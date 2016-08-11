@@ -1,0 +1,25 @@
+Package: DSAIDE
+Type: Package
+Title: Dynamical Systems Approach To Infectious Disease Epidemiology
+Description: A collection of Shiny apps that allow for the simulation and
+    exploration of various infectious disease transmission dynamics scenarios.
+    The apps include explanations of the underlying models and instructions on
+    what to do with the models. This package is part of a course of the same
+    title, taught by the package creator.
+Version: 0.27
+Date: 2016-8-10
+Authors@R: c(
+    person("Andreas", "Handel", email = "ahandel@uga.edu",
+    role = c("aut", "cre")),
+    person("Sina", "Solaimanpour",  role = "aut") )
+Maintainer: Andreas Handel <ahandel@uga.edu>
+License: GPL-3
+LazyData: TRUE
+Imports:
+    deSolve (>= 1.13),
+    knitr (>= 1.13),
+    adaptivetau (>= 2.2)
+Depends:
+    shiny (>= 0.13.2)
+RoxygenNote: 5.0.1
+VignetteBuilder: knitr

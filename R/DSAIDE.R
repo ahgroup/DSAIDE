@@ -1,0 +1,35 @@
+#' DSAIDE: A package to learn about Dynamical Systems Approaches to Infectious
+#' Disease Epidemiology
+#'
+#' The DSAIDE package provides a number of shiny apps that simulate various
+#' infectious disease dynamics models By manipulating the models and working
+#' through the instructions provided within the shiny UI, you can learn about
+#' some important concepts in infectious disease epidemiology. You will also
+#' learn how models can be used to study such concepts.
+#'
+#' @section Package Structure:#'
+#'   The package is structured in a modular way. Each
+#'   Shiny App runs a single infectious disease model. The underlying models are
+#'   encoded as functions, which are called by Shiny. The structure of the
+#'   package allows you to interact with the models in 3 ways:
+#'
+#'   1. Start the main menu of the package by calling dsaidemenu(). Pick a shiny
+#'   app corresponding to a model, and explore the model through the
+#'   corresponding shiny UI. This is the main intended use of this package.
+#'
+#'   2. Call each simulator function directly from the R console, without going
+#'   through the shiny app. Each model simulator function is called simulate_XXX
+#'   and is documented. You can call the functions with different initial
+#'   condition and parameter values. This allows you to for instance write a few
+#'   lines of extra R code to loop over some model parameter. This gives you
+#'   some more flexibility in what you can do with these functions, but requires
+#'   being able to write a little bit of R code.
+#'
+#'   3. Find the code for a simulator function you are interested in and modify
+#'   it to your needs. This obviously provides the most flexibility and you can
+#'   end up with any model you need, but for that you need to know or learn some
+#'   more R coding.
+#'
+#' @docType package
+#' @name DSAIDE
+NULL
