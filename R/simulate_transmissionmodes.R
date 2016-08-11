@@ -1,12 +1,6 @@
-############################################################
-##simulating an SIR model with births and deaths and waning immunity
-##implementing different forms of transmission
-##written by Andreas Handel, ahandel@uga.edu, last change: 10/3/14
-############################################################
 
-# transmission_type_ode_eq function
 # This function is used in the solver function and has no independent usages
-transmission_type_ode_eq <- function(t, y, pars)
+transmissionmode <- function(t, y, pars)
 {
       #Programming Note - instead of passing parameters to the function via the pars argument and then picking them up inside the function,
       #i'm just using the fact that anything defined in the main program is also accessible to the functions. This is not very good - but convenient - programming
@@ -31,7 +25,7 @@ transmission_type_ode_eq <- function(t, y, pars)
       return(list(c(dS, dI, dR)));
 } #end function specifying the ODEs
 
-#' simulate_directtransmission function
+#' Simulation of a compartmental infectious disease transmission model illustrating different types of transmission
 #'
 #' @description  ESCRIPTION DESCRIPTION DESCRIPTION DESCRIPTION DESCRIPTION DESCRIPTION
 #'
@@ -46,18 +40,28 @@ transmission_type_ode_eq <- function(t, y, pars)
 #' @param w duration of immunity. Setting it to zero means infinite immunity (no waning immunity), 1/w is duration of immunity, so e.g. w=0.5 means 2 years of immunity
 #' @param k constant of proportionality for population-size dependent area - choose such that results look decent
 #' @param scenario set to different values for different stransmission scenarios: 1 = density-dependent, 2 = frequency-dependent
-#' @return This function runs the and ODE solver and will return the frame that contains the data from the ODE solver
-#' @details
-#' Add details here...
+#' @return This function returns the simulation result as obtained from a call
+#'   to the deSolve ode solver
+#' @details A compartmental ID model with several states/compartments
+#'   is simulated as a set of ordinary differential
+#'   equations. The function returns the output from the odesolver as a matrix,
+#'   with one column per compartment/variable. The first column is time.
+#' @section Warning:
+#'   This function does not perform any error checking. So if you try to do
+#'   something nonsensical (e.g. have I0 > PopSize or any negative values or fractions > 1),
+#'   the code will likely abort with an error message
 #' @examples
-#' # To run the simulation with default parameters just call this function
-#' simulate_directtransmission()
-#' # One can also pass any number of the parameters as he needs
-#' simulate_directtransmission(PopSize = 1e9)
-#' simulate_directtransmission(PopSize = 1e9, gamma = 16)
+#'   # To run the simulation with default parameters just call this function
+#'   result <- simulate_transmissionmodes()
+#'   # To choose parameter values other than the standard one, specify them e.g. like such
+#'   result <- simulate_transmissionmodes(PopSize = 2000, P0 = 10, tmax = 100 )
+#'   # You should then use the simulation result returned from the function, e.g. like this:
+#'   plot(result[,1],result[,2],xlab='Time',ylab='Number Susceptible',type='l')
+#' @seealso The UI of the shiny app 'TransmissionModes', which is part of this package, contains more details on the model
 #' @author Andreas Handel
 #' @references We can add (a) reference(s) here..
 #' @export
+
 
 simulate_directtransmission <- function(PopSize = 1e6, I0 = 1, R0 = 0, tmax = 5, gamma = 13, beta.d = 4e-5, beta.f = 40,  mu = 0 * 1 / 50,
                               w = 0.0, k = 1e-6, scenario = 2){
