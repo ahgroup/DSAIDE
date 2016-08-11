@@ -27,7 +27,8 @@ transmissionmode <- function(t, y, pars)
 
 #' Simulation of a compartmental infectious disease transmission model illustrating different types of transmission
 #'
-#' @description  ESCRIPTION DESCRIPTION DESCRIPTION DESCRIPTION DESCRIPTION DESCRIPTION
+#' @description  This model allows for the simulation of different transmission modes
+#' 
 #'
 #' @param PopSize try a range of values for this and see how it affects the outbreak - this corresponds to the "initial-population" slider in NetLogo
 #' @param I0 initial number of infected hosts, again try a number of different values - this corresponds to the "initial-infected" slider in NetLogo
