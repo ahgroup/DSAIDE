@@ -23,3 +23,5 @@ Depends:
     shiny (>= 0.13.2)
 RoxygenNote: 5.0.1
 VignetteBuilder: knitr
+URL: https://github.com/ahgroup/DSAIDE
+BugReports: https://github.com/ahgroup/DSAIDE/issues
