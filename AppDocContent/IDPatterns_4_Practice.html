@@ -88,7 +88,7 @@
 <ul>
 <li>Set the model parameters such that it corresponds to the following setting:
 <ul>
-<li>A population size of 1000, 1 initially infected, presymptomatic host, simulation duration 10 years.</li>
+<li>A population size of 1000, 1 initially infected, presymptomatic host, simulation duration (approximately) 10 years.</li>
 <li>Assume that only symptomatic individuals transmit, at rate <span class="math inline">\(b_I = 0.002\)</span>, and that there is no seasonal variation.</li>
 <li>Assume that the duration of the symptomatic period is 1 month long. (Hint: The parameter <span class="math inline">\(g_i\)</span> is the inverse of this period. Also, the model parameters are in units of 1/month.)</li>
 <li>Assume that the duration of the presymptomatic period is approximately 6 days long. (Hint: The parameter <span class="math inline">\(g_P\)</span> is the inverse of this period. Also, the model parameters are in units of 1/month. Make sure you convert correctly.)</li>
@@ -105,8 +105,8 @@
 <li>Next, turn on births and deaths. It’s always good to check parts of a model. Here, we want to first look at births and deaths in the absence of disease. Therefore, set initial number of infected to 0, keep the initial population size at 1000.</li>
 <li>Set the natural death rate, <span class="math inline">\(n\)</span>, to a value that corresponds to an average lifespan of 41 years. Recall that the unit of <span class="math inline">\(n\)</span> is 1/months. You therefore need to take the inverse of the lifespan to get the death rate in years, then convert to months and set the slider to a value as close as possible (you can’t set it to exactly the value you get).</li>
 <li>Set the birth rate to <span class="math inline">\(\lambda=4\)</span> per month.</li>
-<li>Also increase the simulation duration to 1000 years.</li>
-<li>Apply what you learned about steady states to compute the expected steady state population size of susceptibles, i.e. solve <span class="math inline">\(\dot S = 0 = \lambda - n S\)</span> for the value of S given the values of <span class="math inline">\(\lambda\)</span> and <span class="math inline">\(n\)</span>. Compare what you from the simulation. The 2 should agree, i.e. <span class="math inline">\(S\)</span> should reach the value you computed after some time.</li>
+<li>Also increase the simulation duration to 1000 years. (Depending on the speed of your computer, it will take several seconds for the simulation to finish).</li>
+<li>Apply what you learned in the reading about steady states to compute the expected steady state population size of susceptibles, i.e. solve <span class="math inline">\(\dot S = 0 = \lambda - n S\)</span> for the value of S given the values of <span class="math inline">\(\lambda\)</span> and <span class="math inline">\(n\)</span>. Compare what you from the simulation. The 2 should agree, i.e. <span class="math inline">\(S\)</span> should reach the value you computed after some time.</li>
 </ul>
 </div>
 <div id="task-3" class="section level3">
@@ -137,29 +137,29 @@
 <div id="task-6" class="section level3">
 <h3>Task 6:</h3>
 <ul>
-<li>The patterns we’ve seen so far are oscillations/cycles (i.e. repeated outbreaks) and eventually settling down to a steady state. The oscillations are what we referred to in the reading as the “intrinsic”, purely produced by the interplay between depletion of susceptibles due to infection and replenishment due to birth.</li>
+<li>The patterns we’ve seen so far are oscillations/cycles (i.e. repeated outbreaks) and eventually settling down to a steady state. The oscillations are what we referred to in the reading as <em>intrinsic</em>, purely produced by the interplay between depletion of susceptibles due to infection and replenishment due to birth.</li>
 <li>We discussed that waning immunity is another mechanism of resource replenishment. To investigate that, set everything as in task #1 (i.e. no more births and deaths). Do a quick run to ensure you get a single outbreak.</li>
 <li>Now, assume that immunity wanes within on average 10 months.</li>
 <li>Think about your expectations, run the simulation and check with what you expected.</li>
-<li>Double the duration of immunity. What do you expect? What do you see?</li>
-</ul>
-</div>
-<div id="task-6-1" class="section level3">
-<h3>Task 6:</h3>
-<ul>
-<li>Now combine births and deaths with waning immunity. Explore how the two different mechanisms interact and influence the observed ID dynamics.</li>
+<li>Double the <em>duration</em> of immunity. What do you expect? What do you see?</li>
 </ul>
 </div>
 <div id="task-7" class="section level3">
 <h3>Task 7:</h3>
+<ul>
+<li>Now combine births and deaths with waning immunity. Explore how the two different mechanisms interact and influence the observed ID dynamics.</li>
+</ul>
+</div>
+<div id="task-8" class="section level3">
+<h3>Task 8:</h3>
 <ul>
 <li>So far, the cycles were due to the intrinsic dynamics of the system. Now we’ll explore what happens if some outside phenomenon - e.g. the weather - influences some model parameters. This is systematically different than before, where we kept all parameters constant while the simulation was running. Now we change that. Specifically the model allows you to let the transmission rates vary sinusoidally with a period of 1 year.</li>
 <li>Set everything as in task #1, do a quick run to make sure you only get one outbreak.</li>
 <li>Now try different non-zero values for the parameter sigma. Think about your expectations. Run the model and compare. Figure out why you are seeing what you see.</li>
 </ul>
 </div>
-<div id="task-8" class="section level3">
-<h3>Task 8:</h3>
+<div id="task-9" class="section level3">
+<h3>Task 9:</h3>
 <ul>
 <li>Assume now that immunity wanes within 10 months. Also set the strength of seasonal variation (sigma) to 0.5.</li>
 <li>Think about your expectations. Run the model and compare. Adjust the simulation time to “zoom in/out”.</li>
@@ -167,8 +167,8 @@
 <li>contemplate the main difference between the pattern you now observe and the ones you’ve seen so far with no external/seasonal driver.</li>
 </ul>
 </div>
-<div id="task-9" class="section level3">
-<h3>Task 9:</h3>
+<div id="task-10" class="section level3">
+<h3>Task 10:</h3>
 <ul>
 <li>Go crazy! You can let people enter the <span class="math inline">\(A\)</span> and <span class="math inline">\(D\)</span> compartments, have an underlying growing or declining population in the absence of disease and let the disease run on top of it, allow for birth/death, waning immunity and seasonality, etc.</li>
 <li>There is lots to explore. While it can be fun to just mess around with the sliders and continue simulating, I suggest a more deliberate exploration. Before you run a simulation, think about what you expect. Then run and compare results with expectations. If they don’t agree, try to figure out what’s going on. This way, you will gain more and more insight into how the different components and processes infleunce the observed outcome - the basics of a systems science approach.</li>
