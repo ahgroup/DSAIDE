@@ -36,7 +36,7 @@ refresh <- function(input, output){
     scenario = isolate(input$scenario);
 
     # Call the ODE solver with the given parameters
-    result <- simulate_directtransmission(PopSize = PopSize, I0 = I0, R0 = R0, tmax = tmax, gamma = gamma, beta.d = beta.d, beta.f = beta.f,
+    result <- simulate_transmissionmodes(PopSize = PopSize, I0 = I0, R0 = R0, tmax = tmax, gamma = gamma, beta.d = beta.d, beta.f = beta.f,
                                mu = mu, w = w, k = k, scenario = scenario)
     return (result)
   })

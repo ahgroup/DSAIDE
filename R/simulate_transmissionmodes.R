@@ -1,6 +1,6 @@
 
 # This function is used in the solver function and has no independent usages
-transmissionmode <- function(t, y, pars)
+transmissionmodeeq <- function(t, y, pars)
 {
       #Programming Note - instead of passing parameters to the function via the pars argument and then picking them up inside the function,
       #i'm just using the fact that anything defined in the main program is also accessible to the functions. This is not very good - but convenient - programming
@@ -64,7 +64,7 @@ transmissionmode <- function(t, y, pars)
 #' @export
 
 
-simulate_directtransmission <- function(PopSize = 1e6, I0 = 1, R0 = 0, tmax = 5, gamma = 13, beta.d = 4e-5, beta.f = 40,  mu = 0 * 1 / 50,
+simulate_ransmissionmodes <- function(PopSize = 1e6, I0 = 1, R0 = 0, tmax = 5, gamma = 13, beta.d = 4e-5, beta.f = 40,  mu = 0 * 1 / 50,
                               w = 0.0, k = 1e-6, scenario = 2){
   ############################################################
   #setting initial conditions for variables
@@ -88,7 +88,7 @@ simulate_directtransmission <- function(PopSize = 1e6, I0 = 1, R0 = 0, tmax = 5,
   #this line runs the simulation, i.e. integrates the differential equations describing the infection process
   #the result is saved in the odeoutput matrix, with the 1st column the time, the 2nd, 3rd, 4th column the variables S, I, R
   #This odeoutput matrix will be re-created every time you run the code, so any previous results will be overwritten
-  odeoutput = deSolve::lsoda(Y0, timevec, transmission_type_ode_eq, parms=parameters, atol=1e-12, rtol=1e-12);
+  odeoutput = deSolve::lsoda(Y0, timevec, func = transmissionmodeeq, parms=parameters, atol=1e-12, rtol=1e-12);
 
   return (odeoutput)
 }
