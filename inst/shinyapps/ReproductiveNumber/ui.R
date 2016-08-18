@@ -24,26 +24,29 @@ ui <- fluidPage(
            sliderInput("I0", "Initial number of infected hosts", min = 0, max = 100, value = 0, step = 1)
     ),
     column(4,
-           sliderInput("tmax", "Maximum simulation time (days)", min = 10, max = 1000, value = 300, step = 10)
+           numericInput("tmax", "Maximum simulation time (months)", min = 0, max = 1200, value = 120)
     ),
     align = "center"
   ), #close fluidRow structure for input
 
   fluidRow(
-    column(4,
-           sliderInput("beta", "Rate of transmission (beta, 1/days)", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
+    column(3,
+           sliderInput("beta", "Rate of transmission (beta, 1/months)", min = 0, max = 0.1, value = 0, step = 0.001 , sep ='')
     ),
-    column(4,
-           sliderInput("gamma", "Rate at which a host leaves the infectious compartment (gamma, 1/days)", min = 0, max = 2, value = 0.5, step = 0.1)
+    column(3,
+           sliderInput("gamma", "Rate at which a host leaves the infectious compartment (gamma, 1/months)", min = 0, max = 25, value = 10, step = 0.5, sep ='')
     ),
-    column(4,
+    column(3,
            sliderInput("f", "Fraction vaccinated prior to outbreak", min = 0, max = 1, value = 0, step = 0.1)
+    ),
+    column(3,
+           sliderInput("e", "Efficacy of vaccine", min = 0, max = 1, value = 0, step = 0.1)
     ),
     align = "center"
   ), #close fluidRow structure for input
   fluidRow(
     column(4,
-           sliderInput("lambda", "Rate of new births (lambda)", min = 0, max = 10000, value = 0, step = 100)
+           sliderInput("lambda", "Monthly rate of new births (lambda)", min = 0, max = 100, value = 0, step = 1)
     ),
     column(4,
            sliderInput("n", "Natural death rate (n, 1/months)", min = 0, max = 1, value = 0, step = 0.1)

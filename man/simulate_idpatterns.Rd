@@ -57,8 +57,6 @@ Simulation of a compartmental model with several different compartments:
   The model is assumed to run in units of months.
   This is assumption is hard-coded into the sinusoidally varying
   transmission coefficient, which is assumed to have a period of a year
-
-  The following processes are modeled:
 }
 \details{
 A compartmental ID model with several states/compartments

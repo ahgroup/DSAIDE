@@ -4,17 +4,18 @@
 \alias{simulate_reproductivenumber}
 \title{Simulation of a compartmental infectious disease transmission model to study the reproductive number}
 \usage{
-simulate_reproductivenumber(PopSize = 1000, I0 = 0, f = 0, tmax = 300,
-  gamma = 50, beta = 0.1, lambda = 20, n = 1/50, w = 0)
+simulate_reproductivenumber(PopSize = 1000, I0 = 0, f = 0, e = 0,
+  tmax = 300, gamma = 50, beta = 0.1, lambda = 20, n = 1/50, w = 0)
 }
 \arguments{
 \item{PopSize}{specifies the initial number of individuals
-(Suceptibles + Infected)
-All other compartments start at 0}
+(Suceptibles + Infected)#'}
 
-\item{I0}{initial number of infected hosts,}
+\item{I0}{initial number of infected hosts}
 
-\item{f}{fraction of vaccinated individuals}
+\item{f}{fraction of vaccinated individuals. Those individuals are moved from S to R at the beginning of the simulation}
+
+\item{e}{efficay of vaccine, given as fraction between 0 and 1}
 
 \item{tmax}{maximum simulation time, units depend on choice of units for your
 parameters}
@@ -37,7 +38,10 @@ This function returns the simulation result as obtained from a call
 Simulation of a basic SIR compartmental model with these compartments:
   Susceptibles (S), Infected/Infectious (I),
   Recovered and Immune (R).
-  The following processes are modeled:
+  
+  The model is assumed to be in units of months when run through the Shiny App
+  However as long as all parameters are chosen in the same units, 
+  one can directly call the simulator assuming any time unit
 }
 \details{
 A compartmental ID model with several states/compartments
@@ -67,6 +71,6 @@ See e.g. Keeling and Rohani 2008 for SIR models and the
   documentation for the deSolve package for details on ODE solvers
 }
 \seealso{
-The UI of the shiny app 'IDPatterns', which is part of this package, contains more details on the model
+The UI of the shiny app 'ReproductiveNumber', which is part of this package, contains more details on the model
 }
 

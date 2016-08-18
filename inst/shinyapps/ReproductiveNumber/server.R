@@ -36,9 +36,10 @@ refresh <- function(input, output){
     beta = isolate(input$beta);
     lambda = isolate(input$lambda);
     n = isolate(input$n);
-
+    e = isolate(input$e);
+    
     # Call the ODE solver with the given parameters
-    result <- simulate_reproductivenumber(PopSize = PopSize, I0 = I0, f = f, tmax = tmax, gamma = gamma, beta = beta, lambda = lambda, n = n)
+    result <- simulate_reproductivenumber(PopSize = PopSize, I0 = I0, f = f, e=e, tmax = tmax, gamma = gamma, beta = beta, lambda = lambda, n = n)
     return (result)
   })
 
@@ -50,7 +51,7 @@ refresh <- function(input, output){
 
     tmax = isolate(input$tmax)
 
-    plot(res()[,1],res()[,2],type="l",xlab="time (days)",ylab="",col="green",lwd=2,log="",xlim=c(0,tmax),ylim=c(1,max(res()[,2])),main="Time Series")
+    plot(res()[,1],res()[,2],type="l",xlab="time (months)",ylab="",col="green",lwd=2,log="",xlim=c(0,tmax),ylim=c(1,max(res()[,2])),main="Time Series")
     lines(res()[,1],res()[,3],type="l",col="red",lwd=2)
     lines(res()[,1],res()[,4],type="l",col="gray",lwd=2)
     lines(res()[,1],res()[,2]+res()[,3]+res()[,4],type="l",col="blue",lwd=2)
