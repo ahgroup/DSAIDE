@@ -62,6 +62,7 @@ dsaidemenu <- function() {
 }
 
 .onAttach <- function(libname, pkgname){
-  packageStartupMessage("Welcome to the DSAIDE package. Type dsaidemenu() to get started.")
+  startmsg = paste("Welcome to the DSAIDE package, version ", packageVersion("DSAIDE"),", ", packageDescription('DSAIDE')$Date,".\n Type dsaidemenu() to get started.",sep='')
+  packageStartupMessage(cat(startmsg))
 }
 
