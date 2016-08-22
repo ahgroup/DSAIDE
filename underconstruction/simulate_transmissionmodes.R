@@ -64,7 +64,7 @@ transmissionmodeeq <- function(t, y, pars)
 #' @export
 
 
-simulate_ransmissionmodes <- function(PopSize = 1e6, I0 = 1, R0 = 0, tmax = 5, gamma = 13, beta.d = 4e-5, beta.f = 40,  mu = 0 * 1 / 50,
+simulate_transmissionmodes <- function(PopSize = 1e6, I0 = 1, R0 = 0, tmax = 5, gamma = 13, beta.d = 4e-5, beta.f = 40,  mu = 0 * 1 / 50,
                               w = 0.0, k = 1e-6, scenario = 2){
   ############################################################
   #setting initial conditions for variables
