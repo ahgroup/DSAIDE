@@ -18,7 +18,8 @@ LazyData: TRUE
 Imports:
     deSolve (>= 1.13),
     knitr (>= 1.13),
-    adaptivetau (>= 2.2)
+    adaptivetau (>= 2.2),
+    utils
 Depends:
     shiny (>= 0.13.2)
 RoxygenNote: 5.0.1

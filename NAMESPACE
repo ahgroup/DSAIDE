@@ -2,9 +2,12 @@
 
 export(dsaidemenu)
 export(generate_instruction_tabs)
+export(simulate_evolution)
 export(simulate_idcharacteristics)
 export(simulate_idpatterns)
 export(simulate_introduction)
 export(simulate_reproductivenumber)
+export(simulate_stochastic)
+export(simulate_transmissionmodes)
 import(shiny)
 importFrom(knitr,knit)

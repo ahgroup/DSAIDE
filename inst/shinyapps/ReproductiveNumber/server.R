@@ -50,8 +50,12 @@ refresh <- function(input, output){
     input$submitBtn
 
     tmax = isolate(input$tmax)
-
-    plot(res()[,1],res()[,2],type="l",xlab="time (months)",ylab="",col="green",lwd=2,log="",xlim=c(0,tmax),ylim=c(1,max(res()[,2])),main="Time Series")
+    PopSize = isolate(input$PopSize);
+    
+    
+    ymax = max(c(PopSize,res()[,2]))
+    
+    plot(res()[,1],res()[,2],type="l",xlab="time (months)",ylab="",col="green",lwd=2,log="",xlim=c(0,tmax),ylim=c(1,ymax),main="Time Series")
     lines(res()[,1],res()[,3],type="l",col="red",lwd=2)
     lines(res()[,1],res()[,4],type="l",col="gray",lwd=2)
     lines(res()[,1],res()[,2]+res()[,3]+res()[,4],type="l",col="blue",lwd=2)
@@ -68,7 +72,11 @@ refresh <- function(input, output){
     PopSize = isolate(input$PopSize)
     gamma = isolate(input$gamma)
     beta = isolate(input$beta)
+    I0 = isolate(input$I0);
+    f = isolate(input$f);
+    e = isolate(input$e);
 
+    
     Sfinal = round(tail(res()[,2],1), 2); Sfracfinal = round(Sfinal / PopSize, 2)
     Ifinal = round(tail(res()[,3],1), 2); Ifracfinal = round(Ifinal / PopSize, 2)
     Rfinal = round(tail(res()[,4],1), 2); Rfracfinal = round(Rfinal / PopSize, 2)

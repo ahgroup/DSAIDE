@@ -16,7 +16,8 @@ dsaidemenu <- function() {
   cond <- 1
 
   print('*************************************************')
-  print('Welcome to  the DSAIDE main menu.')
+  print('Welcome to  the DSAIDE main menu!')
+  print(paste('This is DSAIDE version ', utils::packageVersion("DSAIDE"),", last updated ", utils::packageDescription('DSAIDE')$Date,sep=''))
   print('Have fun exploring the infectious disease models!')
   print('*************************************************')
 
@@ -27,11 +28,11 @@ dsaidemenu <- function() {
     cat("\t2 - Characterizing ID States App", "\n")
     cat("\t3 - ID Patterns App", "\n")
     cat("\t4 - Reproductive Number App", "\n")
-    #cat("\t5 - Modes of Transmission App", "\n")
-    #cat("\t6 - ID Control App", "\n")
-    #cat("\t7 - Host Heterogeneity App", "\n")
-    #cat("\t8 - Stochastic Dynamics App", "\n")
-    #cat("\t9 - Evolutionary Dynamics App", "\n")
+    cat("\t5 - Modes of Transmission App", "\n")
+    cat("\t6 - ID Control App", "\n")
+    cat("\t7 - Host Heterogeneity App", "\n")
+    cat("\t8 - Stochastic Dynamics App", "\n")
+    cat("\t9 - Evolutionary Dynamics App", "\n")
     cat("\t0 - Exit", "\n")
 
     op = scan(what="character", n = 1)
@@ -41,11 +42,11 @@ dsaidemenu <- function() {
     if (op == 2) {appname = "CharacteristicsofID"}
     if (op == 3) {appname = "IDPatterns"}
     if (op == 4) {appname = "ReproductiveNumber"}
-    #if (op == 5) {appname = "TransmissionModes"}
-    #if (op == 6) {appname = "IDControl"}
-    #if (op == 7) {appname = "HostHeterogeneity"}
-    #if (op == 8) {appname = "StochasticDynamics"}
-    #if (op == 9) {appname = "EvolutionaryDynamics"}
+    if (op == 5) {appname = "TransmissionModes"}
+    if (op == 6) {appname = "IDControl"}
+    if (op == 7) {appname = "HostHeterogeneity"}
+    if (op == 8) {appname = "StochasticDynamics"}
+    if (op == 9) {appname = "EvolutionaryDynamics"}
 
     if (as.numeric(op) >0 & as.numeric(op) <10)     #run the shiny app chosen
     {
@@ -62,7 +63,6 @@ dsaidemenu <- function() {
 }
 
 .onAttach <- function(libname, pkgname){
-  startmsg = paste("Welcome to the DSAIDE package, version ", packageVersion("DSAIDE"),", ", packageDescription('DSAIDE')$Date,".\n Type dsaidemenu() to get started.",sep='')
-  packageStartupMessage(cat(startmsg))
+  packageStartupMessage("Welcome to the DSAIDE package. Type dsaidemenu() to get started.")
 }
 

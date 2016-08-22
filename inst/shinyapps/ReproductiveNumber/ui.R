@@ -49,7 +49,7 @@ ui <- fluidPage(
            sliderInput("lambda", "Monthly rate of new births (lambda)", min = 0, max = 100, value = 0, step = 1)
     ),
     column(4,
-           sliderInput("n", "Natural death rate (n, 1/months)", min = 0, max = 1, value = 0, step = 0.1)
+           sliderInput("n", "Natural death rate (n, 1/months)", min = 0, max = 0.02, value = 0, step = 0.0005)
     ),
     column(4,
            sliderInput("w", "Rate of immunity loss (w, 1/months)", min = 0, max = 0.1, value = 0.0, step = 0.01)
