@@ -4,32 +4,43 @@
 \alias{simulate_transmissionmodes}
 \title{Simulation of a compartmental infectious disease transmission model illustrating different types of transmission}
 \usage{
-simulate_transmissionmodes(PopSize = 1e+06, I0 = 1, R0 = 0, tmax = 5,
-  gamma = 13, beta.d = 4e-05, beta.f = 40, mu = 0 * 1/50, w = 0,
-  k = 1e-06, scenario = 2)
+simulate_transmissionmodes(S0 = 1000, I0 = 1, Sv0 = 0, tmax = 120,
+  beta1 = 0.01, beta2 = 0, beta3 = 0, beta4 = 0, lambda1 = 0,
+  lambda2 = 0, n1 = 0, n2 = 0, gamma1 = 1, gamma2 = 1, p = 0,
+  c = 0)
 }
 \arguments{
-\item{PopSize}{try a range of values for this and see how it affects the outbreak - this corresponds to the "initial-population" slider in NetLogo}
+\item{S0}{initial number of susceptible hosts}
 
-\item{I0}{initial number of infected hosts, again try a number of different values - this corresponds to the "initial-infected" slider in NetLogo}
+\item{I0}{initial number of infected hosts}
 
-\item{R0}{initial number of recovered hosts - for now we assume there are no recovered (immune) hosts. We get to this in the course.}
+\item{Sv0}{initial number of susceptible vectors}
 
-\item{tmax}{maximum simulation time, units of years, (equivalent to Max-time slider in the NetLogo simulation)}
+\item{tmax}{maximum simulation time, units of months}
 
-\item{gamma}{rate at which a person leaves the infectious compartment, which is the inverse of the average duration of the infections period. Note: 1/gamma is the duration of the infectious period in units of YEARS so e.g. gamma=26 means infectious period = 1/26 years = 14 days}
+\item{beta1}{rate of transmission from infected to susceptible host}
 
-\item{beta.d}{rate of transmission of pathogen from infected to susceptible host (density)}
+\item{beta2}{rate of transmission from infected vector to susceptible host}
 
-\item{beta.f}{rate of transmission of pathogen from infected to susceptible host (frequency)}
+\item{beta3}{rate of transmission from environment to susceptible host}
 
-\item{mu}{death rate parameter - inverse, i.e. 1/mu, is the average lifespan (in years), a value of 0 means no deaths. A value of 1/20 means e.g. 20 years lifespan}
+\item{beta4}{rate of transmission from infected host to susceptible vector}
 
-\item{w}{duration of immunity. Setting it to zero means infinite immunity (no waning immunity), 1/w is duration of immunity, so e.g. w=0.5 means 2 years of immunity}
+\item{lambda1}{the rate of births of hosts}
 
-\item{k}{constant of proportionality for population-size dependent area - choose such that results look decent}
+\item{lambda2}{the rate of births of vectors}
 
-\item{scenario}{set to different values for different stransmission scenarios: 1 = density-dependent, 2 = frequency-dependent}
+\item{n1}{the rate of natural death of hosts}
+
+\item{n2}{the rate of natural death of vectors}
+
+\item{gamma1}{the rate at which infected hosts recover/die}
+
+\item{gamma2}{the rate at which infected vectors recover/die}
+
+\item{p}{the rate at which infected host shed pathogen in the enviroment}
+
+\item{c}{the rate at which pathogen in the enviroment decays}
 }
 \value{
 This function returns the simulation result as obtained from a call
@@ -47,14 +58,14 @@ A compartmental ID model with several states/compartments
 \section{Warning}{
 
   This function does not perform any error checking. So if you try to do
-  something nonsensical (e.g. have I0 > PopSize or any negative values or fractions > 1),
+  something nonsensical (e.g. any negative values or fractions > 1),
   the code will likely abort with an error message
 }
 \examples{
   # To run the simulation with default parameters just call this function
   result <- simulate_transmissionmodes()
   # To choose parameter values other than the standard one, specify them e.g. like such
-  result <- simulate_transmissionmodes(PopSize = 2000,  tmax = 100, gamma = 10 )
+  result <- simulate_transmissionmodes(S0 = 100, Sv0 = 1e5,  tmax = 100)
   # You should then use the simulation result returned from the function, e.g. like this:
   plot(result[,1],result[,2],xlab='Time',ylab='Number Susceptible',type='l')
 }
@@ -62,7 +73,8 @@ A compartmental ID model with several states/compartments
 Andreas Handel
 }
 \references{
-We can add (a) reference(s) here..
+See e.g. Keeling and Rohani 2008 for SIR models and the
+  documentation for the deSolve package for details on ODE solvers
 }
 \seealso{
 The UI of the shiny app 'TransmissionModes', which is part of this package, contains more details on the model
