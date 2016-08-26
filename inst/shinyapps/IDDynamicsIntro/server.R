@@ -47,8 +47,10 @@ refresh <- function(input, output){
     input$submitBtn
 
     tmax = isolate(input$tmax)
-
-    plot(res()[,1],res()[,2],type="l",xlab="time (days)",ylab="",col="green",lwd=2,log="",xlim=c(0,tmax),ylim=c(1,max(res()[,2])),main="Time Series")
+    PopSize = isolate(input$PopSize)
+    ymax = max(c(res()[,2],PopSize))
+    
+    plot(res()[,1],res()[,2],type="l",xlab="time (days)",ylab="",col="green",lwd=2,log="",xlim=c(0,tmax),ylim=c(1,ymax),main="Time Series")
     lines(res()[,1],res()[,3],type="l",col="red",lwd=2)
     lines(res()[,1],res()[,4],type="l",col="gray",lwd=2)
     lines(res()[,1],res()[,2]+res()[,3]+res()[,4],type="l",col="blue",lwd=2)

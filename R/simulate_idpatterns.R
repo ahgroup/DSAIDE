@@ -91,7 +91,7 @@ simulate_idpatterns <- function(PopSize = 1000, P0 = 1, tmax = 300, bP = 0, bA =
 
   #this line runs the simulation, i.e. integrates the differential equations describing the infection process
   #the result is saved in the odeoutput matrix, with the 1st column the time, the 2nd, 3rd, 4th column the variables S, I, R
-  odeoutput = deSolve::ode(y = Y0, times = timevec, func = idpatternsode, parms=pars, method = "vode", atol=1e-8, rtol=1e-8);
+  odeoutput = deSolve::ode(y = Y0, times = timevec, func = idpatternsode, parms=pars, method = "vode", atol=1e-12, rtol=1e-12);
 
 
   #The output produced by a call to the odesolver is odeoutput matrix is returned by the function
