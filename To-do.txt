@@ -1,3 +1,16 @@
+
+
+
+8/31/2016
+
+- Rewrite the 1st app "ID Introduction" as a single file with UI and Server functions inside.
+
+Note: I found a good source of shiny examples and tips and tricks that might be helpful. 
+E.g. the ""Busy..." / "Done!" / "Error" example on that webiste might be useful for the progress bar task below.
+https://github.com/daattali/advanced-shiny
+
+
+
 8/10/2016
 
 - Make the main menu graphical. Ideally, make it a Shiny app, where the UI has a bunch of buttons, each for a different App. Once the user klicks a button, the Menu App should somehow 'shut down' and start the App for the chosen simulation. When the user exits the specific simulation App, the Menu App will come back. (Later, we can add some welcome, contact/disclaimer and other explanatory text to the menu App.)
