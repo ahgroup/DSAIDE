@@ -1,4 +1,6 @@
+9/2/16
 
+- Find a way to display figure in UI such that it looks better and scales well with screen size - either automatically or via user adjustment
 
 
 8/31/2016

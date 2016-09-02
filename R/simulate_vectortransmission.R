@@ -1,5 +1,5 @@
 # This function is used in the solver function and has no independent usages
-transmissionmodeeq <- function(t, y, parms)
+vectortransmissioneq <- function(t, y, parms)
 {
   with(
     as.list(c(y,parms)), #lets us access variables and parameters stored in y and pars by name
@@ -23,9 +23,9 @@ transmissionmodeeq <- function(t, y, parms)
   
 
   
-#' Simulation of a compartmental infectious disease transmission model illustrating different types of transmission
+#' Simulation of a compartmental infectious disease transmission model illustrating vector-borne transmission
 #'
-#' @description  This model allows for the simulation of different transmission modes
+#' @description  This model allows for the simulation of a vector-borne infectious disease
 #' 
 #'
 #' @param S0 initial number of susceptible hosts
@@ -56,12 +56,12 @@ transmissionmodeeq <- function(t, y, parms)
 #'   the code will likely abort with an error message
 #' @examples
 #'   # To run the simulation with default parameters just call this function
-#'   result <- simulate_transmissionmodes()
+#'   result <- simulate_vectortransmission()
 #'   # To choose parameter values other than the standard one, specify them e.g. like such
-#'   result <- simulate_transmissionmodes(S0 = 100, Sv0 = 1e5,  tmax = 100)
+#'   result <- simulate_vectortransmission(S0 = 100, Sv0 = 1e5,  tmax = 100)
 #'   # You should then use the simulation result returned from the function, e.g. like this:
 #'   plot(result[,1],result[,2],xlab='Time',ylab='Number Susceptible',type='l')
-#' @seealso The UI of the shiny app 'TransmissionModes', which is part of this package, contains more details on the model
+#' @seealso The UI of the shiny app 'VectorTransmission', which is part of this package, contains more details on the model
 #' @author Andreas Handel
 #' @references See e.g. Keeling and Rohani 2008 for SIR models and the
 #'   documentation for the deSolve package for details on ODE solvers
@@ -69,7 +69,7 @@ transmissionmodeeq <- function(t, y, parms)
 
 
 
-simulate_transmissionmodes <- function(S0 = 1e3, I0 = 1, Sv0 = 0, tmax = 120, beta1 = 0.01, beta2 = 0, beta3 = 0, beta4 = 0, lambda1 = 0, lambda2 = 0, n1 = 0, n2 = 0, gamma1 = 1, gamma2 = 1, p = 0 ,c = 0)
+simulate_vectortransmission <- function(S0 = 1e3, I0 = 1, Sv0 = 0, tmax = 120, beta1 = 0.01, beta2 = 0, beta3 = 0, beta4 = 0, lambda1 = 0, lambda2 = 0, n1 = 0, n2 = 0, gamma1 = 1, gamma2 = 1, p = 0 ,c = 0)
 {
   ############################################################
   #setting initial conditions for variables
@@ -88,7 +88,7 @@ simulate_transmissionmodes <- function(S0 = 1e3, I0 = 1, Sv0 = 0, tmax = 120, be
   #this line runs the simulation, i.e. integrates the differential equations describing the infection process
   #the result is saved in the odeoutput matrix, with the 1st column the time, the 2nd, 3rd, 4th column the variables S, I, R
   #This odeoutput matrix will be re-created every time you run the code, so any previous results will be overwritten
-  odeoutput = deSolve::lsoda(Y0, timevec, func = transmissionmodeeq, parms=pars, atol=1e-8, rtol=1e-8);
+  odeoutput = deSolve::lsoda(Y0, timevec, func = vectortransmissioneq, parms=pars, atol=1e-8, rtol=1e-8);
 
   return (odeoutput)
 }
