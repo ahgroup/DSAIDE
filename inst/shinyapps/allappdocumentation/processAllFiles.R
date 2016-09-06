@@ -12,6 +12,8 @@ processAllFiles <- function(){
     #get name of file currently to be processed
     current_filename = files[i]
     #strip out the _4_Practice.html part to create the right folders for the shiny app
+    #in general, the name before the first underscore needs to correspond to the anme of the app
+    #all information past the underscore is stripped
     foldername = unlist(strsplit(current_filename,split='_'))[1]
 
     #Clean up and recreate any previous files/folders
@@ -20,7 +22,7 @@ processAllFiles <- function(){
     unlink(foldername, recursive = TRUE)
 
     # find the path to its folder and copy all of the separated files there
-    shinyapp.path <- sprintf("../inst/shinyapps/%s/www", foldername)
+    shinyapp.path <- sprintf("../shinyapps/%s/www", foldername)
 
     #Clean the folder and create it again
     unlink(shinyapp.path, recursive = TRUE)

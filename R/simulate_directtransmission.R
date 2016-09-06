@@ -34,6 +34,7 @@ directtransmissioneq <- function(t, y, parms)
 #' @param tmax maximum simulation time, units of months
 #' @param bd rate of transmission for density-dependent transmission
 #' @param bf rate of transmission for frequency-dependent transmission
+#' @param scenario choice between density dependent (=1) and frequency dependent (=2) transmission scenarios
 #' @param A the size of the area in which the hosts are assumed to reside/interact
 #' @param b the rate of births 
 #' @param n the rate of natural deaths

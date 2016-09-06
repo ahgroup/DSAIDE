@@ -25,13 +25,15 @@ dsaidemenu <- function() {
     
     appname <- NULL
     
-    cat("Please choose an option:", "\n\n")
+    cat("Please choose an option (upper or lower case works):", "\n\n")
 
     cat("\tA - ID Dynamics Introduction App", "\n")
     cat("\tB - Characterizing ID States App", "\n")
     cat("\tC - ID Patterns App", "\n")
     cat("\tD - Reproductive Number App", "\n")
-    #cat("\t5 - Modes of Transmission App", "\n")
+    cat("\tE - Modes of Direct Transmission App", "\n")
+    cat("\tF - Environmental Transmission App", "\n")
+    cat("\tG - Vector-borne Transmission App", "\n")
     #cat("\t6 - ID Control App", "\n")
     #cat("\t7 - Host Heterogeneity App", "\n")
     #cat("\t8 - Stochastic Dynamics App", "\n")
@@ -49,7 +51,6 @@ dsaidemenu <- function() {
     if (op == "E") {appname = "DirectTransmission"}
     if (op == "F") {appname = "EnvironmentalTransmission"}
     if (op == "G") {appname = "VectorTransmission"}
-    #if (op == 5) {appname = "TransmissionModes"}
     #if (op == 6) {appname = "IDControl"}
     #if (op == 7) {appname = "HostHeterogeneity"}
     #if (op == 8) {appname = "StochasticDynamics"}

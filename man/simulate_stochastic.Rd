@@ -4,16 +4,18 @@
 \alias{simulate_stochastic}
 \title{simulate_stochastic function}
 \usage{
-simulate_stochastic(PopSize = 1000, P0 = 1, tmax = 300, bP = 0,
-  bI = 1/1000, gP = 0.5, gI = 0.5, w = 0, lambda = 0, n = 0,
-  sigma = 0)
+simulate_stochastic(PopSize = 1000, P0 = 10, I0 = 0, tmax = 100,
+  bP = 0, bI = 1/1000, gP = 0.5, gI = 0.5, w = 0, lambda = 0,
+  n = 0, sigma = 0)
 }
 \arguments{
 \item{PopSize}{specifies the initial number of individuals
 (Suceptibles + Infected & Pre-symptomatic)
 All other compartments start at 0}
 
-\item{P0}{initial number of infected, pre-symptomatic hosts,}
+\item{P0}{initial number of infected, pre-symptomatic hosts}
+
+\item{I0}{initial number of infected, symptomatic hosts}
 
 \item{tmax}{maximum simulation time, units depend on choice of units for your
 parameters}
@@ -62,7 +64,7 @@ the code will likely abort with an error message
 # To run the simulation with default parameters just call this function
 result <- simulate_stochastic()
 # To choose parameter values other than the standard one, specify them e.g. like such
-result <- simulate_stochastic(PopSize = 2000, P0 = 10, tmax = 100, sigma = 0.1)
+result <- simulate_stochastic(PopSize = 2000,  tmax = 200, bP = 1/100)
 # You should then use the simulation result returned from the function, e.g. like this:
 plot(result[,1],result[,2],xlab='Time',ylab='Number Susceptible',type='l')
 }

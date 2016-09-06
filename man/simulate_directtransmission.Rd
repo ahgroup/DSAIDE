@@ -15,6 +15,8 @@ simulate_directtransmission(PopSize = 1000, I0 = 1, tmax = 120,
 
 \item{tmax}{maximum simulation time, units of months}
 
+\item{scenario}{choice between density dependent (=1) and frequency dependent (=2) transmission scenarios}
+
 \item{bd}{rate of transmission for density-dependent transmission}
 
 \item{bf}{rate of transmission for frequency-dependent transmission}

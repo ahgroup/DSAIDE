@@ -15,40 +15,55 @@ This is the future home of an introductory tutorial to the DSAIDE pacakage
 
 
 
-## Styles
+## Introduction
+
+
 
 The `html_vignette` template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows:
 
     output: 
       rmarkdown::html_vignette:
-        css: mystyles.css
+          css: mystyles.css
 
-## Figures
 
-The figure sizes have been customised so that you can easily put two images side-by-side. 
 
-```{r, fig.show='hold'}
-plot(1:10)
-plot(10:1)
-```
 
-You can enable figure captions by `fig_caption: yes` in YAML:
+##Use options for end users
 
-    output:
-      rmarkdown::html_vignette:
-        fig_caption: yes
 
-Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr**.
+###Interactive use through the Shiny user interface
 
-## More Examples
+This is the main intended use of this package.
+Start the main menu of the package by calling dsaidemenu(). 
+Pick a shiny app corresponding to a model, and explore the model through the corresponding shiny UI. The UI contains information about the model and a list of tasks to try. 
 
-You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
 
-```{r, echo=FALSE, results='asis'}
-knitr::kable(head(mtcars, 10))
-```
+###Supplementing simulations with custom code
+Call each simulator function directly from the R console, without going
+  through the shiny app. Each model simulator function is called simulate_XXX
+  and is documented. See the documentation for the package to find the names
+  of the different simulation functions, or check the 'further information' 
+  tab for a given shiny app. 
+  You can call the functions with different initial condition and parameter values. 
+  This allows you to for instance write a few
+  lines of extra R code to loop over some model parameter, instead of the manual setting
+  through the sliders in the shiny app. This gives you
+  some more flexibility in what you can do with these functions, but requires
+  being able to write a little bit of R code.
 
-Also a quote using `>`:
+###Modifying simulations
+Find the code for a simulator function you are interested in and modify
+  it to your needs. This provides the most flexibility in what you can do with 
+  this package, and you can end up with any model you need, 
+  but for that you need to know or learn some
+  more R coding. To make it easy to get the source code for the simulator functions,
+  they are located in a subdirectory called 'simulatorfunction' inside the DSAIDE 
+  package folder.
 
-> "He who gives up [code] safety for [code] speed deserves neither."
-([via](https://twitter.com/hadleywickham/status/504368538874703872))
+
+
+
+##Use options for developers
+
+
+
