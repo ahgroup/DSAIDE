@@ -5,17 +5,18 @@ directtransmissioneq <- function(t, y, parms)
     as.list(c(y,parms)), #lets us access variables and parameters stored in y and pars by name
     {
       
-      #the ordinary differential equations
-      dS =  - S * (beta1 * I + beta2* Iv + beta3 * E) + lambda1 - n1 * S; #susceptibles
-      dI =  S * (beta1 * I + beta2* Iv + beta3 * E)  - n1 * I - gamma1 * I #infected, symptomatic
-      dR =   gamma1 * I - n1 * R #recovered, immune
+      
+      #force of infection for different scenarios: 1 = density-dependent, 2 = frequency-dependent
+      N=S+I+R
+      if (scenario==1) { lambda=bd*I/A;}
+      if (scenario==2) { lambda=bf*I/N;}
 
-      dE = p * I - c * E; #pathogen in environment
-    
-      dSv = lambda2 - n2 * Sv - beta4 * I * Sv; #susceptible vectors
-      dIv = beta4 * I * Sv - n2 * Iv - gamma2 * Iv; #susceptible hosts
-            
-      list(c(dS, dI, dR, dE, dSv, dIv))
+      #the ordinary differential equations - includes birth-death and waning immunity
+      dS = b - n*S - lambda*S + w*R; #susceptibles 
+      dI = lambda*S - g*I - n*I; #infected/infectious
+      dR = g*I -n*R - w*R; #recovered
+
+      list(c(dS, dI, dR))
     }
   ) #close with statement
 } #end function specifying the ODEs
@@ -28,21 +29,16 @@ directtransmissioneq <- function(t, y, parms)
 #' @description  This model allows for the simulation of different direct transmission modes
 #' 
 #'
-#' @param S0 initial number of susceptible hosts
+#' @param PopSize initial population size
 #' @param I0 initial number of infected hosts
 #' @param tmax maximum simulation time, units of months
-#' @param beta1 rate of transmission from infected to susceptible host
-#' @param beta2 rate of transmission from infected vector to susceptible host
-#' @param beta3 rate of transmission from environment to susceptible host
-#' @param beta4 rate of transmission from infected host to susceptible vector
-#' @param lambda1 the rate of births of hosts
-#' @param lambda2 the rate of births of vectors
-#' @param n1 the rate of natural death of hosts
-#' @param n2 the rate of natural death of vectors
-#' @param gamma1 the rate at which infected hosts recover/die
-#' @param gamma2 the rate at which infected vectors recover/die
-#' @param p the rate at which infected host shed pathogen in the enviroment
-#' @param c the rate at which pathogen in the enviroment decays
+#' @param bd rate of transmission for density-dependent transmission
+#' @param bf rate of transmission for frequency-dependent transmission
+#' @param A the size of the area in which the hosts are assumed to reside/interact
+#' @param b the rate of births 
+#' @param n the rate of natural deaths
+#' @param g the rate at which infected hosts recover
+#' @param w the rate of waning immunity
 #' @return This function returns the simulation result as obtained from a call
 #'   to the deSolve ode solver
 #' @details A compartmental ID model with several states/compartments
@@ -57,7 +53,7 @@ directtransmissioneq <- function(t, y, parms)
 #'   # To run the simulation with default parameters just call this function
 #'   result <- simulate_directtransmission()
 #'   # To choose parameter values other than the standard one, specify them e.g. like such
-#'   result <- simulate_directtransmission(S0 = 100, Sv0 = 1e5,  tmax = 100)
+#'   result <- simulate_directtransmission(PopSize = 100,   tmax = 100, A=10)
 #'   # You should then use the simulation result returned from the function, e.g. like this:
 #'   plot(result[,1],result[,2],xlab='Time',ylab='Number Susceptible',type='l')
 #' @seealso The UI of the shiny app 'DirectTransmission', which is part of this package, contains more details on the model
@@ -68,26 +64,22 @@ directtransmissioneq <- function(t, y, parms)
 
 
 
-simulate_directtransmission <- function(S0 = 1e3, I0 = 1, Sv0 = 0, tmax = 120, beta1 = 0.01, beta2 = 0, beta3 = 0, beta4 = 0, lambda1 = 0, lambda2 = 0, n1 = 0, n2 = 0, gamma1 = 1, gamma2 = 1, p = 0 ,c = 0)
+simulate_directtransmission <- function(PopSize = 1e3, I0 = 1, tmax = 120, scenario = 1, bd = 0.01, bf = 0, A = 1, b = 0, n = 0, g = 0.1, w = 0)
 {
   ############################################################
-  #setting initial conditions for variables
-  #you can change initial conditions by changing the values assigned to 
-  #S0, Sv0 and I0
-  #every other compartment starts at 0
-  Y0 = c(S = S0, I = I0, R = 0, E = 0, Sv = Sv0, Iv = 0);  #combine initial conditions into a vector
+  Y0 = c(S = PopSize-I0, I = I0, R = 0);  #combine initial conditions into a vector
   dt = min(0.1, tmax / 1000); #time step for which to get results back
   timevec = seq(0, tmax, dt); #vector of times for which solution is returned (not that internal timestep of the integrator is different)
   
   
   ############################################################
   #vector of parameters which is sent to the ODE function  
-  pars=c(beta1 = beta1, beta2 = beta2, beta3 = beta3, beta4 = beta4, lambda1 = lambda1, lambda2 = lambda2, n1 = n1, n2 = n2, gamma1 = gamma1, gamma2 = gamma2, p = p , c = c); 
+  pars=c(tmax = tmax, bd = bd, bf = bf, A = A, b = b, n = n, g = g, w = w, scenario = scenario); 
 
   #this line runs the simulation, i.e. integrates the differential equations describing the infection process
   #the result is saved in the odeoutput matrix, with the 1st column the time, the 2nd, 3rd, 4th column the variables S, I, R
   #This odeoutput matrix will be re-created every time you run the code, so any previous results will be overwritten
-  odeoutput = deSolve::lsoda(Y0, timevec, func = directtransmissioneq, parms=pars, atol=1e-8, rtol=1e-8);
+  odeoutput = deSolve::lsoda(Y0, timevec, func = directtransmissioneq, parms=pars, atol=1e-12, rtol=1e-12);
 
   return (odeoutput)
 }

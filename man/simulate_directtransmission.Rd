@@ -4,41 +4,30 @@
 \alias{simulate_directtransmission}
 \title{Simulation of a compartmental infectious disease transmission model illustrating different types of direct transmission}
 \usage{
-simulate_directtransmission(S0 = 1000, I0 = 1, Sv0 = 0, tmax = 120,
-  beta1 = 0.01, beta2 = 0, beta3 = 0, beta4 = 0, lambda1 = 0,
-  lambda2 = 0, n1 = 0, n2 = 0, gamma1 = 1, gamma2 = 1, p = 0,
-  c = 0)
+simulate_directtransmission(PopSize = 1000, I0 = 1, tmax = 120,
+  scenario = 1, bd = 0.01, bf = 0, A = 1, b = 0, n = 0, g = 0.1,
+  w = 0)
 }
 \arguments{
-\item{S0}{initial number of susceptible hosts}
+\item{PopSize}{initial population size}
 
 \item{I0}{initial number of infected hosts}
 
 \item{tmax}{maximum simulation time, units of months}
 
-\item{beta1}{rate of transmission from infected to susceptible host}
+\item{bd}{rate of transmission for density-dependent transmission}
 
-\item{beta2}{rate of transmission from infected vector to susceptible host}
+\item{bf}{rate of transmission for frequency-dependent transmission}
 
-\item{beta3}{rate of transmission from environment to susceptible host}
+\item{A}{the size of the area in which the hosts are assumed to reside/interact}
 
-\item{beta4}{rate of transmission from infected host to susceptible vector}
+\item{b}{the rate of births}
 
-\item{lambda1}{the rate of births of hosts}
+\item{n}{the rate of natural deaths}
 
-\item{lambda2}{the rate of births of vectors}
+\item{g}{the rate at which infected hosts recover}
 
-\item{n1}{the rate of natural death of hosts}
-
-\item{n2}{the rate of natural death of vectors}
-
-\item{gamma1}{the rate at which infected hosts recover/die}
-
-\item{gamma2}{the rate at which infected vectors recover/die}
-
-\item{p}{the rate at which infected host shed pathogen in the enviroment}
-
-\item{c}{the rate at which pathogen in the enviroment decays}
+\item{w}{the rate of waning immunity}
 }
 \value{
 This function returns the simulation result as obtained from a call
@@ -63,7 +52,7 @@ A compartmental ID model with several states/compartments
   # To run the simulation with default parameters just call this function
   result <- simulate_directtransmission()
   # To choose parameter values other than the standard one, specify them e.g. like such
-  result <- simulate_directtransmission(S0 = 100, Sv0 = 1e5,  tmax = 100)
+  result <- simulate_directtransmission(PopSize = 100,   tmax = 100, A=10)
   # You should then use the simulation result returned from the function, e.g. like this:
   plot(result[,1],result[,2],xlab='Time',ylab='Number Susceptible',type='l')
 }
