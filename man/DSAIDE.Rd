@@ -42,7 +42,7 @@ learn how models can be used to study such concepts.
   this package, and you can end up with any model you need, 
   but for that you need to know or learn some
   more R coding. To make it easy to get the source code for the simulator functions,
-  they are located in a subdirectory called 'simulatorfunctions' inside the DSAIDE 
+  they are located in a subdirectory called 'simulatorfunction' inside the DSAIDE 
   package folder.
 }
 
