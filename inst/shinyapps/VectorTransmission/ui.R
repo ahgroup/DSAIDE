@@ -1,4 +1,4 @@
-#This is the UI for the Environmental Transmission App
+#This is the UI for the Vector Transmission App
 
 ui <- fluidPage(
   includeCSS("../shinystyle.css"),
@@ -6,7 +6,7 @@ ui <- fluidPage(
   tags$head( tags$script(src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML", type = 'text/javascript') ),
   
   div( includeHTML("www/header.html"), align = "center"),
-  h1('Environmental Transmission App', align = "center", style = "background-color:#123c66; color:#fff"),
+  h1('Vector Transmission App', align = "center", style = "background-color:#123c66; color:#fff"),
   
   #################################
   #Start with results on top
@@ -30,31 +30,31 @@ ui <- fluidPage(
   h2('Simulation Settings'),
   fluidRow(
     column(3,
-           sliderInput("PopSize", "Population Size", min = 1000, max = 5000, value = 1000, step = 500)
+           sliderInput("Ph0", "Host Population Size", min = 1000, max = 5000, value = 1000, step = 500)
     ),
     column(3,
-           sliderInput("I0", "initial number of infected hosts", min = 0, max = 100, value = 0, step = 1)
+           sliderInput("Pv0", "Vector Population Size", min = 1000, max = 5000, value = 1000, step = 500)
     ),
     column(3,
-           sliderInput("E0", "initial number of environmental pathogen", min = 0, max = 100, value = 0, step = 1)
+           sliderInput("Ih0", "initial number of infected hosts", min = 0, max = 100, value = 0, step = 1)
     ),
     column(3,
-           sliderInput("tmax", "Maximum simulation time (months)", min = 1, max = 500, value = 100, step = 1)
+           sliderInput("Iv0", "initial number of infected vectors", min = 0, max = 100, value = 0, step = 1)
     ),
     align = "center"
   ), #close fluidRow structure for input
   fluidRow(
     column(3,
-           sliderInput("bd", "direct transmission rate (bd, 1/month)", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
+           sliderInput("tmax", "Maximum simulation time (months)", min = 1, max = 500, value = 100, step = 1)
     ),
     column(3,
-           sliderInput("be", "environmental transmission rate (be, 1/month)", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
+           sliderInput("b1", "vector to host transmission rate (b1, 1/month)", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
     ),
     column(3,
-           sliderInput("p", "Rate of pathogen shedding by infected hosts (p, 1/month)", min = 0, max = 50, value = 1, step = 0.1)
+           sliderInput("b2", "host to vector transmission rate (b2, 1/month)", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
     ),
     column(3,
-           sliderInput("c", "Rate of environmental pathogen decay (c, 1/month) ", min = 0, max = 10, value = 0, step = 0.01 , sep ='')
+           sliderInput("w", "Rate of waning immunity (p, 1/month)", min = 0, max = 50, value = 1, step = 0.1)
     ),
     align = "center"
   ), #close fluidRow structure for input
@@ -63,10 +63,10 @@ ui <- fluidPage(
            sliderInput("g", "Rate of recovery of infected hosts (g, 1/month)", min = 0, max = 2, value = 0.5, step = 0.1)
     ),
     column(3,
-           sliderInput("b", "Monthly rate of new births (b)", min = 0, max = 100, value = 0, step = 1)
+           sliderInput("b", "Monthly rate of new vector births (b)", min = 0, max = 100, value = 0, step = 1)
     ),
     column(3,
-           sliderInput("n", "Natural death rate (n, 1/month)", min = 0, max = 0.02, value = 0, step = 0.0005, sep ='')
+           sliderInput("n", "Natural vector death rate (n, 1/month)", min = 0, max = 0.02, value = 0, step = 0.0005, sep ='')
     ),
     align = "center"
   ), #close fluidRow structure for input
