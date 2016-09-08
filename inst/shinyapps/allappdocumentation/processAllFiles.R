@@ -1,9 +1,8 @@
-#library("gdata")
 library("XML")
 
-#first, get all of the HTML files in this folder,
-#for each file call the separate function to split into individual html files
-#then move them to the corresponding shiny app folder
+#for each HTML file in the folder where this script resides
+#call the separate() function to split into individual html files
+#save the individual files in the www subfolder of each shiny app
 processAllFiles <- function(){
   files = list.files(".", pattern = "\\.html$")
 
@@ -17,31 +16,23 @@ processAllFiles <- function(){
     foldername = unlist(strsplit(current_filename,split='_'))[1]
 
     #Clean up and recreate any previous files/folders
+    #the location of these documentation files are in the www subfolder of the respective shiny app
 
-    # Delete the previously created subfolder for the given file
-    unlink(foldername, recursive = TRUE)
+    # find the path to the app www folder and copy all of the separated files there
+    shinyapp.path <- sprintf("../%s/www", foldername)
 
-    # find the path to its folder and copy all of the separated files there
-    shinyapp.path <- sprintf("../shinyapps/%s/www", foldername)
-
-    #Clean the folder and create it again
+    #Remove the www folder and all its previous content, and recreate a new empty one
     unlink(shinyapp.path, recursive = TRUE)
     dir.create(shinyapp.path)
 
-    # Call the separate function (see below) to separate the HTML
-    #separated HTML files are saved to subfolder below the current one
-    pathToDir <- separate(current_filename,foldername)
-
-    # Here we copy the files over into the www directory of each shiny app
-    results.files <- list.files(pathToDir)
-    for (j in seq(results.files))
-      {
-                file.copy(from=sprintf("%s/%s", pathToDir, results.files[j]), to=shinyapp.path,
-                overwrite = TRUE, recursive = FALSE,
-                copy.mode = TRUE)
-      } #finish loop to copy files
+    # Call the separate function (see below) to separate the HTML into component files
+    #these component files are copied into the www directory of each shiny app
+    #the UI of each app then loads and displays (some of) those HTML files 
+    pathToDir <- separate(current_filename,shinyapp.path)
+    
   } #finish loop over all files in folder
 } #end of function
+
 
 # This function will read a R markdown file, find the Practice section and
 #   separate all the sub-sections from that part on.
@@ -49,8 +40,8 @@ processAllFiles <- function(){
 # Parameters,
 #   input: The main HTML file that needs to be separated
 #   foldername: The name of the folder where the new files should be stored
-##
 # Return values: Path to the folder consisting of the separated HTML files
+
 separate <- function(input,foldername){
   # Read and parse raw HTML file
   html.raw <- htmlTreeParse(input, useInternalNodes = TRUE)
@@ -83,21 +74,14 @@ separate <- function(input,foldername){
   #html.body.script <- xpathApply(html.raw, "//script[@type[starts-with(., 'text/javascript')]]", saveXML)
   html.body.script <- xpathApply(html.raw, "//script", xmlValue) #there is some weird CDATA field coming along if I use saveXML. not sure how to get rid, so just extract inside and slap script tag on again later
 
-
   # Static text to end a Body TAG
   html.body.end <- '</body>'
 
   # Static text to end an HTML TAG
   html.html.end <- '</html>'
 
-
   script.start.tag <- '<script>'
   script.end.tag <- '</script>'
-
-
-  # Create a directory to copy all of the separated files of this HTML here!
-  dir.create(sprintf("%s/%s", dirname(input), foldername))
-
 
   # Now loop over the tabs and create an HTML file for each one
   # Files are named simply as shinytab1.html, shinytab2.html, etc.
@@ -135,8 +119,11 @@ separate <- function(input,foldername){
     )
 
     # This is the file that will be written in
-    fileName <- sprintf("%s/%s/%s.html", dirname(input), foldername, gsub("\\s", "_", title))
-
+    #fileName <- sprintf("%s/%s/%s.html", dirname(input), foldername, gsub("\\s", "_", title))
+    fileName <- sprintf("%s/%s.html", foldername, gsub("\\s", "_", title))
+    
+    #browser()
+    
     # Create a connection to the file
     fileConn <- file( fileName )
 
@@ -165,7 +152,7 @@ separate <- function(input,foldername){
                    html.body.end
                    #html.html.end
   )
-  fileName <- sprintf("%s/%s/header.html", dirname(input), foldername)
+  fileName <- sprintf("%s/header.html",  foldername)
   fileConn <- file( fileName )
   writeLines(con = fileConn, text = toWrite)
   close(fileConn)
@@ -183,11 +170,10 @@ separate <- function(input,foldername){
                    html.body.end,
                    html.html.end
   )
-  fileName <- sprintf("%s/%s/footer.html", dirname(input), foldername)
+  fileName <- sprintf("%s/footer.html", foldername)
   fileConn <- file( fileName )
   writeLines(con = fileConn, text = toWrite)
   close(fileConn)
-
 
   return (sprintf("%s/%s", dirname(input), foldername))
 }

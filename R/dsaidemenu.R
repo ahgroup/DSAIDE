@@ -34,10 +34,10 @@ dsaidemenu <- function() {
     cat("\tE - Modes of Direct Transmission App", "\n")
     cat("\tF - Environmental Transmission App", "\n")
     cat("\tG - Vector-borne Transmission App", "\n")
-    #cat("\t6 - ID Control App", "\n")
-    #cat("\t7 - Host Heterogeneity App", "\n")
-    #cat("\t8 - Stochastic Dynamics App", "\n")
-    #cat("\t9 - Evolutionary Dynamics App", "\n")
+    cat("\tH - ID Control App", "\n")
+    cat("\tI - Host Heterogeneity App", "\n")
+    cat("\tJ - Stochastic Dynamics App", "\n")
+    cat("\tK - Evolutionary Dynamics App", "\n")
     cat("\tX - Exit", "\n")
 
     op = scan(what="character", n = 1)
@@ -51,10 +51,10 @@ dsaidemenu <- function() {
     if (op == "E") {appname = "DirectTransmission"}
     if (op == "F") {appname = "EnvironmentalTransmission"}
     if (op == "G") {appname = "VectorTransmission"}
-    #if (op == 6) {appname = "IDControl"}
-    #if (op == 7) {appname = "HostHeterogeneity"}
-    #if (op == 8) {appname = "StochasticDynamics"}
-    #if (op == 9) {appname = "EvolutionaryDynamics"}
+    if (op == "H") {appname = "IDControl"}
+    if (op == "I") {appname = "HostHeterogeneity"}
+    if (op == "J") {appname = "StochasticDynamics"}
+    if (op == "K") {appname = "EvolutionaryDynamics"}
 
     if (!is.null(appname))     #run the shiny app chosen
     {

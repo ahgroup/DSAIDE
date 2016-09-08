@@ -82,5 +82,5 @@ simulate_directtransmission <- function(PopSize = 1e3, I0 = 1, tmax = 120, scena
   #This odeoutput matrix will be re-created every time you run the code, so any previous results will be overwritten
   odeoutput = deSolve::lsoda(Y0, timevec, func = directtransmissioneq, parms=pars, atol=1e-12, rtol=1e-12);
 
-  return (odeoutput)
+  return(odeoutput)
 }

@@ -61,5 +61,5 @@ Answer to task 1.
 * Could be list of references, or explanation on how to access the underlying code, etc.
 
 ##More sections
-Any other sections that don't have the shinytab label can be filled here but are ignored by the processing script and not included in the app UI.
+Any other sections that don't have the shinytab label can be included here but are ignored by the processing script and not included in the app UI.
 

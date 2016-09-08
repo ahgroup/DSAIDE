@@ -10,23 +10,6 @@ refresh <- function(input, output){
   res <- reactive({
     input$submitBtn
     
-    # Create a Progress object
-    progress <- shiny::Progress$new()
-    progress$set(message = "Starting Simulation: ", value = 0)
-    # Close the progress when this reactive exits (even if there's an error)
-    on.exit(progress$close())
-    
-    # Update the proggress bar to show how the process is going
-    updateProgress_ <- function(value = NULL, detail = NULL) {
-      if (is.null(value)) {
-        value <- progress$getValue()
-        value <- value + (progress$getMax() - value) / 5
-      }else{
-        value <- progress$getMax() * value
-      }
-      progress$set(value = value, detail = detail)
-    }
-    
     # Read all the input values from the UI
     PopSize = isolate(input$PopSize);
     I0 = isolate(input$I0);
@@ -38,12 +21,13 @@ refresh <- function(input, output){
     n = isolate(input$n);
     w = isolate(input$w);
     A = isolate(input$A);
-    scenario = isolate(input$scenario);
+    scenario = as.numeric(isolate(input$scenario));
     
         
     # Call the ODE solver with the given parameters
 
     result <- simulate_directtransmission(PopSize = PopSize, I0 = I0, tmax = tmax, scenario = scenario, bd = bd, bf = bf, A = A, b = b, n = n, g = g, w = w)
+  
     return (result)
   })
   
@@ -55,7 +39,6 @@ refresh <- function(input, output){
       
       tmax = isolate(input$tmax)
       PopSize = isolate(input$PopSize);
-      
       
       ymax = max(c(PopSize,res()[,2]))
       
