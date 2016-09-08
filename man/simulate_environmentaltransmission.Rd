@@ -4,39 +4,28 @@
 \alias{simulate_environmentaltransmission}
 \title{Simulation of a compartmental infectious disease transmission model illustrating environmental transmission}
 \usage{
-simulate_environmentaltransmission(S0 = 1000, I0 = 1, Sv0 = 0,
-  tmax = 120, beta1 = 0.01, beta2 = 0, beta3 = 0, beta4 = 0,
-  lambda1 = 0, lambda2 = 0, n1 = 0, n2 = 0, gamma1 = 1, gamma2 = 1,
-  p = 0, c = 0)
+simulate_environmentaltransmission(PopSize = 1000, I0 = 1, E0 = 0,
+  tmax = 120, bd = 0.01, be = 0, b = 0, n = 0, g = 1, p = 0,
+  c = 0)
 }
 \arguments{
-\item{S0}{initial number of susceptible hosts}
+\item{PopSize}{initial population size}
 
 \item{I0}{initial number of infected hosts}
 
-\item{Sv0}{initial number of susceptible vectors}
+\item{E0}{initial number of pathogen in environment}
 
 \item{tmax}{maximum simulation time, units of months}
 
-\item{beta1}{rate of transmission from infected to susceptible host}
+\item{bd}{rate of direct transmission}
 
-\item{beta2}{rate of transmission from infected vector to susceptible host}
+\item{be}{rate of environmental transmission}
 
-\item{beta3}{rate of transmission from environment to susceptible host}
+\item{b}{rate of births of hosts}
 
-\item{beta4}{rate of transmission from infected host to susceptible vector}
+\item{n}{the rate of natural death of hosts}
 
-\item{lambda1}{the rate of births of hosts}
-
-\item{lambda2}{the rate of births of vectors}
-
-\item{n1}{the rate of natural death of hosts}
-
-\item{n2}{the rate of natural death of vectors}
-
-\item{gamma1}{the rate at which infected hosts recover/die}
-
-\item{gamma2}{the rate at which infected vectors recover/die}
+\item{g}{the rate at which infected hosts recover/die}
 
 \item{p}{the rate at which infected host shed pathogen in the enviroment}
 
@@ -65,7 +54,7 @@ A compartmental ID model with several states/compartments
   # To run the simulation with default parameters just call this function
   result <- simulate_environmentaltransmission()
   # To choose parameter values other than the standard one, specify them e.g. like such
-  result <- simulate_environmentaltransmission(S0 = 100, Sv0 = 1e5,  tmax = 100)
+  result <- simulate_environmentaltransmission(PopSize = 100, E0 = 1e5,  tmax = 100)
   # You should then use the simulation result returned from the function, e.g. like this:
   plot(result[,1],result[,2],xlab='Time',ylab='Number Susceptible',type='l')
 }
