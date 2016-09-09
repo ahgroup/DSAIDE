@@ -5,6 +5,18 @@ ui <- fluidPage(
   includeCSS("../shinystyle.css"),
 
   tags$head( tags$script(src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML", type = 'text/javascript') ),
+  tags$head(
+    tags$style(HTML("
+      img {
+        max-height: 90px;
+        max-width: '100%';
+      }
+    
+      body {
+        background-color: #fff;
+      }
+    "))
+  ),
 
   div( includeHTML("www/header.html"), align = "center"),
   h1('ID Dynamics Introduction App', align = "center", style = "background-color:#123c66; color:#fff"),
@@ -39,17 +51,26 @@ ui <- fluidPage(
           align = "center"
           ), #close fluidRow structure for input
 
-  div( style="text-align:center",          actionButton("submitBtn", "Run Simulation")  ),
+  div( style="text-align:center", actionButton("submitBtn", "Run Simulation")  ),
   tags$hr(),
 
   h2('Simulation Results'),
-  plotOutput(outputId = "plot"),
-  # PLaceholder for results of type text
-  htmlOutput(outputId = "text"),
-
-  #Placeholder for any possible warning or error messages (this will be shown in red)
-  htmlOutput(outputId = "warn"),
-
+  fluidRow(
+    column(12, 
+           uiOutput("plot.ui")
+           ),
+    column(7, 
+           # PLaceholder for results of type text
+           htmlOutput(outputId = "text"),
+           # Placeholder for any possible warning or error messages (this will be shown in red)
+           htmlOutput(outputId = "warn")
+    ),
+  
+    column(4, 
+           # Slider to change the size of the plot
+           sliderInput("PlotWidth", "Plot width (%)", min = 30, max = 100, value = 60, step = 5)
+    )
+  ),
 
   tags$head(tags$style("#warn{color: red;
                                font-style: italic;

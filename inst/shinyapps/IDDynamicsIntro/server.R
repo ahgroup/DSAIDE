@@ -39,7 +39,11 @@ refresh <- function(input, output){
 
     return(result)
   })
-
+    
+  output$plot.ui <- renderUI({
+    plotOutput("plot", width = paste0(input$PlotWidth, "%"), height = 500)
+  })
+    
   # Here, we use the "res" variable to plot the chart that we need
   # the resulting chart will be shown in the "plot" placeholder of the UI
   output$plot <- renderPlot(
@@ -55,7 +59,7 @@ refresh <- function(input, output){
     lines(res()[,1],res()[,4],type="l",col="gray",lwd=2)
     lines(res()[,1],res()[,2]+res()[,3]+res()[,4],type="l",col="blue",lwd=2)
     legend("right", c("Susceptible","Infected","Recovered","Total"),col = c("green","red","gray","blue"),lwd=2)
-  }, width = 600, height = 'auto'
+  }
   )
 
   # Use the result "res" returned from the simulator to compute and some text results
