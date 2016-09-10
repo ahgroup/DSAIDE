@@ -1,6 +1,11 @@
+9/9/16
+
+- Right now in every server.R file, there is a whole bunch of commands that produce a plot, results in text form and potential warning messages. Instead of repeating more or less the same code in every server.R file,  could we move that into a single function that takes as input what the simulator returns (res/result, which is always a matrix with 1st column time and other columns model variables) and produces a plot, the text results and possible warnings, and returns all that. Then each server.R (or eventually the single shiny app file, see below) would call that function, without having to repeat the code multiple times. Only try it initially for the ID Introduction app.
+
+
 9/2/16
 
-- Find a way to display figure in UI such that it looks better and scales well with screen size - either automatically or via user adjustment
+- Find a way to display figure in UI such that it looks better and scales well with screen size - either automatically or via user adjustment. Only try it initially for the ID Introduction app.
 
 
 8/31/2016
@@ -17,4 +22,5 @@ https://github.com/daattali
 
 - Make the main menu graphical. Ideally, make it a Shiny app, where the UI has a bunch of buttons, each for a different App. Once the user klicks a button, the Menu App should somehow 'shut down' and start the App for the chosen simulation. When the user exits the specific simulation App, the Menu App will come back. (Later, we can add some welcome, contact/disclaimer and other explanatory text to the menu App.)
 
-- Remove progress bar. Instead, once a user hits 'run simulation' a 'simulation running' message should show up below the button. This message should go away as soon as the simulation has finished and output has been displayed. For now, only try it on the "IDPatterns" app, leave others as they are. 
+- Remove progress bar. Instead, once a user hits 'run simulation' a 'simulation running' message should show up below the button. This message should go away as soon as the simulation has finished and output has been displayed. For now, only try it on the "ID Introduction" app, leave others as they are. Depending on how many lines of code this is, maybe turn it into a stand-alone function that is called from each server.R file, instead of having the code repeated in each server.R file. But only do that if it doesn't make the code more complex.
+
