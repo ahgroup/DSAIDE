@@ -5,12 +5,12 @@
 
 9/2/16
 
-- Find a way to display figure in UI such that it looks better and scales well with screen size - either automatically or via user adjustment. Only try it initially for the ID Introduction app.
+- Find a way to display figure in UI such that it looks better and scales well with screen size - either automatically or via user adjustment. Only try it initially for the ID Introduction app. %%DONE - Please take a look at the "ID Introduction" app to see if it looks fine or not?
 
 
 8/31/2016
 
-- Rewrite the 1st app "ID Introduction" as a single file with UI and Server functions inside.
+- Rewrite the 1st app "ID Introduction" as a single file with UI and Server functions inside. %%DONE
 
 Note: I found a good source of shiny examples and tips and tricks that might be helpful. 
 E.g. the ""Busy..." / "Done!" / "Error" example on that webiste might be useful for the progress bar task below.
