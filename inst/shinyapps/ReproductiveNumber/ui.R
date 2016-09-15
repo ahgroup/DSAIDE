@@ -34,7 +34,7 @@ ui <- fluidPage(
            sliderInput("beta", "Rate of transmission (beta, 1/months)", min = 0, max = 0.1, value = 0, step = 0.001 , sep ='')
     ),
     column(3,
-           sliderInput("gamma", "Rate at which a host leaves the infectious compartment (gamma, 1/months)", min = 0, max = 25, value = 10, step = 0.5, sep ='')
+           sliderInput("gamma", "Rate at which a host leaves the infectious compartment (gamma, 1/months)", min = 0, max = 25, value = 10, step = 0.25, sep ='')
     ),
     column(3,
            sliderInput("f", "Fraction vaccinated prior to outbreak", min = 0, max = 1, value = 0, step = 0.05, sep ='')

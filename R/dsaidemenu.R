@@ -31,9 +31,9 @@ dsaidemenu <- function() {
     cat("\tB - Characterizing ID States App", "\n")
     cat("\tC - ID Patterns App", "\n")
     cat("\tD - Reproductive Number App", "\n")
-    cat("\tE - Modes of Direct Transmission App", "\n")
-    cat("\tF - Environmental Transmission App", "\n")
-    cat("\tG - Vector-borne Transmission App", "\n")
+    cat("\tE - Modes of Direct Transmission App - NOT YET AVAILABLE", "\n")
+    cat("\tF - Environmental Transmission App - NOT YET AVAILABLE", "\n")
+    cat("\tG - Vector-borne Transmission App - NOT YET AVAILABLE", "\n")
     cat("\tH - ID Control App - NOT YET AVAILABLE", "\n")
     cat("\tI - Host Heterogeneity App - NOT YET AVAILABLE", "\n")
     cat("\tJ - Stochastic Dynamics App - NOT YET AVAILABLE", "\n")
@@ -48,9 +48,9 @@ dsaidemenu <- function() {
     if (op == "B") {appname = "CharacteristicsofID"}
     if (op == "C") {appname = "IDPatterns"}
     if (op == "D") {appname = "ReproductiveNumber"}
-    if (op == "E") {appname = "DirectTransmission"}
-    if (op == "F") {appname = "EnvironmentalTransmission"}
-    if (op == "G") {appname = "VectorTransmission"}
+    #if (op == "E") {appname = "DirectTransmission"}
+    #if (op == "F") {appname = "EnvironmentalTransmission"}
+    #if (op == "G") {appname = "VectorTransmission"}
     #if (op == "H") {appname = "IDControl"}
     #if (op == "I") {appname = "HostHeterogeneity"}
     #if (op == "J") {appname = "StochasticDynamics"}
