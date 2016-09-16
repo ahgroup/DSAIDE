@@ -82,23 +82,53 @@
 <ul>
 <li>Set the model parameters such that it corresponds to the following setting:
 <ul>
-<li>A population size of 1000, 1 initially infected host, no pathogen in environment, simulation duration 10 years.</li>
-<li>We’ll first look at direct transmission. Set transmission rate of <em>b<sub>d</sub> = 0.001</em>, environmental transmission to 0.</li>
+<li>A population size of 1000 for both hosts and vectors, 1 initially infected host, no infected vector, simulation duration approximately 10 years.</li>
+<li>Set host -&gt; vector transmission rate, <em>b<sub>2</sub></em>=0.001. Keep <em>b<sub>1</sub></em> = 0.</li>
 <li>Set environmental pathogen shedding and clearance to 0.</li>
-<li>Assume that the duration of the infectious period is half a month (about 2 weeks) long.</li>
-<li>Turn off births and deaths for now.</li>
+<li>Assume that the duration of the infectious period in hosts is half a month (about 2 weeks) long.</li>
+<li>Turn off births and deaths and waning immunity for now.</li>
 </ul></li>
-<li>Run the simulation. You should get the usual direct transmission outbreak and SIR dynamics.</li>
+<li>Run the simulation, observe what you get.</li>
+<li>Now set <em>b<sub>1</sub></em> = <em>b<sub>2</sub></em>, run again. Then set <em>b<sub>1</sub></em> = 2 <em>b<sub>2</sub></em>, run again.</li>
 <li>Record the number and fraction of susceptible/infected/recovered remaining at the end of the outbreak.</li>
 </ul>
 </div>
 <div id="task-2" class="section level3">
 <h3>Task 2:</h3>
 <ul>
-<li>Now try various values for the rate of shedding into the environment and environmental clearance.</li>
-<li>As you change those parameters away from 0 (but don’t change anything else), what do you expect to see?</li>
-<li>Think about your expectations, run the simulation and compare your expectations with the results.</li>
+<li>Now start with no infected hosts and 1 infected vector. What do you expect to see? Run the simulation to check your expectation.</li>
+<li>Play around with different initial number of infected hosts and vectors and different transmission rates.</li>
 <li>Anything surprising happening? Do you understand why you are seeing what you see?</li>
+</ul>
+</div>
+<div id="task-3" class="section level3">
+<h3>Task 3:</h3>
+<ul>
+<li>Turn off any infection process by setting number of initial infected hosts and vectors to 0.</li>
+<li>Let’s assume our vectors are mosquitos, and that they live for about 1 month. Set the death rate accordingly.</li>
+<li>Set the birth rate such that the vector population settles at 2000.</li>
+</ul>
+</div>
+<div id="task-4" class="section level3">
+<h3>Task 4:</h3>
+<ul>
+<li>Turn infection process back on by having an infected host. Everything else as above.</li>
+<li>Contemplate the dynamics you see.</li>
+<li>You have births and deaths now, and usually with those you can get multiple outbreaks. Why not here?</li>
+</ul>
+</div>
+<div id="task-5" class="section level3">
+<h3>Task 5:</h3>
+<ul>
+<li>Assume host immunity wanes after an average of 4 months.</li>
+<li>What do you expect to see? Run simulations to check your expectations.</li>
+</ul>
+</div>
+<div id="task-6" class="section level3">
+<h3>Task 6:</h3>
+<ul>
+<li>Keep exploring.</li>
+<li>Try to figure out how the different parameters influence the dynamics, specifically the (lack of) sustained cycles.</li>
 </ul>
 </div>
 </div>
@@ -114,7 +144,8 @@
 <h2>Further Information</h2>
 <ul>
 <li>For this app, the underlying function running the simulation is called <code>simulate_vectortransmission.R</code>. You can call this function directly, without going through the shiny app. Check the help file for the function for more information. If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself.</li>
-<li>You could also modify this R function for your own purposes - though that requires R coding knowledge.</li>
+<li>You could also modify this R function for your own purposes.</li>
+<li>To learn more about the underlying simulations and how to access and use the code, see the package vignette, which you can open by typing <code>vignette('DSAIDE')</code> in the R console.</li>
 </ul>
 <div id="references" class="section level3 unnumbered">
 <h3>References</h3>
@@ -128,6 +159,8 @@
 <hr>
 <p id="mylicense">
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a><br />This work by <a xmlns:cc="http://creativecommons.org/ns#" href="http://handelgroup.uga.edu/" property="cc:attributionName" rel="cc:attributionURL">Andreas Handel</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+<br>
+Software/Code is licensed under GPL-3.
 </p>
 </div>
 

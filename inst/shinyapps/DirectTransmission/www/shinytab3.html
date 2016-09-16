@@ -4,9 +4,9 @@
 <div id="task-1" class="section level3">&#13;
 <h3>Task 1:</h3>&#13;
 <ul><li>Set the model parameters such that it corresponds to the following setting:&#13;
-<ul><li>A population size of 1000, 1 initially infected host, simulation duration 10 years.</li>&#13;
-<li>Consider density-dependent transmission, with a transmission rate of b<sub>d</sub> = 0.001, area of size 2.</li>&#13;
-<li>Assume that the duration of the infectious period is 6 days long.</li>&#13;
+<ul><li>A population size of 1000, 1 initially infected host, simulation duration approximately 10 years.</li>&#13;
+<li>Consider density-dependent transmission, with a transmission rate of b<sub>d</sub> = 0.005, area of size 2.</li>&#13;
+<li>Assume that the duration of the infectious period is 15 days long (and that there are 30 days in a month).</li>&#13;
 <li>Turn off births, deaths and waning immunity for now.</li>&#13;
 </ul></li>&#13;
 <li>With parameters set to correspond to the scenario just described, run the simulation.</li>&#13;
@@ -14,7 +14,7 @@
 </ul></div>&#13;
 <div id="task-2" class="section level3">&#13;
 <h3>Task 2:</h3>&#13;
-<ul><li>Now switch to frequency-dependent transmission, set b<sub>f</sub>=0.5. Keep everything else as before.</li>&#13;
+<ul><li>Now switch to frequency-dependent transmission, set b<sub>f</sub>=2.5. Keep everything else as before.</li>&#13;
 <li>Think about your expectations, run the simulation and compare your expectations with the results.</li>&#13;
 <li>Anything surprising happening? Do you understand why you are seeing what you see?</li>&#13;
 </ul></div>&#13;
@@ -22,19 +22,17 @@
 <h3>Task 3:</h3>&#13;
 <ul><li>Let’s assume we are now in a location with twice the number of people as before, living in roughly the same area.</li>&#13;
 <li>Implement that in the simulation by changing population size, keep all other settings as above.</li>&#13;
-<li>What do you expect to see for the frequency and density dependent scenarios? Run simulations and check.</li>&#13;
+<li>What do you expect to see for the frequency and density dependent scenarios? Run simulations and check. Pay attention to both the numbers and fractions of S/I/R individuals at the end of the outbreak.</li>&#13;
 </ul></div>&#13;
 <div id="task-4" class="section level3">&#13;
 <h3>Task 4:</h3>&#13;
-<ul><li>If you double the population size as you just did, how do you need to adjust the area to obtain the same sized outbreak (in terms of fraction of people getting infected) for density-dependent transmission?</li>&#13;
+<ul><li>If you double the population size as you just did, how do you need to adjust the area to obtain the same sized outbreak (in terms of fraction of people getting infected/remaining susceptible) for density-dependent transmission?</li>&#13;
+<li>Try with the simulation if your expectation is correct.</li>&#13;
 </ul></div>&#13;
 <div id="task-5" class="section level3">&#13;
 <h3>Task 5:</h3>&#13;
-<ul><li>For both types of transmission, play around with the factors that influence the transmission/force of infection term and see what you get. That can involve allowing for births and deaths to change population size.</li>&#13;
-</ul></div>&#13;
-<div id="task-6" class="section level3">&#13;
-<h3>Task 6:</h3>&#13;
 <ul><li>Keep exploring by trying different parameters and transmission settings and see how they influence results.</li>&#13;
-<li>As you continue your exploration, think about potential real infectious diseases that might be approximated by either one of the transmission types, and what settings for other model parameters would be for those ID.</li>&#13;
+<li>You can also go beyond a single outbreak and turn on births/deaths (which can impact population size) or waning immunity.</li>&#13;
+<li>As you continue your exploration, think about potential real infectious diseases that might be approximated by either one of the transmission types, and what approximate choices for the model parameters would describe those ID.</li>&#13;
 </ul></div>&#13;
 </div> </body>

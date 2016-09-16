@@ -54,7 +54,7 @@ ui <- fluidPage(
            sliderInput("b2", "host to vector transmission rate (b2, 1/month)", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
     ),
     column(3,
-           sliderInput("w", "Rate of waning immunity (p, 1/month)", min = 0, max = 50, value = 1, step = 0.1)
+           sliderInput("w", "Rate of waning immunity (p, 1/month)", min = 0, max = 1, value = 0, step = 0.01, sep ='')
     ),
     align = "center"
   ), #close fluidRow structure for input
@@ -63,10 +63,10 @@ ui <- fluidPage(
            sliderInput("g", "Rate of recovery of infected hosts (g, 1/month)", min = 0, max = 2, value = 0.5, step = 0.1)
     ),
     column(3,
-           sliderInput("b", "Monthly rate of new vector births (b)", min = 0, max = 100, value = 0, step = 1)
+           sliderInput("b", "Monthly rate of new vector births (b)", min = 0, max = 10000, value = 0, step = 100)
     ),
     column(3,
-           sliderInput("n", "Natural vector death rate (n, 1/month)", min = 0, max = 0.02, value = 0, step = 0.0005, sep ='')
+           sliderInput("n", "Natural vector death rate (n, 1/month)", min = 0, max = 2, value = 0, step = 0.01, sep ='')
     ),
     align = "center"
   ), #close fluidRow structure for input

@@ -11,8 +11,8 @@
 <ul><li>Susceptible individuals can become infected by two types of direct transmission from infected hosts, further described below.</li>&#13;
 <li>Infected hosts recover after some time (specified by the rate <em>g</em>).</li>&#13;
 <li>Recovered individuals are initially immune to reinfection. They can loose their immunity at rate <em>w</em> and return back to the susceptible compartment.</li>&#13;
-<li>New susceptibles enter (are born) at a fixed rate <em>b</em>. From each compartment (, hosts “leave” after some time (i.e. they die) at rate <em>n</em>. The inverse of this rate is the average lifespan of a host.</li>&#13;
-</ul><p>The force of infection, <span class="math inline">\(\lambda\)</span>, depends on the transmission model. For density-dependent transmission, it is given by <span class="math inline">\(\lambda = b_d I / A\)</span>, where <em>A</em> is the area under consideration. For frequency-dependent transmission, we have <span class="math inline">\(\lambda = b_f I / N\)</span>, where <em>N</em> is the size of the population, <em>N=S+I+R</em>.</p>&#13;
+<li>New susceptibles enter (are born) at a fixed rate <em>b</em>. From each compartment, hosts “leave” after some time (i.e. they die) at rate <em>n</em>. The inverse of this rate is the average lifespan of a host.</li>&#13;
+</ul><p>The force of infection, <span class="math inline">\(\lambda\)</span>, depends on the transmission model. For density-dependent transmission, it is given by <span class="math inline">\(\lambda = b_d I / A\)</span>, where <em>A</em> is the area of the scenario under consideration (e.g. a city). For frequency-dependent transmission, we have <span class="math inline">\(\lambda = b_f I / N\)</span>, where <em>N</em> is the size of the population, <em>N=S+I+R</em>.</p>&#13;
 </div>&#13;
 <div id="model-implementation" class="section level3">&#13;
 <h3>Model Implementation</h3>&#13;
@@ -22,5 +22,9 @@
 </div>&#13;
 <p><span class="math display">\[\dot S =b - \lambda S  + wR - nS\]</span> <span class="math display">\[\dot I = \lambda S - g I -nI\]</span> <span class="math display">\[\dot R = g I - wR - nR\]</span></p>&#13;
 <p>with <span class="math inline">\(\lambda = b_d I / A\)</span> for density-dependent transmission and <span class="math inline">\(\lambda = b_f I / N\)</span> for frequency-dependent transmission.</p>&#13;
+</div>&#13;
+<div id="model-comments" class="section level3">&#13;
+<h3>Model Comments</h3>&#13;
+<p>Note that quite often, we assume that the area is constant and do not include it in the model or even talk about it. Often, the population size is also assumed to be constant. In that case, the 2 types of transmission models behave the same. But as soon as area or population size change, the model results differ. Which is what you can explore with this simulation.</p>&#13;
 </div>&#13;
 </div> </body>

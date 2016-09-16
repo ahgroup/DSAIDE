@@ -33,10 +33,10 @@ ui <- fluidPage(
            sliderInput("PopSize", "Population Size", min = 1000, max = 5000, value = 1000, step = 500)
     ),
     column(3,
-           sliderInput("I0", "initial number of infected hosts", min = 0, max = 100, value = 0, step = 1)
+           sliderInput("I0", "initial number of infected hosts", min = 0, max = 50, value = 0, step = 1)
     ),
     column(3,
-           sliderInput("E0", "initial number of environmental pathogen", min = 0, max = 100, value = 0, step = 1)
+           sliderInput("E0", "initial amount of environmental pathogen", min = 0, max = 100, value = 0, step = 1)
     ),
     column(3,
            sliderInput("tmax", "Maximum simulation time (months)", min = 1, max = 500, value = 100, step = 1)

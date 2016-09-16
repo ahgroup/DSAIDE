@@ -13,8 +13,8 @@ refresh <- function(input, output){
     # Read all the input values from the UI
     Ph0 = isolate(input$Ph0);
     Ih0 = isolate(input$Ih0);
-    Pv0 = isolate(input$Ph0);
-    Iv0 = isolate(input$Ih0);
+    Pv0 = isolate(input$Pv0);
+    Iv0 = isolate(input$Iv0);
     tmax = isolate(input$tmax);
     
     b1 = isolate(input$b1);
@@ -40,7 +40,7 @@ refresh <- function(input, output){
       tmax = isolate(input$tmax)
       PopSize = isolate(input$PopSize);
       
-      ymax = max(c(PopSize,res()[,2]))
+      ymax = max(c(PopSize,res()[,"Sh"],res()[,"Sv"]))
       
       plot(res()[,1],res()[,2],type="l",xlab="time (months)",ylab="",col="green",lwd=2,log="",xlim=c(0,tmax),ylim=c(1,ymax),main="Time Series")
       lines(res()[,1],res()[,3],type="l",col="red",lwd=2,lty=2)

@@ -1,0 +1,105 @@
+/* Handel midifications for shiny apps
+ * Last Modified: 2016-06-06
+------------------------------------------- */
+
+
+/* Color Glossary for easy changing of colors later
+ * grey:  #403c3d 
+ * dark grey:  #333
+ * light grey: #ccc
+ * near white: #f9f9f9
+ * light blue: #3388CC
+ * blue: #005599
+------------------------------------------------ */
+
+
+/* Image
+---------------*/
+img {
+	max-width: 100%;
+	max-height: 90%;
+	padding: 6px;
+	
+}
+.image {
+	display: inline-block;
+	margin-left: 10px;
+	margin-right: 10px;
+	max-width: 100%;
+	max-height: 90%;
+	padding: 0;  
+	text-align: center;
+  
+  /* Visual */
+	border-radius: 5px;
+	border: 1px solid #ccc;  /* light grey */
+}
+.figure {
+	margin-left: 10px;
+	margin-right: 10px;
+	padding: 0;  
+	text-align: center;
+  
+  /* Visual */
+	border-radius: 5px;
+	border: 1px solid #ccc;  /* light grey */
+}
+.caption {
+	padding: 0;
+	margin: auto;
+	margin-bottom: 6px;
+}
+
+
+
+/* My additions
+-------------------- */
+
+#classname
+{
+	color: #123c66;  
+	font-weight: bold;
+	text-align: center;
+	font-size: 120%;
+}
+
+#classauthor
+{
+	color: black;  
+	font-weight: normal;
+	text-align: center;
+	
+}
+
+#mylicense
+{
+	text-align: center;
+	font-size: 70%;
+	
+}
+
+iframe {
+	display: block;
+	margin-left: auto;
+    margin-right: auto;
+}
+
+#mytextbox
+{
+	border: 10px solid #cfd7e0; 
+	color: black;  
+	font-weight: normal;
+}
+
+.MathJax {
+	font-size: 2em;
+}
+
+
+.shiny-progress-container {
+	top: 40px;
+}
+
+.progress-message {
+	color: red;
+}
