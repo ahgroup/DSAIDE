@@ -48,9 +48,9 @@ dsaidemenu <- function() {
     if (op == "B") {appname = "CharacteristicsofID"}
     if (op == "C") {appname = "IDPatterns"}
     if (op == "D") {appname = "ReproductiveNumber"}
-    #if (op == "E") {appname = "DirectTransmission"}
-    #if (op == "F") {appname = "EnvironmentalTransmission"}
-    #if (op == "G") {appname = "VectorTransmission"}
+    if (op == "E") {appname = "DirectTransmission"}
+    if (op == "F") {appname = "EnvironmentalTransmission"}
+    if (op == "G") {appname = "VectorTransmission"}
     #if (op == "H") {appname = "IDControl"}
     #if (op == "I") {appname = "HostHeterogeneity"}
     #if (op == "J") {appname = "StochasticDynamics"}

@@ -107,9 +107,9 @@
 <h3>Task 5:</h3>
 <ul>
 <li>Set the model parameters back to those given in task #1.</li>
-<li>Another way to estimate R<sub>0</sub> is to determine the rate of increase in infected hosts at the beginning of the outbreak. During the initial phase, new infections increase exponentially according to <span class="math inline">\(I(t)=I_0 e^{rt}\)</span>. Usually, for any real outbreak, you do not know the number of infected at the start, I<sub>0</sub>, or the exact time the outbreak starts. It is still possible to estimate r by obtaining two values of I at two time points during that initial growth rate, i.e. I<sub>1</sub> at time t<sub>1</sub> and I<sub>2</sub> at time t<sub>2</sub>. With those quantities once, can compute the exponential growth rate r. Figure out how to do determine those values and use them to compute <span class="math inline">\(r\)</span>. Hint: play with the maximum simulation duration such that the simulation stops at 2 different times during the initial exponential growth phase.</li>
+<li>Another way to estimate R<sub>0</sub> is to determine the rate of increase in infected hosts at the beginning of the outbreak. During the initial phase, new infections increase exponentially according to <span class="math inline">\(I(t)=I_0 e^{rt}\)</span>. Usually, for any real outbreak, you do not know the number of infected at the start, I<sub>0</sub>, or the exact time the outbreak starts. It is still possible to estimate r by obtaining two values of I at two time points during that initial growth rate, i.e. I<sub>1</sub> at time t<sub>1</sub> and I<sub>2</sub> at time t<sub>2</sub>. With those quantities, one can compute the exponential growth rate r. Figure out how to determine those values and use them to compute <span class="math inline">\(r\)</span>. Hint: play with the maximum simulation duration such that the simulation stops at 2 different times during the initial exponential growth phase.</li>
 <li>For this model, the growth rate and R<sub>0</sub> are related through <span class="math inline">\(R_0 = 1+rD\)</span>, where D is the average duration of the infectious period. Use this to determine R<sub>0</sub>. You should get essentially the same answer (up to some rounding errors) as for task #1.</li>
-<li>Note that the choice of t<sub>1</sub> and t<sub>2</sub> can influence the results. Earlier times are better since once</li>
+<li>Note that the choice of t<sub>1</sub> and t<sub>2</sub> can influence the results. Earlier times are better since once the number of susceptibles starts to drop markedly, the growth of infected slows down and is not truly exponential anymore.</li>
 </ul>
 </div>
 <div id="task-6" class="section level3">
@@ -151,36 +151,36 @@
 <li>Finally, run the simulation at the vaccination level you determined above to be enough to prevent an outbreak. Make sure your expectations and simulation results agree.</li>
 </ul>
 </div>
-<div id="task-13" class="section level3">
-<h3>Task 13:</h3>
+<div id="task-12" class="section level3">
+<h3>Task 12:</h3>
 <ul>
 <li>Most vaccines are not perfect. What fraction of the population would you need to vaccinate for the scenario above if the vaccine efficacy/effectiveness was 75%? What if it was 60%? Confirm with the simulations.</li>
 </ul>
 </div>
-<div id="task-14" class="section level3">
-<h3>Task 14:</h3>
+<div id="task-13" class="section level3">
+<h3>Task 13:</h3>
 <ul>
 <li>So far, we looked at an individual outbreak. Now we introduce births and deaths. For our model, we use a constant birth rate <span class="math inline">\(\lambda\)</span>, and a fixed per-capita death rate <span class="math inline">\(\mu\)</span>. It is possible to have population dynamics (births, deaths) in the absence of an ID. It is useful to first figure out what’s going on there before you introduce the disease dynamics.</li>
 <li>Choose various values for the birthrate and lifespan, run the model and see what the population does in the absence of an infectious disease. Can you figure out the equation that relates births, deaths and steady state level for our model? Test it with the simulation.</li>
 </ul>
 </div>
-<div id="task-15" class="section level3">
-<h3>Task 15:</h3>
+<div id="task-14" class="section level3">
+<h3>Task 14:</h3>
 <ul>
 <li>If births (and deaths) are present, you will be able to get multiple outbreaks and endemic states. Set the parameter values such that your hosts have an average life-span of 41 years, set birth rate such that the population is steady at 1000 in the absence of the ID. Set simulation time to around 500 years, 1 infected, gamma=5, beta=0.015. No vaccine.</li>
 <li>Run the simulation, make sure you reach a steady state. Compare the steady state values for S, I and R from the simulation with those predicted from the SIR steady state equations.</li>
 </ul>
 </div>
-<div id="task-16" class="section level3">
-<h3>Task 16:</h3>
+<div id="task-15" class="section level3">
+<h3>Task 15:</h3>
 <ul>
 <li>Use the fraction of susceptibles remaining at steady state to compute R<sub>0</sub> as described in the lecture notes.</li>
 <li>Double the value of <span class="math inline">\(\gamma\)</span>, run the simulation and again compute R<sub>0</sub> using the steady state result.</li>
 <li>Next double the values for both natural birth and death rates and repeat.</li>
 </ul>
 </div>
-<div id="task-17" class="section level3">
-<h3>Task 17:</h3>
+<div id="task-16" class="section level3">
+<h3>Task 16:</h3>
 <ul>
 <li>Keep exploring.</li>
 </ul>

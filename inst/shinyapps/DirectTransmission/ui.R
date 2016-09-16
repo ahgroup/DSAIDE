@@ -57,7 +57,7 @@ ui <- fluidPage(
   ), #close fluidRow structure for input
   fluidRow(
     column(3,
-           sliderInput("g", "Rate of recovery of infected hosts (g, 1/months)", min = 0, max = 2, value = 0.5, step = 0.1)
+           sliderInput("g", "Rate of recovery of infected hosts (g, 1/months)", min = 0, max = 10, value = 1, step = 0.1)
     ),
     column(3,
            sliderInput("w", "Rate of immunity loss (w, 1/months)", min = 0, max = 0.1, value = 0.0, step = 0.01 , sep ='')
