@@ -1,5 +1,5 @@
 # This function is used in the ode solver function and has no independent usages
-idpatternsode <- function(t, y, parms)
+idcontrolode <- function(t, y, parms)
 {
 
   with(
@@ -24,7 +24,7 @@ idpatternsode <- function(t, y, parms)
 
 } #end function specifying the ODEs
 
-#' Simulation of a compartmental infectious disease transmission model including seasonality
+#' Simulation of a compartmental infectious disease transmission model including different control mechanisms
 #'
 #' @description  Simulation of a compartmental model with several different compartments:
 #'   Susceptibles (S), Infected and Pre-symptomatic (P),
@@ -68,9 +68,9 @@ idpatternsode <- function(t, y, parms)
 #'   the code will likely abort with an error message
 #' @examples
 #'   # To run the simulation with default parameters just call this function
-#'   result <- simulate_idpatterns()
+#'   result <- simulate_idcontrol()
 #'   # To choose parameter values other than the standard one, specify them e.g. like such
-#'   result <- simulate_idpatterns(PopSize = 2000, P0 = 10, tmax = 100, f = 0.1, d = 0.2, sigma = 0.1)
+#'   result <- simulate_idcontrol(PopSize = 2000, P0 = 10, tmax = 100, f = 0.1, d = 0.2, sigma = 0.1)
 #'   # You should then use the simulation result returned from the function, e.g. like this:
 #'   plot(result[,1],result[,2],xlab='Time',ylab='Number Susceptible',type='l')
 #' @seealso The UI of the shiny app 'IDPatterns', which is part of this package, contains more details on the model
@@ -79,7 +79,7 @@ idpatternsode <- function(t, y, parms)
 #' @author Andreas Handel
 #' @export
 
-simulate_idpatterns <- function(PopSize = 1000, P0 = 1, tmax = 300, bP = 0, bA = 0, bI = 1/1000, gP = 0.5, gA = 0.5, gI = 0.5, f = 0, d = 0, w = 0, lambda = 0, n = 0, sigma = 0)
+simulate_idcontrol <- function(PopSize = 1000, P0 = 1, tmax = 300, bP = 0, bA = 0, bI = 1/1000, gP = 0.5, gA = 0.5, gI = 0.5, f = 0, d = 0, w = 0, lambda = 0, n = 0, sigma = 0)
 {
   S0 = PopSize - P0; #initial number of uninfected hosts
   Y0 = c(S = S0, P = P0, A = 0, I = 0, R = 0, D = 0);  #combine initial conditions into a vector
@@ -91,7 +91,7 @@ simulate_idpatterns <- function(PopSize = 1000, P0 = 1, tmax = 300, bP = 0, bA =
 
   #this line runs the simulation, i.e. integrates the differential equations describing the infection process
   #the result is saved in the odeoutput matrix, with the 1st column the time, the 2nd, 3rd, 4th column the variables S, I, R
-  odeoutput = deSolve::ode(y = Y0, times = timevec, func = idpatternsode, parms=pars, method = "vode", atol=1e-12, rtol=1e-12);
+  odeoutput = deSolve::ode(y = Y0, times = timevec, func = idcontrolode, parms=pars, method = "vode", atol=1e-12, rtol=1e-12);
 
 
   #The output produced by a call to the odesolver is odeoutput matrix is returned by the function
