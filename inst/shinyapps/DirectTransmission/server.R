@@ -40,12 +40,14 @@ refresh <- function(input, output){
       tmax = isolate(input$tmax)
       PopSize = isolate(input$PopSize);
       
-      ymax = max(c(PopSize,res()[,2]))
+      totpop = res()[,2]+res()[,3]+res()[,4];
+      
+      ymax = max(c(PopSize,totpop))
       
       plot(res()[,1],res()[,2],type="l",xlab="time (months)",ylab="",col="green",lwd=2,log="",xlim=c(0,tmax),ylim=c(1,ymax),main="Time Series")
       lines(res()[,1],res()[,3],type="l",col="red",lwd=2,lty=2)
       lines(res()[,1],res()[,4],type="l",col="gray",lwd=2,lty=3)
-      lines(res()[,1],res()[,2]+res()[,3]+res()[,4],type="l",col="blue",lwd=2,lty=4)
+      lines(res()[,1],totpop,type="l",col="blue",lwd=2,lty=4)
       legend("right", c("Susceptible","Infected","Recovered","Total"),col = c("green","red","gray","blue"),lwd=2)
     }, width = 600, height = 'auto'
   )
