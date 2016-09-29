@@ -10,23 +10,7 @@ refresh <- function(input, output){
     res <- reactive({
     input$submitBtn
 
-    # Create a Progress object
-    progress <- shiny::Progress$new()
-    progress$set(message = "Simulation Running", value = 0)
-    # Close the progress when this reactive exits (even if there's an error)
-    on.exit(progress$close())
-
-    # Update the progress bar to show how the process is going
-    updateProgress_ <- function(value = NULL, detail = NULL) {
-      if (is.null(value)) {
-        value <- progress$getValue()
-        value <- value + (progress$getMax() - value) / 5
-      }else{
-        value <- progress$getMax() * value
-      }
-      progress$set(value = value, detail = detail)
-    }
-
+    
     # Read all the input values from the UI
     PopSize = isolate(input$PopSize);
     P0 = isolate(input$P0);
@@ -113,7 +97,7 @@ refresh <- function(input, output){
     }
     HTML(txt)
   })
-
+browser()
 }
 
 shinyServer(function(input, output, session) {

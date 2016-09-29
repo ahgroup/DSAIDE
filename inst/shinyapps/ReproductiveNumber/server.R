@@ -10,23 +10,6 @@ refresh <- function(input, output){
   res <- reactive({
     input$submitBtn
 
-    # Create a Progress object
-    progress <- shiny::Progress$new()
-    progress$set(message = "Starting Simulation: ", value = 0)
-    # Close the progress when this reactive exits (even if there's an error)
-    on.exit(progress$close())
-
-    # Update the proggress bar to show how the process is going
-    updateProgress_ <- function(value = NULL, detail = NULL) {
-      if (is.null(value)) {
-        value <- progress$getValue()
-        value <- value + (progress$getMax() - value) / 5
-      }else{
-        value <- progress$getMax() * value
-      }
-      progress$set(value = value, detail = detail)
-    }
-
     # Read all the input values from the UI
     PopSize = isolate(input$PopSize);
     I0 = isolate(input$I0);
@@ -46,57 +29,49 @@ refresh <- function(input, output){
   # Here, we use the "odeoutput" variable to plot the chart that we need
   # the resulting chart will be shown in the "plot" placeholder of the UI
   output$plot <- renderPlot(
-  {
-    input$submitBtn
-
-    tmax = isolate(input$tmax)
-    PopSize = isolate(input$PopSize);
-    
-    
-    ymax = max(c(PopSize,res()[,2]))
-    
-    plot(res()[,1],res()[,2],type="l",xlab="time (months)",ylab="",col="green",lwd=2,log="",xlim=c(0,tmax),ylim=c(1,ymax),main="Time Series")
-    lines(res()[,1],res()[,3],type="l",col="red",lwd=2,lty=2)
-    lines(res()[,1],res()[,4],type="l",col="gray",lwd=2,lty=3)
-    lines(res()[,1],res()[,2]+res()[,3]+res()[,4],type="l",col="blue",lwd=2,lty=4)
-    legend("right", c("Susceptible","Infected","Recovered","Total"),col = c("green","red","gray","blue"),lwd=2)
-  }, width = 600, height = 'auto'
+    {
+      input$submitBtn
+      
+      tmax = isolate(input$tmax)
+      PopSize = isolate(input$PopSize);
+      ymax = max(c(PopSize,res()[,2]))
+      
+      plot(res()[,1],res()[,2],type="l",xlab="time (months)",ylab="",col="green",lwd=2,log="",xlim=c(0,tmax),ylim=c(1,ymax),main="Time Series")
+      lines(res()[,1],res()[,3],type="l",col="red",lwd=2,lty=2)
+      lines(res()[,1],res()[,4],type="l",col="gray",lwd=2,lty=3)
+      lines(res()[,1],res()[,2]+res()[,3]+res()[,4],type="l",col="blue",lwd=2,lty=4)
+      legend("right", c("Susceptible","Infected","Recovered","Total"),col = c("green","red","gray","blue"),lwd=2)
+    }, width = 600, height = 'auto'
   )
-
-  # Use the result "res" returned from the simulator to compute and some text results
-  # the text should be formatted as HTML and placed in the "text" placeholder of the UI
+  
+  
+  #produce text output
   output$text <- renderUI(
-  {
-    txt <- ""
-
-    PopSize = isolate(input$PopSize)
-    gamma = isolate(input$gamma)
-    beta = isolate(input$beta)
-    I0 = isolate(input$I0);
-    f = isolate(input$f);
-    e = isolate(input$e);
-
-    
-    Sfinal = round(tail(res()[,2],1), 2); Sfracfinal = round(Sfinal / PopSize, 2)
-    Ifinal = round(tail(res()[,3],1), 2); Ifracfinal = round(Ifinal / PopSize, 2)
-    Rfinal = round(tail(res()[,4],1), 2); Rfracfinal = round(Rfinal / PopSize, 2)
-
-    txt1 <- paste(sprintf('Number and Fraction Susceptibles at end of simulation: %.2f, %.2f',Sfinal, Sfracfinal))
-    txt2 <- paste(sprintf('Number and Fraction Infected at end of simulation: %.2f, %.2f',Ifinal, Ifracfinal))
-    txt3 <- paste(sprintf('Number and Fraction Recovered at end of simulation: %.2f, %.2f',Rfinal, Rfracfinal))
-
-    txt <- paste(txt1, txt2, txt3, sep = "<br/>")
-
-    HTML(txt)
-  })
-
-
+    {
+      txt <- ""
+      
+      PopSize = isolate(input$PopSize)
+      
+      
+      Sfinal = round(tail(res()[,2],1), 2); Sfracfinal = round(Sfinal / PopSize, 2)
+      Ifinal = round(tail(res()[,3],1), 2); Ifracfinal = round(Ifinal / PopSize, 2)
+      Rfinal = round(tail(res()[,4],1), 2); Rfracfinal = round(Rfinal / PopSize, 2)
+      
+      txt1 <- paste(sprintf('Number and Fraction Susceptibles at end of simulation: %.2f, %.2f',Sfinal, Sfracfinal))
+      txt2 <- paste(sprintf('Number and Fraction Infected at end of simulation: %.2f, %.2f',Ifinal, Ifracfinal))
+      txt3 <- paste(sprintf('Number and Fraction Recovered at end of simulation: %.2f, %.2f',Rfinal, Rfracfinal))
+      
+      txt <- paste(txt1, txt2, txt3, sep = "<br/>")
+      
+      HTML(txt)
+    })
+  
   # At last, if we have any warnings or error from the "odeoutput" we can show them here
   # These pieces of texts will be shown in red in the UI ("warn" placeholder will be used)
   output$warn <- renderUI({
     txt <- ""
     if(length(data()$warns) == 0){
-
+      
     }else{
       txt <- paste(txt, "Warnings:", sep = "<br/>")
       for (i in 1:length(data()$warns)){
@@ -105,7 +80,13 @@ refresh <- function(input, output){
     }
     HTML(txt)
   })
-
+  
+  #Send the result "res" returned from the simulator to another function
+  #to produce plot, text and warning output
+  #also send shiny input information into function 
+  #everything above related to output production should go into this function
+  #I currently don't know how to do it
+  #output <- produce_simoutput(input,output,res)
 }
 
 shinyServer(function(input, output, session) {

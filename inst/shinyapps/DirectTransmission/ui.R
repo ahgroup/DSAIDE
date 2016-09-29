@@ -8,7 +8,7 @@ ui <- fluidPage(
   div( includeHTML("www/header.html"), align = "center"),
   h1('Modes of Direct Transmission App', align = "center", style = "background-color:#123c66; color:#fff"),
 
-  #end section to add buttons
+  #start section to add buttons
   fluidRow(
     column(6,
            div( style="text-align:center", actionButton("submitBtn", "Run Simulation", style="color: #000000; background-color: #D2FFE2")  )
@@ -89,15 +89,11 @@ ui <- fluidPage(
       #Placeholder for any possible warning or error messages (this will be shown in red)
       htmlOutput(outputId = "warn"),
       
-      tags$head(tags$style("#warn{color: red;
-                           font-style: italic;
-                           }")),
-      tags$hr()
+      tags$head(tags$style("#warn{color: red; font-style: italic;  }"))
+    
   
     ) #end main panel column with outcomes
   ), #end layout with side and main panel
-
-
 
   #################################
   #Instructions section at bottom as tabs
