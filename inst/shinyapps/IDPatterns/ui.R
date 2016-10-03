@@ -43,13 +43,13 @@ ui <- fluidPage(
           ), #close fluidRow structure for input
   fluidRow(
       column(4,
-             sliderInput("gP", "Rate of recovery of presymptomatic hosts (gP, 1/months)", min = 0, max = 5, value = 0.5, step = 0.1)
+             sliderInput("gP", "Rate at which presymptomatic hosts leave compartment (gP, 1/months)", min = 0, max = 5, value = 0.5, step = 0.1)
       ),
       column(4,
-             sliderInput("gA", "Rate of recovery of asymptomatic hosts (gA, 1/months)", min = 0, max = 5, value = 0.5, step = 0.1)
+             sliderInput("gA", "Rate at which asymptomatic hosts leave compartment (gA, 1/months)", min = 0, max = 5, value = 0.5, step = 0.1)
       ),
       column(4,
-             sliderInput("gI", "Rate of recovery of symptomatic hosts (gI, 1/months)", min = 0, max = 5, value = 0.5, step = 0.1)
+             sliderInput("gI", "Rate at which symptomatic hosts leave compartment (gI, 1/months)", min = 0, max = 5, value = 0.5, step = 0.1)
       ),
       align = "center"
   ), #close fluidRow structure for input

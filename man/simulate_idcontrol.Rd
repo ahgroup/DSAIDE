@@ -53,7 +53,6 @@ Simulation of a compartmental model with several different compartments:
   Recovered and Immune (R) and Dead (D).
 
   This model includes natural births and deaths and waning immunity.
-  It also allows for seasonal variation in transmission.
   The model is assumed to run in units of months.
   This is assumption is hard-coded into the sinusoidally varying
   transmission coefficient, which is assumed to have a period of a year

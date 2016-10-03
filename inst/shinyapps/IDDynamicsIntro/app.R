@@ -34,6 +34,8 @@ refresh <- function(input, output){
     gamma = isolate(input$gamma);
     tmax = isolate(input$tmax);
     
+    browser()
+    
     # Call the ODE solver with the given parameters
     result <- simulate_introduction(PopSize = PopSize, I0 = I0, gamma = gamma, beta = beta, tmax = tmax)
     
