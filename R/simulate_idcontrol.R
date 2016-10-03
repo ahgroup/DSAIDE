@@ -5,20 +5,22 @@ idcontrolode <- function(t, y, parms)
   with(
     as.list(c(y,parms)), #lets us access variables and parameters stored in y and pars by name
     {
-      #seasonally varying transmission parameters
-      bPs <- bP * (1 + sigma * sin(2*pi*t/12) )
-      bAs <- bA * (1 + sigma * sin(2*pi*t/12) )
-      bIs <- bI * (1 + sigma * sin(2*pi*t/12) )
-
+ 
       #the ordinary differential equations
-      dS =  lambda - S * (bPs * P + bAs * A + bIs * I) + w * R - n *S; #susceptibles
-      dP =    S * (bPs * P + bAs * A + bIs * I) - gP * P - n * P; #infected, pre-symptomatic
+      dS =  birth_h - S * (bP * P + bA * A + bI * I + bE * E + bv * Iv) + w * R - n *S; #susceptibles
+      dP =    S * (bP * P + bA * A + bI * I + bE * E + bv * Iv) - gP * P - n * P; #infected, pre-symptomatic
       dA =  f*gP*P - gA * A - n * A #infected, asymptomatic
       dI =  (1-f)*gP*P -  gI*I - n * I #infected, symptomatic
       dR =  (1-d)*gI*I + gA * A - w * R - n * R #recovered, immune
       dD = d*gI*I #dead
 
-      list(c(dS, dP, dA, dI, dR, dD))
+      dE = pI * I + pA * A - c * E; #pathogen in environment
+      
+      dSv = birth_v - death_v * Sv - bh * Ih * Sv; #susceptible vectors
+      dIv = bh * Ih * Sv - death_v * Iv ; #susceptible hosts
+      
+      
+      list(c(dS, dP, dA, dI, dR, dD, dE, dSv, dIv))
     }
   ) #close with statement
 
@@ -32,7 +34,6 @@ idcontrolode <- function(t, y, parms)
 #'   Recovered and Immune (R) and Dead (D).
 #'
 #'   This model includes natural births and deaths and waning immunity.
-#'   It also allows for seasonal variation in transmission.
 #'   The model is assumed to run in units of months.
 #'   This is assumption is hard-coded into the sinusoidally varying
 #'   transmission coefficient, which is assumed to have a period of a year
