@@ -43,7 +43,7 @@ ui <- fluidPage(
                     sliderInput("tmax", "Maximum simulation time (months)", min = 1, max = 1200, value = 100, step = 1)
              ),
              column(6,
-                    sliderInput("w", "Rate of immunity loss (w, 1/months)", min = 0, max = 0.1, value = 0.0, step = 0.01)
+                    sliderInput("w", "Rate of immunity loss (w, 1/months)", min = 0, max = 10, value = 0, step = 0.01)
              )
            ), #close fluidRow structure for input
            fluidRow(

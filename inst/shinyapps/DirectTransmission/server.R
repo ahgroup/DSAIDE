@@ -27,7 +27,7 @@ refresh <- function(input, output){
     # Call the ODE solver with the given parameters
 
     result <- simulate_directtransmission(PopSize = PopSize, I0 = I0, tmax = tmax, scenario = scenario, bd = bd, bf = bf, A = A, b = b, n = n, g = g, w = w)
-  
+
     return (result)
   })
   

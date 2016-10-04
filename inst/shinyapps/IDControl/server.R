@@ -36,29 +36,30 @@ refresh <- function(input, output){
     d = isolate(input$d);
     w = isolate(input$w);
 
-    birth_h = isolate(input$birth_h)
-    death_h = isolate(input$death_h)
-    birth_v = isolate(input$birth_v)
-    death_v = isolate(input$death_v)
+    birthh = isolate(input$birthh);
+    deathh = isolate(input$deathh);
+    birthv = isolate(input$birthv);
+    deathv = isolate(input$deathv);
     
-
     # Call the ODE solver with the given parameters
-    result <- simulate_idcontrol(S = S0, P = 0, A = 0, I = I0, R = 0, D = 0, E = E0, Sv = Sv0, Iv = Iv0, bP = bP, bA = bA, bI = bI, bE = bE, bv = bv, bh = bh, gP = gP , gA = gA, gI = gI, pA = pA, pI = pI, c = c, f = f, d = d, w = w, birth_h = birth_h, death_h = death_h, birth_v = birth_v, death_v = death_v)
-
+    result <- simulate_idcontrol(S0 = S0, I0 = I0, E0 = E0, Sv0 = Sv0, Iv0 = Iv0, tmax = tmax, bP = bP, bA = bA, bI = bI, bE = bE, bv = bv, bh = bh, gP = gP , gA = gA, gI = gI, pA = pA, pI = pI, c = c, f = f, d = d, w = w, birthh = birthh, deathh = deathh, birthv = birthv, deathv = deathv)
+    
+    #browser()
+    
     return(result)
   })
 
   # Here, we use the "res" variable to plot the chart that we need
   # the resulting chart will be shown in the "plot" placeholder of the UI
-  output$plot <- renderPlot({
+  output$plot <- renderPlot(
+    {
     input$submitBtn
 
     tmax = isolate(input$tmax)
 
-    ymax = max(res()[,2:7])
-    
     par(mfrow=c(2,1))
     
+    ymax = max(res()[,2:7])
     plot(res()[,1],res()[,"S"],type="l",xlab="time (months)",ylab="",col="green",lwd=2,log="",xlim=c(0,tmax),ylim=c(1,ymax),main="Time Series")
     lines(res()[,1],res()[,"P"],type="l",col="orange",lwd=2,lty=1)
     lines(res()[,1],res()[,"A"],type="l",col="magenta",lwd=2,lty=2)
@@ -66,22 +67,23 @@ refresh <- function(input, output){
     lines(res()[,1],res()[,"R"],type="l",col="blue",lwd=2)
     lines(res()[,1],res()[,"D"],type="l",col="gray",lwd=2)
     legend("right", c("Susceptible","Pre-Symptomatic","Asymptomatic","Symptomatic","Recovered","Dead"),col = c("green","orange",'magenta',"red",'blue',"gray"),lty=c(1,1,2,3,1,1),lwd=2)
-
+  
     #2nd panel
     ymax = max(res()[,8:10])
-    plot(res()[,1],res()[,"E"],type="l",xlab="time (months)",ylab="",col="green",lwd=2,log="",xlim=c(0,tmax),ylim=c(1,ymax),main="Time Series"))
+    plot(res()[,1],res()[,"E"],type="l",xlab="time (months)",ylab="",col="green",lwd=2,log="",xlim=c(0,tmax),ylim=c(1,ymax),main="Time Series")
     lines(res()[,1],res()[,"Sv"],type="l",col="blue",lwd=2,lty = 2)
     lines(res()[,1],res()[,"Iv"],type="l",col="red",lwd=2,lty=3)
     legend("right", c("Environment","Susceptible vector","Infected vector"),col = c("green",'blue',"red"),lty=c(1,2,3),lwd=2)
   
-  }, width = 600, height = 'auto')
+    }, height = 'auto' , width = 'auto'
+  ) #end renderplot
 
-  # Use the result "res" returned from the simulator to compute and some text results
+    # Use the result "res" returned from the simulator to compute and some text results
   # the text should be formatted as HTML and placed in the "text" placeholder of the UI
   output$text <- renderUI({
     txt <- ""
 
-    PopSize = isolate(input$PopSize)
+    PopSize = isolate(sum(res()[1,2:7]))
 
     Sfinal = round(tail(res()[,"S"],1), 2); Sfracfinal = round(Sfinal / PopSize, 2)
     Pfinal = round(tail(res()[,"P"],1), 2); Pfracfinal = round(Pfinal / PopSize, 2)
@@ -116,7 +118,6 @@ refresh <- function(input, output){
     }
     HTML(txt)
   })
-browser()
 }
 
 shinyServer(function(input, output, session) {

@@ -4,31 +4,48 @@
 \alias{simulate_idcontrol}
 \title{Simulation of a compartmental infectious disease transmission model including different control mechanisms}
 \usage{
-simulate_idcontrol(PopSize = 1000, P0 = 1, tmax = 300, bP = 0, bA = 0,
-  bI = 1/1000, gP = 0.5, gA = 0.5, gI = 0.5, f = 0, d = 0, w = 0,
-  lambda = 0, n = 0, sigma = 0)
+simulate_idcontrol(S0 = 1000, I0 = 1, E0 = 0, Sv0 = 1000, Iv0 = 0,
+  tmax = 300, bP = 0, bA = 0, bI = 1/1000, bE = 0, bv = 1/1000,
+  bh = 1/1000, gP = 0.5, gA = 0.5, gI = 0.5, pA = 1, pI = 10,
+  c = 1, f = 0, d = 0, w = 0, birthh = 0, deathh = 0, birthv = 0,
+  deathv = 0)
 }
 \arguments{
-\item{PopSize}{specifies the initial number of individuals
-(Suceptibles + Infected & Pre-symptomatic)
-All other compartments start at 0}
+\item{S0}{initial number of susceptible hosts}
 
-\item{P0}{initial number of infected, pre-symptomatic hosts,}
+\item{I0}{initial number of infected and symptomatic hosts}
+
+\item{E0}{initial amount of pathogen in environment}
+
+\item{Sv0}{initial number of susceptible vectors}
+
+\item{Iv0}{initial number of infected vectors}
 
 \item{tmax}{maximum simulation time, in units of months}
 
-\item{bP}{level/rate of infectiousness for hosts in the P compartment}
+\item{bP}{rate of transmission from pre-symptomatic to susceptible hosts}
 
-\item{bA}{level/rate of infectiousness for hosts in the A compartment}
+\item{bA}{rate of transmission from asymptomatic to susceptible hosts}
 
-\item{bI}{level/rate of infectiousness for hosts in the I compartment}
+\item{bI}{rate of transmission from symptomatic to susceptible hosts}
 
-\item{gP}{rate at which a person leaves the P compartment, which
-is the inverse of the average time spent in that compartment}
+\item{bE}{rate of transmission from environment to susceptible hosts}
+
+\item{bv}{rate of transmission from infected vectors to susceptible hosts}
+
+\item{bh}{rate of transmission from symptomatic hosts to susceptible vectors}
+
+\item{gP}{rate at which a person leaves the P compartment}
 
 \item{gA}{rate at which a person leaves the A compartment}
 
 \item{gI}{rate at which a person leaves the I compartment}
+
+\item{pA}{rate of pathogen shedding into environment by asymptomatic hosts}
+
+\item{pI}{rate of pathogen shedding into environment by symptomatic hosts}
+
+\item{c}{rate of pathogen decay in environment}
 
 \item{f}{fraction of pre-symptomatic individuals that have an asymptomatic infection}
 
@@ -36,11 +53,13 @@ is the inverse of the average time spent in that compartment}
 
 \item{w}{rate at which recovered persons loose immunity and return to susceptible state}
 
-\item{lambda}{the rate at which new individuals enter the model (are born)}
+\item{birthh}{the rate at which new hosts enter the model (are born)}
 
-\item{n}{the rate of natural death (the inverse it the average lifespan)}
+\item{deathh}{the rate of natural death of hosts (the inverse it the average lifespan)}
 
-\item{sigma}{strength of seasonal/annual sigmoidal variation of transmission rate}
+\item{birthv}{the rate at which new vectors enter the model (are born)}
+
+\item{deathv}{the rate of natural death of vectors (the inverse it the average lifespan)}
 }
 \value{
 This function returns the simulation result as obtained from a call
@@ -51,11 +70,9 @@ Simulation of a compartmental model with several different compartments:
   Susceptibles (S), Infected and Pre-symptomatic (P),
   Infected and Asymptomatic (A), Infected and Symptomatic (I),
   Recovered and Immune (R) and Dead (D).
+  Also modeled is an environmental pathogen stage (E), and susceptible (Sv) and infected (Iv) vectors.
 
-  This model includes natural births and deaths and waning immunity.
-  The model is assumed to run in units of months.
-  This is assumption is hard-coded into the sinusoidally varying
-  transmission coefficient, which is assumed to have a period of a year
+  Any initial conditions not specified below start at 0.
 }
 \details{
 A compartmental ID model with several states/compartments
@@ -73,7 +90,7 @@ A compartmental ID model with several states/compartments
   # To run the simulation with default parameters just call this function
   result <- simulate_idcontrol()
   # To choose parameter values other than the standard one, specify them e.g. like such
-  result <- simulate_idcontrol(PopSize = 2000, P0 = 10, tmax = 100, f = 0.1, d = 0.2, sigma = 0.1)
+  result <- simulate_idcontrol(S0 = 2000, I0 = 10, tmax = 100, f = 0.1, d = 0.2)
   # You should then use the simulation result returned from the function, e.g. like this:
   plot(result[,1],result[,2],xlab='Time',ylab='Number Susceptible',type='l')
 }

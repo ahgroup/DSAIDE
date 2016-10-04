@@ -7,17 +7,17 @@ idcontrolode <- function(t, y, parms)
     {
  
       #the ordinary differential equations
-      dS =  birth_h - S * (bP * P + bA * A + bI * I + bE * E + bv * Iv) + w * R - death_h *S; #susceptibles
-      dP =    S * (bP * P + bA * A + bI * I + bE * E + bv * Iv) - gP * P - death_h * P; #infected, pre-symptomatic
-      dA =  f*gP*P - gA * A - death_h * A #infected, asymptomatic
-      dI =  (1-f)*gP*P -  gI*I - death_h * I #infected, symptomatic
-      dR =  (1-d)*gI*I + gA * A - w * R - death_h * R #recovered, immune
+      dS =  birthh - S * (bP * P + bA * A + bI * I + bE * E + bv * Iv) + w * R - deathh *S; #susceptibles
+      dP =    S * (bP * P + bA * A + bI * I + bE * E + bv * Iv) - gP * P - deathh * P; #infected, pre-symptomatic
+      dA =  f*gP*P - gA * A - deathh * A #infected, asymptomatic
+      dI =  (1-f)*gP*P -  gI*I - deathh * I #infected, symptomatic
+      dR =  (1-d)*gI*I + gA * A - w * R - deathh * R #recovered, immune
       dD = d*gI*I #dead
 
       dE = pI * I + pA * A - c * E; #pathogen in environment
       
-      dSv = birth_v - death_v * Sv - bh * I * Sv; #susceptible vectors
-      dIv = bh * I * Sv - death_v * Iv ; #susceptible hosts
+      dSv = birthv - deathv * Sv - bh * I * Sv; #susceptible vectors
+      dIv = bh * I * Sv - deathv * Iv ; #susceptible hosts
       
       
       list(c(dS, dP, dA, dI, dR, dD, dE, dSv, dIv))
@@ -47,8 +47,7 @@ idcontrolode <- function(t, y, parms)
 #' @param bE rate of transmission from environment to susceptible hosts
 #' @param bv rate of transmission from infected vectors to susceptible hosts
 #' @param bh rate of transmission from symptomatic hosts to susceptible vectors
-#' @param gP rate at which a person leaves the P compartment, which
-#'   is the inverse of the average time spent in that compartment
+#' @param gP rate at which a person leaves the P compartment
 #' @param gA rate at which a person leaves the A compartment
 #' @param gI rate at which a person leaves the I compartment
 #' @param pA rate of pathogen shedding into environment by asymptomatic hosts
@@ -57,10 +56,10 @@ idcontrolode <- function(t, y, parms)
 #' @param f fraction of pre-symptomatic individuals that have an asymptomatic infection
 #' @param d fraction of symptomatic infected hosts that die due to disease
 #' @param w rate at which recovered persons loose immunity and return to susceptible state
-#' @param birth_h the rate at which new hosts enter the model (are born)
-#' @param death_h the rate of natural death of hosts (the inverse it the average lifespan)
-#' @param birth_v the rate at which new vectors enter the model (are born)
-#' @param death_v the rate of natural death of vectors (the inverse it the average lifespan)
+#' @param birthh the rate at which new hosts enter the model (are born)
+#' @param deathh the rate of natural death of hosts (the inverse it the average lifespan)
+#' @param birthv the rate at which new vectors enter the model (are born)
+#' @param deathv the rate of natural death of vectors (the inverse it the average lifespan)
 #' @param tmax maximum simulation time, in units of months
 #' @return This function returns the simulation result as obtained from a call
 #'   to the deSolve ode solver
@@ -85,14 +84,14 @@ idcontrolode <- function(t, y, parms)
 #' @author Andreas Handel
 #' @export
 
-simulate_idcontrol <- function(S0 = 1000, I0 = 1, E0 = 0, Sv0 = 1000, Iv0 = 0, tmax = 300, bP = 0, bA = 0, bI = 1/1000, bE = 0, bv = 1/1000, bh = 1/1000, gP = 0.5, gA = 0.5, gI = 0.5, pA = 1, pI = 10, c = 1,  f = 0, d = 0, w = 0, birth_h = 0, death_h = 0, birth_v = 0, death_v = 0)
+simulate_idcontrol <- function(S0 = 1000, I0 = 1, E0 = 0, Sv0 = 1000, Iv0 = 0, tmax = 300, bP = 0, bA = 0, bI = 1/1000, bE = 0, bv = 1/1000, bh = 1/1000, gP = 0.5, gA = 0.5, gI = 0.5, pA = 1, pI = 10, c = 1,  f = 0, d = 0, w = 0, birthh = 0, deathh = 0, birthv = 0, deathv = 0)
 {
   Y0 = c(S = S0, P = 0, A = 0, I = I0, R = 0, D = 0, E = E0, Sv = Sv0, Iv = Iv0);  #combine initial conditions into a vector
   dt = min(0.1, tmax / 1000); #time step for which to get results back
   timevec = seq(0, tmax, dt); #vector of times for which solution is returned (not that internal timestep of the integrator is different)
 
   #combining parameters into a parameter vector
-  pars = c(bP = bP, bA = bA, bI = bI, bE = bE, bv = bv, bh = bh, gP = gP , gA = gA, gI = gI, pA = pA, pI = pI, c = c, f = f, d = d, w = w, birth_h = birth_h, death_h = death_h, birth_v = birth_v, death_v = death_v);
+  pars = c(bP = bP, bA = bA, bI = bI, bE = bE, bv = bv, bh = bh, gP = gP , gA = gA, gI = gI, pA = pA, pI = pI, c = c, f = f, d = d, w = w, birthh = birthh, deathh = deathh, birthv = birthv, deathv = deathv);
 
   #this line runs the simulation, i.e. integrates the differential equations describing the infection process
   #the result is saved in the odeoutput matrix, with the 1st column the time, the 2nd, 3rd, 4th column the variables S, I, R
