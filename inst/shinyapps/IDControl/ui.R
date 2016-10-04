@@ -30,75 +30,75 @@ ui <- fluidPage(
            #################################
            # Inputs section
            h2('Simulation Settings'),
+           p('All parameters are assumed to be in units of (inverse) months'),
            fluidRow(
-             column(6,
+             column(4,
                     sliderInput("S0", "initial number of susceptible hosts", min = 100, max = 5000, value = 1000, step = 100)
              ),
-             column(6,
+             column(4,
                     sliderInput("I0", "initial number of symptomatic hosts", min = 0, max = 100, value = 0, step = 1)
-             )
-             fluidRow(
-               column(6,
+             ),
+             column(4,
                       sliderInput("E0", "initial amount of environmental pathogen", min = 0, max = 5000, value = 0, step = 100)
-               ),
-               column(6,
-                      sliderInput("Sv0", "initial number of susceptible vectors", min = 0, max = 5000, value = 0, step = 100)
-               )
+             )
              ), #close fluidRow structure for input
            fluidRow(
-             column(6,
+             column(4,
+                    sliderInput("Sv0", "initial number of susceptible vectors", min = 0, max = 5000, value = 0, step = 100)
+             ),
+             column(4,
                     sliderInput("Iv0", "initial number of infected vectors", min = 0, max = 100, value = 0, step = 1)
-             )
-             column(6,
+             ),
+             column(4,
                     sliderInput("tmax", "Maximum simulation time (months)", min = 1, max = 1200, value = 100, step = 1)
              )
            ), #close fluidRow structure for input
            fluidRow(
-             column(6,
+             column(4,
                     sliderInput("bP", "Rate of transmission from pre-symptomatic hosts", min = 0, max = 0.1, value = 0, step = 0.001 , sep ='')
              ),
-             column(6,
+             column(4,
                     sliderInput("bA", "Rate of transmission from asymptomatic hosts", min = 0, max = 0.1, value = 0, step = 0.001 , sep ='')
+             ),
+             column(4,
+                                    sliderInput("bI", "Rate of transmission from symptomatic hosts", min = 0, max = 0.1, value = 0, step = 0.001 , sep ='')
              )
            ), #close fluidRow structure for input
           fluidRow(
-               column(6,
-                      sliderInput("bI", "Rate of transmission from symptomatic hosts", min = 0, max = 0.1, value = 0, step = 0.001 , sep ='')
-               ),
-               column(6,
+               column(4,
                       sliderInput("bE", "Rate of transmission from environment", min = 0, max = 0.1, value = 0, step = 0.001 , sep ='')
-               )
-             ), #close fluidRow structure for input
-           fluidRow(
-               column(6,
+               ),
+               column(4,
                       sliderInput("bv", "Rate of transmission from vectors", min = 0, max = 0.1, value = 0, step = 0.001 , sep ='')
                ),
-               column(6,
+               column(4,
                       sliderInput("bh", "Rate of transmission to vectors", min = 0, max = 0.1, value = 0, step = 0.001 , sep ='')
                )
              ), #close fluidRow structure for input
              fluidRow(
                column(4,
-                      sliderInput("gP", "Rate at which presymptomatic hosts leave compartment (gP, 1/month)", min = 0, max = 5, value = 0.5, step = 0.1)
+                      sliderInput("gP", "Rate at which presymptomatic hosts leave compartment", min = 0, max = 5, value = 0.5, step = 0.1)
                ),
                column(4,
-                      sliderInput("gA", "Rate at which asymptomatic hosts leave compartment (gA, 1/month)", min = 0, max = 5, value = 0.5, step = 0.1)
+                      sliderInput("gA", "Rate at which asymptomatic hosts leave compartment", min = 0, max = 5, value = 0.5, step = 0.1)
                ),
                column(4,
-                      sliderInput("gI", "Rate at which symptomatic hosts leave compartment (gI, 1/month)", min = 0, max = 5, value = 0.5, step = 0.1)
-               ),
-               fluidRow(
+                      sliderInput("gI", "Rate at which symptomatic hosts leave compartment", min = 0, max = 5, value = 0.5, step = 0.1)
+               )
+             ), #close fluidRow structure for input
+          
+             fluidRow(
                  column(4,
-                        sliderInput("pA", "Rate of pathogen shedding by asymptomatic hosts (pA, 1/month)", min = 0, max = 50, value = 1, step = 0.1)
+                        sliderInput("pA", "Rate of pathogen shedding by asymptomatic hosts", min = 0, max = 50, value = 1, step = 0.1)
                  ),
                  column(4,
-                        sliderInput("pI", "Rate of pathogen shedding by symptomatic hosts (pI, 1/month)", min = 0, max = 50, value = 1, step = 0.1)
+                        sliderInput("pI", "Rate of pathogen shedding by symptomatic hosts", min = 0, max = 50, value = 1, step = 0.1)
                  ),
                  column(4,
-                        sliderInput("c", "Rate of environmental pathogen decay (c, 1/month) ", min = 0, max = 10, value = 0, step = 0.01 , sep ='')
+                        sliderInput("c", "Rate of environmental pathogen decay", min = 0, max = 10, value = 0, step = 0.01 , sep ='')
                  )
-               ), #close fluidRow structure for input
-               fluidRow(
+            ), #close fluidRow structure for input
+            fluidRow(
                  column(4,
                         sliderInput("f", "Fraction of hosts that are asymptomatic", min = 0, max = 1, value = 0, step = 0.1)
                  ),
@@ -108,24 +108,23 @@ ui <- fluidPage(
                  column(4,
                         sliderInput("d", "Fraction of symptomatic hosts that die", min = 0, max = 1, value = 0, step = 0.01 , sep ='')
                  )
-               ), #close fluidRow structure for input
-               
-               fluidRow(
+             ), #close fluidRow structure for input
+             fluidRow(
                  column(6,
-                        sliderInput("birth_h", "birth rate of hosts (1/month)", min = 0, max = 100, value = 0, step = 0.01 , sep ='')
+                        sliderInput("birthh", "birth rate of hosts", min = 0, max = 100, value = 0, step = 0.01 , sep ='')
                  ),
                  column(6,
-                        sliderInput("death_h", "death rate of hosts (1/month)", min = 0, max = 100, value = 0, step = 0.01 , sep ='')
+                        sliderInput("deathh", "death rate of hosts", min = 0, max = 100, value = 0, step = 0.01 , sep ='')
                  )
-               ), #close fluidRow structure for input
-               fluidRow(
+             ), #close fluidRow structure for input
+             fluidRow(
                  column(6,
-                        sliderInput("birth_v", "birth rate of vectors (1/month)", min = 0, max = 100, value = 0, step = 0.01 , sep ='')
+                        sliderInput("birthv", "birth rate of vectors", min = 0, max = 100, value = 0, step = 0.01 , sep ='')
                  ),
                  column(6,
-                        sliderInput("death_v", "death rate of vectors (1/month)", min = 0, max = 100, value = 0, step = 0.01 , sep ='')
+                        sliderInput("deathv", "death rate of vectors", min = 0, max = 100, value = 0, step = 0.01 , sep ='')
                  )
-               ) #close fluidRow structure for input
+            ) #close fluidRow structure for input
                
              
     ), #end sidebar column for inputs
@@ -136,7 +135,7 @@ ui <- fluidPage(
            #################################
            #Start with results on top
            h2('Simulation Results'),
-           plotOutput(outputId = "plot"),
+           plotOutput(outputId = "plot", height = "800px"),
            # PLaceholder for results of type text
            htmlOutput(outputId = "text"),
            #Placeholder for any possible warning or error messages (this will be shown in red)
