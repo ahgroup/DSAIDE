@@ -55,24 +55,24 @@ ui <- fluidPage(
            ), #close fluidRow structure for input
            fluidRow(
              column(4,
-                    sliderInput("bP", "Rate of transmission from pre-symptomatic hosts", min = 0, max = 0.1, value = 0, step = 0.001 , sep ='')
+                    sliderInput("bP", "Rate of transmission from pre-symptomatic hosts", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
              ),
              column(4,
-                    sliderInput("bA", "Rate of transmission from asymptomatic hosts", min = 0, max = 0.1, value = 0, step = 0.001 , sep ='')
+                    sliderInput("bA", "Rate of transmission from asymptomatic hosts", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
              ),
              column(4,
-                                    sliderInput("bI", "Rate of transmission from symptomatic hosts", min = 0, max = 0.1, value = 0, step = 0.001 , sep ='')
+                                    sliderInput("bI", "Rate of transmission from symptomatic hosts", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
              )
            ), #close fluidRow structure for input
           fluidRow(
                column(4,
-                      sliderInput("bE", "Rate of transmission from environment", min = 0, max = 0.1, value = 0, step = 0.001 , sep ='')
+                      sliderInput("bE", "Rate of transmission from environment", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
                ),
                column(4,
-                      sliderInput("bv", "Rate of transmission from vectors", min = 0, max = 0.1, value = 0, step = 0.001 , sep ='')
+                      sliderInput("bv", "Rate of transmission from vectors", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
                ),
                column(4,
-                      sliderInput("bh", "Rate of transmission to vectors", min = 0, max = 0.1, value = 0, step = 0.001 , sep ='')
+                      sliderInput("bh", "Rate of transmission to vectors", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
                )
              ), #close fluidRow structure for input
              fluidRow(
@@ -89,13 +89,13 @@ ui <- fluidPage(
           
              fluidRow(
                  column(4,
-                        sliderInput("pA", "Rate of pathogen shedding by asymptomatic hosts", min = 0, max = 50, value = 1, step = 0.1)
+                        sliderInput("pA", "Rate of pathogen shedding by asymptomatic hosts", min = 0, max = 10, value = 0, step = 0.1)
                  ),
                  column(4,
-                        sliderInput("pI", "Rate of pathogen shedding by symptomatic hosts", min = 0, max = 50, value = 1, step = 0.1)
+                        sliderInput("pI", "Rate of pathogen shedding by symptomatic hosts", min = 0, max = 10, value = 0, step = 0.1)
                  ),
                  column(4,
-                        sliderInput("c", "Rate of environmental pathogen decay", min = 0, max = 10, value = 0, step = 0.01 , sep ='')
+                        sliderInput("c", "Rate of environmental pathogen decay", min = 0, max = 10, value = 0, step = 0.1 , sep ='')
                  )
             ), #close fluidRow structure for input
             fluidRow(
@@ -103,7 +103,7 @@ ui <- fluidPage(
                         sliderInput("f", "Fraction of hosts that are asymptomatic", min = 0, max = 1, value = 0, step = 0.1)
                  ),
                  column(4,
-                        sliderInput("w", "Rate of waning immunity (w, 1/month)", min = 0, max = 50, value = 1, step = 0.1)
+                        sliderInput("w", "Rate of waning immunity (w, 1/month)", min = 0, max = 50, value = 0, step = 0.1)
                  ),
                  column(4,
                         sliderInput("d", "Fraction of symptomatic hosts that die", min = 0, max = 1, value = 0, step = 0.01 , sep ='')
@@ -119,10 +119,10 @@ ui <- fluidPage(
              ), #close fluidRow structure for input
              fluidRow(
                  column(6,
-                        sliderInput("birthv", "birth rate of vectors", min = 0, max = 100, value = 0, step = 0.01 , sep ='')
+                        sliderInput("birthv", "birth rate of vectors", min = 0, max = 5000, value = 0, step = 1 , sep ='')
                  ),
                  column(6,
-                        sliderInput("deathv", "death rate of vectors", min = 0, max = 100, value = 0, step = 0.01 , sep ='')
+                        sliderInput("deathv", "death rate of vectors", min = 0, max = 30, value = 0, step = 0.1 , sep ='')
                  )
             ) #close fluidRow structure for input
                

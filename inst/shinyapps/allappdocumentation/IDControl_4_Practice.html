@@ -58,14 +58,14 @@
 </ul>
 <p>The included processes/mechanisms are the following:</p>
 <ul>
-<li>Susceptible individuals (S) can become infected by pre-symptomatic (P), asymptomatic (A) or symptomatic (I) hosts. The rates at which infections from the different types of infected individuals (P, A and I) occur are governed by 3 parameters, <span class="math inline">\(b_P\)</span>, <span class="math inline">\(b_A\)</span> and <span class="math inline">\(b_I\)</span>.</li>
-<li>Susceptible individuals (S) can also become infected by contact with the environment or infected vectors, at rates <span class="math inline">\(b_E\)</span> and <span class="math inline">\(b_v\)</span>.</li>
-<li>Susceptible vectors (Sv) can become infected by contact with symptomatic hosts at rate b<sub>h</sub>.</li>
-<li>All infected hosts first enter the presymptomatic stage. They remain there for some time (determined by rate <span class="math inline">\(g_P\)</span>, the inverse of which is the average time spent in the presymptomatic stage). A fraction <span class="math inline">\(f\)</span> of presymptomatic hosts move into the asymptomatic category, the rest become symptomatic infected hosts.</li>
-<li>Asymptomatic infected hosts recover after some time (specified by the rate <span class="math inline">\(g_A\)</span>). Similarly, the rate <span class="math inline">\(g_I\)</span> determines the duration the symptomatic hosts stay in the symptomatic state. For symptomatic hosts, two outcomes are possible. Either recovery or death. The parameter <span class="math inline">\(d\)</span> determines the fraction of hosts that die.</li>
+<li>Susceptible individuals (S) can become infected by pre-symptomatic (P), asymptomatic (A) or symptomatic (I) hosts. The rates at which infections from the different types of infected individuals (P, A and I) occur are governed by 3 parameters, <em>b<sub>P</sub></em>, <em>b<sub>A</sub></em> and <em>b<sub>I</sub></em>.</li>
+<li>Susceptible individuals (S) can also become infected by contact with the environment or infected vectors, at rates <em>b<sub>E</sub></em> and <em>b<sub>v</sub></em>.</li>
+<li>Susceptible vectors (Sv) can become infected by contact with symptomatic hosts at rate <em>b<sub>h</sub></em>.</li>
+<li>All infected hosts first enter the presymptomatic stage. They remain there for some time (determined by rate <em>g<sub>P</sub></em>, the inverse of which is the average time spent in the presymptomatic stage). A fraction <em>f</em> of presymptomatic hosts move into the asymptomatic category, the rest become symptomatic infected hosts.</li>
+<li>Asymptomatic infected hosts recover after some time (specified by the rate <em>g<sub>A</sub></em>). Similarly, the rate <em>g<sub>I</sub></em> determines the duration the symptomatic hosts stay in the symptomatic state. For symptomatic hosts, two outcomes are possible. Either recovery or death. The parameter <em>d</em> determines the fraction of hosts that die.</li>
 <li>Recovered individuals are initially immune to reinfection. They can loose their immunity at rate <em>w</em> and return back to the susceptible compartment.</li>
 <li>Symptomatic and asymptomatic hosts shed pathogen into the environment at rates p<sub>A</sub> and p<sub>I</sub>. The pathogen in the environment decays at rate <em>c</em>.</li>
-<li>New susceptible hosts and vectors enter the system (are born) at rates e<sub>h</sub> and e<sub>v</sub>. Natural death for hosts and vectors occurs at rates n<sub>h</sub> and n<sub>v</sub>. (In the app, those rates are called birth<sub>i</sub> and death<sub>i</sub>).</li>
+<li>New susceptible hosts and vectors enter the system (are born) at rates <em>e<sub>h</sub></em> and <em>e<sub>v</sub></em>. Natural death for hosts and vectors occurs at rates <em>n<sub>h</sub></em> and <em>n<sub>v</sub></em>. (In the code, those rates are called birth<sub>i</sub> and death<sub>i</sub>).</li>
 </ul>
 <p>Note that we only track people that die due to the disease in our <em>D</em> compartment. All hosts dying due to other causes just “exit the system” and we don’t further keep track of them (though we could add another compartment to “collect” and track all individuals who died from non disease related causes.)</p>
 <p>Also note that we made several simplifcations to keep the model from getting too complex. For instance presymptomatic individuals do not shed into the environment and only symptomatic hosts are assumed to be able to infect vectors. Further details relaxing these assumptions could of course be included, at the expense of a larger and more complex model.</p>
@@ -89,22 +89,89 @@
 <ul>
 <li>Set the model parameters such that it corresponds to the following setting:
 <ul>
-<li>A population size of 1000, 1 initially infected, presymptomatic host, simulation duration (approximately) 10 years.</li>
-<li>Assume that only symptomatic individuals transmit, at rate <span class="math inline">\(b_I = 0.002\)</span>, and that there is no seasonal variation.</li>
-<li>Assume that the duration of the symptomatic period is 1 month long. (Hint: The parameter <span class="math inline">\(g_i\)</span> is the inverse of this period. Also, the model parameters are in units of 1/month.)</li>
-<li>Assume that the duration of the presymptomatic period is approximately 6 days long. (Hint: The parameter <span class="math inline">\(g_P\)</span> is the inverse of this period. Also, the model parameters are in units of 1/month. Make sure you convert correctly.)</li>
+<li>1000 susceptible hosts and vectors, 1 initially symptomatic host, no infected vectors or pathogen in environment.</li>
+<li>Simulation duration approximately 5 years.</li>
+<li>Assume that only symptomatic individuals transmit, at rate <em>b<sub>I</sub></em> = 0.002. All other transmission rates should be 0.</li>
+<li>Assume that the duration of the symptomatic period is 1 month long, the duration of the presymptomatic period is half a month long.</li>
 <li>Assume that there are no asymptomatic infections. You can therefore set the rate of recovery of asymptomatics, <span class="math inline">\(g_A\)</span> to anything, it doesn’t matter because nobody will be asymptomatic.</li>
+<li>Assume that no environmental shedding and decay occurs.</li>
 <li>Assume nobody dies due to disease, and immunity does not wane.</li>
 <li>Assume that there are no births and non-disease deaths occurring.</li>
 </ul></li>
-<li>With parameters set to correspond to the scenario just described, run the simulation and ensure you get a single outbreak.</li>
+<li>With parameters set to correspond to the scenario just described, run the simulation and ensure you get a single outbreak with 20% susceptibles left at the end.</li>
 </ul>
 </div>
 <div id="task-2" class="section level3">
 <h3>Task 2:</h3>
+<ul>
+<li>Let’s now assume that 50% of infected hosts are asymptomatic, and that the duration of the asymptomatic stage is the same as the symptomatic stage.</li>
+<li>In addition, assume that asymptomatic infected are half as infectious as symptomatic infected, and that pre-symptomatic are as infectious as symptomatic.</li>
+<li>Run the simulation, you should get an outbreak with around 11% susceptibles left.</li>
+<li>Assume that we are quaranting hosts, and that quarantining reduces infectiousness by half.</li>
+<li>First, we envision a scenario where we can only detect and quarantine individuals that show symptoms. Implement such a scenario, run the simulation and record the number of susceptibles left at the end.</li>
+<li>Next, we envision a scenario where we can quarantine everyone who has become infected, independent of symptom status. Implement such a scenario, again run the simulation and record the number of susceptibles left at the end.</li>
+</ul>
 </div>
 <div id="task-3" class="section level3">
 <h3>Task 3:</h3>
+<ul>
+<li>Change settings back as they were before you implemented quarantine.</li>
+<li>Now assume that we can administer a drug. This will likely only be given to symptomatics.</li>
+<li>First assume that the drug reduces infectiousness of symptomatics by half. Run the simulation, record the number of susceptibles at the end of the outbreak.</li>
+<li>Now assume that the drug <em>also</em> reduces the duration of the symptomatic period from a month (30 days) to 20 days. Run the simulation, record the number of susceptibles at the end of the outbreak.</li>
+</ul>
+</div>
+<div id="task-4" class="section level3">
+<h3>Task 4:</h3>
+<ul>
+<li>Of course, intervention strategies are best if they reach all that transmit. Let’s assume now that we still have a drug that targets symptomatics, but that asymptomatics and presymptomatics don’t transmit.</li>
+<li>Set the model such that only symptomatics transmit, at _b<sub>I</sub>=0.004 and duration of symptomatic period 1 month. Nobody else transmits. Everying else as in task 2. You should get an outbreak of the same size as in task 1.</li>
+<li>Now assume that the drug reduces the duration of the symptomatic period from a month (30 days) to 20 days. Run the simulation, record the number of susceptibles at the end of the outbreak.</li>
+<li>Now assume that the drug also cuts infectiousness by half. Run the simulation, record the number of susceptibles at the end of the outbreak.</li>
+</ul>
+</div>
+<div id="task-5" class="section level3">
+<h3>Task 5:</h3>
+<ul>
+<li>Set everything as in task 1. Then turn on environmental shedding by symptomatics and decay both at rates of 1 per month. Run an outbreak, record the number of susceptibles at the end.</li>
+</ul>
+</div>
+<div id="task-6" class="section level3">
+<h3>Task 6:</h3>
+<ul>
+<li>Set rate of transmission from environment to susceptible hosts at _b<sub>E</sub>=0.002. Run the simulation.</li>
+<li>Turn off the rate of direct transmission between hosts. Make sure you still get an outbreak.</li>
+<li>Let’s assume different interventions that affect the environmental transmission.</li>
+<li>First, we consider an intervention that leads to a 50% increased pathogen clearance from the environment. Implement that and run the simulation.</li>
+<li>Instead of faster clearance, assume a 50% reduced rate of infection from the environment. Implement that and run the simulation.</li>
+</ul>
+</div>
+<div id="task-7" class="section level3">
+<h3>Task 7:</h3>
+<ul>
+<li>We’ll now switch to vector-borne transmission. Set everything as in task 1.<br />
+</li>
+<li>Assume that transmission between hosts does not occur. Set transmission from host to vector and vector to host to 0.001.</li>
+<li>Run the simulation. Observe the dynamics of the vectors.</li>
+<li>Now allow for vector births and deaths. Assume that vectors (say mosquitoes) live for half a month. Set birth rate such that vector population balances at 1000. Run the simulation.</li>
+<li>Double host-vector and vector-host transmission rates. Now consider some vector control measures.</li>
+<li>Assume we sprayed against mosquitoes and it reduced the population size by 90%. Set the initial vector population to that value, run the outbreak, observe.</li>
+</ul>
+</div>
+<div id="task-8" class="section level3">
+<h3>Task 8:</h3>
+<ul>
+<li>Instead of killing vector populations, we now consider reduction in transmission, e.g. due to the use of bednets.</li>
+<li>Set everything as in task 7 (minus the intervention). Assume that an intervention reduces transmission <em>to</em> vectors by half. Run the simulation, observe.</li>
+<li>Now assume that an intervention reduces transmission <em>from</em> vectors by half. Run the simulation, observe.</li>
+<li>Finally, assume that the intervention reduces transmission both to and from vectors by half. Run the simulation, observe.</li>
+</ul>
+</div>
+<div id="task-9" class="section level3">
+<h3>Task 9:</h3>
+<ul>
+<li>Keep exploring. The model has many more parameters that you can change, e.g. allowing births and deaths and waning immunity for hosts, or ID that transmit through multiple routes at the same time (e.g. Zika virus). Investigate how different control strategies work under different scenarios.</li>
+</ul>
 </div>
 </div>
 <div id="answers" class="section level2">

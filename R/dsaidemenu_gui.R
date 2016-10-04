@@ -44,8 +44,8 @@ dsaidemenu_gui <- function() {
 
 }
 
-.onAttach <- function(libname, pkgname){
-  packageStartupMessage("Welcome to the DSAIDE package. Type dsaidemenu() to start the text menu 
-                        and dsaidemenu_gui() to start the GUI menu.")
-}
+#.onAttach <- function(libname, pkgname){
+#  packageStartupMessage("Welcome to the DSAIDE package. Type dsaidemenu() to start the text menu 
+ #                       and dsaidemenu_gui() to start the GUI menu.")
+#}
 
