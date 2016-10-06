@@ -32,14 +32,11 @@ stochasticratefunc <- function(y, parms, t)
 #' simulate_stochastic function
 #'
 #' @description  Simulation of a stochastic SEIR type model with the following compartments:
-#' Susceptibles (S), Infected and Pre-symptomatic (P),
+#' Susceptibles (S), Infected and pre-symptomatic (P),
 #' Infected and Symptomatic (I),
 #' Recovered and Immune (R)
 #'
-#' @param PopSize specifies the initial number of individuals
-#' (Suceptibles + Infected & Pre-symptomatic)
-#' All other compartments start at 0
-#' @param P0 initial number of infected, pre-symptomatic hosts
+#' @param S0 initial number of susceptible hosts
 #' @param I0 initial number of infected, symptomatic hosts
 #' @param bP level/rate of infectiousness for hosts in the P compartment
 #' @param bI level/rate of infectiousness for hosts in the I compartment
@@ -67,7 +64,7 @@ stochasticratefunc <- function(y, parms, t)
 #' # To run the simulation with default parameters just call this function
 #' result <- simulate_stochastic()
 #' # To choose parameter values other than the standard one, specify them e.g. like such
-#' result <- simulate_stochastic(PopSize = 2000,  tmax = 200, bP = 1/100)
+#' result <- simulate_stochastic(S0 = 2000,  tmax = 200, bP = 1/100)
 #' # You should then use the simulation result returned from the function, e.g. like this:
 #' plot(result[,1],result[,2],xlab='Time',ylab='Number Susceptible',type='l')
 #' @references See the manual for the adaptivetau package for details on the algorithm
@@ -77,9 +74,9 @@ stochasticratefunc <- function(y, parms, t)
 
 
 
-simulate_stochastic <- function(PopSize = 1000, P0 = 10, I0 = 0, tmax = 100, bP = 0, bI = 1/1000, gP = 0.5, gI = 0.5, w = 0, lambda = 0, n = 0, sigma = 0)
+simulate_stochastic <- function(S0 = 1000, I0 = 10, tmax = 100, bP = 0, bI = 1/1000, gP = 0.5, gI = 0.5, w = 0, lambda = 0, n = 0, sigma = 0)
 {
-    Y0 = c(S = PopSize - P0, P = P0,  I = 0, R = 0);  #combine initial conditions into a vector
+    Y0 = c(S = S0, P = 0,  I = I0, R = 0);  #combine initial conditions into a vector
     dt = tmax / 1000; #time step for which to get results back
     timevec = seq(0, tmax, dt); #vector of times for which solution is returned (not that internal timestep of the integrator is different)
 

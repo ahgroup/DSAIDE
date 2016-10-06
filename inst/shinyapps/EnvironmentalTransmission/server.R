@@ -30,63 +30,12 @@ refresh <- function(input, output){
     return (result)
   })
   
-  # Here, we use the "odeoutput" variable to plot the chart that we need
-  # the resulting chart will be shown in the "plot" placeholder of the UI
-  output$plot <- renderPlot(
-    {
-      input$submitBtn
-      
-      tmax = isolate(input$tmax)
-      PopSize = isolate(input$PopSize);
-      
-      ymax = max(c(PopSize,res()[,2]))
-      
-      plot(res()[,1],res()[,2],type="l",xlab="time (months)",ylab="",col="green",lwd=2,log="",xlim=c(0,tmax),ylim=c(1,ymax),main="Time Series")
-      lines(res()[,1],res()[,3],type="l",col="red",lwd=2,lty=2)
-      lines(res()[,1],res()[,4],type="l",col="gray",lwd=2,lty=3)
-      lines(res()[,1],res()[,5],type="l",col="blue",lwd=2,lty=4)
-      legend("right", c("Susceptible","Infected","Recovered","Environment"),col = c("green","red","gray","blue"),lwd=2)
-    }, width = 600, height = 'auto'
-  )
+  #function that takes result saved in res and produces output
+  #output (plots, text, warnings) is stored in and modifies the global variable output
+  produce_simoutput(input,output,res)
   
-  # Use the result "res" returned from the simulator to compute and some text results
-  # the text should be formatted as HTML and placed in the "text" placeholder of the UI
-  output$text <- renderUI(
-    {
-      txt <- ""
-      
-      PopSize = isolate(input$PopSize)
-   
-      Sfinal = round(tail(res()[,2],1), 2); Sfracfinal = round(Sfinal / PopSize, 2)
-      Ifinal = round(tail(res()[,3],1), 2); Ifracfinal = round(Ifinal / PopSize, 2)
-      Rfinal = round(tail(res()[,4],1), 2); Rfracfinal = round(Rfinal / PopSize, 2)
-      
-      txt1 <- paste(sprintf('Number and Fraction Susceptibles at end of simulation: %.2f, %.2f',Sfinal, Sfracfinal))
-      txt2 <- paste(sprintf('Number and Fraction Infected at end of simulation: %.2f, %.2f',Ifinal, Ifracfinal))
-      txt3 <- paste(sprintf('Number and Fraction Recovered at end of simulation: %.2f, %.2f',Rfinal, Rfracfinal))
-      
-      txt <- paste(txt1, txt2, txt3, sep = "<br/>")
-      
-      HTML(txt)
-    })
-  
-  
-  # At last, if we have any warnings or error from the "odeoutput" we can show them here
-  # These pieces of texts will be shown in red in the UI ("warn" placeholder will be used)
-  output$warn <- renderUI({
-    txt <- ""
-    if(length(data()$warns) == 0){
-      
-    }else{
-      txt <- paste(txt, "Warnings:", sep = "<br/>")
-      for (i in 1:length(data()$warns)){
-        txt <- paste(txt, data()$warns[[i]], sep = "<br/>")
-      }
-    }
-    HTML(txt)
-  })
-  
-}
+} #ends inner shiny server function that runs the simulation and returns output
+
 
 shinyServer(function(input, output, session) {
   

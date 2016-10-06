@@ -1,4 +1,4 @@
-#This is the Shiny server file for the ID Dynamics Introduction App
+#This is the Shiny file for the ID Dynamics Introduction App
 
 #the main function with all the functionality
 #this function is wrapped inside the shiny server function below to allow return to main menu when window is closed
@@ -10,22 +10,6 @@ refresh <- function(input, output){
   res <- reactive({
     input$submitBtn
     
-    # Create a Progress object
-    progress <- shiny::Progress$new()
-    progress$set(message = "Starting Simulation: ", value = 0)
-    # Close the progress when this reactive exits (even if there's an error)
-    on.exit(progress$close())
-    
-    # Update the progress bar to show how the process is going
-    updateProgress_ <- function(value = NULL, detail = NULL) {
-      if (is.null(value)) {
-        value <- progress$getValue()
-        value <- value + (progress$getMax() - value) / 5
-      }else{
-        value <- progress$getMax() * value
-      }
-      progress$set(value = value, detail = detail)
-    }
     
     # Read all the input values from the UI
     PopSize = isolate(input$PopSize);
@@ -33,9 +17,7 @@ refresh <- function(input, output){
     beta = isolate(input$beta);
     gamma = isolate(input$gamma);
     tmax = isolate(input$tmax);
-    
-    browser()
-    
+
     # Call the ODE solver with the given parameters
     result <- simulate_introduction(PopSize = PopSize, I0 = I0, gamma = gamma, beta = beta, tmax = tmax)
     
@@ -46,62 +28,12 @@ refresh <- function(input, output){
     plotOutput("plot", width = paste0(input$PlotWidth, "%"), height = 500)
   })
   
-  # Here, we use the "res" variable to plot the chart that we need
-  # the resulting chart will be shown in the "plot" placeholder of the UI
-  output$plot <- renderPlot(
-    {
-      input$submitBtn
-      
-      tmax = isolate(input$tmax)
-      PopSize = isolate(input$PopSize)
-      ymax = max(c(res()[,2],PopSize))
-      
-      plot(res()[,1],res()[,2],type="l",xlab="time (days)",ylab="",col="green",lwd=2,log="",xlim=c(0,tmax),ylim=c(1,ymax),main="Time Series")
-      lines(res()[,1],res()[,3],type="l",col="red",lwd=2)
-      lines(res()[,1],res()[,4],type="l",col="gray",lwd=2)
-      lines(res()[,1],res()[,2]+res()[,3]+res()[,4],type="l",col="blue",lwd=2)
-      legend("right", c("Susceptible","Infected","Recovered","Total"),col = c("green","red","gray","blue"),lwd=2)
-    }
-  )
+  #function that takes result saved in res and produces output
+  #output (plots, text, warnings) is stored in and modifies the global variable output
+  produce_simoutput(input,output,res)
   
-  # Use the result "res" returned from the simulator to compute and some text results
-  # the text should be formatted as HTML and placed in the "text" placeholder of the UI
-  output$text <- renderUI({
-    txt <- ""
-    
-    PopSize = isolate(input$PopSize)
-    gamma = isolate(input$gamma)
-    beta = isolate(input$beta)
-    
-    Sfinal = round(tail(res()[,2],1), 2); Sfracfinal = round(Sfinal / PopSize, 2)
-    Ifinal = round(tail(res()[,3],1), 2); Ifracfinal = round(Ifinal / PopSize, 2)
-    Rfinal = round(tail(res()[,4],1), 2); Rfracfinal = round(Rfinal / PopSize, 2)
-    
-    txt1 <- paste(sprintf('Number and Fraction Susceptibles at end of simulation: %.2f, %.2f',Sfinal, Sfracfinal))
-    txt2 <- paste(sprintf('Number and Fraction Infected at end of simulation: %.2f, %.2f',Ifinal, Ifracfinal))
-    txt3 <- paste(sprintf('Number and Fraction Recovered at end of simulation: %.2f, %.2f',Rfinal, Rfracfinal))
-    
-    txt <- paste(txt1, txt2, txt3, sep = "<br/>")
-    
-    HTML(txt)
-  })
-  
-  # At last, if we have any warnings or error from the "res" we can show them here
-  # These peices of texts will be shown in red in the UI ("warn" placeholder will be used)
-  output$warn <- renderUI({
-    txt <- ""
-    if(length(data()$warns) == 0){
-      
-    }else{
-      txt <- paste(txt, "Warnings:", sep = "<br/>")
-      for (i in 1:length(data()$warns)){
-        txt <- paste(txt, data()$warns[[i]], sep = "<br/>")
-      }
-    }
-    HTML(txt)
-  })
-  
-}
+} #ends inner shiny server function that runs the simulation and returns output
+
 
 server <- function(input, output, session) {
   
@@ -207,6 +139,6 @@ ui <- fluidPage(
   do.call(tabsetPanel,generate_instruction_tabs()),
   
   div(includeHTML("www/footer.html"), align="center", style="font-size:small") #footer
-) #end fluidpage
+) #end fluidpage, i.e. the UI part of the app
 
 shinyApp(ui = ui, server = server)

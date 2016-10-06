@@ -6,8 +6,8 @@ Description: A collection of Shiny apps that allow for the simulation and
     The apps include explanations of the underlying models and instructions on
     what to do with the models. This package is part of a course of the same
     title, taught by the package creator.
-Version: 0.31
-Date: 2016-10-04
+Version: 0.32
+Date: 2016-10-06
 Authors@R: c(
     person("Andreas", "Handel", email = "ahandel@uga.edu",
     role = c("aut", "cre")),

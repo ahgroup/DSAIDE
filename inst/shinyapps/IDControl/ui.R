@@ -16,7 +16,7 @@ ui <- fluidPage(
            div( style="text-align:center", actionButton("submitBtn", "Run Simulation", style="color: #000000; background-color: #D2FFE2")  )
     ),
     column(6,
-           div( style="text-align:center", actionButton("exitBtn", "Exit App", style="color: #000000; background-color: #BDCCD9") )
+           actionButton("exitBtn", "Exit App", class="exitbutton")
     )
   ), #end section to add buttons
   
@@ -30,7 +30,6 @@ ui <- fluidPage(
            #################################
            # Inputs section
            h2('Simulation Settings'),
-           p('All parameters are assumed to be in units of (inverse) months'),
            fluidRow(
              column(4,
                     sliderInput("S0", "initial number of susceptible hosts", min = 100, max = 5000, value = 1000, step = 100)

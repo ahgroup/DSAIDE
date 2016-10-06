@@ -1,8 +1,6 @@
-#This is the Shiny server file for the ID Dynamics Introduction App
+#This is the Shiny App for the main menu
 
-#the main function with all the functionality
-#this function is wrapped inside the shiny server function below to allow return to main menu when window is closed
-
+#this function is the server part of the app
 server <- function(input, output, session) {
   
   observeEvent(input$IDDynamicsIntro, {
@@ -84,39 +82,72 @@ server <- function(input, output, session) {
 }
 
 
-#This is the UI for the ID Dynamics Introduction App
+#This is the UI for the Main Menu of DSAIDE
 ui <- fluidPage(
   includeCSS("../shinystyle.css"),
-  
   tags$head( tags$script(src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML", type = 'text/javascript') ),
-  tags$head(
-    tags$style(HTML("
-                    img {
-                    max-height: 90px;
-                    max-width: '100%';
-                    }
-                    
-                    body {
-                    background-color: #fff;
-                    }
-                    "))
-    ),
-  
-  div( includeHTML("www/header.html"), align = "center"),
-  h1('ID Dynamics Introduction App', align = "center", style = "background-color:#123c66; color:#fff"),
 
-  div( style="text-align:center", actionButton("IDDynamicsIntro", "Run ID Dynamics Intro")  ),
-  div( style="text-align:center", actionButton("CharacteristicsofID", "Run Characteristics of ID")  ),
-  div( style="text-align:center", actionButton("IDPatterns", "Run ID Patterns")  ),
-  div( style="text-align:center", actionButton("ReproductiveNumber", "Run Reproductive Number")  ),
-  div( style="text-align:center", actionButton("DirectTransmission", "Run Direct Transmission")  ),
-  div( style="text-align:center", actionButton("EnvironmentalTransmission", "Run Environmental Transmission")  ),
-  div( style="text-align:center", actionButton("VectorTransmission", "Run Vector Transmission")  ),
-  div( style="text-align:center", actionButton("IDControl", "Run ID Control")  ),
-  div( style="text-align:center", actionButton("HostHeterogeneity", "Run Host Heterogeneity")  ),
-  div( style="text-align:center", actionButton("StochasticDynamics", "Run Stochastic Dynamics")  ),
-  div( style="text-align:center", actionButton("EvolutionaryDynamics", "Run Evolutionary Dynamics")  ),
-  div( style="text-align:center", actionButton("Exit", "Exit")  ),
+  h1('DSAIDE - Main Menu', align = "center", style = "background-color:#123c66; color:#fff"),
+
+  welcometext=paste('This is DSAIDE version ',utils::packageVersion("DSAIDE"),", last updated ", utils::packageDescription('DSAIDE')$Date,sep=''),
+  p(welcometext, class='maintext'),
+  p('Have fun exploring the infectious disease models!', class='maintext'),
+
+  fluidRow(
+    column(4,
+           actionButton("IDDynamicsIntro", "ID Dynamics Intro", class="mainbutton")
+    ),
+    column(4,
+           actionButton("CharacteristicsofID", "Characteristics of ID", class="mainbutton")
+    ),
+    column(4,
+           actionButton("IDPatterns", "ID Patterns", class="mainbutton")
+    ),
+    class = "mainmenurow"
+  ), #close fluidRow structure for input
+  fluidRow(
+    column(4,
+           actionButton("DirectTransmission", "Direct Transmission", class="mainbutton")  
+    ),
+    column(4,
+         actionButton("EnvironmentalTransmission", "Environmental Transmission", class="mainbutton")  
+    ),
+    column(4,
+           actionButton("VectorTransmission", "Vector Transmission", class="mainbutton")
+    ),
+    class = "mainmenurow"
+  ), #close fluidRow structure for input
+  fluidRow(
+    column(4,
+           actionButton("IDControl", "ID Control", class="mainbutton")  
+    ),
+    column(4,
+           actionButton("HostHeterogeneity", "Host Heterogeneity", class="mainbutton")  
+    ),
+    column(4,
+           actionButton("StochasticDynamics", "Stochastic Dynamics", class="mainbutton")  
+    ),
+    class = "mainmenurow"
+  ), #close fluidRow structure for input
+  fluidRow(
+    column(4,
+           actionButton("EvolutionaryDynamics", "Evolutionary Dynamics", class="mainbutton")
+    ),
+    column(4,
+           actionButton("ReproductiveNumber", "Reproductive Number", class="mainbutton")  
+    ),
+    column(4, ""
+           ),
+    class = "mainmenurow"
+    ),
+    fluidRow(
+      
+    column(12,
+           actionButton("Exit", "Exit", class="exitbutton")
+    ),
+    class = "mainmenurow"
+    ), #close fluidRow structure for input
+  
   
   div(includeHTML("www/footer.html"), align="center", style="font-size:small") #footer
 ) #end fluidpage

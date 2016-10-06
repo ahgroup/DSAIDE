@@ -1,26 +1,11 @@
-9/9/16
+10/6/16
 
-- Right now in every server.R file, there is a whole bunch of commands that produce a plot, results in text form and potential warning messages. Instead of repeating more or less the same code in every server.R file,  could we move that into a single function that takes as input what the simulator returns (res/result, which is always a matrix with 1st column time and other columns model variables) and produces a plot, the text results and possible warnings, and returns all that. Then each server.R (or eventually the single shiny app file, see below) would call that function, without having to repeat the code multiple times. Only try it initially for the ID Introduction app.  %%Each plot has different legends, colors and other unique properties. If we want to implement a peice of code that can handle all of these different properties, we might as well just call the plot function directly which can handle them way better than what we might be able to implement. But again, if you think that would be a better idea, I will try to implement a function that will handle them all.
+Implement the following features in the 'Characteristics of ID' App.
 
-
-9/2/16
-
-- Find a way to display figure in UI such that it looks better and scales well with screen size - either automatically or via user adjustment. Only try it initially for the ID Introduction app. %%DONE - Please take a look at the "ID Introduction" app to see if it looks fine or not?
-
-
-8/31/2016
-
-- Rewrite the 1st app "ID Introduction" as a single file with UI and Server functions inside. %%DONE
+- Remove progress bar. Instead, once a user hits 'run simulation' a 'simulation running' message should show up below the button. This message should go away as soon as the simulation has finished and output has been displayed. Depending on how many lines of code this is, maybe turn it into a stand-alone function. But only do that if it doesn't make the code more complex.
 
 Note: I found a good source of shiny examples and tips and tricks that might be helpful. 
-E.g. the ""Busy..." / "Done!" / "Error" example on that webiste might be useful for the progress bar task below.
+E.g. the ""Busy..." / "Done!" / "Error" example on that website might be useful for the progress bar task below.
 https://github.com/daattali
 
-
-
-8/10/2016
-
-- Make the main menu graphical. Ideally, make it a Shiny app, where the UI has a bunch of buttons, each for a different App. Once the user klicks a button, the Menu App should somehow 'shut down' and start the App for the chosen simulation. When the user exits the specific simulation App, the Menu App will come back. (Later, we can add some welcome, contact/disclaimer and other explanatory text to the menu App.)
-
-- Remove progress bar. Instead, once a user hits 'run simulation' a 'simulation running' message should show up below the button. This message should go away as soon as the simulation has finished and output has been displayed. For now, only try it on the "ID Introduction" app, leave others as they are. Depending on how many lines of code this is, maybe turn it into a stand-alone function that is called from each server.R file, instead of having the code repeated in each server.R file. But only do that if it doesn't make the code more complex.
-
+- Modify the figure size adjustment functionality such that the width and height can both be adjusted and connect that to the plotOutput() setting in the new version of the UI   

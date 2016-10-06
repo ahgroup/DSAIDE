@@ -103,3 +103,40 @@ iframe {
 .progress-message {
 	color: red;
 }
+
+
+
+.mainbutton {
+	text-align: center;
+	color: #000000; 
+	background-color: #D2FFE2;
+	border-spacing: 20px;
+	width: 200px;
+}
+
+.submitbutton {
+	text-align: center;
+	color: #000000; 
+	background-color: #D2FFE2;
+	border-spacing: 20px;
+	width: 200px;
+}
+
+.exitbutton {
+	text-align: center;
+	color: #000000; 
+	background-color: #BDCCD9;	
+	width: 200px;
+}
+
+.mainmenurow {
+	text-align: center;
+	padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+.maintext {
+	text-align: center;
+	color: #2a3f9e; 
+	
+}

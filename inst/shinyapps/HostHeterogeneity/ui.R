@@ -13,11 +13,12 @@ ui <- fluidPage(
   #start section to add buttons
   fluidRow(
     column(6,
-           div( style="text-align:center", actionButton("submitBtn", "Run Simulation", style="color: #000000; background-color: #D2FFE2")  )
+           actionButton("submitBtn", "Run Simulation", class="submitbutton")  
     ),
     column(6,
-           div( style="text-align:center", actionButton("exitBtn", "Exit App", style="color: #000000; background-color: #BDCCD9") )
-    )
+           actionButton("exitBtn", "Exit App", class="exitbutton")
+    ),
+    align = "center"
   ), #end section to add buttons
   
   tags$hr(),
@@ -84,7 +85,7 @@ ui <- fluidPage(
                         sliderInput("tmax", "Maximum simulation time (months)", min = 1, max = 1200, value = 100, step = 1)
                  )
                  
-             ), #close fluidRow structure for input
+             ) #close fluidRow structure for input
              
     ), #end sidebar column for inputs
     
@@ -94,7 +95,7 @@ ui <- fluidPage(
            #################################
            #Start with results on top
            h2('Simulation Results'),
-           plotOutput(outputId = "plot", height = "800px"),
+           plotOutput(outputId = "plot", height = "500px"),
            # PLaceholder for results of type text
            htmlOutput(outputId = "text"),
            #Placeholder for any possible warning or error messages (this will be shown in red)
