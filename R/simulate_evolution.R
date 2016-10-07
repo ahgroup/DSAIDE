@@ -1,40 +1,43 @@
 ############################################################
-##simulating a stochastic SIR type model
+##simulating a stochastic SIR type model with 2 types
+#assumption is these are wild-type and mutant
+#allows exploration of evolutionary dynamics
 ##written by Andreas Handel, ahandel@uga.edu, last change: 10/6/16
 ############################################################
 
 #this specifies the rates used by the adapativetau routine
-stochasticratefunc <- function(y, parms, t)
+evolutionratefunc <- function(y, parms, t)
 {
     with(as.list(c(y, parms)),
          {
-             #seasonally varying transmission parameters
-             bPs <- bP * (1 + sigma * sin(2*pi*t/365) )
-             bIs <- bI * (1 + sigma * sin(2*pi*t/365) )
-
+           
              #specify each rate/transition/reaction that can happen in the system
              rates=c(  lambda,
-                       n * S,
-                       n * P,
-                       n * I,
-                       n * R,
-                       S * bPs * P,
-                       S * bIs * I,
-                       gP * P,
-                       gI * I,
-                       w * R
+                       n1 * S1,
+                       n1 * I1,
+                       n1 * R1,
+                       S1 * b1 * I1,
+                       g1 * I1,
+                       w1 * R1,
+                       lambda2,
+                       n2 * S2,
+                       n2 * I2,
+                       n2 * R2,
+                       S2 * b2 * I2,
+                       g2 * I2,
+                       w2 * R2,
+                       
              ) #end specification of each rate/transition/reaction
              return(rates)
          })
 } #end function specifying rates used by adaptivetau
 
 
-#' simulate_stochastic function
+#' simulate_evolution function
 #'
-#' @description  Simulation of a stochastic SEIR type model with the following compartments:
-#' Susceptibles (S), Infected and pre-symptomatic (P),
-#' Infected and Symptomatic (I),
-#' Recovered and Immune (R)
+#' @description  Simulation of a stochastic 2-strain SIR model with the following compartments for each strain:
+#' Susceptibles (S), Infected and Symptomatic (I1 and I2),
+#' Recovered and Immune (R1 and R2)
 #'
 #' @param S0 initial number of susceptible hosts
 #' @param I0 initial number of infected, symptomatic hosts
@@ -74,7 +77,7 @@ stochasticratefunc <- function(y, parms, t)
 
 
 
-simulate_stochastic <- function(S0 = 1000, I0 = 10, tmax = 100, bP = 0, bI = 1/1000, gP = 0.5, gI = 0.5, w = 0, lambda = 0, n = 0, sigma = 0)
+simulate_evolution <- function(S0 = 1000, I0 = 10, tmax = 100, bP = 0, bI = 1/1000, gP = 0.5, gI = 0.5, w = 0, lambda = 0, n = 0, sigma = 0)
 {
     Y0 = c(S = S0, P = 0,  I = I0, R = 0);  #combine initial conditions into a vector
     dt = tmax / 1000; #time step for which to get results back
@@ -101,7 +104,7 @@ simulate_stochastic <- function(S0 = 1000, I0 = 10, tmax = 100, bP = 0, bI = 1/1
 
     #this line runs the simulation, i.e. integrates the differential equations describing the infection process
     #the result is saved in the odeoutput matrix, with the 1st column the time, the 2nd, 3rd, 4th column the variables S, I, R
-    output = adaptivetau::ssa.adaptivetau(init.values = Y0, transitions = transitions,  rateFunc = stochasticratefunc, params = pars, tf = tmax)
+    output = adaptivetau::ssa.adaptivetau(init.values = Y0, transitions = transitions,  rateFunc = evolutionratefunc, params = pars, tf = tmax)
 
     #The output produced by a call to the odesolver is odeoutput matrix is returned by the function
     return(output)

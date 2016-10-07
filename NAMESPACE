@@ -2,6 +2,7 @@
 
 export(dsaidemenu)
 export(generate_instruction_tabs)
+export(produce_multisimoutput)
 export(produce_simoutput)
 export(simulate_directtransmission)
 export(simulate_environmentaltransmission)
