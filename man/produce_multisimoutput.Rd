@@ -4,7 +4,7 @@
 \alias{produce_multisimoutput}
 \title{A helper function that takes result from the simulators and produces plots and text output}
 \usage{
-produce_multisimoutput(input, output, res)
+produce_multisimoutput(input, output, allres)
 }
 \value{
 output a list with plot, text and warn elements for display in a shiny UI

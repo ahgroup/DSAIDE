@@ -89,10 +89,10 @@ ui <- fluidPage(
 
   h1('DSAIDE - Main Menu', align = "center", style = "background-color:#123c66; color:#fff"),
 
-  welcometext=paste('This is DSAIDE version ',utils::packageVersion("DSAIDE"),", last updated ", utils::packageDescription('DSAIDE')$Date,sep=''),
-  p(welcometext, class='maintext'),
+  p(paste('This is DSAIDE version ',utils::packageVersion("DSAIDE"),' last updated ', utils::packageDescription('DSAIDE')$Date,sep=''), class='maintext'),
   p('Have fun exploring the infectious disease models!', class='maintext'),
-
+  p('Note that not all Apps are available yet', class='maintext'),
+  
   fluidRow(
     column(4,
            actionButton("IDDynamicsIntro", "ID Dynamics Intro", class="mainbutton")
@@ -119,22 +119,22 @@ ui <- fluidPage(
   ), #close fluidRow structure for input
   fluidRow(
     column(4,
+           actionButton("ReproductiveNumber", "Reproductive Number", class="mainbutton")  
+    ),
+    column(4,
            actionButton("IDControl", "ID Control", class="mainbutton")  
     ),
     column(4,
            actionButton("HostHeterogeneity", "Host Heterogeneity", class="mainbutton")  
     ),
-    column(4,
-           actionButton("StochasticDynamics", "Stochastic Dynamics", class="mainbutton")  
-    ),
     class = "mainmenurow"
   ), #close fluidRow structure for input
   fluidRow(
     column(4,
-           actionButton("EvolutionaryDynamics", "Evolutionary Dynamics", class="mainbutton")
+           actionButton("StochasticDynamics", "Stochastic Dynamics", class="mainbutton")  
     ),
     column(4,
-           actionButton("ReproductiveNumber", "Reproductive Number", class="mainbutton")  
+           actionButton("EvolutionaryDynamics", "Evolutionary Dynamics", class="mainbutton")
     ),
     column(4, ""
            ),
