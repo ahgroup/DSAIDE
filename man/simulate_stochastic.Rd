@@ -5,8 +5,7 @@
 \title{simulate_stochastic function}
 \usage{
 simulate_stochastic(S0 = 1000, I0 = 10, tmax = 100, bP = 0,
-  bI = 1/1000, gP = 0.5, gI = 0.5, w = 0, lambda = 0, n = 0,
-  sigma = 0)
+  bI = 1/1000, gP = 0.5, gI = 0.5, w = 0, lambda = 0, n = 0)
 }
 \arguments{
 \item{S0}{initial number of susceptible hosts}
@@ -30,8 +29,6 @@ is the inverse of the average time spent in that compartment}
 \item{lambda}{the rate at which new individuals enter the model (are born)}
 
 \item{n}{the rate of natural death (the inverse it the average lifespan)}
-
-\item{sigma}{strength of seasonal variation of transmission rate}
 }
 \value{
 This function returns the simulation result as obtained from a call

@@ -56,7 +56,7 @@ server <- function(input, output, session) {
     print ("Running HostHeterogeneity...")
     stopApp(returnValue = 'I')
   })
-  
+
   observeEvent(input$StochasticDynamics, {
     input$StochasticDynamics
     print ("Running StochasticDynamics...")
@@ -67,6 +67,12 @@ server <- function(input, output, session) {
     input$EvolutionaryDynamics
     print ("Running EvolutionaryDynamics...")
     stopApp(returnValue = 'K')
+  })
+
+  observeEvent(input$MultiPathogen, {
+    input$MultiPathogen
+    print ("Running MultiPathogen...")
+    stopApp(returnValue = 'L')
   })
   
   observeEvent(input$Exit, {
@@ -130,14 +136,15 @@ ui <- fluidPage(
     class = "mainmenurow"
   ), #close fluidRow structure for input
   fluidRow(
+    column(4, 
+           actionButton("MultiPathogen", "Multi Pathogen Dynamics", class="mainbutton")  
+    ),
     column(4,
            actionButton("StochasticDynamics", "Stochastic Dynamics", class="mainbutton")  
     ),
     column(4,
            actionButton("EvolutionaryDynamics", "Evolutionary Dynamics", class="mainbutton")
     ),
-    column(4, ""
-           ),
     class = "mainmenurow"
     ),
     fluidRow(

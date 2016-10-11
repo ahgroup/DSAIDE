@@ -1,6 +1,6 @@
 ############################################################
-##simulating a stochastic SIR type model
-##written by Andreas Handel, ahandel@uga.edu, last change: 10/6/16
+##simulating a stochastic SEIR type model
+##written by Andreas Handel, ahandel@uga.edu, last change: 10/11/16
 ############################################################
 
 #this specifies the rates used by the adapativetau routine
@@ -8,18 +8,14 @@ stochasticratefunc <- function(y, parms, t)
 {
     with(as.list(c(y, parms)),
          {
-             #seasonally varying transmission parameters
-             bPs <- bP * (1 + sigma * sin(2*pi*t/365) )
-             bIs <- bI * (1 + sigma * sin(2*pi*t/365) )
-
-             #specify each rate/transition/reaction that can happen in the system
+            #specify each rate/transition/reaction that can happen in the system
              rates=c(  lambda,
                        n * S,
                        n * P,
                        n * I,
                        n * R,
-                       S * bPs * P,
-                       S * bIs * I,
+                       S * bP * P,
+                       S * bI * I,
                        gP * P,
                        gI * I,
                        w * R
@@ -40,7 +36,6 @@ stochasticratefunc <- function(y, parms, t)
 #' @param I0 initial number of infected, symptomatic hosts
 #' @param bP level/rate of infectiousness for hosts in the P compartment
 #' @param bI level/rate of infectiousness for hosts in the I compartment
-#' @param sigma strength of seasonal variation of transmission rate
 #' @param gP rate at which a person leaves the P compartment, which
 #'   is the inverse of the average time spent in that compartment
 #' @param gI rate at which a person leaves the I compartment
@@ -74,14 +69,14 @@ stochasticratefunc <- function(y, parms, t)
 
 
 
-simulate_stochastic <- function(S0 = 1000, I0 = 10, tmax = 100, bP = 0, bI = 1/1000, gP = 0.5, gI = 0.5, w = 0, lambda = 0, n = 0, sigma = 0)
+simulate_stochastic <- function(S0 = 1000, I0 = 10, tmax = 100, bP = 0, bI = 1/1000, gP = 0.5, gI = 0.5, w = 0, lambda = 0, n = 0)
 {
     Y0 = c(S = S0, P = 0,  I = I0, R = 0);  #combine initial conditions into a vector
     dt = tmax / 1000; #time step for which to get results back
     timevec = seq(0, tmax, dt); #vector of times for which solution is returned (not that internal timestep of the integrator is different)
 
     #combining parameters into a parameter vector
-    pars = c(bP = bP, bI = bI, gP = gP,  gI = gI, w = w, lambda = lambda, n = n, sigma = sigma);
+    pars = c(bP = bP, bI = bI, gP = gP,  gI = gI, w = w, lambda = lambda, n = n);
 
     #specify for each reaction/rate/transition how the different variables change
     #needs to be in exactly the same order as the rates listed in the rate function
@@ -103,6 +98,9 @@ simulate_stochastic <- function(S0 = 1000, I0 = 10, tmax = 100, bP = 0, bI = 1/1
     #the result is saved in the odeoutput matrix, with the 1st column the time, the 2nd, 3rd, 4th column the variables S, I, R
     output = adaptivetau::ssa.adaptivetau(init.values = Y0, transitions = transitions,  rateFunc = stochasticratefunc, params = pars, tf = tmax)
 
+    #since I use P above, but it's better to rename as SEIR in the plots, do a rename here
+    colnames(output)[3]<-"E"
+    
     #The output produced by a call to the odesolver is odeoutput matrix is returned by the function
     return(output)
 }

@@ -30,9 +30,10 @@ dsaidemenu <- function() {
     if (op == "G") {appname = "VectorTransmission"}
     if (op == "H") {appname = "IDControl"}
     if (op == "I") {appname = "HostHeterogeneity"}
-    #if (op == "J") {appname = "StochasticDynamics"}
+    if (op == "J") {appname = "StochasticDynamics"}
     #if (op == "K") {appname = "EvolutionaryDynamics"}
-
+    #if (op == "L") {appname = "MultiPathogen"}
+    
     if (!is.null(appname))     #run the shiny app chosen
     {
         appDir <- system.file("shinyapps", appname, package = "DSAIDE")

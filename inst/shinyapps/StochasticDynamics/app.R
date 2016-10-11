@@ -23,7 +23,6 @@ refresh <- function(input, output){
 
     lambda = isolate(input$lambda)
     n = isolate(input$n);
-    sigma = isolate(input$sigma)
     nreps = isolate(input$nreps)
 
     # Call the adaptivetau simulator with the given parameters
@@ -32,7 +31,7 @@ refresh <- function(input, output){
     result <- list()
     for (nn in 1:nreps)
     {
-     result[[nn]] <- simulate_stochastic(S0 = S0, I0 = I0, tmax = tmax, bP = bP, bI = bI, gP = gP, gI = gI, w = w, lambda = lambda, n = n, sigma = sigma)
+     result[[nn]] <- simulate_stochastic(S0 = S0, I0 = I0, tmax = tmax, bP = bP, bI = bI, gP = gP, gI = gI, w = w, lambda = lambda, n = n)
     }
     
     return(result)
@@ -121,28 +120,24 @@ ui <- fluidPage(
            ), #close fluidRow structure for input
            
            fluidRow(
-             column(4,
+             column(6,
                     sliderInput("gP", "Rate at which presymptomatic hosts leave compartment", min = 0, max = 5, value = 0.5, step = 0.1)
              ),
-             column(4,
+             column(6,
                     sliderInput("gI", "Rate at which symptomatic hosts leave compartment", min = 0, max = 5, value = 0.5, step = 0.1)
-             ),
-             column(4,
-                    sliderInput("nreps", "Number of simulations", min = 1, max = 50, value = 2, step = 1)
              )
-           ), #close fluidRow structure for input
+            ), #close fluidRow structure for input
            fluidRow(
              column(4,
                     sliderInput("lambda", "Rate of new births", min = 0, max = 10000, value = 0, step = 100)
              ),
              column(4,
                     sliderInput("n", "Natural death rate", min = 0, max = 1, value = 0, step = 0.1)
-             ),
+             ),          
              column(4,
-                    sliderInput("sigma", "Strength of seasonal variation of transmission", min = 0, max = 1, value = 0, step = 0.1)
-             ),
-             align = "center"
-           ) #close fluidRow structure for input
+                         sliderInput("nreps", "Number of simulations", min = 1, max = 50, value = 1, step = 1)
+              )
+            ) #close fluidRow structure for input
            
     ), #end sidebar column for inputs
     

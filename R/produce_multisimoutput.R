@@ -35,18 +35,21 @@ produce_multisimoutput <- function(input,output,allres)
     
         
     #loop over each additional simulation
-    #results are added to plot
-    for (n1 in 2:nreps)
+    if (nreps>1)
     {
-        res = allres()[[n1]]      
-        tvec = res[,1]
-        lines(tvec,res[,2],type="l",col=mycols[1],lwd=1,lty=1)
-        for (nn in 3:ncol(res))
-        {
-          lines(tvec,res[,nn],type="l",col=mycols[nn-1],lwd=1,lty=1)
-        }
-    } #done additing lines from additional runs
-
+      #results are added to plot
+      for (n1 in 2:nreps)
+      {
+          res = allres()[[n1]]      
+          tvec = res[,1]
+          lines(tvec,res[,2],type="l",col=mycols[1],lwd=1,lty=1)
+          for (nn in 3:ncol(res))
+          {
+            lines(tvec,res[,nn],type="l",col=mycols[nn-1],lwd=1,lty=1)
+          }
+      } #done additing lines from additional runs
+    }
+    
     }, width = 'auto', height = 'auto'
   ) #end plot
   
