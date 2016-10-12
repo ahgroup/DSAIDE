@@ -98,10 +98,10 @@ ui <- fluidPage(
            p('All parameters are assumed to be in units of (inverse) months'),
            fluidRow(
              column(4,
-                    sliderInput("S0", "initial number of susceptible hosts", min = 100, max = 5000, value = 1000, step = 100)
+                    sliderInput("S0", "initial number of susceptible hosts", min = 100, max = 3000, value = 1000, step = 50)
              ),
              column(4,
-                    sliderInput("I0", "initial number of symptomatic hosts", min = 0, max = 100, value = 5, step = 1)
+                    sliderInput("I0", "initial number of symptomatic hosts", min = 0, max = 1000, value = 1, step = 1)
              ),
              column(4,
                     sliderInput("tmax", "Maximum simulation time (months)", min = 1, max = 1200, value = 100, step = 1)
@@ -109,13 +109,13 @@ ui <- fluidPage(
            ), #close fluidRow structure for input
            fluidRow(
              column(4,
-                    sliderInput("bP", "Rate of transmission of presymptomatic hosts", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
+                    sliderInput("bP", "Rate of transmission of presymptomatic hosts", min = 0, max = 0.02, value = 0, step = 0.0001 , sep ='')
              ),
              column(4,
-                    sliderInput("bI", "Rate of transmission of symptomatic hosts", min = 0, max = 0.01, value = 0.01, step = 0.0001 , sep ='')
+                    sliderInput("bI", "Rate of transmission of symptomatic hosts", min = 0, max = 0.02, value = 0.01, step = 0.0001 , sep ='')
              ),
              column(4,
-                    sliderInput("w", "Rate of immunity loss", min = 0, max = 0.1, value = 0.0, step = 0.01)
+                    sliderInput("w", "Rate of immunity loss", min = 0, max = 0.5, value = 0.0, step = 0.01, sep ='')
              )
            ), #close fluidRow structure for input
            
