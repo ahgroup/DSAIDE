@@ -50,6 +50,43 @@ img {
 	margin-bottom: 6px;
 }
 
+/* ------- Tables ------- */
+table {
+	margin: 20px;
+	border-spacing: 0;
+}
+table th { 
+ /* Box-model */
+	height: 36px;
+	padding: 5px;
+  
+  /* Typography */
+	font-size: 16px;
+	line-height: 36px;
+  
+  /* Visual */
+	background-color: #403c3d;
+	color: #fff;
+	border: 1px solid #ccc; /* light grey */
+  border-bottom: 0;
+}
+table thead th:empty {
+	background: transparent;
+	border: none;
+}
+table caption {
+	font-weight: bold;
+}
+tr:nth-child(2n+1) {
+  /* Visual */
+	background-color: #f9f9f9;  /* near white */
+	color: #000; /* black */
+}
+table td {
+	padding: 5px;
+	border-collapse: collapse;
+	border: 1px solid #ccc; /* light grey */
+}
 
 
 /* My additions

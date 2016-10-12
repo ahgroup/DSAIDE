@@ -69,11 +69,6 @@ server <- function(input, output, session) {
     stopApp(returnValue = 'K')
   })
 
-  observeEvent(input$MultiPathogen, {
-    input$MultiPathogen
-    print ("Running MultiPathogen...")
-    stopApp(returnValue = 'L')
-  })
   
   observeEvent(input$Exit, {
     input$Exit
@@ -136,18 +131,18 @@ ui <- fluidPage(
     class = "mainmenurow"
   ), #close fluidRow structure for input
   fluidRow(
-    column(4, 
-           actionButton("MultiPathogen", "Multi Pathogen Dynamics", class="mainbutton")  
-    ),
     column(4,
            actionButton("StochasticDynamics", "Stochastic Dynamics", class="mainbutton")  
     ),
     column(4,
            actionButton("EvolutionaryDynamics", "Evolutionary Dynamics", class="mainbutton")
     ),
-    class = "mainmenurow"
+    column(4, 
+            ""
     ),
-    fluidRow(
+    class = "mainmenurow"
+  ),
+  fluidRow(
       
     column(12,
            actionButton("Exit", "Exit", class="exitbutton")
