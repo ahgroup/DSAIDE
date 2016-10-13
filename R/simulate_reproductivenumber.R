@@ -27,8 +27,7 @@ reproductivenumberode <- function(t, y, pars)
 #'   However as long as all parameters are chosen in the same units, 
 #'   one can directly call the simulator assuming any time unit
 #'
-#' @param PopSize specifies the initial number of individuals
-#'   (Suceptibles + Infected)#'
+#' @param S0 initial number of susceptible hosts
 #' @param I0 initial number of infected hosts
 #' @param f fraction of vaccinated individuals. Those individuals are moved from S to R at the beginning of the simulation
 #' @param e efficay of vaccine, given as fraction between 0 and 1
@@ -47,13 +46,13 @@ reproductivenumberode <- function(t, y, pars)
 #'   with one column per compartment/variable. The first column is time.
 #' @section Warning:
 #'   This function does not perform any error checking. So if you try to do
-#'   something nonsensical (e.g. have I0 > PopSize or any negative values or fractions > 1),
+#'   something nonsensical (e.g. negative values or fractions > 1),
 #'   the code will likely abort with an error message
 #' @examples
 #'   # To run the simulation with default parameters just call this function
 #'   result <- simulate_reproductivenumber()
 #'   # To choose parameter values other than the standard one, specify them e.g. like such
-#'   result <- simulate_reproductivenumber(PopSize = 2000, I0 = 10, tmax = 100, gamma = 0.5, n = 0.1)
+#'   result <- simulate_reproductivenumber(S0 = 2000, I0 = 10, tmax = 100, gamma = 0.5, n = 0.1)
 #'   # You should then use the simulation result returned from the function, e.g. like this:
 #'   plot(result[,1],result[,2],xlab='Time',ylab='Number Susceptible',type='l')
 #' @seealso The UI of the shiny app 'ReproductiveNumber', which is part of this package, contains more details on the model
@@ -63,9 +62,8 @@ reproductivenumberode <- function(t, y, pars)
 #' @export
 
 
-simulate_reproductivenumber <- function(PopSize = 1000, I0 = 0, f = 0.0, e = 0.0, tmax = 300, gamma = 50, beta = 1e-1, lambda = 20, n = 1/50, w = 0){
+simulate_reproductivenumber <- function(S0 = 1000, I0 = 0, f = 0.0, e = 0.0, tmax = 300, gamma = 50, beta = 1e-1, lambda = 20, n = 1/50, w = 0){
 
-  S0 = PopSize - I0; #initial number of uninfected hosts
   S0eff = (1 - f*e) * S0;
   R0 = f*e * S0;
   Y0 = c(S = S0eff, I = I0, R = R0);  #combine initial conditions into a vector

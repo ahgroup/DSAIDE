@@ -1,6 +1,6 @@
 ############################################################
-#This is the Shiny file for the ID Dynamics Introduction App
-#written by Andreas Handel and Sina  
+#This is the Shiny file for the Host Heterogeneity App
+#written by Andreas Handel and Sina Solaimanpour 
 #maintained by Andreas Handel (ahandel@uga.edu)
 #last updated 10/13/2016
 ############################################################
@@ -14,23 +14,36 @@ refresh <- function(input, output){
   res <- reactive({
     input$submitBtn
     
-    
     # Read all the input values from the UI
-    S0 = isolate(input$S0);
-    I0 = isolate(input$I0);
-    b = isolate(input$b);
-    g = isolate(input$g);
+    S10 = isolate(input$S10);
+    I10 = isolate(input$I10);
+    S20 = isolate(input$S20);
+    I20 = isolate(input$I20);
     tmax = isolate(input$tmax);
-
+    
+    b11 = isolate(input$b11);
+    b21 = isolate(input$b21);
+    b12 = isolate(input$b12);
+    b22 = isolate(input$b22);
+    
+    g1 = isolate(input$g1);
+    g2 = isolate(input$g2);
+    
+    w1 = isolate(input$w1);
+    w2 = isolate(input$w2);
+    
     # Call the ODE solver with the given parameters
-    result <- simulate_introduction(S0 = S0, I0 = I0, g = g, b = b, tmax = tmax)
+    result <- simulate_heterogeneity(S10 = S10, I10 = I10, S20 = S20, I20 = I20, tmax = tmax, b11 = b11, b12 = b12, b21 = b21, b22 = b22, g1 = g1 , g2 = g2, w1 = w1, w2 = w2)
     
     return(list(result)) #this is returned as the res variable
   })
   
+  #if we want certain variables plotted and reported separately, we can specify them manually as a list
+  #if nothing is specified, all variables are plotted and reported at once
+  varlist = list(c("S1","I1","R1"),c("S2","I2","R2") )
   #function that takes result saved in res and produces output
   #output (plots, text, warnings) is stored in and modifies the global variable 'output'
-  produce_simoutput(input,output,res)
+  produce_simoutput(input,output,res,varlist=varlist)
 } #ends the 'refresh' shiny server function that runs the simulation and returns output
 
 #main shiny server function
@@ -61,7 +74,7 @@ ui <- fluidPage(
   tags$head( tags$script(src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML", type = 'text/javascript') ),
   div( includeHTML("www/header.html"), align = "center"),
   #specify name of App below, will show up in title
-  h1('ID Dynamics Introduction App', align = "center", style = "background-color:#123c66; color:#fff"),
+  h1('Host Heterogeneity App', align = "center", style = "background-color:#123c66; color:#fff"),
   
   #section to add buttons
   fluidRow(
@@ -84,29 +97,61 @@ ui <- fluidPage(
            #################################
            # Inputs section
            h2('Simulation Settings'),
+           p('All parameters are assumed to be in units of (inverse) months'),
            fluidRow(
-             column(4,
-                    sliderInput("S0", "Initial number of susceptible hosts", min = 500, max = 5000, value = 1000, step = 500)
+             column(6,
+                    sliderInput("S10", "initial number of susceptible type 1 hosts", min = 100, max = 5000, value = 1000, step = 100)
              ),
-             column(4,
-                    sliderInput("I0", "Initial number of infected hosts", min = 0, max = 100, value = 0, step = 1)
+             column(6,
+                    sliderInput("I10", "initial number of infected type 1  hosts", min = 0, max = 100, value = 0, step = 1)
+             )
+           ), #close fluidRow structure for input
+           fluidRow(
+             column(6,
+                    sliderInput("S20", "initial  number of susceptible type 2 hosts", min = 0, max = 5000, value = 0, step = 100)
              ),
-             column(4,
-                    sliderInput("tmax", "Maximum simulation time", min = 10, max = 1000, value = 300, step = 10)
+             column(6,
+                    sliderInput("I20", "initial  number of infected type 2 hosts", min = 0, max = 100, value = 0, step = 1)
+             )
+           ), #close fluidRow structure for input
+           fluidRow(
+             column(6,
+                    sliderInput("b11", "Rate of transmission between type 1  hosts", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
              ),
-             align = "center"
+             column(6,
+                    sliderInput("b22", "Rate of transmission between type 2 hosts", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
+             )
+           ), #close fluidRow structure for input
+           fluidRow(
+             column(6,
+                    sliderInput("b12", "Rate of transmission from type 2 to type 1", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
+             ),
+             column(6,
+                    sliderInput("b21", "Rate of transmission from type 1 to type 2", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
+             )
+           ), #close fluidRow structure for input
+           fluidRow(
+             column(6,
+                    sliderInput("g1", "Rate at which infected type 1 hosts leave compartment", min = 0, max = 5, value = 0.5, step = 0.1)
+             ),
+             column(6,
+                    sliderInput("g2", "Rate at which infected type 2 hosts leave compartment", min = 0, max = 5, value = 0.5, step = 0.1)
+             )
            ), #close fluidRow structure for input
            
-           fluidRow(
-             column(6,
-                    sliderInput("b", "Rate of transmission", min = 0, max = 0.01, value = 0, step = 0.0001, sep ='')
-             ),
-             column(6,
-                    sliderInput("g", "Rate at which a host leaves the infectious compartment", min = 0, max = 2, value = 0.5, step = 0.1)
-             ),
-             align = "center"
-           ) #close fluidRow structure for input
            
+           fluidRow(
+             column(4,
+                    sliderInput("w1", "Rate of waning immunity of type 1", min = 0, max = 1, value = 0, step = 0.1)
+             ),
+             column(4,
+                    sliderInput("w2", "Rate of waning immunity of type 2", min = 0, max = 50, value = 0, step = 0.1)
+             ),
+             column(4,
+                    sliderInput("tmax", "Maximum simulation time (months)", min = 1, max = 1200, value = 100, step = 1)
+             )
+             
+           ) #close fluidRow structure for input
            
     ), #end sidebar column for inputs
     

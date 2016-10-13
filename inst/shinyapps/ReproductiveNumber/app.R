@@ -1,27 +1,87 @@
-#This is the UI for the Reproductive Number App
+############################################################
+#This is the Shiny file for the Reproductive Number App
+#written by Andreas Handel and Sina Solaimanpour 
+#maintained by Andreas Handel (ahandel@uga.edu)
+#last updated 10/13/2016
+############################################################
 
+#the server-side function with the main functionality
+#this function is wrapped inside the shiny server function below to allow return to main menu when window is closed
+refresh <- function(input, output){
+  
+  # This reactive takes the input data and sends it over to the simulator
+  # Then it will get the results back and return it as the "res" variable
+  res <- reactive({
+    input$submitBtn
+    
+    # Read all the input values from the UI
+    S0 = isolate(input$S0);
+    I0 = isolate(input$I0);
+    f = isolate(input$f);
+    tmax = isolate(input$tmax);
+    gamma = isolate(input$gamma);
+    beta = isolate(input$beta);
+    lambda = isolate(input$lambda);
+    n = isolate(input$n);
+    e = isolate(input$e);
+    
+    # Call the ODE solver with the given parameters
+    result <- simulate_reproductivenumber(S0 = S0, I0 = I0, f = f, e=e, tmax = tmax, gamma = gamma, beta = beta, lambda = lambda, n = n)
+
+    return(list(result)) #this is returned as the res variable
+  })
+  
+  #if we want certain variables plotted and reported separately, we can specify them manually as a list
+  #if nothing is specified, all variables are plotted and reported at once
+  varlist = NULL
+  #function that takes result saved in res and produces output
+  #output (plots, text, warnings) is stored in and modifies the global variable 'output'
+  produce_simoutput(input,output,res,varlist=varlist)
+} #ends the 'refresh' shiny server function that runs the simulation and returns output
+
+#main shiny server function
+server <- function(input, output, session) {
+  
+  # Waits for the Exit Button to be pressed to stop the app and return to main menu
+  observeEvent(input$exitBtn, {
+    input$exitBtn
+    stopApp(returnValue = 0)
+  })
+  
+  # This function is called to refresh the content of the Shiny App
+  refresh(input, output)
+  
+  # Event handler to listen for the webpage and see when it closes.
+  # Right after the window is closed, it will stop the app server and the main menu will
+  # continue asking for inputs.
+  session$onSessionEnded(function(){
+    stopApp(returnValue = 0)
+  })
+} #ends the main shiny server function
+
+
+#This is the UI part of the shiny App
 ui <- fluidPage(
   includeCSS("../shinystyle.css"),
-
   #add header and title
   tags$head( tags$script(src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML", type = 'text/javascript') ),
   div( includeHTML("www/header.html"), align = "center"),
+  #specify name of App below, will show up in title
   h1('Reproductive Number App', align = "center", style = "background-color:#123c66; color:#fff"),
-  #h1('Vaccine Simulation App', align = "center", style = "background-color:#123c66; color:#fff"),
   
-  #start section to add buttons
+  #section to add buttons
   fluidRow(
     column(6,
-           div( style="text-align:center", actionButton("submitBtn", "Run Simulation", style="color: #000000; background-color: #D2FFE2")  )
+           actionButton("submitBtn", "Run Simulation", class="submitbutton")  
     ),
     column(6,
-           div( style="text-align:center", actionButton("exitBtn", "Exit App", style="color: #000000; background-color: #BDCCD9") )
-    )
-    
+           actionButton("exitBtn", "Exit App", class="exitbutton")
+    ),
+    align = "center"
   ), #end section to add buttons
   
   tags$hr(),
-
+  
   ################################
   #Split screen with input on left, output on right
   fluidRow(
@@ -32,7 +92,7 @@ ui <- fluidPage(
            h2('Simulation Settings'),
            fluidRow(
              column(6,
-                    sliderInput("PopSize", "Population Size", min = 1000, max = 5000, value = 1000, step = 500)
+                    sliderInput("S0", "initial number of susceptible hosts", min = 1000, max = 5000, value = 1000, step = 500)
              ),
              column(6,
                     sliderInput("I0", "initial number of infected hosts", min = 0, max = 100, value = 0, step = 1)
@@ -79,18 +139,18 @@ ui <- fluidPage(
            #################################
            #Start with results on top
            h2('Simulation Results'),
-           plotOutput(outputId = "plot"),
+           plotOutput(outputId = "plot", height = "500px"),
            # PLaceholder for results of type text
            htmlOutput(outputId = "text"),
            #Placeholder for any possible warning or error messages (this will be shown in red)
            htmlOutput(outputId = "warn"),
            
            tags$head(tags$style("#warn{color: red;
-                           font-style: italic;
-                           }")),
+                                font-style: italic;
+                                }")),
            tags$hr()
            
-    ) #end main panel column with outcomes
+           ) #end main panel column with outcomes
   ), #end layout with side and main panel
   
   #################################
@@ -99,5 +159,7 @@ ui <- fluidPage(
   #use external function to generate all tabs with instruction content
   do.call(tabsetPanel,generate_instruction_tabs()),
   div(includeHTML("www/footer.html"), align="center", style="font-size:small") #footer
-) #end fluidpage
+  
+) #end fluidpage function, i.e. the UI part of the app
 
+shinyApp(ui = ui, server = server)

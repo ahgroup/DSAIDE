@@ -4,12 +4,11 @@
 \alias{simulate_reproductivenumber}
 \title{Simulation of a compartmental infectious disease transmission model to study the reproductive number}
 \usage{
-simulate_reproductivenumber(PopSize = 1000, I0 = 0, f = 0, e = 0,
+simulate_reproductivenumber(S0 = 1000, I0 = 0, f = 0, e = 0,
   tmax = 300, gamma = 50, beta = 0.1, lambda = 20, n = 1/50, w = 0)
 }
 \arguments{
-\item{PopSize}{specifies the initial number of individuals
-(Suceptibles + Infected)#'}
+\item{S0}{initial number of susceptible hosts}
 
 \item{I0}{initial number of infected hosts}
 
@@ -52,14 +51,14 @@ A compartmental ID model with several states/compartments
 \section{Warning}{
 
   This function does not perform any error checking. So if you try to do
-  something nonsensical (e.g. have I0 > PopSize or any negative values or fractions > 1),
+  something nonsensical (e.g. negative values or fractions > 1),
   the code will likely abort with an error message
 }
 \examples{
   # To run the simulation with default parameters just call this function
   result <- simulate_reproductivenumber()
   # To choose parameter values other than the standard one, specify them e.g. like such
-  result <- simulate_reproductivenumber(PopSize = 2000, I0 = 10, tmax = 100, gamma = 0.5, n = 0.1)
+  result <- simulate_reproductivenumber(S0 = 2000, I0 = 10, tmax = 100, gamma = 0.5, n = 0.1)
   # You should then use the simulation result returned from the function, e.g. like this:
   plot(result[,1],result[,2],xlab='Time',ylab='Number Susceptible',type='l')
 }

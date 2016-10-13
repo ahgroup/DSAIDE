@@ -24,7 +24,7 @@ environmentaltransmissioneq <- function(t, y, parms)
 #' @description  This model allows for the simulation of an environmentally transmitted infectious disease
 #' 
 #'
-#' @param PopSize initial population size
+#' @param S0 initial number of susceptible hosts
 #' @param I0 initial number of infected hosts
 #' @param E0 initial number of pathogen in environment
 #' @param tmax maximum simulation time, units of months
@@ -49,7 +49,7 @@ environmentaltransmissioneq <- function(t, y, parms)
 #'   # To run the simulation with default parameters just call this function
 #'   result <- simulate_environmentaltransmission()
 #'   # To choose parameter values other than the standard one, specify them e.g. like such
-#'   result <- simulate_environmentaltransmission(PopSize = 100, E0 = 1e5,  tmax = 100)
+#'   result <- simulate_environmentaltransmission(S0 = 100, E0 = 1e5,  tmax = 100)
 #'   # You should then use the simulation result returned from the function, e.g. like this:
 #'   plot(result[,1],result[,2],xlab='Time',ylab='Number Susceptible',type='l')
 #' @seealso The UI of the shiny app 'EnvironmentalTransmission', which is part of this package, contains more details on the model
@@ -61,10 +61,10 @@ environmentaltransmissioneq <- function(t, y, parms)
 
 
 
-simulate_environmentaltransmission <- function(PopSize = 1e3, I0 = 1, E0 = 0, tmax = 120, bd = 0.01, be = 0,  b = 0, n = 0, g = 1, p = 0 ,c = 0)
+simulate_environmentaltransmission <- function(S0 = 1e3, I0 = 1, E0 = 0, tmax = 120, bd = 0.01, be = 0,  b = 0, n = 0, g = 1, p = 0 ,c = 0)
 {
   ############################################################
-  Y0 = c(S = PopSize-I0, I = I0, R = 0, E = E0);  #combine initial conditions into a vector
+  Y0 = c(S = S0, I = I0, R = 0, E = E0);  #combine initial conditions into a vector
   dt = min(0.1, tmax / 1000); #time step for which to get results back
   timevec = seq(0, tmax, dt); #vector of times for which solution is returned (not that internal timestep of the integrator is different)
 

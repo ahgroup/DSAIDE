@@ -4,15 +4,15 @@
 \alias{simulate_vectortransmission}
 \title{Simulation of a compartmental infectious disease transmission model illustrating vector-borne transmission}
 \usage{
-simulate_vectortransmission(Ph0 = 1000, Ih0 = 1, Pv0 = 0, Iv0 = 0,
+simulate_vectortransmission(Sh0 = 1000, Ih0 = 1, Sv0 = 0, Iv0 = 0,
   tmax = 120, b1 = 0.01, b2 = 0, b = 0, n = 0, g = 1, w = 0)
 }
 \arguments{
-\item{Ph0}{initial total number of hosts}
+\item{Sh0}{initial number of susceptible hosts}
 
 \item{Ih0}{initial number of infected hosts}
 
-\item{Pv0}{initial total number of vectors}
+\item{Sv0}{initial number of susceptible vectors}
 
 \item{Iv0}{initial number of infected vectors}
 
@@ -40,7 +40,8 @@ This model allows for the simulation of a vector-borne infectious disease
 \details{
 A compartmental ID model with several states/compartments
   is simulated as a set of ordinary differential
-  equations. The function returns the output from the odesolver as a matrix,
+  equations. The compartments are Sh, Ih, Rh, and Sv, Iv.
+  The function returns the output from the odesolver as a matrix,
   with one column per compartment/variable. The first column is time.
 }
 \section{Warning}{
@@ -53,7 +54,7 @@ A compartmental ID model with several states/compartments
   # To run the simulation with default parameters just call this function
   result <- simulate_vectortransmission()
   # To choose parameter values other than the standard one, specify them e.g. like such
-  result <- simulate_vectortransmission(Ph0 = 100, Pv0 = 1e5,  tmax = 100)
+  result <- simulate_vectortransmission(Sh0 = 100, Sv0 = 1e5,  tmax = 100)
   # You should then use the simulation result returned from the function, e.g. like this:
   plot(result[,1],result[,2],xlab='Time',ylab='Number Susceptible',type='l')
 }
@@ -61,8 +62,8 @@ A compartmental ID model with several states/compartments
 Andreas Handel
 }
 \references{
-See e.g. Keeling and Rohani 2008 for SIR models and the
-  documentation for the deSolve package for details on ODE solvers
+See the information in the corresponding shiny app for model details
+           See the documentation for the deSolve package for details on ODE solvers
 }
 \seealso{
 The UI of the shiny app 'VectorTransmission', which is part of this package, contains more details on the model

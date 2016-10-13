@@ -29,9 +29,9 @@ dsaidemenu <- function() {
     if (op == "F") {appname = "EnvironmentalTransmission"}
     if (op == "G") {appname = "VectorTransmission"}
     if (op == "H") {appname = "IDControl"}
-    #if (op == "I") {appname = "HostHeterogeneity"}
-    #if (op == "J") {appname = "StochasticDynamics"}
-    #if (op == "K") {appname = "EvolutionaryDynamics"}
+    if (op == "I") {appname = "HostHeterogeneity"}
+    if (op == "J") {appname = "StochasticDynamics"}
+    if (op == "K") {appname = "EvolutionaryDynamics"}
     
     if (!is.null(appname))     #run the shiny app chosen
     {

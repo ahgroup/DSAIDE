@@ -4,12 +4,12 @@
 \alias{simulate_environmentaltransmission}
 \title{Simulation of a compartmental infectious disease transmission model illustrating environmental transmission}
 \usage{
-simulate_environmentaltransmission(PopSize = 1000, I0 = 1, E0 = 0,
+simulate_environmentaltransmission(S0 = 1000, I0 = 1, E0 = 0,
   tmax = 120, bd = 0.01, be = 0, b = 0, n = 0, g = 1, p = 0,
   c = 0)
 }
 \arguments{
-\item{PopSize}{initial population size}
+\item{S0}{initial number of susceptible hosts}
 
 \item{I0}{initial number of infected hosts}
 
@@ -54,7 +54,7 @@ A compartmental ID model with several states/compartments
   # To run the simulation with default parameters just call this function
   result <- simulate_environmentaltransmission()
   # To choose parameter values other than the standard one, specify them e.g. like such
-  result <- simulate_environmentaltransmission(PopSize = 100, E0 = 1e5,  tmax = 100)
+  result <- simulate_environmentaltransmission(S0 = 100, E0 = 1e5,  tmax = 100)
   # You should then use the simulation result returned from the function, e.g. like this:
   plot(result[,1],result[,2],xlab='Time',ylab='Number Susceptible',type='l')
 }

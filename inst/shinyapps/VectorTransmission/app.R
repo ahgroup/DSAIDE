@@ -1,6 +1,6 @@
 ############################################################
-#This is the Shiny file for the ID Dynamics Introduction App
-#written by Andreas Handel and Sina  
+#This is the Shiny file for the Vector Transmission App
+#written by Andreas Handel and Sina Solaimanpour 
 #maintained by Andreas Handel (ahandel@uga.edu)
 #last updated 10/13/2016
 ############################################################
@@ -14,23 +14,33 @@ refresh <- function(input, output){
   res <- reactive({
     input$submitBtn
     
-    
     # Read all the input values from the UI
-    S0 = isolate(input$S0);
-    I0 = isolate(input$I0);
-    b = isolate(input$b);
-    g = isolate(input$g);
+    Sh0 = isolate(input$Sh0);
+    Ih0 = isolate(input$Ih0);
+    Sv0 = isolate(input$Sv0);
+    Iv0 = isolate(input$Iv0);
     tmax = isolate(input$tmax);
-
+    
+    b1 = isolate(input$b1);
+    b2 = isolate(input$b2);
+    b  = isolate(input$b);
+    n  = isolate(input$n);
+    g  = isolate(input$g);
+    w  = isolate(input$w);
+    
+    
     # Call the ODE solver with the given parameters
-    result <- simulate_introduction(S0 = S0, I0 = I0, g = g, b = b, tmax = tmax)
+    result <- simulate_vectortransmission(Sh0 = Sh0, Ih0 = Ih0, Sv0 = Sv0, Iv0 = Iv0, tmax = tmax, b1 = b1, b2 = b2, b = b, n = n, g = g, w = w)
     
     return(list(result)) #this is returned as the res variable
   })
   
+  #if we want certain variables plotted and reported separately, we can specify them manually as a list
+  #if nothing is specified, all variables are plotted and reported at once
+  varlist = list(c("Sh","Ih","Rh"), c("Sv",'Iv'))
   #function that takes result saved in res and produces output
   #output (plots, text, warnings) is stored in and modifies the global variable 'output'
-  produce_simoutput(input,output,res)
+  produce_simoutput(input,output,res,varlist=varlist)
 } #ends the 'refresh' shiny server function that runs the simulation and returns output
 
 #main shiny server function
@@ -61,7 +71,7 @@ ui <- fluidPage(
   tags$head( tags$script(src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML", type = 'text/javascript') ),
   div( includeHTML("www/header.html"), align = "center"),
   #specify name of App below, will show up in title
-  h1('ID Dynamics Introduction App', align = "center", style = "background-color:#123c66; color:#fff"),
+  h1('Vector Transmission App', align = "center", style = "background-color:#123c66; color:#fff"),
   
   #section to add buttons
   fluidRow(
@@ -86,28 +96,50 @@ ui <- fluidPage(
            h2('Simulation Settings'),
            fluidRow(
              column(4,
-                    sliderInput("S0", "Initial number of susceptible hosts", min = 500, max = 5000, value = 1000, step = 500)
+                    sliderInput("Sh0", "initial number of susceptible hosts", min = 1000, max = 5000, value = 1000, step = 500)
              ),
              column(4,
-                    sliderInput("I0", "Initial number of infected hosts", min = 0, max = 100, value = 0, step = 1)
+                    sliderInput("Sv0", "initial number of susceptible vectors", min = 1000, max = 5000, value = 1000, step = 500)
              ),
              column(4,
-                    sliderInput("tmax", "Maximum simulation time", min = 10, max = 1000, value = 300, step = 10)
+                    sliderInput("Ih0", "initial number of infected hosts", min = 0, max = 100, value = 0, step = 1)
+             ),
+             align = "center"
+           ), #close fluidRow structure for input
+           fluidRow(
+             column(4,
+                    sliderInput("Iv0", "initial number of infected vectors", min = 0, max = 100, value = 0, step = 1)
+             ),
+             column(4,
+                    sliderInput("tmax", "Maximum simulation time", min = 1, max = 500, value = 100, step = 1)
+             ),
+             column(4,
+                    sliderInput("b1", "vector to host transmission rate", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
+             ),
+             align = "center"
+           ), #close fluidRow structure for input
+           fluidRow(
+             column(4,
+                    sliderInput("b2", "host to vector transmission rate", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
+             ),
+             column(4,
+                    sliderInput("w", "Rate of waning immunity", min = 0, max = 1, value = 0, step = 0.01, sep ='')
+             ),
+             column(4,
+                    sliderInput("g", "Rate of recovery of infected hosts", min = 0, max = 2, value = 0.5, step = 0.1)
              ),
              align = "center"
            ), #close fluidRow structure for input
            
            fluidRow(
-             column(6,
-                    sliderInput("b", "Rate of transmission", min = 0, max = 0.01, value = 0, step = 0.0001, sep ='')
+               column(6,
+                    sliderInput("b", "Monthly rate of new vector births", min = 0, max = 10000, value = 0, step = 100)
              ),
              column(6,
-                    sliderInput("g", "Rate at which a host leaves the infectious compartment", min = 0, max = 2, value = 0.5, step = 0.1)
+                    sliderInput("n", "Natural vector death rate", min = 0, max = 2, value = 0, step = 0.01, sep ='')
              ),
              align = "center"
            ) #close fluidRow structure for input
-           
-           
     ), #end sidebar column for inputs
     
     #all the outcomes here

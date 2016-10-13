@@ -19,16 +19,15 @@ vectortransmissioneq <- function(t, y, parms)
 } #end function specifying the ODEs
 
   
-
   
 #' Simulation of a compartmental infectious disease transmission model illustrating vector-borne transmission
 #'
 #' @description  This model allows for the simulation of a vector-borne infectious disease
 #' 
 #'
-#' @param Ph0 initial total number of hosts 
+#' @param Sh0 initial number of susceptible hosts 
 #' @param Ih0 initial number of infected hosts
-#' @param Pv0 initial total number of vectors 
+#' @param Sv0 initial number of susceptible vectors 
 #' @param Iv0 initial number of infected vectors
 #' @param tmax maximum simulation time, units of months
 #' @param b1 rate of transmission from infected vector to susceptible host
@@ -41,7 +40,8 @@ vectortransmissioneq <- function(t, y, parms)
 #'   to the deSolve ode solver
 #' @details A compartmental ID model with several states/compartments
 #'   is simulated as a set of ordinary differential
-#'   equations. The function returns the output from the odesolver as a matrix,
+#'   equations. The compartments are Sh, Ih, Rh, and Sv, Iv.
+#'   The function returns the output from the odesolver as a matrix,
 #'   with one column per compartment/variable. The first column is time.
 #' @section Warning:
 #'   This function does not perform any error checking. So if you try to do
@@ -51,20 +51,20 @@ vectortransmissioneq <- function(t, y, parms)
 #'   # To run the simulation with default parameters just call this function
 #'   result <- simulate_vectortransmission()
 #'   # To choose parameter values other than the standard one, specify them e.g. like such
-#'   result <- simulate_vectortransmission(Ph0 = 100, Pv0 = 1e5,  tmax = 100)
+#'   result <- simulate_vectortransmission(Sh0 = 100, Sv0 = 1e5,  tmax = 100)
 #'   # You should then use the simulation result returned from the function, e.g. like this:
 #'   plot(result[,1],result[,2],xlab='Time',ylab='Number Susceptible',type='l')
 #' @seealso The UI of the shiny app 'VectorTransmission', which is part of this package, contains more details on the model
 #' @author Andreas Handel
-#' @references See e.g. Keeling and Rohani 2008 for SIR models and the
-#'   documentation for the deSolve package for details on ODE solvers
+#' @references See the information in the corresponding shiny app for model details
+#'            See the documentation for the deSolve package for details on ODE solvers
 #' @export
 
 
-simulate_vectortransmission <- function(Ph0 = 1e3, Ih0 = 1, Pv0 = 0, Iv0 = 0, tmax = 120, b1 = 0.01, b2 = 0, b = 0, n = 0, g = 1, w = 0)
+simulate_vectortransmission <- function(Sh0 = 1e3, Ih0 = 1, Sv0 = 0, Iv0 = 0, tmax = 120, b1 = 0.01, b2 = 0, b = 0, n = 0, g = 1, w = 0)
 {
   ############################################################
-  Y0 = c(Sh = Ph0 - Ih0, Ih = Ih0, Rh = 0, Sv = Pv0 - Iv0, Iv = Iv0);  #combine initial conditions into a vector
+  Y0 = c(Sh = Sh0, Ih = Ih0, Rh = 0, Sv = Sv0, Iv = Iv0);  #combine initial conditions into a vector
   dt = min(0.1, tmax / 1000); #time step for which to get results back
   timevec = seq(0, tmax, dt); #vector of times for which solution is returned (not that internal timestep of the integrator is different)
   

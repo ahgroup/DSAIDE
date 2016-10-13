@@ -1,6 +1,6 @@
 ############################################################
-#This is the Shiny file for the ID Dynamics Introduction App
-#written by Andreas Handel and Sina  
+#This is the Shiny file for the Direct Transmission App
+#written by Andreas Handel and Sina Solaimanpour  
 #maintained by Andreas Handel (ahandel@uga.edu)
 #last updated 10/13/2016
 ############################################################
@@ -14,17 +14,24 @@ refresh <- function(input, output){
   res <- reactive({
     input$submitBtn
     
-    
     # Read all the input values from the UI
-    S0 = isolate(input$S0);
+    PopSize = isolate(input$PopSize);
     I0 = isolate(input$I0);
-    b = isolate(input$b);
-    g = isolate(input$g);
     tmax = isolate(input$tmax);
-
-    # Call the ODE solver with the given parameters
-    result <- simulate_introduction(S0 = S0, I0 = I0, g = g, b = b, tmax = tmax)
+    g = isolate(input$g);
+    bd= isolate(input$bd);
+    bf= isolate(input$bf);
+    b = isolate(input$b);
+    n = isolate(input$n);
+    w = isolate(input$w);
+    A = isolate(input$A);
+    scenario = as.numeric(isolate(input$scenario));
     
+    
+    # Call the ODE solver with the given parameters
+    
+    result <- simulate_directtransmission(PopSize = PopSize, I0 = I0, tmax = tmax, scenario = scenario, bd = bd, bf = bf, A = A, b = b, n = n, g = g, w = w)
+
     return(list(result)) #this is returned as the res variable
   })
   
@@ -61,7 +68,7 @@ ui <- fluidPage(
   tags$head( tags$script(src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML", type = 'text/javascript') ),
   div( includeHTML("www/header.html"), align = "center"),
   #specify name of App below, will show up in title
-  h1('ID Dynamics Introduction App', align = "center", style = "background-color:#123c66; color:#fff"),
+  h1('Modes of Direct Transmission App', align = "center", style = "background-color:#123c66; color:#fff"),
   
   #section to add buttons
   fluidRow(
@@ -76,7 +83,7 @@ ui <- fluidPage(
   
   tags$hr(),
   
-  ################################
+  #################################
   #Split screen with input on left, output on right
   fluidRow(
     #all the inputs in here
@@ -85,31 +92,52 @@ ui <- fluidPage(
            # Inputs section
            h2('Simulation Settings'),
            fluidRow(
-             column(4,
-                    sliderInput("S0", "Initial number of susceptible hosts", min = 500, max = 5000, value = 1000, step = 500)
+             column(6,
+                    sliderInput("PopSize", "Population Size", min = 1000, max = 5000, value = 1000, step = 500)
              ),
-             column(4,
-                    sliderInput("I0", "Initial number of infected hosts", min = 0, max = 100, value = 0, step = 1)
-             ),
-             column(4,
-                    sliderInput("tmax", "Maximum simulation time", min = 10, max = 1000, value = 300, step = 10)
-             ),
-             align = "center"
+             column(6,
+                    sliderInput("I0", "initial number of infected hosts", min = 0, max = 100, value = 0, step = 1)
+             )
            ), #close fluidRow structure for input
-           
            fluidRow(
              column(6,
-                    sliderInput("b", "Rate of transmission", min = 0, max = 0.01, value = 0, step = 0.0001, sep ='')
+                    sliderInput("tmax", "Maximum simulation time (months)", min = 1, max = 500, value = 100, step = 1)
              ),
              column(6,
-                    sliderInput("g", "Rate at which a host leaves the infectious compartment", min = 0, max = 2, value = 0.5, step = 0.1)
+                    selectInput("scenario", "Transmission scenario:",c("density dependent" = 1, 'frequency dependent' = 2))
+             )
+           ), #close fluidRow structure for input
+           fluidRow(
+             column(6,
+                    sliderInput("bf", "frequency dependent transmission rate (bf, 1/months)", min = 0, max = 10, value = 0, step = 0.1 , sep ='')
+             ),
+             column(6,
+                    sliderInput("bd", "density dependent transmission rate (bd, 1/months)", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
+             )
+           ), #close fluidRow structure for input
+           fluidRow(
+             column(6,
+                    sliderInput("A", "Area where hosts interact (for density dependent transmission, arbitrary units)", min = 0.1, max = 10, value = 1, step = 0.1)
+             ),
+             column(6,
+                    sliderInput("g", "Rate of recovery of infected hosts (g, 1/months)", min = 0, max = 10, value = 1, step = 0.1)
+             )
+           ), #close fluidRow structure for input
+           fluidRow(
+             column(4,
+                    sliderInput("w", "Rate of immunity loss (w, 1/months)", min = 0, max = 0.1, value = 0.0, step = 0.01 , sep ='')
+             ),
+             column(4,
+                    sliderInput("b", "Monthly rate of new births (b)", min = 0, max = 100, value = 0, step = 1)
+             ),
+             column(4,
+                    sliderInput("n", "Natural death rate (n, 1/months)", min = 0, max = 0.02, value = 0, step = 0.0005, sep ='')
              ),
              align = "center"
            ) #close fluidRow structure for input
            
-           
     ), #end sidebar column for inputs
-    
+
     #all the outcomes here
     column(6,
            

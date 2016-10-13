@@ -4,7 +4,7 @@
 \alias{produce_simoutput}
 \title{A helper function that takes result from the simulators and produces plots and text output}
 \usage{
-produce_simoutput(input, output, allres)
+produce_simoutput(input, output, allres, varlist = NULL)
 }
 \value{
 output a list with plot, text and warn elements for display in a shiny UI
