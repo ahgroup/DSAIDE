@@ -1,5 +1,4 @@
-#This is the Shiny file for the Stochastic Dynamics App
-
+#This is the Shiny file for the Evolutionary Dynamics App
 
 #the main function with all the functionality for the server
 #this function is wrapped inside the shiny server function below to allow return to main menu when window is closed
@@ -10,19 +9,24 @@ refresh <- function(input, output){
     
     # Read all the input values from the UI
     S0 = isolate(input$S0);
-    I0 = isolate(input$I0);
+    Iu0 = isolate(input$Iu0);
+    It0 = isolate(input$It0);
+    Ir0 = isolate(input$Ir0);
     tmax = isolate(input$tmax);
 
-    bP = isolate(input$bP);
-    bI = isolate(input$bI);
+    bu = isolate(input$bu);
+    bt = isolate(input$bt);
+    br = isolate(input$br);
 
-    gP = isolate(input$gP);
-    gI = isolate(input$gI);
+    cu = isolate(input$cu);
+    ct = isolate(input$ct);
 
-    w = isolate(input$w);
-
-    lambda = isolate(input$lambda)
-    n = isolate(input$n);
+    f = isolate(input$f);
+    
+    gu = isolate(input$gu);
+    gt = isolate(input$gt);
+    gr = isolate(input$gr);
+    
     nreps = isolate(input$nreps)
 
     # Call the adaptivetau simulator with the given parameters
@@ -31,7 +35,7 @@ refresh <- function(input, output){
     result <- list()
     for (nn in 1:nreps)
     {
-     result[[nn]] <- simulate_stochastic(S0 = S0, I0 = I0, tmax = tmax, bP = bP, bI = bI, gP = gP, gI = gI, w = w, lambda = lambda, n = n)
+     result[[nn]] <- simulate_evolution(S0 = S0, Iu0 = Iu0, It0 = It0, Ir0 = Ir0, tmax = tmax, bu = bu, bt = bt, br = br, cu = cu, ct = ct, f = f, gu = gu, gt = gt, gr = gr)
     }
     
     return(result)
@@ -72,7 +76,7 @@ ui <- fluidPage(
   #add header and title
   tags$head( tags$script(src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML", type = 'text/javascript') ),
   div( includeHTML("www/header.html"), align = "center"),
-  h1('Stochastic Dynamics App', align = "center", style = "background-color:#123c66; color:#fff"),
+  h1('Evolutionary Dynamics App', align = "center", style = "background-color:#123c66; color:#fff"),
   
   #start section to add buttons
   fluidRow(
@@ -95,13 +99,13 @@ ui <- fluidPage(
            #################################
            # Inputs section
            h2('Simulation Settings'),
-           p('All parameters are assumed to be in units of (inverse) months'),
+           p('All parameters are assumed to be in units of (inverse) days'),
            fluidRow(
              column(4,
                     sliderInput("S0", "initial number of susceptible hosts", min = 100, max = 3000, value = 1000, step = 50)
              ),
              column(4,
-                    sliderInput("I0", "initial number of symptomatic hosts", min = 0, max = 1000, value = 1, step = 1)
+                    sliderInput("Iu0", "initial number of untreated wild-type infected hosts", min = 0, max = 1000, value = 1, step = 1)
              ),
              column(4,
                     sliderInput("tmax", "Maximum simulation time (months)", min = 1, max = 1200, value = 100, step = 1)
@@ -109,31 +113,45 @@ ui <- fluidPage(
            ), #close fluidRow structure for input
            fluidRow(
              column(4,
-                    sliderInput("bP", "Rate of transmission of presymptomatic hosts", min = 0, max = 0.02, value = 0, step = 0.0001 , sep ='')
+                    sliderInput("It0", "initial number of treated wild-type infected hosts", min = 0, max = 1000, value = 1, step = 1)
              ),
              column(4,
-                    sliderInput("bI", "Rate of transmission of symptomatic hosts", min = 0, max = 0.02, value = 0.01, step = 0.0001 , sep ='')
+                    sliderInput("Ir0", "initial number of resistant infected hosts", min = 0, max = 1000, value = 1, step = 1)
              ),
              column(4,
-                    sliderInput("w", "Rate of immunity loss", min = 0, max = 0.5, value = 0.0, step = 0.01, sep ='')
+                    sliderInput("bu", "Rate of transmission of untreated wild-type hosts", min = 0, max = 0.02, value = 0, step = 0.0001 , sep ='')
+             )
+           ), #close fluidRow structure for input
+           fluidRow(
+             column(4,
+                    sliderInput("bt", "Rate of transmission of treated wild-type hosts", min = 0, max = 0.02, value = 0, step = 0.0001 , sep ='')
+             ),
+             column(4,
+                    sliderInput("br", "Rate of transmission of resistant hosts", min = 0, max = 0.02, value = 0.01, step = 0.0001 , sep ='')
+             ),
+             column(4,
+                    sliderInput("cu", "Fraction of resistant generation by untreated hosts", min = 0, max = 0.01, value = 0.0, step = 0.0001, sep ='')
              )
            ), #close fluidRow structure for input
            
            fluidRow(
-             column(6,
-                    sliderInput("gP", "Rate at which presymptomatic hosts leave compartment", min = 0, max = 5, value = 0.5, step = 0.1)
+             column(4,
+                    sliderInput("ct", "Fraction of resistant generation by treated hosts", min = 0, max = 0.01, value = 0.0, step = 0.0001, sep ='')
              ),
-             column(6,
-                    sliderInput("gI", "Rate at which symptomatic hosts leave compartment", min = 0, max = 5, value = 0.5, step = 0.1)
+             column(4,
+                    sliderInput("gu", "Rate at which untreated hosts leave compartment", min = 0, max = 5, value = 0.5, step = 0.1)
+             ),
+             column(4,
+                    sliderInput("gt", "Rate at which treated hosts leave compartment", min = 0, max = 5, value = 0.5, step = 0.1)
              )
-            ), #close fluidRow structure for input
+           ), #close fluidRow structure for input
            fluidRow(
              column(4,
-                    sliderInput("lambda", "Rate of new births", min = 0, max = 10000, value = 0, step = 100)
+                    sliderInput("gr", "Rate at which resistant hosts leave compartment", min = 0, max = 5, value = 0.5, step = 0.1)
              ),
              column(4,
-                    sliderInput("n", "Natural death rate", min = 0, max = 1, value = 0, step = 0.1)
-             ),          
+                    sliderInput("f", "Fraction of infected receiving treatment", min = 0, max = 1, value = 0.0, step = 0.05)
+             ),
              column(4,
                          sliderInput("nreps", "Number of simulations", min = 1, max = 50, value = 1, step = 1)
               )

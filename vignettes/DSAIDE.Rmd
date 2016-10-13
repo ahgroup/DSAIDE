@@ -13,48 +13,85 @@ vignette: >
 
 
 ## Introduction
+DSAIDE stands for Dynamical Systems Approaches to Infectious Disease Epidemiology.
+
+The idea behind this package is to give students and other interested folks a tool that allows them to learn about patterns and features seen in infectious disease epidemiology using a dynamical systems approach.
+
+The underlying models are written mostly as deterministic, compartmental ordinary differential equations. Some models are written as stochastic equivalents. By wrapping the models around a graphical user interface, it allows exploration of models and infectious disease patterns without the need to write R code.
+
+At the same time, the package is structured in a modular way that should allow those interested in the actual models and learning R coding to easily move from one stage to another.
+
+The package currently consists of 11 simulations/Apps which are each meant to illustrate a different infectious disease epidemiology topic. Each App is meant to be stand-alone, with a description of the model, a list of tasks students should try, and information for further details embedded in each App. 
 
 
-This is the future home of an introductory tutorial to the DSAIDE package
+
+##Interacting with and using the package
+The following sections describe the main envisioned ways the content in this R package can be used and extended. The idea is that everyone starts at level 1, and then depending on their needs and interests, can decide to move on to the next level.
 
 
+###Level 1: Interactive use through the Shiny user interface
 
-##Use options for end users
+The interactive exploration of the models through the Shiny user interfacie is the main intended use of this package. The steps to get there are simple. Install the package (only needs to be done once):
+```{r eval=FALSE, echo=TRUE}
+install.packages('DSAIDE')
+```
 
+Then load the package:
+```{r eval=TRUE, echo=TRUE}
+library('DSAIDE')
+```
 
-###Interactive use through the Shiny user interface
+Finally, call the main menu for the package:
+```{r eval=FALSE, echo=TRUE}
+dsaidemenu()
+```
+This will bring up a simple graphical menu from which the user can select each App. After exploring an App, the user returns to the main menu and eventually exits the main menu. In this way, no coding experience is needed, the student can fully focus on learning the infectious disease dynamics related topics.
 
-This is the main intended use of this package.
-Start the main menu of the package by calling dsaidemenu(). 
-Pick a shiny app corresponding to a model, and explore the model through the corresponding shiny UI. The UI contains information about the model and a list of tasks to try. 
-
-
-###Supplementing simulations with custom code
-Call each simulator function directly from the R console, without going
-  through the shiny app. Each model simulator function is called simulate_XXX
-  and is documented. See the documentation for the package to find the names
-  of the different simulation functions, or check the 'further information' 
-  tab for a given shiny app. 
-  You can call the functions with different initial condition and parameter values. 
-  This allows you to for instance write a few
-  lines of extra R code to loop over some model parameter, instead of the manual setting
-  through the sliders in the shiny app. This gives you
-  some more flexibility in what you can do with these functions, but requires
-  being able to write a little bit of R code.
-
-###Modifying simulations
-Find the code for a simulator function you are interested in and modify
-  it to your needs. This provides the most flexibility in what you can do with 
-  this package, and you can end up with any model you need, 
-  but for that you need to know or learn some
-  more R coding. To make it easy to get the source code for the simulator functions,
-  they are located in a subdirectory called 'simulatorfunction' inside the DSAIDE 
-  package folder.
+Each app contains the information needed to understand the underlying model, and has a list of (non exhaustive) tasks that a student can try to get a better understanding of the topic meant to be covered by the App.  
 
 
 
 
-##Use options for developers
+###Level 2: Supplementing simulations with custom code
+Each App is structured in such a way that the underlying model/simulation is a stand-alone function. This simulator function can be called directly, without going through the Shiny App. Consider as example the first App, called "ID Dynamics Intro". The model is a simple SIR model. The function running this model is called `simulate_introduction.R`, the user can learn about the inputs and outputs of the function by looking at its documentation
+```{r eval=FALSE, echo=TRUE}
+?simulate_introduction
+```
+
+The help file explains that one can run the simulation by specifying initial number of susceptibles and infected, the duration for which the simulation should be run, and the rates of infection and recovery. Most models do not have inherent time units and are set by the user based on choices for parameters. It is important to ensure that all quantities that have time units (here, _tmax_, _g_ and _b_) are expressed in the same time units, e.g. days or months (or the inverse of those units for rates).   
+
+```{r eval=TRUE, echo=TRUE}
+result <- simulate_introduction(S0 = 1000, I0 = 1, tmax = 300, g = 0.5,  b = 1/1000)
+```
+Calling the simulation function produces time-series for the dynamics of each of the variables that are tracked. 
+The Shiny app automatically produce plots of these time-series. Users can produce their own plots, e.g. such as
+```{r eval=TRUE, echo=TRUE}
+plot(result[,"time"],result[,"S"],xlab='Time',ylab='Number Susceptible',type='l')
+```
+
+The more interesting use of these simulator functions outside of the Shiny App is that it allows additional exploration of the models. For instance it is possible to systematically loop over a parameter, record some quantity of interest for each run, and report the result at the end. The following is a simple example, where we loop over different values of the recovery rate and record the peak of the outbreak each time:
+
+```{r eval=TRUE, echo=TRUE}
+gvec = seq(0.1,2,by=0.1) #values of g which we went to run the simulation for
+peak = rep(0,length(gvec)) #this will hold the peak values for each g
+for (n in 1:length(gvec))
+{
+  result <- simulate_introduction(S0 = 1000, I0 = 1, tmax = 300, g = gvec[n],  b = 1/1000)
+  peak[n] <- max(result[,"I"])
+}
+plot(gvec,peak,type='p')
+```
+
+Thus, the user can add their own custom code to the existing simulator functions and with a few lines of extra code analyze and explore many more questions and scenarios than those accessible through the Shiny App interface. This gives the user a lot more flexibility using these simulations, but requires being able to write some R code.
 
 
+###Level 3: Modifying simulations
+Finally, there is an option for the user to access and modify the underlying simulator functions directly. To facilitate this, all simulator functions are in a subdirectory called _simulatorfunctions_ inside the DSAIDE package folder. You might have to search your computer to see where R installed the package. 
+
+I suggest that you copy the whole folder to some new directory and then modify the function you are interested in. 
+All simulator functions are (hopefully) well documented. So as long as you are familiar with R coding, you should have no problem modifying the function to your needs. Of course, you will need to interact with your modified function as described in _Level 2_ - unless you also want to write a new Shiny App wrapper for your new function. If you want to do that, read on.
+
+
+###Level 4: Developing an new App
+I would love to add further Apps to the package, so I've tried to make it (hopefully) easy to develop further Shiny Apps. There is some information in the package to help with development in a sub-folder called _docsfordevelopers_. Essentially, each app consists of a simulator function and a shiny App function which calls the simulator function, together with documentation for the App. Developing a new App then consists of writing at minimum 2 R functions (_simulate_NNN.R_ and the corresponding _app.R_) and filling the provided Rmd template for the documentation, then running a few functions to process everything. See the information in the _docsfordevelopers_ folder for more details. 
 

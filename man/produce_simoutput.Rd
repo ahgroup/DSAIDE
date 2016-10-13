@@ -4,13 +4,14 @@
 \alias{produce_simoutput}
 \title{A helper function that takes result from the simulators and produces plots and text output}
 \usage{
-produce_simoutput(input, output, res)
+produce_simoutput(input, output, allres)
 }
 \value{
 output a list with plot, text and warn elements for display in a shiny UI
 }
 \description{
-This function generates plots and text to be displayed in the Shiny UI. This is a helper function.
+This function generates plots and text to be displayed in the Shiny UI. 
+This is a helper function. This version can process multiple simulation runs, supplied as a list
 }
 \details{
 This function is called by the shiny server to produce output returned to the UI

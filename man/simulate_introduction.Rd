@@ -4,22 +4,21 @@
 \alias{simulate_introduction}
 \title{Simulator for a basic SIR model}
 \usage{
-simulate_introduction(PopSize = 1000, I0 = 1, tmax = 300, gamma = 0.5,
-  beta = 1/1000)
+simulate_introduction(S0 = 1000, I0 = 1, tmax = 300, g = 0.5,
+  b = 1/1000)
 }
 \arguments{
-\item{PopSize}{specifies the initial number of individuals (suceptibles +
-infected)}
+\item{S0}{initial number of suceptibles individuals}
 
 \item{I0}{initial number of infected hosts}
 
 \item{tmax}{maximum simulation time, units depend on choice of units for your
 parameters}
 
-\item{gamma}{rate at which a person leaves the infectious compartment, which
+\item{g}{rate at which a person leaves the infectious compartment, which
 is the inverse of the average duration of the infections period}
 
-\item{beta}{level of infectiousness, i.e. rate of transmission of pathogen
+\item{b}{level of infectiousness, i.e. rate of transmission of pathogen
 from infected to susceptible host}
 }
 \value{
@@ -47,7 +46,7 @@ code will likely abort with an error message
 # To run the simulation with default parameters just call this function
 result <- simulate_introduction()
 # To choose parameter values other than the standard one, specify them e.g. like such
-result <- simulate_introduction(PopSize = 2000, I0 = 10, tmax = 100, gamma = 1, beta = 1/100)
+result <- simulate_introduction(S0 = 2000, I0 = 10, tmax = 100, g = 1, b = 1/100)
 # You should then use the simulation result returned from the function, e.g. like this:
 plot(result[,1],result[,2],xlab='Time',ylab='Number Susceptible',type='l')
 }
@@ -55,7 +54,7 @@ plot(result[,1],result[,2],xlab='Time',ylab='Number Susceptible',type='l')
 Andreas Handel
 }
 \references{
-See e.g. Keeling and Rohani 2008 for SIR models and the
-  documentation for the deSolve package for details on ODE solvers
+See the documentation in the corresponding shiny app for further information and more details about the model 
+see the documentation for the deSolve package for details on ODE solvers
 }
 

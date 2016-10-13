@@ -4,26 +4,25 @@ output:
   html_document:
     theme: null
     highlight: null
-    #css: ../styles/handelshiny.css
     fig_caption: true
     mathjax: default 
     keep_md: false
-    includes:
-      #in_header: in_header.txt
-      #before_body: ../styles/before_shiny_body.txt
-      #after_body: ../styles/after_shiny_body.txt 
-bibliography: ../media/references.bib
 ---
 
 
 ```{r}
-#Creating an R chunck provides an easy way to add comments in R style - a bit trickier in Markdown itself
-#The extra settings in the YAML header that are uncommented allow for styling of the app
-#that's not needed, the template here without the extra information should work
+################
+#This R chunk only exists as an easy way to add comments - a bit trickier in Markdown itself
+################
+#You can adjust settings in the YAML header for styling 
+#first make sure your simulator function is in the \R folder 
+#and your App is in an appropriately named folder inside \shinyapps
 #use this template and fill it with information for your App
 #turn this into an HTML file using RMarkdown (knitr/pandoc)
-#make sure the HTML file is in the directory with all the App documentation, then run the processing script on it
+#make sure the HTML file is in the directory with all the App documentation
+#run the processing script (processAllFiles.R), which processes all documentation
 #if everything works, the information described below should automatically be displayed in tabs at the bottom of the App UI
+#note that the processing script changes some of the styling as specified in the shinystyle.css file
 ```
 
 ##Overview {#shinytab1}
@@ -61,5 +60,4 @@ Answer to task 1.
 * Could be list of references, or explanation on how to access the underlying code, etc.
 
 ##More sections
-Any other sections that don't have the shinytab label can be included here but are ignored by the processing script and not included in the app UI.
-
+Any other sections that don't have the _shinytab_ label can be included here but are ignored by the processing script and not included in the app UI.

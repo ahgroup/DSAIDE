@@ -1,6 +1,7 @@
 ############################################################
-##simulating a basic SIR model
-##written by Andreas Handel, ahandel@uga.edu, last change: 8/2/16
+##code to simulate a basic SIR model as set of ODEs
+##written by Andreas Handel (ahandel@uga.edu)
+##last modified: 10/13/16
 ############################################################
 
 # reproductive_number_ode_eq function
@@ -33,12 +34,11 @@ introductionode <- function(t, y, pars)
 #' The function simulates the ODE using an ODE solver from the deSolve package.
 #' The function returns a matrix containing time-series of each variable and time.
 #'
-#' @param PopSize specifies the initial number of individuals (suceptibles +
-#'   infected)
+#' @param S0 initial number of suceptibles individuals
 #' @param I0 initial number of infected hosts
-#' @param beta level of infectiousness, i.e. rate of transmission of pathogen
+#' @param b level of infectiousness, i.e. rate of transmission of pathogen
 #'   from infected to susceptible host
-#' @param gamma rate at which a person leaves the infectious compartment, which
+#' @param g rate at which a person leaves the infectious compartment, which
 #'   is the inverse of the average duration of the infections period
 #' @param tmax maximum simulation time, units depend on choice of units for your
 #'   parameters
@@ -54,23 +54,22 @@ introductionode <- function(t, y, pars)
 #' # To run the simulation with default parameters just call this function
 #' result <- simulate_introduction()
 #' # To choose parameter values other than the standard one, specify them e.g. like such
-#' result <- simulate_introduction(PopSize = 2000, I0 = 10, tmax = 100, gamma = 1, beta = 1/100)
+#' result <- simulate_introduction(S0 = 2000, I0 = 10, tmax = 100, g = 1, b = 1/100)
 #' # You should then use the simulation result returned from the function, e.g. like this:
 #' plot(result[,1],result[,2],xlab='Time',ylab='Number Susceptible',type='l')
-#' @references See e.g. Keeling and Rohani 2008 for SIR models and the
-#'   documentation for the deSolve package for details on ODE solvers
+#' @references See the documentation in the corresponding shiny app for further information and more details about the model 
+#' see the documentation for the deSolve package for details on ODE solvers
 #' @author Andreas Handel
 #' @export
 
-simulate_introduction <- function(PopSize = 1000, I0 = 1, tmax = 300, gamma = 0.5, beta = 1/1000){
+simulate_introduction <- function(S0 = 1000, I0 = 1, tmax = 300, g = 0.5, b = 1/1000){
 
-  S0 = PopSize - I0; #initial number of uninfected hosts
   Y0 = c(S = S0, I = I0, R = 0);  #combine initial conditions into a vector
   dt = min(0.1, tmax / 1000); #time step for which to get results back
   timevec = seq(0, tmax, dt); #vector of times for which solution is returned (not that internal timestep of the integrator is different)
 
   #combining parameters into a parameter vector
-  pars = c(beta, gamma);
+  pars = c(b = b, g = g);
 
   #this line runs the simulation, i.e. integrates the differential equations describing the infection process
   #the result is saved in the odeoutput matrix, with the 1st column the time, the 2nd, 3rd, 4th column the variables S, I, R

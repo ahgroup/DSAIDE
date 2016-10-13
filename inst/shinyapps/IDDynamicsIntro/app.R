@@ -12,20 +12,16 @@ refresh <- function(input, output){
     
     
     # Read all the input values from the UI
-    PopSize = isolate(input$PopSize);
+    S0 = isolate(input$S0);
     I0 = isolate(input$I0);
-    beta = isolate(input$beta);
-    gamma = isolate(input$gamma);
+    b = isolate(input$b);
+    g = isolate(input$g);
     tmax = isolate(input$tmax);
 
     # Call the ODE solver with the given parameters
-    result <- simulate_introduction(PopSize = PopSize, I0 = I0, gamma = gamma, beta = beta, tmax = tmax)
+    result <- simulate_introduction(S0 = S0, I0 = I0, g = g, b = b, tmax = tmax)
     
-    return(result)
-  })
-  
-  output$plot.ui <- renderUI({
-    plotOutput("plot", width = paste0(input$PlotWidth, "%"), height = 500)
+    return(list(result))
   })
   
   #function that takes result saved in res and produces output
@@ -59,86 +55,85 @@ server <- function(input, output, session) {
 #This is the UI for the ID Dynamics Introduction App
 ui <- fluidPage(
   includeCSS("../shinystyle.css"),
-  
+  #add header and title
   tags$head( tags$script(src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML", type = 'text/javascript') ),
-  tags$head(
-    tags$style(HTML("
-                    img {
-                    max-height: 90px;
-                    max-width: '100%';
-                    }
-                    
-                    body {
-                    background-color: #fff;
-                    }
-                    "))
-    ),
-  
   div( includeHTML("www/header.html"), align = "center"),
   h1('ID Dynamics Introduction App', align = "center", style = "background-color:#123c66; color:#fff"),
   
-  
-  div( style="text-align:center", actionButton("exitBtn", "Exit App") ),
-  tags$hr(),
-  
-  
-  # Inputs go at top above output
-  # Each input uses either a slider or a text box except for the submit button
-  fluidRow(
-    column(4,
-           sliderInput("PopSize", "Initial Population Size", min = 1000, max = 5000, value = 1000, step = 500)
-    ),
-    column(4,
-           sliderInput("I0", "Initial number of infected hosts", min = 0, max = 100, value = 0, step = 1)
-    ),
-    column(4,
-           sliderInput("tmax", "Maximum simulation time (days)", min = 10, max = 1000, value = 300, step = 10)
-    ),
-    align = "center"
-  ), #close fluidRow structure for input
-  
+  #start section to add buttons
   fluidRow(
     column(6,
-           sliderInput("beta", "Rate of transmission (beta, 1/days)", min = 0, max = 0.01, value = 0, step = 0.0001, sep ='')
+           actionButton("submitBtn", "Run Simulation", class="submitbutton")  
     ),
     column(6,
-           sliderInput("gamma", "Rate at which a host leaves the infectious compartment (gamma, 1/days)", min = 0, max = 2, value = 0.5, step = 0.1)
+           actionButton("exitBtn", "Exit App", class="exitbutton")
     ),
     align = "center"
-  ), #close fluidRow structure for input
+  ), #end section to add buttons
   
-  div( style="text-align:center", actionButton("submitBtn", "Run Simulation")  ),
   tags$hr(),
   
-  h2('Simulation Results'),
+  ################################
+  #Split screen with input on left, output on right
   fluidRow(
-    column(12, 
-           uiOutput("plot.ui")
-    ),
-    column(7, 
+    #all the inputs in here
+    column(6,
+           #################################
+           # Inputs section
+           h2('Simulation Settings'),
+           fluidRow(
+             column(4,
+                    sliderInput("S0", "Initial number of susceptible hosts", min = 500, max = 5000, value = 1000, step = 500)
+             ),
+             column(4,
+                    sliderInput("I0", "Initial number of infected hosts", min = 0, max = 100, value = 0, step = 1)
+             ),
+             column(4,
+                    sliderInput("tmax", "Maximum simulation time", min = 10, max = 1000, value = 300, step = 10)
+             ),
+             align = "center"
+           ), #close fluidRow structure for input
+           
+           fluidRow(
+             column(6,
+                    sliderInput("b", "Rate of transmission", min = 0, max = 0.01, value = 0, step = 0.0001, sep ='')
+             ),
+             column(6,
+                    sliderInput("g", "Rate at which a host leaves the infectious compartment", min = 0, max = 2, value = 0.5, step = 0.1)
+             ),
+             align = "center"
+           ) #close fluidRow structure for input
+           
+           
+    ), #end sidebar column for inputs
+    
+    #all the outcomes here
+    column(6,
+           
+           #################################
+           #Start with results on top
+           h2('Simulation Results'),
+           plotOutput(outputId = "plot", height = "500px"),
            # PLaceholder for results of type text
            htmlOutput(outputId = "text"),
-           # Placeholder for any possible warning or error messages (this will be shown in red)
-           htmlOutput(outputId = "warn")
-    ),
-    
-    column(4, 
-           # Slider to change the size of the plot
-           sliderInput("PlotWidth", "Plot width (%)", min = 30, max = 100, value = 60, step = 5)
-    )
-  ),
+           #Placeholder for any possible warning or error messages (this will be shown in red)
+           htmlOutput(outputId = "warn"),
+           
+           tags$head(tags$style("#warn{color: red;
+                                font-style: italic;
+                                }")),
+           tags$hr()
+           
+           ) #end main panel column with outcomes
+  ), #end layout with side and main panel
   
-  tags$head(tags$style("#warn{color: red;
-                               font-style: italic;
-                               }")),
-  tags$hr(),
+  #################################
+  #Instructions section at bottom as tabs
   h2('Instructions'),
-  
   #use external function to generate all tabs with instruction content
-  
   do.call(tabsetPanel,generate_instruction_tabs()),
-  
   div(includeHTML("www/footer.html"), align="center", style="font-size:small") #footer
-) #end fluidpage, i.e. the UI part of the app
+  
+  ) #end fluidpage, i.e. the UI part of the app
 
 shinyApp(ui = ui, server = server)

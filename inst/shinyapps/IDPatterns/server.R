@@ -36,7 +36,7 @@ refresh <- function(input, output){
     # Call the ODE solver with the given parameters
     result <- simulate_idpatterns(PopSize = PopSize, P0 = P0, tmax = tmax, bP = bP, bA = bA, bI = bI, gP = gP , gA = gA, gI = gI, f = f, d = d, w = w, lambda = lambda, n = n, sigma = sigma)
 
-    return(result)
+    return(list(result))
     })
     
     #function that takes result saved in res and produces output

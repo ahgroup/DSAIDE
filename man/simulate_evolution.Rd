@@ -4,43 +4,50 @@
 \alias{simulate_evolution}
 \title{simulate_evolution function}
 \usage{
-simulate_evolution(S0 = 1000, I0 = 10, tmax = 100, bP = 0,
-  bI = 1/1000, gP = 0.5, gI = 0.5, w = 0, lambda = 0, n = 0,
-  sigma = 0)
+simulate_evolution(S0 = 1000, Iu0 = 1, It0 = 1, Ir0 = 1, tmax = 100,
+  bu = 1/1000, bt = 1/1000, br = 1/1000, cu = 1/1000, ct = 1/100,
+  f = 0, gu = 1, gt = 1, gr = 1)
 }
 \arguments{
 \item{S0}{initial number of susceptible hosts}
 
-\item{I0}{initial number of infected, symptomatic hosts}
+\item{Iu0}{initial number of wild-type infected untreated hosts}
+
+\item{It0}{initial number of wild-type infected treated hosts}
+
+\item{Ir0}{initial number of resistant infected hosts}
 
 \item{tmax}{maximum simulation time, units depend on choice of units for your
 parameters}
 
-\item{bP}{level/rate of infectiousness for hosts in the P compartment}
+\item{bu}{level/rate of infectiousness for hosts in the Iu compartment}
 
-\item{bI}{level/rate of infectiousness for hosts in the I compartment}
+\item{bt}{level/rate of infectiousness for hosts in the It compartment}
 
-\item{gP}{rate at which a person leaves the P compartment, which
+\item{br}{level/rate of infectiousness for hosts in the Ir compartment}
+
+\item{cu}{fraction of resistant mutant infections that an untreated host produces}
+
+\item{ct}{fraction of resistant mutant infections that a treated host produces}
+
+\item{f}{fraction of infected receiving treatment}
+
+\item{gu}{rate at which a host leaves the Iu compartment, which
 is the inverse of the average time spent in that compartment}
 
-\item{gI}{rate at which a person leaves the I compartment}
+\item{gt}{rate at which a person leaves the It compartment}
 
-\item{w}{rate at which recovered persons loose immunity and return to susceptible state}
-
-\item{lambda}{the rate at which new individuals enter the model (are born)}
-
-\item{n}{the rate of natural death (the inverse it the average lifespan)}
-
-\item{sigma}{strength of seasonal variation of transmission rate}
+\item{gr}{rate at which a person leaves the Ir compartment}
 }
 \value{
 This function returns the simulation result as obtained from a call
   to the adaptivetau integrator
 }
 \description{
-Simulation of a stochastic 2-strain SIR model with the following compartments for each strain:
-Susceptibles (S), Infected and Symptomatic (I1 and I2),
-Recovered and Immune (R1 and R2)
+Simulation of a stochastic 2-strain SIR model with the following compartments:
+Susceptibles (S), Infected with wild-type/sensitive and untreated (Iu),
+Infected with wild-type and treated (It), infected with resistant (Ir), 
+Recovered and Immune (R)
 }
 \details{
 A compartmental ID model with several states/compartments
@@ -57,9 +64,9 @@ the code will likely abort with an error message
 }
 \examples{
 # To run the simulation with default parameters just call this function
-result <- simulate_stochastic()
+result <- simulate_evolution()
 # To choose parameter values other than the standard one, specify them e.g. like such
-result <- simulate_stochastic(S0 = 2000,  tmax = 200, bP = 1/100)
+result <- simulate_evolution(S0 = 2000,  tmax = 200, bt = 1/100)
 # You should then use the simulation result returned from the function, e.g. like this:
 plot(result[,1],result[,2],xlab='Time',ylab='Number Susceptible',type='l')
 }
@@ -67,6 +74,9 @@ plot(result[,1],result[,2],xlab='Time',ylab='Number Susceptible',type='l')
 Andreas Handel
 }
 \references{
-See the manual for the adaptivetau package for details on the algorithm
+See the manual for the adaptivetau package for details on the algorithm.
+            The implemented model is loosely based on: Handel et al 2009 JTB 
+           "Antiviral resistance and the control of pandemic influenza: The roles of
+           stochasticity, evolution and model details"
 }
 
