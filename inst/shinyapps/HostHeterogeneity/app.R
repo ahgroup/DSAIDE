@@ -142,10 +142,10 @@ ui <- fluidPage(
            
            fluidRow(
              column(4,
-                    sliderInput("w1", "Rate of waning immunity of type 1", min = 0, max = 1, value = 0, step = 0.1)
+                    sliderInput("w1", "Rate of waning immunity of type 1", min = 0, max = 5, value = 0, step = 0.05)
              ),
              column(4,
-                    sliderInput("w2", "Rate of waning immunity of type 2", min = 0, max = 50, value = 0, step = 0.1)
+                    sliderInput("w2", "Rate of waning immunity of type 2", min = 0, max = 5, value = 0, step = 0.05)
              ),
              column(4,
                     sliderInput("tmax", "Maximum simulation time (months)", min = 1, max = 1200, value = 100, step = 1)

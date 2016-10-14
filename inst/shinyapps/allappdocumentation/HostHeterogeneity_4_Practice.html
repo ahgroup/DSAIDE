@@ -27,8 +27,8 @@
 
 
 <div id="myheader" class="container">
-	<p id="classname">EPID 8510 - Dynamical Systems Approach to Infectious Disease Epidemiology</p>
-	<p id="classauthor"><a href="http://handelgroup.uga.edu">Andreas Handel</a>, Epidemiology &amp; Biostatistics, University of Georgia</p>
+	<p id="classname">DSAIDE - Dynamical Systems Approach to Infectious Disease Epidemiology</p>
+	<p id="myheadertext">A collection of Shiny/R Apps to explore and simulate the population dynamics of infectious diseases. Written and maintained by <a href="http://handelgroup.uga.edu">Andreas Handel</a>, University of Georgia. </p>
 </div>
 
 
@@ -76,20 +76,78 @@
 <ul>
 <li>Set the model parameters such that it corresponds to the following setting:
 <ul>
-<li>1000 susceptible hosts and vectors, 1 initially symptomatic host, no infected vectors or pathogen in environment.</li>
+<li>1000 susceptible hosts and 1 infected host of type 1.</li>
+<li>200 susceptible hosts and 1 infected host of type 2.</li>
 <li>Simulation duration approximately 5 years.</li>
-<li>Assume that only symptomatic individuals transmit, at rate <em>b<sub>I</sub></em> = 0.002. All other transmission rates should be 0.</li>
-<li>Assume that the duration of the symptomatic period is 1 month long, the duration of the presymptomatic period is half a month long.</li>
-<li>Assume that there are no asymptomatic infections. You can therefore set the rate of recovery of asymptomatics, <span class="math inline">\(g_A\)</span> to anything, it doesn’t matter because nobody will be asymptomatic.</li>
-<li>Assume that no environmental shedding and decay occurs.</li>
+<li>Assume that transmission from host 1 to 1 is 0.002, from host 2 to 2 is 0.01. No transmission from one host type to the other.</li>
+<li>Assume that the duration of the infectious period is 1 month long for both types.</li>
 <li>Assume nobody dies due to disease, and immunity does not wane.</li>
-<li>Assume that there are no births and non-disease deaths occurring.</li>
+<li>No waning immunity or natural births/deaths.</li>
 </ul></li>
-<li>With parameters set to correspond to the scenario just described, run the simulation and ensure you get a single outbreak with 20% susceptibles left at the end.</li>
+<li>With parameters set to correspond to the scenario just described, run the simulation and ensure you get outbreaks in both populations with 20% susceptibles left at the end.</li>
 </ul>
 </div>
 <div id="task-2" class="section level3">
 <h3>Task 2:</h3>
+<ul>
+<li>Set the transmission rate from host 1 to host 1 to 0.001. Rest as before. Run the simulation.</li>
+<li>Now set the transmission rate from host 2 to host 1 to 0.001. You should see an outbreak in both populations. This is an example of a core group driving the dynamics. Contemplate what the core group does.</li>
+</ul>
+</div>
+<div id="task-3" class="section level3">
+<h3>Task 3:</h3>
+<ul>
+<li>Keep all settings as before, but set initial number of infected type 1 hosts to 0.</li>
+<li>Contemplate what you expect to see, run simulation, see if your expectations are confirmed.</li>
+<li>Now set initial number of infected type 1 hosts back to 1, infected type 2 hosts to 0.</li>
+<li>Contemplate what you expect to see, run simulation, see if your expectations are confirmed.</li>
+</ul>
+</div>
+<div id="task-4" class="section level3">
+<h3>Task 4:</h3>
+<ul>
+<li>Set the transmission rate from host 1 to host 1 to 0. Same for the transmission rate between type 2 hosts.</li>
+<li>Set the transmission rate from host 2 to host 1 to 0.01, from host 1 to host 2 to 0.002. Those are the same values used on task 1 for transmission among the same hosts.</li>
+<li>Set number of initial infected of type 1 and 2 both to 1.</li>
+<li>Contemplate what you expect to see, run simulation, see if your expectations are confirmed.</li>
+<li>Now set the transmission rate from host 1 to host 2 to 0.01, from host 2 to host 1 to 0.002. Again, think about your expectations, run simulation and check.</li>
+</ul>
+</div>
+<div id="task-5" class="section level3">
+<h3>Task 5:</h3>
+<ul>
+<li>Repeat the previous task, with only infected of type 1 initially present.</li>
+<li>Contemplate what you expect to see, run simulation, see if your expectations are confirmed.</li>
+</ul>
+</div>
+<div id="task-6" class="section level3">
+<h3>Task 6:</h3>
+<ul>
+<li>Repeat the previous task, with only infected of type 2 initially present.</li>
+<li>Contemplate what you expect to see, run simulation, see if your expectations are confirmed.</li>
+</ul>
+</div>
+<div id="task-7" class="section level3">
+<h3>Task 7:</h3>
+<ul>
+<li>Set everything as in task 1, but with waning immunity for both types at a rate 0.2.</li>
+<li>Run simulation, confirm that both populations reach a steady endemic state.</li>
+<li>Set transmission from type 2 to type 1 to 0.005, run simulation and see what changes.</li>
+<li>Set transmission from type 1 to type 2 to 0.005, other cross-transmission back to 0. Run simulation and see what changes.</li>
+</ul>
+</div>
+<div id="task-8" class="section level3">
+<h3>Task 8:</h3>
+<ul>
+<li>With the settings you just had, turn off waning immunity for type 1, run simulation and see what you get.</li>
+<li>Turn waning immunity for type 1 back on and turn off for type 2, run simulation and see what you get.</li>
+</ul>
+</div>
+<div id="task-9" class="section level3">
+<h3>Task 9:</h3>
+<ul>
+<li>Keep exploring. Think of a real ID where accounting for 2 types of hosts is important, see if you can use the simulation to approximate and explore that ID.</li>
+</ul>
 </div>
 </div>
 <div id="answers" class="section level2">
@@ -123,12 +181,10 @@
 <div id="myfooter" class="container">
 <hr>
 <p id="mylicense">
-<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a><br />This work by <a xmlns:cc="http://creativecommons.org/ns#" href="http://handelgroup.uga.edu/" property="cc:attributionName" rel="cc:attributionURL">Andreas Handel</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
-<br>
-Software/Code is licensed under GPL-3.
+This package is built and maintained by <a href="http://handelgroup.uga.edu/">Andreas Handel</a>, with contributions from others.<br>
+All text and figures are licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>. Software/Code is licensed under <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GPL-3</a>.
 </p>
 </div>
-
 
 <!--custom javascript to open links in new tabs instead of the same. needed to work on eLC -->
 <script type="text/javascript" charset="utf-8">
