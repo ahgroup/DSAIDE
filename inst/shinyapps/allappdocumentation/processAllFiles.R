@@ -62,7 +62,7 @@ separate <- function(input,foldername){
   #html.body.label <- xpathApply(html.raw, "//div[@id[starts-with(., 'mylabel')]]", saveXML)
 
   # Get the header of the page as a Node list
-  html.body.header <- xpathApply(html.raw, "//div[@id[starts-with(., 'myheader')]]", saveXML)
+  html.body.header <- xpathApply(html.raw, "//div[@id[starts-with(., 'shinyheader')]]", saveXML)
 
   # Find all the DIV tags within the html structure which has shinytab* ID
   html.parse.shinytabs = getNodeSet(html.raw, "//div[@id[starts-with(., 'shinytab')]]") # xmlValue or saveXML

@@ -49,7 +49,7 @@ produce_simoutput <- function(input,output,allres,varlist = NULL)
       
       mycols=c("blue",'orange','red','green','black','magenta','cyan')
       #plot the 1st line
-      graphics::plot(tvec,res[,varnames[1]],type="l",xlab="time (days)",ylab="",col=mycols[1],lwd=1,log="",xlim=c(0,tmax),ylim=c(0,ymax),main="Time Series")
+      graphics::plot(tvec,res[,varnames[1]],type="l",xlab="time",ylab="",col=mycols[1],lwd=1,log="",xlim=c(0,tmax),ylim=c(0,ymax),main="Time Series")
       
       if (length(varnames)>1) #plot additional lines if there is more than 1 variable to be plotted
       {

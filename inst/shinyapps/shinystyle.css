@@ -92,13 +92,21 @@ table td {
 /* My additions
 -------------------- */
 
-#classname
+#shinyheadertitle
 {
 	color: #123c66;  
 	font-weight: bold;
 	text-align: center;
 	font-size: 120%;
 }
+
+#shinyheadertext
+{
+	color: #123c66;  
+	text-align: center;
+	font-size: 100%;
+}
+
 
 #classauthor
 {
@@ -175,5 +183,12 @@ iframe {
 .maintext {
 	text-align: center;
 	color: #2a3f9e; 
+	font-weight: bold;
+}
+
+.infotext {
+	text-align: center;
+	color: #2a3f9e; 
 	
 }
+

@@ -86,14 +86,16 @@ server <- function(input, output, session) {
 #This is the UI for the Main Menu of DSAIDE
 ui <- fluidPage(
   includeCSS("../shinystyle.css"),
+  #add header and title
   tags$head( tags$script(src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML", type = 'text/javascript') ),
-
+  div( includeHTML("www/header.html"), align = "center"),
+  #specify name of App below, will show up in title
+  
   h1('DSAIDE - Main Menu', align = "center", style = "background-color:#123c66; color:#fff"),
 
-  p(paste('This is DSAIDE version ',utils::packageVersion("DSAIDE"),' last updated ', utils::packageDescription('DSAIDE')$Date,sep=''), class='maintext'),
+  p(paste('This is DSAIDE version ',utils::packageVersion("DSAIDE"),' last updated ', utils::packageDescription('DSAIDE')$Date,sep=''), class='infotext'),
   p('Have fun exploring the infectious disease models!', class='maintext'),
-  p('Note that not all Apps are available yet', class='maintext'),
-  
+
   fluidRow(
     column(4,
            actionButton("IDDynamicsIntro", "ID Dynamics Intro", class="mainbutton")
@@ -149,7 +151,6 @@ ui <- fluidPage(
     ),
     class = "mainmenurow"
     ), #close fluidRow structure for input
-  
   
   div(includeHTML("www/footer.html"), align="center", style="font-size:small") #footer
 ) #end fluidpage

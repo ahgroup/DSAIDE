@@ -5,8 +5,8 @@ Description: A collection of Shiny apps that allow for the simulation and
     exploration of various infectious disease transmission dynamics scenarios.
     The apps include explanations of the underlying models and instructions on
     what to do with the models. 
-Version: 0.33
-Date: 2016-10-13
+Version: 0.35
+Date: 2016-10-14
 Authors@R: c(
     person("Andreas", "Handel", email = "ahandel@uga.edu",
     role = c("aut", "cre")),

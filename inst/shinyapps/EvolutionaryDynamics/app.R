@@ -99,27 +99,26 @@ ui <- fluidPage(
            #################################
            # Inputs section
            h2('Simulation Settings'),
-           p('All parameters are assumed to be in units of (inverse) days'),
            fluidRow(
              column(4,
                     sliderInput("S0", "initial number of susceptible hosts", min = 100, max = 3000, value = 1000, step = 50)
              ),
              column(4,
-                    sliderInput("Iu0", "initial number of untreated wild-type infected hosts", min = 0, max = 1000, value = 1, step = 1)
+                    sliderInput("Iu0", "initial number of untreated wild-type infected hosts", min = 0, max = 100, value = 1, step = 1)
              ),
              column(4,
-                    sliderInput("tmax", "Maximum simulation time (months)", min = 1, max = 1200, value = 100, step = 1)
+                    sliderInput("tmax", "Maximum simulation time", min = 1, max = 1200, value = 100, step = 1)
              )
            ), #close fluidRow structure for input
            fluidRow(
              column(4,
-                    sliderInput("It0", "initial number of treated wild-type infected hosts", min = 0, max = 1000, value = 1, step = 1)
+                    sliderInput("It0", "initial number of treated wild-type infected hosts", min = 0, max = 100, value = 0, step = 1)
              ),
              column(4,
-                    sliderInput("Ir0", "initial number of resistant infected hosts", min = 0, max = 1000, value = 1, step = 1)
+                    sliderInput("Ir0", "initial number of resistant infected hosts", min = 0, max = 100, value = 0, step = 1)
              ),
              column(4,
-                    sliderInput("bu", "Rate of transmission of untreated wild-type hosts", min = 0, max = 0.02, value = 0, step = 0.0001 , sep ='')
+                    sliderInput("bu", "Rate of transmission of untreated wild-type hosts", min = 0, max = 0.02, value = 0.001, step = 0.0001 , sep ='')
              )
            ), #close fluidRow structure for input
            fluidRow(
@@ -127,22 +126,22 @@ ui <- fluidPage(
                     sliderInput("bt", "Rate of transmission of treated wild-type hosts", min = 0, max = 0.02, value = 0, step = 0.0001 , sep ='')
              ),
              column(4,
-                    sliderInput("br", "Rate of transmission of resistant hosts", min = 0, max = 0.02, value = 0.01, step = 0.0001 , sep ='')
+                    sliderInput("br", "Rate of transmission of resistant hosts", min = 0, max = 0.02, value = 0, step = 0.0001 , sep ='')
              ),
              column(4,
-                    sliderInput("cu", "Fraction of resistant generation by untreated hosts", min = 0, max = 0.01, value = 0.0, step = 0.0001, sep ='')
+                    sliderInput("cu", "Fraction of resistant generation by untreated hosts", min = 0, max = 0.5, value = 0.0, step = 0.005, sep ='')
              )
            ), #close fluidRow structure for input
            
            fluidRow(
              column(4,
-                    sliderInput("ct", "Fraction of resistant generation by treated hosts", min = 0, max = 0.01, value = 0.0, step = 0.0001, sep ='')
+                    sliderInput("ct", "Fraction of resistant generation by treated hosts", min = 0, max = 0.5, value = 0.0, step = 0.005, sep ='')
              ),
              column(4,
-                    sliderInput("gu", "Rate at which untreated hosts leave compartment", min = 0, max = 5, value = 0.5, step = 0.1)
+                    sliderInput("gu", "Rate at which untreated hosts leave compartment", min = 0, max = 5, value = 0.5, step = 0.05)
              ),
              column(4,
-                    sliderInput("gt", "Rate at which treated hosts leave compartment", min = 0, max = 5, value = 0.5, step = 0.1)
+                    sliderInput("gt", "Rate at which treated hosts leave compartment", min = 0, max = 5, value = 0.5, step = 0.05)
              )
            ), #close fluidRow structure for input
            fluidRow(
