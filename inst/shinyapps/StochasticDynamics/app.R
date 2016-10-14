@@ -101,7 +101,7 @@ ui <- fluidPage(
                     sliderInput("S0", "initial number of susceptible hosts", min = 100, max = 3000, value = 1000, step = 50)
              ),
              column(4,
-                    sliderInput("I0", "initial number of symptomatic hosts", min = 0, max = 1000, value = 1, step = 1)
+                    sliderInput("I0", "initial number of symptomatic hosts", min = 0, max = 500, value = 1, step = 1)
              ),
              column(4,
                     sliderInput("tmax", "Maximum simulation time (months)", min = 1, max = 1200, value = 100, step = 1)
