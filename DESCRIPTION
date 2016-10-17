@@ -21,6 +21,9 @@ Imports:
     utils
 Depends:
     shiny (>= 0.13.2)
+Suggests:
+    knitr,
+    rmarkdown
 RoxygenNote: 5.0.1
 VignetteBuilder: knitr
 URL: https://github.com/ahgroup/DSAIDE
