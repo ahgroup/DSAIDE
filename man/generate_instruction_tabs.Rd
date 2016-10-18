@@ -13,10 +13,9 @@ tablist a list of tabs for display in a shiny UI
 This function generates the tabs with content for each Shiny app. This is a helper function.
 }
 \details{
-This function is called by the shiny UIs to populate the instruction tabs
+This function is called by the shiny UIs to populate the documentation and information tabs
 }
 \author{
 Andreas Handel
 }
-\keyword{internal}
 

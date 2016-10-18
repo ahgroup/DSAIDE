@@ -2,7 +2,7 @@
 % Please edit documentation in R/simulate_introduction.R
 \name{simulate_introduction}
 \alias{simulate_introduction}
-\title{Simulator for a basic SIR model}
+\title{Simulation of a basic SIR model illustrating a single infectious disease outbreak}
 \usage{
 simulate_introduction(S0 = 1000, I0 = 1, tmax = 300, g = 0.5,
   b = 1/1000)
@@ -37,10 +37,9 @@ A simple SIR model is simulated as a set of ordinary differential
 equations, using an ode solver from the deSolve package.#'
 }
 \section{Warning}{
-
-This function does not perform any error checking. So if you try to do
-something nonsensical (e.g. have I0 > PopSize or any negative values), the
-code will likely abort with an error message
+ This function does not perform any error checking. So if
+  you try to do something nonsensical (e.g. specify negative parameter values
+  or fractions > 1), the code will likely abort with an error message
 }
 \examples{
 # To run the simulation with default parameters just call this function
@@ -53,8 +52,9 @@ plot(result[,1],result[,2],xlab='Time',ylab='Number Susceptible',type='l')
 \author{
 Andreas Handel
 }
-\references{
-See the documentation in the corresponding shiny app for further information and more details about the model 
-see the documentation for the deSolve package for details on ODE solvers
+\seealso{
+See the shiny app documentation corresponding to this simulator
+function for more details on this model. See the manual for the deSolve
+package for details on the underlying ODE simulator algorithm.
 }
 

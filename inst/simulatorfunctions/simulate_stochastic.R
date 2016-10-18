@@ -1,6 +1,6 @@
 ############################################################
 ##simulating a stochastic SEIR type model
-##written by Andreas Handel, ahandel@uga.edu, last change: 10/18/16
+##written by Andreas Handel, ahandel@uga.edu, last change: 10/11/16
 ############################################################
 
 #this specifies the rates used by the adapativetau routine
@@ -25,50 +25,44 @@ stochasticratefunc <- function(y, parms, t)
 } #end function specifying rates used by adaptivetau
 
 
-#' Stochastic simulation of an SEIR-type model
-#' 
-#' @description  Simulation of a stochastic SEIR type model with the following
-#'   compartments: Susceptibles (S), Infected and pre-symptomatic (P), 
-#'   Infected and Symptomatic (I), Recovered and Immune (R)
-#'   
+#' simulate_stochastic function
+#'
+#' @description  Simulation of a stochastic SEIR type model with the following compartments:
+#' Susceptibles (S), Infected and pre-symptomatic (P),
+#' Infected and Symptomatic (I),
+#' Recovered and Immune (R)
+#'
 #' @param S0 initial number of susceptible hosts
 #' @param I0 initial number of infected, symptomatic hosts
 #' @param bP level/rate of infectiousness for hosts in the P compartment
 #' @param bI level/rate of infectiousness for hosts in the I compartment
-#' @param gP rate at which a person leaves the P compartment, which is the
-#'   inverse of the average time spent in that compartment
+#' @param gP rate at which a person leaves the P compartment, which
+#'   is the inverse of the average time spent in that compartment
 #' @param gI rate at which a person leaves the I compartment
-#' @param w rate at which recovered persons loose immunity and return to
-#'   susceptible state
+#' @param w rate at which recovered persons loose immunity and return to susceptible state
 #' @param lambda the rate at which new individuals enter the model (are born)
-#' @param n the rate of natural death (the inverse is the average lifespan)
-#' @param tmax maximum simulation time, units depend on choice of units for 
-#' your parameters
-#' @return The function returns the time series of the simulated model as
-#'   matrix, with one column per compartment/variable. The first column is time.
-#' @details A compartmental ID model with several states/compartments is
-#'   simulated. Initial conditions for the P and R variables are 0. Units of
-#'   time depend on the time units chosen for model parameters. The simulation
-#'   runs as a stochastic model using the adaptive-tau algorithm as implemented
-#'   by ssa.adaptivetau #' in the adpativetau package. See the manual of this
-#'   package for more details. The function returns the time series of the
-#'   simulated disease as output matrix, with one column per
-#'   compartment/variable. The first column is time.
-#' @section Warning: This function does not perform any error checking. So if
-#'   you try to do something nonsensical (e.g. specify negative parameter values
-#'   or fractions > 1), the code will likely abort with an error message
+#' @param n the rate of natural death (the inverse it the average lifespan)
+#' @param tmax maximum simulation time, units depend on choice of units for your
+#'   parameters
+#' @return This function returns the simulation result as obtained from a call
+#'   to the adaptivetau integrator
+#' @details A compartmental ID model with several states/compartments
+#' is simulated as a stochastic model using the adaptive tau algorithm as implemented by ssa.adaptivetau
+#' in the adpativetau package. See the manual of this package for more details.
+#' The function returns the time series of the simulated disease as output matrix,
+#' with one column per compartment/variable. The first column is time.
+#' @section Warning:
+#' This function does not perform any error checking. So if you try to do
+#' something nonsensical (e.g. have I0 > PopSize or any negative values or fractions > 1),
+#' the code will likely abort with an error message
 #' @examples
-#' # To run the simulation with default parameters 
+#' # To run the simulation with default parameters just call this function
 #' result <- simulate_stochastic()
-#' # To choose parameter values other than the standard one, specify them e.g. like this
+#' # To choose parameter values other than the standard one, specify them e.g. like such
 #' result <- simulate_stochastic(S0 = 2000,  tmax = 200, bP = 1/100)
-#' 
-#' # You can display or further process the result, e.g. like this
-#' plot(result[,'time'],result[,'S'],xlab='Time',ylab='Number Susceptible',type='l')
-#' print(paste('Total number of infected at end of simulation:',result[nrow(result),'R'])) 
-#' @seealso See the shiny app documentation corresponding to this simulator
-#' function for more details on this model. See the manual for the adaptivetau
-#' package for details on the stochastic algorithm.
+#' # You should then use the simulation result returned from the function, e.g. like this:
+#' plot(result[,1],result[,2],xlab='Time',ylab='Number Susceptible',type='l')
+#' @references See the manual for the adaptivetau package for details on the algorithm
 #' @author Andreas Handel
 #' @export
 

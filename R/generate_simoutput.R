@@ -1,15 +1,21 @@
 #' @title A helper function that takes result from the simulators and produces plots and text output
 #'
 #' @description This function generates plots and text to be displayed in the Shiny UI. 
-#' This is a helper function. This version can process multiple simulation runs, supplied as a list
+#' This is a helper function. This function processes multiple simulation runs, supplied as a list
+#' @param input the shiny app input structure
+#' @param output the shiny app output structure
+#' @param allres multiple runs of the simulation, supplied as a list. each entry in the list is expected to be a matrix 
+#' @param varlist an optional list of vectors containing the names of variables 
+#'    that should be plotted and processed independently. if not supplied, all variables will be shown in one plot.
+#'    Also, final results for all variables will either be computed according to the groups of variable/compartment 
+#'    names provided in varlist or if not provided, all variables will be used. 
 #' @return output a list with plot, text and warn elements for display in a shiny UI
-#' @details This function is called by the shiny server to produce output returned to the UI
+#' @details This function is called by the shiny server to produce output returned to the shiny UI
 #' @author Andreas Handel
-#' @keywords internal
 #' @export
 
 
-produce_simoutput <- function(input,output,allres,varlist = NULL)
+generate_simoutput <- function(input,output,allres,varlist = NULL)
 {
   
   #check if user provided list of variables to be processed separately

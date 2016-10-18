@@ -2,15 +2,14 @@
 #'
 #' @description This function generates the tabs with content for each Shiny app. This is a helper function.
 #' @return tablist a list of tabs for display in a shiny UI
-#' @details This function is called by the shiny UIs to populate the instruction tabs
+#' @details This function is called by the shiny UIs to populate the documentation and information tabs
 #' @author Andreas Handel
-#' @keywords internal
 #' @export
 
 
 ############################################################
 ##generate the tabs with the instruction and other content for each shiny app
-##written by Andreas Handel, ahandel@uga.edu, last change: 8/27/16
+##written by Andreas Handel, ahandel@uga.edu, last change: 10/17/2016
 ############################################################
 
 generate_instruction_tabs <- function()

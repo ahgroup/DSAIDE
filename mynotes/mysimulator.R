@@ -13,9 +13,9 @@ introductionode <- function(t, y, parms)
     {
   
       #the ordinary differential equations
-  	  dS =  - b * S * I; #susceptibles
+  	  dS =  - b * S * I + w * R; #susceptibles
 	  	dI = b * S * I - g * I; #infected/infectious
-	 	  dR = g * I; #recovered
+	 	  dR = g * I - w * R; #recovered
 
 	 	  list(c(dS, dI, dR))
     }
@@ -59,14 +59,14 @@ introductionode <- function(t, y, parms)
 #' @author Andreas Handel
 #' @export
 
-simulate_introduction <- function(S0 = 1000, I0 = 1, tmax = 300, g = 0.5, b = 1/1000)
+mysimulator <- function(S0 = 1000, I0 = 1, tmax = 300, g = 0.5, b = 1/1000, w = 0)
 {
   Y0 = c(S = S0, I = I0, R = 0);  #combine initial conditions into a vector
   dt = min(0.1, tmax / 1000); #time step for which to get results back
   timevec = seq(0, tmax, dt); #vector of times for which solution is returned (not that internal timestep of the integrator is different)
 
   #combining parameters into a parameter vector
-  pars = c(b = b, g = g);
+  pars = c(b = b, g = g, w = w);
 
   #this line runs the simulation, i.e. integrates the differential equations describing the infection process
   #the result is saved in the odeoutput matrix, with the 1st column the time, the 2nd, 3rd, 4th column the variables S, I, R

@@ -30,12 +30,12 @@ refresh <- function(input, output){
     # Call the ODE solver with the given parameters
     result <- simulate_idcharacteristics(PopSize = PopSize, P0 = P0, tmax = tmax, bP = bP, bA = bA, bI = bI, gP = gP , gA = gA, gI = gI, f = f, d = d, w = w)
 
-    return(list(result)) #need to return as list since that's the structure the produce_simoutput function needs
+    return(list(result)) #need to return as list since that's the structure the generate_simoutput function needs
   })
 
   #function that takes result saved in res and produces output
   #output (plots, text, warnings) is stored in and modifies the global variable output
-  produce_simoutput(input,output,res)
+  generate_simoutput(input,output,res)
 
 } #ends inner shiny server function that runs the simulation and returns output
 

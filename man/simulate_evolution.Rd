@@ -2,7 +2,7 @@
 % Please edit documentation in R/simulate_evolution.R
 \name{simulate_evolution}
 \alias{simulate_evolution}
-\title{simulate_evolution function}
+\title{Stochastic simulation of a compartmental SIR-type model with wild-type and mutant strains and treatment}
 \usage{
 simulate_evolution(S0 = 1000, Iu0 = 1, It0 = 1, Ir0 = 1, tmax = 100,
   bu = 1/1000, bt = 1/1000, br = 1/1000, cu = 1/1000, ct = 1/100,

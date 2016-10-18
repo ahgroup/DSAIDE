@@ -40,7 +40,7 @@ refresh <- function(input, output){
   varlist = list(c("Sh","Ih","Rh"), c("Sv",'Iv'))
   #function that takes result saved in res and produces output
   #output (plots, text, warnings) is stored in and modifies the global variable 'output'
-  produce_simoutput(input,output,res,varlist=varlist)
+  generate_simoutput(input,output,res,varlist=varlist)
 } #ends the 'refresh' shiny server function that runs the simulation and returns output
 
 #main shiny server function

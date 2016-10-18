@@ -43,7 +43,7 @@ refresh <- function(input, output){
     
     #function that takes result saved in res and produces output
     #output (plots, text, warnings) is stored in and modifies the global variable output
-    produce_simoutput(input,output,res)
+    generate_simoutput(input,output,res)
     
 } #ends inner shiny server function that runs the simulation and returns output
 

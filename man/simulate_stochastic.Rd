@@ -2,7 +2,7 @@
 % Please edit documentation in R/simulate_stochastic.R
 \name{simulate_stochastic}
 \alias{simulate_stochastic}
-\title{simulate_stochastic function}
+\title{Stochastic simulation of an SEIR-type model}
 \usage{
 simulate_stochastic(S0 = 1000, I0 = 10, tmax = 100, bP = 0,
   bI = 1/1000, gP = 0.5, gI = 0.5, w = 0, lambda = 0, n = 0)
@@ -12,59 +12,65 @@ simulate_stochastic(S0 = 1000, I0 = 10, tmax = 100, bP = 0,
 
 \item{I0}{initial number of infected, symptomatic hosts}
 
-\item{tmax}{maximum simulation time, units depend on choice of units for your
-parameters}
+\item{tmax}{maximum simulation time, units depend on choice of units for 
+your parameters}
 
 \item{bP}{level/rate of infectiousness for hosts in the P compartment}
 
 \item{bI}{level/rate of infectiousness for hosts in the I compartment}
 
-\item{gP}{rate at which a person leaves the P compartment, which
-is the inverse of the average time spent in that compartment}
+\item{gP}{rate at which a person leaves the P compartment, which is the
+inverse of the average time spent in that compartment}
 
 \item{gI}{rate at which a person leaves the I compartment}
 
-\item{w}{rate at which recovered persons loose immunity and return to susceptible state}
+\item{w}{rate at which recovered persons loose immunity and return to
+susceptible state}
 
 \item{lambda}{the rate at which new individuals enter the model (are born)}
 
-\item{n}{the rate of natural death (the inverse it the average lifespan)}
+\item{n}{the rate of natural death (the inverse is the average lifespan)}
 }
 \value{
-This function returns the simulation result as obtained from a call
-  to the adaptivetau integrator
+The function returns the time series of the simulated model as
+  matrix, with one column per compartment/variable. The first column is time.
 }
 \description{
-Simulation of a stochastic SEIR type model with the following compartments:
-Susceptibles (S), Infected and pre-symptomatic (P),
-Infected and Symptomatic (I),
-Recovered and Immune (R)
+Simulation of a stochastic SEIR type model with the following
+  compartments: Susceptibles (S), Infected and pre-symptomatic (P), 
+  Infected and Symptomatic (I), Recovered and Immune (R)
 }
 \details{
-A compartmental ID model with several states/compartments
-is simulated as a stochastic model using the adaptive tau algorithm as implemented by ssa.adaptivetau
-in the adpativetau package. See the manual of this package for more details.
-The function returns the time series of the simulated disease as output matrix,
-with one column per compartment/variable. The first column is time.
+A compartmental ID model with several states/compartments is
+  simulated. Initial conditions for the P and R variables are 0. Units of
+  time depend on the time units chosen for model parameters. The simulation
+  runs as a stochastic model using the adaptive-tau algorithm as implemented
+  by ssa.adaptivetau #' in the adpativetau package. See the manual of this
+  package for more details. The function returns the time series of the
+  simulated disease as output matrix, with one column per
+  compartment/variable. The first column is time.
 }
 \section{Warning}{
-
-This function does not perform any error checking. So if you try to do
-something nonsensical (e.g. have I0 > PopSize or any negative values or fractions > 1),
-the code will likely abort with an error message
+ This function does not perform any error checking. So if
+  you try to do something nonsensical (e.g. specify negative parameter values
+  or fractions > 1), the code will likely abort with an error message
 }
 \examples{
-# To run the simulation with default parameters just call this function
+# To run the simulation with default parameters 
 result <- simulate_stochastic()
-# To choose parameter values other than the standard one, specify them e.g. like such
+# To choose parameter values other than the standard one, specify them e.g. like this
 result <- simulate_stochastic(S0 = 2000,  tmax = 200, bP = 1/100)
-# You should then use the simulation result returned from the function, e.g. like this:
-plot(result[,1],result[,2],xlab='Time',ylab='Number Susceptible',type='l')
+
+# You can display or further process the result, e.g. like this
+plot(result[,'time'],result[,'S'],xlab='Time',ylab='Number Susceptible',type='l')
+print(paste('Total number of infected at end of simulation:',result[nrow(result),'R'])) 
 }
 \author{
 Andreas Handel
 }
-\references{
-See the manual for the adaptivetau package for details on the algorithm
+\seealso{
+See the shiny app documentation corresponding to this simulator
+function for more details on this model. See the manual for the adaptivetau
+package for details on the stochastic algorithm.
 }
 
