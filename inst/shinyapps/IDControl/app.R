@@ -182,7 +182,7 @@ ui <- fluidPage(
                     sliderInput("f", "Fraction of hosts that are asymptomatic", min = 0, max = 1, value = 0, step = 0.1)
              ),
              column(4,
-                    sliderInput("w", "Rate of waning immunity (w, 1/month)", min = 0, max = 50, value = 0, step = 0.1)
+                    sliderInput("w", "Rate of waning host immunity", min = 0, max = 50, value = 0, step = 0.1)
              ),
              column(4,
                     sliderInput("d", "Fraction of symptomatic hosts that die", min = 0, max = 1, value = 0, step = 0.01 , sep ='')

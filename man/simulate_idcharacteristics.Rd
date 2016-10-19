@@ -5,8 +5,7 @@
 \title{Simulation of an infectious disease transmission model with multiple compartments}
 \usage{
 simulate_idcharacteristics(PopSize = 1000, P0 = 1, tmax = 300, bP = 0,
-  bA = 0, bI = 1/1000, gP = 0.5, gA = 0.5, gI = 0.5, f = 0, d = 0,
-  w = 0)
+  bA = 0, bI = 1/1000, gP = 0.5, gA = 0.5, gI = 0.5, f = 0, d = 0)
 }
 \arguments{
 \item{PopSize}{specifies the initial number of individuals
@@ -34,8 +33,6 @@ is the inverse of the average time spent in that compartment}
 \item{f}{fraction of pre-symptomatic individuals that have an asymptomatic infection}
 
 \item{d}{fraction of symptomatic infected hosts that die due to disease}
-
-\item{w}{rate at which recovered persons loose immunity and return to susceptible state}
 }
 \value{
 The function returns the output from the odesolver as a matrix,

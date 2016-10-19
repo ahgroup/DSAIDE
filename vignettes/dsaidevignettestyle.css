@@ -103,3 +103,8 @@ iframe {
 .progress-message {
 	color: red;
 }
+
+
+.table {
+    width: 10%;
+}
