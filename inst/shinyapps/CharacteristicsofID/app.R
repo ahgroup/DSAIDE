@@ -25,10 +25,9 @@ refresh <- function(input, output){
 
     f = isolate(input$f);
     d = isolate(input$d);
-    w = isolate(input$w);
-
+ 
     # Call the ODE solver with the given parameters
-    result <- simulate_idcharacteristics(PopSize = PopSize, P0 = P0, tmax = tmax, bP = bP, bA = bA, bI = bI, gP = gP , gA = gA, gI = gI, f = f, d = d, w = w)
+    result <- simulate_idcharacteristics(PopSize = PopSize, P0 = P0, tmax = tmax, bP = bP, bA = bA, bI = bI, gP = gP , gA = gA, gI = gI, f = f, d = d)
 
     return(list(result)) #need to return as list since that's the structure the generate_simoutput function needs
   })
@@ -135,9 +134,6 @@ ui <- fluidPage(
              ),
              column(4,
                     sliderInput("d", "Fraction of deaths in symptomatic hosts", min = 0, max = 1, value = 0, step = 0.1)
-             ),
-             column(4,
-                    sliderInput("w", "Rate of immunity loss", min = 0, max = 0.1, value = 0.0, step = 0.01 , sep ='')
              ),
              align = "center"
            )

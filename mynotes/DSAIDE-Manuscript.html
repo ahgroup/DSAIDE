@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+<title>DSAIDE - An R package to learn dynamical systems approaches to infectious disease epidemiology</title>
+
+
+
+
+
+
+<link href="data:text/css;charset=utf-8,%0A%0A%0Aimg%20%7B%0Amax%2Dwidth%3A%20100%25%3B%0Amax%2Dheight%3A%2090%25%3B%0Apadding%3A%206px%3B%0A%7D%0A%2Eimage%20%7B%0Adisplay%3A%20inline%2Dblock%3B%0Amargin%2Dleft%3A%2010px%3B%0Amargin%2Dright%3A%2010px%3B%0Amax%2Dwidth%3A%20100%25%3B%0Amax%2Dheight%3A%2090%25%3B%0Apadding%3A%200%3B%20text%2Dalign%3A%20center%3B%0A%0Aborder%2Dradius%3A%205px%3B%0Aborder%3A%201px%20solid%20%23ccc%3B%20%0A%7D%0A%2Efigure%20%7B%0Amargin%2Dleft%3A%2010px%3B%0Amargin%2Dright%3A%2010px%3B%0Apadding%3A%200%3B%20text%2Dalign%3A%20center%3B%0A%0Aborder%2Dradius%3A%205px%3B%0Aborder%3A%201px%20solid%20%23ccc%3B%20%0A%7D%0A%2Ecaption%20%7B%0Apadding%3A%200%3B%0Amargin%3A%20auto%3B%0Amargin%2Dbottom%3A%206px%3B%0A%7D%0A%0Atable%20%7B%0Amargin%3A%2020px%3B%0Aborder%2Dspacing%3A%200%3B%0A%7D%0Atable%20th%20%7B%20%0Aheight%3A%2036px%3B%0Apadding%3A%205px%3B%0A%0Afont%2Dsize%3A%2016px%3B%0Aline%2Dheight%3A%2036px%3B%0A%0Abackground%2Dcolor%3A%20%23403c3d%3B%0Acolor%3A%20%23fff%3B%0Aborder%3A%201px%20solid%20%23ccc%3B%20%0Aborder%2Dbottom%3A%200%3B%0A%7D%0Atable%20thead%20th%3Aempty%20%7B%0Abackground%3A%20transparent%3B%0Aborder%3A%20none%3B%0A%7D%0Atable%20caption%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Atr%3Anth%2Dchild%282n%2B1%29%20%7B%0A%0Abackground%2Dcolor%3A%20%23f9f9f9%3B%20%0Acolor%3A%20%23000%3B%20%0A%7D%0Atable%20td%20%7B%0Apadding%3A%205px%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0Aborder%3A%201px%20solid%20%23ccc%3B%20%0A%7D%0A%0A%23shinyheadertitle%0A%7B%0Acolor%3A%20%23123c66%3B%20font%2Dweight%3A%20bold%3B%0Atext%2Dalign%3A%20center%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0A%23shinyheadertext%0A%7B%0Acolor%3A%20%23123c66%3B%20text%2Dalign%3A%20center%3B%0Afont%2Dsize%3A%20100%25%3B%0A%7D%0A%23classauthor%0A%7B%0Acolor%3A%20black%3B%20font%2Dweight%3A%20normal%3B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23mylicense%0A%7B%0Atext%2Dalign%3A%20center%3B%0Afont%2Dsize%3A%2070%25%3B%0A%7D%0Aiframe%20%7B%0Adisplay%3A%20block%3B%0Amargin%2Dleft%3A%20auto%3B%0Amargin%2Dright%3A%20auto%3B%0A%7D%0A%23mytextbox%0A%7B%0Aborder%3A%2010px%20solid%20%23cfd7e0%3B%20color%3A%20black%3B%20font%2Dweight%3A%20normal%3B%0A%7D%0A%2EMathJax%20%7B%0Afont%2Dsize%3A%202em%3B%0A%7D%0A%2Eshiny%2Dprogress%2Dcontainer%20%7B%0Atop%3A%2040px%3B%0A%7D%0A%2Eprogress%2Dmessage%20%7B%0Acolor%3A%20red%3B%0A%7D%0A%2Emainbutton%20%7B%0Atext%2Dalign%3A%20center%3B%0Acolor%3A%20%23000000%3B%20background%2Dcolor%3A%20%23D2FFE2%3B%0Aborder%2Dspacing%3A%2020px%3B%0Awidth%3A%20200px%3B%0A%7D%0A%2Esubmitbutton%20%7B%0Atext%2Dalign%3A%20center%3B%0Acolor%3A%20%23000000%3B%20background%2Dcolor%3A%20%23D2FFE2%3B%0Aborder%2Dspacing%3A%2020px%3B%0Awidth%3A%20200px%3B%0A%7D%0A%2Eexitbutton%20%7B%0Atext%2Dalign%3A%20center%3B%0Acolor%3A%20%23000000%3B%20background%2Dcolor%3A%20%23BDCCD9%3B%09width%3A%20200px%3B%0A%7D%0A%2Emainmenurow%20%7B%0Atext%2Dalign%3A%20center%3B%0Apadding%2Dtop%3A%201em%3B%0Apadding%2Dbottom%3A%201em%3B%0A%7D%0A%2Emaintext%20%7B%0Atext%2Dalign%3A%20center%3B%0Acolor%3A%20%232a3f9e%3B%20font%2Dweight%3A%20bold%3B%0A%7D%0A%2Einfotext%20%7B%0Atext%2Dalign%3A%20center%3B%0Acolor%3A%20%232a3f9e%3B%20%7D%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">DSAIDE - An R package to learn dynamical systems approaches to infectious disease epidemiology</h1>
+
+
+
+<div id="abstract" class="section level1">
+<h1>Abstract</h1>
+</div>
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p>A hallmark of infectious diseases is the interaction and feedback provided by pathogens and hosts during the transmission process. As such, classic epidemiological approaches based on study designs assuming inidependence are somewhat limited. It has long been realized that systems approaches based on modeling are useful to study complex systems such as infectious diseases <span class="citation">(<span class="citeproc-not-found" data-reference-id="blower"><strong>???</strong></span> )</span></p>
+</div>
+<div id="package-overview" class="section level1">
+<h1>Package Overview</h1>
+</div>
+<div id="main-use-case" class="section level1">
+<h1>Main Use Case</h1>
+</div>
+<div id="further-uses" class="section level1">
+<h1>Further Uses</h1>
+</div>
+<div id="conclusions" class="section level1">
+<h1>Conclusions</h1>
+</div>
+<div id="references" class="section level1 unnumbered">
+<h1>References</h1>
+<div id="refs" class="references">
+
+</div>
+</div>
+
+
+
+
+</body>
+</html>

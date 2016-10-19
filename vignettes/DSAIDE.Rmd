@@ -23,7 +23,23 @@ The idea behind this package is to give students and others interested in infect
 
 The package consists of several Shiny Apps that allow the simulation and exploration of different topics in infectious disease epidemiology. 
 
-There are currently 11 simulations/apps available. The topics covered by the apps are:
+There are currently 11 simulations/apps available, briefly described in the table below:
+
+
+
+Compartmental deterministic SIR-type
+
+
+| App Name                | Model      | Topic Covered | 
+|------                   | --------   |---------------|
+|   ID Dynamics Intro     | 3 compartment (SIR) ODE model | A first introduction to a simple compartmental SIR model. Allows simulation of a single outbreak for different parameter and initial condition settings.       |  
+|   Characteristics of ID     | 6 compartment ODE model | Allows exploration of different disease states, e.g. pre-symptomatic, asymptomatic, symptomatic and how they impact ID dynamics in a single outbreak. |  
+|   ID Patterns     | 6 compartment ODE model | Includes births-deaths, waning immunity, seasonality. Allows exploration of different ID patterns (single outbreak, osciallations, steady states). |  
+|   Direct Transmission   | 3 compartment ODE model | Allows switching between density-dependent and frequency-dependent transmission and exploration of its impact on ID dynamics. Births-deaths and waning immunity are included. |  
+|   Environmental Transmission   | 4 compartment ODE model | Includes explicit environmental stage. Allows exploration of the impact of environmental shedding, decay and transmission. Births-deaths and waning immunity are included. |  
+|   Vector Transmission   | 5 compartment ODE model | Includes susceptible and infected vectors and their dynamics. Allows exploration of a simple vector-borne transmission model. Births-deaths for vectors and waning immunity for hosts are included. |  
+
+
 
 
 
