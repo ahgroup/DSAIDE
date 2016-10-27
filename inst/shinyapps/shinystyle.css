@@ -10,6 +10,7 @@
  * near white: #f9f9f9
  * light blue: #3388CC
  * blue: #005599
+ * red: #ff00000
 ------------------------------------------------ */
 
 
@@ -170,7 +171,7 @@ iframe {
 .exitbutton {
 	text-align: center;
 	color: #000000; 
-	background-color: #BDCCD9;	
+	background-color: #ff00000;	
 	width: 200px;
 }
 
