@@ -12,7 +12,7 @@
 
 <meta name="author" content="Andreas Handel" />
 
-<meta name="date" content="2016-10-18" />
+<meta name="date" content="2016-12-19" />
 
 <title>DSAIDE Package Tutorial</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">DSAIDE Package Tutorial</h1>
 <h4 class="author"><em>Andreas Handel</em></h4>
-<h4 class="date"><em>2016-10-18</em></h4>
+<h4 class="date"><em>2016-12-19</em></h4>
 
 
 
@@ -82,7 +82,78 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="package-description" class="section level2">
 <h2>Package description</h2>
 <p>The package consists of several Shiny Apps that allow the simulation and exploration of different topics in infectious disease epidemiology.</p>
-<p>There are currently 11 simulations/apps available. The topics covered by the apps are:</p>
+<p>There are currently 11 simulations/apps available, briefly described in the table below:</p>
+<table style="width:44%;">
+<colgroup>
+<col width="9%"></col>
+<col width="12%"></col>
+<col width="22%"></col>
+</colgroup>
+<thead>
+<tr class="header">
+<th>App Name</th>
+<th>Model</th>
+<th>Topic Covered</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ID Dynamics Intro</td>
+<td>3 compartment (SIR) ODE model</td>
+<td>A first introduction to a simple compartmental SIR model. Allows simulation of a single outbreak for different parameter and initial condition settings.</td>
+</tr>
+<tr class="even">
+<td>Characteristics of ID</td>
+<td>6 compartment ODE model</td>
+<td>The potential role of different disease states (e.g. pre-symptomatic, asymptomatic, symptomatic) on ID dynamics.</td>
+</tr>
+<tr class="odd">
+<td>ID Patterns</td>
+<td>6 compartment ODE model. Includes births-deaths, waning immunity, seasonality.</td>
+<td>Different ID patterns (single outbreak, osciallations, steady states).</td>
+</tr>
+<tr class="even">
+<td>Direct Transmission</td>
+<td>3 compartment ODE model. Births-deaths and waning immunity are included.</td>
+<td>The differences between density-dependent and frequency-dependent transmission and their impact on ID dynamics.</td>
+</tr>
+<tr class="odd">
+<td>Environmental Transmission</td>
+<td>4 compartment ODE model. Includes explicit environmental stage. Births-deaths and waning immunity are included.</td>
+<td>The impact of environmental shedding, decay and transmission.</td>
+</tr>
+<tr class="even">
+<td>Vector Transmission</td>
+<td>5 compartment ODE model. Includes susceptible and infected vectors and their dynamics. Births-deaths for vectors and waning immunity for hosts are included.</td>
+<td>Exploration of a simple vector-borne transmission model.</td>
+</tr>
+<tr class="odd">
+<td>Reproductive Number</td>
+<td>3 compartment ODE model. Includes vaccination of population at beginning of simulation. Births-deaths and waning immunity are included.</td>
+<td>The reproductive number concept and how to estimate it from (simulated) data.</td>
+</tr>
+<tr class="even">
+<td>ID Control</td>
+<td>9 compartment ODE model. An environmental and 2 vector stages as well as 6 host stages.</td>
+<td>The impact of different control measures for different types of ID.</td>
+</tr>
+<tr class="odd">
+<td>Host Heterogeneity</td>
+<td>6 compartment ODE model. 2x SIR for 2 different hosts.</td>
+<td>The impact of host heterogeneity and core groups on ID dynamics and control.</td>
+</tr>
+<tr class="even">
+<td>Stochastic dynamics</td>
+<td>4 compartment (SEIR) stochastic model.</td>
+<td>The impact of stochasticity on dynamics, the phenomenon of ID extinction.</td>
+</tr>
+<tr class="odd">
+<td>Evolutionary dynamics</td>
+<td>5 compartment stochastic model. Untreated and treated hosts infected with wild-type, and hosts infected with resistant strain.</td>
+<td>Interaction between drug treatment and evolution/emergence of drug resistance.</td>
+</tr>
+</tbody>
+</table>
 <p>Each App is meant to be fully self-explanatory. The app contains a description of the model, a list of tasks students should try, and information for further details.</p>
 <p>The underlying models are written mostly as deterministic, compartmental ordinary differential equations. Some models are written as stochastic equivalents. By wrapping the models around a graphical user interface, it allows exploration of models and infectious disease patterns without the need to write R code.</p>
 <p>At the same time, the package is structured in a modular way that should allow those interested in the actual models and learning R coding to easily move from one stage to another.</p>
@@ -96,6 +167,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">'DSAIDE'</span>)</code></pre></div>
 <p>Then load the package:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;DSAIDE&quot;</span>)</code></pre></div>
+<pre><code>## Loading required package: shiny</code></pre>
+<pre><code>## Welcome to the DSAIDE package. Type dsaidemenu() to get started.</code></pre>
 <p>Finally, call the main menu for the package:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dsaidemenu</span>()</code></pre></div>
 <p>This will bring up a simple graphical menu from which the user can select each App. After exploring an App, the user returns to the main menu and eventually exits the main menu. In this way, no coding experience is needed, the student can fully focus on learning the infectious disease dynamics related topics.</p>
@@ -109,7 +182,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">result &lt;-<span class="st"> </span><span class="kw">simulate_introduction</span>(<span class="dt">S0 =</span> <span class="dv">1000</span>, <span class="dt">I0 =</span> <span class="dv">1</span>, <span class="dt">tmax =</span> <span class="dv">300</span>, <span class="dt">g =</span> <span class="fl">0.5</span>,  <span class="dt">b =</span> <span class="dv">1</span>/<span class="dv">1000</span>)</code></pre></div>
 <p>Calling the simulation function produces time-series for the dynamics of each of the variables that are tracked. The Shiny app automatically produce plots of these time-series. Users can produce their own plots, e.g. such as</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(result[,<span class="st">&quot;time&quot;</span>],result[,<span class="st">&quot;S&quot;</span>],<span class="dt">xlab=</span><span class="st">'Time'</span>,<span class="dt">ylab=</span><span class="st">'Number Susceptible'</span>,<span class="dt">type=</span><span class="st">'l'</span>)</code></pre></div>
-<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASAAAAEgCAMAAAAjXV6yAAAAS1BMVEUAAAAAADoAAGYAOpAAZrY6AAA6ADo6AGY6kNtmAABmADpmtrZmtv+QOgCQ2/+2ZgC2/7a2///bkDrb////tmb/25D//7b//9v///+v8YZIAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAH00lEQVR4nO2di3brJhBFlYdbu03iG0V+/P+XVqCH7dTizCAk4+HstXp7VwOC7CI04qXqTIJUj65A7lAQgIIAFASgIAAFASgIQEEACgJQEICCABQEoCAABQEoCEBBAAoCUBCAggAUBKAgAAUBKAhAQQAKAlAQgIIAFASgIAAFASgIQEEACgJQEICCABQEoCAABQEoCEBBAAoCUBCAggAUBKAgAAUBKAhAQQAKAlAQgIIAFASgIAAFASgIQEEACgJQEICCABQEoCAABQGuBB131dvPfvu4umTJRVDz8lW//Rx3NHTDKOj0uT23gs716/d06tNn5QmlMcYo6Lj78IKawC9fV33zaqpi2tn/WtC+/WcCl6Snnk5ljN99UF19TKZ1jWxIXMxNdvsUq6qXr+m0hbcgAWPzKrEPEuEbWUsx7YeRNKQTNLSMwmIcCboWVHKgKKHoQLG/z0Ldb+GP+cY/w+tAIFR2oDg0j3mvGtXToBY0NI/wyyoKFJ8matALOn2++38HexcYKBoW1LeKJvQylrDcR6MUNDdQ/HVry+/whxHRgiTAQLG/XP6GlhGEA8XhctkbWkSQ5DEfc91HoO6DtmM3NN0HCQJFq4JkaFpQ7oYiAsV/uud7qkDRrKDgvJgiUDQmaH+JZGYNZJgVdGlBqco1Jyh1uQYFwQEz1eUyDxVjXlb9a2p4wAy+sVV3/5ohMcMd3SM8MGDWpkFvsoYFSeKgcdBIUq41QUMLCg/HN4G1Db/KtSZoGLQHBuTlWhOUZnLVsKDk5VIQuJw9QSmWAVsWlGQZsGFBomXAmnKtCZIsA1aVa02QYBmwrty831aj+6B0gWLeTSh6uCNu5vnuoglzglKXS0HgcuYEue557uJDy4K6x9dxB0Z85OUaEyRZYaYr15igYV45WSRtTVA/VHbYpHoXMyeodRMdB90t15yg1OVSELicNUFuJKieO7VqWVAbBx027+c946D7CV0c5GZ+GAdNJHSC9q2ceQcLGBbU3lvHnRuTDtxi8mXAqjo8gqhOug2CgpPvqkWc9gRhNMuAlZdenUUEKVtQ1oZmzM2n2y9mS1BP+Cmv2y9mUlDCQNGooHSBolFB6QJFm4ISBorGBAkOdin7MS9gOlC8vx29OEFFtyA/WN+AMemCA8XD5qNbCOz/Mkm5gaIPD91wEAPFuwn9ysRuqIOB4r2E/vnUrd8MCnJtzE2fTfZUpgV13U9or4b389fXzQM/UK4hQb7n8VvFQkOKvol1fVRxj/nm5cuNSPcd9QSu3fSxkGRE0ZQgFwK1fg6b4Lyhb2dltiAZx93rt29Ck6cMFS7INzTHZD9VvCDd5TI2REEACgLoBV2NZSQr15SgyeB4RrmmBKU5fdSwIMnMqrZcU4KWKJeCwOWMCUq861lTi/WJ6aQT73rW1GJ94uKgpLueNbVYn7g4KOmuZ00t1ie+BUXtep446NuUoPS7nq0JmrPreaJcY4IWKDdfQxQEiL7Fkp2jqKvG6sR00vDDI/pyLQkSfHhEX64lQem3hWuqsToxLUjw4RFtuZYELfLhETOCkn2hzqqgpcqlIHC5fI/pihA03GbptiJo6rE2MU8x/PhSbkXQ1GNtFpk41C4k19RjbRaZelbuWVXVY20i+iC/OjNI2S2oOx0n6Z5VVUVWJv5VI4j+G4d2BC2xukNTkZXJY32QqibrskgnHREoZhtML7P8RR8onnM1tMi7WMRj3v+3zFhOkHbPas4scotFtqAsiW5BwSHpoj+GPRDckln0x7B7Zs5qPA3RguYtoJq4qORHj/+JKHn4POm6Ve+7obBGk4IEZ3f4eenOYIGCBHSPeT82S0H3GALF/dtPaYJkE4djoLh/L03QhX3oswiDltZnoYLa3zw4bDaE0uB7omYFHTYptkTZFVTPXYBnkYug0+fMr7LY5DpQTDFqb45BUDNvXZBdekHsfqbQBIpF8jQjXI+CggAUBKAgAAUBKAhAQYD0gtCJubcc/v6+yQRz+wUmW10eN9nwK6m4lskFuc0e8g0f7ti460ww9+mz/WntDlGT5/EDfbdJ5bVMLagblpWemNt0gfuYCefujwvtT+OT5RlPqlXkGUktaPwFJImbausncsdM0tzt/3xtHidIXc55AUF+nZp8/roTNGSS5t5fJRXmcXN66nLO6QV1N7a8E/KVHDMJc7vFJbo8je/YteU4nlFQM/TRml/WzXfmIGiFW6xbnKS+XVy/lcEtpuqkz4MgTefZryRVd7htuhw6ad1jvhekefxepuaUoUGjCg1GHhwo9s1cHsBdvkWtCPrcWQDjKcYPDhSvwnoRfT8wZkK5625c2KUR53ET6sO6JnmeHr6sAigIQEEACgJQEICCABQEoCAABQEoCEBBAAoCUBCAggAUBKAgAAUBKAhAQQAKAlAQgIIAFASgIAAFASgIQEGA7ARdDnr6k+TgwrlkJ8ghOZBvLSgIkLEgd1TIYfNve8tt3Tmzfk3YsMp+PbIX5BfWv3779XJ+Ke9mXUPZC9qehz8+uu8vJvlgrpzsBX2cxz+6NXPdisPVeCpBfQBAQcEWtDLPJCjNkddKnklQ9/Gz/brt6KkE+Tho5ZMhshSUExQEoCAABQEoCEBBAAoCUBCAggAUBKAgAAUBKAhAQQAKAlAQgIIAFASgIAAFASgIQEEACgJQEOA/igCcnbuKM7cAAAAASUVORK5CYII=" alt /><!-- --></p>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
 <p>The more interesting use of these simulator functions outside of the Shiny App is that it allows additional exploration of the models. For instance it is possible to systematically loop over a parameter, record some quantity of interest for each run, and report the result at the end. The following is a simple example, where we loop over different values of the recovery rate and record the peak of the outbreak each time:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gvec =<span class="st"> </span><span class="kw">seq</span>(<span class="fl">0.1</span>,<span class="dv">2</span>,<span class="dt">by=</span><span class="fl">0.1</span>) <span class="co">#values of g which we went to run the simulation for</span>
 peak =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>,<span class="kw">length</span>(gvec)) <span class="co">#this will hold the peak values for each g</span>
@@ -119,7 +192,7 @@ for (n in <span class="dv">1</span>:<span class="kw">length</span>(gvec))
   peak[n] &lt;-<span class="st"> </span><span class="kw">max</span>(result[,<span class="st">&quot;I&quot;</span>])
 }
 <span class="kw">plot</span>(gvec,peak,<span class="dt">type=</span><span class="st">'p'</span>,<span class="dt">xlab=</span><span class="st">'Rate of recovery'</span>,<span class="dt">ylab=</span><span class="st">'Max number of infected'</span>)</code></pre></div>
-<p><img src="data:image/png;base64,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" alt /><!-- --></p>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASAAAAEgCAMAAAAjXV6yAAAAaVBMVEUAAAAAADoAAGYAOpAAZrY6AAA6ADo6AGY6Ojo6OpA6kNtmAABmADpmOpBmZgBmZmZmtttmtv+QOgCQOmaQkGaQ27aQ2/+2ZgC225C2/7a2///bkDrb2//b////tmb/25D//7b//9v///+e2pxgAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAJfUlEQVR4nO2djXbjJhCFtZuk3bXTbp22UbtqbEfv/5AVoD9si4sQQoDuPSebbDJCypdhGKEBFTVlVLH1BcQuAgIiICACAiIgIAICIiAgAgIiICACAiIgIAICIiAgAgIiICACAiIgIAICIiAgAgIiICACAiIgIAICIiAgAgIiICACAiIgIAICIiAgAgIiICACAiIgIAICIiAgAgIiICACAiIgIAICIiAgAgIiICACAiIgIAICIiAgAgIiICACAlKArsei19efG19SXBo86FwcxL9f3re7mBjVA/p8e5afq6ePzS4mRvWArseT/HxmF9M08qCD/FzSgzSNY5BwoYoxSNdomJdDGf3nRsyDgAgISO9iTx/lYbtriVKjIP3lvcmBrkcS0qQN8yJJrJgHadISRQGIiaKuOw9ioqjrNgZVxWnDq4lQt4kiE+kbMQ8CGoL0q/IdBmldd4A4zOtqAZXDlCsTRU13HkTpYpAGGgESKeKZPexGAyCVQl+Pz9tdTIzipD3Q3aT9smG+SEazAdXqLuzysigIFS2lJW0EkQOghk2x+F6sGH1ELRdAFvp8U/452Q2LrsXYCa0DqOqSgMlsIGtAcNK+i+P19BP8nAHhSfsuE6ink4GMY5DFpL2dB+U6itlM2vfzsaYYlIbcPcg4ad9Vok3aZAzIz6R9zoC8TNpnDchCNoliGpoJqInQNjOKVoliGpoN6GAByHaYT0Fzu1g1zANMD/PTieL8WYSt5ZAH0YOWGQrtOlHEI1S980Sx9DEZnTEgP7V3WQOyuMcQXiZmZifz7YwBdYtZTJJ8fnk30MwYULsUwSTZC0vJcYfDfL+mzpwotrmQaUYxCa2TBwnvqfbqQTa6Hr/+lC40uS5x54BEoJKajOe5AhJ38zgG+Tzv1lrLgwI3t54ICCgwoIn5oIjnh6LwoJgfscYAKOqH9OtM2s87b16AbCbtZ543J0B2k/Zzz5tXDPLvQRzF1m9uPbkA8lXEmYScJszETA+rO6YM+0LyRYt6MwbkZylCxoDoQciQMQgZchRbZGhuZQflL4HPu7UICIhFnEBrFVDttYiz1urrprTvEjyL8hfL1T4Pvhvf6OaSKMJ7DFcPinHibJXqDsciziinXlcaxZyKOPcEyKm5bAD52Ggy4xhktdGkY6KYxShms9HkrhNFizWr+04ULdas7nu1j8Wa1X17kM2a1X2v9rHRrlf7hD3v1nLuYgv3As4ZkPVrI857Xe1j8eKRsigOl+8fu1ztY/PoWcArpfe4DfMR5UkuHgRffiQZyvVibqt9YrppdX70bHp9lrqR/fyvdvOgqKY9ZgKyfAFbfyM7ec+fKyBbtWPc9OLEvQNa1lziMajrZisWUCU+ivl4oUY0AJBWeXBoaGUH80EWj559nndrOcQglQGGOu/WcgH0wjWrJkObrSl8nTeCWBU4SM87bwz5UMxBOoqMOuYgnSigcBsLJAoo4HnTjEEhz5voKMa9O2wMF76YJX9A7RZcq5+3Nd+sr7kDCrmgbsNo7Q7I6d0+btMdW473zoAWvj4rY0CwcMPveQfjVAAFPm9vnVwMCnTe1jylUcxmu2R/5705LDgoB0Abbpe8QVdzCdKbTdpvEayjnlF8fFDsgELOST88SPazYLHIIQbh7ZJ9nvfuqPFHACU23aE8J2RXSyQPenSw1tW6L6Y+Q4Mpw5UArbtuvgfUu9Nt37vri8jAaDjjoiy19nKo9so1UOLfqc/QYNJwHUDrL2a5iUWpAQq1HCpOQLJ41axgy6GijEHdTNnnnxG8JTPKUewsV2BUfPnRpKEawxcuC09GDoAkIR93rPPO6slyncRGMy+L4o+3pQvGZp/Vl+XqgJrwItdqLLsXm3tWf5brA/pNuY5pFPOmFAEFVZKAvCxFmH1Wb5brAyqfPqrn+vISYhxLEZCYtD+LzU1CDGNpAjrVl19/yo/VlSIgcScqNv4PAighDTxF3Ut5CNPFEtI4k34WI1mIQSwlJXP7vZUICEgB6p5WhEoUE1LrQdfjwr3as9VomF84V5apxjGoZPe6lx6kq1BTiunodhS7vNCLNGmAxGBGPrpGgMRritnBbtUDKg1vcPal8e5nan5u+pSjm2bTpmljQ1OTMtPrh2lzi5paQObnhZ4kNm/qN3ACS2TFi8kfHWYyNDT5+dY0UHXwzC3qCphJq0f73XIr86qi83Ad+mEGQ1OTaqK0XahjbvFGAe/FtIusK9P1nYtD/9vqhxkMzU1Ka+U1xhZvFRKQtj1c+a0wPuceABl3lRv/BDXZ1cqjFjUFBKT+fu1f8XoUE3OGDeL769cOMxniJlt6qEVNWwFqvzX9V5wPCDV5HsfoGAE98GzDQyaHLmZucqhpirWLPYiNhoHZLkjX94AmmqyG6BRrkNZGV3WRNl0MDco3JCeaHO+0Huswr+dn8vpsgjRK60aj2HSTl5fxt+cnioFUqQxfrZspzbd+8vdWlpXxxmBkON1k+zb0L+82LWripD0QAQEREBABAREQEAEBERAQAQEREBABAREQEAEBERAQAQEREBABAREQEAEBERAQAQEREBABAREQEAEBERAQAQEREFDQ6g71gFyrLjhPPp6vlu5E40dBAcmCE21Dy+kNUv3sLbtc4QFpe6KaAMVR9R8ekHrdtqpUES99E5sZ3FTBN/8RP5GFP9fXv8QXvUnVFtN3ZrJoSlaJSwNp/rsscfGzcGAjDxK1TuKtttJPxBd9hZPogWI/tc6DVO1qb6IOOnRmbV3Q00dnIM1FydDnmx8PDA9IFMOJHQzkX19gUNHmPK6Cb1xiAHSoB5MuMvVmotKw+aZuIHeR8PE2sHqTUazfSa9QgFQxXFudqj41/w6ATvVg0tWwambNT3sDdVjjoL42SAjtQZeX1o2Kr/+0HnQuRuDUb958WwfUmXR+0ZsJFk0P6w3UYY0rGcofZyl4F5PlyvL367qYVk5p8qB6qILuzRoW/47bUIddX/9+9bSKO3wMKkWJqQg456KLQaex0V0MOo3G/LsY1HznhwxDvcFJ/vibry1IwgMS44xynuKgfmH5kvay9YH7UUxWfXcm4gvRUGcmEobnkUF7WOUtC98gDxIXL+twxS9cdnnQUBbdJjQaoMFEz4PqPjNvDVpzX2NYtjerl+++NvnJFFDl7UYuS0CXF3+7RGUJyKcICIiAgAgIiICACAiIgIAICIiAgAgIiICACAiIgIAICIiAgAgIiICACAiIgIAICIiAgP4HunPdmWnVGcAAAAAASUVORK5CYII=" /><!-- --></p>
 <p>Thus, the user can add their own custom code to the existing simulator functions and with a few lines of extra code analyze and explore many more questions and scenarios than those accessible through the Shiny App interface. This gives the user a lot more flexibility using these simulations, but requires being able to write some R code to interface with the supplied simulator functions.</p>
 </div>
 <div id="level-3-modifying-simulations" class="section level3">

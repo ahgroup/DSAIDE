@@ -2,7 +2,9 @@
 title: "DSAIDE Package Tutorial"
 author: "Andreas Handel"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output: 
+  rmarkdown::html_vignette:
+    #css: dsaidevignettestyle.css
 vignette: >
   %\VignetteIndexEntry{DSAIDE}
   %\VignetteEngine{knitr::rmarkdown}
@@ -23,7 +25,25 @@ The idea behind this package is to give students and others interested in infect
 
 The package consists of several Shiny Apps that allow the simulation and exploration of different topics in infectious disease epidemiology. 
 
-There are currently 11 simulations/apps available. The topics covered by the apps are:
+There are currently 11 simulations/apps available, briefly described in the table below:
+
+
+
+| App Name                | Model      | Topic Covered | 
+|------                   | --------   |---------------|
+|   ID Dynamics Intro     | 3 compartment (SIR) ODE model | A first introduction to a simple compartmental SIR model. Allows simulation of a single outbreak for different parameter and initial condition settings.       |  
+|   Characteristics of ID     | 6 compartment ODE model | The potential role of different disease states (e.g. pre-symptomatic, asymptomatic, symptomatic) on ID dynamics. |  
+|   ID Patterns     | 6 compartment ODE model. Includes births-deaths, waning immunity, seasonality. | Different ID patterns (single outbreak, osciallations, steady states). |  
+|   Direct Transmission   | 3 compartment ODE model. Births-deaths and waning immunity are included. | The differences between density-dependent and frequency-dependent transmission and their impact on ID dynamics.  |  
+|   Environmental Transmission   | 4 compartment ODE model. Includes explicit environmental stage. Births-deaths and waning immunity are included. | The impact of environmental shedding, decay and transmission.  |  
+|   Vector Transmission   | 5 compartment ODE model. Includes susceptible and infected vectors and their dynamics. Births-deaths for vectors and waning immunity for hosts are included. | Exploration of a simple vector-borne transmission model. |  
+|   Reproductive Number  | 3 compartment ODE model.  Includes vaccination of population at beginning of simulation. Births-deaths and waning immunity are included. | The reproductive number concept and how to estimate it from (simulated) data. |  
+|   ID Control  | 9 compartment ODE model. An environmental and 2 vector stages as well as 6 host stages. | The impact of different control measures for different types of ID. |  
+|   Host Heterogeneity | 6 compartment ODE model. 2x SIR for 2 different hosts. | The impact of host heterogeneity and core groups on ID dynamics and control. |  
+|   Stochastic dynamics  | 4 compartment (SEIR) stochastic model. | The impact of stochasticity on dynamics, the phenomenon of ID extinction. |  
+|   Evolutionary dynamics  | 5 compartment stochastic model. Untreated and treated hosts infected with wild-type, and hosts infected with resistant strain. | Interaction between drug treatment and evolution/emergence of drug resistance. |  
+
+
 
 
 
