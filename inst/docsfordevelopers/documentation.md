@@ -1,13 +1,14 @@
 #Documentation for working on the DSAIDE package and developing new Apps 
 
-##To work on package in RStudio: 
+##To work on package through RStudio: 
 * Load DSAIDE.Rproj in RStudio. Edit files as needed.
+* Optionally, use RStudio tie-in with github to sync project to github (the 'git' tab).
 
 ##Package structure 
 * The main R functions, i.e. the menu and the simulation scripts are in the R/ folder
 * The R/ folder also has a few helper/convenience functions
-* The shiny apps are in the inst/shinyapps/ subfolder. Each App has a corresponding www/ subfolder which contains the documentation. This folder is automatically generated as described below.
-* the inst/shinyapps/allappdocumentation foulder contains html files for content in shiny apps. This will need to be processed, see below.
+* The shiny apps are in the inst/shinyapps/ subfolder (which gets copied to /shinyapps in the deployed package). Each App has a corresponding www/ subfolder which contains the documentation. This folder is automatically generated as described below.
+* the inst/shinyapps/allappdocumentation folder contains html files for the documentation content of all shiny apps. These HTML files are created from an R markdown file and will need to be further processed. See information below.
 * \inst\docsfordevelopers contains information for someone wanting to add new apps to the package
 * \inst\simulatorfunctions contains the R code for all simulator functions for easy access and editing by users
 * folder \vignettes contains the vignette - this is copied to \inst\doc at some point, don't edit it there
@@ -29,12 +30,12 @@
 * Add your App to the main menu by modifying dsaidemenu.R and the MainMenu Shiny app.R file.
 
 ##To prepare App documentation
-* Write the documentation for the app as markdown file. A template exists in the allappdocumentation/rmarkdowntemplate/ folder. Add information to the template as described there. 
+* Write the documentation for the app as markdown file. A template exists in the allappdocumentation/rmarkdowntemplate/ folder. Add information to the template as described in the template. 
 * Turn your documentation file into an HTML file and copy to the allappdocumentation/ folder. 
 * First part of file name must be the same as name for the Shiny app. You can have additional text following an underscore, it will be stripped.  
-* Run the R script processAllFiles.R, which will execute a function by the same name inside the script. This splits html files. Each section in the html file that has a 'shinytabNNN' id will be extracted and placed into a separate html file. Any other sections are ignored.
+* Run the R script processAllFiles.R, which will execute a function by the same name inside the script. This function runs through all html files in that folder and splits them. Each section in the documentation html file that has a 'shinytabNNN' id will be extracted and placed into a separate html file. Any other sections are ignored. Those 'shinytabNNN' files are later loaded by the shiny UI and displayed inside the app.
 * The newly created files will be placed in the www subfolders for each shiny app in inst/shinyapps/
-* The www subfolder for each shiny app is deleted and re-created on each run, so should not contain any other files
+* The www subfolder for each shiny app is deleted and re-created on each run, so don't edit manually
 * Naming for newly created html files is shinytab1.html, etc. and header.html/footer.html
 * see also comments in processAllFiles.R for more details
 
@@ -47,14 +48,15 @@
 ##Contributing your Apps
 * The best way to add your apps to the DSAIDE package is if you fork the package from github, write your app, then send a pull request.
 * Alternatively, if you are not familiar with that approach, you can email me your new App files and I can manually integrate them.
+* If you plan to write and contribute new apps, maybe best if you contact me (ahandel@uga.edu) and we can discuss beforehand, will likely make for a smoother process.
 
 ##To build the DSAIDE package:
 * "by hand" edit the DESCRIPTION file to make sure it's up to date
-* Use the functions in the 'build' tab to test and build the package.
+* in RStudio, use the functions in the 'build' tab to test and build the package.
 * Run clean and rebuild, then build and reload using menu, or devtools::load_all()
-* Run the check 
+* Run the check, fix any errors 
 
-##To use package for users:
+##To use package:
 * install either from CRAN or github
 * for github install, install devtools package, load it
 * then run install_github("ahgroup/DSAIDE")
@@ -62,5 +64,4 @@
 * dsaidemenu()
 
 ##Notes:
-* One can also use the 'git' tab to sync with github.
 * All needed libraries should be loaded via the DESCRIPTION file and not in separate R files
