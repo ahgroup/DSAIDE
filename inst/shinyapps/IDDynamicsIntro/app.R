@@ -99,10 +99,10 @@ ui <- fluidPage(
            
            fluidRow(
              column(6,
-                    sliderInput("b", "Rate of transmission", min = 0, max = 0.01, value = 0, step = 0.0001, sep ='')
+                    sliderInput("b", "Rate of transmission (beta)", min = 0, max = 0.01, value = 0, step = 0.0001, sep ='')
              ),
              column(6,
-                    sliderInput("g", "Rate at which a host leaves the infectious compartment", min = 0, max = 2, value = 0.5, step = 0.1)
+                    sliderInput("g", "Rate at which a host leaves the infectious compartment (gamma)", min = 0, max = 2, value = 0.5, step = 0.1)
              ),
              align = "center"
            ) #close fluidRow structure for input
