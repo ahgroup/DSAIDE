@@ -43,7 +43,7 @@ For this model, we include the following processes:
 * All infected individuals first enter the presymptomatic stage. They remain there for some time (determined by rate $g_P$, the inverse of which is the average time spent in the presymptomatic stage). A fraction $f$ of presymptomatic hosts move into the asymptomatic category, the rest become symptomatic infected hosts.
 * Asymptomatic infected hosts recover after some time (specified by the rate $g_A$). 
 * Similarly, infected symptomatic hosts leave that stage at rate $g_I$. For symptomatic hosts, two outcomes are possible, either recovery or death. The parameter $d$ determines the fraction of hosts that die.
-* Recovered individuals are immune to reinfection and can lose their immunity at some rate. 
+* Recovered individuals are immune to reinfection. 
 
 
 
@@ -52,11 +52,11 @@ The flow diagram and the set of ordinary differential equations (ODE) which are 
 
 ![Flow diagram for this model.](../media/IDCharacteristicmodel.png)
 
-$$\dot S = -S (b_P P + b_A A + b_I I) + wR $$ 
+$$\dot S = -S (b_P P + b_A A + b_I I)  $$ 
 $$\dot P = S (b_P P + b_A A + b_I I) - g_P P $$ 
 $$\dot A = f g_P P - g_A A $$ 
 $$\dot I = (1-f) g_P P - g_I I $$ 
-$$\dot R = g_A A + (1-d) g_I I - wR$$
+$$\dot R = g_A A + (1-d) g_I I $$
 $$\dot D = d g_I I $$
 
 
@@ -73,7 +73,7 @@ _A general note: Some of the tasks below (and in future apps) are fairly open en
     * A population size of 1000, 1 initially infected, presymptomatic host, simulation duration 200 days.
     * Assume that only symptomatic individuals transmit, at rate $b_I = 0.001$.
     * Assume that the duration of the presymptomatic, asymptomatic and symptomatic periods are all 5 days long. (Hint: The parameters g~P~, g~A~ and g~I~ are the inverse of these periods.)
-    * Assume that there are no asymptomatic infections, nobody dies due to disease, and immunity does not wane.
+    * Assume that there are no asymptomatic infections and nobody dies due to disease.
 
 * With parameters set to correspond to the scenario just described, run the simulation.
 * Record the number and fraction of susceptible/infected/recovered remaining at the end of the outbreak.    
@@ -127,6 +127,6 @@ _A general note: Some of the tasks below (and in future apps) are fairly open en
 
 
 ##More sections
-This might not go into shiny
+This has not shinytab label and therefore does not go into the shiny app
 
 
