@@ -14,26 +14,11 @@ bibliography: vignetterefs.bib
 ---
 
 
+
 ## Summary
 _Dynamical Systems Approaches to Infectious Disease Epidemiology (DSAIDE)_ is an R package that allows individuals to explore and study concepts of infectious disease epidemiology using dynamical systems models, without the need to read or write computer code.
-
-
-
-## Background and Motivation
-Epidemiology has its roots in the study of infectious diseases. While modern epidemiology deals with a host of different health related topics, infectious diseases are still an important component. The classical study approach of epidemiology, based on randomized controlled trials, cohort studies, case-control studies, and related study designs, can be successfully applied to infectious diseases. 
-However, this framework of study does generally not account for a crucial aspect of infectious diseases, namely the non-independence between individuals. A hallmark of infectious diseases is the interaction and feedback provided by pathogens and hosts during the transmission process. Due to the fact that infected hosts transmit to others, infectious disease dynamics has inherent feedback loops built in that need to be accounted for. Classic epidemiological approaches based on study designs assuming independence are therefore not suitable to study important infectious disease concepts such as population level immunity thresholds, critical community size, indirect effects of vaccination and other interventions, etc.
-
-On the research side, this has long been accounted for in the infectious disease modeling paradigm, where one builds and analyzes a system of interacting components (e.g. susceptible and infected hosts). Such systems approaches based on modeling are useful to study complex systems such as infectious diseases and have a long history [@blower04]. The challenge with such approaches in a teaching setting is that students need to master not only the scientific material, but generally also a fair amount of mathematics and code writing.
-
-In my own experience teaching a course on _Modeling Infectious Diseases_, students often struggle with the mathematical and coding aspects, which interfers with their ability to understand the scientific concepts. While becoming a modeler requires to master the mathematical and coding challenges, it seems valuable to teach concepts and topics of infectious disease epidemiology, such as reproductive number, herd immunity, critical community size, etc. from a perspective of a dynamical interacting system 
-
-
-## Introduction
-DSAIDE stands for __Dynamical Systems Approaches to Infectious Disease Epidemiology.__ As the name indicates, the purpose of this package is to provide a tool to learn about concepts, patterns and features seen in infectious disease epidemiology using a dynamical systems approach.
-
 The idea behind the specific structure of the package is that it uses mathematical models to teach infectious disease epidemiology concepts, but does not require the user to write any computer code.
-
-Another idea is that if a user wants to continue on their journey of learning modeling and infectious disease epidemiology, they can do so relatively seamlessly with this package. The different use cases for the package are described below.
+Another idea is that if a user wants to continue on their journey of learning modeling and infectious disease epidemiology, they can do so relatively seamlessly with this package by directly accessing and modifying the underlying code. The different use cases for the package are described below.
 
 
 ## Package description

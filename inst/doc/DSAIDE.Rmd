@@ -14,12 +14,11 @@ bibliography: vignetterefs.bib
 ---
 
 
-## Introduction
-DSAIDE stands for __Dynamical Systems Approaches to Infectious Disease Epidemiology.__ As the name indicates, the purpose of this package is to provide a tool to learn about concepts, patterns and features seen in infectious disease epidemiology using a dynamical systems approach.
 
+## Summary
+_Dynamical Systems Approaches to Infectious Disease Epidemiology (DSAIDE)_ is an R package that allows individuals to explore and study concepts of infectious disease epidemiology using dynamical systems models, without the need to read or write computer code.
 The idea behind the specific structure of the package is that it uses mathematical models to teach infectious disease epidemiology concepts, but does not require the user to write any computer code.
-
-Another idea is that if a user wants to continue on their journey of learning modeling and infectious disease epidemiology, they can do so relatively seamlessly with this package. The different use cases for the package are described below.
+Another idea is that if a user wants to continue on their journey of learning modeling and infectious disease epidemiology, they can do so relatively seamlessly with this package by directly accessing and modifying the underlying code. The different use cases for the package are described below.
 
 
 ## Package description

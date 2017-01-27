@@ -59,6 +59,7 @@ ui <- fluidPage(
   includeCSS("../shinystyle.css"),
   #add header and title
   tags$head( tags$script(src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML", type = 'text/javascript') ),
+  tags$head(tags$style(".myrow{vertical-align: bottom;}")),
   div( includeHTML("www/header.html"), align = "center"),
   #specify name of App below, will show up in title
   h1('ID Dynamics Introduction App', align = "center", style = "background-color:#123c66; color:#fff"),
@@ -84,7 +85,7 @@ ui <- fluidPage(
            #################################
            # Inputs section
            h2('Simulation Settings'),
-           fluidRow(
+           fluidRow( class = 'myrow',
              column(4,
                     sliderInput("S0", "Initial number of susceptible hosts", min = 500, max = 5000, value = 1000, step = 500)
              ),
@@ -97,14 +98,14 @@ ui <- fluidPage(
              align = "center"
            ), #close fluidRow structure for input
            
-           fluidRow(
+           fluidRow(class = 'myrow',
              column(6,
                     sliderInput("b", "Rate of transmission (beta)", min = 0, max = 0.01, value = 0, step = 0.0001, sep ='')
              ),
              column(6,
                     sliderInput("g", "Rate at which a host leaves the infectious compartment (gamma)", min = 0, max = 2, value = 0.5, step = 0.1)
              ),
-             align = "center"
+             align = "center" 
            ) #close fluidRow structure for input
            
            
