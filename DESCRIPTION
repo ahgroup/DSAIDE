@@ -7,8 +7,8 @@ Description: A collection of Shiny apps that allow for the simulation and
     about infectious disease epidemiology from a dynamical systems perspective.
     All apps include explanations of the underlying models and instructions on
     what to do with the models. 
-Version: 0.38
-Date: 2017-01-27
+Version: 0.39
+Date: 2017-02-20
 Authors@R: c(
     person("Andreas", "Handel", email = "ahandel@uga.edu", 
     role = c("aut", "cre")),
@@ -25,7 +25,7 @@ Depends:
     shiny (>= 0.13.2)
 Suggests:
     rmarkdown
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1
 VignetteBuilder: knitr
 URL: https://github.com/ahgroup/DSAIDE
 BugReports: https://github.com/ahgroup/DSAIDE/issues

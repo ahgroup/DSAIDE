@@ -31,16 +31,16 @@ parameters}
 }
 \value{
 This function returns the simulation result as obtained from a call
-  to the deSolve ode solver
+  to the deSolve ode solver.
 }
 \description{
 Simulation of a basic SIR compartmental model with these compartments:
   Susceptibles (S), Infected/Infectious (I),
   Recovered and Immune (R).
   
-  The model is assumed to be in units of months when run through the Shiny App
+  The model is assumed to be in units of months when run through the Shiny App.
   However as long as all parameters are chosen in the same units, 
-  one can directly call the simulator assuming any time unit
+  one can directly call the simulator assuming any time unit.
 }
 \details{
 A compartmental ID model with several states/compartments
@@ -52,8 +52,9 @@ A compartmental ID model with several states/compartments
 
   This function does not perform any error checking. So if you try to do
   something nonsensical (e.g. negative values or fractions > 1),
-  the code will likely abort with an error message
+  the code will likely abort with an error message.
 }
+
 \examples{
   # To run the simulation with default parameters just call this function
   result <- simulate_reproductivenumber()
@@ -62,14 +63,13 @@ A compartmental ID model with several states/compartments
   # You should then use the simulation result returned from the function, e.g. like this:
   plot(result[,1],result[,2],xlab='Time',ylab='Number Susceptible',type='l')
 }
-\author{
-Andreas Handel
-}
 \references{
 See e.g. Keeling and Rohani 2008 for SIR models and the
   documentation for the deSolve package for details on ODE solvers
 }
 \seealso{
-The UI of the shiny app 'ReproductiveNumber', which is part of this package, contains more details on the model
+The UI of the shiny app 'ReproductiveNumber', which is part of this package, contains more details on the model.
 }
-
+\author{
+Andreas Handel
+}

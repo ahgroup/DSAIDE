@@ -87,7 +87,7 @@
 <div id="notes" class="section level3">
 <h3>Notes</h3>
 <p><em>All parameters are assumed to be in units of (inverse) months.</em></p>
-<p><em>Some of the simulations might take a few seconds to run. While they run, you should see a ‘Simulation running’ message in the upper right corner.</em></p>
+<p><em>Some of the simulations might take a few seconds to run. Be patient.</em></p>
 </div>
 <div id="task-1" class="section level3">
 <h3>Task 1:</h3>
@@ -130,7 +130,7 @@
 <h3>Task 4:</h3>
 <ul>
 <li>Of course, intervention strategies are best if they reach all that transmit. Let’s assume now that we still have a drug that targets symptomatics, but that asymptomatics and presymptomatics don’t transmit.</li>
-<li>Set the model such that only symptomatics transmit, at rate 0.004 and duration of symptomatic period 1 month. Nobody else transmits. Everying else as in task 2. You should get an outbreak of the same size as in task 1.</li>
+<li>Set the model such that only symptomatics transmit, at rate 0.004 and duration of symptomatic period 1 month. Nobody else transmits. Everying else should be as in task 2. You should get an outbreak of the same size as in task 1.</li>
 <li>Now assume that the drug reduces the duration of the symptomatic period from a month (30 days) to 20 days. Run the simulation, record the number of susceptibles at the end of the outbreak.</li>
 <li>Now assume that the drug also cuts infectiousness by half. Run the simulation, record the number of susceptibles at the end of the outbreak.</li>
 </ul>
@@ -179,29 +179,31 @@
 </ul>
 </div>
 </div>
-<div id="answers" class="section level2">
-<h2>Answers</h2>
-</div>
-<div id="answer-1" class="section level2">
-<h2>Answer 1:</h2>
-<div id="answer-2" class="section level3">
-<h3>Answer 2:</h3>
-</div>
-<div id="answer-3" class="section level3">
-<h3>Answer 3:</h3>
-</div>
-</div>
 <div id="shinytab4" class="section level2">
 <h2>Further Information</h2>
 <ul>
 <li>For this app, the underlying function running the simulation is called <code>simulate_idcontrol.R</code>. You can call this function directly, without going through the shiny app. Check the help file for the function for more information.</li>
 <li>If you call the function directly, you need to process the results returned from this function and produce useful output (such as a plot) yourself.</li>
 <li>You can also modify this R function for your own purposes. To find out how to do that, type <code>?DSAIDE</code> at the R console.</li>
+<li>For some additional reading, see e.g. <span class="citation">(Klepac et al. 2013, <span class="citation">Klepac et al. (2015)</span>, <span class="citation">Kirsch et al. (2017)</span>, <span class="citation">Tognotti (2013)</span>)</span>.</li>
 </ul>
+<div id="references" class="section level3 unnumbered">
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-kirsch17">
+<p>Kirsch, Thomas D, Heidi Moseson, Moses Massaquoi, Tolbert G Nyenswah, Rachel Goodermote, Isabel Rodriguez-Barraquer, Justin Lessler, Derek A T Cumings, and David H Peters. 2017. “Impact of Interventions and the Incidence of Ebola Virus Disease in Liberia-Implications for Future Epidemics.” <em>Health Policy and Planning</em> 32 (2): 205–14. doi:<a href="https://doi.org/10.1093/heapol/czw113">10.1093/heapol/czw113</a>.</p>
 </div>
-<div id="more-sections" class="section level2">
-<h2>More sections</h2>
-<p>This might not go into shiny</p>
+<div id="ref-klepac15">
+<p>Klepac, Petra, Sebastian Funk, T Deirdre Hollingsworth, C Jessica E Metcalf, and Katie Hampson. 2015. “Six Challenges in the Eradication of Infectious Diseases.” <em>Epidemics</em> 10 (March): 97–101. doi:<a href="https://doi.org/10.1016/j.epidem.2014.12.001">10.1016/j.epidem.2014.12.001</a>.</p>
+</div>
+<div id="ref-klepac13">
+<p>Klepac, Petra, C Jessica E Metcalf, Angela R McLean, and Katie Hampson. 2013. “Towards the Endgame and Beyond: Complexities and Challenges for the Elimination of Infectious Diseases.” <em>Philosophical Transactions of the Royal Society of London. Series B, Biological Sciences</em> 368 (1623): 20120137. doi:<a href="https://doi.org/10.1098/rstb.2012.0137">10.1098/rstb.2012.0137</a>.</p>
+</div>
+<div id="ref-tognotti13">
+<p>Tognotti, Eugenia. 2013. “Lessons from the History of Quarantine, from Plague to Influenza a.” <em>Emerging Infectious Diseases</em> 19 (2): 254–59. doi:<a href="https://doi.org/10.3201/eid1902.120312">10.3201/eid1902.120312</a>.</p>
+</div>
+</div>
+</div>
 </div>
 
 <div id="myfooter" class="container">

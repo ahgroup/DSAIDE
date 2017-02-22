@@ -115,6 +115,8 @@ Answer to task 1.
 
 * For this app, the underlying function running the simulation is called `simulate_environmentaltransmission.R`. You can call this function directly, without going through the shiny app. Check the help file for the function for more information. If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself. 
 * You could also modify this R function for your own purposes - though that requires R coding knowledge.
+* Some more information on environmentally transmitted ID and modeling can be found in [@codeco01].
 
-###References
+
+### References
 

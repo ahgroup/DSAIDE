@@ -42,7 +42,7 @@ The processes being modeled are:
 * Susceptible vectors can become infected by contact with infected hosts at rate _b~2~_ 
 * Infected hosts recover after some time (specified by the rate _g_). 
 * New susceptible vectors are born at a rate _b_. Susceptible and infected vectors die at rate _n_. The inverse of this rate is the average lifespan. 
-* Recovered hosts loose their immunity at rate _w_.
+* Recovered hosts lose their immunity at rate _w_.
 
 We envision hosts to be humans and vectors to be e.g. mosquitos. We further assume the time scale for the model is short enough that we can ignore births and deaths for human hosts but not vectors. This is likely a decent approximation as long as our simulation time is not more than few years.
 
@@ -65,6 +65,7 @@ $$\dot I_v = b_2 S_v I_h  - n I_v$$
 
 _A general note: Some of the tasks below are fairly open ended. You shouldn't go through the tasks like a check-list. Instead, explore these simulations, play with them, query them. As you do, loop through iterations of formulating your expectations for a specific scenario/task, running the model and observing results, and if results don't agree with your expectations, figure out why. Essentially, **"do science/research"**._ 
 
+_The simulation is assumed to run in units of months, i.e. all rate parameters are assumed to be in inverse months._
 
 ###Task 1: 
 * Set the model parameters such that it corresponds to the following setting: 
@@ -101,7 +102,7 @@ _A general note: Some of the tasks below are fairly open ended. You shouldn't go
 
 
 ##Answers 
-This section does not have the shinytab label and is therefore ignored and not included in the app. One could provide the answers here. Note that if this file is supplied with the package, the answers are in principle available, so most users might not know where/how to look.
+This section does not have the shinytab label and is therefore ignored and not included in the app. One could provide the answers here. Note that if this file is supplied with the package, the answers are in principle available.
 
 ###Answer 1: 
 Answer to task 1.
@@ -112,6 +113,8 @@ Answer to task 1.
 * For this app, the underlying function running the simulation is called `simulate_vectortransmission.R`. You can call this function directly, without going through the shiny app. Check the help file for the function for more information. If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself. 
 * You could also modify this R function for your own purposes.
 * To learn more about the underlying simulations and how to access and use the code, see the package vignette, which you can open by typing `vignette('DSAIDE')` in the R console.
+* Some more information on vector-borne diseases and modeling can be found in [@kilpatrick12, @luz10].
+
 
 ###References
 

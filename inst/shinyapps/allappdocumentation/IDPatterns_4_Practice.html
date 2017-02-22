@@ -39,9 +39,8 @@
 
 <div id="shinytab1" class="section level2">
 <h2>Overview</h2>
-<p>For this module, we will explore a model that tracks the same compartments as the <em>Characteristics of ID</em> model. If you haven’t yet explored the <em>Characteristics of ID</em> model, I suggest you try out that one first. The model for this app adds a few more processes. It includes natural births and deaths of hosts, seasonal variation in transmission, and waning immunity.</p>
+<p>This app allows you to explore a model that tracks the same compartments as the <em>Characteristics of ID</em> model. If you haven’t yet explored the <em>Characteristics of ID</em> model, I suggest you try out that one first. The model for this app adds a few more processes. It includes natural births and deaths of hosts, seasonal variation in transmission, and waning immunity.</p>
 <p>Also note that for this model, the time units are in months, not days. Read about the model in the “Model” tab. Then do the tasks described in the “What to do” tab.</p>
-<p><strong>Keep a record for the results you obtain doing the tasks described below. The online quiz covering the practice part will ask for (some of) these results/answers.</strong></p>
 </div>
 <div id="shinytab2" class="section level2">
 <h2>The Model</h2>
@@ -56,15 +55,12 @@
 <li><strong>R</strong> - recovered/removed individuals. Those individuals have recovered and are immune. They can loose their immunity in this model.</li>
 <li><strong>D</strong> - individuals who have died due to the disease.</li>
 </ul>
-<p>We also include the same processes as in the previous model. Those are described here again:</p>
+<p>We include the following processes in this model:</p>
 <ul>
 <li>Susceptible individuals (S) can become infected by pre-symptomatic (P), asymptomatic (A) or symptomatic (I) hosts. The rates at which infections from the different types of infected individuals (P, A and I) occur are governed by 3 parameters, <span class="math inline">\(b_P\)</span>, <span class="math inline">\(b_A\)</span> and <span class="math inline">\(b_I\)</span>.</li>
-<li>All infected individuals first enter the presymptomatic stage. They remain there for some time (determined by rate <span class="math inline">\(g_P\)</span>, the inverse of which is the average time spent in the presymptomatic stage). A fraction <span class="math inline">\(f\)</span> of presymptomatic hosts move into the asymptomatic category, the rest become symptomatic infected hosts.</li>
-<li>Asymptomatic infected hosts recover after some time (specified by the rate <span class="math inline">\(g_A\)</span>). Similarly, the rate <span class="math inline">\(g_I\)</span> determines the duration the symptomatic hosts stay in the symptomatic state. For symptomatic hosts, two outcomes are possible. Either recovery or death. The parameter <span class="math inline">\(d\)</span> determines the fraction of hosts that die.</li>
+<li>All infected individuals first enter the presymptomatic stage. They remain there for some time (determined by rate <span class="math inline">\(g_P\)</span>, the inverse of which is the average time spent in the presymptomatic stage). A fraction <em>f</em> of presymptomatic hosts move into the asymptomatic category, the rest become symptomatic infected hosts.</li>
+<li>Asymptomatic infected hosts recover after some time (specified by the rate <em>g<sub>A</sub></em>). Similarly, the rate <em>g<sub>I</sub></em> determines the duration the symptomatic hosts stay in the symptomatic state. For symptomatic hosts, two outcomes are possible. Either recovery or death. The parameter <span class="math inline">\(d\)</span> determines the fraction of hosts that die.</li>
 <li>Recovered individuals are initially immune to reinfection. They can loose their immunity at rate <span class="math inline">\(w\)</span> and return back to the susceptible compartment.</li>
-</ul>
-<p>In addition, we include a few new processes/mechanisms, namely we allow for natural births and deaths. We implement this as follows:</p>
-<ul>
 <li>New susceptibles enter the system/model at a fixed rate <span class="math inline">\(\lambda\)</span>. From each compartment (apart from the dead compartment), hosts “leave” after some time (i.e. they die) at rate <span class="math inline">\(n\)</span>. The inverse of this rate is the average lifespan of a host.</li>
 <li>The rates of transmission, <span class="math inline">\(b_P\)</span>, <span class="math inline">\(b_A\)</span> and <span class="math inline">\(b_I\)</span> can vary seasonally/annually, modeled as a sinusoidal function. The strength of this seasonal variation is controlled by the parameter <span class="math inline">\(\sigma\)</span>.</li>
 </ul>
@@ -79,12 +75,12 @@
 </div>
 <p><span class="math display">\[b_P^s = b_P(1+\sigma \sin(2\pi t /12))\]</span> <span class="math display">\[b_A^s = b_A(1+\sigma \sin(2\pi t /12))\]</span> <span class="math display">\[b_I^s = b_I(1+\sigma \sin(2\pi t /12))\]</span> <span class="math display">\[\dot S = \lambda - S (b_P^s P + b_A^s A + b_I^s I) + wR - n S \]</span> <span class="math display">\[\dot P = S (b_P^s P + b_A^s A + b_I^s I) - g_P P - n P\]</span> <span class="math display">\[\dot A = f g_P P - g_A A - n A\]</span> <span class="math display">\[\dot I = (1-f) g_P P - g_I I - n I \]</span> <span class="math display">\[\dot R = g_A A + (1-d) g_I I - wR - n R\]</span> <span class="math display">\[\dot D = d g_I I \]</span></p>
 <p>Since we do not track people dying due to non-disease causes, all the “n - arrows” are not pointing to another compartment, instead those individuals just “leave the system”. Similarly new susceptibles enter the system (are born) from “outside the system”.</p>
-<p>Also note that the transmission rates, <span class="math inline">\(b_i\)</span>, can be time varying as described above.</p>
+<p>Also note that the transmission rates, <em>b<sub>i</sub></em>, can be time varying as described above.</p>
 </div>
 </div>
 <div id="shinytab3" class="section level2">
 <h2>What to do</h2>
-<p><em>Note: Some of the simulations might take a few seconds to run. While they run, you should see a ‘Simulation running’ message in the upper right corner.</em></p>
+<p><em>Note: Some of the simulations might take a few seconds to run. Be patient.</em></p>
 <div id="task-1" class="section level3">
 <h3>Task 1:</h3>
 <ul>
@@ -139,7 +135,7 @@
 <div id="task-6" class="section level3">
 <h3>Task 6:</h3>
 <ul>
-<li>The patterns we’ve seen so far are oscillations/cycles (i.e. repeated outbreaks) and eventually settling down to a steady state. The oscillations are what we referred to in the reading as <em>intrinsic</em>, purely produced by the interplay between depletion of susceptibles due to infection and replenishment due to birth.</li>
+<li>The patterns we’ve seen so far are oscillations/cycles (i.e. repeated outbreaks) that eventually settle down to a steady state. The oscillations are what we referred to in the reading as <em>intrinsic</em>, purely produced by the interplay between depletion of susceptibles due to infection and replenishment due to birth.</li>
 <li>We discussed that waning immunity is another mechanism of resource replenishment. To investigate that, set everything as in task #1 (i.e. no more births and deaths). Do a quick run to ensure you get a single outbreak.</li>
 <li>Now, assume that immunity wanes within on average 10 months.</li>
 <li>Think about your expectations, run the simulation and check with what you expected.</li>
@@ -177,29 +173,16 @@
 </ul>
 </div>
 </div>
-<div id="answers" class="section level2">
-<h2>Answers</h2>
-</div>
-<div id="answer-1" class="section level2">
-<h2>Answer 1:</h2>
-<div id="answer-2" class="section level3">
-<h3>Answer 2:</h3>
-</div>
-<div id="answer-3" class="section level3">
-<h3>Answer 3:</h3>
-</div>
-</div>
 <div id="shinytab4" class="section level2">
 <h2>Further Information</h2>
 <ul>
 <li>For this app, the underlying function running the simulation is called <code>simulate_idpatterns.R</code>. You can call this function directly, without going through the shiny app. Check the help file for the function for more information.</li>
 <li>If you call the function directly, you need to process the results returned from this function and produce useful output (such as a plot) yourself.</li>
-<li>You could also modify this R function for your own purposes, though that writing R code. To find out how to do that, type <code>?DSAIDE</code> at the R console.</li>
+<li>You could also modify this R function for your own purposes, though that requires experience writing R code. To find out how to do that, type <code>?DSAIDE</code> at the R console.</li>
 </ul>
+<div id="references" class="section level3">
+<h3>References</h3>
 </div>
-<div id="more-sections" class="section level2">
-<h2>More sections</h2>
-<p>This might not go into shiny</p>
 </div>
 
 <div id="myfooter" class="container">

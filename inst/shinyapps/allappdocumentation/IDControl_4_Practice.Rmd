@@ -77,8 +77,7 @@ To keep the diagram from getting too cluttered, births and natural deaths are no
 ###Notes
 _All parameters are assumed to be in units of (inverse) months._
 
-_Some of the simulations might take a few seconds to run. While they run, you should see a 'Simulation running' message in the upper right corner._
-
+_Some of the simulations might take a few seconds to run. Be patient._
 
 
 ###Task 1: 
@@ -110,7 +109,7 @@ _Some of the simulations might take a few seconds to run. While they run, you sh
 
 ###Task 4: 
 * Of course, intervention strategies are best if they reach all that transmit. Let's assume now that we still have a drug that targets symptomatics, but that asymptomatics and presymptomatics don't transmit.
-* Set the model such that only symptomatics transmit, at  rate 0.004 and duration of symptomatic period 1 month. Nobody else transmits. Everying else as in task 2. You should get an outbreak of the same size as in task 1.
+* Set the model such that only symptomatics transmit, at rate 0.004 and duration of symptomatic period 1 month. Nobody else transmits. Everying else should be as in task 2. You should get an outbreak of the same size as in task 1.
 * Now assume that the drug reduces the duration of the symptomatic period from a month (30 days) to 20 days. Run the simulation, record the number of susceptibles at the end of the outbreak. 
 * Now assume that the drug also cuts infectiousness by half. Run the simulation, record the number of susceptibles at the end of the outbreak. 
 
@@ -142,22 +141,13 @@ _Some of the simulations might take a few seconds to run. While they run, you sh
 ###Task 9: 
 * Keep exploring. The model has many more parameters that you can change, e.g. allowing births and deaths and waning immunity for hosts, or ID that transmit through multiple routes at the same time (e.g. Zika virus). Investigate how different control strategies work under different scenarios.
   
-##Answers 
-##Answer 1: 
-
-###Answer 2: 
-
-###Answer 3: 
-
 
 ##Further Information {#shinytab4}
 
 * For this app, the underlying function running the simulation is called `simulate_idcontrol.R`. You can call this function directly, without going through the shiny app. Check the help file for the function for more information. 
 * If you call the function directly, you need to process the results returned from this function and produce useful output (such as a plot) yourself. 
 * You can also modify this R function for your own purposes. To find out how to do that, type `?DSAIDE` at the R console.
+* For some additional reading, see e.g. [@klepac13, @klepac15, @kirsch17, @tognotti13].
 
-
-##More sections
-This might not go into shiny
-
+### References
 

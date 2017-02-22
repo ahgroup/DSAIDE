@@ -36,7 +36,7 @@ The included processes/mechanisms are the following:
 * Susceptible individuals of type 1 or 2 can become infected by infected hosts of type 1 or 2. The rates at which infections from type 1/2 to type 1/2 occur are given by the parameters _b~11~_, _b~12~_, _b~21~_ and _b~22~_. 
 * Infected hosts of type 1/2 recover after some time at rates _g~1~_/_g~2~_. 
 * Recovered individuals are initially immune to reinfection. They can loose their immunity at rates _w~1~_/_w~2~_ and return back to the susceptible state. 
-* New susceptible hosts and vectors  enter the system at rates _e~1~_ and _e~1~_. Natural death occurs at rates _n~1~_ and _n~2~_. 
+* New susceptible hosts and vectors enter the system at rates _e~1~_ and _e~2~_. Natural death occurs at rates _n~1~_ and _n~2~_. 
 
 
 
@@ -109,12 +109,6 @@ $$\dot R_2 = g_2 I_2 - w_2 R_2 - n_2 R_2$$
 * Keep exploring. Think of a real ID where accounting for 2 types of hosts is important, see if you can use the simulation to approximate and explore that ID.
 
   
-##Answers 
-##Answer 1: 
-
-###Answer 2: 
-
-###Answer 3: 
 
 
 ##Further Information {#shinytab4}
@@ -122,9 +116,6 @@ $$\dot R_2 = g_2 I_2 - w_2 R_2 - n_2 R_2$$
 * For this app, the underlying function running the simulation is called `simulate_heterogeneity.R`. You can call this function directly, without going through the shiny app. Check the help file for the function for more information. 
 * If you call the function directly, you need to process the results returned from this function and produce useful output (such as a plot) yourself. 
 * You can also modify this R function for your own purposes. To find out how to do that, type `?DSAIDE` at the R console.
+* For some more information dealing with host heterogeneity, see e.g. [@beldomenico10, @yorke78, @lloyd-smith05].
 
-
-##More sections
-This might not go into shiny
-
-
+### References

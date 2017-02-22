@@ -50,14 +50,14 @@
 <li><strong>S</strong> - uninfected and susceptible individuals</li>
 <li><strong>E</strong> - individuals who are infected and do not yet show symptoms. Those individuals can be infectious.</li>
 <li><strong>I</strong> - individuals who are infected and show symptoms. Those individuals are likely infectious, but the model allows to adjust this, including no infectiousness.</li>
-<li><strong>R</strong> - recovered/removed individuals. Those individuals have recovered and are immune. They can loose their immunity in</li>
+<li><strong>R</strong> - recovered/removed individuals. Those individuals have recovered and are immune. They can lose their immunity.</li>
 </ul>
 <p>The included processes/mechanisms are the following:</p>
 <ul>
 <li>Susceptible individuals (S) can become infected by pre-symptomatic/exposed (E) or symptomatic (I) hosts at rates <em>b<sub>E</sub></em> and <em>b<sub>I</sub></em>.</li>
 <li>All infected hosts first enter the exposed/presymptomatic stage and leave the stage at rate <em>g<sub>E</sub></em>, the inverse of which is the average time spent in this stage.</li>
 <li>All infected hosts go from the presymptomatic to the symptomatic stage and leave the stage at rate <em>g<sub>I</sub></em>.</li>
-<li>Recovered individuals are initially immune to reinfection. They can loose their immunity at rate <em>w</em> and return back to the susceptible compartment.</li>
+<li>Recovered individuals are initially immune to reinfection. They can lose their immunity at rate <em>w</em> and return back to the susceptible compartment.</li>
 <li>New susceptible hosts enter the system (are born) at rate <em>e</em>. Natural death occurs at rate <em>n</em>.</li>
 </ul>
 </div>
@@ -214,11 +214,22 @@
 <li>For this app, the underlying function running the simulation is called <code>simulate_stochastic.R</code>. You can call this function directly, without going through the shiny app. Check the help file for the function for more information.</li>
 <li>If you call the function directly, you need to process the results returned from this function and produce useful output (such as a plot) yourself.</li>
 <li>You can also modify this R function for your own purposes. To find out how to do that, type <code>?DSAIDE</code> at the R console.</li>
+<li>For some further reading concerning stochastic dynamics of ID, see e.g. <span class="citation">(Lloyd-Smith et al. 2005, <span class="citation">Black (1966)</span>, <span class="citation">Keeling (1997)</span>)</span>.</li>
 </ul>
+<div id="references" class="section level3 unnumbered">
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-black66">
+<p>Black, F L. 1966. “Measles Endemicity in Insular Populations: Critical Community Size and Its Evolutionary Implication.” <em>Journal of Theoretical Biology</em> 11 (2): 207–11.</p>
 </div>
-<div id="more-sections" class="section level2">
-<h2>More sections</h2>
-<p>This might not go into shiny</p>
+<div id="ref-keeling97">
+<p>Keeling, M J. 1997. “Modelling the Persistence of Measles.” <em>Trends in Microbiology</em> 5 (12): 513–18. doi:<a href="https://doi.org/10.1016/S0966-842X(97)01147-5">10.1016/S0966-842X(97)01147-5</a>.</p>
+</div>
+<div id="ref-lloyd-smith05a">
+<p>Lloyd-Smith, James O, Paul C Cross, Cheryl J Briggs, Matt Daugherty, Wayne M Getz, John Latto, Maria S Sanchez, Adam B Smith, and Andrea Swei. 2005. “Should We Expect Population Thresholds for Wildlife Disease?” <em>Trends in Ecology &amp; Evolution</em> 20 (9): 511–19. doi:<a href="https://doi.org/10.1016/j.tree.2005.07.004">10.1016/j.tree.2005.07.004</a>.</p>
+</div>
+</div>
+</div>
 </div>
 
 <div id="myfooter" class="container">

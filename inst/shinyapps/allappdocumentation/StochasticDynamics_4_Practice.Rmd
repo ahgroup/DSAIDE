@@ -28,7 +28,7 @@ The following compartments are included:
 * **S** - uninfected and susceptible individuals 
 * **E** - individuals who are infected and do not yet show symptoms. Those individuals can be infectious.
 * **I** - individuals who are infected and show symptoms. Those individuals are likely infectious, but the model allows to adjust this, including no infectiousness.
-* **R** - recovered/removed individuals. Those individuals have recovered and are immune. They can loose their immunity in 
+* **R** - recovered/removed individuals. Those individuals have recovered and are immune. They can lose their immunity.
 
 
 The included processes/mechanisms are the following:
@@ -36,7 +36,7 @@ The included processes/mechanisms are the following:
 * Susceptible individuals (S) can become infected by pre-symptomatic/exposed (E) or symptomatic (I) hosts at rates _b~E~_ and _b~I~_. 
 * All infected hosts first enter the exposed/presymptomatic stage and leave the stage at rate _g~E~_, the inverse of which is the average time spent in this stage. 
 * All infected hosts go from the presymptomatic to the symptomatic stage and leave the stage at rate _g~I~_. 
-* Recovered individuals are initially immune to reinfection. They can loose their immunity at rate _w_ and return back to the susceptible compartment. 
+* Recovered individuals are initially immune to reinfection. They can lose their immunity at rate _w_ and return back to the susceptible compartment. 
 * New susceptible hosts enter the system (are born) at rate _e_. Natural death occurs at rate _n_.
 
 
@@ -130,9 +130,7 @@ _Note: Some of the simulations might take a few seconds to run. While they run, 
 * For this app, the underlying function running the simulation is called `simulate_stochastic.R`. You can call this function directly, without going through the shiny app. Check the help file for the function for more information. 
 * If you call the function directly, you need to process the results returned from this function and produce useful output (such as a plot) yourself. 
 * You can also modify this R function for your own purposes. To find out how to do that, type `?DSAIDE` at the R console.
+* For some further reading concerning stochastic dynamics of ID, see e.g. [@lloyd-smith05a, @black66, @keeling97].
 
-
-##More sections
-This might not go into shiny
-
+### References
 

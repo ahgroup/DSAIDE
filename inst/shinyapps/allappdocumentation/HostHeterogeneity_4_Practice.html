@@ -57,7 +57,7 @@
 <li>Susceptible individuals of type 1 or 2 can become infected by infected hosts of type 1 or 2. The rates at which infections from type 1/2 to type 1/2 occur are given by the parameters <em>b<sub>11</sub></em>, <em>b<sub>12</sub></em>, <em>b<sub>21</sub></em> and <em>b<sub>22</sub></em>.</li>
 <li>Infected hosts of type 1/2 recover after some time at rates <em>g<sub>1</sub></em>/<em>g<sub>2</sub></em>.</li>
 <li>Recovered individuals are initially immune to reinfection. They can loose their immunity at rates <em>w<sub>1</sub></em>/<em>w<sub>2</sub></em> and return back to the susceptible state.</li>
-<li>New susceptible hosts and vectors enter the system at rates <em>e<sub>1</sub></em> and <em>e<sub>1</sub></em>. Natural death occurs at rates <em>n<sub>1</sub></em> and <em>n<sub>2</sub></em>.</li>
+<li>New susceptible hosts and vectors enter the system at rates <em>e<sub>1</sub></em> and <em>e<sub>2</sub></em>. Natural death occurs at rates <em>n<sub>1</sub></em> and <em>n<sub>2</sub></em>.</li>
 </ul>
 </div>
 <div id="model-implementation" class="section level3">
@@ -151,29 +151,25 @@
 </ul>
 </div>
 </div>
-<div id="answers" class="section level2">
-<h2>Answers</h2>
-</div>
-<div id="answer-1" class="section level2">
-<h2>Answer 1:</h2>
-<div id="answer-2" class="section level3">
-<h3>Answer 2:</h3>
-</div>
-<div id="answer-3" class="section level3">
-<h3>Answer 3:</h3>
-</div>
-</div>
 <div id="shinytab4" class="section level2">
 <h2>Further Information</h2>
 <ul>
 <li>For this app, the underlying function running the simulation is called <code>simulate_heterogeneity.R</code>. You can call this function directly, without going through the shiny app. Check the help file for the function for more information.</li>
 <li>If you call the function directly, you need to process the results returned from this function and produce useful output (such as a plot) yourself.</li>
 <li>You can also modify this R function for your own purposes. To find out how to do that, type <code>?DSAIDE</code> at the R console.</li>
+<li>For some more information dealing with host heterogeneity, see e.g. <span class="citation">(<span class="citeproc-not-found" data-reference-id="beldomenico10"><strong>???</strong></span>, <span class="citation">Yorke, Hethcote, and Nold (1978)</span>, <span class="citation">Lloyd-Smith et al. (2005)</span>)</span>.</li>
 </ul>
+<div id="references" class="section level3 unnumbered">
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-lloyd-smith05">
+<p>Lloyd-Smith, J. O., S. J. Schreiber, P. E. Kopp, and W. M. Getz. 2005. “Superspreading and the Effect of Individual Variation on Disease Emergence.” <em>Nature</em> 438 (7066). Department of Environmental Science, Policy; Management, 140 Mulford Hall, University of California, Berkeley, California 94720-3114, USA. jls@nature.berkeley.edu: 355–59. doi:<a href="https://doi.org/10.1038/nature04153">10.1038/nature04153</a>.</p>
 </div>
-<div id="more-sections" class="section level2">
-<h2>More sections</h2>
-<p>This might not go into shiny</p>
+<div id="ref-yorke78">
+<p>Yorke, J. A., H. W. Hethcote, and A. Nold. 1978. “Dynamics and Control of the Transmission of Gonorrhea.” <em>Sex Transm Dis</em> 5 (2). Institute for Physical Science; Technology, University of Maryland, College Park, USA.: 51–56.</p>
+</div>
+</div>
+</div>
 </div>
 
 <div id="myfooter" class="container">

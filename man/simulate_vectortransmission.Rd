@@ -50,6 +50,7 @@ A compartmental ID model with several states/compartments
   something nonsensical (e.g. any negative values or fractions > 1),
   the code will likely abort with an error message
 }
+
 \examples{
   # To run the simulation with default parameters just call this function
   result <- simulate_vectortransmission()
@@ -58,9 +59,6 @@ A compartmental ID model with several states/compartments
   # You should then use the simulation result returned from the function, e.g. like this:
   plot(result[,1],result[,2],xlab='Time',ylab='Number Susceptible',type='l')
 }
-\author{
-Andreas Handel
-}
 \references{
 See the information in the corresponding shiny app for model details
            See the documentation for the deSolve package for details on ODE solvers
@@ -68,4 +66,6 @@ See the information in the corresponding shiny app for model details
 \seealso{
 The UI of the shiny app 'VectorTransmission', which is part of this package, contains more details on the model
 }
-
+\author{
+Andreas Handel
+}

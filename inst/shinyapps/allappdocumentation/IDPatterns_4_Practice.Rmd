@@ -16,14 +16,12 @@ bibliography: ../media/references.bib
 ---
 
 ##Overview {#shinytab1}
-For this module, we will explore a model that tracks the same compartments as the _Characteristics of ID_  model. If you haven't yet explored the _Characteristics of ID_ model, I suggest you try out that one first.
+This app allows you to explore a model that tracks the same compartments as the _Characteristics of ID_  model. If you haven't yet explored the _Characteristics of ID_ model, I suggest you try out that one first.
 The model for this app adds a few more processes. It includes natural births and deaths of hosts, seasonal variation in transmission, and waning immunity.
 
 Also note that for this model, the time units are in months, not days.
 Read about the model in the "Model" tab. Then do the tasks described in the "What to do" tab.
 
-
-**Keep a record for the results you obtain doing the tasks described below. The online quiz covering the practice part will ask for (some of) these results/answers.**
 
 ##The Model {#shinytab2}
 
@@ -39,16 +37,12 @@ This model has the same compartments as the one we saw previously. They are list
 * **D** - individuals who have died due to the disease.
 
 
-We also include the same processes as in the previous model. Those are described here again:
+We include the following processes in this model:
 
 * Susceptible individuals (S) can become infected by pre-symptomatic (P), asymptomatic (A) or symptomatic (I) hosts. The rates at which infections from the different types of infected individuals (P, A and I) occur are governed by 3 parameters, $b_P$, $b_A$ and $b_I$. 
-* All infected individuals first enter the presymptomatic stage. They remain there for some time (determined by rate $g_P$, the inverse of which is the average time spent in the presymptomatic stage). A fraction $f$ of presymptomatic hosts move into the asymptomatic category, the rest become symptomatic infected hosts.
-* Asymptomatic infected hosts recover after some time (specified by the rate $g_A$). Similarly, the rate $g_I$ determines the duration the symptomatic hosts stay in the symptomatic state. For symptomatic hosts, two outcomes are possible. Either recovery or death. The parameter $d$ determines the fraction of hosts that die.
+* All infected individuals first enter the presymptomatic stage. They remain there for some time (determined by rate $g_P$, the inverse of which is the average time spent in the presymptomatic stage). A fraction _f_ of presymptomatic hosts move into the asymptomatic category, the rest become symptomatic infected hosts.
+* Asymptomatic infected hosts recover after some time (specified by the rate _g~A~_). Similarly, the rate _g~I~_ determines the duration the symptomatic hosts stay in the symptomatic state. For symptomatic hosts, two outcomes are possible. Either recovery or death. The parameter $d$ determines the fraction of hosts that die.
 * Recovered individuals are initially immune to reinfection. They can loose their immunity at rate $w$ and return back to the susceptible compartment. 
-
-
-In addition, we include a few new processes/mechanisms, namely we allow for natural births and deaths. We implement this as follows:
-
 * New susceptibles enter the system/model at a fixed rate $\lambda$. From each compartment (apart from the dead compartment), hosts "leave" after some time (i.e. they die) at rate $n$. The inverse of this rate is the average lifespan of a host. 
 * The rates of transmission, $b_P$, $b_A$ and $b_I$ can vary seasonally/annually, modeled as a sinusoidal function. The strength of this seasonal variation is controlled by the parameter $\sigma$.
 
@@ -72,13 +66,13 @@ $$\dot D = d g_I I $$
 
 Since we do not track people dying due to non-disease causes, all the "n - arrows" are not pointing to another compartment, instead those individuals just "leave the system". Similarly new susceptibles enter the system (are born) from "outside the system".
 
-Also note that the transmission rates, $b_i$, can be time varying as described above.
+Also note that the transmission rates, _b~i~_, can be time varying as described above.
 
 
 
 ##What to do {#shinytab3}
 
-_Note: Some of the simulations might take a few seconds to run. While they run, you should see a 'Simulation running' message in the upper right corner._
+_Note: Some of the simulations might take a few seconds to run. Be patient._
 
 ###Task 1: 
 * Set the model parameters such that it corresponds to the following setting: 
@@ -119,7 +113,7 @@ _Note: Some of the simulations might take a few seconds to run. While they run, 
 
 
 ###Task 6: 
-* The patterns we've seen so far are oscillations/cycles (i.e. repeated outbreaks) and eventually settling down to a steady state. The oscillations are what we referred to in the reading as _intrinsic_, purely produced by the interplay between depletion of susceptibles due to infection and replenishment due to birth.
+* The patterns we've seen so far are oscillations/cycles (i.e. repeated outbreaks) that eventually settle down to a steady state. The oscillations are what we referred to in the reading as _intrinsic_, purely produced by the interplay between depletion of susceptibles due to infection and replenishment due to birth.
 * We discussed that waning immunity is another mechanism of resource replenishment. To investigate that, set everything as in task #1 (i.e. no more births and deaths). Do a quick run to ensure you get a single outbreak.
 * Now, assume that immunity wanes within on average 10 months. 
 * Think about your expectations, run the simulation and check with what you expected.
@@ -145,22 +139,13 @@ _Note: Some of the simulations might take a few seconds to run. While they run, 
 * There is lots to explore. While it can be fun to just mess around with the sliders and continue simulating, I suggest a more deliberate exploration. Before you run a simulation, think about what you expect. Then run and compare results with expectations. If they don't agree, try to figure out what's going on. This way, you will gain more and more insight into how the different components and processes influence the observed outcome - the basics of a systems science approach.
 
 
-##Answers 
-##Answer 1: 
-
-###Answer 2: 
-
-###Answer 3: 
-
-
 ##Further Information {#shinytab4}
 
 * For this app, the underlying function running the simulation is called `simulate_idpatterns.R`. You can call this function directly, without going through the shiny app. Check the help file for the function for more information. 
 * If you call the function directly, you need to process the results returned from this function and produce useful output (such as a plot) yourself. 
-* You could also modify this R function for your own purposes, though that writing R code. To find out how to do that, type `?DSAIDE` at the R console.
+* You could also modify this R function for your own purposes, though that requires experience writing R code. To find out how to do that, type `?DSAIDE` at the R console.
 
 
-##More sections
-This might not go into shiny
+###References
 
 

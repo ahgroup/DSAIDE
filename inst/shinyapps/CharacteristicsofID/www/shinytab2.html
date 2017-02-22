@@ -8,7 +8,7 @@
 <li><strong>P</strong> - presymptomatic individuals who are infected and do not yet show symptoms. Those individuals can potentially be infectious.</li>&#13;
 <li><strong>A</strong> - asymptomatic, infected individuals. Those individuals can potentially be infectious.</li>&#13;
 <li><strong>I</strong> - individuals who are infected and show symptoms. Those individuals are likely infectious, but the model allows to adjust this, including no infectiousness.</li>&#13;
-<li><strong>R</strong> - recovered/removed individuals. Those individuals have recovered and are immune. They can lose their immunity in this model.</li>&#13;
+<li><strong>R</strong> - recovered/removed individuals. Those individuals have recovered and are immune.</li>&#13;
 <li><strong>D</strong> - individuals who have died due to the disease.</li>&#13;
 </ul><p>Of course, as with the basic SIR model, this model could be made to include further details by extendind the compartments. E.g. doubling the compartments would allow us to stratify according to gender. In general, for each additional distinct feature you want to track, the existing number of compartments needs to be replicated by the discrete categories you have. So replicated by 2 for gender, replicated by 3 if we wanted to stratify by young/medium/old age, etc.</p>&#13;
 <p>In addition to specifying the <em>compartments</em> of a model, we need to specify the dynamics determining the changes for each compartment. In general, more compartments leads to more processes and more parameters governing these processes.</p>&#13;

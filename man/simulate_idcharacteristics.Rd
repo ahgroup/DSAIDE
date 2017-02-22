@@ -54,6 +54,7 @@ This function does not perform any error checking. So if you try to do
 something nonsensical (e.g. have I0 > PopSize or any negative values or fractions > 1),
 the code will likely abort with an error message
 }
+
 \examples{
 # To run the simulation with default parameters just call this function
 result <- simulate_idcharacteristics()
@@ -62,11 +63,10 @@ result <- simulate_idcharacteristics(PopSize = 2000, P0 = 10, tmax = 100, f = 0.
 # You should then use the simulation result returned from the function, e.g. like this:
 plot(result[,1],result[,2],xlab='Time',ylab='Number Susceptible',type='l')
 }
-\author{
-Andreas Handel
-}
 \references{
 See e.g. Keeling and Rohani 2008 for SIR models and the
   documentation for the deSolve package for details on ODE solvers
 }
-
+\author{
+Andreas Handel
+}

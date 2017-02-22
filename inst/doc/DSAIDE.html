@@ -12,7 +12,7 @@
 
 <meta name="author" content="Andreas Handel" />
 
-<meta name="date" content="2017-01-27" />
+<meta name="date" content="2017-02-20" />
 
 <title>DSAIDE Package Tutorial</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">DSAIDE Package Tutorial</h1>
 <h4 class="author"><em><a href="http://handelgroup.uga.edu">Andreas Handel</a></em></h4>
-<h4 class="date"><em>2017-01-27</em></h4>
+<h4 class="date"><em>2017-02-20</em></h4>
 
 
 
@@ -111,7 +111,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <tr class="odd">
 <td>ID Patterns</td>
 <td>6 compartment ODE model. Includes births-deaths, waning immunity, seasonality.</td>
-<td>Different ID patterns (single outbreak, osciallations, steady states).</td>
+<td>Different ID patterns (single outbreak, oscillations, steady states).</td>
 </tr>
 <tr class="even">
 <td>Direct Transmission</td>
@@ -158,7 +158,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="intended-audience-and-goal-of-the-package" class="section level2">
 <h2>Intended audience and goal of the package</h2>
-<p>The audience for this app are individuals interested in infectious disease epidemiology from a <em>systems/modeling perspective</em>. For instance the apps allow exploration of concepts such as <em>patterns of infectious disease incidence</em>, <em>reproductive number concept</em>, <em>extinctions and critical community size</em>, etc. All these concepts are not well described by applying classical epidemiology approaches (i.e. assuming independence between individulas) to infectious diseases, but can readily by understood using a systems/modeling approach.</p>
+<p>The audience for this app is individuals interested in infectious disease epidemiology from a <em>systems/modeling perspective</em>. For instance the apps allow exploration of concepts such as <em>patterns of infectious disease incidence</em>, <em>reproductive number concept</em>, <em>extinctions and critical community size</em>, etc. All these concepts are not well described by applying classical epidemiology approaches (i.e. assuming independence between individulas) to infectious diseases, but can readily by understood using a systems/modeling approach.</p>
 <p>The documentation for each app tries to be complete and self-contained. However, the information provided inside each app is unlikely sufficient for a complete novice to fully understand the modeling and infectious disease material.</p>
 <p>A highly motivated user could likely learn the modeling and infectious disease material covered by the apps on their own by working through some of the references provided for each app and/or general infectious disease modeling textbooks (e.g. <span class="citation">(Keeling and Rohani 2008,<span class="citation">Vynnycky and White (2010)</span>)</span>).</p>
 <p>Another intended use is for this package to be part of a course on infectious disease epidemiology/modeling.</p>
@@ -190,11 +190,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="level-2-directly-interacting-with-the-simulation-functions" class="section level3">
 <h3>Level 2: Directly interacting with the simulation functions</h3>
-<p>As stated above, the exploration of the models and infectious disease topics through the graphical interface is the main intended use of the package. However, the package is structured such that it is possible without too much effort to interact with the code more directly. This will provide more flexibility but will require writing some code.</p>
+<p>As stated above, the exploration of the models and infectious disease topics through the graphical interface is the main intended use of the package. However, the package is structured such that it is possible, without too much effort, to interact with the code more directly. This will provide more flexibility but will require writing some code.</p>
 <p>To facilitate direct interaction and modification of the underlying simulations, each app is structured in such a way that the underlying model/simulation is a stand-alone function. This simulator function can be called directly, without going through the graphical interface. The ‘Further Information’ tab inside each app provides the name of the corresponding simulator function.</p>
 <p>Consider as example the first app, called “ID Dynamics Intro”. The simulator function for this model is called <code>simulate_introduction.R</code>, the user can learn about the inputs and outputs of the function by looking at its documentation</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">help</span>(<span class="st">'simulate_introduction'</span>)</code></pre></div>
-<p>The help file explains that one can run the simulation by specifying initial number of susceptibles and infected, the duration for which the simulation should be run, and the infection and recovery parameters. Unless explicitly specified, the models do not have inherent time units. Instead, those are set by the user based on choices for parameters. It is important to ensure that all quantities that have time units. For this simulation, <em>tmax</em>, <em>g</em> and <em>b</em> are expressed in the same time units, e.g. days or months (or the inverse of those units for the rate parameters). Each parameter has some default. The user can modify those default settings. For instance one can call the simulator with the following settings, overwriting the defaults:</p>
+<p>The help file explains that one can run the simulation by specifying initial number of susceptibles and infected, the duration for which the simulation should be run, and the infection and recovery parameters. Unless explicitly specified, the models do not have inherent time units. Instead, those are set by the user based on choices for parameters. It is important to ensure that all quantities have time units. For this simulation, <em>tmax</em>, <em>g</em>, and <em>b</em> are expressed in the same time units, e.g. days or months (or the inverse of those units for the rate parameters). Each parameter has some default. The user can modify those default settings. For instance one can call the simulator with the following settings, overwriting the defaults:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">result &lt;-<span class="st"> </span><span class="kw">simulate_introduction</span>(<span class="dt">S0 =</span> <span class="dv">500</span>, <span class="dt">I0 =</span> <span class="dv">5</span>, <span class="dt">tmax =</span> <span class="dv">100</span>, <span class="dt">g =</span> <span class="fl">0.1</span>,  <span class="dt">b =</span> <span class="dv">1</span>/<span class="dv">2500</span>)</code></pre></div>
 <p>Calling the simulation function execuctes the underlying dynamical model (here a simple 3 compartment ODE model, as described in the “Model” section of the app). The simulation function produces and returns time-series for the dynamics of each of the variables that are tracked. Users can produce their own plots, e.g. plotting susceptible as function of time:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(result[,<span class="st">&quot;time&quot;</span>],result[,<span class="st">&quot;S&quot;</span>],<span class="dt">xlab=</span><span class="st">'Time'</span>,<span class="dt">ylab=</span><span class="st">'Number Susceptible'</span>,<span class="dt">type=</span><span class="st">'l'</span>)</code></pre></div>
@@ -217,7 +217,7 @@ for (n in <span class="dv">1</span>:<span class="kw">length</span>(gvec))
 <h3>Level 3: Modifying the simulation functions</h3>
 <p>As a next step, it is possible to not only interact with the simulation functions, but instead directly access the code and modify the underlying simulator functions. To make this easy, copies of all simulator functions are in a subdirectory called <em>simulatorfunctions</em> inside the DSAIDE package folder. Each function in that folder starts with <code>simulate_</code>. To find the location where R installed the package, a search on your computer might be needed.</p>
 <p>While the functions in this subfolder are not used to run the code in the DSAIDE package, and one could therefore edit them without breaking the package, it is better to make a copy of the whole folder somewhere else. This way the chance of overwriting any modifications - if for instance the package is being re-installed - are reduced.</p>
-<p>All simulator functions are (hopefully) well documented. Some basic to intermediate level of R coding experience is likely required to successfully modify the functions. In addition to modifying the simulator function of interest, somed additional code to interact with the modified function (as described in <em>Level 2</em>) is likely required.</p>
+<p>All simulator functions are (hopefully) well documented. Some basic to intermediate level of R coding experience is likely required to successfully modify the functions. In addition to modifying the simulator function of interest, some additional code to interact with the modified function (as described in <em>Level 2</em>) is likely required.</p>
 <p>The following provides a simple example of this process of modifying a simulator function and exploring its results. Assume that we want to modify the simple SIR model encoded in <code>simulate_introduction.R</code>. After finding the file and making a copy (let’s call the modified function <code>mysimulator.R</code>), we can make modifications. Say we want to include waning immunity with recovered returning to the susceptible class at rate <em>w</em>.</p>
 <p>We will need to modify the following lines of code:</p>
 <p>old:</p>
@@ -251,7 +251,7 @@ for (n in <span class="dv">1</span>:<span class="kw">length</span>(wvec))
 </div>
 <div id="developing-and-contributing-new-apps-to-the-package" class="section level2">
 <h2>Developing and contributing new apps to the package</h2>
-<p>The package is built in way that makes it (hopefully) easy for others to contribute new simulations/apps. To that end, the package contains a subfolder called <em>docsfordevelopers</em>, which provides information on how the apps are structured and how to add new ones. In brief, each app consists of a simulator function and a shiny app function which calls the simulator function. Further HTML files provide the documentation displayed in each app. Developing a new app consists of writing (at least) 2 R functions (<em>simulate_NNNNNN.R</em> and the corresponding <em>app.R</em>) and filling the provided RMarkdown template for the documentation, then running a few functions to process everything.</p>
+<p>The package is built in a way that makes it (hopefully) easy for others to contribute new simulations/apps. To that end, the package contains a subfolder called <em>docsfordevelopers</em>, which provides information on how the apps are structured and how to add new ones. In brief, each app consists of a simulator function and a shiny app function which calls the simulator function. Further HTML files provide the documentation displayed in each app. Developing a new app consists of writing (at least) 2 R functions (<em>simulate_NNNNNN.R</em> and the corresponding <em>app.R</em>) and filling the provided RMarkdown template for the documentation, then running a few functions to process everything.</p>
 <p>The information in the <em>docsfordevelopers</em> folder contains more details and is hopefully complete enough to allow fairly easy development and contribution to the package. If you are interested in contributing further apps, I suggest you get in touch with me, either by email (<a href="mailto:ahandel@uga.edu">ahandel@uga.edu</a>) or through the github site for the package (<a href="https://github.com/ahgroup/DSAIDE" class="uri">https://github.com/ahgroup/DSAIDE</a>).</p>
 </div>
 <div id="acknowledgements" class="section level2">

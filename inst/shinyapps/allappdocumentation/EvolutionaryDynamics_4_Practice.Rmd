@@ -103,12 +103,6 @@ __All parameters described below and in the model are assumed to be in units of 
 * Turn on resistance generation by treated and untreated. 
 * Explore how population size, rate of resistance generation and fitness of the different strains affect outcomes.
 
-##Answers 
-##Answer 1: 
-
-###Answer 2: 
-
-###Answer 3: 
 
 
 ##Further Information {#shinytab4}

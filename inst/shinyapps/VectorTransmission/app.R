@@ -133,10 +133,10 @@ ui <- fluidPage(
            
            fluidRow(
                column(6,
-                    sliderInput("b", "Monthly rate of new vector births", min = 0, max = 10000, value = 0, step = 100)
+                    sliderInput("b", "Rate of new vector births", min = 0, max = 10000, value = 0, step = 100)
              ),
              column(6,
-                    sliderInput("n", "Natural vector death rate", min = 0, max = 2, value = 0, step = 0.01, sep ='')
+                    sliderInput("n", "Vector death rate", min = 0, max = 2, value = 0, step = 0.01, sep ='')
              ),
              align = "center"
            ) #close fluidRow structure for input

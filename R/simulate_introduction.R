@@ -42,7 +42,7 @@ introductionode <- function(t, y, parms)
 #' @return The function returns the output from the odesolver as a matrix,
 #' with one column per compartment/variable. The first column is time.
 #' @details A simple SIR model is simulated as a set of ordinary differential
-#' equations, using an ode solver from the deSolve package.#'
+#' equations, using an ode solver from the deSolve package.
 #' @section Warning: This function does not perform any error checking. So if
 #'   you try to do something nonsensical (e.g. specify negative parameter values
 #'   or fractions > 1), the code will likely abort with an error message

@@ -89,12 +89,10 @@ ui <- fluidPage(
   #add header and title
   tags$head( tags$script(src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML", type = 'text/javascript') ),
   div( includeHTML("www/header.html"), align = "center"),
-  #specify name of App below, will show up in title
-  
-  h1('DSAIDE - Main Menu', align = "center", style = "background-color:#123c66; color:#fff"),
-
   p(paste('This is DSAIDE version ',utils::packageVersion("DSAIDE"),' last updated ', utils::packageDescription('DSAIDE')$Date,sep=''), class='infotext'),
-  p('Have fun exploring the infectious disease models!', class='maintext'),
+  
+  #specify name of App below, will show up in title
+  h1('DSAIDE - Main Menu', align = "center", style = "background-color:#123c66; color:#fff"),
 
   fluidRow(
     column(4,
@@ -152,6 +150,9 @@ ui <- fluidPage(
     class = "mainmenurow"
     ), #close fluidRow structure for input
   
+  p('This collection of Shiny apps is meant to illustrate and teach various topics of infectious disease epidemiology from a dynamical systems perspective. The simulation apps are meant to provide "learning by doing/exploring". Depending on you background knowledge, it is possible that exploring the apps on their own might not suffice to learn the material. Ideally, you would use these apps as part of a course on the topic. Alternatively, you can try to obtain the required background information to fill any gaps in understanding by reading the material listed in the "Further Information" section of the apps.',class='infotext', align="left"),
+  p('The main way of interacting with the ID simulations is through the graphical interface. For information on more advanced uses of the simulations provided here, see the package vignette or the "Further Information" section of the apps.',class='infotext', align="left"),
+    p('Have fun exploring the infectious disease models!', class='maintext'),
   div(includeHTML("www/footer.html"), align="center", style="font-size:small") #footer
 ) #end fluidpage
 

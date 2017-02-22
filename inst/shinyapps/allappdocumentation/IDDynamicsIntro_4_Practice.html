@@ -51,7 +51,7 @@
 <li><strong>I</strong> - infected and infectious individuals (note that these terms are often used interchangably, but technically we are talking about someone who is infected <strong>and</strong> is infectious, i.e. can infect others)</li>
 <li><strong>R</strong> - recovered/removed individuals. Those are individuals that do not further participate, either because they are now immune or because they died.</li>
 </ul>
-<p>The SIR model is very basic. It can of course be extendend by introducing further compartments. For instance we could stratify according to gender, which would give us 2 sets of SIR compartments, one for males and one for females. We will see this and other ways of making models more detailed later in the course.</p>
+<p>The SIR model is very basic. It could be extendend by introducing further compartments. For instance we could stratify according to gender, which would give us 2 sets of SIR compartments, one for males and one for females. Some of these extensions are implemented in some of the other apps.</p>
 <p>In addition to specifying the <em>compartments</em> of a model, we need to specify the dynamics determining the changes for each compartment. Broadly speaking, there are processes that increase the number of individuals in a given compartment/stage, and processes that lead to a reduction. Those processes are sometimes called in-flows and out-flows.</p>
 <p>For our system, we specify only 2 processes/flows:</p>
 <ol style="list-style-type: decimal">
@@ -59,7 +59,7 @@
 </li>
 <li>An infected individual dies or recovers and enters the recovered/removed (R) compartment at some rate (often labeled as <span class="math inline">\(\gamma\)</span>).</li>
 </ol>
-<p>As with the compartments, we can of course extend the model and allow other processes to occur. For instance we could allow for natural births and deaths, waning immunity, deaths due to disease, etc. We will do that soon. For now, we keep the model as simple as possible.</p>
+<p>As with the compartments, we can extend the model and allow other processes to occur. For instance we could allow for natural births and deaths, waning immunity, deaths due to disease, etc. We will do that soon. For now, we keep the model as simple as possible.</p>
 </div>
 <div id="model-implementation" class="section level3">
 <h3>Model Implementation</h3>
@@ -76,21 +76,18 @@
 <ul>
 <li>For many of the models, I will show their underlying equations. But you are not expected to know them or “do anything” with them.</li>
 <li>You will see the term <em>host</em> used instead of <em>individuals</em>. In general, while we most often think of humans, the host can be any kind of animal (or even a plant).</li>
-<li>In general, the entities that change in our model (i.e. here the number of individuals in compartments S, I and R) are called variables: They are variable and change during the simulation. In contrast, the quantities that are usually fixed for a given scenario are called parameters. For this model, those are the infection rate <span class="math inline">\(\beta\)</span> and the recovery rate <span class="math inline">\(\gamma\)</span>.</li>
+<li>In general, the entities that change in our model (i.e. here the number of individuals in compartments S, I and R) are called variables: They are variable and change during the simulation.</li>
+<li>In contrast, the quantities that are usually fixed for a given scenario are called parameters. For this model, those are the infection rate <span class="math inline">\(\beta\)</span> and the recovery rate <span class="math inline">\(\gamma\)</span>.</li>
 <li>We would usually choose the parameter such that they match the specific disease we want to study. We’ll get to that soon. For now, you’ll just play around with the model without trying to relate it to some specific ID.</li>
 </ul>
 </div>
 </div>
 <div id="shinytab3" class="section level2">
 <h2>What to do</h2>
-<div id="note" class="section level3">
-<h3>Note:</h3>
-<p>You might not yet fully understand exactly why you get the dynamics you see. That’s ok. This simulation exercise is to “get you thinking”, we’ll get deeper into the “whys” later in the course. For now, just for yourself, try to figure out as much as possible why you get what you get.</p>
-</div>
 <div id="task-1" class="section level3">
 <h3>Task 1:</h3>
 <ul>
-<li>Run the simulation with a population size of 1000, 1 initially infected host, simulation duration 100 days, gamma=0.5 per day, beta=0.001. You will get an outbreak of some - currently unspecified - infectious disease.</li>
+<li>Run the simulation with a population size of 1000, 1 initially infected host, simulation duration 100 days, recovery rate gamma=0.5 per day, and infectiousness beta=0.001. You will get an outbreak of some - currently unspecified - infectious disease.</li>
 <li>Record the number and fraction of susceptible/infected/recovered remaining at the end of the outbreak.<br />
 </li>
 <li>From the graph, get a (rough) estimate of the day at which the outbreak peaks.</li>
@@ -134,29 +131,25 @@
 </ul>
 </div>
 </div>
-<div id="answers" class="section level2">
-<h2>Answers</h2>
-<div id="answer-1" class="section level3">
-<h3>Answer 1:</h3>
-</div>
-<div id="answer-2" class="section level3">
-<h3>Answer 2:</h3>
-</div>
-<div id="answer-3" class="section level3">
-<h3>Answer 3:</h3>
-</div>
-</div>
 <div id="shinytab4" class="section level2">
 <h2>Further Information</h2>
 <ul>
 <li>This app (and all others) are structured such that the Shiny part (the graphical interface you see and the server-side function that goes with it) calls an underlying R script which runs the simulation for the model of interest and returns the results.</li>
 <li>For this app, the underlying function running the simulation is called <code>simulate_introduction.R</code>. You can call this function directly, without going through the shiny app. Type <code>?simulate_introduction</code> into the R console for more information. If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself.</li>
 <li>You could also modify this R function for your own purposes - though that requires R coding knowledge.</li>
+<li>Some useful books which cover the material of this and most of the other apps (though often a somewhat more mathematical level) are <span class="citation">(Vynnycky and White 2010)</span> and <span class="citation">(Keeling and Rohani 2008)</span>.</li>
 </ul>
+<div id="references" class="section level3 unnumbered">
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-keeling08">
+<p>Keeling, Matt J, and Pejman Rohani. 2008. <em>Modeling Infectious Diseases in Humans and Animals</em>. Princeton University Press.</p>
 </div>
-<div id="more-sections" class="section level2">
-<h2>More sections</h2>
-<p>This might not go into shiny</p>
+<div id="ref-vynnycky10">
+<p>Vynnycky, Emilia, and Richard White. 2010. <em>An Introduction to Infectious Disease Modelling</em>. Oxford University Press.</p>
+</div>
+</div>
+</div>
 </div>
 
 <div id="myfooter" class="container">

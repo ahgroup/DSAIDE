@@ -6,12 +6,12 @@
 <ul><li><strong>S</strong> - uninfected and susceptible individuals</li>&#13;
 <li><strong>I</strong> - infected and infectious individuals (note that these terms are often used interchangably, but technically we are talking about someone who is infected <strong>and</strong> is infectious, i.e. can infect others)</li>&#13;
 <li><strong>R</strong> - recovered/removed individuals. Those are individuals that do not further participate, either because they are now immune or because they died.</li>&#13;
-</ul><p>The SIR model is very basic. It can of course be extendend by introducing further compartments. For instance we could stratify according to gender, which would give us 2 sets of SIR compartments, one for males and one for females. We will see this and other ways of making models more detailed later in the course.</p>&#13;
+</ul><p>The SIR model is very basic. It could be extendend by introducing further compartments. For instance we could stratify according to gender, which would give us 2 sets of SIR compartments, one for males and one for females. Some of these extensions are implemented in some of the other apps.</p>&#13;
 <p>In addition to specifying the <em>compartments</em> of a model, we need to specify the dynamics determining the changes for each compartment. Broadly speaking, there are processes that increase the number of individuals in a given compartment/stage, and processes that lead to a reduction. Those processes are sometimes called in-flows and out-flows.</p>&#13;
 <p>For our system, we specify only 2 processes/flows:</p>&#13;
 <ol style="list-style-type: decimal"><li>A susceptible individual (S) can become infected by an infectious individual (I) at some rate (which is usually labeled b or <span class="math inline">\(\beta\)</span>). This leads to the susceptible individual leaving the S compartment and entering the I compartment.<br/></li>&#13;
 <li>An infected individual dies or recovers and enters the recovered/removed (R) compartment at some rate (often labeled as <span class="math inline">\(\gamma\)</span>).</li>&#13;
-</ol><p>As with the compartments, we can of course extend the model and allow other processes to occur. For instance we could allow for natural births and deaths, waning immunity, deaths due to disease, etc. We will do that soon. For now, we keep the model as simple as possible.</p>&#13;
+</ol><p>As with the compartments, we can extend the model and allow other processes to occur. For instance we could allow for natural births and deaths, waning immunity, deaths due to disease, etc. We will do that soon. For now, we keep the model as simple as possible.</p>&#13;
 </div>&#13;
 <div id="model-implementation" class="section level3">&#13;
 <h3>Model Implementation</h3>&#13;
@@ -26,7 +26,8 @@
 <h3>Some notes</h3>&#13;
 <ul><li>For many of the models, I will show their underlying equations. But you are not expected to know them or “do anything” with them.</li>&#13;
 <li>You will see the term <em>host</em> used instead of <em>individuals</em>. In general, while we most often think of humans, the host can be any kind of animal (or even a plant).</li>&#13;
-<li>In general, the entities that change in our model (i.e. here the number of individuals in compartments S, I and R) are called variables: They are variable and change during the simulation. In contrast, the quantities that are usually fixed for a given scenario are called parameters. For this model, those are the infection rate <span class="math inline">\(\beta\)</span> and the recovery rate <span class="math inline">\(\gamma\)</span>.</li>&#13;
+<li>In general, the entities that change in our model (i.e. here the number of individuals in compartments S, I and R) are called variables: They are variable and change during the simulation.</li>&#13;
+<li>In contrast, the quantities that are usually fixed for a given scenario are called parameters. For this model, those are the infection rate <span class="math inline">\(\beta\)</span> and the recovery rate <span class="math inline">\(\gamma\)</span>.</li>&#13;
 <li>We would usually choose the parameter such that they match the specific disease we want to study. We’ll get to that soon. For now, you’ll just play around with the model without trying to relate it to some specific ID.</li>&#13;
 </ul></div>&#13;
 </div> </body>

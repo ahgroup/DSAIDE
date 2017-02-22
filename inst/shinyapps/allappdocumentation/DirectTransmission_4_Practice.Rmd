@@ -18,14 +18,13 @@ bibliography: ../media/references.bib
 ##Overview {#shinytab1}
 This app allows you to explore a model with 2 different modes of direct transmission. Read about the model in the "Model" tab. Then do the tasks described in the "What to do" tab.
 
-**Keep a record for the results you obtain doing the tasks described below. The online quiz covering the practice part will ask for (some of) these results/answers.**
 
 ##The Model {#shinytab2}
 
 
 ###Model Overview
 
-This is a simple SIR model with births and deaths and 2 types of direct transmission, density-dependent and frequency-dependent (based on the terminology in [@begon02] - see further information tab for references).
+This is a simple SIR model with births and deaths and 2 types of direct transmission, density-dependent and frequency-dependent (based on the terminology in [@begon02] - see _Further Information_ tab for references).
 
 This model has the following compartments:  
 
@@ -94,7 +93,7 @@ _A general note: Some of the tasks below are fairly open ended. You shouldn't go
 ###Task 5: 
 * Keep exploring by trying different parameters and transmission settings and see how they influence results.
 * You can also go beyond a single outbreak and turn on births/deaths (which can impact population size) or waning immunity.
-* As you continue your exploration, think about potential real infectious diseases that might be approximated by either one of the transmission types, and what approximate choices for the model parameters would describe those ID.
+* As you continue your exploration, think about potential real infectious diseases that might be approximated by either one of the transmission types, and what approximate choices for the model parameters would describe those IDs.
 
 
 ##Answers 

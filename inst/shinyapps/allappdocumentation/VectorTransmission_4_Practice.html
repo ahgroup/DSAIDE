@@ -61,7 +61,7 @@
 <li>Susceptible vectors can become infected by contact with infected hosts at rate <em>b<sub>2</sub></em></li>
 <li>Infected hosts recover after some time (specified by the rate <em>g</em>).</li>
 <li>New susceptible vectors are born at a rate <em>b</em>. Susceptible and infected vectors die at rate <em>n</em>. The inverse of this rate is the average lifespan.</li>
-<li>Recovered hosts loose their immunity at rate <em>w</em>.</li>
+<li>Recovered hosts lose their immunity at rate <em>w</em>.</li>
 </ul>
 <p>We envision hosts to be humans and vectors to be e.g. mosquitos. We further assume the time scale for the model is short enough that we can ignore births and deaths for human hosts but not vectors. This is likely a decent approximation as long as our simulation time is not more than few years.</p>
 </div>
@@ -78,6 +78,7 @@
 <div id="shinytab3" class="section level2">
 <h2>What to do</h2>
 <p><em>A general note: Some of the tasks below are fairly open ended. You shouldn’t go through the tasks like a check-list. Instead, explore these simulations, play with them, query them. As you do, loop through iterations of formulating your expectations for a specific scenario/task, running the model and observing results, and if results don’t agree with your expectations, figure out why. Essentially, <strong>“do science/research”</strong>.</em></p>
+<p><em>The simulation is assumed to run in units of months, i.e. all rate parameters are assumed to be in inverse months.</em></p>
 <div id="task-1" class="section level3">
 <h3>Task 1:</h3>
 <ul>
@@ -134,7 +135,7 @@
 </div>
 <div id="answers" class="section level2">
 <h2>Answers</h2>
-<p>This section does not have the shinytab label and is therefore ignored and not included in the app. One could provide the answers here. Note that if this file is supplied with the package, the answers are in principle available, so most users might not know where/how to look.</p>
+<p>This section does not have the shinytab label and is therefore ignored and not included in the app. One could provide the answers here. Note that if this file is supplied with the package, the answers are in principle available.</p>
 <div id="answer-1" class="section level3">
 <h3>Answer 1:</h3>
 <p>Answer to task 1.</p>
@@ -146,9 +147,18 @@
 <li>For this app, the underlying function running the simulation is called <code>simulate_vectortransmission.R</code>. You can call this function directly, without going through the shiny app. Check the help file for the function for more information. If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself.</li>
 <li>You could also modify this R function for your own purposes.</li>
 <li>To learn more about the underlying simulations and how to access and use the code, see the package vignette, which you can open by typing <code>vignette('DSAIDE')</code> in the R console.</li>
+<li>Some more information on vector-borne diseases and modeling can be found in <span class="citation">(Kilpatrick and Randolph 2012, <span class="citation">Luz, Struchiner, and Galvani (2010)</span>)</span>.</li>
 </ul>
-<div id="references" class="section level3">
+<div id="references" class="section level3 unnumbered">
 <h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-kilpatrick12">
+<p>Kilpatrick, A Marm, and Sarah E Randolph. 2012. “Drivers, Dynamics, and Control of Emerging Vector-Borne Zoonotic Diseases.” <em>Lancet (London, England)</em> 380 (9857): 1946–55. doi:<a href="https://doi.org/10.1016/S0140-6736(12)61151-9">10.1016/S0140-6736(12)61151-9</a>.</p>
+</div>
+<div id="ref-luz10">
+<p>Luz, Paula M, Claudio J Struchiner, and Alison P Galvani. 2010. “Modeling Transmission Dynamics and Control of Vector-Borne Neglected Tropical Diseases.” <em>PLoS Neglected Tropical Diseases</em> 4 (10): e761. doi:<a href="https://doi.org/10.1371/journal.pntd.0000761">10.1371/journal.pntd.0000761</a>.</p>
+</div>
+</div>
 </div>
 </div>
 

@@ -55,6 +55,7 @@ A compartmental ID model with several states/compartments is
   you try to do something nonsensical (e.g. specify negative parameter values
   or fractions > 1), the code will likely abort with an error message
 }
+
 \examples{
 # To run the simulation with default parameters 
 result <- simulate_stochastic()
@@ -65,12 +66,11 @@ result <- simulate_stochastic(S0 = 2000,  tmax = 200, bP = 1/100)
 plot(result[,'time'],result[,'S'],xlab='Time',ylab='Number Susceptible',type='l')
 print(paste('Total number of infected at end of simulation:',result[nrow(result),'R'])) 
 }
-\author{
-Andreas Handel
-}
 \seealso{
 See the shiny app documentation corresponding to this simulator
 function for more details on this model. See the manual for the adaptivetau
 package for details on the stochastic algorithm.
 }
-
+\author{
+Andreas Handel
+}

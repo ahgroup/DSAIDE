@@ -30,7 +30,7 @@ In the _Introduction to ID_ app, you explored a simple 3-compartment model, the 
 * **P** - presymptomatic individuals who are infected and do not yet show symptoms. Those individuals can potentially be infectious.
 * **A** - asymptomatic, infected individuals. Those individuals can potentially be infectious.
 * **I** - individuals who are infected and show symptoms. Those individuals are likely infectious, but the model allows to adjust this, including no infectiousness.
-* **R** - recovered/removed individuals. Those individuals have recovered and are immune. They can lose their immunity in this model.
+* **R** - recovered/removed individuals. Those individuals have recovered and are immune. 
 * **D** - individuals who have died due to the disease.
 
 Of course, as with the basic SIR model, this model could be made to include further details by extendind the compartments. E.g. doubling the compartments would allow us to stratify according to gender. In general, for each additional distinct feature you want to track, the existing number of compartments needs to be replicated by the discrete categories you have. So replicated by 2 for gender, replicated by 3 if we wanted to stratify by young/medium/old age, etc. 
@@ -124,9 +124,8 @@ _A general note: Some of the tasks below (and in future apps) are fairly open en
 
 * For this app, the underlying function running the simulation is called `simulate_idcharacteristics.R`. You can call this function directly, without going through the shiny app. Check the help file for the function for more information. If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself. 
 * You could also modify this R function for your own purposes - though that requires R coding knowledge.
+* Some further information covering the concepts this app addresses can be found in [@kajita07, @milwid16].
 
-
-##More sections
-This has not shinytab label and therefore does not go into the shiny app
+###References
 
 

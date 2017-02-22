@@ -38,7 +38,7 @@ The following simulations/apps are currently available:
 |------                   | --------   |---------------|
 |   ID Dynamics Intro     | 3 compartment (SIR) ODE model | A first introduction to a simple compartmental SIR model. Allows simulation of a single outbreak for different parameter and initial condition settings.       |  
 |   Characteristics of ID     | 6 compartment ODE model | The potential role of different disease states (e.g. pre-symptomatic, asymptomatic, symptomatic) on ID dynamics. |  
-|   ID Patterns     | 6 compartment ODE model. Includes births-deaths, waning immunity, seasonality. | Different ID patterns (single outbreak, osciallations, steady states). |  
+|   ID Patterns     | 6 compartment ODE model. Includes births-deaths, waning immunity, seasonality. | Different ID patterns (single outbreak, oscillations, steady states). |  
 |   Direct Transmission   | 3 compartment ODE model. Births-deaths and waning immunity are included. | The differences between density-dependent and frequency-dependent transmission and their impact on ID dynamics.  |  
 |   Environmental Transmission   | 4 compartment ODE model. Includes explicit environmental stage. Births-deaths and waning immunity are included. | The impact of environmental shedding, decay and transmission.  |  
 |   Vector Transmission   | 5 compartment ODE model. Includes susceptible and infected vectors and their dynamics. Births-deaths for vectors and waning immunity for hosts are included. | Exploration of a simple vector-borne transmission model. |  
@@ -52,7 +52,7 @@ The following simulations/apps are currently available:
 
 ## Intended audience and goal of the package
 
-The audience for this app are individuals interested in infectious disease epidemiology from a _systems/modeling perspective_. For instance the apps allow exploration of concepts such as _patterns of infectious disease incidence_, _reproductive number concept_, _extinctions and critical community size_, etc. All these concepts are not well described by applying classical epidemiology approaches (i.e. assuming independence between individulas) to infectious diseases, but can readily by understood using a systems/modeling approach.
+The audience for this app is individuals interested in infectious disease epidemiology from a _systems/modeling perspective_. For instance the apps allow exploration of concepts such as _patterns of infectious disease incidence_, _reproductive number concept_, _extinctions and critical community size_, etc. All these concepts are not well described by applying classical epidemiology approaches (i.e. assuming independence between individulas) to infectious diseases, but can readily by understood using a systems/modeling approach.
 
 The documentation for each app tries to be complete and self-contained. However, the information provided inside each app is unlikely sufficient for a complete novice to fully understand the modeling and infectious disease material. 
 
@@ -108,7 +108,7 @@ This will bring up a graphical menu from which one can select each app. Each app
 library('DSAIDE')
 ```
 
-As stated above, the exploration of the models and infectious disease topics through the graphical interface is the main intended use of the package. However, the package is structured such that it is possible without too much effort to interact with the code more directly. This will provide more flexibility but will require writing some code.
+As stated above, the exploration of the models and infectious disease topics through the graphical interface is the main intended use of the package. However, the package is structured such that it is possible, without too much effort, to interact with the code more directly. This will provide more flexibility but will require writing some code.
 
 To facilitate direct interaction and modification of the underlying simulations, each app is structured in such a way that the underlying model/simulation is a stand-alone function. This simulator function can be called directly, without going through the graphical interface. The 'Further Information' tab inside each app provides the name of the corresponding simulator function.
 
@@ -117,7 +117,7 @@ Consider as example the first app, called "ID Dynamics Intro". The simulator fun
 help('simulate_introduction')
 ```
 
-The help file explains that one can run the simulation by specifying initial number of susceptibles and infected, the duration for which the simulation should be run, and the infection and recovery parameters. Unless explicitly specified, the models do not have inherent time units. Instead, those are set by the user based on choices for parameters. It is important to ensure that all quantities that have time units. For this simulation, _tmax_, _g_ and _b_ are expressed in the same time units, e.g. days or months (or the inverse of those units for the rate parameters). Each parameter has some default. The user can modify those default settings. For instance one can call the simulator with the following settings, overwriting the defaults:  
+The help file explains that one can run the simulation by specifying initial number of susceptibles and infected, the duration for which the simulation should be run, and the infection and recovery parameters. Unless explicitly specified, the models do not have inherent time units. Instead, those are set by the user based on choices for parameters. It is important to ensure that all quantities have time units. For this simulation, _tmax_, _g_, and _b_ are expressed in the same time units, e.g. days or months (or the inverse of those units for the rate parameters). Each parameter has some default. The user can modify those default settings. For instance one can call the simulator with the following settings, overwriting the defaults:  
 
 ```{r, eval=TRUE, echo=TRUE}
 result <- simulate_introduction(S0 = 500, I0 = 5, tmax = 100, g = 0.1,  b = 1/2500)
@@ -152,7 +152,7 @@ As a next step, it is possible to not only interact with the simulation function
 
 While the functions in this subfolder are not used to run the code in the DSAIDE package, and one could therefore edit them without breaking the package, it is better to make a copy of the whole folder somewhere else. This way the chance of overwriting any modifications - if for instance the package is being re-installed - are reduced.
 
-All simulator functions are (hopefully) well documented. Some basic to intermediate level of R coding experience is likely required to successfully modify the functions. In addition to modifying the simulator function of interest, somed additional code to interact with the modified function (as described in _Level 2_) is likely required.
+All simulator functions are (hopefully) well documented. Some basic to intermediate level of R coding experience is likely required to successfully modify the functions. In addition to modifying the simulator function of interest, some additional code to interact with the modified function (as described in _Level 2_) is likely required.
 
 The following provides a simple example of this process of modifying a simulator function and exploring its results. Assume that we want to modify the simple SIR model encoded in `simulate_introduction.R`. After finding the file and making a copy (let's call the modified function `mysimulator.R`), we can make modifications. Say we want to include waning immunity with recovered returning to the susceptible class at rate _w_. 
 
@@ -214,7 +214,7 @@ plot(wvec,peak,type='p',xlab='Rate of waning immunity',ylab='Max number of infec
 
 ## Developing and contributing new apps to the package
 
-The package is built in way that makes it (hopefully) easy for others to contribute new simulations/apps. To that end, the package contains a subfolder called _docsfordevelopers_, which provides information on how the apps are structured and how to add new ones. In brief, each app consists of a simulator function and a shiny app function which calls the simulator function. Further HTML files provide the documentation displayed in each app. Developing a new app consists of writing (at least) 2 R functions (_simulate_NNNNNN.R_ and the corresponding _app.R_) and filling the provided RMarkdown template for the documentation, then running a few functions to process everything. 
+The package is built in a way that makes it (hopefully) easy for others to contribute new simulations/apps. To that end, the package contains a subfolder called _docsfordevelopers_, which provides information on how the apps are structured and how to add new ones. In brief, each app consists of a simulator function and a shiny app function which calls the simulator function. Further HTML files provide the documentation displayed in each app. Developing a new app consists of writing (at least) 2 R functions (_simulate_NNNNNN.R_ and the corresponding _app.R_) and filling the provided RMarkdown template for the documentation, then running a few functions to process everything. 
 
 The information in the _docsfordevelopers_ folder contains more details and is hopefully complete enough to allow fairly easy development and contribution to the package. If you are interested in contributing further apps, I suggest you get in touch with me, either by email (ahandel@uga.edu) or through the github site for the package (https://github.com/ahgroup/DSAIDE).
 

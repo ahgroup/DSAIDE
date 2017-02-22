@@ -31,4 +31,3 @@ This function is called by the shiny server to produce output returned to the sh
 \author{
 Andreas Handel
 }
-

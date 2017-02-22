@@ -34,13 +34,14 @@ The function returns a matrix containing time-series of each variable and time.
 }
 \details{
 A simple SIR model is simulated as a set of ordinary differential
-equations, using an ode solver from the deSolve package.#'
+equations, using an ode solver from the deSolve package.
 }
 \section{Warning}{
  This function does not perform any error checking. So if
   you try to do something nonsensical (e.g. specify negative parameter values
   or fractions > 1), the code will likely abort with an error message
 }
+
 \examples{
 # To run the simulation with default parameters just call this function
 result <- simulate_introduction()
@@ -49,12 +50,11 @@ result <- simulate_introduction(S0 = 2000, I0 = 10, tmax = 100, g = 1, b = 1/100
 # You should then use the simulation result returned from the function, e.g. like this:
 plot(result[,1],result[,2],xlab='Time',ylab='Number Susceptible',type='l')
 }
-\author{
-Andreas Handel
-}
 \seealso{
 See the shiny app documentation corresponding to this simulator
 function for more details on this model. See the manual for the deSolve
 package for details on the underlying ODE simulator algorithm.
 }
-
+\author{
+Andreas Handel
+}
