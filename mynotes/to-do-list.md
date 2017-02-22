@@ -1,7 +1,6 @@
 Things to do for John:
 
 * Do another check. Make sure there are no more references to 'this course' or 'this module' or such. 
-* Make all diagrams look the same (Inkscape/SVG).
 * Re-check reproductive number app
 * Evolutionary Dynamics App?
 
