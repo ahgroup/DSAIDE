@@ -35,7 +35,7 @@ The included processes/mechanisms are the following:
 
 * Susceptible individuals of type 1 or 2 can become infected by infected hosts of type 1 or 2. The rates at which infections from type 1/2 to type 1/2 occur are given by the parameters _b~11~_, _b~12~_, _b~21~_ and _b~22~_. 
 * Infected hosts of type 1/2 recover after some time at rates _g~1~_/_g~2~_. 
-* Recovered individuals are initially immune to reinfection. They can loose their immunity at rates _w~1~_/_w~2~_ and return back to the susceptible state. 
+* Recovered individuals are initially immune to reinfection. They can lose their immunity at rates _w~1~_/_w~2~_ and return back to the susceptible state. 
 * New susceptible hosts and vectors enter the system at rates _e~1~_ and _e~2~_. Natural death occurs at rates _n~1~_ and _n~2~_. 
 
 

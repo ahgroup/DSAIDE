@@ -63,7 +63,7 @@ _The following tasks ask you to use various equations to compute the reproductiv
 ###Task 1: 
 * Set the simulation with a population size of 1000, 1 infected, simulation time 60 months, gamma=5, beta=0.01. Everything else at 0.
 * Run the simulation, you should get an outbreak.
-* Use the equation linking R~0~ and the fraction of susceptible hosts left at the end of the outbreak to compute the reproductive number. 
+* Use the final size equation linking R~0~ and the fraction of susceptible hosts left at the end of the outbreak to compute the reproductive number. 
 
 ###Task 2: 
 * Use the equation that expresses R~0~ as function of model parameters for the simple SIR model. Using the values of the model parameters, compute R~0~ that way. Check that it agrees with what you found in task #1.
@@ -79,7 +79,7 @@ _The following tasks ask you to use various equations to compute the reproductiv
 ###Task 5: 
 * Set the model parameters back to those given in task #1.
 * Another way to estimate R~0~ is to determine the rate of increase in infected hosts at the beginning of the outbreak. During the initial phase, new infections increase exponentially according to $I(t)=I_0 e^{gt}$, with _g_ being the rate of growth. Usually, for any real outbreak, you do not know the number of infected at the start, I~0~, or the exact time the outbreak starts. It is still possible to estimate _g_ by obtaining two values of _I_ at two time points during that initial growth rate, i.e. _I~1~_ at time _t~1~_ and _I~2~_ at time _t~2~_. With those quantities, one can compute the exponential growth rate, _g_. Figure out how to determine those values and use them to compute _g_. Hint: play with the maximum simulation duration such that the simulation stops at 2 different times during the initial exponential growth phase.
-* For this model, the growth rate and R~0~ are related through _R~0~ = 1+gD_, where _D_ is the average duration of the infectious period. Use this to determine R~0~. You should get essentially the same answer (up to some rounding errors) as for task #1.
+* For this model, the growth rate and R~0~ are related through _R~0~ = 1+gD_, where _D_ is the average duration of the infectious period (i.e. the inverse of the recovery rate). Use this to determine R~0~. You should get essentially the same answer (up to some rounding errors) as for task #1.
 * Note that the choice of _t~1~_ and _t~2~_ can influence the results. Earlier times are better since once the number of susceptibles starts to drop markedly, the growth of infected slows down and is not truly exponential anymore.
 
 
