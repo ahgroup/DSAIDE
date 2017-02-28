@@ -1,9 +1,3 @@
-Things to do for John:
-
-* Do another check. Make sure there are no more references to 'this course' or 'this module' or such. 
-* Re-check reproductive number app
-* Evolutionary Dynamics App?
-
 
 Now:
 1. Finish vignette, check manual/documentation, improve as needed. 
@@ -11,10 +5,7 @@ Now:
 4. Write DSAIDE paper
 5. Write and publish DSAIDE book. Use bookdown, place on leanpub. Then decide if going with a real publisher makes sense.
 
-
-
 Add following content/features to package:
-* One more app/simulation
 * add progress bar
 * fix figure size adjustment 
 * Left or block align text on main menu page
