@@ -7,8 +7,8 @@ Description: A collection of Shiny apps that allow for the simulation and
     about infectious disease epidemiology from a dynamical systems perspective.
     All apps include explanations of the underlying models and instructions on
     what to do with the models. 
-Version: 0.39
-Date: 2017-02-20
+Version: 0.4
+Date: 2017-02-27
 Authors@R: c(
     person("Andreas", "Handel", email = "ahandel@uga.edu", 
     role = c("aut", "cre")),
@@ -18,11 +18,11 @@ License: GPL-3
 LazyData: TRUE
 Imports:
     deSolve (>= 1.13),
-    knitr (>= 1.13),
+    knitr (>= 1.15),
     adaptivetau (>= 2.2),
     utils
 Depends:
-    shiny (>= 0.13.2)
+    shiny (>= 1.0)
 Suggests:
     rmarkdown
 RoxygenNote: 6.0.1
