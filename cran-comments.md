@@ -24,7 +24,7 @@ Note 2:
     shinyapps   6.0Mb
 
 Each shiny app contains information about the model that is studied. This documentation includes a figure for each app, thus the 6Mb size.
-I have excluded the folders containing the files with the figures and all the raw documentation (folders \inst\shinyapps\allappdocumentation and \inst\shinyapps\media) with .Rbuildignore but this does not seem to be considered by R CMD check.
+I have excluded the folders containing the files with the figures and all the raw documentation (folders \inst\shinyapps\allappdocumentation and \inst\shinyapps\media) from the package with .Rbuildignore but this does not seem to be considered by R CMD check.
 
 
 

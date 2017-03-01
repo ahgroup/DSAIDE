@@ -7,7 +7,7 @@ Description: A collection of Shiny apps that allow for the simulation and
     about infectious disease epidemiology from a dynamical systems perspective.
     All apps include explanations of the underlying models and instructions on
     what to do with the models. 
-Version: 0.4
+Version: 0.4.0
 Date: 2017-03-01
 Authors@R: c(
     person("Andreas", "Handel", email = "ahandel@uga.edu", 
