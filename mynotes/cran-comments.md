@@ -12,7 +12,7 @@ There was 1 NOTE:
   sub-directories of 1Mb or more:
     shinyapps   6.0Mb
 
-A fair bit of documentation that goes with each Shiny App is inside this folder, thus the 6Mb size.
+Each shiny app contains information about the model that is studied. This documentation includes, for each app, a , thus the 6Mb size.
 
 ## Submission History
 This is the first submission of this package.
