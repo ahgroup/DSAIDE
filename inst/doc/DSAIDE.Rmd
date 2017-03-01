@@ -221,7 +221,7 @@ The information in the _docsfordevelopers_ folder contains more details and is h
 
 ## Acknowledgements
  
-The following individuals contributed to this package: Sina Solaimanpour, Brian McKay.
+The following individuals contributed to this package: Sina Solaimanpour, Brian McKay, John Rossow.
 
 
 ## References
