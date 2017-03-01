@@ -1,6 +1,8 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
-^mynotes$
 ^\.travis\.yml$
 ^mynotes$
-^allappdocumentation
+^allappdocumentation$
+^media$
+^README\.md$
+^NEWS\.md$

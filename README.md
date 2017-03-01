@@ -1,20 +1,25 @@
 # DSAIDE
+Dynamical Systems Approach to Infectious Disease Epidemiology
 
-The goal of DSAIDE is to ...
+## Description
+This is an R package consisting of a set of Shiny Apps to teach infectious disease epidemiology from a dynamical system perspective.
+By manipulating the models through the Shiny UI interface and working through the instructions provided within the Shiny UI, you can learn about some important concepts in infectious disease epidemiology. 
+You will also learn how models can be used to study such concepts.
 
-## Installation
+## Installing
+1. Install the CRAN release in the usual way with install.packages()
+2. The latest development version (potentially buggy) can be installed from github, using the devtools package function via: install_github("ahgroup/DSAIDE")
 
-You can install DSAIDE from github with:
+## Basic Use
+After loading the package, run `dsaidemenu()` to start the main menu. 
+From there choose the different apps corresponding to different infectious disease topics and scenarios.
+Each app contains a description of the model and scenario that is implemented.
+Each app also contains a list of recommeded tasks to work through in order to learn about a specific infectious topic.
+Once done exploring the apps, close the main menu to exit back to the R console.
 
-```R
-# install.packages("devtools")
-devtools::install_github("DSAIDE/ahgroup")
-```
+## Advanced Use
+The vignette illustrates ways to interact with and modify the underlying models without the use of the Shiny GUI.
 
-## Example
-
-This is a basic example which shows you how to solve a common problem:
-
-```R
-...
-```
+## Further information
+The vignette provides additional details about the different ways the package can be used.
+For feedback, bug reports etc., use the packages' github site https://github.com/ahgroup/DSAIDE

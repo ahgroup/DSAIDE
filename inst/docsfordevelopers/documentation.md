@@ -9,8 +9,8 @@
 * The R/ folder also has a few helper/convenience functions
 * The shiny apps are in the inst/shinyapps/ subfolder (which gets copied to /shinyapps in the deployed package). Each App has a corresponding www/ subfolder which contains the documentation. This folder is automatically generated as described below.
 * There are a few other folders in the inst/shinyapps/ directory which do not correspond to shiny apps. Those are:
-    * the _allappdocumentation_ folder contains Rmd and html files for the documentation content of all shiny apps. These HTML files are created from the Rmd files and will need to be further processed. See information below.
-    * The _media_ folder contains figures used as part of the documentation (i.e. the Rmd files)
+    * the _allappdocumentation_ folder contains Rmd and html files for the documentation content of all shiny apps. These HTML files are created from the Rmd files and will need to be further processed. See information below. Note that this is not part of the CRAN R package for size reasons, but if you fork the project from github it will be included.
+    * The _media_ folder contains figures and a bib file used as part of the documentation (i.e. the Rmd files). Note that this is not part of the CRAN R package for size reasons, but if you fork the project from github it will be included.
     * The _styles_ folder contains css styling for the documentation
     * The _documentationtemplate_ contains an Rmd template that can be used as starting point when writing documentation for a new Shiny App
 * \inst\docsfordevelopers contains this file and any other potential information for someone wanting to add new apps to the package
