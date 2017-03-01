@@ -7,11 +7,19 @@ There were no ERRORs or WARNINGs.
 
 There were 2 NOTES:
 
+Note 1:
+
+* checking CRAN incoming feasibility ... NOTE
+Maintainer: 'Andreas Handel <ahandel@uga.edu>'
+
+New submission
 
 
+
+Note 2:
 
 * checking installed package size ... NOTE
-  installed size is  6.9Mb
+  installed size is  6.3Mb
   sub-directories of 1Mb or more:
     shinyapps   6.0Mb
 
