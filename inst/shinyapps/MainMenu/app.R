@@ -68,6 +68,12 @@ server <- function(input, output, session) {
     print ("Running EvolutionaryDynamics...")
     stopApp(returnValue = 'K')
   })
+  
+  observeEvent(input$PathogenDynamics, {
+    input$PathogenDynamics
+    print("Running PathogenDynamics...")
+    stopApp(returnValue = "L")
+  })
 
   
   observeEvent(input$Exit, {
@@ -138,7 +144,7 @@ ui <- fluidPage(
            actionButton("EvolutionaryDynamics", "Evolutionary Dynamics", class="mainbutton")
     ),
     column(4, 
-            ""
+            actionButton("PathogenDynamics", "Pathogen Dynamics", class = "mainbutton")
     ),
     class = "mainmenurow"
   ),
