@@ -59,8 +59,9 @@ server <- function(input, output) {
     time_periods <- input$sim_length
     mat_form <- matrix(rep(0, time_periods*5), ncol = 5)
     results_df <- as.data.frame(mat_form)
-    names(results_df) <- c("Time Point", "Infected With A?", "Infected With B?", "Time Infected With A", 
-                           "Time Infected With B")
+  #  names(results_df) <- c("Time Point", "Infected With A?", "Infected With B?", "Time Infected With A", 
+  #                         "Time Infected With B")
+    names(results_df) <- c("A", "B", "C", "D", "E")
     exp_A <- FALSE
     exp_B <- FALSE
     time_A <- 0
