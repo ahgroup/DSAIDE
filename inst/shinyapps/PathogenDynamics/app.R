@@ -84,7 +84,7 @@ server <- function(input, output) {
       
       print(c(exp_A, exp_B))
       
-      results_df[time_point, ] <- c(time_point, exp_A, exp_B, time_A, time_B)
+      results_df[time_point, ] <- c(time_point, as.character(exp_A), as.character(exp_B), time_A, time_B)
       
       time_point <- time_point + 1
       
