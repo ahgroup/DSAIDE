@@ -57,7 +57,8 @@ server <- function(input, output) {
   
   output$sim_results <- renderTable({
     time_periods <- input$sim_length
-    mat_form <- matrix(rep(0, time_periods*5), ncol = 5)
+  #  mat_form <- matrix(rep(0, time_periods*5), ncol = 5)
+    mat_form <- matrix(rep(0, 5), ncol = 5)
     results_df <- as.data.frame(mat_form)
     names(results_df) <- c("Time Point", "Infected With A?", "Infected With B?", "Time Infected With A", 
                            "Time Infected With B")
@@ -66,7 +67,7 @@ server <- function(input, output) {
     time_A <- 0
     time_B <- 0
     time_point <- 1
-    while (time_point <= time_periods & exp_A != "Finished" & exp_B != "Finished") {
+    while (time_point <= time_periods & !(exp_A == "Finished" & exp_B == "Finished")) {
       if (exp_A == TRUE | exp_A == FALSE) {
         exp_A <- ifelse(exp_A == TRUE, sample(x = c(TRUE, "Finished"), size = 1,
                                               prob = c(1 - input$pathA_rec, input$pathA_rec)),
