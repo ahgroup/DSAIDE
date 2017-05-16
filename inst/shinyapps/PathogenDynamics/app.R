@@ -82,6 +82,8 @@ server <- function(input, output) {
       time_A <- ifelse(exp_A == TRUE, time_A + 1, time_A)
       time_B <- ifelse(exp_B == TRUE, time_B + 1, time_B)
       
+      print(c(exp_A, exp_B))
+      
       results_df[time_point, ] <- c(time_point, exp_A, exp_B, time_A, time_B)
       
       time_point <- time_point + 1
