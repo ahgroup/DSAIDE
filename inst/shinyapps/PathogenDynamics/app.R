@@ -39,7 +39,7 @@ ui <- fluidPage(
     ),
     mainPanel(
     #  verbatimTextOutput("sim_results")
-      dataTableOutput("sim_results")
+      tableOutput("sim_results")
     )
   ),
   
@@ -55,7 +55,7 @@ ui <- fluidPage(
 # Define server logic required to draw a histogram
 server <- function(input, output) {
   
-  output$sim_results <- renderDataTable({
+  output$sim_results <- renderTable({
     time_periods <- input$sim_length
     mat_form <- matrix(rep(0, time_periods*5), ncol = 5)
     results_df <- as.data.frame(mat_form)
