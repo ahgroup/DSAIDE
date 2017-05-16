@@ -66,7 +66,7 @@ server <- function(input, output) {
     time_A <- 0
     time_B <- 0
     time_point <- 1
-    while (time_point <= time_periods) {
+    while (time_point <= time_periods & exp_A != "Finished" & exp_B != "Finished") {
       if (exp_A == TRUE | exp_A == FALSE) {
         exp_A <- ifelse(exp_A == TRUE, sample(x = c(TRUE, "Finished"), size = 1,
                                               prob = c(1 - input$pathA_rec, input$pathA_rec)),
