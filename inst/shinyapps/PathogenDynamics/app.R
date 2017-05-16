@@ -15,6 +15,14 @@ library(shiny)
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(
+  includeCSS("../shinystyle.css"),
+  #add header and title
+  tags$head( tags$script(src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML", type = 'text/javascript') ),
+  tags$head(tags$style(".myrow{vertical-align: bottom;}")),
+  div( includeHTML("www/header.html"), align = "center"),
+  #specify name of App below, will show up in title
+  h1('Pathogen Dynamics App', align = "center", style = "background-color:#123c66; color:#fff"),
+  
   sidebarLayout(
     sidebarPanel(
       h4("Select the parameters for the pathogen simulation."),
@@ -33,7 +41,14 @@ ui <- fluidPage(
     #  verbatimTextOutput("sim_results")
       dataTableOutput("sim_results")
     )
-  )
+  ),
+  
+  #################################
+  #Instructions section at bottom as tabs
+  h2('Instructions'),
+  #use external function to generate all tabs with instruction content
+  do.call(tabsetPanel,generate_instruction_tabs()),
+  div(includeHTML("www/footer.html"), align="center", style="font-size:small") #footer
 
 )
 
