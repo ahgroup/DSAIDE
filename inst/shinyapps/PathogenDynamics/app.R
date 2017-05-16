@@ -55,9 +55,23 @@ ui <- fluidPage(
 # Define server logic required to draw a histogram
 server <- function(input, output) {
   
+  # sim_results() is the table that shows the progress of the simulation.
+  # It indicates at each time step the pathogen(s), if any, with which
+  # the host is infected, with TRUE for present infection, FALSE for
+  # no infection, and Finished for the state of recovery from a past
+  # infection. The host cannot be reinfected by the same pathogen.
+  # The columns on the right, "Time Infected with A" and "Time Infected
+  # With B," show the number of time periods in the simulation that
+  # the pathogen was infected with A and B. If the host has recovered,
+  # it cannot be reinfected, and thus after recovery, the number
+  # in the column corresponding to the recovered pathogen will remain
+  # the same for the rest of the simulation. The simulation ends
+  # either when the number of time periods reaches the maximum
+  # specified by the user, or when the host has been infected by
+  # and recovered from both pathogens, as there can be no new
+  # activity after both recoveries.
   output$sim_results <- renderTable({
     time_periods <- input$sim_length
-  #  mat_form <- matrix(rep(0, time_periods*5), ncol = 5)
     mat_form <- matrix(rep(0, 5), ncol = 5)
     results_df <- as.data.frame(mat_form)
     names(results_df) <- c("Time Point", "Infected With A?", "Infected With B?", "Time Infected With A", 
@@ -68,6 +82,13 @@ server <- function(input, output) {
     time_B <- 0
     time_point <- 1
     while (time_point <= time_periods & !(exp_A == "Finished" & exp_B == "Finished")) {
+      # The outer conditional ensures that the simulation does not introduce
+      # the possibility of reinfection once exp_A or exp_B have taken the
+      # value of "Finished." The ifelse() statement uses the sample() function
+      # to determine whether the host recovers (if infected), or whether the
+      # host gets infected (if it currently is not). In both cases, the vector
+      # of probabilities for recovery or infection are drawn from the user
+      # inputs of these probabilities.
       if (exp_A == TRUE | exp_A == FALSE) {
         exp_A <- ifelse(exp_A == TRUE, sample(x = c(TRUE, "Finished"), size = 1,
                                               prob = c(1 - input$pathA_rec, input$pathA_rec)),
@@ -83,8 +104,6 @@ server <- function(input, output) {
       time_A <- ifelse(exp_A == TRUE, time_A + 1, time_A)
       time_B <- ifelse(exp_B == TRUE, time_B + 1, time_B)
       
-      print(c(exp_A, exp_B))
-      
       results_df[time_point, ] <- c(time_point, as.character(exp_A), as.character(exp_B), time_A, time_B)
       
       time_point <- time_point + 1
@@ -95,11 +114,6 @@ server <- function(input, output) {
     return(results_df)
     
   })
-  
-  # output$results_table <- renderDataTable({
-  #   sim_results()
-  # })
-   
    
 }
 
