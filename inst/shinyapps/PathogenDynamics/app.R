@@ -1,47 +1,177 @@
-# Outline of app:
-# The user can select the probability of infection in a given period by each pathogen,
-# the probability of recovery in a given period from each infection, and the maximum
-# possible number of time periods. The server will then run a while loop where the
-# host is exposed to whatever pathogens to which it is vulnerable in each period.
-# The function records which pathogens, if any, infected the host, and how long
-# the host harbored the pathogen(s). The loop breaks when either the available
-# time periods run out, or when the host has become immune to both pathogens.
-# The server will then return 1) length of the simulation time, 2) which pathogen(s),
-# if any, infected the host, and 3) if the host was infected, how long it was
-# infected with each pathogen. This output will then be printed as a data table
-# in the main panel of the user interface.
+############################################################
+#This is the Shiny file for the Host Heterogeneity App
+#written by Andreas Handel and Sina Solaimanpour 
+#maintained by Andreas Handel (ahandel@uga.edu)
+#last updated 10/13/2016
+############################################################
 
-library(shiny)
+#the server-side function with the main functionality
+#this function is wrapped inside the shiny server function below to allow return to main menu when window is closed
+refresh <- function(input, output){
+  
+  # This reactive takes the input data and sends it over to the simulator
+  # Then it will get the results back and return it as the "res" variable
+  res <- reactive({
+    input$submitBtn
+    
+    # Read all the input values from the UI
+    S = isolate(input$S);
+    I1 = isolate(input$I1);
+    I12 = isolate(input$I12);
+    I2 = isolate(input$I2);
+    tmax = isolate(input$tmax);
+    
+    R1 = isolate(input$R1);
+    R2 = isolate(input$R2);
+    
+    b1 = isolate(input$b1);
+    b2 = isolate(input$b2);
+    b12 = isolate(input$b12);
+    
+    g1 = isolate(input$g1);
+    g2 = isolate(input$g2);
+    g12 = isolate(input$g12);
+    
+    # Call the ODE solver with the given parameters
+    result <- simulate_heterogeneity(S = S, I1 = I1, I2 = I2, I12 = I12, tmax = tmax, b1 = b1, b2 = b2, b12 = b12, g1 = g1, g2 = g2, g12 = g12)
+    
+    return(list(result)) #this is returned as the res variable
+  })
+  
+  #if we want certain variables plotted and reported separately, we can specify them manually as a list
+  #if nothing is specified, all variables are plotted and reported at once
+  varlist = list(c("S1","I1","R1"),c("S2","I2","R2") )
+  #function that takes result saved in res and produces output
+  #output (plots, text, warnings) is stored in and modifies the global variable 'output'
+  generate_simoutput(input,output,res,varlist=varlist)
+} #ends the 'refresh' shiny server function that runs the simulation and returns output
 
-# Define UI for application that draws a histogram
+#main shiny server function
+server <- function(input, output, session) {
+  
+  # Waits for the Exit Button to be pressed to stop the app and return to main menu
+  observeEvent(input$exitBtn, {
+    input$exitBtn
+    stopApp(returnValue = 0)
+  })
+  
+  # This function is called to refresh the content of the Shiny App
+  refresh(input, output)
+  
+  # Event handler to listen for the webpage and see when it closes.
+  # Right after the window is closed, it will stop the app server and the main menu will
+  # continue asking for inputs.
+  session$onSessionEnded(function(){
+    stopApp(returnValue = 0)
+  })
+} #ends the main shiny server function
+
+
+#This is the UI part of the shiny App
 ui <- fluidPage(
   includeCSS("../shinystyle.css"),
   #add header and title
   tags$head( tags$script(src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML", type = 'text/javascript') ),
-  tags$head(tags$style(".myrow{vertical-align: bottom;}")),
   div( includeHTML("www/header.html"), align = "center"),
   #specify name of App below, will show up in title
-  h1('Pathogen Dynamics App', align = "center", style = "background-color:#123c66; color:#fff"),
+  h1('Host Heterogeneity App', align = "center", style = "background-color:#123c66; color:#fff"),
   
-  sidebarLayout(
-    sidebarPanel(
-      h4("Select the parameters for the pathogen simulation."),
-      numericInput(inputId = "pathA_inf", label = "Probability of Infection by Pathogen A",
-                   value = 0.2, min = 0, max = 1, step = 0.01),
-      numericInput(inputId = "pathB_inf", label = "Probability of Infection by Pathogen B",
-                   value = 0.2, min = 0, max = 1, step = 0.01),
-      numericInput(inputId = "pathA_rec", label = "Probability of Recovery from Pathogen A",
-                   value = 0.2, min = 0, max = 1, step = 0.01),
-      numericInput(inputId = "pathB_rec", label = "Probability of Recovery from Pathogen B",
-                   value = 0.2, min = 0, max = 1, step = 0.01),
-      numericInput(inputId = "sim_length", label = "Length of Simulation Time",
-                   value = 10, min = 5, max = 100, step = 1)
+  #section to add buttons
+  fluidRow(
+    column(6,
+           actionButton("submitBtn", "Run Simulation", class="submitbutton")  
     ),
-    mainPanel(
-    #  verbatimTextOutput("sim_results")
-      tableOutput("sim_results")
-    )
-  ),
+    column(6,
+           actionButton("exitBtn", "Exit App", class="exitbutton")
+    ),
+    align = "center"
+  ), #end section to add buttons
+  
+  tags$hr(),
+  
+  ################################
+  #Split screen with input on left, output on right
+  fluidRow(
+    #all the inputs in here
+    column(6,
+           #################################
+           # Inputs section
+           h2('Simulation Settings'),
+           p('All parameters are assumed to be in units of (inverse) months'),
+           fluidRow(
+             column(6,
+                    sliderInput("S", "initial number of susceptible hosts", min = 100, max = 5000, value = 1000, step = 100)
+             ),
+             column(6,
+                    sliderInput("I1", "initial number of hosts infected with pathogen 1", min = 0, max = 100, value = 0, step = 1)
+             )
+           ), #close fluidRow structure for input
+           fluidRow(
+             column(6,
+                    sliderInput("I2", "initial number of hosts infected with pathogen 2", min = 0, max = 100, value = 0, step = 1)
+             )
+           ), #close fluidRow structure for input
+           fluidRow(
+             column(6,
+                    sliderInput("b1", "Rate of transmission between hosts infected with pathogen 1", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
+             ),
+             column(6,
+                    sliderInput("b2", "Rate of transmission between hosts infected with pathogen 2", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
+             )
+           ), #close fluidRow structure for input
+           fluidRow(
+             column(6,
+                    sliderInput("b12", "Rate of transmission from type 2 to type 1", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
+             )
+           ), #close fluidRow structure for input
+           fluidRow(
+             column(6,
+                    sliderInput("g1", "Rate at which hosts infected with type 1 leave compartment", min = 0, max = 5, value = 0.5, step = 0.1)
+             ),
+             column(6,
+                    sliderInput("g2", "Rate at which hosts infected with type 2 leave compartment", min = 0, max = 5, value = 0.5, step = 0.1)
+             ),
+             column(6,
+                    sliderInput("g12", "Rate at which infected host recovers from types 1 and 2",
+                                min = 0, max = 5, value = 0.5, step = 0.1)
+            )
+           ), #close fluidRow structure for input
+           
+           
+           fluidRow(
+             column(4,
+                    sliderInput("w1", "Rate of waning immunity of type 1", min = 0, max = 5, value = 0, step = 0.05)
+             ),
+             column(4,
+                    sliderInput("w2", "Rate of waning immunity of type 2", min = 0, max = 5, value = 0, step = 0.05)
+             ),
+             column(4,
+                    sliderInput("tmax", "Maximum simulation time (months)", min = 1, max = 1200, value = 100, step = 1)
+             )
+             
+           ) #close fluidRow structure for input
+           
+    ), #end sidebar column for inputs
+    
+    #all the outcomes here
+    column(6,
+           
+           #################################
+           #Start with results on top
+           h2('Simulation Results'),
+           plotOutput(outputId = "plot", height = "500px"),
+           # PLaceholder for results of type text
+           htmlOutput(outputId = "text"),
+           #Placeholder for any possible warning or error messages (this will be shown in red)
+           htmlOutput(outputId = "warn"),
+           
+           tags$head(tags$style("#warn{color: red;
+                                font-style: italic;
+                                }")),
+           tags$hr()
+           
+    ) #end main panel column with outcomes
+  ), #end layout with side and main panel
   
   #################################
   #Instructions section at bottom as tabs
@@ -49,74 +179,7 @@ ui <- fluidPage(
   #use external function to generate all tabs with instruction content
   do.call(tabsetPanel,generate_instruction_tabs()),
   div(includeHTML("www/footer.html"), align="center", style="font-size:small") #footer
-
-)
-
-# Define server logic required to draw a histogram
-server <- function(input, output) {
   
-  # sim_results() is the table that shows the progress of the simulation.
-  # It indicates at each time step the pathogen(s), if any, with which
-  # the host is infected, with TRUE for present infection, FALSE for
-  # no infection, and Finished for the state of recovery from a past
-  # infection. The host cannot be reinfected by the same pathogen.
-  # The columns on the right, "Time Infected with A" and "Time Infected
-  # With B," show the number of time periods in the simulation that
-  # the pathogen was infected with A and B. If the host has recovered,
-  # it cannot be reinfected, and thus after recovery, the number
-  # in the column corresponding to the recovered pathogen will remain
-  # the same for the rest of the simulation. The simulation ends
-  # either when the number of time periods reaches the maximum
-  # specified by the user, or when the host has been infected by
-  # and recovered from both pathogens, as there can be no new
-  # activity after both recoveries.
-  output$sim_results <- renderTable({
-    time_periods <- input$sim_length
-    mat_form <- matrix(rep(0, 5), ncol = 5)
-    results_df <- as.data.frame(mat_form)
-    names(results_df) <- c("Time Point", "Infected With A?", "Infected With B?", "Time Infected With A", 
-                           "Time Infected With B")
-    exp_A <- FALSE
-    exp_B <- FALSE
-    time_A <- 0
-    time_B <- 0
-    time_point <- 1
-    while (time_point <= time_periods & !(exp_A == "Finished" & exp_B == "Finished")) {
-      # The outer conditional ensures that the simulation does not introduce
-      # the possibility of reinfection once exp_A or exp_B have taken the
-      # value of "Finished." The ifelse() statement uses the sample() function
-      # to determine whether the host recovers (if infected), or whether the
-      # host gets infected (if it currently is not). In both cases, the vector
-      # of probabilities for recovery or infection are drawn from the user
-      # inputs of these probabilities.
-      if (exp_A == TRUE | exp_A == FALSE) {
-        exp_A <- ifelse(exp_A == TRUE, sample(x = c(TRUE, "Finished"), size = 1,
-                                              prob = c(1 - input$pathA_rec, input$pathA_rec)),
-                        sample(x = c(TRUE, FALSE), size = 1, prob = c(input$pathA_inf, 1 - input$pathA_inf)))
-      }
-      
-      if (exp_B == TRUE | exp_B == FALSE) {
-        exp_B <- ifelse(exp_B == TRUE, sample(x = c(TRUE, "Finished"), size = 1,
-                                              prob = c(1 - input$pathB_rec, input$pathB_rec)),
-                        sample(x = c(TRUE, FALSE), size = 1, prob = c(input$pathB_inf, 1 - input$pathB_inf)))
-      }
-      
-      time_A <- ifelse(exp_A == TRUE, time_A + 1, time_A)
-      time_B <- ifelse(exp_B == TRUE, time_B + 1, time_B)
-      
-      results_df[time_point, ] <- c(time_point, as.character(exp_A), as.character(exp_B), time_A, time_B)
-      
-      time_point <- time_point + 1
-      
-      
-    }
+) #end fluidpage function, i.e. the UI part of the app
 
-    return(results_df)
-    
-  })
-   
-}
-
-# Run the application 
 shinyApp(ui = ui, server = server)
-
