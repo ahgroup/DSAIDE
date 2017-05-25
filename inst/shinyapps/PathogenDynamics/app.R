@@ -109,7 +109,11 @@ ui <- fluidPage(
            fluidRow(
              column(6,
                     sliderInput("I2", "initial number of hosts infected with pathogen 2", min = 0, max = 100, value = 0, step = 1)
-             )
+             ),
+             column(6,
+                    sliderInput("I12", "initial number of hosts infected with pathogens 1 and 2", min = 0, max = 100, value = 0, step = 1)
+                    
+            )
            ), #close fluidRow structure for input
            fluidRow(
              column(6,
