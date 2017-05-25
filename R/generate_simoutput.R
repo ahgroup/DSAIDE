@@ -130,6 +130,8 @@ generate_simoutput <- function(input,output,allres,varlist = NULL)
         txt <- paste(txt, newtxt, sep = "<br/>")
       }
     alltext <- paste(alltext, txt, sep = "<hr>" ) #add text blocks together
+    print(alltext) ################################ Debugging line
+     
       
     } #finishes loop over sets of variables
     
