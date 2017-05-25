@@ -1,5 +1,5 @@
 ############################################################
-#This is the Shiny file for the Host Heterogeneity App
+#This is the Shiny file for the Multiple Pathogen App
 #written by Andreas Handel and Sina Solaimanpour 
 #maintained by Andreas Handel (ahandel@uga.edu)
 #last updated 10/13/2016
