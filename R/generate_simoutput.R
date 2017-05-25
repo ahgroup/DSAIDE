@@ -115,8 +115,8 @@ generate_simoutput <- function(input,output,allres,varlist = NULL)
       for (n1 in 1:nreps) #add all final values
       {
         currentsim = allres()[[n1]]
-        print(paste("currentsim", currentsim))
         nrows = nrow(currentsim) #number of entries in time-series matrix - can be different for every run
+        print(c(nrows, varnames)) ########################## Debugging line
         currfinal = currentsim[nrows,varnames] #final number for each variable of interest
         print(paste("currfinal", currfinal))
         resfinal = resfinal + currfinal #total numbers
