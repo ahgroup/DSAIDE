@@ -40,10 +40,10 @@ refresh <- function(input, output){
   
   #if we want certain variables plotted and reported separately, we can specify them manually as a list
   #if nothing is specified, all variables are plotted and reported at once
-  varlist = list(c("S1","I1","R1"),c("S2","I2","R2") )
+ # varlist = list(c("S1","I1","R1"),c("S2","I2","R2") )
   #function that takes result saved in res and produces output
   #output (plots, text, warnings) is stored in and modifies the global variable 'output'
-  generate_simoutput(input,output,res,varlist=varlist)
+  generate_simoutput(input,output,res,varlist=NULL)
 } #ends the 'refresh' shiny server function that runs the simulation and returns output
 
 #main shiny server function
