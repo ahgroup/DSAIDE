@@ -105,6 +105,7 @@ generate_simoutput <- function(input,output,allres,varlist = NULL)
     
     for (vn in 1:nplots)
     {    
+      print(vn) ############################## Debugging line
       #for multiple plots, names of variables to be plotted as passed in by varlist, otherwise names are just all column names (minus time) 
       ifelse(nplots>1, varnames <- unlist(varlist[vn]), varnames <- colnames(allres()[[1]])[-1] )
       
