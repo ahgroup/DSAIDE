@@ -24,7 +24,7 @@ evolutionratefunc <- function(y, parms, t)
 } #end function specifying rates used by adaptivetau
 
 
-#' simulate_evolution function
+#' Stochastic simulation of a compartmental SIR-type model with wild-type and mutant strains and treatment
 #'
 #' @description  Simulation of a stochastic 2-strain SIR model with the following compartments:
 #' Susceptibles (S), Infected with wild-type/sensitive and untreated (Iu),

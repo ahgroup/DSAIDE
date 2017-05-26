@@ -3,7 +3,7 @@ idcontrolode <- function(t, y, parms)
 {
 
   with(
-    as.list(c(y,parms)), #lets us access variables and parameters stored in y and pars by name
+    as.list(c(y,parms)), #lets us access variables and parameters stored in y and parms by name
     {
  
       #the ordinary differential equations
