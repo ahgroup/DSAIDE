@@ -8,7 +8,6 @@
 #the server-side function with the main functionality
 #this function is wrapped inside the shiny server function below to allow return to main menu when window is closed
 refresh <- function(input, output){
-  print(str(input))
   
   # This reactive takes the input data and sends it over to the simulator
   # Then it will get the results back and return it as the "res" variable
@@ -32,9 +31,6 @@ refresh <- function(input, output){
     
     w1 = isolate(input$w1);
     w2 = isolate(input$w2);
-    
-    print(environment()) ################################# Debugging line
-    print(ls()) ################################# Debugging line
     
     # Call the ODE solver with the given parameters
     result <- simulate_heterogeneity(S10 = S10, I10 = I10, S20 = S20, I20 = I20, tmax = tmax, b11 = b11, b12 = b12, b21 = b21, b22 = b22, g1 = g1 , g2 = g2, w1 = w1, w2 = w2)
