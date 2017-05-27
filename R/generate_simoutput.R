@@ -105,29 +105,23 @@ generate_simoutput <- function(input,output,allres,varlist = NULL)
     
     for (vn in 1:nplots)
     {    
-      print(vn) ############################## Debugging line
       #for multiple plots, names of variables to be plotted as passed in by varlist, otherwise names are just all column names (minus time) 
       ifelse(nplots>1, varnames <- unlist(varlist[vn]), varnames <- colnames(allres()[[1]])[-1] )
       
-      print("Checkpoint 1") ########################## Debugging line
       resfinal = rep(0,length(varnames)) 
       resfracfinal = rep(0,length(varnames)) 
       for (n1 in 1:nreps) #add all final values
       {
         currentsim = allres()[[n1]]
-        print(currentsim) ########################## Debugging line
         nrows = nrow(currentsim) #number of entries in time-series matrix - can be different for every run
-        print(c(nrows, varnames)) ########################## Debugging line
         currfinal = currentsim[nrows,varnames] #final number for each variable of interest
         print(paste("currfinal", currfinal))
         resfinal = resfinal + currfinal #total numbers
         resfracfinal = resfracfinal + currfinal / sum(currfinal) #add up fractions
       }  
-      print("Checkpoint 2") ########################## Debugging line
       resfinal = resfinal/nreps #mean for each variable, take out time
       resfracfinal = resfracfinal/nreps #mean for each variable, take out time
       
-      print("Checkpoint 3") ########################## Debugging line
       txt <- ""
       for (nn in 1:length(varnames))
       {
@@ -137,7 +131,6 @@ generate_simoutput <- function(input,output,allres,varlist = NULL)
         txt <- paste(txt, newtxt, sep = "<br/>")
       }
     alltext <- paste(alltext, txt, sep = "<hr>" ) #add text blocks together
-    print(alltext) ################################ Debugging line
      
       
     } #finishes loop over sets of variables
