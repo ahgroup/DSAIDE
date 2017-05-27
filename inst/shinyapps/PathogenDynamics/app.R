@@ -33,7 +33,7 @@ refresh <- function(input, output){
     g12 = isolate(input$g12);
     
     # Call the ODE solver with the given parameters
-    result <- simulate_multi(S = S, I1 = I1, I2 = I2, I12 = I12, tmax = tmax, b1 = b1, b2 = b2, b12 = b12, g1 = g1, g2 = g2, g12 = g12)
+    result <- simulate_multihost(S = S, I1 = I1, I2 = I2, I12 = I12, tmax = tmax, b1 = b1, b2 = b2, b12 = b12, g1 = g1, g2 = g2, g12 = g12)
     
     return(list(result)) #this is returned as the res variable
   })
