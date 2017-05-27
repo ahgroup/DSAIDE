@@ -8,7 +8,6 @@
 #the server-side function with the main functionality
 #this function is wrapped inside the shiny server function below to allow return to main menu when window is closed
 refresh <- function(input, output){
-  print(str(input))
   
   # This reactive takes the input data and sends it over to the simulator
   # Then it will get the results back and return it as the "res" variable
@@ -34,8 +33,6 @@ refresh <- function(input, output){
     g12 = isolate(input$g12);
     
     # Call the ODE solver with the given parameters
-    print(environment()) ################################# Debugging line
-    print(ls())################################# Debugging line
     result <- simulate_multihost(S = S, I1 = I1, I2 = I2, I12 = I12, tmax = tmax, b1 = b1, b2 = b2, b12 = b12, g1 = g1, g2 = g2, g12 = g12)
     
     return(list(result)) #this is returned as the res variable
