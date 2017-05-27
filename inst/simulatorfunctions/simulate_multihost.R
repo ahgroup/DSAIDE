@@ -58,7 +58,7 @@ multieq <- function(t, y, parms)
 #' @export
 
 
-simulate_multi <- function(S = 1e3, I10 = 1, I20 = 0, I12 = 0, R1 = 0, R2 = 0, R12 = 0, tmax = 120, a = 0, b1 = 0, b2 = 0, b12 = 0, g1 = 1, g2 = 1, g12 = 1)
+simulate_multihost <- function(S = 1e3, I10 = 1, I20 = 0, I12 = 0, R1 = 0, R2 = 0, R12 = 0, tmax = 120, a = 0, b1 = 0, b2 = 0, b12 = 0, g1 = 1, g2 = 1, g12 = 1)
 {
   ############################################################
   Y0 = c(S = S, I1 = I10, I2 = I20, I12 = I12, R1 = R1, R2 = R2, R12 = R12);  #combine initial conditions into a vector
