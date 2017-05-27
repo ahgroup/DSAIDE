@@ -8,6 +8,7 @@
 #the server-side function with the main functionality
 #this function is wrapped inside the shiny server function below to allow return to main menu when window is closed
 refresh <- function(input, output){
+  print(str(input))
   
   # This reactive takes the input data and sends it over to the simulator
   # Then it will get the results back and return it as the "res" variable
