@@ -74,7 +74,7 @@ ui <- fluidPage(
   tags$head( tags$script(src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML", type = 'text/javascript') ),
   div( includeHTML("www/header.html"), align = "center"),
   #specify name of App below, will show up in title
-  h1('Host Heterogeneity App', align = "center", style = "background-color:#123c66; color:#fff"),
+  h1('Multiple Pathogen App', align = "center", style = "background-color:#123c66; color:#fff"),
   
   #section to add buttons
   fluidRow(
