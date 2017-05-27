@@ -46,13 +46,13 @@ multieq <- function(t, y, parms)
 #'   the code will likely abort with an error message
 #' @examples
 #'   # To run the simulation with default parameters just call this function
-#'   result <- simulate_heterogeneity()
+#'   result <- simulate_multihost()
 #'   # To choose parameter values other than the standard one, specify them e.g. like such
-#'   result <- simulate_heterogeneity(S10 = 100, S20 = 1e3,  tmax = 100)
+#'   result <- simulate_multihost(S10 = 100, S20 = 1e3,  tmax = 100)
 #'   # You should then use the simulation result returned from the function, e.g. like this:
 #'   plot(result[,1],result[,2],xlab='Time',ylab='Number Susceptible',type='l')
-#' @seealso The UI of the shiny app 'Host Heterogeneity', which is part of this package, contains more details on the model
-#' @author Andreas Handel
+#' @seealso The UI of the shiny app 'Pathogen Dynamics', which is part of this package, contains more details on the model
+#' @author Andreas Handel and Spencer Hall
 #' @references See e.g. Keeling and Rohani 2008 for SIR models and the
 #'   documentation for the deSolve package for details on ODE solvers
 #' @export
