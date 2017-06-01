@@ -41,7 +41,8 @@ The following simulations/apps are currently available:
 |   ID Patterns     | 6 compartment ODE model. Includes births-deaths, waning immunity, seasonality. | Different ID patterns (single outbreak, oscillations, steady states). |  
 |   Direct Transmission   | 3 compartment ODE model. Births-deaths and waning immunity are included. | The differences between density-dependent and frequency-dependent transmission and their impact on ID dynamics.  |  
 |   Environmental Transmission   | 4 compartment ODE model. Includes explicit environmental stage. Births-deaths and waning immunity are included. | The impact of environmental shedding, decay and transmission.  |  
-|   Pathogen Dynamics            | ? compartment ODE model. Infection and recovery of single host to two pathogen strains. |
+|   Pathogen Dynamics            | ? compartment ODE model. |  Infection and recovery of single host to two 
+pathogen strains. |
 |   Vector Transmission   | 5 compartment ODE model. Includes susceptible and infected vectors and their dynamics. Births-deaths for vectors and waning immunity for hosts are included. | Exploration of a simple vector-borne transmission model. |  
 |   Reproductive Number  | 3 compartment ODE model.  Includes vaccination of population at beginning of simulation. Births-deaths and waning immunity are included. | The reproductive number concept and how to estimate it from (simulated) data. |  
 |   ID Control  | 9 compartment ODE model. An environmental and 2 vector stages as well as 6 host stages. | The impact of different control measures for different types of ID. |  
