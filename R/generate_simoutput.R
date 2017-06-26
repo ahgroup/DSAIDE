@@ -115,6 +115,7 @@ generate_simoutput <- function(input,output,allres,varlist = NULL)
         currentsim = allres()[[n1]]
         nrows = nrow(currentsim) #number of entries in time-series matrix - can be different for every run
         currfinal = currentsim[nrows,varnames] #final number for each variable of interest
+        print(paste("currfinal", currfinal))
         resfinal = resfinal + currfinal #total numbers
         resfracfinal = resfracfinal + currfinal / sum(currfinal) #add up fractions
       }  
@@ -130,6 +131,7 @@ generate_simoutput <- function(input,output,allres,varlist = NULL)
         txt <- paste(txt, newtxt, sep = "<br/>")
       }
     alltext <- paste(alltext, txt, sep = "<hr>" ) #add text blocks together
+     
       
     } #finishes loop over sets of variables
     

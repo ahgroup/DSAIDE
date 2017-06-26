@@ -1,0 +1,86 @@
+---
+title: Multi Pathogen Dynamics - Practice
+output:
+  html_document:
+    theme: null
+    highlight: null
+    fig_caption: true
+    mathjax: default 
+    keep_md: false
+---
+
+
+```{r}
+################
+#This R chunk only exists as an easy way to add comments - a bit trickier in Markdown itself
+################
+#You can adjust settings in the YAML header for styling 
+#first make sure your simulator function is in the \R folder 
+#and your App is in an appropriately named folder inside \shinyapps
+#use this template and fill it with information for your App
+#turn this into an HTML file using RMarkdown (knitr/pandoc)
+#make sure the HTML file is in the directory with all the App documentation
+#run the processing script (processAllFiles.R), which processes all documentation
+#if everything works, the information described below should automatically be displayed in tabs at the bottom of the App UI
+#note that the processing script changes some of the styling as specified in the shinystyle.css file
+```
+
+##Overview {#shinytab1}
+This app allows you to explore a model with 2 pathogens. Read about the model in the "Model" tab. Then do the tasks described in the "What to do" tab.
+
+##The Model {#shinytab2}
+
+###Model Overview
+
+This model tracks susceptibles, infected with either pathogen 1, pathogen 2 or both, and individuals recovered from infection with pathogen 1, pathogen 2 or both.
+
+The following compartments are included:  
+
+* **S** - uninfected and susceptible individuals.
+* **I~1~** - individuals who are infected with pathogen 1 and infectious.
+* **I~2~** - individuals who are infected with pathogen 2 and infectious.
+* **I~12~** - individuals who are infected with both pathogen 1 and 2 and infectious.
+* **R~1~** - individuals recovered from infection with pathogen 1, still susceptible to pathogen 2.
+* **R~2~** - individuals recovered from infection with pathogen 2, still susceptible to pathogen 1.
+* **R~12~** - individuals recovered from infection with both pathogen 1 and 2.
+
+
+The included processes/mechanisms are the following:
+
+* Susceptible individuals can become infected with either pathogen 1 or 2.  
+* Hosts infected with pathogen 1 or 2 can become infected with the other pathogen.
+* Hosts infected with pathogen 1, 2 or both infect susceptibles or hosts infected with the other pathogen at rates _b~1~_/_b~2~_/_b~12~_. 
+* Hosts infected with both pathogens infect susceptibles with either pathogen 1 or 2 at fractions _a_/_(1-a)_.
+* Infected hosts recover after some time at rates _g~1~_/_g~2~_/_g~12~_. 
+* Recovered individuals are immune to reinfection by the pathogen they have already been infected with. 
+
+
+###Model Implementation
+The flow diagram and the mathematical model which are implemented in this app are as follows:
+
+![Flow diagram for this model.](../media/multipathogenmodel.png)
+
+$$\dot S =  - S (b_{1} I_1 + b_{2} I_2 + b_{12}I_{12})  $$ 
+$$\dot I_1 =   (b_{1} I_1 + ab_{12} I_{12})S - g_1 I_1 - b_{12} I_1 I_{12}$$ 
+$$\dot I_2 =   (b_{2} I_2 +  (1-a) b_{12} I_{12})S - g_2 I_2 -  b_{12}  I_2 I_{12}$$ 
+$$\dot I_{12} =  b_{12} I_{12} (I_1 + I_2 + R_1 + R_2)  - g_{12} I_{12}$$ 
+$$\dot R_1 = g_1 I_1 -  b_{12} R_1 I_{12}$$
+$$\dot R_2 = g_2 I_2 - b_{12} R_2 I_{12}$$
+$$\dot R_{12} =  g_{12} I_{12} $$
+
+
+
+
+##What to do {#shinytab3}
+
+###Task 1: 
+
+
+##Further Information {#shinytab4}
+
+* For this app, the underlying function running the simulation is called `simulate_multihost.R`. You can call this function directly, without going through the shiny app. Check the help file for the function for more information. 
+* If you call the function directly, you need to process the results returned from this function and produce useful output (such as a plot) yourself. 
+* You can also modify this R function for your own purposes. To find out how to do that, type `?DSAIDE` at the R console.
+
+### References
+

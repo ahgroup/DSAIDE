@@ -14,5 +14,6 @@ export(simulate_introduction)
 export(simulate_reproductivenumber)
 export(simulate_stochastic)
 export(simulate_vectortransmission)
+export(simulate_multihost) ################# Added this line for the new multihost app.
 import(shiny)
 importFrom(knitr,knit)
