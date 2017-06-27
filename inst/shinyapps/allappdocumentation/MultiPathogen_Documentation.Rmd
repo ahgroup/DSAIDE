@@ -1,12 +1,18 @@
 ---
-title: Multi Pathogen Dynamics - Practice
+title: Multi Pathogen Dynamics - Documentation
 output:
   html_document:
     theme: null
     highlight: null
+    css: ../styles/handelshiny.css
     fig_caption: true
     mathjax: default 
     keep_md: false
+    includes:
+      #in_header: in_header.txt
+      before_body: ../styles/before_shiny_body.txt
+      after_body: ../styles/after_shiny_body.txt 
+bibliography: ../media/references.bib
 ---
 
 

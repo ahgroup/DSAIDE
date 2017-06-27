@@ -33,13 +33,13 @@
 * Add your App to the main menu by modifying dsaidemenu.R and the MainMenu Shiny app.R file.
 
 ##To prepare App documentation
-* Write the documentation for the app as markdown file. A template exists in the shinyapps/documentationtemplate/ folder. Add information to the template as described in the template. 
-* Turn your documentation file into an HTML file and copy to the shinyapps/allappdocumentation/ folder. 
+* Write the documentation for the app as R markdown file. A template exists in the shinyapps/documentationtemplate/ folder. Add information to the template as described in the template. 
+* Place your documentation file into the shinyapps/allappdocumentation/ folder. 
 * First part of file name must be the same as name for the Shiny app. You can have additional text following an underscore, it will be stripped.  
-* Run the R script processAllFiles.R, which will execute a function by the same name inside the script. This function runs through all html files in that folder and splits them. Each section in the documentation html file that has a 'shinytabNNN' id will be extracted and placed into a separate html file. Any other sections are ignored. Those 'shinytabNNN' files are later loaded by the shiny UI and displayed inside the app.
+* Run the R script processAllFiles.R, which will execute a function by the same name inside the script. This function first runs through all Rmd files in that folder and turns them into HTML, then processes the HTML files and splits them. Each section in the documentation html file that has a 'shinytabNNN' id will be extracted and placed into a separate html file. Any other sections are ignored. Those 'shinytabNNN' files are later loaded by the shiny UI and displayed inside the app.
 * The newly created files will be placed in the www subfolders for each shiny app in inst/shinyapps/
 * The www subfolder for each shiny app is deleted and re-created on each run, so don't edit manually
-* Naming for newly created html files is shinytab1.html, etc. and header.html/footer.html
+* Naming for newly created html files is shinytab1.html, etc., as well as header.html/footer.html
 * see also comments in processAllFiles.R for more details
 
 ##To update R documentation and vignette

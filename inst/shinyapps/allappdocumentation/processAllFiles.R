@@ -1,15 +1,32 @@
 library("XML")
+library("knitr")
+
+
+#run through all Rmd files in current folder, knit them into HTML files
+processAllRmdFiles <-function() 
+{
+  files = list.files(".", pattern = "\\.Rmd$")
+  
+  for (i in seq(length(files)))
+  {
+    #get name of file currently to be processed
+    current_filename = files[i]
+    rmarkdown::render(current_filename)
+  }    
+  
+}  
 
 #for each HTML file in the folder where this script resides
 #call the separate() function to split into individual html files
 #save the individual files in the www subfolder of each shiny app
-processAllFiles <- function(){
+processAllHTMLFiles <- function(){
   files = list.files(".", pattern = "\\.html$")
 
   for (i in seq(length(files)))
   {
     #get name of file currently to be processed
     current_filename = files[i]
+    print(sprintf('processing file %s',current_filename))
     #strip out the _4_Practice.html part to create the right folders for the shiny app
     #in general, the name before the first underscore needs to correspond to the anme of the app
     #all information past the underscore is stripped
@@ -30,12 +47,14 @@ processAllFiles <- function(){
     #the UI of each app then loads and displays (some of) those HTML files 
     pathToDir <- separate(current_filename,shinyapp.path)
     
+    #browser()
+    
   } #finish loop over all files in folder
 } #end of function
 
 
-# This function will read a R markdown file, find the Practice section and
-#   separate all the sub-sections from that part on.
+# This function will read a documentation file in HTML and
+# separate the sub-sections into individual files
 #
 # Parameters,
 #   input: The main HTML file that needs to be separated
@@ -181,5 +200,6 @@ separate <- function(input,foldername){
 ################################################
 #main program
 #run the functions above to process all files
-processAllFiles()
+processAllRmdFiles() #turns Rmd files into HTML - uncomment if not needed/wanted
+processAllHTMLFiles() #turns HTML documentation files into individual HTML files for loading/display inside each app
 
