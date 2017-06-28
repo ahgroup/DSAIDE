@@ -38,16 +38,18 @@ This app allows you to explore a model with 2 pathogens. Read about the model in
 
 ###Model Overview
 
-This model tracks susceptibles, infected with either pathogen 1, pathogen 2 or both, and individuals recovered from infection with pathogen 1, pathogen 2 or both.
+This model tracks susceptible hosts, hosts infected with either pathogen 1, pathogen 2 or both, and individuals recovered from infection with pathogen 1, pathogen 2 or both. As usual, it is assumed that infected hosts are infectious.
 
 The following compartments are included:  
 
 * **S** - uninfected and susceptible individuals.
-* **I~1~** - individuals who are infected with pathogen 1 and infectious.
-* **I~2~** - individuals who are infected with pathogen 2 and infectious.
-* **I~12~** - individuals who are infected with both pathogen 1 and 2 and infectious.
+* **I~1~** - individuals who are infected with pathogen 1.
+* **I~2~** - individuals who are infected with pathogen 2.
+* **I~12~** - individuals who are infected with both pathogen 1 and 2 .
 * **R~1~** - individuals recovered from infection with pathogen 1, still susceptible to pathogen 2.
 * **R~2~** - individuals recovered from infection with pathogen 2, still susceptible to pathogen 1.
+* **I~1X~** - individuals previously infected with pathogen 2 and now infected with pathogen 1.
+* **I~2X~** - individuals previously infected with pathogen 1 and now infected with pathogen 2.
 * **R~12~** - individuals recovered from infection with both pathogen 1 and 2.
 
 
@@ -55,24 +57,26 @@ The included processes/mechanisms are the following:
 
 * Susceptible individuals can become infected with either pathogen 1 or 2.  
 * Hosts infected with pathogen 1 or 2 can become infected with the other pathogen.
-* Hosts infected with pathogen 1, 2 or both infect susceptibles or hosts infected with the other pathogen at rates _b~1~_/_b~2~_/_b~12~_. 
-* Hosts infected with both pathogens infect susceptibles with either pathogen 1 or 2 at fractions _a_/_(1-a)_.
-* Infected hosts recover after some time at rates _g~1~_/_g~2~_/_g~12~_. 
-* Recovered individuals are immune to reinfection by the pathogen they have already been infected with. 
+* Hosts infected with pathogen 1, 2 or both infect susceptibles or hosts infected with the other pathogen at rates _b~1~_/_b~2~_/_b~12~_. For simplicity, we assume that the rates are independent of the status of the host that becomes infected (e.g. an **S** host and a **I~1~** can become infected at the same rates with pathogen 2). It also does not matter if a host has previously recovered from an infection with the other pathogen.
+* Hosts infected with both pathogens infect susceptibles with either pathogen 1 or 2 at fractions _a_/_(1-a)_. We do not consider the possibility that both pathogens are transmitted at the same time.
+* Infected hosts recover after some time at rates _g~1~_/_g~2~_/_g~12~_. Rate of recovery does not depend on previous infections.
+* Recovered individuals are immune to reinfection by the pathogen they have already been infected with (either at the same time or consecutively) but can still be infected with the pathogen they have not yet been infected with. 
 
 
 ###Model Implementation
-The flow diagram and the mathematical model which are implemented in this app are as follows:
+The flow diagram and the set of differential equations for the mathematical model implemented in this app are as follows:
 
 ![Flow diagram for this model.](../media/multipathogenmodel.png)
 
-$$\dot S =  - S (b_{1} I_1 + b_{2} I_2 + b_{12}I_{12})  $$ 
-$$\dot I_1 =   (b_{1} I_1 + ab_{12} I_{12})S - g_1 I_1 - b_{12} I_1 I_{12}$$ 
-$$\dot I_2 =   (b_{2} I_2 +  (1-a) b_{12} I_{12})S - g_2 I_2 -  b_{12}  I_2 I_{12}$$ 
-$$\dot I_{12} =  b_{12} I_{12} (I_1 + I_2 + R_1 + R_2)  - g_{12} I_{12}$$ 
-$$\dot R_1 = g_1 I_1 -  b_{12} R_1 I_{12}$$
-$$\dot R_2 = g_2 I_2 - b_{12} R_2 I_{12}$$
-$$\dot R_{12} =  g_{12} I_{12} $$
+$$\dot S =  -  (b_{1} (I_1+I_{1X}) + b_{2} (I_2+I_{2X}) + b_{12}I_{12}) S  $$ 
+$$\dot I_1 =   (b_{1} (I_1+I_{1X}) + ab_{12} I_{12})S - (g_1  + b_{2} (I_2+I_{2X})  + b_{12}  I_{12}) I_1$$ 
+$$\dot I_2 =   (b_{2} (I_2+I_{2X}) +  (1-a) b_{12} I_{12})S - (g_2 + b_{1}(I_1 + I_{1X}) + b_{12} I_{12}) I_2$$ 
+$$\dot I_{12} = (b_{2} (I_2+I_{2X})  + b_{12}  I_{12}) I_1 + (b_{1}(I_1 + I_{1X}) + b_{12} I_{12}) I_2  - g_{12} I_{12}$$ 
+$$\dot R_1 = g_1 I_1 - (b_2 (I_2 + I_{2X}) + b_{12}  I_{12}) R_1$$
+$$\dot R_2 = g_2 I_2 - (b_1 (I_1 + I_{1X}) + b_{12}  I_{12}) R_2$$
+$$\dot I_{1X} = (b_1 (I_1 + I_{1X}) + b_{12}  I_{12}) R_2 - g_{1} I_{1X}$$
+$$\dot I_{2X} = (b_2 (I_2 + I_{2X}) + b_{12}  I_{12}) R_1 - g_{2} I_{2X}$$
+$$\dot R_{12} = g_{1} I_{1X} + g_{2} I_{2X} + g_{12} I_{12} $$
 
 
 
@@ -82,9 +86,12 @@ $$\dot R_{12} =  g_{12} I_{12} $$
 ###Task 1: 
 
 
+###Task 2: 
+
+
 ##Further Information {#shinytab4}
 
-* For this app, the underlying function running the simulation is called `simulate_multihost.R`. You can call this function directly, without going through the shiny app. Check the help file for the function for more information. 
+* For this app, the underlying function running the simulation is called `simulate_multipathogen.R`. You can call this function directly, without going through the shiny app. Check the help file for the function for more information. 
 * If you call the function directly, you need to process the results returned from this function and produce useful output (such as a plot) yourself. 
 * You can also modify this R function for your own purposes. To find out how to do that, type `?DSAIDE` at the R console.
 

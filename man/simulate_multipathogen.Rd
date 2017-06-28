@@ -2,39 +2,43 @@
 % Please edit documentation in R/simulate_multipathogen.R
 \name{simulate_multipathogen}
 \alias{simulate_multipathogen}
-\title{Simulation of a compartmental infectious disease transmission model with 2 types of hosts}
+\title{Simulation of a compartmental infectious disease transmission model with 2 types of pathogens}
 \usage{
-simulate_multipathogen(S = 1000, I10 = 1, I20 = 0, I12 = 0, R1 = 0,
-  R2 = 0, R12 = 0, tmax = 120, a = 0, b1 = 0, b2 = 0, b12 = 0,
-  g1 = 1, g2 = 1, g12 = 1)
+simulate_multipathogen(S0 = 1000, I10 = 1, I20 = 0, I120 = 0,
+  tmax = 120, b1 = 0, b2 = 0, b12 = 0, g1 = 1, g2 = 1, g12 = 1,
+  a = 0)
 }
 \arguments{
-\item{S}{initial total number of hosts}
+\item{S0}{initial total number of hosts}
+
+\item{I10}{initial number of hosts infected with type 1}
+
+\item{I20}{initial number of hosts infected with type 2}
+
+\item{I120}{initial number of double infected hosts}
 
 \item{tmax}{maximum simulation time, units of months}
 
-\item{b1}{rate of transmission of type 1 pathogen to host}
+\item{b1}{rate at which type 1 infected hosts transmit}
 
-\item{b2}{rate of transmission of type 2 pathogen to host}
+\item{b2}{rate at which type 1 infected hosts transmit}
 
-\item{b12}{rate of transmission from infected type 2 host to susceptible type 1 host}
+\item{b12}{rate at which double infected hosts transmit}
 
 \item{g1}{the rate at which infected type 1 hosts recover}
 
 \item{g2}{the rate at which infected type 2 hosts recover}
 
-\item{g12}{the rate at which hosts infected with type 1 and 2 recover}
+\item{g12}{the rate at which double infected hosts recover}
 
-\item{I1}{initial number of hosts infected with type 1}
-
-\item{I2}{initial number of hosts infected with type 2}
+\item{a}{fraction of type 1 infections produced by double infected hosts}
 }
 \value{
 This function returns the simulation result as obtained from a call
   to the deSolve ode solver
 }
 \description{
-This model allows for the simulation of an ID with 2 types of hosts
+This model allows for the simulation of 2 IDs in a single host
 }
 \details{
 A compartmental ID model with several states/compartments
@@ -53,7 +57,7 @@ A compartmental ID model with several states/compartments
   # To run the simulation with default parameters just call this function
   result <- simulate_multipathogen()
   # To choose parameter values other than the standard one, specify them e.g. like such
-  result <- simulate_multipathogen(S10 = 100, S20 = 1e3,  tmax = 100)
+  result <- simulate_multipathogen(S0 = 100, I20 = 10,  tmax = 100, a = 0.5)
   # You should then use the simulation result returned from the function, e.g. like this:
   plot(result[,1],result[,2],xlab='Time',ylab='Number Susceptible',type='l')
 }
