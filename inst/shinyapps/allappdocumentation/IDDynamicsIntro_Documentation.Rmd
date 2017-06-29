@@ -16,7 +16,7 @@ bibliography: ../media/references.bib
 ---
 
 ##Overview {#shinytab1}
-This app allows exploration of a very basic infectious disease simulation. The main goal is to get you familiar with the overall setup and ideas behind using these simulations, and how to run them. Read about the model in the "Model" tab. Then do the tasks described in the "What to do" tab.
+This app allows you to explore a very basic infectious disease simulation. The main goal is to provide familiarity with the overall setup and ideas behind using these simulations, and how to run them. Read about the model in the "Model" tab. Then do the tasks described in the "What to do" tab.
 
 
 ##The Model {#shinytab2}
@@ -34,36 +34,38 @@ In addition to specifying the *compartments* of a model, we need to specify the 
 
 For our system, we specify only 2 processes/flows: 
 
-1. A susceptible individual (S) can become infected by an infectious individual (I) at some rate (which is usually labeled b or $\beta$). This leads to the susceptible individual leaving the S compartment and entering the I compartment.   
-2. An infected individual dies or recovers and enters the recovered/removed (R) compartment at some rate (often labeled as $\gamma$).
+1. A susceptible individual (S) can become infected by an infectious individual (I) at some rate (for which we use the parameter _b_). This leads to the susceptible individual leaving the S compartment and entering the I compartment.   
+2. An infected individual dies or recovers and enters the recovered/removed (R) compartment at some. This is described by the parameter _g_ in our model.
 
 As with the compartments, we can extend the model and allow other processes to occur. For instance we could allow for natural births and deaths, waning immunity, deaths due to disease, etc. We will do that soon. For now, we keep the model as simple as possible.
 
 ###Model Implementation
 To allow us to simulate and study this model, we need to implement it on the computer. For that purpose, it is often useful to write the model as mathematical equations (this is not strictly needed, some computer simluation models are never formulated as mathematical models). One way to formulate the simple SIR model is with a set of ordinary differential equations. Each compartment/variable gets an equation. The right side of each equations specifies the processes going on in the system and how they change the numbers in each compartment via inflows and outflows. For the model described above, the equations look like this:
 
-$$\dot S = -\beta SI$$ 
-$$\dot I = \beta S I - \gamma I$$
-$$\dot R = \gamma I$$
+$$\dot S = -b SI$$ 
+$$\dot I = b S I - g I$$
+$$\dot R = g I$$
 
 Since not everyone likes equations :) a very good way to describe compartmental models is by showing a flow diagram. Such a diagram consists of a box for each compartment, and arrows pointing in and out of boxes to describe flows and interactions. For the simple SIR model, the flow diagram looks as follows:
 
-![Flow diagram for simple SIR model. ](../media/SIRdiagram.png)
+![Flow diagram for simple SIR model. ](../media/basicSIRmodelfigure.png)
 
 
 ###Some notes
-* For many of the models, I will show their underlying equations. But you are not expected to know them or "do anything" with them.
-* You will see the term *host* used instead of *individuals*. In general, while we most often think of humans, the host can be any kind of animal (or even a plant).
+* For many of the models, the underlying equations are shown. If the equations don't display properly, try opening the app with a different browser.
+* You will see both the term *host(s)* and *individual(s)* used interchangeably. In general, while we most often think of humans, the host can be any kind of animal (or even a plant).
 * In general, the entities that change in our model (i.e. here the number of individuals in compartments S, I and R) are called variables: They are variable and change during the simulation. 
-* In contrast, the quantities that are usually fixed for a given scenario are called parameters. For this model, those are the infection rate $\beta$ and the recovery rate $\gamma$.
+* In contrast, the quantities that are usually fixed for a given scenario are called parameters. For this model, those are the infection rate _b_ and the recovery rate _g_.
 * We would usually choose the parameter such that they match the specific disease we want to study. We'll get to that soon. For now, you'll just play around with the model without trying to relate it to some specific ID.
+* There are no fixed rules concerning the naming of variables and parameters. Compartments (e.g. SIR) tend to be labeled very similar by different researchers, parameter labels are much more different. Always check carefully for a given paper/model what the meaning of each parameter is.
 
 
 
 ##What to do {#shinytab3}
+For the following tasks, it is assumed that the model runs in units of days.
 
 ###Task 1: 
-* Run the simulation with a population size of 1000, 1 initially infected host, simulation duration 100 days, recovery rate gamma=0.5 per day, and infectiousness beta=0.001. You will get an outbreak of some - currently unspecified - infectious disease. 
+* Run the simulation with a population size of 1000, 1 initially infected host, simulation duration 100 days, recovery rate _g_=0.5 per day, and infectiousness _b_0.001. You will get an outbreak of some - currently unspecified - infectious disease. 
 * Record the number and fraction of susceptible/infected/recovered remaining at the end of the outbreak.    
 * From the graph, get a (rough) estimate of the day at which the outbreak peaks.
 * Contemplate the fact that the outbreak ends even though there are still a good number of susceptible remaining, i.e. not everyone got infected. 

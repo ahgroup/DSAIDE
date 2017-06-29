@@ -15,7 +15,7 @@
    id="svg8179"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="SIRdiagram.svg">
+   sodipodi:docname="basicSIRmodelfigure.svg">
   <defs
      id="defs8181">
     <marker
@@ -189,13 +189,13 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.4254587"
-     inkscape:cx="179.52358"
+     inkscape:cx="74.645059"
      inkscape:cy="290.48197"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
-     inkscape:window-width="1920"
-     inkscape:window-height="1137"
+     inkscape:window-width="3440"
+     inkscape:window-height="1377"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1">
@@ -267,8 +267,8 @@
        inkscape:export-xdpi="300.207"
        inkscape:export-ydpi="300.207" />
     <path
-       style="fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:#5b9bd5;stroke-width:0.01876553px;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:"
-       d="m 122.69662,772.14208 85.41832,0 0,2.552 -85.41832,0 z m 73.43592,-4.278 16.30714,5.554 -16.30714,5.573 c -1.02615,0.357 -2.37156,0.15102 -2.97938,-0.45 -0.6095,-0.619 -0.25771,-1.389 0.80076,-1.745 l 13.07169,-4.466 0,2.195 -13.07169,-4.466 c -1.05854,-0.356 -1.41026,-1.126 -0.80076,-1.745 0.60782,-0.601 1.95323,-0.807 2.97938,-0.45 z"
+       style="fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:#5b9bd5;stroke-width:0.01464926px;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:"
+       d="m 157.77099,772.14162 52.03615,0 0,2.55291 -52.03615,0 z m 44.73657,-4.27954 9.93418,5.556 -9.93418,5.575 c -0.62512,0.35712 -1.44474,0.15107 -1.81502,-0.45016 -0.3713,-0.61923 -0.15699,-1.3895 0.48782,-1.74563 l 7.96317,-4.4676 0,2.19578 -7.96317,-4.4676 c -0.64485,-0.35613 -0.85912,-1.1264 -0.48782,-1.74563 0.37028,-0.60121 1.1899,-0.80728 1.81502,-0.45016 z"
        id="path13063"
        inkscape:connector-curvature="0"
        inkscape:export-filename="C:\data\Dropbox\2016-3-fall-epid8510\media\SIRdiagram.png"
@@ -295,7 +295,7 @@
        id="rect8292"
        width="114.74497"
        height="80"
-       x="4.0896568"
+       x="32.089657"
        y="733.44592"
        inkscape:export-xdpi="300.207"
        inkscape:export-ydpi="300.207"
@@ -303,7 +303,7 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="12.072403"
+       x="40.072403"
        y="779.87463"
        id="text8294"
        sodipodi:linespacing="125%"
@@ -312,11 +312,11 @@
        inkscape:export-filename="C:\data\Dropbox\2016-3-fall-epid8510\media\SIRdiagram.png"><tspan
          sodipodi:role="line"
          id="tspan8296"
-         x="12.072403"
+         x="40.072403"
          y="779.87463"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.5px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start">Susceptible</tspan></text>
     <path
-       style="fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:#5b9bd5;stroke-width:0.01876553px;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:#5b9bd5;stroke-width:0.01876553px;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:"
        d="m 363.58958,772.06715 56.70207,-0.50399 0.0291,2.55188 -56.70207,0.50399 z m 48.69912,-4.71106 10.88834,5.45749 -10.76129,5.66893 c -0.67709,0.36304 -1.57255,0.16501 -1.98291,-0.43239 -0.41166,-0.61538 -0.18693,-1.38741 0.51163,-1.74964 l 8.62621,-4.5429 0.0252,2.19489 -8.7282,-4.38864 c -0.70675,-0.34974 -0.94901,-1.11763 -0.55149,-1.74019 0.39663,-0.60455 1.28739,-0.81849 1.97263,-0.46756 z"
        id="path13063-5"
        inkscape:connector-curvature="0"
@@ -396,7 +396,7 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:27.32454491px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="139.72055"
+       x="167.72055"
        y="765.84387"
        id="text13516"
        sodipodi:linespacing="125%"
@@ -405,9 +405,9 @@
        inkscape:export-ydpi="300.207"><tspan
          sodipodi:role="line"
          id="tspan13522"
-         x="139.72055"
+         x="167.72055"
          y="765.84387"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Palatino Linotype';-inkscape-font-specification:'Palatino Linotype, Normal';font-size:17.5px;text-anchor:start;text-align:start;writing-mode:lr;line-height:125%">βSI</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.5px;line-height:125%;font-family:'Palatino Linotype';-inkscape-font-specification:'Palatino Linotype, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start">bSI</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:27.32454491px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -422,6 +422,6 @@
          id="tspan13542"
          x="375.78214"
          y="761.81976"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Palatino Linotype';-inkscape-font-specification:'Palatino Linotype, Normal';font-size:17.5px;text-anchor:start;text-align:start;writing-mode:lr;line-height:125%">γI</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.5px;line-height:125%;font-family:'Palatino Linotype';-inkscape-font-specification:'Palatino Linotype, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start">gI</tspan></text>
   </g>
 </svg>

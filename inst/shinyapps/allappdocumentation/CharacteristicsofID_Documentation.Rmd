@@ -16,13 +16,12 @@ bibliography: ../media/references.bib
 ---
 
 ##Overview {#shinytab1}
-In this app, we will explore a model that has several more compartments than the basic SIR model discussed in the _Introduction to ID_ app. Read about the model in the "Model" tab. Then do the tasks described in the "What to do" tab.
+This app allows you to explore a model that has several more compartments than the basic SIR model discussed in the _Introduction to ID_ app. Read about the model in the "Model" tab. Then do the tasks described in the "What to do" tab.
 
 
 ##The Model {#shinytab2}
 
 ###Model Overview
-*Note: I'll be using the term **individual(s)** and **host(s)** interchangably in the future. This is common usage and I want you to get used to this terminology, therefore I'm switching around on purpose. They mean the same thing in this context.*
 
 In the _Introduction to ID_ app, you explored a simple 3-compartment model, the basic SIR model. The model for this app has a few additional compartments, which allows us to include more details/realism into our model. We again focus on tracking individuals with regard to their infection/disease status. For this model, we track the following compartments/stages:
 
@@ -33,16 +32,16 @@ In the _Introduction to ID_ app, you explored a simple 3-compartment model, the 
 * **R** - recovered/removed individuals. Those individuals have recovered and are immune. 
 * **D** - individuals who have died due to the disease.
 
-Of course, as with the basic SIR model, this model could be made to include further details by extendind the compartments. E.g. doubling the compartments would allow us to stratify according to gender. In general, for each additional distinct feature you want to track, the existing number of compartments needs to be replicated by the discrete categories you have. So replicated by 2 for gender, replicated by 3 if we wanted to stratify by young/medium/old age, etc. 
+Of course, as with the basic SIR model, we could include further details by extending the number of compartments. In general, for each additional feature you want to track, the existing number of compartments needs to be replicated by the discrete categories you have. FOr gender, one would need to have 2x the compartments, if one wanted to stratify according to young/medium/old age one needs 3x the compartments, etc. 
 
 In addition to specifying the *compartments* of a model, we need to specify the dynamics determining the changes for each compartment. In general, more compartments leads to more processes and more parameters governing these processes.
 
 For this model, we include the following processes: 
 
-* Susceptible individuals (S) can become infected by pre-symptomatic (P), asymptomatic (A) or symptomatic (I) hosts. The rates at which infections from the different types of infected individuals (P, A and I) occur are governed by 3 parameters, $b_P$, $b_A$ and $b_I$. In other words, those $b_i$ parameters determine how infectious an individual in stages $P$, $A$ and $I$ is.
-* All infected individuals first enter the presymptomatic stage. They remain there for some time (determined by rate $g_P$, the inverse of which is the average time spent in the presymptomatic stage). A fraction $f$ of presymptomatic hosts move into the asymptomatic category, the rest become symptomatic infected hosts.
-* Asymptomatic infected hosts recover after some time (specified by the rate $g_A$). 
-* Similarly, infected symptomatic hosts leave that stage at rate $g_I$. For symptomatic hosts, two outcomes are possible, either recovery or death. The parameter $d$ determines the fraction of hosts that die.
+* Susceptible individuals (S) can become infected by pre-symptomatic (P), asymptomatic (A) or symptomatic (I) hosts. The rates at which infections from the different types of infected individuals (P, A and I) occur are governed by 3 parameters, _b~P~_, _b~A~_ and _b~I~_. In other words, those b~i~ parameters determine how infectious an individual in stages P, A and I is.
+* All infected individuals first enter the presymptomatic stage. They remain there for some time (determined by rate _g~P~_, the inverse of which is the average time spent in the presymptomatic stage). A fraction _f_ of presymptomatic hosts move into the asymptomatic category, the rest become symptomatic infected hosts.
+* Asymptomatic infected hosts recover after some time (specified by the rate _g~A~_). 
+* Similarly, infected symptomatic hosts leave that stage at rate _g~I~_. For symptomatic hosts, two outcomes are possible, either recovery or death. The parameter _d_ determines the fraction of hosts that die.
 * Recovered individuals are immune to reinfection. 
 
 
@@ -65,14 +64,15 @@ $$\dot D = d g_I I $$
 
 ##What to do {#shinytab3}
 
-_A general note: Some of the tasks below (and in future apps) are fairly open ended. In general, I don't want you to just do the tasks like a check-list. Instead, I want you to explore these simulations. Play with them, query them, go through iterations of thinking what you expect, observing it, and if discrepancies occur, figure out why. Essentially, I want you to "do science/research"._ 
+_A general note: Some of the tasks below (and in future apps) are fairly open ended. The idea is that these tasks give you something to get started, but you should feel free to explore the simulations any way you want. Play with them, query them, go through iterations of thinking what you expect, observing it, and if discrepancies occur, figure out why. Essentially, the best way to use these apps is to "do your own science/research" with them._ 
 
+For the following tasks, it is assumed that the model runs in units of days.
 
 ###Task 1: 
 * Set the model parameters such that it corresponds to the following setting: 
     * A population size of 1000, 1 initially infected, presymptomatic host, simulation duration 200 days.
-    * Assume that only symptomatic individuals transmit, at rate $b_I = 0.001$.
-    * Assume that the duration of the presymptomatic, asymptomatic and symptomatic periods are all 5 days long. (Hint: The parameters g~P~, g~A~ and g~I~ are the inverse of these periods.)
+    * Assume that only symptomatic individuals transmit, at rate _b~I~_ = 0.001.
+    * Assume that the duration of the presymptomatic, asymptomatic and symptomatic periods are all 5 days long. (Hint: The parameters _g~P~_, _g~A~_ and _g~I~_ are the inverse of these periods.)
     * Assume that there are no asymptomatic infections and nobody dies due to disease.
 
 * With parameters set to correspond to the scenario just described, run the simulation.
@@ -100,7 +100,7 @@ _A general note: Some of the tasks below (and in future apps) are fairly open en
 * Compare your expectations with the results. How do they agree/disagree? Does it make sense? Anything surprising happening?
 
 ###Task 5: 
-* Further explore how changes in the infectiousness of the different groups (b~P~, b~A~, b~I~) and the average time a person spends in each of those states (g~P~, g~A~, g~I~) affects the infection dynamics.
+* Further explore how changes in the infectiousness of the different groups (_b~P~_, _b~A~_, _b~I~_) and the average time a person spends in each of those states (_g~P~_, _g~A~_, _g~I~_) affects the infection dynamics.
 * Every time, think about what you expect to get, then run the simulation, compare your expectations with the results. Then make sense of it.
 
 ###Task 6: 

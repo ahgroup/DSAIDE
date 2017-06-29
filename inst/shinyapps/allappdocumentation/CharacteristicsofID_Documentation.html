@@ -59,10 +59,10 @@
 <p>In addition to specifying the <em>compartments</em> of a model, we need to specify the dynamics determining the changes for each compartment. In general, more compartments leads to more processes and more parameters governing these processes.</p>
 <p>For this model, we include the following processes:</p>
 <ul>
-<li>Susceptible individuals (S) can become infected by pre-symptomatic (P), asymptomatic (A) or symptomatic (I) hosts. The rates at which infections from the different types of infected individuals (P, A and I) occur are governed by 3 parameters, <span class="math inline">\(b_P\)</span>, <span class="math inline">\(b_A\)</span> and <span class="math inline">\(b_I\)</span>. In other words, those <span class="math inline">\(b_i\)</span> parameters determine how infectious an individual in stages <span class="math inline">\(P\)</span>, <span class="math inline">\(A\)</span> and <span class="math inline">\(I\)</span> is.</li>
-<li>All infected individuals first enter the presymptomatic stage. They remain there for some time (determined by rate <span class="math inline">\(g_P\)</span>, the inverse of which is the average time spent in the presymptomatic stage). A fraction <span class="math inline">\(f\)</span> of presymptomatic hosts move into the asymptomatic category, the rest become symptomatic infected hosts.</li>
-<li>Asymptomatic infected hosts recover after some time (specified by the rate <span class="math inline">\(g_A\)</span>).</li>
-<li>Similarly, infected symptomatic hosts leave that stage at rate <span class="math inline">\(g_I\)</span>. For symptomatic hosts, two outcomes are possible, either recovery or death. The parameter <span class="math inline">\(d\)</span> determines the fraction of hosts that die.</li>
+<li>Susceptible individuals (S) can become infected by pre-symptomatic (P), asymptomatic (A) or symptomatic (I) hosts. The rates at which infections from the different types of infected individuals (P, A and I) occur are governed by 3 parameters, <em>b<sub>P</sub></em>, b<sub>A</sub> and b<sub>I</sub>. In other words, those b<sub>i</sub> parameters determine how infectious an individual in stages P, A and I is.</li>
+<li>All infected individuals first enter the presymptomatic stage. They remain there for some time (determined by rate <span class="math inline">\(g_P\)</span>, the inverse of which is the average time spent in the presymptomatic stage). A fraction <em>f</em> of presymptomatic hosts move into the asymptomatic category, the rest become symptomatic infected hosts.</li>
+<li>Asymptomatic infected hosts recover after some time (specified by the rate g<sub>A</sub>).</li>
+<li>Similarly, infected symptomatic hosts leave that stage at rate <span class="math inline">\(g_I\)</span>. For symptomatic hosts, two outcomes are possible, either recovery or death. The parameter <em>d</em> determines the fraction of hosts that die.</li>
 <li>Recovered individuals are immune to reinfection.</li>
 </ul>
 </div>
@@ -85,7 +85,7 @@
 <li>Set the model parameters such that it corresponds to the following setting:
 <ul>
 <li>A population size of 1000, 1 initially infected, presymptomatic host, simulation duration 200 days.</li>
-<li>Assume that only symptomatic individuals transmit, at rate <span class="math inline">\(b_I = 0.001\)</span>.</li>
+<li>Assume that only symptomatic individuals transmit, at rate b<sub>I</sub> = 0.001.</li>
 <li>Assume that the duration of the presymptomatic, asymptomatic and symptomatic periods are all 5 days long. (Hint: The parameters g<sub>P</sub>, g<sub>A</sub> and g<sub>I</sub> are the inverse of these periods.)</li>
 <li>Assume that there are no asymptomatic infections and nobody dies due to disease.</li>
 </ul></li>
