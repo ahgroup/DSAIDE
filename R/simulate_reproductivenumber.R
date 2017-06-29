@@ -3,19 +3,22 @@
 # This function is used in the solver function and has no independent usages
 reproductivenumberode <- function(t, y, pars)
 {
-      S = y[1]; In = y[2]; Rec = y[3]; #assigning the y/variable vector to each of the compartments - susceptibles (S), infecteds (I), recovereds (R)
-      beta = pars[1]; gamma = pars[2]; #assigning the parameter vector to each of the parameter values - level of infectiousness (beta), duration of infectious period (1/gamma)
-      lambda = pars[3]; n = pars[4]; #birth and death rates
-      w = pars[5]; #immunity loss rate
-
+  with(
+    as.list(c(y,parms)), #lets us access variables and parameters stored in y and parms by name
+    {    
+  
       #the ordinary differential equations
-  	  dS = lambda - n * S - beta * S * In +  w * Rec; #susceptibles
-	  	dIn = beta * S * In - gamma * In - n * In; #infected/infectious
-	 	  dRec = gamma * In - n * Rec - w * Rec; #recovered
-
-      return(list(c(dS, dIn, dRec)))
+  	  dS = m - n * S - b * S * In +  w * Rec; #susceptibles
+	  	dI = b * S * In - g * In - n * In; #infected/infectious
+	 	  dR = g * In - n * Rec - w * Rec; #recovered
+	 	  
+	 	  list(c(dS, dI, dR))
+	 	  
+    }
+  ) #close with statement
 } #end function specifying the ODEs
-
+	 	  
+ 	  
 
 #' Simulation of a compartmental infectious disease transmission model to study the reproductive number
 #' 
@@ -31,10 +34,10 @@ reproductivenumberode <- function(t, y, pars)
 #' @param I0 initial number of infected hosts
 #' @param f fraction of vaccinated individuals. Those individuals are moved from S to R at the beginning of the simulation
 #' @param e efficay of vaccine, given as fraction between 0 and 1
-#' @param beta level/rate of infectiousness for hosts in the I compartment
-#' @param gamma rate at which a person leaves the I compartment
+#' @param b level/rate of infectiousness for hosts in the I compartment
+#' @param g rate at which a person leaves the I compartment
 #' @param w rate at which recovered persons loose immunity and return to susceptible state
-#' @param lambda the rate at which new individuals enter the model (are born)
+#' @param m the rate at which new individuals enter the model (are born)
 #' @param n the rate of natural death (the inverse it the average lifespan)
 #' @param tmax maximum simulation time, units depend on choice of units for your
 #'   parameters
@@ -52,7 +55,7 @@ reproductivenumberode <- function(t, y, pars)
 #'   # To run the simulation with default parameters just call this function
 #'   result <- simulate_reproductivenumber()
 #'   # To choose parameter values other than the standard one, specify them e.g. like such
-#'   result <- simulate_reproductivenumber(S0 = 2000, I0 = 10, tmax = 100, gamma = 0.5, n = 0.1)
+#'   result <- simulate_reproductivenumber(S0 = 2000, I0 = 10, tmax = 100, g = 0.5, n = 0.1)
 #'   # You should then use the simulation result returned from the function, e.g. like this:
 #'   plot(result[,1],result[,2],xlab='Time',ylab='Number Susceptible',type='l')
 #' @seealso The UI of the shiny app 'ReproductiveNumber', which is part of this package, contains more details on the model.
@@ -62,7 +65,7 @@ reproductivenumberode <- function(t, y, pars)
 #' @export
 
 
-simulate_reproductivenumber <- function(S0 = 1000, I0 = 0, f = 0.0, e = 0.0, tmax = 300, gamma = 50, beta = 1e-1, lambda = 20, n = 1/50, w = 0){
+simulate_reproductivenumber <- function(S0 = 1000, I0 = 0, f = 0.0, e = 0.0, tmax = 300, g = 50, b = 1e-1, m = 20, n = 1/50, w = 0){
 
   S0eff = (1 - f*e) * S0;
   R0 = f*e * S0;
@@ -71,7 +74,7 @@ simulate_reproductivenumber <- function(S0 = 1000, I0 = 0, f = 0.0, e = 0.0, tma
   timevec = seq(0, tmax, dt); #vector of times for which solution is returned (not that internal timestep of the integrator is different)
 
   #combining parameters into a parameter vector
-  pars = c(beta, gamma, lambda, n, w);
+  pars = c(b = b, g = g, m = m, n = n, w = w);
 
   #this line runs the simulation, i.e. integrates the differential equations describing the infection process
   #the result is saved in the odeoutput matrix, with the 1st column the time, the 2nd, 3rd, 4th column the variables S, I, R

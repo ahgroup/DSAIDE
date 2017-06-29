@@ -20,6 +20,7 @@ This app allows you to explore a model that tracks the same compartments as the 
 
 Read about the model in the "Model" tab. Then do the tasks described in the "What to do" tab.
 
+_Note that this model runs in time units of months. This is hard-coded into the seasonal dynamics and can't be changed (unless you modify the underlying simulation code)_
 
 ##The Model {#shinytab2}
 
@@ -70,7 +71,7 @@ Also note that the transmission rates, _b~i~_, can be time varying as described 
 
 ##What to do {#shinytab3}
 
-_Notes: For the tasks below, we assume that the model runs in time units of months. Some of the simulations might take a few seconds to run. Be patient._
+_Notes: The model runs in time units of months. This is hard-coded into the seasonal dynamics and can't be changed (unless you modify the underlying simulation code). Some of the simulations might take a few seconds to run. Be patient._
 
 ###Task 1: 
 * Set the model parameters such that it corresponds to the following setting: 

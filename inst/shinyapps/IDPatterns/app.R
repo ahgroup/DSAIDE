@@ -32,13 +32,13 @@ refresh <- function(input, output){
     d = isolate(input$d);
     w = isolate(input$w);
     
-    lambda = isolate(input$lambda)
+    m = isolate(input$m)
     n = isolate(input$n);
-    sigma = isolate(input$sigma)
+    s = isolate(input$s)
     
     
     # Call the ODE solver with the given parameters
-    result <- simulate_idpatterns(PopSize = PopSize, P0 = P0, tmax = tmax, bP = bP, bA = bA, bI = bI, gP = gP , gA = gA, gI = gI, f = f, d = d, w = w, lambda = lambda, n = n, sigma = sigma)
+    result <- simulate_idpatterns(PopSize = PopSize, P0 = P0, tmax = tmax, bP = bP, bA = bA, bI = bI, gP = gP , gA = gA, gI = gI, f = f, d = d, w = w, m = m, n = n, s = s)
     
     return(list(result))
   })
@@ -152,13 +152,13 @@ ui <- fluidPage(
            ),
            fluidRow(
              column(4,
-                    sliderInput("lambda", "Monthly rate of new births (lambda)", min = 0, max = 100, value = 0, step = 1)
+                    sliderInput("m", "Monthly rate of new births (m)", min = 0, max = 100, value = 0, step = 1)
              ),
              column(4,
                     sliderInput("n", "Natural death rate (n, 1/months)", min = 0, max = 0.02, value = 0, step = 0.0005, sep ='')
              ),
              column(4,
-                    sliderInput("sigma", "Strength of seasonal variation of transmission (sigma)", min = 0, max = 1, value = 0, step = 0.1)
+                    sliderInput("s", "Strength of seasonal variation of transmission (s)", min = 0, max = 1, value = 0, step = 0.1)
              ),
              align = "center"
            ) #close fluidRow structure for input

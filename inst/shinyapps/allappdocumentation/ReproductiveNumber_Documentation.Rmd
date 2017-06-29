@@ -17,7 +17,7 @@ bibliography: ../media/references.bib
 
 
 ##Overview {#shinytab1}
-This app lets you explore the reproductive number in some detail. Read about the model in the "Model" tab. Then do the tasks described in the "What to do" tab.
+This app lets you explore the concept of the reproductive number. Read about the model in the "Model" tab. Then do the tasks described in the "What to do" tab.
 
 
 ##The Model {#shinytab2}
@@ -34,10 +34,10 @@ In addition to specifying the *compartments* of a model, we need to specify the 
 
 For our system, we specify the following processes/flows: 
 
-* Susceptible individuals (S) can become infected by infectious individuals (I) at some rate (which is usually labeled b or $\beta$). This leads to the susceptible individual leaving the S compartment and entering the I compartment.   
-* Infected individuals recover and enter the recovered (R) compartment at some rate (often labeled as $\gamma$).
-* Recovered individuals can loose immunity at rate $w$ and return back to the susceptible compartment. 
-* Natural births (into the S compartment at rate $\lambda$) and deaths (from all compartments at rate $n$) are possible.
+* Susceptible individuals (S) can become infected by infectious individuals (I) at some rate, _b_. This leads to the susceptible individual leaving the S compartment and entering the I compartment.   
+* Infected individuals recover and enter the recovered (R) compartment at some rate, _g_.
+* Recovered individuals can loose immunity at rate _w_ and return back to the susceptible compartment. 
+* Natural births (into the S compartment at rate _m_) and deaths (from all compartments at rate _n_) are possible.
 * The model allows a fraction of individuals to be vaccinated before the outbreak. Those individuals are moved into the R compartment prior to the start of the outbreak.
 
 
@@ -49,11 +49,11 @@ The flow diagram and the set of equations which are used to implement this model
 
 $$S_{v} = (1-ef)S_0$$
 $$R_0 = efS_{v}$$
-$$\dot S =\lambda -\beta SI - nS + wR$$ 
-$$\dot I = \beta S I - \gamma I - nI$$
-$$\dot R = \gamma I - nR - wR$$
+$$\dot S =m - b SI - nS + wR$$ 
+$$\dot I = \ S I - g I - nI$$
+$$\dot R = g I - nR - wR$$
 
-Here, $S_0$ is the initial population of susceptibles, and $S_{v}$ is the susceptible population after vaccination. Vaccinated individuals are moved to the $R$ compartment prior to the start of the outbreak.
+Here, S~0~ is the initial population of susceptibles, and S~v~ is the susceptible population after vaccination. Vaccinated individuals are moved to the R compartment prior to the start of the outbreak.
 
 
 ##What to do {#shinytab3}
@@ -78,7 +78,7 @@ _The following tasks ask you to use various equations to compute the reproductiv
 
 ###Task 5: 
 * Set the model parameters back to those given in task #1.
-* Another way to estimate R~0~ is to determine the rate of increase in infected hosts at the beginning of the outbreak. During the initial phase, new infections increase exponentially according to $I(t)=I_0 e^{gt}$, with _g_ being the rate of growth. Usually, for any real outbreak, you do not know the number of infected at the start, I~0~, or the exact time the outbreak starts. It is still possible to estimate _g_ by obtaining two values of _I_ at two time points during that initial growth rate, i.e. _I~1~_ at time _t~1~_ and _I~2~_ at time _t~2~_. With those quantities, one can compute the exponential growth rate, _g_. Figure out how to determine those values and use them to compute _g_. Hint: play with the maximum simulation duration such that the simulation stops at 2 different times during the initial exponential growth phase.
+* Another way to estimate R~0~ is to determine the rate of increase in infected hosts at the beginning of the outbreak. During the initial phase, new infections increase exponentially according to I(t)=I~0~ exp(gt), with _g_ being the rate of growth. Usually, for any real outbreak, you do not know the number of infected at the start, I~0~, or the exact time the outbreak starts. It is still possible to estimate _g_ by obtaining two values of _I_ at two time points during that initial growth rate, i.e. _I~1~_ at time _t~1~_ and _I~2~_ at time _t~2~_. With those quantities, one can compute the exponential growth rate, _g_. Figure out how to determine those values and use them to compute _g_. Hint: play with the maximum simulation duration such that the simulation stops at 2 different times during the initial exponential growth phase.
 * For this model, the growth rate and R~0~ are related through _R~0~ = 1+gD_, where _D_ is the average duration of the infectious period (i.e. the inverse of the recovery rate). Use this to determine R~0~. You should get essentially the same answer (up to some rounding errors) as for task #1.
 * Note that the choice of _t~1~_ and _t~2~_ can influence the results. Earlier times are better since once the number of susceptibles starts to drop markedly, the growth of infected slows down and is not truly exponential anymore.
 
@@ -116,69 +116,22 @@ _The following tasks ask you to use various equations to compute the reproductiv
 
 
 ###Task 13: 
-* So far, we looked at an individual outbreak. Now we introduce births and deaths. For our model, we use a constant birth rate $\lambda$, and a fixed per-capita death rate $\mu$.  It is possible to have population dynamics (births, deaths) in the absence of an ID. It is useful to first figure out what's going on there before you introduce the disease dynamics. 
+* So far, we looked at an individual outbreak. Now we introduce births and deaths. For our model, we use a constant birth rate _m_, and a fixed per-capita death rate _n_.  It is possible to have population dynamics (births, deaths) in the absence of an ID. It is useful to first figure out what's going on there before you introduce the disease dynamics. 
 * Choose various values for the birthrate and lifespan, run the model and see what the population does in the absence of an infectious disease. Can you figure out the equation that relates births, deaths and steady state level for our model? Test it with the simulation.
 
 ###Task 14: 
-* If births (and deaths) are present, you will be able to get multiple outbreaks and endemic states. Set the parameter values such that your hosts have an average life-span of 41 years, set birth rate such that the population is steady at 1000 in the absence of the ID. Set simulation time to around 500 years, 1 infected, gamma=5, beta=0.015. No vaccine.
+* If births (and deaths) are present, you will be able to get multiple outbreaks and endemic states. Set the parameter values such that your hosts have an average life-span of 41 years, set birth rate such that the population is steady at 1000 in the absence of the ID. Set simulation time to around 500 years, 1 infected, _g_=5, _b_=0.015. No vaccine.
 * Run the simulation, make sure you reach a steady state. Compare the steady state values for S, I and R from the simulation with those predicted from the SIR steady state equations.
 
 ###Task 15: 
 * Use the fraction of susceptibles remaining at steady state to compute R~0~ as described in the lecture notes. 
-* Double the value of $\gamma$, run the simulation and again compute R~0~ using the steady state result. 
+* Double the value of _g_, run the simulation and again compute R~0~ using the steady state result. 
 * Next double the values for both natural birth and death rates and repeat. 
 
 
 ###Task 16:
 * Keep exploring. 
 
-
-
-
-
-##Answers 
-They are currently not shown anywhere. The answers below are also not updated and are likely not in sync with the questions/tasks above.
-
-__Those answers correspond to an old set of tasks and might not be up-to-date!__
-
-###Answer 1: 
-Fraction of susceptibles left at end of outbreak are about Sf=0.2, which leads to an R0=log(Sf)/(Sf-1)=2, same (up to some rounding errors) one gets from the R0=beta*S0/gamma equation.
-
-###Answer 2: 
-Double beta gives double R0, bigger outbreak.
-
-###Answer 3: 
-Double rate of recovery brings R0 back down. Faster recovery means fewer chances for an infected to infect other, therefore lower R0.
-
-###Answer 4: 
-Growth rate can be read off from values of I(t) and given as r=(log(It2)-log(It1))/(t2-t1), where It1 and It2 are number of infected at times t2 and t1. 
-
-###Answer 5: 
-The peak is when the outbreak goes from growth (R>1) to decline (R<1), just at the peak we have R=1. At the peak, there is no growth, so r=0, and the equation R=1+rD becomes R=1+0D=1. To prevent any further infections (not only have the outbreak wane, but stop instantaneously) would require an R=0.
-
-###Answer 6: 
-R~0~=1 means no outbreak, we need R0>1 for an outbreak. If R0 is only slightly above 1, you can see a very slow and small outbreak.
-
-###Answer 7: 
-In the model, we describe births and deaths by a constant birth rate lambda and a per-capita death rate $\mu=1/Y$, where Y is the average lifespan. To get a steady state in the absence of the disease, we need births and deaths to balance each other, i.e. $\lambda=\mu*S$, or $S=\lambda/ \mu= \lambda*Y$. In the simulation, no matter what number of susceptibles you start with, they will eventually settle down at a level given by lambda/mu.
-
-###Answer 8: 
-At steady state, we have no changes in the sizes of the S, I, R compartments. Therefore our equations become 0=lambda-mu*S-beta*S*I, 0=beta*S*I-gamma*I-mu*I, 0=gamma*I-mu*R. Those equations can be solved for  the steady state values Ss, Is and Rs as functions of the model parameters. One finds Ss=(gamma+mu)/beta, Is= lambda/(gamma+mu)- mu/beta, Rs=gamma/mu*Is . For given choices of the parameters, one can compute the values for these steady states. They agree with the values one gets from the simulation at steady state.
-
-###Answer 9: 
-R0=1/Ss=1/(0.5)=2, as expected. Double gamma gives R0=1, no SS with disease. Changes in birth and death don't make a difference.
-
-###Answer 10: 
-Same R0, so outbreak size is the same (same total number of people become infected), but the dynamics is different. With a longer infectious duration and a lower level of infectiousness, we get a slower outbreak. Could for instance be SARS versus HIV: Similar R0, but SARS is shorter and more infectious, HIV longer and less infectious. 
-
-###Answer 11: 
-Estimates for R0 for SARS are around 3-5. If you have R0, you can use the equation for R0, solve for beta to get beta=R0*gamma/S0. So if you know R0, duration of infectious period and size of your population, you can get the rate of transmission.
-
-###Answer 12: 
-R=4 is >1 so we get an outbreak. If we protected half the population, we would cut down R=R0*(1-p)=4*(1-0.5)=2. Would still give an outbreak, though a smaller one. We need to get R<=1 to not get an outbreak. For that, we need to protect 75% (or a bit more) of the population to get R=4*(1-0.75)=1.
-
-###Answer 13: 
-As it should be, simulations agree with theory (up to small rounding/numerical differences).
 
 
 ##Further Information {#shinytab4}
