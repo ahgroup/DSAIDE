@@ -1,16 +1,16 @@
 
 # reproductive_number_ode_eq function
 # This function is used in the solver function and has no independent usages
-reproductivenumberode <- function(t, y, pars)
+reproductivenumberode <- function(t, y, parms)
 {
   with(
     as.list(c(y,parms)), #lets us access variables and parameters stored in y and parms by name
     {    
   
       #the ordinary differential equations
-  	  dS = m - n * S - b * S * In +  w * Rec; #susceptibles
-	  	dI = b * S * In - g * In - n * In; #infected/infectious
-	 	  dR = g * In - n * Rec - w * Rec; #recovered
+  	  dS = m - n*S - b*S*I +  w*R; #susceptibles
+	  	dI = b*S*I - g*I - n*I; #infected/infectious
+	 	  dR = g*I - n*R - w*R; #recovered
 	 	  
 	 	  list(c(dS, dI, dR))
 	 	  

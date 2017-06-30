@@ -2,7 +2,7 @@
 #This is the Shiny file for the Reproductive Number App
 #written by Andreas Handel and Sina Solaimanpour 
 #maintained by Andreas Handel (ahandel@uga.edu)
-#last updated 6/29/2017
+#last updated 7/19/2017
 ############################################################
 
 #the server-side function with the main functionality
@@ -92,15 +92,15 @@ ui <- fluidPage(
            h2('Simulation Settings'),
            fluidRow(
              column(6,
-                    sliderInput("S0", "initial number of susceptible hosts", min = 1000, max = 5000, value = 1000, step = 500)
+                    sliderInput("S0", "initial number of susceptible hosts (S0)", min = 1000, max = 5000, value = 1000, step = 500)
              ),
              column(6,
-                    sliderInput("I0", "initial number of infected hosts", min = 0, max = 100, value = 0, step = 1)
+                    sliderInput("I0", "initial number of infected hosts (I0)", min = 0, max = 100, value = 0, step = 1)
              )
            ), #close fluidRow structure for input
            fluidRow(
              column(6,
-                    sliderInput("tmax", "Maximum simulation time", min = 1, max = 1200, value = 100, step = 1)
+                    sliderInput("tmax", "Maximum simulation time (tmax)", min = 1, max = 1200, value = 100, step = 1)
              ),
              column(6,
                     sliderInput("w", "Rate of immunity loss (w)", min = 0, max = 10, value = 0, step = 0.01)
@@ -116,10 +116,10 @@ ui <- fluidPage(
            ), #close fluidRow structure for input
            fluidRow(
              column(6,
-                    sliderInput("f", "Fraction vaccinated prior to outbreak", min = 0, max = 1, value = 0, step = 0.05, sep ='')
+                    sliderInput("f", "Fraction vaccinated prior to outbreak (f)", min = 0, max = 1, value = 0, step = 0.05, sep ='')
              ),
              column(6,
-                    sliderInput("e", "Efficacy of vaccine", min = 0, max = 1, value = 0, step = 0.05, sep ='')
+                    sliderInput("e", "Efficacy of vaccine (e)", min = 0, max = 1, value = 0, step = 0.05, sep ='')
              )
            ), #close fluidRow structure for input
            fluidRow(

@@ -5,7 +5,7 @@
 \title{Simulation of a compartmental infectious disease transmission model illustrating different types of direct transmission}
 \usage{
 simulate_directtransmission(PopSize = 1000, I0 = 1, tmax = 120,
-  scenario = 1, bd = 0.01, bf = 0, A = 1, b = 0, n = 0, g = 0.1,
+  scenario = 1, bd = 0.01, bf = 0, A = 1, m = 0, n = 0, g = 0.1,
   w = 0)
 }
 \arguments{
@@ -23,7 +23,7 @@ simulate_directtransmission(PopSize = 1000, I0 = 1, tmax = 120,
 
 \item{A}{the size of the area in which the hosts are assumed to reside/interact}
 
-\item{b}{the rate of births}
+\item{m}{the rate of births}
 
 \item{n}{the rate of natural deaths}
 

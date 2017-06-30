@@ -5,7 +5,7 @@
 \title{Simulation of a compartmental infectious disease transmission model illustrating vector-borne transmission}
 \usage{
 simulate_vectortransmission(Sh0 = 1000, Ih0 = 1, Sv0 = 0, Iv0 = 0,
-  tmax = 120, b1 = 0.01, b2 = 0, b = 0, n = 0, g = 1, w = 0)
+  tmax = 120, b1 = 0.01, b2 = 0, m = 0, n = 0, g = 1, w = 0)
 }
 \arguments{
 \item{Sh0}{initial number of susceptible hosts}
@@ -22,7 +22,7 @@ simulate_vectortransmission(Sh0 = 1000, Ih0 = 1, Sv0 = 0, Iv0 = 0,
 
 \item{b2}{rate of transmission from infected host to susceptible vector}
 
-\item{b}{the rate of births of vectors}
+\item{m}{the rate of births of vectors}
 
 \item{n}{the rate of natural death of vectors}
 

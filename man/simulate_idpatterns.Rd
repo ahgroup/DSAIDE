@@ -6,7 +6,7 @@
 \usage{
 simulate_idpatterns(PopSize = 1000, P0 = 1, tmax = 300, bP = 0,
   bA = 0, bI = 1/1000, gP = 0.5, gA = 0.5, gI = 0.5, f = 0, d = 0,
-  w = 0, lambda = 0, n = 0, sigma = 0)
+  w = 0, m = 0, n = 0, s = 0)
 }
 \arguments{
 \item{PopSize}{specifies the initial number of individuals
@@ -36,11 +36,11 @@ is the inverse of the average time spent in that compartment}
 
 \item{w}{rate at which recovered persons loose immunity and return to susceptible state}
 
-\item{lambda}{the rate at which new individuals enter the model (are born)}
+\item{m}{the rate at which new individuals enter the model (are born)}
 
 \item{n}{the rate of natural death (the inverse it the average lifespan)}
 
-\item{sigma}{strength of seasonal/annual sigmoidal variation of transmission rate}
+\item{s}{strength of seasonal/annual sigmoidal variation of transmission rate}
 }
 \value{
 This function returns the simulation result as obtained from a call
@@ -75,7 +75,7 @@ A compartmental ID model with several states/compartments
   # To run the simulation with default parameters just call this function
   result <- simulate_idpatterns()
   # To choose parameter values other than the standard one, specify them e.g. like such
-  result <- simulate_idpatterns(PopSize = 2000, P0 = 10, tmax = 100, f = 0.1, d = 0.2, sigma = 0.1)
+  result <- simulate_idpatterns(PopSize = 2000, P0 = 10, tmax = 100, f = 0.1, d = 0.2, s = 0.1)
   # You should then use the simulation result returned from the function, e.g. like this:
   plot(result[,1],result[,2],xlab='Time',ylab='Number Susceptible',type='l')
 }

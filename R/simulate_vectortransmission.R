@@ -10,7 +10,7 @@ vectortransmissioneq <- function(t, y, parms)
       dIh =  Sh * b1 * Iv  - g * Ih #infected, symptomatic
       dRh =   g * Ih - w * Rh #recovered, immune
    
-      dSv = b - n * Sv - b2 * Ih * Sv; #susceptible vectors
+      dSv = m - n * Sv - b2 * Ih * Sv; #susceptible vectors
       dIv = b2 * Ih * Sv - n * Iv ; #susceptible hosts
             
       list(c(dSh, dIh, dRh, dSv, dIv))
@@ -32,7 +32,7 @@ vectortransmissioneq <- function(t, y, parms)
 #' @param tmax maximum simulation time, units of months
 #' @param b1 rate of transmission from infected vector to susceptible host
 #' @param b2 rate of transmission from infected host to susceptible vector
-#' @param b the rate of births of vectors
+#' @param m the rate of births of vectors
 #' @param n the rate of natural death of vectors
 #' @param g the rate at which infected hosts recover/die
 #' @param w the rate at which host immunity wanes
@@ -61,7 +61,7 @@ vectortransmissioneq <- function(t, y, parms)
 #' @export
 
 
-simulate_vectortransmission <- function(Sh0 = 1e3, Ih0 = 1, Sv0 = 0, Iv0 = 0, tmax = 120, b1 = 0.01, b2 = 0, b = 0, n = 0, g = 1, w = 0)
+simulate_vectortransmission <- function(Sh0 = 1e3, Ih0 = 1, Sv0 = 0, Iv0 = 0, tmax = 120, b1 = 0.01, b2 = 0, m = 0, n = 0, g = 1, w = 0)
 {
   ############################################################
   Y0 = c(Sh = Sh0, Ih = Ih0, Rh = 0, Sv = Sv0, Iv = Iv0);  #combine initial conditions into a vector
@@ -71,7 +71,7 @@ simulate_vectortransmission <- function(Sh0 = 1e3, Ih0 = 1, Sv0 = 0, Iv0 = 0, tm
   
   ############################################################
   #vector of parameters which is sent to the ODE function  
-  pars=c(b1 = b1, b2 = b2, b = b, n = n, g = g, w = w); 
+  pars=c(b1 = b1, b2 = b2, m = m, n = n, g = g, w = w); 
 
   #this line runs the simulation, i.e. integrates the differential equations describing the infection process
   #the result is saved in the odeoutput matrix, with the 1st column the time, the 2nd, 3rd, 4th column the variables S, I, R

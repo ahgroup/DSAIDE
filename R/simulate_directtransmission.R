@@ -8,12 +8,12 @@ directtransmissioneq <- function(t, y, parms)
       
       #force of infection for different scenarios: 1 = density-dependent, 2 = frequency-dependent
       N=S+I+R
-      if (scenario==1) { lambda=bd*I/A;}
-      if (scenario==2) { lambda=bf*I/N;}
+      if (scenario==1) { f=bd*I/A;}
+      if (scenario==2) { f=bf*I/N;}
 
       #the ordinary differential equations - includes birth-death and waning immunity
-      dS = b - n*S - lambda*S + w*R; #susceptibles 
-      dI = lambda*S - g*I - n*I; #infected/infectious
+      dS = m - n*S - f*S + w*R; #susceptibles 
+      dI = f*S - g*I - n*I; #infected/infectious
       dR = g*I -n*R - w*R; #recovered
 
       list(c(dS, dI, dR))
@@ -36,7 +36,7 @@ directtransmissioneq <- function(t, y, parms)
 #' @param bf rate of transmission for frequency-dependent transmission
 #' @param scenario choice between density dependent (=1) and frequency dependent (=2) transmission scenarios
 #' @param A the size of the area in which the hosts are assumed to reside/interact
-#' @param b the rate of births 
+#' @param m the rate of births 
 #' @param n the rate of natural deaths
 #' @param g the rate at which infected hosts recover
 #' @param w the rate of waning immunity
@@ -65,7 +65,7 @@ directtransmissioneq <- function(t, y, parms)
 
 
 
-simulate_directtransmission <- function(PopSize = 1e3, I0 = 1, tmax = 120, scenario = 1, bd = 0.01, bf = 0, A = 1, b = 0, n = 0, g = 0.1, w = 0)
+simulate_directtransmission <- function(PopSize = 1e3, I0 = 1, tmax = 120, scenario = 1, bd = 0.01, bf = 0, A = 1, m = 0, n = 0, g = 0.1, w = 0)
 {
   ############################################################
   Y0 = c(S = PopSize-I0, I = I0, R = 0);  #combine initial conditions into a vector
@@ -75,7 +75,7 @@ simulate_directtransmission <- function(PopSize = 1e3, I0 = 1, tmax = 120, scena
   
   ############################################################
   #vector of parameters which is sent to the ODE function  
-  pars=c(tmax = tmax, bd = bd, bf = bf, A = A, b = b, n = n, g = g, w = w, scenario = scenario); 
+  pars=c(tmax = tmax, bd = bd, bf = bf, A = A, m = m, n = n, g = g, w = w, scenario = scenario); 
 
   #this line runs the simulation, i.e. integrates the differential equations describing the infection process
   #the result is saved in the odeoutput matrix, with the 1st column the time, the 2nd, 3rd, 4th column the variables S, I, R

@@ -1,7 +1,8 @@
 ############################################################
 #This is the Shiny file for the Multiple Pathogen App
+#written by Andreas Handel and Spencer Hall
 #maintained by Andreas Handel (ahandel@uga.edu)
-#last updated 6/26/2017
+#last updated 7/13/2017
 ############################################################
 
 #the server-side function with the main functionality

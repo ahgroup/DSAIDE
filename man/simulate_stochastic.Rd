@@ -5,7 +5,7 @@
 \title{Stochastic simulation of an SEIR-type model}
 \usage{
 simulate_stochastic(S0 = 1000, I0 = 10, tmax = 100, bP = 0,
-  bI = 1/1000, gP = 0.5, gI = 0.5, w = 0, lambda = 0, n = 0)
+  bI = 1/1000, gP = 0.5, gI = 0.5, w = 0, m = 0, n = 0)
 }
 \arguments{
 \item{S0}{initial number of susceptible hosts}
@@ -27,7 +27,7 @@ inverse of the average time spent in that compartment}
 \item{w}{rate at which recovered persons loose immunity and return to
 susceptible state}
 
-\item{lambda}{the rate at which new individuals enter the model (are born)}
+\item{m}{the rate at which new individuals enter the model (are born)}
 
 \item{n}{the rate of natural death (the inverse is the average lifespan)}
 }

@@ -2,7 +2,7 @@
 #This is the Shiny file for the Host Heterogeneity App
 #written by Andreas Handel and Sina Solaimanpour 
 #maintained by Andreas Handel (ahandel@uga.edu)
-#last updated 10/13/2016
+#last updated 7/13/2017
 ############################################################
 
 #the server-side function with the main functionality
@@ -148,7 +148,7 @@ ui <- fluidPage(
                     sliderInput("w2", "Rate of waning immunity of type 2", min = 0, max = 5, value = 0, step = 0.05)
              ),
              column(4,
-                    sliderInput("tmax", "Maximum simulation time (months)", min = 1, max = 1200, value = 100, step = 1)
+                    sliderInput("tmax", "Maximum simulation time", min = 1, max = 1200, value = 100, step = 1)
              )
              
            ) #close fluidRow structure for input

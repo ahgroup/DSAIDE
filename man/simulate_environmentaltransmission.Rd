@@ -5,7 +5,7 @@
 \title{Simulation of a compartmental infectious disease transmission model illustrating environmental transmission}
 \usage{
 simulate_environmentaltransmission(S0 = 1000, I0 = 1, E0 = 0,
-  tmax = 120, bd = 0.01, be = 0, b = 0, n = 0, g = 1, p = 0,
+  tmax = 120, bd = 0.01, be = 0, m = 0, n = 0, g = 1, p = 0,
   c = 0)
 }
 \arguments{
@@ -21,7 +21,7 @@ simulate_environmentaltransmission(S0 = 1000, I0 = 1, E0 = 0,
 
 \item{be}{rate of environmental transmission}
 
-\item{b}{rate of births of hosts}
+\item{m}{rate of births of hosts}
 
 \item{n}{the rate of natural death of hosts}
 
