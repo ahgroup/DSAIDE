@@ -1,90 +1,102 @@
 ---
-title: ID Dynamics Introduction - Practice
+title: Infectious Disease Dynamics Introduction - Practice
 output:
   html_document:
     theme: null
     highlight: null
-    css: ../styles/handelshiny.css
+    css: ../styles/dsaide.css
     fig_caption: true
     mathjax: default 
     keep_md: false
     includes:
       #in_header: in_header.txt
-      before_body: ../styles/before_shiny_body.txt
-      after_body: ../styles/after_shiny_body.txt 
+      before_body: ../styles/dsaide_before_body.txt
+      after_body: ../styles/dsaide_after_body.txt 
 bibliography: ../media/references.bib
 ---
 
 ##Overview {#shinytab1}
-This app allows you to explore a very basic infectious disease simulation. The main goal is to provide familiarity with the overall setup and ideas behind using these simulations, and how to run them. Read about the model in the "Model" tab. Then do the tasks described in the "What to do" tab.
+This app allows you to explore a very basic infectious disease simulation. The main goal is to provide familiarity with the overall setup and ideas behind using these simulations, and how to run them. Read about the model in the "Model" tab. Make sure to read the 'general notes' section. Then do the tasks described in the "What to do" tab. Finally, check out the "Further Information" tab to learn where you can find some background information on this (and many of the other) apps.
 
 
 ##The Model {#shinytab2}
 
 ###Model Overview
-This model is a compartmental SIR model. Compartmental means that we place individuals into distinct compartments, according to some characteristics. We then only track the total number of individuals in each of these compartments. In the simplest model, the only characteristic we track is a person's infection status. We allow for 3 different stages/compartments: 
+This model is a compartmental SIR (susceptible-infected-recovered) model. Compartmental means that we place individuals into distinct compartments, according to some characteristics. We then only track the total number of individuals in each of these compartments. In the simplest model, the only characteristic we track is a person's infection status. We allow for 3 different stages/compartments: 
 
-* **S** - uninfected and susceptible individuals 
-* **I** - infected and infectious individuals (note that these terms are often used interchangably, but technically we are talking about someone who is infected **and** is infectious, i.e. can infect others)
+* **S** - uninfected and susceptible individuals. 
+* **I** - infected and infectious individuals (note that these terms are often used interchangably, but technically we are talking about someone who is infected **and** is infectious, i.e. can infect others).
 * **R** - recovered/removed individuals. Those are individuals that do not further participate, either because they are now immune or because they died.
 
-The SIR model is very basic. It could be extendend by introducing further compartments. For instance we could stratify according to gender, which would give us 2 sets of SIR compartments, one for males and one for females. Some of these extensions are implemented in some of the other apps.
+The SIR model is very basic. It could be extendend by introducing further compartments. For instance we could stratify according to gender, which would give us 2 sets of SIR compartments, one for males and one for females. Some of these extensions are implemented in other apps.
 
-In addition to specifying the *compartments* of a model, we need to specify the dynamics determining the changes for each compartment. Broadly speaking, there are processes that increase the number of individuals in a given compartment/stage, and processes that lead to a reduction. Those processes are sometimes called in-flows and out-flows. 
+In addition to specifying the **compartments** of a model, we need to specify the **processes/mechanisms** determining the changes for each compartment. Broadly speaking, there are processes that increase the number of individuals in a given compartment/stage, and processes that lead to a reduction. Those processes are sometimes called in-flows and out-flows. 
 
 For our system, we specify only 2 processes/flows: 
 
 1. A susceptible individual (S) can become infected by an infectious individual (I) at some rate (for which we use the parameter _b_). This leads to the susceptible individual leaving the S compartment and entering the I compartment.   
 2. An infected individual dies or recovers and enters the recovered/removed (R) compartment at some. This is described by the parameter _g_ in our model.
 
-As with the compartments, we can extend the model and allow other processes to occur. For instance we could allow for natural births and deaths, waning immunity, deaths due to disease, etc. We will do that soon. For now, we keep the model as simple as possible.
+As with the compartments, we could extend the model and allow other processes to occur. For instance we could allow for natural births and deaths, waning immunity, deaths due to disease, etc. Some of that will be included in other apps. 
+
+###Model Representation
+For compartmental models (and also often other types of models), it is useful to show a graphical schematic representation of the compartments and processes included in the model. For compartmental models, such a diagram/figure is usually called a flow diagram. Such a diagram consists of a box for each compartment, and arrows pointing in and out of boxes to describe flows and interactions. For the simple SIR model, the flow diagram looks as follows:
+
+![Flow diagram for simple SIR model. ](../media/basicSIRmodelfigure.png)
+
 
 ###Model Implementation
-To allow us to simulate and study this model, we need to implement it on the computer. For that purpose, it is often useful to write the model as mathematical equations (this is not strictly needed, some computer simluation models are never formulated as mathematical models). One way to formulate the simple SIR model is with a set of ordinary differential equations. Each compartment/variable gets an equation. The right side of each equations specifies the processes going on in the system and how they change the numbers in each compartment via inflows and outflows. For the model described above, the equations look like this:
+To allow us to simulate this model, we need to implement it on the computer. For that purpose, it is often useful to write the model as mathematical equations (this is not strictly needed, some computer simluation models are never formulated as mathematical models). A very common way (but not the only one) to implement compartmental models such as the simple SIR model is with a set of ordinary differential equations. Each compartment/variable gets an equation. The right side of each equations specifies the processes going on in the system and how they change the numbers in each compartment via inflows and outflows. For the model described above, the equations look like this:
 
 $$\dot S = -b SI$$ 
 $$\dot I = b S I - g I$$
 $$\dot R = g I$$
 
-Since not everyone likes equations :) a very good way to describe compartmental models is by showing a flow diagram. Such a diagram consists of a box for each compartment, and arrows pointing in and out of boxes to describe flows and interactions. For the simple SIR model, the flow diagram looks as follows:
+**Note: If you don't see equations but instead gibberish, try opening the app with a different browser. It seems the built-in RStudio viewer often does not process the equations well, but Firefox and Chrome seem to work.** 
 
-![Flow diagram for simple SIR model. ](../media/basicSIRmodelfigure.png)
+(If you have an idea how to fix this equation issue for the RStudio viewer, I'd love to hear about it.)
 
 
-###Some notes
-* For many of the models, the underlying equations are shown. If the equations don't display properly, try opening the app with a different browser.
-* You will see both the term *host(s)* and *individual(s)* used interchangeably. In general, while we most often think of humans, the host can be any kind of animal (or even a plant).
-* In general, the entities that change in our model (i.e. here the number of individuals in compartments S, I and R) are called variables: They are variable and change during the simulation. 
-* In contrast, the quantities that are usually fixed for a given scenario are called parameters. For this model, those are the infection rate _b_ and the recovery rate _g_.
-* We would usually choose the parameter such that they match the specific disease we want to study. We'll get to that soon. For now, you'll just play around with the model without trying to relate it to some specific ID.
-* There are no fixed rules concerning the naming of variables and parameters. Compartments (e.g. SIR) tend to be labeled very similar by different researchers, parameter labels are much more different. Always check carefully for a given paper/model what the meaning of each parameter is.
 
+###Some general notes
+* Throughout DSAIDE, I will use _ID_ to abbreviate _infectious disease_
+* You will see both the term *host(s)* and *individual(s)* used interchangeably. While we most often think of human hosts, the hosts can be any kind of animal (or plants or bacteria infected by phages or...).
+* In general, the entities that change in our model (here the number of individuals in compartments S, I and R) are called variables: They are variable and change during the simulation. 
+* In contrast, the quantities that are usually fixed for a given scenario/simulation are called parameters. For this model, those are the infection rate _b_ and the recovery rate _g_.
+* Sometimes, parameters can vary during the simulation, but most often they do not.
+* If you want to study a specific ID, you choose parameters such that they match the specific disease you want to study. For now, just play around with the model without trying to relate it to some specific ID.
+* There are no fixed rules concerning the naming of variables and parameters. Compartments (e.g. SIR) tend to be labeled very similarly by different researchers, parameter labels are much more variable. Always check carefully for a given paper/model what the meaning of each parameter is.
+* Some people prefer diagrams, others equations. In my opinion, it is therefore best to show both. 
 
 
 ##What to do {#shinytab3}
-For the following tasks, it is assumed that the model runs in units of days.
+*This and most other simulations/apps in DSAIDE do not have intrinsic time units. You could therefore assume that your model runs in units of days or weeks/months/years, based on what's most suitable for the disease you want to study. You have to make sure that all your parameters are in the right time units. Always make sure to check if a given simulation can handle different time units or assumes specific ones.*
+
+*The tasks below are described in way that assumes that everything is in units of days (rate parameters therefore have units of inverse days).*
+
+
 
 ###Task 1: 
-* Run the simulation with a population size of 1000, 1 initially infected host, simulation duration 100 days, recovery rate _g_=0.5 per day, and infectiousness _b_0.001. You will get an outbreak of some - currently unspecified - infectious disease. 
+* Run the simulation with a population size of 1000, 1 initially infected host, simulation duration 100 days, recovery rate _g_=0.5 per day, and infectiousness _b_=0.001. You will get an outbreak of some - currently unspecified - infectious disease. 
 * Record the number and fraction of susceptible/infected/recovered remaining at the end of the outbreak.    
 * From the graph, get a (rough) estimate of the day at which the outbreak peaks.
 * Contemplate the fact that the outbreak ends even though there are still a good number of susceptible remaining, i.e. not everyone got infected. 
 * Run the simulation again, with the same values you just had. Does anything change? Why (not)?
 
 ###Task 2: 
-* Double the value of the transmission rate, beta. Leave everything else the same. 
+* Double the value of the transmission rate, _b_. Leave everything else the same. 
 * What do you expect to get for the number/fraction of S/I/R at the end of the outbreak and the time at which the outbreak peaks?
 * Run the simulation with the doubled transmission rate, record the same values (final S/I/R and outbreak peak) as above.
 * Compare your expectations with the results. How do they agree/disagree? Does it make sense? Anything surprising happening?
 
 ###Task 3: 
-* Now, double the rate of recovery (gamma), leave everything as in #2.
-* How do you expect the results to change? (Try to make your prediction as precise/quantitative as you can)
+* Now, double the rate of recovery, _g_, leave everything as in #2.
+* How do you expect the results to change? (Try to make your prediction as precise/quantitative as you can.)
 * Run the simulation with these new parameter settings, record the same values as above.
 * Compare your expectations with the results. How do they agree/disagree? Does it make sense? Anything surprising happening?
 
 ###Task 4: 
-* Now, double the number of susceptibles (i.e. the population size), leave everything as in #3.
+* Now, double the number of susceptibles (i.e. the population size), leave everything else as you just had.
 * How do you expect the results to change?
 * Run the simulation with these new parameter settings, record the same values as above.
 * Compare your expectations with what results. How do they agree/disagree? Does it make sense? Anything surprising happening?
@@ -100,10 +112,12 @@ For the following tasks, it is assumed that the model runs in units of days.
 
 
 ##Further Information {#shinytab4}
-* This app (and all others) are structured such that the Shiny part (the graphical interface you see and the server-side function that goes with it) calls an underlying R script which runs the simulation for the model of interest and returns the results.
-* For this app, the underlying function running the simulation is called `simulate_introduction.R`. You can call this function directly, without going through the shiny app. Type `?simulate_introduction` into the R console for more information. If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself. 
-* You could also modify this R function for your own purposes - though that requires R coding knowledge.
-* Some useful books which cover the material of this and most of the other apps (though often a somewhat more mathematical level) are [@vynnycky10] and [@keeling08].
+* This app (and all others) are structured such that the Shiny part (the graphical interface you are currently using and the server-side function that goes with it) calls an underlying R script which runs the simulation for the model of interest and returns the results.
+* For this app, the underlying function running the simulation is called `simulate_introduction.R`. You can call this function directly, without going through the shiny app. Type `?simulate_introduction` into the R console for more information (you need to exit the graphical interace first or start a new R session). If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself. 
+* You could also modify this R function for your own purposes - though that requires some more R coding knowledge. 
+* To get a quick start explaining how to interact with the simulator functions directly, read the vignette for the package (type `vignette('DSAIDE')` into the R console).
+* Some useful books which cover the material of this and most of the other apps (though often at a somewhat more challenging mathematical level) are [@vynnycky10] and [@keeling08].
+
 
 ### References
 

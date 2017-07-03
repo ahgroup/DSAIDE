@@ -93,6 +93,10 @@ separate <- function(input,foldername){
   #html.body.script <- xpathApply(html.raw, "//script[@type[starts-with(., 'text/javascript')]]", saveXML)
   html.body.script <- xpathApply(html.raw, "//script", xmlValue) #there is some weird CDATA field coming along if I use saveXML. not sure how to get rid, so just extract inside and slap script tag on again later
 
+  # Find the script in the footer
+  html.footer.script <- xpathApply(html.raw, "//script", xmlValue) 
+  #html.footer.script <- xpathApply(html.raw, "//script", saveXML)
+  
   # Static text to end a Body TAG
   html.body.end <- '</body>'
 
@@ -102,6 +106,8 @@ separate <- function(input,foldername){
   script.start.tag <- '<script>'
   script.end.tag <- '</script>'
 
+  #browser()
+  
   # Now loop over the tabs and create an HTML file for each one
   # Files are named simply as shinytab1.html, shinytab2.html, etc.
   # That's done because names of specific tabs can change between apps
@@ -120,8 +126,9 @@ separate <- function(input,foldername){
     #content <- xpathApply(subDoc, "//div[@id[starts-with(., 'shinytab')]]")
 
     # Structure all the text that needs to be saved in the file
-    # for each Shinytab.html file, we need to include the MathJax script bit at the end to allow equations to render ok
-    # that should be script #2 in the html.body.script list
+    # for each Shinytab.html file, 
+    # we need to include the MathJax script bit at the end to allow equations to render ok
+    # that should be html.footer.script[[1]]
     toWrite <- paste(#html.head.start,
                      #html.head.content[[1]],
                      #html.head.end,
@@ -129,10 +136,6 @@ separate <- function(input,foldername){
                      #html.body.label[[1]],
                      #html.body.header[[1]],
                      content[[1]],
-                     #html.body.footer[[1]],
-                     #script.start.tag,
-                     #html.body.script[[2]], #including MathJax script here doesn't seem to work with shiny, so leave it out for now
-                     #script.end.tag,
                      html.body.end
                      #html.html.end
     )
@@ -185,6 +188,9 @@ separate <- function(input,foldername){
                    #html.body.header[[1]],
                    #content[[1]],
                    html.body.footer[[1]],
+                   script.start.tag,
+                   html.footer.script[[1]], #including MathJax script here doesn't seem to work with shiny, so leave it out for now
+                   script.end.tag,
                    #html.body.script[[1]],
                    html.body.end,
                    html.html.end

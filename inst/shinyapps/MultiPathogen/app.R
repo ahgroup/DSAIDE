@@ -67,7 +67,7 @@ server <- function(input, output, session) {
 
 #This is the UI part of the shiny App
 ui <- fluidPage(
-    includeCSS("../styles/shinystyle.css"),
+    includeCSS("../styles/dsaide.css"),
     #add header and title
     tags$head( tags$script(src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML", type = 'text/javascript') ),
     div( includeHTML("www/header.html"), align = "center"),

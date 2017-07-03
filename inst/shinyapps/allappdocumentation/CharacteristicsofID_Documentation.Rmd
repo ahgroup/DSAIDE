@@ -4,14 +4,14 @@ output:
   html_document:
     theme: null
     highlight: null
-    css: ../styles/handelshiny.css
+    css: ../styles/dsaide.css
     fig_caption: true
     mathjax: default 
     keep_md: false
     includes:
       #in_header: in_header.txt
-      before_body: ../styles/before_shiny_body.txt
-      after_body: ../styles/after_shiny_body.txt 
+      before_body: ../styles/dsaide_before_body.txt
+      after_body: ../styles/dsaide_after_body.txt 
 bibliography: ../media/references.bib
 ---
 
