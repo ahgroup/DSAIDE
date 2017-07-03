@@ -20,6 +20,10 @@ Once done exploring the apps, close the main menu to exit back to the R console.
 ## Advanced Use
 The vignette illustrates ways to interact with and modify the underlying models without the use of the Shiny GUI.
 
+### Contributing to the package
+DSAIDE is built in a way that makes it (hopefully) easy for others to contribute new simulations/apps. The package contains a sub-folder called _/docsfordevelopers_ (in the locally installed version of the package, this folder is in the main package folder, on Github it is inside the _/inst_ folder). The information in this folder explains the overall structure of the package and gives detailed instructions on how to create new apps. The information provided is meant to be detailed and complete enough to allow fairly easy development and contribution of new apps (or other enhancements) to the package. For any further questions, feel free to contact me via email or github.
+
+
 ## Further information
 The vignette provides additional details about the different ways the package can be used.
 For feedback, bug reports etc., use the packages' github site https://github.com/ahgroup/DSAIDE

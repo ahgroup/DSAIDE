@@ -197,9 +197,24 @@ separate <- function(input,foldername){
   return (sprintf("%s/%s", dirname(input), foldername))
 }
 
+
+#after HTML files have been processed, go ahead and remove them
+removeAllHTMLFiles <-function() 
+{
+  files = list.files(".", pattern = "\\.html$")
+  
+  for (i in seq(length(files)))
+  {
+    #get name of file currently to be processed
+    current_filename = files[i]
+    unlink(current_filename)
+  }    
+  
+}  
+
 ################################################
 #main program
 #run the functions above to process all files
 processAllRmdFiles() #turns Rmd files into HTML - uncomment if not needed/wanted
 processAllHTMLFiles() #turns HTML documentation files into individual HTML files for loading/display inside each app
-
+removeAllHTMLFiles() #deletes the HTML files from this folder - uncomment if you want to keep them
