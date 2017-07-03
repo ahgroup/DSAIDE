@@ -72,16 +72,15 @@ ui <- fluidPage(
   div( includeHTML("www/header.html"), align = "center"),
   h1('Environmental Transmission App', align = "center", style = "background-color:#123c66; color:#fff"),
   
-  #################################
-  #end section to add buttons
+  #section to add buttons
   fluidRow(
     column(6,
-           div( style="text-align:center", actionButton("submitBtn", "Run Simulation", style="color: #000000; background-color: #D2FFE2")  )
+           actionButton("submitBtn", "Run Simulation", class="submitbutton")  
     ),
     column(6,
-           div( style="text-align:center", actionButton("exitBtn", "Exit App", style="color: #000000; background-color: #BDCCD9") )
-    )
-    
+           actionButton("exitBtn", "Exit App", class="exitbutton")
+    ),
+    align = "center"
   ), #end section to add buttons
   
   tags$hr(),
