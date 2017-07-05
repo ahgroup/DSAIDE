@@ -24,8 +24,7 @@
 <h3>Model Implementation</h3>&#13;
 <p>To allow us to simulate this model, we need to implement it on the computer. For that purpose, it is often useful to write the model as mathematical equations (this is not strictly needed, some computer simluation models are never formulated as mathematical models). A very common way (but not the only one) to implement compartmental models such as the simple SIR model is with a set of ordinary differential equations. Each compartment/variable gets an equation. The right side of each equations specifies the processes going on in the system and how they change the numbers in each compartment via inflows and outflows. For the model described above, the equations look like this:</p>&#13;
 <p><span class="math display">\[\dot S = -b SI\]</span> <span class="math display">\[\dot I = b S I - g I\]</span> <span class="math display">\[\dot R = g I\]</span></p>&#13;
-<p><strong>Note: If you don’t see equations but instead gibberish, try opening the app with a different browser. It seems the built-in RStudio viewer often does not process the equations well, but Firefox and Chrome seem to work.</strong></p>&#13;
-<p>(If you have an idea how to fix this equation issue for the RStudio viewer, I’d love to hear about it.)</p>&#13;
+<p><em>Note: If you don’t see equations but instead gibberish, try opening the app with a different browser. I have found that occasionally, on some computers, the built-in RStudio viewer does not process the equations correctly. Firefox and Chrome seem to work.</em></p>&#13;
 </div>&#13;
 <div id="some-general-notes" class="section level3">&#13;
 <h3>Some general notes</h3>&#13;

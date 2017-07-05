@@ -82,18 +82,46 @@ $$\dot R_{12} = g_{1} I_{1X} + g_{2} I_{2X} + g_{12} I_{12} $$
 
 
 ##What to do {#shinytab3}
+_For the following tasks, it is assumed that the model runs in units of days._
 
 ###Task 1: 
-
+* First, make sure each pathogen can produce an outbreak by itself.
+* Set the initial number of infected with pathogen 1 to 1, all other infected at zero. Susceptibles at 1000.
+* Set all transmission rates to 0.001, all recovery rates at 0.5.
+* Set fraction of pathogen 1 infections to a=0.5.
+* Run the simulation for 100 days, check that you only get a single outbreak with pathogen 1.
+* Now set initial number of infected with pathogen 1 to 0, with pathogen 2 to 1. Run simulation and check that you get exactly the same size outbreak with pathogen 2.
 
 ###Task 2: 
+* Leave everything as before but now start with 1 infected for both pathogen 1 and 2. You should see outbreaks for both pathogens with the same dynamics (in fact, you won't see the curves for I1, R1, etc. since they are covered by the curves for I2, R2.)
+
+###Task 3: 
+* Now start with I10=1 and I20=10. What do you expect to see? What do you find?
+
+###Task 4: 
+* Go back to I10=I20=1, instead set b2=0.002. What do you expect to see? What do you find?
+* What do you conclude has the stronger impact, higher initial number of infected for pathogen 2 or higher transmissibility?
+
+###Task 5: 
+* To confirm that things are completely "symmetric", re-do the 2 previous tasks but now instead of changing pathogen 2 initial infected or transmission rate, do it for pathogen 1.
+
+###Task 5:
+* Set everyting back as in task #2, i.e. the 2 pathogens have the same starting numbers and transmission rates.
+* Now play around with the fraction of pathogen 1 infections, a. What do you expect? What do you find?
+
+###Task 6:
+* Keep exploring. Investigate how some of the other parameters influence the outbreak dynamics for the 2 pathogens.
+* Always follow the same pattern: Think about what you results you expect to get from a certain scenario/parameter setting and why. Then check with the simulation. If things don't agree, figure out why not. 
+
 
 
 ##Further Information {#shinytab4}
 
-* For this app, the underlying function running the simulation is called `simulate_multipathogen.R`. You can call this function directly, without going through the shiny app. Check the help file for the function for more information. 
-* If you call the function directly, you need to process the results returned from this function and produce useful output (such as a plot) yourself. 
-* You can also modify this R function for your own purposes. To find out how to do that, type `?DSAIDE` at the R console.
+* This app (and all others) are structured such that the Shiny part (the graphical interface you are currently using and the server-side function that goes with it) calls an underlying R script which runs the simulation for the model of interest and returns the results.
+* For this app, the underlying function running the simulation is called `simulate_multipathogen.R`. You can call this function directly, without going through the shiny app. Type `?simulate_multipathogen` into the R console for more information (you need to exit the graphical interace first or start a new R session). If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself. 
+* You can also modify this R function for your own purposes. That requires some more R coding knowledge. 
+* To get a quick start explaining how to interact with the simulator functions directly, read the vignette for the package (type `vignette('DSAIDE')` into the R console).
+
 
 ### References
 

@@ -5,8 +5,8 @@
 \title{Simulation of a compartmental infectious disease transmission model with 2 types of pathogens}
 \usage{
 simulate_multipathogen(S0 = 1000, I10 = 1, I20 = 0, I120 = 0,
-  tmax = 120, b1 = 0, b2 = 0, b12 = 0, g1 = 1, g2 = 1, g12 = 1,
-  a = 0)
+  tmax = 120, b1 = 0.001, b2 = 0, b12 = 0, g1 = 1, g2 = 1,
+  g12 = 1, a = 0)
 }
 \arguments{
 \item{S0}{initial total number of hosts}

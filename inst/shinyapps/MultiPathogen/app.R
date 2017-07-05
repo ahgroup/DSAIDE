@@ -39,9 +39,11 @@ refresh <- function(input, output){
     
     #if we want certain variables plotted and reported separately, we can specify them manually as a list
     #if nothing is specified, all variables are plotted and reported at once
+    varlist = list(c("S","I1","I2",'R1','R2'), c("I1X","I2X","I12",'R12'))
+    
     #function that takes result saved in res and produces output
     #output (plots, text, warnings) is stored in and modifies the global variable 'output'
-    generate_simoutput(input,output,res,varlist=NULL)
+    generate_simoutput(input,output,res,varlist=varlist)
 } #ends the 'refresh' shiny server function that runs the simulation and returns output
 
 #main shiny server function
@@ -98,52 +100,52 @@ ui <- fluidPage(
                p('All parameters are assumed to be in units of (inverse) months'),
                fluidRow(
                    column(6,
-                          sliderInput("S0", "initial number of susceptible hosts", min = 100, max = 5000, value = 1000, step = 100)
+                          sliderInput("S0", "initial number of susceptible hosts (S0)", min = 100, max = 5000, value = 1000, step = 100)
                    ),
                    column(6,
-                          sliderInput("I10", "initial number of hosts infected with pathogen 1", min = 0, max = 100, value = 0, step = 1)
+                          sliderInput("I10", "initial number of hosts infected with pathogen 1 (I10)", min = 0, max = 100, value = 0, step = 1)
                    )
                ), #close fluidRow structure for input
                fluidRow(
                    column(6,
-                          sliderInput("I20", "initial number of hosts infected with pathogen 2", min = 0, max = 100, value = 0, step = 1)
+                          sliderInput("I20", "initial number of hosts infected with pathogen 2 (I20)", min = 0, max = 100, value = 0, step = 1)
                    ),
                    column(6,
-                          sliderInput("I120", "initial number of hosts infected with pathogens 1 and 2", min = 0, max = 100, value = 0, step = 1)
+                          sliderInput("I120", "initial number of hosts infected with pathogens 1 and 2 (I120)", min = 0, max = 100, value = 0, step = 1)
                    )
                ), #close fluidRow structure for input
                fluidRow(
                    column(6,
-                          sliderInput("b1", "Rate at which hosts infected with pathogen 1 transmit", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
+                          sliderInput("b1", "Rate at which hosts infected with pathogen 1 transmit (b1)", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
                    ),
                    column(6,
-                          sliderInput("b2", "Rate at which hosts infected with pathogen 1 transmit", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
+                          sliderInput("b2", "Rate at which hosts infected with pathogen 2 transmit (b2)", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
                    )
                ), #close fluidRow structure for input
                fluidRow(
                    column(6,
-                          sliderInput("b12", "Rate at which double infected hosts transmit", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
+                          sliderInput("b12", "Rate at which double infected hosts transmit (b12)", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
                           ),
                  column(6,
-                      sliderInput("g1", "Rate at which hosts infected with type 1 recover", min = 0, max = 5, value = 0.5, step = 0.1)
+                      sliderInput("g1", "Rate at which hosts infected with type 1 recover (g1)", min = 0, max = 5, value = 0.5, step = 0.1)
                         )
                ), #close fluidRow structure for input
                fluidRow(
                    column(6,
-                          sliderInput("g2", "Rate at which hosts infected with type 2 recover", min = 0, max = 5, value = 0.5, step = 0.1)
+                          sliderInput("g2", "Rate at which hosts infected with type 2 recover (g2)", min = 0, max = 5, value = 0.5, step = 0.1)
                    ),
                    column(6,
-                          sliderInput("g12", "Rate at which double infected host recover",      min = 0, max = 5, value = 0.5, step = 0.1)
+                          sliderInput("g12", "Rate at which double infected host recover (g12)",  min = 0, max = 5, value = 0.5, step = 0.1)
                    )
                ), #close fluidRow structure for input
                
                fluidRow(
                    column(6,
-                          sliderInput("a", "Fraction of pathogen 1 infections produced by double infected", min = 0, max = 1, value = 0, step = 0.05)
+                          sliderInput("a", "Fraction of pathogen 1 infections produced by double infected (a)", min = 0, max = 1, value = 0.5, step = 0.05)
                    ),
                   
                    column(6,
-                          sliderInput("tmax", "Maximum simulation time", min = 1, max = 1200, value = 100, step = 1)
+                          sliderInput("tmax", "Maximum simulation time (tmax)", min = 1, max = 1200, value = 100, step = 1)
                    )
                    
                ) #close fluidRow structure for input

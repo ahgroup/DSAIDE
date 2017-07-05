@@ -143,10 +143,10 @@ _Some of the simulations might take a few seconds to run. Be patient._
   
 
 ##Further Information {#shinytab4}
-
-* For this app, the underlying function running the simulation is called `simulate_idcontrol.R`. You can call this function directly, without going through the shiny app. Check the help file for the function for more information. 
-* If you call the function directly, you need to process the results returned from this function and produce useful output (such as a plot) yourself. 
-* You can also modify this R function for your own purposes. To find out how to do that, type `?DSAIDE` at the R console.
+* This app (and all others) are structured such that the Shiny part (the graphical interface you are currently using and the server-side function that goes with it) calls an underlying R script which runs the simulation for the model of interest and returns the results.
+* For this app, the underlying function running the simulation is called `simulate_idcontrol.R`. You can call this function directly, without going through the shiny app. Type `?simulate_idcontrol` into the R console for more information (you need to exit the graphical interace first or start a new R session). If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself. 
+* You could also modify this R function for your own purposes - though that requires some more R coding knowledge. 
+* To get a quick start explaining how to interact with the simulator functions directly, read the vignette for the package (type `vignette('DSAIDE')` into the R console).
 * For some additional reading, see e.g. [@klepac13, @klepac15, @kirsch17, @tognotti13].
 
 ### References

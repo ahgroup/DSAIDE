@@ -10,8 +10,7 @@ multipatheq <- function(t, y, parms)
             
             dI1 <- (b1*(I1+I1X) + a*b12*I12)*S       - g1*I1 - (b2*(I2+I2X) + b12*I12)*I1
             dI2 <- (b2*(I2+I2X) + (1 - a)*b12*I12)*S - g2*I2 - (b1*(I1+I1X) + b12*I12)*I2
-            dI12 <- (b1*(I1+I1X) + b12*I12)*I2 + (b2*(I2+I2X) + b12*I12)*I1  
-              
+            dI12 <- (b1*(I1+I1X) + b12*I12)*I2 + (b2*(I2+I2X) + b12*I12)*I1 - g12*I12 
 
             dI1X <- (b1 * (I1 + I1X) + b12*I12)*R2 - g1*I1X
             dI2X <- (b2 * (I2 + I2X) + b12*I12)*R1 - g2*I2X
@@ -22,8 +21,8 @@ multipatheq <- function(t, y, parms)
             dR12 <- g12*I12 + g1*I1X + g2*I2X
             
             
-            list(c(dS, dI1, dI2, dI1X, dI2X, dI12, dR1, dR2, dR12))
-        }
+            list( c(dS, dI1, dI2, dI12, dI1X, dI2X, dR1, dR2, dR12))        
+          }
     ) #close with statement
 } #end function specifying the ODEs
 
@@ -68,7 +67,7 @@ multipatheq <- function(t, y, parms)
 #' @export
 
 
-simulate_multipathogen <- function(S0 = 1e3, I10 = 1, I20 = 0, I120 = 0, tmax = 120, b1 = 0, b2 = 0, b12 = 0, g1 = 1, g2 = 1, g12 = 1, a = 0)
+simulate_multipathogen <- function(S0 = 1e3, I10 = 1, I20 = 0, I120 = 0, tmax = 120, b1 = 1e-3, b2 = 0, b12 = 0, g1 = 1, g2 = 1, g12 = 1, a = 0)
 {
     ############################################################
     Y0 = c(S = S0, I1 = I10, I2 = I20, I12 = I120, I1X = 0 , I2X = 0, R1 = 0, R2 = 0, R12 = 0);  #combine initial conditions into a vector

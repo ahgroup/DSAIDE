@@ -52,10 +52,7 @@ $$\dot S = -b SI$$
 $$\dot I = b S I - g I$$
 $$\dot R = g I$$
 
-**Note: If you don't see equations but instead gibberish, try opening the app with a different browser. It seems the built-in RStudio viewer often does not process the equations well, but Firefox and Chrome seem to work.** 
-
-(If you have an idea how to fix this equation issue for the RStudio viewer, I'd love to hear about it.)
-
+*Note: If you don't see equations but instead gibberish, try opening the app with a different browser. I have found that occasionally, on some computers, the built-in RStudio viewer does not process the equations correctly. Firefox and Chrome seem to work.* 
 
 
 ###Some general notes
