@@ -26,19 +26,19 @@ This app lets you explore the concept of the reproductive number. Read about the
 For this app, we'll use the basic compartmental SIR model. We allow for 3 different stages/compartments: 
 
 * **S** - uninfected and susceptible individuals 
-* **I** - infected and infectious individuals (note that these terms are often used interchangably, but technically we are talking about someone who is infected **and** is infectious, i.e. can infect others)
+* **I** - infected and infectious individuals (note that these terms are often used interchangeably, but technically we are talking about someone who is infected **and** is infectious, i.e. can infect others)
 * **R** - recovered/removed individuals. Those are individuals that do not further participate, either because they are now immune or because they died.
 
 
-In addition to specifying the *compartments* of a model, we need to specify the dynamics determining the changes for each compartment. Broadly speaking, there are processes that increase the number of individuals in a given compartment/stage, and processes that lead to a reduction. Those processes are sometimes called in-flows and out-flows. 
+In addition to specifying the *compartments* of a model, we need to specify the dynamics determining the changes for each compartment. Broadly speaking, some processes increase the number of individuals in a given compartment/stage and other processes that lead to a reduction. Those processes are sometimes called inflows and outflows. 
 
 For our system, we specify the following processes/flows: 
 
 * Susceptible individuals (S) can become infected by infectious individuals (I) at some rate, _b_. This leads to the susceptible individual leaving the S compartment and entering the I compartment.   
 * Infected individuals recover and enter the recovered (R) compartment at some rate, _g_.
-* Recovered individuals can loose immunity at rate _w_ and return back to the susceptible compartment. 
+* Recovered individuals can lose immunity at rate _w_ and return to the susceptible compartment. 
 * Natural births (into the S compartment at rate _m_) and deaths (from all compartments at rate _n_) are possible.
-* The model allows a fraction of individuals to be vaccinated before the outbreak. Those individuals are moved into the R compartment prior to the start of the outbreak.
+* The model allows a fraction of individuals to be vaccinated before the outbreak. Those individuals are moved into the R compartment before the start of the outbreak.
 
 
 
@@ -53,7 +53,7 @@ $$\dot S =m - b SI - nS + wR$$
 $$\dot I = \ S I - g I - nI$$
 $$\dot R = g I - nR - wR$$
 
-Here, S~0~ is the initial population of susceptibles, and S~v~ is the susceptible population after vaccination. Vaccinated individuals are moved to the R compartment prior to the start of the outbreak.
+Here, S~0~ is the initial population of susceptibles, and S~v~ is the susceptible population after vaccination. Vaccinated individuals are moved to the R compartment before the start of the outbreak.
 
 
 ##What to do {#shinytab3}
@@ -68,7 +68,7 @@ __For the tasks described here, it is assumed that the model runs in units of mo
 * Use the final size equation linking R~0~ and the fraction of susceptible hosts left at the end of the outbreak to compute the reproductive number. 
 
 ###Task 2: 
-* Use the equation that expresses R~0~ as function of model parameters for the simple SIR model. Using the values of the model parameters, compute R~0~ that way. Check that it agrees with what you found in task #1.
+* Use the equation that expresses R~0~ as a function of model parameters for the simple SIR model. Using the values of the model parameters, compute R~0~ that way. Check that it agrees with what you found in task #1.
 
 ###Task 3: 
 * Double the value of the transmission parameter, _b_. Before you run the simulation, what do you expect to see and what do you expect to get for R~0~?
@@ -86,18 +86,18 @@ __For the tasks described here, it is assumed that the model runs in units of mo
 
 
 ###Task 6: 
-* What is the value of R at the time the outbreak peaks? (It's only called R~0~ at the beginning for a fully susceptible population). Explain how you can find that value for R, both using intuitive reasoning and using the equation for R~0~ given above (R~0~ = 1+rD). Note that at this R value, the outbreak wanes, but people still get infected. What R value would you need to completely halt any further infections?
+* What is the value of R at the time the outbreak peaks? (It's only called R~0~ at the beginning for a fully susceptible population). Explain how you can find that value for R, both using intuitive reasoning and using the equation for R~0~ given above (R~0~ = 1+rD). Note that at this R value, the outbreak wanes, but people still get infected. What R value would you need to halt any further infections completely?
 
 ###Task 7: 
 * What would happen if a new ID came along that had an R~0~ value that was the same as the one you just determined in the previous question, namely the value of R at the peak of an outbreak? Test this with the simulation. Choose parameter values for which you get the right R~0~ and observe what the model produces.
 
 
 ###Task 8: 
-* R~0~ quantifies the level of transmissibility of an ID, which determines how many people will become infected or what level of intervention is needed to stop/prevent an outbreak. However, it is important to be aware that R~0~ says nothing about the timing/dynamics of the outbreak. Set parameter values as in #1. Run an outbreak, record the time of peak and duration of the outbreak (the latter is somewhat ill defined, so just come up with a rough number). Then increase the infectious duration by a factor of 4 (rate reduced by factor of 4) and adjust the infectiousness-level such that you get the same R~0~ as before. Run again and compare the results with respect to total outbreak size and timing of outbreak.    
+* R~0~ quantifies the level of transmissibility of an ID, which determines how many people will become infected or what level of intervention is needed to stop/prevent an outbreak. However, it is important to be aware that R~0~ says nothing about the timing/dynamics of the outbreak. Set parameter values as in #1. Run an outbreak, record the time of peak and duration of the outbreak (the latter is somewhat ill-defined, so just come up with a rough number). Then increase the infectious duration by a factor of 4 (rate reduced by a factor of 4) and adjust the infectiousness-level such that you get the same R~0~ as before. Run again and compare the results concerning total outbreak size and timing of outbreak.    
 
 
 ###Task 9: 
-* One usually obtains R~0~ from the data/literature and uses it to pick values for the transmission parameter. Let's try that. Go online and find (approximate) values for the duration of the infectious period and for R~0~ for SARS. Keep the population size at 1000. Use those values to compute the transmission parameter, _b_. Run an outbreak, see if things work out right. Specifically, using the equation involving the final number of susceptibles left should give you an R~0~ that roughly agrees with the one you started out with.
+* One usually obtains R~0~ from the data/literature and uses it to pick values for the transmission parameter. Let's try that. Go online and find (approximate) values for the duration of the infectious period and R~0~ for SARS. Keep the population size at 1000. Use those values to compute the transmission parameter, _b_. Run an outbreak, see if things work out right. Specifically, using the equation involving the final number of susceptibles left should give you an R~0~ that roughly agrees with the one you started out with.
 
 
 
@@ -118,11 +118,11 @@ __For the tasks described here, it is assumed that the model runs in units of mo
 
 
 ###Task 13: 
-* So far, we looked at an individual outbreak. Now we introduce births and deaths. For our model, we use a constant birth rate _m_, and a fixed per-capita death rate _n_.  It is possible to have population dynamics (births, deaths) in the absence of an ID. It is useful to first figure out what's going on there before you introduce the disease dynamics. 
+* So far, we looked at an individual outbreak. Now we introduce births and deaths. For our model, we use a constant birth rate _m_ and a fixed per-capita death rate _n_.  It is possible to have population dynamics (births, deaths) in the absence of an ID. It is useful first to figure out what's going on there before you introduce the disease dynamics. 
 * Choose various values for the birthrate and lifespan, run the model and see what the population does in the absence of an infectious disease. Can you figure out the equation that relates births, deaths and steady state level for our model? Test it with the simulation.
 
 ###Task 14: 
-* If births (and deaths) are present, you will be able to get multiple outbreaks and endemic states. Set the parameter values such that your hosts have approximately an average life-span of 41 years. Make sure to convert to months and convert to a rate. Set birth rate such that the population is steady at 1000 in the absence of the ID. Set simulation time to around 500 years, 1 infected, _g_=5, _b_=0.015. No vaccine. (Be patient, running the simulation takes some time.)
+* If births (and deaths) are present, you will be able to get multiple outbreaks and endemic states. Set the parameter values such that your hosts have approximately an average lifespan of 41 years. Make sure to convert to months and convert to a rate. Set birth rate such that the population is steady at 1000 in the absence of the ID. Set simulation time to around 500 years, 1 infected, _g_=5, _b_=0.015. No vaccine. (Be patient, running the simulation takes some time.)
 * Run the simulation, make sure you reach a steady state. Compare the steady state values for S, I and R from the simulation with those predicted from the SIR steady state equations.
 
 ###Task 15: 
@@ -137,7 +137,7 @@ __For the tasks described here, it is assumed that the model runs in units of mo
 
 ##Further Information {#shinytab4}
 * This app (and all others) are structured such that the Shiny part (the graphical interface you are currently using and the server-side function that goes with it) calls an underlying R script which runs the simulation for the model of interest and returns the results.
-* For this app, the underlying function running the simulation is called `simulate_reproductivenumber.R`. You can call this function directly, without going through the shiny app. Type `?simulate_reproductivenumber` into the R console for more information (you need to exit the graphical interace first or start a new R session). If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself. 
+* For this app, the underlying function running the simulation is called `simulate_reproductivenumber.R`. You can call this function directly, without going through the shiny app. Type `?simulate_reproductivenumber` into the R console for more information (you need to exit the graphical interface first or start a new R session). If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself. 
 * You could also modify this R function for your own purposes - though that requires some more R coding knowledge. 
 * To get a quick start explaining how to interact with the simulator functions directly, read the vignette for the package (type `vignette('DSAIDE')` into the R console).
 * For some information on the reproductive number, see e.g. [@fine11, @heffernan05a, @roberts07, @wallinga07].
