@@ -108,18 +108,18 @@ ui <- fluidPage(
            ), #close fluidRow structure for input
            fluidRow(
              column(6,
-                    numericInput("b", "Rate of transmission (b)", min = 0, max = 0.1, value = 0, step = 0.001 , sep ='')
+                    numericInput("b", "Rate of transmission (b)", min = 0, max = 0.1, value = 0, step = 0.001  )
              ),
              column(6,
-                    numericInput("g", "Rate at which a host leaves the infectious compartment (g)", min = 0, max = 25, value = 10, step = 0.25, sep ='')
+                    numericInput("g", "Rate at which a host leaves the infectious compartment (g)", min = 0, max = 25, value = 10, step = 0.25 )
              )
            ), #close fluidRow structure for input
            fluidRow(
              column(6,
-                    numericInput("f", "Fraction vaccinated prior to outbreak (f)", min = 0, max = 1, value = 0, step = 0.05, sep ='')
+                    numericInput("f", "Fraction vaccinated prior to outbreak (f)", min = 0, max = 1, value = 0, step = 0.05 )
              ),
              column(6,
-                    numericInput("e", "Efficacy of vaccine (e)", min = 0, max = 1, value = 0, step = 0.05, sep ='')
+                    numericInput("e", "Efficacy of vaccine (e)", min = 0, max = 1, value = 0, step = 0.05 )
              )
            ), #close fluidRow structure for input
            fluidRow(
@@ -127,7 +127,7 @@ ui <- fluidPage(
                     numericInput("m", "Rate of new births (m)", min = 0, max = 100, value = 0, step = 1)
              ),
              column(6,
-                    numericInput("n", "Natural death rate (n)", min = 0, max = 0.02, value = 0, step = 0.0005, sep ='')
+                    numericInput("n", "Natural death rate (n)", min = 0, max = 0.02, value = 0, step = 0.0005 )
              )
            ) #close fluidRow structure for input
            

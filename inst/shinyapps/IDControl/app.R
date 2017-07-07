@@ -134,24 +134,24 @@ ui <- fluidPage(
            ), #close fluidRow structure for input
            fluidRow(
              column(4,
-                    numericInput("bP", "Rate of transmission from pre-symptomatic hosts (bP)", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
+                    numericInput("bP", "Rate of transmission from pre-symptomatic hosts (bP)", min = 0, max = 0.01, value = 0, step = 0.0001  )
              ),
              column(4,
-                    numericInput("bA", "Rate of transmission from asymptomatic hosts (bA)", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
+                    numericInput("bA", "Rate of transmission from asymptomatic hosts (bA)", min = 0, max = 0.01, value = 0, step = 0.0001  )
              ),
              column(4,
-                    numericInput("bI", "Rate of transmission from symptomatic hosts (bI)", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
+                    numericInput("bI", "Rate of transmission from symptomatic hosts (bI)", min = 0, max = 0.01, value = 0, step = 0.0001  )
              )
            ), #close fluidRow structure for input
            fluidRow(
              column(4,
-                    numericInput("bE", "Rate of transmission from environment (bE)", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
+                    numericInput("bE", "Rate of transmission from environment (bE)", min = 0, max = 0.01, value = 0, step = 0.0001  )
              ),
              column(4,
-                    numericInput("bv", "Rate of transmission from vectors (bv)", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
+                    numericInput("bv", "Rate of transmission from vectors (bv)", min = 0, max = 0.01, value = 0, step = 0.0001  )
              ),
              column(4,
-                    numericInput("bh", "Rate of transmission to vectors (bh)", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
+                    numericInput("bh", "Rate of transmission to vectors (bh)", min = 0, max = 0.01, value = 0, step = 0.0001  )
              )
            ), #close fluidRow structure for input
            fluidRow(
@@ -174,7 +174,7 @@ ui <- fluidPage(
                     numericInput("pI", "Rate of pathogen shedding by symptomatic hosts (pI)", min = 0, max = 10, value = 0, step = 0.1)
              ),
              column(4,
-                    numericInput("c", "Rate of environmental pathogen decay (c)", min = 0, max = 10, value = 0, step = 0.1 , sep ='')
+                    numericInput("c", "Rate of environmental pathogen decay (c)", min = 0, max = 10, value = 0, step = 0.1  )
              )
            ), #close fluidRow structure for input
            fluidRow(
@@ -185,23 +185,23 @@ ui <- fluidPage(
                     numericInput("w", "Rate of waning host immunity (w)", min = 0, max = 50, value = 0, step = 0.1)
              ),
              column(4,
-                    numericInput("d", "Fraction of symptomatic hosts that die (d)", min = 0, max = 1, value = 0, step = 0.01 , sep ='')
+                    numericInput("d", "Fraction of symptomatic hosts that die (d)", min = 0, max = 1, value = 0, step = 0.01  )
              )
            ), #close fluidRow structure for input
            fluidRow(
              column(6,
-                    numericInput("mh", "birth rate of hosts (mh)", min = 0, max = 100, value = 0, step = 0.01 , sep ='')
+                    numericInput("mh", "birth rate of hosts (mh)", min = 0, max = 100, value = 0, step = 0.01  )
              ),
              column(6,
-                    numericInput("nh", "death rate of hosts (nh)", min = 0, max = 100, value = 0, step = 0.01 , sep ='')
+                    numericInput("nh", "death rate of hosts (nh)", min = 0, max = 100, value = 0, step = 0.01  )
              )
            ), #close fluidRow structure for input
            fluidRow(
              column(6,
-                    numericInput("mv", "birth rate of vectors (mv)", min = 0, max = 5000, value = 0, step = 1 , sep ='')
+                    numericInput("mv", "birth rate of vectors (mv)", min = 0, max = 5000, value = 0, step = 1  )
              ),
              column(6,
-                    numericInput("nv", "death rate of vectors (nv)", min = 0, max = 30, value = 0, step = 0.1 , sep ='')
+                    numericInput("nv", "death rate of vectors (nv)", min = 0, max = 30, value = 0, step = 0.1  )
              )
            ) #close fluidRow structure for input
            

@@ -118,24 +118,24 @@ ui <- fluidPage(
                     numericInput("Ir0", "initial number of resistant infected hosts", min = 0, max = 100, value = 0, step = 1)
              ),
              column(4,
-                    numericInput("bu", "Rate of transmission of untreated wild-type hosts", min = 0, max = 0.02, value = 0.001, step = 0.0001 , sep ='')
+                    numericInput("bu", "Rate of transmission of untreated wild-type hosts", min = 0, max = 0.02, value = 0.001, step = 0.0001  )
              )
            ), #close fluidRow structure for input
            fluidRow(
              column(4,
-                    numericInput("bt", "Rate of transmission of treated wild-type hosts", min = 0, max = 0.02, value = 0, step = 0.0001 , sep ='')
+                    numericInput("bt", "Rate of transmission of treated wild-type hosts", min = 0, max = 0.02, value = 0, step = 0.0001  )
              ),
              column(4,
-                    numericInput("br", "Rate of transmission of resistant hosts", min = 0, max = 0.02, value = 0, step = 0.0001 , sep ='')
+                    numericInput("br", "Rate of transmission of resistant hosts", min = 0, max = 0.02, value = 0, step = 0.0001  )
              ),
              column(4,
-                    numericInput("cu", "Fraction of resistant generation by untreated hosts", min = 0, max = 0.5, value = 0.0, step = 0.005, sep ='')
+                    numericInput("cu", "Fraction of resistant generation by untreated hosts", min = 0, max = 0.5, value = 0.0, step = 0.005 )
              )
            ), #close fluidRow structure for input
            
            fluidRow(
              column(4,
-                    numericInput("ct", "Fraction of resistant generation by treated hosts", min = 0, max = 0.5, value = 0.0, step = 0.005, sep ='')
+                    numericInput("ct", "Fraction of resistant generation by treated hosts", min = 0, max = 0.5, value = 0.0, step = 0.005 )
              ),
              column(4,
                     numericInput("gu", "Rate at which untreated hosts leave compartment", min = 0, max = 5, value = 0.5, step = 0.05)

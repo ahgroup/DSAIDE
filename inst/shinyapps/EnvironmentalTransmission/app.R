@@ -112,10 +112,10 @@ ui <- fluidPage(
            ), #close fluidRow structure for input
            fluidRow(
              column(6,
-                    numericInput("bd", "direct transmission rate (bd)", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
+                    numericInput("bd", "direct transmission rate (bd)", min = 0, max = 0.01, value = 0, step = 0.0001  )
              ),
              column(6,
-                    numericInput("be", "environmental transmission rate (be)", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
+                    numericInput("be", "environmental transmission rate (be)", min = 0, max = 0.01, value = 0, step = 0.0001  )
              )
            ), #close fluidRow structure for input
            fluidRow(
@@ -123,7 +123,7 @@ ui <- fluidPage(
                     numericInput("p", "Rate of pathogen shedding by infected hosts (p)", min = 0, max = 50, value = 1, step = 0.1)
              ),
              column(6,
-                    numericInput("c", "Rate of environmental pathogen decay (c) ", min = 0, max = 10, value = 0, step = 0.01 , sep ='')
+                    numericInput("c", "Rate of environmental pathogen decay (c) ", min = 0, max = 10, value = 0, step = 0.01  )
              )
            ), #close fluidRow structure for input
            fluidRow(
@@ -134,7 +134,7 @@ ui <- fluidPage(
                     numericInput("m", "Rate of new births (m)", min = 0, max = 100, value = 0, step = 1)
              ),
              column(4,
-                    numericInput("n", "Natural death rate (n)", min = 0, max = 0.02, value = 0, step = 0.0005, sep ='')
+                    numericInput("n", "Natural death rate (n)", min = 0, max = 0.02, value = 0, step = 0.0005 )
              )
            ) #close fluidRow structure for input
     ), #end sidebar column for inputs

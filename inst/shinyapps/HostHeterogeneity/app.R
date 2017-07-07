@@ -116,18 +116,18 @@ ui <- fluidPage(
            ), #close fluidRow structure for input
            fluidRow(
              column(6,
-                    numericInput("b11", "Rate of transmission between type 1  hosts", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
+                    numericInput("b11", "Rate of transmission between type 1  hosts", min = 0, max = 0.01, value = 0, step = 0.0001  )
              ),
              column(6,
-                    numericInput("b22", "Rate of transmission between type 2 hosts", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
+                    numericInput("b22", "Rate of transmission between type 2 hosts", min = 0, max = 0.01, value = 0, step = 0.0001  )
              )
            ), #close fluidRow structure for input
            fluidRow(
              column(6,
-                    numericInput("b12", "Rate of transmission from type 2 to type 1", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
+                    numericInput("b12", "Rate of transmission from type 2 to type 1", min = 0, max = 0.01, value = 0, step = 0.0001  )
              ),
              column(6,
-                    numericInput("b21", "Rate of transmission from type 1 to type 2", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
+                    numericInput("b21", "Rate of transmission from type 1 to type 2", min = 0, max = 0.01, value = 0, step = 0.0001  )
              )
            ), #close fluidRow structure for input
            fluidRow(

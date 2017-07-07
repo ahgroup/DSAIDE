@@ -109,10 +109,10 @@ ui <- fluidPage(
            ), #close fluidRow structure for input
            fluidRow(
              column(6,
-                    numericInput("bf", "frequency dependent transmission rate (bf)", min = 0, max = 10, value = 0, step = 0.1 , sep ='')
+                    numericInput("bf", "frequency dependent transmission rate (bf)", min = 0, max = 10, value = 0, step = 0.1  )
              ),
              column(6,
-                    numericInput("bd", "density dependent transmission rate (bd)", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
+                    numericInput("bd", "density dependent transmission rate (bd)", min = 0, max = 0.01, value = 0, step = 0.0001  )
              )
            ), #close fluidRow structure for input
            fluidRow(
@@ -125,13 +125,13 @@ ui <- fluidPage(
            ), #close fluidRow structure for input
            fluidRow(
              column(4,
-                    numericInput("w", "Rate of immunity loss (w)", min = 0, max = 0.1, value = 0.0, step = 0.01 , sep ='')
+                    numericInput("w", "Rate of immunity loss (w)", min = 0, max = 0.1, value = 0.0, step = 0.01  )
              ),
              column(4,
                     numericInput("m", "Rate of new births (m)", min = 0, max = 100, value = 0, step = 1)
              ),
              column(4,
-                    numericInput("n", "Natural death rate (n)", min = 0, max = 0.02, value = 0, step = 0.0005, sep ='')
+                    numericInput("n", "Natural death rate (n)", min = 0, max = 0.02, value = 0, step = 0.0005 )
              ),
              align = "center"
            ) #close fluidRow structure for input
