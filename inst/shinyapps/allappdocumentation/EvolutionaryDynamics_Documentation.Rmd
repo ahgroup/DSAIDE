@@ -23,19 +23,19 @@ For this module, we will explore a stochastic SIR-type model with 2 different pa
 
 ###Model Overview
 
-This model tracks susceptibles, wild-type infected untreated, wild-type infected treated, drug resistant infected and recovered hosts. 
+This model tracks susceptibles, wild-type infected untreated, wild-type infected treated, drug-resistant infected and recovered hosts. 
 The following compartments are included:  
 
 * **S** - uninfected and susceptible individuals 
 * **I~u~** - individuals who are infected with the wild-type/drug sensitive strain and not on treatment.
 * **I~t~** - individuals who are infected with the wild-type/drug sensitive strain and on treatment.
-* **I~r~** - individuals who are infected with the drug resistant strain. Treatment has no impact on those hosts.
+* **I~r~** - individuals who are infected with the drug-resistant strain. Treatment has no impact on those hosts.
 * **R** - recovered/removed individuals. Those individuals have recovered and are immune. 
 
 
 The included processes/mechanisms are the following:
 
-* Susceptible individuals (S) can become infected by untreated or treated hosts infected with the wild-type strain at rates _b~u~_ and _b~t~_. A fraction _f_ of those hosts is assumed to receive treatment, the remainder do not. Small fractions (_c~u~_ and _c~t~_) of wild-type infected untreated or treated hosts can generate resistant mutants and transmit those, leading to resistant infections.  
+* Susceptible individuals (S) can become infected by untreated or treated hosts infected with the wild-type strain at rates _b~u~_ and _b~t~_. A fraction _f_ of those hosts are assumed to receive treatment, while the remainder do not. Small fractions (_c~u~_ and _c~t~_) of wild-type infected untreated or treated hosts can generate resistant mutants and transmit those, leading to resistant infections.  
 * Susceptible individuals (S) can become infected by hosts infected with the resistant strain at rate _b~r~_. 
 * All infected hosts recover at some rate _g~i~_, with _i=u,t,r_. 
 * Recovered individuals are immune to reinfection. 
@@ -71,9 +71,9 @@ __All parameters described below and in the model are assumed to be in units of 
 * Set the model parameters such that it corresponds to the following setting: 
     * 500 susceptible and 1 initially untreated infected host. No other infected hosts.
     * Simulation duration approximately half a year.
-    * Assume that  untreated individuals transmit at rate 0.001, treated at rate 0.0005 and resistant at rate 0.0008. 
+    * Assume that untreated individuals transmit at rate 0.001, treated at rate 0.0005 and resistant at rate 0.0008. 
     * Assume that the duration of the infectious period for untreated is 5 days long, 4 days for treated and 5 days for resistant. 
-    * Set number of simulations to 20.
+    * Set the number of simulations to 20.
     
 * With parameters set to correspond to the scenario just described, run the simulation.
 * You should see some simulations with outbreaks and some without. For those with outbreaks, you should have around 10-100 susceptible left at the end.
@@ -93,15 +93,15 @@ __All parameters described below and in the model are assumed to be in units of 
 * Now turn on treatment. With settings as above, run the simulation with fraction receiving treatment at 0.25, 0.5, 0.75 and 1.
 
 ###Task 5: 
-* Repeat task 3 with number of simulations at 50. Record the average number of susceptibles at the end of each of the 5 treatment levels. 
+* Repeat task 3 with the number of simulations at 50. Record the average number of susceptibles at the end of each of the 5 treatment levels. 
 * Set rate of transmission of resistant hosts to the same as that for untreated hosts, 0.001 and turn resistance generation on to 0.3.
-* Repeat running 50 simulations at a time (you can repeat a few times to get a better idea about random variation). Record the average number of susceptibles at the end of each of the 5 treatment levels. 
-* In your head or on a piece of paper, sketch out the relation between treatment level and number of susceptibles left at the end in the absence and presence of resistance evolution. What do you conclude from that?
+* Repeat running 50 simulations at a time (you can repeat a few times to get a better idea of random variation). Record the average number of susceptibles at the end of each of the 5 treatment levels. 
+* In your head or on a piece of paper, sketch out the relationship between treatment level and the number of susceptibles left at the end in the absence and presence of resistance evolution. What do you conclude from that?
 
 ###Task 6: 
 * Keep exploring. 
 * Turn on resistance generation by treated and untreated. 
-* Explore how population size, rate of resistance generation and fitness of the different strains affect outcomes.
+* Explore how population size, the rate of resistance generation and fitness of the different strains affect outcomes.
 
 
 
