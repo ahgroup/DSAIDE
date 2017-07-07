@@ -22,7 +22,7 @@ For this module, we will explore an SEIR model. This model is implemented in a _
 
 ###Model Overview
 
-This model tracks susceptibles, exposed/pre-sympomatic, infected/symptomatic and recovered hosts. 
+This model tracks susceptibles, exposed/pre-symptomatic, infected/symptomatic and recovered hosts. 
 The following compartments are included:  
 
 * **S** - uninfected and susceptible individuals 
@@ -36,7 +36,7 @@ The included processes/mechanisms are the following:
 * Susceptible individuals (S) can become infected by pre-symptomatic/exposed (E) or symptomatic (I) hosts at rates _b~E~_ and _b~I~_. 
 * All infected hosts first enter the exposed/presymptomatic stage and leave the stage at rate _g~E~_, the inverse of which is the average time spent in this stage. 
 * All infected hosts go from the presymptomatic to the symptomatic stage and leave the stage at rate _g~I~_. 
-* Recovered individuals are initially immune to reinfection. They can lose their immunity at rate _w_ and return back to the susceptible compartment. 
+* Recovered individuals are initially immune to reinfection. They can lose their immunity at rate _w_ and return to the susceptible compartment. 
 * New susceptible hosts enter the system (are born) at rate _e_. Natural death occurs at rate _n_.
 
 
@@ -77,16 +77,16 @@ _Note: Some of the simulations might take a few seconds to run. While they run, 
     * Assume that only symptomatic individuals transmit, at rate 0.002. 
     * Assume that the duration of the symptomatic period is 1 month long, the duration of the presymptomatic period is half a month long. 
     * Assume immunity does not wane and that there are no births and deaths.
-    * Set number of simulations to 1.
+    * Set the number of simulations to 1.
     
 * With parameters set to correspond to the scenario just described, run the simulation.
-* If your run the simulation again without changing anything, what do you expect to see? Test your expectations by running the simulation several times.
+* If you rerun the simulation without changing anything, what do you expect to see? Test your expectations by running the simulation several times.
 * To speed things up, set the number of simulations to 20, run all 20.
 
 ###Task 2: 
-* In the previous task, you should have seen that occasionally, no outbreak occurs (because the infected person recovers/dies before they can infect others). Explore how the initial number of infected influences the chance of (not) getting outbreaks. Set initial number of infected to 5, everything as above. 
+* In the previous task, you should have seen that occasionally, no outbreak occurs (because the infected person recovers/dies before they can infect others). Explore how the initial number of infected influences the chance of (not) getting outbreaks. Set the initial number of infected to 5, everything as above. 
 * Run 20 outbreaks at a time, repeat a few times. Observe the number of times you do (not) get an outbreak.
-* Repeat with initial number of infected at 2,3, and 10.
+* Repeat with the initial number of infected at 2,3, and 10.
 
 
 ###Task 3: 
@@ -95,11 +95,11 @@ _Note: Some of the simulations might take a few seconds to run. While they run, 
 
 
 ###Task 4: 
-* Set susceptibles to 400, infected to 100, rate of immunity loss to 0.2, rate of symptomatic transmission to 0.005, no presymptomatic transmission. 
-* Set the duration of the symptomatic period to 1 month, the duration of the presymptomatic period to half a month. 
+* Set susceptibles to 400, infected to 100, the rate of immunity loss to 0.2, the rate of symptomatic transmission to 0.005, and no presymptomatic transmission. 
+* Set the duration of the symptomatic period to 1 month and the duration of the presymptomatic period to half a month. 
 * Simulation time about 5 years.
 * No births and deaths.
-* Set number of simulations to 1. Run the model several times.
+* Set the number of simulations to 1. Run the model several times.
 * You should see the stochastic version of a steady state, namely S-E-I-R values that fluctuate around some level.
     
 ###Task 5: 
@@ -127,7 +127,7 @@ _Note: Some of the simulations might take a few seconds to run. While they run, 
 
 ##Further Information {#shinytab4}
 * This app (and all others) are structured such that the Shiny part (the graphical interface you are currently using and the server-side function that goes with it) calls an underlying R script which runs the simulation for the model of interest and returns the results.
-* For this app, the underlying function running the simulation is called `simulate_stochastic.R`. You can call this function directly, without going through the shiny app. Type `?simulate_stochastic` into the R console for more information (you need to exit the graphical interace first or start a new R session). If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself. 
+* For this app, the underlying function running the simulation is called `simulate_stochastic.R`. You can call this function directly, without going through the shiny app. Type `?simulate_stochastic` into the R console for more information (you need to exit the graphical interface first or start a new R session). If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself. 
 * You could also modify this R function for your own purposes - though that requires some more R coding knowledge. 
 * To get a quick start explaining how to interact with the simulator functions directly, read the vignette for the package (type `vignette('DSAIDE')` into the R console).
 * For some further reading concerning stochastic dynamics of ID, see e.g. [@lloyd-smith05a, @black66, @keeling97].
