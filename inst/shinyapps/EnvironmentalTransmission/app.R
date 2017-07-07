@@ -22,14 +22,14 @@ refresh <- function(input, output){
     g  = isolate(input$g);
     bd = isolate(input$bd);
     be = isolate(input$be);
-    b  = isolate(input$b);
+    m  = isolate(input$m);
     n  = isolate(input$n);
     c  = isolate(input$c);
     p  = isolate(input$p);
     
     
     # Call the ODE solver with the given parameters
-    result <- simulate_environmentaltransmission(S = S0, I = I0, E = E0, tmax = tmax, bd = bd, be = be, b = b, n = n, g = g, p = p, c = c)
+    result <- simulate_environmentaltransmission(S = S0, I = I0, E = E0, tmax = tmax, bd = bd, be = be, m = m, n = n, g = g, p = p, c = c)
     
     return(list(result)) #this is returned as the res variable
   })
@@ -65,23 +65,22 @@ server <- function(input, output, session) {
 
 #This is the UI part of the shiny App
 ui <- fluidPage(
-  includeCSS("../shinystyle.css"),
+  includeCSS("../styles/dsaide.css"),
   
   tags$head( tags$script(src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML", type = 'text/javascript') ),
   
   div( includeHTML("www/header.html"), align = "center"),
   h1('Environmental Transmission App', align = "center", style = "background-color:#123c66; color:#fff"),
   
-  #################################
-  #end section to add buttons
+  #section to add buttons
   fluidRow(
     column(6,
-           div( style="text-align:center", actionButton("submitBtn", "Run Simulation", style="color: #000000; background-color: #D2FFE2")  )
+           actionButton("submitBtn", "Run Simulation", class="submitbutton")  
     ),
     column(6,
-           div( style="text-align:center", actionButton("exitBtn", "Exit App", style="color: #000000; background-color: #BDCCD9") )
-    )
-    
+           actionButton("exitBtn", "Exit App", class="exitbutton")
+    ),
+    align = "center"
   ), #end section to add buttons
   
   tags$hr(),
@@ -108,34 +107,34 @@ ui <- fluidPage(
                     sliderInput("E0", "initial amount of environmental pathogen", min = 0, max = 100, value = 0, step = 1)
              ),
              column(6,
-                    sliderInput("tmax", "Maximum simulation time (months)", min = 1, max = 500, value = 100, step = 1)
+                    sliderInput("tmax", "Maximum simulation time", min = 1, max = 500, value = 100, step = 1)
              )
            ), #close fluidRow structure for input
            fluidRow(
              column(6,
-                    sliderInput("bd", "direct transmission rate (bd, 1/month)", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
+                    sliderInput("bd", "direct transmission rate (bd)", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
              ),
              column(6,
-                    sliderInput("be", "environmental transmission rate (be, 1/month)", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
+                    sliderInput("be", "environmental transmission rate (be)", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
              )
            ), #close fluidRow structure for input
            fluidRow(
              column(6,
-                    sliderInput("p", "Rate of pathogen shedding by infected hosts (p, 1/month)", min = 0, max = 50, value = 1, step = 0.1)
+                    sliderInput("p", "Rate of pathogen shedding by infected hosts (p)", min = 0, max = 50, value = 1, step = 0.1)
              ),
              column(6,
-                    sliderInput("c", "Rate of environmental pathogen decay (c, 1/month) ", min = 0, max = 10, value = 0, step = 0.01 , sep ='')
+                    sliderInput("c", "Rate of environmental pathogen decay (c) ", min = 0, max = 10, value = 0, step = 0.01 , sep ='')
              )
            ), #close fluidRow structure for input
            fluidRow(
              column(4,
-                    sliderInput("g", "Rate of recovery of infected hosts (g, 1/month)", min = 0, max = 2, value = 0.5, step = 0.1)
+                    sliderInput("g", "Rate of recovery of infected hosts (g)", min = 0, max = 2, value = 0.5, step = 0.1)
              ),
              column(4,
-                    sliderInput("b", "Monthly rate of new births (b)", min = 0, max = 100, value = 0, step = 1)
+                    sliderInput("m", "Rate of new births (m)", min = 0, max = 100, value = 0, step = 1)
              ),
              column(4,
-                    sliderInput("n", "Natural death rate (n, 1/month)", min = 0, max = 0.02, value = 0, step = 0.0005, sep ='')
+                    sliderInput("n", "Natural death rate (n)", min = 0, max = 0.02, value = 0, step = 0.0005, sep ='')
              )
            ) #close fluidRow structure for input
     ), #end sidebar column for inputs

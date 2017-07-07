@@ -18,4 +18,3 @@ Run this function with no arguments to start the main menu (a shiny App) for DSA
 \author{
 Andreas Handel, Sina Solaimanpour
 }
-

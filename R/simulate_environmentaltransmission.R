@@ -8,7 +8,7 @@ environmentaltransmissioneq <- function(t, y, parms)
     {
       
       #the ordinary differential equations
-      dS =  - S * (bd * I + be *  E) + b - n * S; #susceptibles
+      dS = m  - S * (bd * I + be *  E)  - n * S; #susceptibles
       dI =  S * (bd * I + be * E)  - n * I - g * I #infected, symptomatic
       dR =   g * I - n * R #recovered, immune
       dE = p * I - c * E; #pathogen in environment
@@ -30,7 +30,7 @@ environmentaltransmissioneq <- function(t, y, parms)
 #' @param tmax maximum simulation time, units of months
 #' @param bd rate of direct transmission 
 #' @param be rate of environmental transmission 
-#' @param b rate of births of hosts
+#' @param m rate of births of hosts
 #' @param n the rate of natural death of hosts
 #' @param g the rate at which infected hosts recover/die
 #' @param p the rate at which infected host shed pathogen in the enviroment
@@ -61,7 +61,7 @@ environmentaltransmissioneq <- function(t, y, parms)
 
 
 
-simulate_environmentaltransmission <- function(S0 = 1e3, I0 = 1, E0 = 0, tmax = 120, bd = 0.01, be = 0,  b = 0, n = 0, g = 1, p = 0 ,c = 0)
+simulate_environmentaltransmission <- function(S0 = 1e3, I0 = 1, E0 = 0, tmax = 120, bd = 0.01, be = 0,  m = 0, n = 0, g = 1, p = 0 ,c = 0)
 {
   ############################################################
   Y0 = c(S = S0, I = I0, R = 0, E = E0);  #combine initial conditions into a vector
@@ -70,7 +70,7 @@ simulate_environmentaltransmission <- function(S0 = 1e3, I0 = 1, E0 = 0, tmax = 
 
   ############################################################
   #vector of parameters which is sent to the ODE function  
-  pars=c(bd = bd, be = be, b = b, n = n, g = g, p = p, c = c); 
+  pars=c(bd = bd, be = be, m = m, n = n, g = g, p = p, c = c); 
 
   #this line runs the simulation, i.e. integrates the differential equations describing the infection process
   #the result is saved in the odeoutput matrix, with the 1st column the time, the remaining columns the values for the variables

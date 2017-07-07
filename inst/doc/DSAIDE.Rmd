@@ -1,111 +1,162 @@
 ---
 title: "DSAIDE Package Tutorial"
-author: "Andreas Handel"
+author: "<a href=http://handelgroup.uga.edu>Andreas Handel</a>"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output:
+  rmarkdown::html_vignette:
+    fig_caption: yes
+    css: dsaidevignettestyle.css
 vignette: >
   %\VignetteIndexEntry{DSAIDE}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+bibliography: vignetterefs.bib
 ---
 
 
 
-
-## Introduction
-DSAIDE stands for Dynamical Systems Approaches to Infectious Disease Epidemiology.
-
-The idea behind this package is to give students and others interested in infectious diseases at the population level a tool that allows them to learn about patterns and features seen in infectious disease epidemiology using a dynamical systems approach.
-
+## Summary
+_Dynamical Systems Approaches to Infectious Disease Epidemiology (DSAIDE)_ is an R package that allows individuals to explore and study concepts of infectious disease epidemiology using dynamical systems models, without the need to read or write computer code.
+The idea behind the specific structure of the package is that it uses mathematical models to teach infectious disease epidemiology concepts, but does not require the user to write any computer code.
+Another idea is that if a user wants to continue on their journey of learning modeling and infectious disease epidemiology, they can do so relatively seamlessly with this package by directly accessing and modifying the underlying code. The different use cases for the package are described below.
 
 
 ## Package description
 
-The package consists of several Shiny Apps that allow the simulation and exploration of different topics in infectious disease epidemiology. 
+The package consists of several simulations/apps that allow for the simulation and exploration of different topics in infectious disease epidemiology. 
 
-There are currently 11 simulations/apps available. The topics covered by the apps are:
+The underlying models are written as compartmental dynamical models, either deterministic using differential equations (deSolve package) or stochastic using a Gillespie-type approach (adaptivetau package). A graphical user interface is wrapped around each simulation/app. The graphical user interfaces are written using the functionality of the R Shiny package. This allows exploration of models and infectious disease epidemiology concepts without the need to write any code. At the same time, the package is structured in a modular way that should allow those interested in the actual models and learning R coding to easily move from one stage to another.
 
-
-
-Each App is meant to be fully self-explanatory. The app contains a description of the model, a list of tasks students should try, and information for further details. 
+Each app is meant to be fully self-explanatory and contains a description of the model, a list of tasks the user could try, and information on further details and readings. 
 
 
-The underlying models are written mostly as deterministic, compartmental ordinary differential equations. Some models are written as stochastic equivalents. By wrapping the models around a graphical user interface, it allows exploration of models and infectious disease patterns without the need to write R code.
-
-At the same time, the package is structured in a modular way that should allow those interested in the actual models and learning R coding to easily move from one stage to another.
+The following simulations/apps are currently available:
 
 
 
-##Interacting with and using the package
-The following sections describe the main envisioned ways the content in this R package can be used and extended. The idea is that everyone starts at level 1, and then depending on their needs and interests, can decide to move on to the next level.
+| App Name                | Model      | Topic Covered | 
+|------                   | --------   |---------------|
+|   ID Dynamics Intro     | 3 compartment (SIR) ODE model | A first introduction to a simple compartmental SIR model. Allows simulation of a single outbreak for different parameter and initial condition settings.       |  
+|   Characteristics of ID     | 6 compartment ODE model | The potential role of different disease states (e.g. pre-symptomatic, asymptomatic, symptomatic) on ID dynamics. |  
+|   ID Patterns     | 6 compartment ODE model. Includes births-deaths, waning immunity, seasonality. | Different ID patterns (single outbreak, oscillations, steady states). |  
+|   Direct Transmission   | 3 compartment ODE model. Births-deaths and waning immunity are included. | The differences between density-dependent and frequency-dependent transmission and their impact on ID dynamics.  |  
+|   Environmental Transmission   | 4 compartment ODE model. Includes explicit environmental stage. Births-deaths and waning immunity are included. | The impact of environmental shedding, decay and transmission.  |  
+|   Vector Transmission   | 5 compartment ODE model. Includes susceptible and infected vectors and their dynamics. Births-deaths for vectors and waning immunity for hosts are included. | Exploration of a simple vector-borne transmission model. |  
+|   Reproductive Number  | 3 compartment ODE model.  Includes vaccination of population at beginning of simulation. Births-deaths and waning immunity are included. | The reproductive number concept and how to estimate it from (simulated) data. |  
+|   ID Control  | 9 compartment ODE model. An environmental and 2 vector stages as well as 6 host stages. | The impact of different control measures for different types of ID. |  
+|   Host Heterogeneity | 6 compartment ODE model. 2x SIR for 2 different hosts. | The impact of host heterogeneity and core groups on ID dynamics and control. |  
+|   Stochastic dynamics  | 4 compartment (SEIR) stochastic model. | The impact of stochasticity on dynamics, the phenomenon of ID extinction. |  
+|   Evolutionary dynamics  | 5 compartment stochastic model. Untreated and treated hosts infected with wild-type, and hosts infected with resistant strain. | Interaction between drug treatment and evolution/emergence of drug resistance. |  
 
 
-###Level 1: Interactive use through the Shiny user interface
 
-The interactive exploration of the models through the Shiny user interfacie is the main intended use of this package. The steps to get there are simple. Install the package (only needs to be done once):
+## Intended audience and goal of the package
+
+The audience for this app is individuals interested in infectious disease epidemiology from a _systems/modeling perspective_. For instance the apps allow exploration of concepts such as _patterns of infectious disease incidence_, _reproductive number concept_, _extinctions and critical community size_, etc. All these concepts are not well described by applying classical epidemiology approaches (i.e. assuming independence between individulas) to infectious diseases, but can readily by understood using a systems/modeling approach.
+
+The documentation for each app tries to be complete and self-contained. However, the information provided inside each app is unlikely sufficient for a complete novice to fully understand the modeling and infectious disease material. 
+
+A highly motivated user could likely learn the modeling and infectious disease material covered by the apps on their own by working through some of the references provided for each app and/or general infectious disease modeling textbooks (e.g. [@keeling08,@vynnycky10]). 
+
+Another intended use is for this package to be part of a course on infectious disease epidemiology/modeling.   
+
+
+
+
+## Using the package
+
+The following sections describe the main envisioned ways the content in this R package can be used and extended. The idea is that everyone starts at level 1, and then depending on individual needs and interests, can decide to move on to the next level.
+
+
+### Level 1: Interactive use through the graphical user interface
+
+The interactive exploration of the models and infectious disease concepts through the graphical user interface is the main intended use of this package. The steps to get there are simple. 
+
+#### Install the package 
+
+From CRAN, the package can be installed via
 ```{r, eval=FALSE, echo=TRUE}
 install.packages('DSAIDE')
 ```
 
-Then load the package:
-```{r, eval=TRUE, echo=TRUE}
-library("DSAIDE")
+To get a more up-to-date version of the package (but possibly a bit more buggy), installation from github using the `devtools` package is also possible:
+```{r, eval=FALSE, echo=TRUE}
+install.packages('devtools')
+library('devtools')
+install_github("ahgroup/DSAIDE")
 ```
 
-Finally, call the main menu for the package:
+Package installation is a one-time process, unless R itself is being upgraded/reinstalled.
+
+#### Load and run the package
+
+Every time a new R/Rstudio session is started, the package needs to be loaded: 
+```{r, eval=FALSE, echo=TRUE}
+library('DSAIDE')
+```
+followed by starting the main menu for the package:
 ```{r, eval=FALSE, echo=TRUE}
 dsaidemenu()
 ```
 
-This will bring up a simple graphical menu from which the user can select each App. After exploring an App, the user returns to the main menu and eventually exits the main menu. In this way, no coding experience is needed, the student can fully focus on learning the infectious disease dynamics related topics.
-
-Each app contains the information needed to understand the underlying model, and has a list of (non exhaustive) tasks that a student can try to get a better understanding of the topic meant to be covered by the App.  
+This will bring up a graphical menu from which one can select each app. Each app contains the information needed to understand the underlying model, and has a list of (non exhaustive) suggested tasks to learn about the topic covered by the app. After exploring an app, the user returns to the main menu and eventually exits the main menu and closes the R session. No code needs to be written, the user can fully focus on learning the infectious disease dynamics related concepts and topics that are covered by the different apps.
 
 
 
-
-###Level 2: Supplementing simulations with custom code
-Each App is structured in such a way that the underlying model/simulation is a stand-alone function. This simulator function can be called directly, without going through the Shiny App. Consider as example the first App, called "ID Dynamics Intro". The model is a simple SIR model. The function running this model is called `simulate_introduction.R`, the user can learn about the inputs and outputs of the function by looking at its documentation
-```{r eval=FALSE, echo=TRUE}
-?simulate_introduction
+### Level 2: Directly interacting with the simulation functions
+```{r, eval=TRUE, echo=FALSE, message=FALSE}
+library('DSAIDE')
 ```
 
-The help file explains that one can run the simulation by specifying initial number of susceptibles and infected, the duration for which the simulation should be run, and the rates of infection and recovery. Most models do not have inherent time units and are set by the user based on choices for parameters. It is important to ensure that all quantities that have time units (here, _tmax_, _g_ and _b_) are expressed in the same time units, e.g. days or months (or the inverse of those units for rates).   
+As stated above, the exploration of the models and infectious disease topics through the graphical interface is the main intended use of the package. However, the package is structured such that it is possible, without too much effort, to interact with the code more directly. This will provide more flexibility but will require writing some code.
+
+To facilitate direct interaction and modification of the underlying simulations, each app is structured in such a way that the underlying model/simulation is a stand-alone function. This simulator function can be called directly, without going through the graphical interface. The 'Further Information' tab inside each app provides the name of the corresponding simulator function.
+
+Consider as example the first app, called "ID Dynamics Intro". The simulator function for this model is called `simulate_introduction.R`, the user can learn about the inputs and outputs of the function by looking at its documentation 
+```{r eval=FALSE, echo=TRUE}
+help('simulate_introduction')
+```
+
+The help file explains that one can run the simulation by specifying initial number of susceptibles and infected, the duration for which the simulation should be run, and the infection and recovery parameters. Unless explicitly specified, the models do not have inherent time units. Instead, those are set by the user based on choices for parameters. It is important to ensure that all quantities have time units. For this simulation, _tmax_, _g_, and _b_ are expressed in the same time units, e.g. days or months (or the inverse of those units for the rate parameters). Each parameter has some default. The user can modify those default settings. For instance one can call the simulator with the following settings, overwriting the defaults:  
 
 ```{r, eval=TRUE, echo=TRUE}
-result <- simulate_introduction(S0 = 1000, I0 = 1, tmax = 300, g = 0.5,  b = 1/1000)
+result <- simulate_introduction(S0 = 500, I0 = 5, tmax = 100, g = 0.1,  b = 1/2500)
 ```
-Calling the simulation function produces time-series for the dynamics of each of the variables that are tracked. 
-The Shiny app automatically produce plots of these time-series. Users can produce their own plots, e.g. such as
+
+Calling the simulation function execuctes the underlying dynamical model (here a simple 3 compartment ODE model, as described in the "Model" section of the app). The simulation function produces and returns time-series for the dynamics of each of the variables that are tracked. Users can produce their own plots, e.g. plotting susceptible as function of time:
+
 ```{r, eval=TRUE, echo=TRUE}
 plot(result[,"time"],result[,"S"],xlab='Time',ylab='Number Susceptible',type='l')
 ```
 
-The more interesting use of these simulator functions outside of the Shiny App is that it allows additional exploration of the models. For instance it is possible to systematically loop over a parameter, record some quantity of interest for each run, and report the result at the end. The following is a simple example, where we loop over different values of the recovery rate and record the peak of the outbreak each time:
+The ability to call the simulation functions directly instead of going through the graphical interface allows additional exploration of the models. For instance if one wanted to explore the behavior of a model systematically for different values of a given parameter, this would need to be done manually if run through the graphical interface. Calling the function directly allows one to automate this by wrapping the function inside a loop over the parameter of interest, recording some quantity of interest for each run, and report the result at the end. The following is a simple example, showing a loop over different values of the recovery rate and recording the peak of the outbreak each time, with the final result _peak of outbreak as function of recovery time_ shown in a plot:
 
 ```{r, eval=TRUE, echo=TRUE}
-gvec = seq(0.1,2,by=0.1) #values of g which we went to run the simulation for
-peak = rep(0,length(gvec)) #this will hold the peak values for each g
+gvec = seq(0.01,0.3,by=0.01) #values of recovery rate, g, for which to run the simulation 
+peak = rep(0,length(gvec)) #this will record the peak values for each g
 for (n in 1:length(gvec))
 {
-  result <- simulate_introduction(S0 = 1000, I0 = 1, tmax = 300, g = gvec[n],  b = 1/1000)
-  peak[n] <- max(result[,"I"])
+  #call the simulator function with different values of g each time
+  result <- simulate_introduction(S0 = 500, I0 = 5, tmax = 200, g = gvec[n],  b = 1/2500)
+  peak[n] <- max(result[,"I"]) #record max number of infected for each value of g
 }
+#plot final result
 plot(gvec,peak,type='p',xlab='Rate of recovery',ylab='Max number of infected')
 ```
 
-Thus, the user can add their own custom code to the existing simulator functions and with a few lines of extra code analyze and explore many more questions and scenarios than those accessible through the Shiny App interface. This gives the user a lot more flexibility using these simulations, but requires being able to write some R code to interface with the supplied simulator functions. 
+Thus, the user can add their own custom code to the existing simulator functions and with a few lines of extra code analyze and explore many more questions and scenarios than those accessible through the graphical interface. This provides a lot more flexibility, but requires writing some R code to interface with the supplied simulator functions. 
 
 
-###Level 3: Modifying simulations
-Finally, there is an option for the user to access and modify the underlying simulator functions directly. To facilitate this, all simulator functions are in a subdirectory called _simulatorfunctions_ inside the DSAIDE package folder. You might have to search your computer to see where R installed the package. 
+### Level 3: Modifying the simulation functions
+As a next step, it is possible to not only interact with the simulation functions, but instead directly access the code and modify the underlying simulator functions. To make this easy, copies of all simulator functions are in a subdirectory called _simulatorfunctions_ inside the DSAIDE package folder. Each function in that folder starts with `simulate_`. To find the location where R installed the package, a search on your computer might be needed. 
 
-I suggest that you copy the whole folder to some new directory and then modify the function you are interested in. 
-All simulator functions are (hopefully) well documented. So as long as you are familiar with R coding, you should have no problem modifying the function to your needs. After editing the simulator function to suit your needs, you will likely also need to write additional code to interact with your modified function as described in _Level 2_.
+While the functions in this subfolder are not used to run the code in the DSAIDE package, and one could therefore edit them without breaking the package, it is better to make a copy of the whole folder somewhere else. This way the chance of overwriting any modifications - if for instance the package is being re-installed - are reduced.
 
-The following provides a simple example of this process. Let's assume for simplicity that you want to modify the simple SIR model encoded in simulate_introduction.R. You find the file, make a copy - let's call it mysimulator.R and edit. Say you want to include waning immunity with recovered returning to the susceptible class at rate _w_. 
+All simulator functions are (hopefully) well documented. Some basic to intermediate level of R coding experience is likely required to successfully modify the functions. In addition to modifying the simulator function of interest, some additional code to interact with the modified function (as described in _Level 2_) is likely required.
 
-You will need to modify the following lines in your code:
+The following provides a simple example of this process of modifying a simulator function and exploring its results. Assume that we want to modify the simple SIR model encoded in `simulate_introduction.R`. After finding the file and making a copy (let's call the modified function `mysimulator.R`), we can make modifications. Say we want to include waning immunity with recovered returning to the susceptible class at rate _w_. 
+
+We will need to modify the following lines of code:
 
 old:
 ```{r eval=FALSE, echo=TRUE}
@@ -143,24 +194,34 @@ dR = g * I -  w * R; #recovered
 ```
 
 
-If you now wanted to explore how different rates of waning immunity impact the maximum peak size over all outbreaks, you can for instance run:
+We could now for instance explore how different rates of waning immunity impact the maximum peak size over all outbreaks. This requires a slight modification of the code shown above in _Level 2_ as follows:
 
 
-```{r eval=FALSE, echo=TRUE}
-wvec = seq(0,2,by=0.1) #values of w which we went to run the simulation for
-peak = rep(0,length(wvec)) #this will hold the peak values for each w
+```{r eval=TRUE, echo=TRUE}
+source('mysimulator.R') #to initialize the new function - it needs to be in same directory as this code
+wvec = seq(0,1,by=0.02) #values of immunity loss rate, w, for which to run the simulation 
+peak = rep(0,length(wvec)) #this will record the peak values for each g
 for (n in 1:length(wvec))
 {
   result <- mysimulator(S0 = 1000, I0 = 1, tmax = 300, g = 0.5,  b = 1/1000, w = wvec[n])
   peak[n] <- max(result[,"I"])
 }
-plot(wvec,peak,type='p')
+plot(wvec,peak,type='p',xlab='Rate of waning immunity',ylab='Max number of infected')
 ```
 
 
 
 
-###Level 4: Developing a new Shiny app
-I would love to add further Shiny apps to the package. I have tried to make it (hopefully) easy to develop further Shiny Apps. There is some information in the package to help with development in a sub-folder called _docsfordevelopers_. Essentially, each app consists of a simulator function and a shiny App function which calls the simulator function, together with documentation for the App. Developing a new App then consists of writing at minimum 2 R functions (_simulate_NNN.R_ and the corresponding _app.R_) and filling the provided Rmd template for the documentation, then running a few functions to process everything. See the information in the _docsfordevelopers_ folder for more details. 
+## Developing and contributing new apps to the package
+
+The package is built in a way that makes it (hopefully) easy for others to contribute new simulations/apps. To that end, the package contains a subfolder called _docsfordevelopers_, which provides information on how the apps are structured and how to add new ones. In brief, each app consists of a simulator function and a shiny app function which calls the simulator function. Further HTML files provide the documentation displayed in each app. Developing a new app consists of writing (at least) 2 R functions (_simulate_NNNNNN.R_ and the corresponding _app.R_) and filling the provided RMarkdown template for the documentation, then running a few functions to process everything. 
+
+The information in the _docsfordevelopers_ folder contains more details and is hopefully complete enough to allow fairly easy development and contribution to the package. If you are interested in contributing further apps, I suggest you get in touch with me, either by email (ahandel@uga.edu) or through the github site for the package (https://github.com/ahgroup/DSAIDE).
 
 
+## Acknowledgements
+ 
+The following individuals contributed to this package: Sina Solaimanpour, Brian McKay, John Rossow.
+
+
+## References

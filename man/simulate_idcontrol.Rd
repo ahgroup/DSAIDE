@@ -7,8 +7,7 @@
 simulate_idcontrol(S0 = 1000, I0 = 1, E0 = 0, Sv0 = 1000, Iv0 = 0,
   tmax = 300, bP = 0, bA = 0, bI = 1/1000, bE = 0, bv = 1/1000,
   bh = 1/1000, gP = 0.5, gA = 0.5, gI = 0.5, pA = 1, pI = 10,
-  c = 1, f = 0, d = 0, w = 0, birthh = 0, deathh = 0, birthv = 0,
-  deathv = 0)
+  c = 1, f = 0, d = 0, w = 0, mh = 0, nh = 0, mv = 0, nv = 0)
 }
 \arguments{
 \item{S0}{initial number of susceptible hosts}
@@ -53,13 +52,13 @@ simulate_idcontrol(S0 = 1000, I0 = 1, E0 = 0, Sv0 = 1000, Iv0 = 0,
 
 \item{w}{rate at which recovered persons loose immunity and return to susceptible state}
 
-\item{birthh}{the rate at which new hosts enter the model (are born)}
+\item{mh}{the rate at which new hosts enter the model (are born)}
 
-\item{deathh}{the rate of natural death of hosts (the inverse it the average lifespan)}
+\item{nh}{the rate of natural death of hosts (the inverse it the average lifespan)}
 
-\item{birthv}{the rate at which new vectors enter the model (are born)}
+\item{mv}{the rate at which new vectors enter the model (are born)}
 
-\item{deathv}{the rate of natural death of vectors (the inverse it the average lifespan)}
+\item{nv}{the rate of natural death of vectors (the inverse it the average lifespan)}
 }
 \value{
 This function returns the simulation result as obtained from a call
@@ -86,6 +85,7 @@ A compartmental ID model with several states/compartments
   something nonsensical (e.g. have I0 > PopSize or any negative values or fractions > 1),
   the code will likely abort with an error message
 }
+
 \examples{
   # To run the simulation with default parameters just call this function
   result <- simulate_idcontrol()
@@ -94,9 +94,6 @@ A compartmental ID model with several states/compartments
   # You should then use the simulation result returned from the function, e.g. like this:
   plot(result[,1],result[,2],xlab='Time',ylab='Number Susceptible',type='l')
 }
-\author{
-Andreas Handel
-}
 \references{
 See e.g. Keeling and Rohani 2008 for SIR models and the
   documentation for the deSolve package for details on ODE solvers
@@ -104,4 +101,6 @@ See e.g. Keeling and Rohani 2008 for SIR models and the
 \seealso{
 The UI of the shiny app 'IDPatterns', which is part of this package, contains more details on the model
 }
-
+\author{
+Andreas Handel
+}

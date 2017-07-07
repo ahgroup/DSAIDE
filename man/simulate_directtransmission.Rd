@@ -5,7 +5,7 @@
 \title{Simulation of a compartmental infectious disease transmission model illustrating different types of direct transmission}
 \usage{
 simulate_directtransmission(PopSize = 1000, I0 = 1, tmax = 120,
-  scenario = 1, bd = 0.01, bf = 0, A = 1, b = 0, n = 0, g = 0.1,
+  scenario = 1, bd = 0.01, bf = 0, A = 1, m = 0, n = 0, g = 0.1,
   w = 0)
 }
 \arguments{
@@ -23,7 +23,7 @@ simulate_directtransmission(PopSize = 1000, I0 = 1, tmax = 120,
 
 \item{A}{the size of the area in which the hosts are assumed to reside/interact}
 
-\item{b}{the rate of births}
+\item{m}{the rate of births}
 
 \item{n}{the rate of natural deaths}
 
@@ -50,6 +50,7 @@ A compartmental ID model with several states/compartments
   something nonsensical (e.g. any negative values or fractions > 1),
   the code will likely abort with an error message
 }
+
 \examples{
   # To run the simulation with default parameters just call this function
   result <- simulate_directtransmission()
@@ -58,9 +59,6 @@ A compartmental ID model with several states/compartments
   # You should then use the simulation result returned from the function, e.g. like this:
   plot(result[,1],result[,2],xlab='Time',ylab='Number Susceptible',type='l')
 }
-\author{
-Andreas Handel
-}
 \references{
 See e.g. Keeling and Rohani 2008 for SIR models and the
   documentation for the deSolve package for details on ODE solvers
@@ -68,4 +66,6 @@ See e.g. Keeling and Rohani 2008 for SIR models and the
 \seealso{
 The UI of the shiny app 'DirectTransmission', which is part of this package, contains more details on the model
 }
-
+\author{
+Andreas Handel
+}

@@ -2,7 +2,7 @@
 #This is the Shiny file for the ID Patterns App
 #written by Andreas Handel and Sina Solaimanpour  
 #maintained by Andreas Handel (ahandel@uga.edu)
-#last updated 10/13/2016
+#last updated 7/13/2017
 ############################################################
 
 #the server-side function with the main functionality
@@ -32,13 +32,13 @@ refresh <- function(input, output){
     d = isolate(input$d);
     w = isolate(input$w);
     
-    lambda = isolate(input$lambda)
+    m = isolate(input$m)
     n = isolate(input$n);
-    sigma = isolate(input$sigma)
+    s = isolate(input$s)
     
     
     # Call the ODE solver with the given parameters
-    result <- simulate_idpatterns(PopSize = PopSize, P0 = P0, tmax = tmax, bP = bP, bA = bA, bI = bI, gP = gP , gA = gA, gI = gI, f = f, d = d, w = w, lambda = lambda, n = n, sigma = sigma)
+    result <- simulate_idpatterns(PopSize = PopSize, P0 = P0, tmax = tmax, bP = bP, bA = bA, bI = bI, gP = gP , gA = gA, gI = gI, f = f, d = d, w = w, m = m, n = n, s = s)
     
     return(list(result))
   })
@@ -72,7 +72,7 @@ server <- function(input, output, session) {
 
 #This is the UI part of the shiny App
 ui <- fluidPage(
-  includeCSS("../shinystyle.css"),
+  includeCSS("../styles/dsaide.css"),
   #add header and title
   tags$head( tags$script(src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML", type = 'text/javascript') ),
   div( includeHTML("www/header.html"), align = "center"),
@@ -103,38 +103,38 @@ ui <- fluidPage(
            
            fluidRow(
              column(4,
-                    sliderInput("PopSize", "Population Size", min = 1000, max = 5000, value = 1000, step = 500)
+                    sliderInput("PopSize", "Population Size (PopSize)", min = 1000, max = 5000, value = 1000, step = 500)
              ),
              column(4,
-                    sliderInput("P0", "Initial number of presymptomatic hosts", min = 0, max = 100, value = 0, step = 1)
+                    sliderInput("P0", "Initial number of presymptomatic hosts (P0)", min = 0, max = 100, value = 0, step = 1)
              ),
              column(4,
-                    sliderInput("tmax", "Maximum simulation time (months)", min = 6, max = 12000, value = 120, step = 12)
+                    sliderInput("tmax", "Maximum simulation time (tmax)", min = 6, max = 12000, value = 120, step = 12)
              ),
              align = "center"
            ), #close fluidRow structure for input
            
            fluidRow(
              column(4,
-                    sliderInput("bP", "Level/Rate of transmission by presymptomatic hosts (bP, 1/months)", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
+                    sliderInput("bP", "Level/Rate of transmission by presymptomatic hosts (bP)", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
              ),
              column(4,
-                    sliderInput("bA", "Level/Rate of transmission by asymptomatic hosts (bA, 1/months)", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
+                    sliderInput("bA", "Level/Rate of transmission by asymptomatic hosts (bA)", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
              ),
              column(4,
-                    sliderInput("bI", "Level/Rate of transmission by symptomatic hosts (bI, 1/months)", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
+                    sliderInput("bI", "Level/Rate of transmission by symptomatic hosts (bI)", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
              ),
              align = "center"
            ), #close fluidRow structure for input
            fluidRow(
              column(4,
-                    sliderInput("gP", "Rate at which presymptomatic hosts leave compartment (gP, 1/months)", min = 0, max = 5, value = 0.5, step = 0.1)
+                    sliderInput("gP", "Rate at which presymptomatic hosts leave compartment (gP,)", min = 0, max = 5, value = 0.5, step = 0.1)
              ),
              column(4,
-                    sliderInput("gA", "Rate at which asymptomatic hosts leave compartment (gA, 1/months)", min = 0, max = 5, value = 0.5, step = 0.1)
+                    sliderInput("gA", "Rate at which asymptomatic hosts leave compartment (gA)", min = 0, max = 5, value = 0.5, step = 0.1)
              ),
              column(4,
-                    sliderInput("gI", "Rate at which symptomatic hosts leave compartment (gI, 1/months)", min = 0, max = 5, value = 0.5, step = 0.1)
+                    sliderInput("gI", "Rate at which symptomatic hosts leave compartment (gI)", min = 0, max = 5, value = 0.5, step = 0.1)
              ),
              align = "center"
            ), #close fluidRow structure for input
@@ -146,19 +146,19 @@ ui <- fluidPage(
                     sliderInput("d", "Fraction of deaths in symptomatic hosts (d)", min = 0, max = 1, value = 0, step = 0.1)
              ),
              column(4,
-                    sliderInput("w", "Rate of immunity loss (w, 1/months)", min = 0, max = 0.5, value = 0.0, step = 0.01 , sep ='')
+                    sliderInput("w", "Rate of immunity loss (w)", min = 0, max = 0.5, value = 0.0, step = 0.01 , sep ='')
              ),
              align = "center"
            ),
            fluidRow(
              column(4,
-                    sliderInput("lambda", "Monthly rate of new births (lambda)", min = 0, max = 100, value = 0, step = 1)
+                    sliderInput("m", "Rate of births (m)", min = 0, max = 100, value = 0, step = 1)
              ),
              column(4,
-                    sliderInput("n", "Natural death rate (n, 1/months)", min = 0, max = 0.02, value = 0, step = 0.0005, sep ='')
+                    sliderInput("n", "Natural death rate (n)", min = 0, max = 0.02, value = 0, step = 0.0005, sep ='')
              ),
              column(4,
-                    sliderInput("sigma", "Strength of seasonal variation of transmission (sigma)", min = 0, max = 1, value = 0, step = 0.1)
+                    sliderInput("s", "Strength of seasonal variation of transmission (s)", min = 0, max = 1, value = 0, step = 0.1)
              ),
              align = "center"
            ) #close fluidRow structure for input

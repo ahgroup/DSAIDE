@@ -62,6 +62,7 @@ This function does not perform any error checking. So if you try to do
 something nonsensical (e.g. have I0 > PopSize or any negative values or fractions > 1),
 the code will likely abort with an error message
 }
+
 \examples{
 # To run the simulation with default parameters just call this function
 result <- simulate_evolution()
@@ -70,13 +71,12 @@ result <- simulate_evolution(S0 = 2000,  tmax = 200, bt = 1/100)
 # You should then use the simulation result returned from the function, e.g. like this:
 plot(result[,1],result[,2],xlab='Time',ylab='Number Susceptible',type='l')
 }
-\author{
-Andreas Handel
-}
 \references{
 See the manual for the adaptivetau package for details on the algorithm.
             The implemented model is loosely based on: Handel et al 2009 JTB 
            "Antiviral resistance and the control of pandemic influenza: The roles of
            stochasticity, evolution and model details"
 }
-
+\author{
+Andreas Handel
+}

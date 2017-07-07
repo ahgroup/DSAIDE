@@ -18,4 +18,3 @@ This function is called by the shiny UIs to populate the documentation and infor
 \author{
 Andreas Handel
 }
-

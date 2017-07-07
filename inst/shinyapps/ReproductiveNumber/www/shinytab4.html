@@ -1,6 +1,25 @@
 <body> <div id="shinytab4" class="section level2">&#13;
 <h2>Further Information</h2>&#13;
-<ul><li>For this app, the underlying function running the simulation is called <code>simulate_reproductivenumber.R</code>. You can call this function directly, without going through the shiny app. Check the help file for the function for more information.</li>&#13;
-<li>If you call the function directly, you need to process the results returned from this function and produce useful output (such as a plot) yourself.</li>&#13;
-<li>You could also modify this R function for your own purposes - though that requires R coding knowledge.</li>&#13;
-</ul></div> </body>
+<ul><li>This app (and all others) are structured such that the Shiny part (the graphical interface you are currently using and the server-side function that goes with it) calls an underlying R script which runs the simulation for the model of interest and returns the results.</li>&#13;
+<li>For this app, the underlying function running the simulation is called <code>simulate_reproductivenumber.R</code>. You can call this function directly, without going through the shiny app. Type <code>?simulate_reproductivenumber</code> into the R console for more information (you need to exit the graphical interace first or start a new R session). If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself.</li>&#13;
+<li>You could also modify this R function for your own purposes - though that requires some more R coding knowledge.</li>&#13;
+<li>To get a quick start explaining how to interact with the simulator functions directly, read the vignette for the package (type <code>vignette('DSAIDE')</code> into the R console).</li>&#13;
+<li>For some information on the reproductive number, see e.g. <span class="citation">(Fine, Eames, and Heymann 2011, <span class="citation">Heffernan, Smith, and Wahl (2005)</span>, <span class="citation">Roberts (2007)</span>, <span class="citation">Wallinga and Lipsitch (2007)</span>)</span>.</li>&#13;
+</ul><div id="references" class="section level3 unnumbered">&#13;
+<h3>References</h3>&#13;
+<div id="refs" class="references">&#13;
+<div id="ref-fine11">&#13;
+<p>Fine, Paul, Ken Eames, and David L Heymann. 2011. “‘Herd Immunity’: A Rough Guide.” <em>Clinical Infectious Diseases : An Official Publication of the Infectious Diseases Society of America</em> 52 (7): 911–16. doi:<a href="https://doi.org/10.1093/cid/cir007">10.1093/cid/cir007</a>.</p>&#13;
+</div>&#13;
+<div id="ref-heffernan05a">&#13;
+<p>Heffernan, J M, R J Smith, and L M Wahl. 2005. “Perspectives on the Basic Reproductive Ratio.” <em>Journal of the Royal Society, Interface</em> 2 (4): 281–93. doi:<a href="https://doi.org/10.1098/rsif.2005.0042">10.1098/rsif.2005.0042</a>.</p>&#13;
+</div>&#13;
+<div id="ref-roberts07">&#13;
+<p>Roberts, M G. 2007. “The Pluses and Minuses of R0.” <em>Journal of the Royal Society, Interface</em> 4 (16): 949–61. doi:<a href="https://doi.org/10.1098/rsif.2007.1031">10.1098/rsif.2007.1031</a>.</p>&#13;
+</div>&#13;
+<div id="ref-wallinga07">&#13;
+<p>Wallinga, J., and M. Lipsitch. 2007. “How generation intervals shape the relationship between growth rates and reproductive numbers.” <em>Proceedings of the Royal Society B</em> 274 (1609): 599–604.</p>&#13;
+</div>&#13;
+</div>&#13;
+</div>&#13;
+</div> </body>

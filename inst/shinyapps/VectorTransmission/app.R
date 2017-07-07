@@ -23,14 +23,14 @@ refresh <- function(input, output){
     
     b1 = isolate(input$b1);
     b2 = isolate(input$b2);
-    b  = isolate(input$b);
+    m  = isolate(input$m);
     n  = isolate(input$n);
     g  = isolate(input$g);
     w  = isolate(input$w);
     
     
     # Call the ODE solver with the given parameters
-    result <- simulate_vectortransmission(Sh0 = Sh0, Ih0 = Ih0, Sv0 = Sv0, Iv0 = Iv0, tmax = tmax, b1 = b1, b2 = b2, b = b, n = n, g = g, w = w)
+    result <- simulate_vectortransmission(Sh0 = Sh0, Ih0 = Ih0, Sv0 = Sv0, Iv0 = Iv0, tmax = tmax, b1 = b1, b2 = b2, m = m, n = n, g = g, w = w)
     
     return(list(result)) #this is returned as the res variable
   })
@@ -66,7 +66,7 @@ server <- function(input, output, session) {
 
 #This is the UI part of the shiny App
 ui <- fluidPage(
-  includeCSS("../shinystyle.css"),
+  includeCSS("../styles/dsaide.css"),
   #add header and title
   tags$head( tags$script(src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML", type = 'text/javascript') ),
   div( includeHTML("www/header.html"), align = "center"),
@@ -96,47 +96,47 @@ ui <- fluidPage(
            h2('Simulation Settings'),
            fluidRow(
              column(4,
-                    sliderInput("Sh0", "initial number of susceptible hosts", min = 1000, max = 5000, value = 1000, step = 500)
+                    sliderInput("Sh0", "initial number of susceptible hosts (Sh0)", min = 1000, max = 5000, value = 1000, step = 500)
              ),
              column(4,
-                    sliderInput("Sv0", "initial number of susceptible vectors", min = 1000, max = 5000, value = 1000, step = 500)
+                    sliderInput("Sv0", "initial number of susceptible vectors (Sv0)", min = 1000, max = 5000, value = 1000, step = 500)
              ),
              column(4,
-                    sliderInput("Ih0", "initial number of infected hosts", min = 0, max = 100, value = 0, step = 1)
-             ),
-             align = "center"
-           ), #close fluidRow structure for input
-           fluidRow(
-             column(4,
-                    sliderInput("Iv0", "initial number of infected vectors", min = 0, max = 100, value = 0, step = 1)
-             ),
-             column(4,
-                    sliderInput("tmax", "Maximum simulation time", min = 1, max = 500, value = 100, step = 1)
-             ),
-             column(4,
-                    sliderInput("b1", "vector to host transmission rate", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
+                    sliderInput("Ih0", "initial number of infected hosts (Ih0)", min = 0, max = 100, value = 0, step = 1)
              ),
              align = "center"
            ), #close fluidRow structure for input
            fluidRow(
              column(4,
-                    sliderInput("b2", "host to vector transmission rate", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
+                    sliderInput("Iv0", "initial number of infected vectors (Iv0)", min = 0, max = 100, value = 0, step = 1)
              ),
              column(4,
-                    sliderInput("w", "Rate of waning immunity", min = 0, max = 1, value = 0, step = 0.01, sep ='')
+                    sliderInput("tmax", "Maximum simulation time (tmax)", min = 1, max = 500, value = 100, step = 1)
              ),
              column(4,
-                    sliderInput("g", "Rate of recovery of infected hosts", min = 0, max = 2, value = 0.5, step = 0.1)
+                    sliderInput("b1", "vector to host transmission rate (b1)", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
+             ),
+             align = "center"
+           ), #close fluidRow structure for input
+           fluidRow(
+             column(4,
+                    sliderInput("b2", "host to vector transmission rate (b2)", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
+             ),
+             column(4,
+                    sliderInput("w", "Rate of waning immunity (w)", min = 0, max = 1, value = 0, step = 0.01, sep ='')
+             ),
+             column(4,
+                    sliderInput("g", "Rate of recovery of infected hosts (g)", min = 0, max = 2, value = 0.5, step = 0.1)
              ),
              align = "center"
            ), #close fluidRow structure for input
            
            fluidRow(
                column(6,
-                    sliderInput("b", "Monthly rate of new vector births", min = 0, max = 10000, value = 0, step = 100)
+                    sliderInput("m", "Rate of new vector births (m)", min = 0, max = 10000, value = 0, step = 100)
              ),
              column(6,
-                    sliderInput("n", "Natural vector death rate", min = 0, max = 2, value = 0, step = 0.01, sep ='')
+                    sliderInput("n", "Vector death rate (n)", min = 0, max = 2, value = 0, step = 0.01, sep ='')
              ),
              align = "center"
            ) #close fluidRow structure for input

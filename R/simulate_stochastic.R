@@ -1,6 +1,6 @@
 ############################################################
 ##simulating a stochastic SEIR type model
-##written by Andreas Handel, ahandel@uga.edu, last change: 10/18/16
+##written by Andreas Handel, ahandel@uga.edu, last change: 6/18/17
 ############################################################
 
 #this specifies the rates used by the adapativetau routine
@@ -9,7 +9,7 @@ stochasticratefunc <- function(y, parms, t)
     with(as.list(c(y, parms)),
          {
             #specify each rate/transition/reaction that can happen in the system
-             rates=c(  lambda,
+             rates=c(  m,
                        n * S,
                        n * P,
                        n * I,
@@ -40,7 +40,7 @@ stochasticratefunc <- function(y, parms, t)
 #' @param gI rate at which a person leaves the I compartment
 #' @param w rate at which recovered persons loose immunity and return to
 #'   susceptible state
-#' @param lambda the rate at which new individuals enter the model (are born)
+#' @param m the rate at which new individuals enter the model (are born)
 #' @param n the rate of natural death (the inverse is the average lifespan)
 #' @param tmax maximum simulation time, units depend on choice of units for 
 #' your parameters
@@ -75,14 +75,14 @@ stochasticratefunc <- function(y, parms, t)
 
 
 
-simulate_stochastic <- function(S0 = 1000, I0 = 10, tmax = 100, bP = 0, bI = 1/1000, gP = 0.5, gI = 0.5, w = 0, lambda = 0, n = 0)
+simulate_stochastic <- function(S0 = 1000, I0 = 10, tmax = 100, bP = 0, bI = 1/1000, gP = 0.5, gI = 0.5, w = 0, m = 0, n = 0)
 {
     Y0 = c(S = S0, P = 0,  I = I0, R = 0);  #combine initial conditions into a vector
     dt = tmax / 1000; #time step for which to get results back
     timevec = seq(0, tmax, dt); #vector of times for which solution is returned (not that internal timestep of the integrator is different)
 
     #combining parameters into a parameter vector
-    pars = c(bP = bP, bI = bI, gP = gP,  gI = gI, w = w, lambda = lambda, n = n);
+    pars = c(bP = bP, bI = bI, gP = gP,  gI = gI, w = w, m = m, n = n);
 
     #specify for each reaction/rate/transition how the different variables change
     #needs to be in exactly the same order as the rates listed in the rate function

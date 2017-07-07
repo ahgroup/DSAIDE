@@ -21,7 +21,7 @@ refresh <- function(input, output){
     g = isolate(input$g);
     bd= isolate(input$bd);
     bf= isolate(input$bf);
-    b = isolate(input$b);
+    m = isolate(input$m);
     n = isolate(input$n);
     w = isolate(input$w);
     A = isolate(input$A);
@@ -30,7 +30,7 @@ refresh <- function(input, output){
     
     # Call the ODE solver with the given parameters
     
-    result <- simulate_directtransmission(PopSize = PopSize, I0 = I0, tmax = tmax, scenario = scenario, bd = bd, bf = bf, A = A, b = b, n = n, g = g, w = w)
+    result <- simulate_directtransmission(PopSize = PopSize, I0 = I0, tmax = tmax, scenario = scenario, bd = bd, bf = bf, A = A, m = m, n = n, g = g, w = w)
 
     return(list(result)) #this is returned as the res variable
   })
@@ -63,7 +63,7 @@ server <- function(input, output, session) {
 
 #This is the UI part of the shiny App
 ui <- fluidPage(
-  includeCSS("../shinystyle.css"),
+  includeCSS("../styles/dsaide.css"),
   #add header and title
   tags$head( tags$script(src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML", type = 'text/javascript') ),
   div( includeHTML("www/header.html"), align = "center"),
@@ -101,7 +101,7 @@ ui <- fluidPage(
            ), #close fluidRow structure for input
            fluidRow(
              column(6,
-                    sliderInput("tmax", "Maximum simulation time (months)", min = 1, max = 500, value = 100, step = 1)
+                    sliderInput("tmax", "Maximum simulation time", min = 1, max = 500, value = 100, step = 1)
              ),
              column(6,
                     selectInput("scenario", "Transmission scenario:",c("density dependent" = 1, 'frequency dependent' = 2))
@@ -109,10 +109,10 @@ ui <- fluidPage(
            ), #close fluidRow structure for input
            fluidRow(
              column(6,
-                    sliderInput("bf", "frequency dependent transmission rate (bf, 1/months)", min = 0, max = 10, value = 0, step = 0.1 , sep ='')
+                    sliderInput("bf", "frequency dependent transmission rate (bf)", min = 0, max = 10, value = 0, step = 0.1 , sep ='')
              ),
              column(6,
-                    sliderInput("bd", "density dependent transmission rate (bd, 1/months)", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
+                    sliderInput("bd", "density dependent transmission rate (bd)", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
              )
            ), #close fluidRow structure for input
            fluidRow(
@@ -120,18 +120,18 @@ ui <- fluidPage(
                     sliderInput("A", "Area where hosts interact (for density dependent transmission, arbitrary units)", min = 0.1, max = 10, value = 1, step = 0.1)
              ),
              column(6,
-                    sliderInput("g", "Rate of recovery of infected hosts (g, 1/months)", min = 0, max = 10, value = 1, step = 0.1)
+                    sliderInput("g", "Rate of recovery of infected hosts (g)", min = 0, max = 10, value = 1, step = 0.1)
              )
            ), #close fluidRow structure for input
            fluidRow(
              column(4,
-                    sliderInput("w", "Rate of immunity loss (w, 1/months)", min = 0, max = 0.1, value = 0.0, step = 0.01 , sep ='')
+                    sliderInput("w", "Rate of immunity loss (w)", min = 0, max = 0.1, value = 0.0, step = 0.01 , sep ='')
              ),
              column(4,
-                    sliderInput("b", "Monthly rate of new births (b)", min = 0, max = 100, value = 0, step = 1)
+                    sliderInput("m", "Rate of new births (m)", min = 0, max = 100, value = 0, step = 1)
              ),
              column(4,
-                    sliderInput("n", "Natural death rate (n, 1/months)", min = 0, max = 0.02, value = 0, step = 0.0005, sep ='')
+                    sliderInput("n", "Natural death rate (n)", min = 0, max = 0.02, value = 0, step = 0.0005, sep ='')
              ),
              align = "center"
            ) #close fluidRow structure for input

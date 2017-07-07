@@ -5,7 +5,7 @@
 \title{Simulation of a compartmental infectious disease transmission model to study the reproductive number}
 \usage{
 simulate_reproductivenumber(S0 = 1000, I0 = 0, f = 0, e = 0,
-  tmax = 300, gamma = 50, beta = 0.1, lambda = 20, n = 1/50, w = 0)
+  tmax = 300, g = 50, b = 0.1, m = 20, n = 1/50, w = 0)
 }
 \arguments{
 \item{S0}{initial number of susceptible hosts}
@@ -19,11 +19,11 @@ simulate_reproductivenumber(S0 = 1000, I0 = 0, f = 0, e = 0,
 \item{tmax}{maximum simulation time, units depend on choice of units for your
 parameters}
 
-\item{gamma}{rate at which a person leaves the I compartment}
+\item{g}{rate at which a person leaves the I compartment}
 
-\item{beta}{level/rate of infectiousness for hosts in the I compartment}
+\item{b}{level/rate of infectiousness for hosts in the I compartment}
 
-\item{lambda}{the rate at which new individuals enter the model (are born)}
+\item{m}{the rate at which new individuals enter the model (are born)}
 
 \item{n}{the rate of natural death (the inverse it the average lifespan)}
 
@@ -31,16 +31,16 @@ parameters}
 }
 \value{
 This function returns the simulation result as obtained from a call
-  to the deSolve ode solver
+  to the deSolve ode solver.
 }
 \description{
 Simulation of a basic SIR compartmental model with these compartments:
   Susceptibles (S), Infected/Infectious (I),
   Recovered and Immune (R).
   
-  The model is assumed to be in units of months when run through the Shiny App
+  The model is assumed to be in units of months when run through the Shiny App.
   However as long as all parameters are chosen in the same units, 
-  one can directly call the simulator assuming any time unit
+  one can directly call the simulator assuming any time unit.
 }
 \details{
 A compartmental ID model with several states/compartments
@@ -52,24 +52,24 @@ A compartmental ID model with several states/compartments
 
   This function does not perform any error checking. So if you try to do
   something nonsensical (e.g. negative values or fractions > 1),
-  the code will likely abort with an error message
+  the code will likely abort with an error message.
 }
+
 \examples{
   # To run the simulation with default parameters just call this function
   result <- simulate_reproductivenumber()
   # To choose parameter values other than the standard one, specify them e.g. like such
-  result <- simulate_reproductivenumber(S0 = 2000, I0 = 10, tmax = 100, gamma = 0.5, n = 0.1)
+  result <- simulate_reproductivenumber(S0 = 2000, I0 = 10, tmax = 100, g = 0.5, n = 0.1)
   # You should then use the simulation result returned from the function, e.g. like this:
   plot(result[,1],result[,2],xlab='Time',ylab='Number Susceptible',type='l')
-}
-\author{
-Andreas Handel
 }
 \references{
 See e.g. Keeling and Rohani 2008 for SIR models and the
   documentation for the deSolve package for details on ODE solvers
 }
 \seealso{
-The UI of the shiny app 'ReproductiveNumber', which is part of this package, contains more details on the model
+The UI of the shiny app 'ReproductiveNumber', which is part of this package, contains more details on the model.
 }
-
+\author{
+Andreas Handel
+}
