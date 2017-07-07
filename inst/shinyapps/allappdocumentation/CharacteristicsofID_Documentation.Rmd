@@ -32,14 +32,14 @@ In the _Introduction to ID_ app, you explored a simple 3-compartment model, the 
 * **R** - recovered/removed individuals. Those individuals have recovered and are immune. 
 * **D** - individuals who have died due to the disease.
 
-Of course, as with the basic SIR model, we could include further details by extending the number of compartments. In general, for each additional feature you want to track, the existing number of compartments needs to be replicated by the discrete categories you have. FOr gender, one would need to have 2x the compartments, if one wanted to stratify according to young/medium/old age one needs 3x the compartments, etc. 
+Of course, as with the basic SIR model, we could include further details by extending the number of compartments. In general, for each additional feature you want to track, the existing number of compartments needs to be replicated by the discrete categories you have. For gender, one would need to have 2x the compartments. Similarly if one wanted to stratify according to young/medium/old age, 3x the compartments are required, etc. 
 
 In addition to specifying the *compartments* of a model, we need to specify the dynamics determining the changes for each compartment. In general, more compartments leads to more processes and more parameters governing these processes.
 
 For this model, we include the following processes: 
 
 * Susceptible individuals (S) can become infected by pre-symptomatic (P), asymptomatic (A) or symptomatic (I) hosts. The rates at which infections from the different types of infected individuals (P, A and I) occur are governed by 3 parameters, _b~P~_, _b~A~_ and _b~I~_. In other words, those b~i~ parameters determine how infectious an individual in stages P, A and I is.
-* All infected individuals first enter the presymptomatic stage. They remain there for some time (determined by rate _g~P~_, the inverse of which is the average time spent in the presymptomatic stage). A fraction _f_ of presymptomatic hosts move into the asymptomatic category, the rest become symptomatic infected hosts.
+* All infected individuals first enter the presymptomatic stage. They remain there for some time (determined by rate _g~P~_, the inverse of which is the average time spent in the presymptomatic stage). A fraction _f_ of presymptomatic hosts move into the asymptomatic category, and the rest become symptomatic infected hosts.
 * Asymptomatic infected hosts recover after some time (specified by the rate _g~A~_). 
 * Similarly, infected symptomatic hosts leave that stage at rate _g~I~_. For symptomatic hosts, two outcomes are possible, either recovery or death. The parameter _d_ determines the fraction of hosts that die.
 * Recovered individuals are immune to reinfection. 
@@ -51,12 +51,12 @@ The flow diagram and the set of ordinary differential equations (ODE) which are 
 
 ![Flow diagram for this model.](../media/IDCharacteristicmodel.png)
 
-$$\dot S = -S (b_P P + b_A A + b_I I)  $$ 
-$$\dot P = S (b_P P + b_A A + b_I I) - g_P P $$ 
-$$\dot A = f g_P P - g_A A $$ 
-$$\dot I = (1-f) g_P P - g_I I $$ 
-$$\dot R = g_A A + (1-d) g_I I $$
-$$\dot D = d g_I I $$
+$$\dot S = -S (b_P P + b_A A + b_I I)$$ 
+$$\dot P = S (b_P P + b_A A + b_I I) - g_P P$$ 
+$$\dot A = f g_P P - g_A A$$ 
+$$\dot I = (1-f) g_P P - g_I I$$ 
+$$\dot R = g_A A + (1-d) g_I I$$
+$$\dot D = d g_I I$$
 
 
 
@@ -64,7 +64,7 @@ $$\dot D = d g_I I $$
 
 ##What to do {#shinytab3}
 
-_A general note: Some of the tasks below (and in future apps) are fairly open ended. The idea is that these tasks give you something to get started, but you should feel free to explore the simulations any way you want. Play with them, query them, go through iterations of thinking what you expect, observing it, and if discrepancies occur, figure out why. Essentially, the best way to use these apps is to "do your own science/research" with them._ 
+_A general note: Some of the tasks below (and in future apps) are fairly open-ended. The idea is that these tasks give you something to get started, but you should feel free to explore the simulations any way you want. Play with them, query them, go through iterations of thinking what you expect, observing it, and if discrepancies occur, figure out why. Essentially, the best way to use these apps is to "do your own science/research" with them._ 
 
 For the following tasks, it is assumed that the model runs in units of days.
 
@@ -72,14 +72,14 @@ For the following tasks, it is assumed that the model runs in units of days.
 * Set the model parameters such that it corresponds to the following setting: 
     * A population size of 1000, 1 initially infected, presymptomatic host, simulation duration 200 days.
     * Assume that only symptomatic individuals transmit, at rate _b~I~_ = 0.001.
-    * Assume that the duration of the presymptomatic, asymptomatic and symptomatic periods are all 5 days long. (Hint: The parameters _g~P~_, _g~A~_ and _g~I~_ are the inverse of these periods.)
+    * Assume that the duration of the presymptomatic, asymptomatic and symptomatic periods are all 5 days long. (Hint: The parameters _g~P~_, _g~A~_ and _g~I~_ are the inverses of these periods.)
     * Assume that there are no asymptomatic infections and nobody dies due to disease.
 
 * With parameters set to correspond to the scenario just described, run the simulation.
 * Record the number and fraction of susceptible/infected/recovered remaining at the end of the outbreak.    
 * Check the results with the assumptions for the model and make sure they agree (you shouldn't get any deaths, no asymptomatics, etc.)
 * From the graph, contemplate how you would estimate the day at which the outbreak peaks. What's the problem? How would you solve it?
-* Run the simulation again, with the same values you just had. Does anything change? Why (not)?
+* Rerun the simulation, with the same values you just had. Does anything change? Why (not)?
 
 ###Task 2: 
 * Assume now that half of the infected are asymptomatic. Don't change any other assumption.
@@ -88,7 +88,7 @@ For the following tasks, it is assumed that the model runs in units of days.
 * Compare your expectations with the results. How do they agree/disagree? Does it make sense? Anything surprising happening?
 
 ###Task 3: 
-* Now assume that the asymptomatics transmit at the same rate as the symptomatics. Leave everything as in #2.
+* Now assume that the asymptomatics transmit at the same rate as the symptomatic. Leave everything as in #2.
 * How do you expect the results to change? (Try to make as precise/quantitative a prediction as you can)
 * Run another simulation, record the same values as above.
 * Compare your expectations with the results. How do they agree/disagree? Does it make sense? Anything surprising happening?
