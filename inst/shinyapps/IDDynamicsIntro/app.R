@@ -101,7 +101,7 @@ ui <- fluidPage(
            
            fluidRow(class = 'myrow',
              column(6,
-                    numericInput("b", "Rate of transmission (b)", min = 0, max = 0.01, value = 0, step = 0.0001, sep ='')
+                    numericInput("b", "Rate of transmission (b)", min = 0, max = 0.01, value = 0, step = 0.0001 )
              ),
              column(6,
                     numericInput("g", "Rate at which a host leaves the infectious compartment (g)", min = 0, max = 2, value = 0.5, step = 0.1)

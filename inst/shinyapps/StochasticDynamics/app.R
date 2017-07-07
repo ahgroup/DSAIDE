@@ -108,13 +108,13 @@ ui <- fluidPage(
            ), #close fluidRow structure for input
            fluidRow(
              column(4,
-                    numericInput("bP", "Rate of transmission of presymptomatic hosts (bP)", min = 0, max = 0.02, value = 0, step = 0.0001 , sep ='')
+                    numericInput("bP", "Rate of transmission of presymptomatic hosts (bP)", min = 0, max = 0.02, value = 0, step = 0.0001  )
              ),
              column(4,
-                    numericInput("bI", "Rate of transmission of symptomatic hosts (bI)", min = 0, max = 0.02, value = 0.01, step = 0.0001 , sep ='')
+                    numericInput("bI", "Rate of transmission of symptomatic hosts (bI)", min = 0, max = 0.02, value = 0.01, step = 0.0001  )
              ),
              column(4,
-                    numericInput("w", "Rate of immunity loss (w)", min = 0, max = 0.5, value = 0.0, step = 0.01, sep ='')
+                    numericInput("w", "Rate of immunity loss (w)", min = 0, max = 0.5, value = 0.0, step = 0.01 )
              )
            ), #close fluidRow structure for input
            

@@ -116,15 +116,15 @@ ui <- fluidPage(
                ), #close fluidRow structure for input
                fluidRow(
                    column(6,
-                          numericInput("b1", "Rate at which hosts infected with pathogen 1 transmit (b1)", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
+                          numericInput("b1", "Rate at which hosts infected with pathogen 1 transmit (b1)", min = 0, max = 0.01, value = 0, step = 0.0001  )
                    ),
                    column(6,
-                          numericInput("b2", "Rate at which hosts infected with pathogen 2 transmit (b2)", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
+                          numericInput("b2", "Rate at which hosts infected with pathogen 2 transmit (b2)", min = 0, max = 0.01, value = 0, step = 0.0001  )
                    )
                ), #close fluidRow structure for input
                fluidRow(
                    column(6,
-                          numericInput("b12", "Rate at which double infected hosts transmit (b12)", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
+                          numericInput("b12", "Rate at which double infected hosts transmit (b12)", min = 0, max = 0.01, value = 0, step = 0.0001  )
                           ),
                  column(6,
                       numericInput("g1", "Rate at which hosts infected with type 1 recover (g1)", min = 0, max = 5, value = 0.5, step = 0.1)

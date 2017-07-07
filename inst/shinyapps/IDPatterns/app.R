@@ -116,13 +116,13 @@ ui <- fluidPage(
            
            fluidRow(
              column(4,
-                    numericInput("bP", "Level/Rate of transmission by presymptomatic hosts (bP)", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
+                    numericInput("bP", "Level/Rate of transmission by presymptomatic hosts (bP)", min = 0, max = 0.01, value = 0, step = 0.0001  )
              ),
              column(4,
-                    numericInput("bA", "Level/Rate of transmission by asymptomatic hosts (bA)", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
+                    numericInput("bA", "Level/Rate of transmission by asymptomatic hosts (bA)", min = 0, max = 0.01, value = 0, step = 0.0001  )
              ),
              column(4,
-                    numericInput("bI", "Level/Rate of transmission by symptomatic hosts (bI)", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
+                    numericInput("bI", "Level/Rate of transmission by symptomatic hosts (bI)", min = 0, max = 0.01, value = 0, step = 0.0001  )
              ),
              align = "center"
            ), #close fluidRow structure for input
@@ -146,7 +146,7 @@ ui <- fluidPage(
                     numericInput("d", "Fraction of deaths in symptomatic hosts (d)", min = 0, max = 1, value = 0, step = 0.1)
              ),
              column(4,
-                    numericInput("w", "Rate of immunity loss (w)", min = 0, max = 0.5, value = 0.0, step = 0.01 , sep ='')
+                    numericInput("w", "Rate of immunity loss (w)", min = 0, max = 0.5, value = 0.0, step = 0.01  )
              ),
              align = "center"
            ),
@@ -155,7 +155,7 @@ ui <- fluidPage(
                     numericInput("m", "Rate of births (m)", min = 0, max = 100, value = 0, step = 1)
              ),
              column(4,
-                    numericInput("n", "Natural death rate (n)", min = 0, max = 0.02, value = 0, step = 0.0005, sep ='')
+                    numericInput("n", "Natural death rate (n)", min = 0, max = 0.02, value = 0, step = 0.0005 )
              ),
              column(4,
                     numericInput("s", "Strength of seasonal variation of transmission (s)", min = 0, max = 1, value = 0, step = 0.1)
