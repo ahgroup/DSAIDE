@@ -4,7 +4,7 @@ author: "Andreas Handel"
 date: "`r Sys.Date()`"
 output: 
   rmarkdown::html_vignette:
-    css: dsaidevignettestyle.css
+    #css: dsaidevignettestyle.css
 vignette: >
   %\VignetteIndexEntry{DSAIDE}
   %\VignetteEngine{knitr::rmarkdown}
