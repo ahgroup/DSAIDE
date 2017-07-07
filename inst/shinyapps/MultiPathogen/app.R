@@ -100,52 +100,52 @@ ui <- fluidPage(
                p('All parameters are assumed to be in units of (inverse) months'),
                fluidRow(
                    column(6,
-                          sliderInput("S0", "initial number of susceptible hosts (S0)", min = 100, max = 5000, value = 1000, step = 100)
+                          numericInput("S0", "initial number of susceptible hosts (S0)", min = 100, max = 5000, value = 1000, step = 100)
                    ),
                    column(6,
-                          sliderInput("I10", "initial number of hosts infected with pathogen 1 (I10)", min = 0, max = 100, value = 0, step = 1)
+                          numericInput("I10", "initial number of hosts infected with pathogen 1 (I10)", min = 0, max = 100, value = 0, step = 1)
                    )
                ), #close fluidRow structure for input
                fluidRow(
                    column(6,
-                          sliderInput("I20", "initial number of hosts infected with pathogen 2 (I20)", min = 0, max = 100, value = 0, step = 1)
+                          numericInput("I20", "initial number of hosts infected with pathogen 2 (I20)", min = 0, max = 100, value = 0, step = 1)
                    ),
                    column(6,
-                          sliderInput("I120", "initial number of hosts infected with pathogens 1 and 2 (I120)", min = 0, max = 100, value = 0, step = 1)
+                          numericInput("I120", "initial number of hosts infected with pathogens 1 and 2 (I120)", min = 0, max = 100, value = 0, step = 1)
                    )
                ), #close fluidRow structure for input
                fluidRow(
                    column(6,
-                          sliderInput("b1", "Rate at which hosts infected with pathogen 1 transmit (b1)", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
+                          numericInput("b1", "Rate at which hosts infected with pathogen 1 transmit (b1)", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
                    ),
                    column(6,
-                          sliderInput("b2", "Rate at which hosts infected with pathogen 2 transmit (b2)", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
+                          numericInput("b2", "Rate at which hosts infected with pathogen 2 transmit (b2)", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
                    )
                ), #close fluidRow structure for input
                fluidRow(
                    column(6,
-                          sliderInput("b12", "Rate at which double infected hosts transmit (b12)", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
+                          numericInput("b12", "Rate at which double infected hosts transmit (b12)", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
                           ),
                  column(6,
-                      sliderInput("g1", "Rate at which hosts infected with type 1 recover (g1)", min = 0, max = 5, value = 0.5, step = 0.1)
+                      numericInput("g1", "Rate at which hosts infected with type 1 recover (g1)", min = 0, max = 5, value = 0.5, step = 0.1)
                         )
                ), #close fluidRow structure for input
                fluidRow(
                    column(6,
-                          sliderInput("g2", "Rate at which hosts infected with type 2 recover (g2)", min = 0, max = 5, value = 0.5, step = 0.1)
+                          numericInput("g2", "Rate at which hosts infected with type 2 recover (g2)", min = 0, max = 5, value = 0.5, step = 0.1)
                    ),
                    column(6,
-                          sliderInput("g12", "Rate at which double infected host recover (g12)",  min = 0, max = 5, value = 0.5, step = 0.1)
+                          numericInput("g12", "Rate at which double infected host recover (g12)",  min = 0, max = 5, value = 0.5, step = 0.1)
                    )
                ), #close fluidRow structure for input
                
                fluidRow(
                    column(6,
-                          sliderInput("a", "Fraction of pathogen 1 infections produced by double infected (a)", min = 0, max = 1, value = 0.5, step = 0.05)
+                          numericInput("a", "Fraction of pathogen 1 infections produced by double infected (a)", min = 0, max = 1, value = 0.5, step = 0.05)
                    ),
                   
                    column(6,
-                          sliderInput("tmax", "Maximum simulation time (tmax)", min = 1, max = 1200, value = 100, step = 1)
+                          numericInput("tmax", "Maximum simulation time (tmax)", min = 1, max = 1200, value = 100, step = 1)
                    )
                    
                ) #close fluidRow structure for input

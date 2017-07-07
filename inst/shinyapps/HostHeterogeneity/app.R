@@ -100,55 +100,55 @@ ui <- fluidPage(
            p('All parameters are assumed to be in units of (inverse) months'),
            fluidRow(
              column(6,
-                    sliderInput("S10", "initial number of susceptible type 1 hosts", min = 100, max = 5000, value = 1000, step = 100)
+                    numericInput("S10", "initial number of susceptible type 1 hosts", min = 100, max = 5000, value = 1000, step = 100)
              ),
              column(6,
-                    sliderInput("I10", "initial number of infected type 1  hosts", min = 0, max = 100, value = 0, step = 1)
+                    numericInput("I10", "initial number of infected type 1  hosts", min = 0, max = 100, value = 0, step = 1)
              )
            ), #close fluidRow structure for input
            fluidRow(
              column(6,
-                    sliderInput("S20", "initial  number of susceptible type 2 hosts", min = 0, max = 5000, value = 0, step = 100)
+                    numericInput("S20", "initial  number of susceptible type 2 hosts", min = 0, max = 5000, value = 0, step = 100)
              ),
              column(6,
-                    sliderInput("I20", "initial  number of infected type 2 hosts", min = 0, max = 100, value = 0, step = 1)
+                    numericInput("I20", "initial  number of infected type 2 hosts", min = 0, max = 100, value = 0, step = 1)
              )
            ), #close fluidRow structure for input
            fluidRow(
              column(6,
-                    sliderInput("b11", "Rate of transmission between type 1  hosts", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
+                    numericInput("b11", "Rate of transmission between type 1  hosts", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
              ),
              column(6,
-                    sliderInput("b22", "Rate of transmission between type 2 hosts", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
+                    numericInput("b22", "Rate of transmission between type 2 hosts", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
              )
            ), #close fluidRow structure for input
            fluidRow(
              column(6,
-                    sliderInput("b12", "Rate of transmission from type 2 to type 1", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
+                    numericInput("b12", "Rate of transmission from type 2 to type 1", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
              ),
              column(6,
-                    sliderInput("b21", "Rate of transmission from type 1 to type 2", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
+                    numericInput("b21", "Rate of transmission from type 1 to type 2", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
              )
            ), #close fluidRow structure for input
            fluidRow(
              column(6,
-                    sliderInput("g1", "Rate at which infected type 1 hosts leave compartment", min = 0, max = 5, value = 0.5, step = 0.1)
+                    numericInput("g1", "Rate at which infected type 1 hosts leave compartment", min = 0, max = 5, value = 0.5, step = 0.1)
              ),
              column(6,
-                    sliderInput("g2", "Rate at which infected type 2 hosts leave compartment", min = 0, max = 5, value = 0.5, step = 0.1)
+                    numericInput("g2", "Rate at which infected type 2 hosts leave compartment", min = 0, max = 5, value = 0.5, step = 0.1)
              )
            ), #close fluidRow structure for input
            
            
            fluidRow(
              column(4,
-                    sliderInput("w1", "Rate of waning immunity of type 1", min = 0, max = 5, value = 0, step = 0.05)
+                    numericInput("w1", "Rate of waning immunity of type 1", min = 0, max = 5, value = 0, step = 0.05)
              ),
              column(4,
-                    sliderInput("w2", "Rate of waning immunity of type 2", min = 0, max = 5, value = 0, step = 0.05)
+                    numericInput("w2", "Rate of waning immunity of type 2", min = 0, max = 5, value = 0, step = 0.05)
              ),
              column(4,
-                    sliderInput("tmax", "Maximum simulation time", min = 1, max = 1200, value = 100, step = 1)
+                    numericInput("tmax", "Maximum simulation time", min = 1, max = 1200, value = 100, step = 1)
              )
              
            ) #close fluidRow structure for input
