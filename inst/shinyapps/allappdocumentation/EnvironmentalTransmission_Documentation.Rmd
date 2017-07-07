@@ -35,7 +35,7 @@ This model has the following compartments:
 
 The processes being modeled are:
 
-* Susceptible individuals can become infected by either direct contact with infected hosts at rate _b~d~_ or through contact with pathogen in the environment at rate _b~e~_.
+* Susceptible individuals can become infected by either direct contact with infected hosts at rate _b~d~_ or through contact with a pathogen in the environment at rate _b~e~_.
 * Infected hosts recover after some time (specified by the rate _g_). 
 * New susceptibles enter (are born) at a rate _b_. From each compartment, hosts "leave" after some time (i.e. they die) at rate _n_. The inverse of this rate is the average lifespan of a host. 
 * Infected hosts shed pathogen into the environment at rate _p_.
@@ -55,12 +55,12 @@ $$\dot E = p I - cE$$
 
 
 ###A comment on terminology  
-Often the letter _E_ is used for the _exposed_ stage, which would then be called an SEIR model. I'm using the letter _E_ here to denote environmental stage of the pathogen. While this could also be abbreviated to SEIR (or maybe SIRE), if you see the terminology _SEIR model_ somewhere, the authors usually refer to a model with the additional exposed stage, not environmental stage. There are no naming rules for either model compartments or parameters, so you will see all kinds of letters used. They should all be clearly specified by the authors such that there is no ambiguity.
+Often the letter _E_ is used for the _exposed_ stage, which would then be called a SEIR model. I'm using the letter _E_ here to denote environmental stage of the pathogen. While this could also be abbreviated to SIER (or maybe SIRE), if you see the terminology _SEIR model_ somewhere, the authors usually refer to a model with the additional exposed stage, not an environmental stage. There are no naming rules for either model compartments or parameters, so you will see all kinds of letters used. They should all be explicitly specified by the authors such that there is no ambiguity.
 
 
 ##What to do {#shinytab3}
 
-_A general note: Some of the tasks below are fairly open ended. You shouldn't go through the tasks like a check-list. Instead, explore these simulations, play with them, query them. As you do, loop through iterations of formulating your expectations for a specific scenario/task, running the model and observing results, and if results don't agree with your expectations, figure out why. Essentially, **"do science/research"**._ 
+_A general note: Some of the tasks below are fairly open-ended. You shouldn't go through the tasks like a check-list. Instead, explore these simulations, play with them, query them. As you do, loop through iterations of formulating your expectations for a specific scenario/task, running the model and observing results, and if results don't agree with your expectations, figure out why. Essentially, **"do science/research"**._ 
 
 
 ###Task 1: 
@@ -77,9 +77,9 @@ _A general note: Some of the tasks below are fairly open ended. You shouldn't go
 * Now try various values for the rate of shedding into the environment and environmental clearance. Leave everything else unchanged.
 * As you change those parameters away from 0, what do you expect to see?
 * Think about your expectations, run the simulation and compare your expectations with the results.
-* Anything surprising happening? Do you understand why you are seeing what you see?
+* Anything surprising happening? Do you understand why you see what you see?
 
-Note: The 'pathogen in the environment' units are arbitrary here, and parameters are chosen such that everything fits (mostly) into a single plot. To compare with real data, where environmental pathogen load might be very high, you would need to show separate plots, or plot on a log scale.
+Note: The 'pathogen in the environment' units are arbitrary here, and parameters are chosen such that everything fits (mostly) into a single plot. To compare with real data, where environmental pathogen load might be very high, you would need to show separate plots or plot on a log scale.
 
 ###Task 3: 
 * Now set _p = 10_ and _c = 10_ . Turn off direct transmission. Run to make sure you don't get an outbreak.
@@ -88,15 +88,15 @@ Note: The 'pathogen in the environment' units are arbitrary here, and parameters
 
 ###Task 4: 
 * Now also turn on direct transmission by setting _b~d~ = b~e~ = 0.001_. What do you expect to see?
-* Run simulations and see how your expecations hold up.
+* Run simulations and see how your expectations hold up.
 
 ###Task 5: 
-* Now set initial number of infected to 0 and inital pathogen in the environment to 1. What do you expect to see?
-* Run simulations and see how your expecations hold up.
+* Now set initial number of infected to 0 and initial pathogen in the environment to 1. What do you expect to see?
+* Run simulations and see how your expectations hold up.
 
 ###Task 6: 
 * Try different combinations of direct and environmental transmission only and having only infected hosts or only pathogen in the environment at the start. What do you expect to see?
-* Run simulations and see how your expecations hold up.
+* Run simulations and see how your expectations hold up.
 
 ###Task 7: 
 * Keep exploring by trying different parameters and transmission settings and see how they influence results.
@@ -119,4 +119,3 @@ Answer to task 1.
 
 
 ### References
-
