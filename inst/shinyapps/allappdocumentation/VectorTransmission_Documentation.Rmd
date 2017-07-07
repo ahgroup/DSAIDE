@@ -63,7 +63,7 @@ $$\dot I_v = b_2 S_v I_h  - n I_v$$
 
 ##What to do {#shinytab3}
 
-_A general note: Some of the tasks below are fairly open ended. You shouldn't go through the tasks like a check-list. Instead, explore these simulations, play with them, query them. As you do, loop through iterations of formulating your expectations for a specific scenario/task, running the model and observing results, and if results don't agree with your expectations, figure out why. Essentially, **"do science/research"**._ 
+_A general note: Some of the tasks below are fairly open-ended. You shouldn't go through the tasks like a check-list. Instead, explore these simulations, play with them, query them. As you do, loop through iterations of formulating your expectations for a specific scenario/task, running the model and observing results, and if results don't agree with your expectations, figure out why. Essentially, **"do science/research"**._ 
 
 _The simulation is assumed to run in units of months, i.e. all rate parameters are assumed to be in inverse months._
 
@@ -74,23 +74,23 @@ _The simulation is assumed to run in units of months, i.e. all rate parameters a
     * Assume that the duration of the infectious period in hosts is half a month (about 2 weeks) long. 
     * Turn off births and deaths and waning immunity for now.
 * Run the simulation, observe what you get. 
-* Now set _b~1~_ = _b~2~_, run again. Then set _b~1~_ = 2 _b~2~_, run again.
+* Now set _b~1~_ = _b~2~_, rerun. Then set _b~1~_ = 2 _b~2~_, run again.
 * Record the number and fraction of susceptible/infected/recovered remaining at the end of the outbreak.    
 
 ###Task 2: 
 * Now start with no infected hosts and 1 infected vector. What do you expect to see? Run the simulation to check your expectation.
-* Play around with different initial number of infected hosts and vectors and different transmission rates.
-* Anything surprising happening? Do you understand why you are seeing what you see?
+* Play around with a different initial number of infected hosts and vectors and different transmission rates.
+* Anything surprising happening? Do you understand why you see what you see?
 
 ###Task 3: 
-* Turn off any infection process by setting number of initial infected hosts and vectors to 0. 
+* Turn off any infection process by setting the number of initial infected hosts and vectors to 0. 
 * Let's assume our vectors are mosquitos, and that they live for about 1 month. Set the death rate accordingly.
 * Set the birth rate such that the vector population settles at 2000.
 
 ###Task 4: 
 * Turn infection process back on by having an infected host. Everything else as above.
 * Contemplate the dynamics you see. 
-* You have births and deaths now, and usually with those you can get multiple outbreaks. Why not here?
+* You have births and deaths now, and usually with those, you can get multiple outbreaks. Why not here?
 
 ###Task 5: 
 * Assume host immunity wanes after an average of 4 months. 
