@@ -36,7 +36,7 @@ The processes being modeled are:
 
 * Susceptible individuals can become infected by two types of direct transmission from infected hosts, further described below.
 * Infected hosts recover after some time (specified by the rate _g_). 
-* Recovered individuals are initially immune to reinfection. They can loose their immunity at rate _w_ and return back to the susceptible compartment. 
+* Recovered individuals are initially immune to reinfection. They can lose their immunity at rate _w_ and return to the susceptible compartment. 
 * New susceptibles enter (are born) at a rate _m_. From each compartment, hosts "leave" after some time (i.e. they die) at rate _n_. The inverse of this rate is the average lifespan of a host. 
 
 
@@ -59,7 +59,7 @@ with _f = b~d~ I / A_ for density-dependent transmission and _f = b~f~ I / N_ fo
 
 
 ###Model Comments
-Note that quite often, we assume that the area is constant and do not include it in the model or even talk about it. Often, the population size is also assumed to be constant. In that case, the 2 types of transmission models behave the same. But as soon as area or population size change, the model results differ. Which is what you can explore with this simulation.
+Note that quite often, we assume that the area is constant and do not include it in the model or even talk about it. Often, the population size is also assumed to be constant. In that case, the 2 types of transmission models behave the same. But as soon as area or population size change, the model results differ. You can explore the effect of this relationship using this simulation.
 
 ##What to do {#shinytab3}
 
@@ -69,7 +69,7 @@ _Note: For the following tasks, it is assumed that the model runs in units of mo
 ###Task 1: 
 * Set the model parameters such that it corresponds to the following setting: 
     * A population size of 1000, 1 initially infected host, simulation duration approximately 10 years.
-    * Consider density-dependent transmission, with a transmission rate of b~d~ = 0.005, area of size 2.
+    * Consider density-dependent transmission, with a transmission rate of b~d~ = 0.005, and an area of size 2.
     * Assume that the duration of the infectious period is 15 days long (and that there are 30 days in a month). 
     * Turn off births, deaths and waning immunity for now.
 * With parameters set to correspond to the scenario just described, run the simulation.
@@ -78,7 +78,7 @@ _Note: For the following tasks, it is assumed that the model runs in units of mo
 ###Task 2: 
 * Now switch to frequency-dependent transmission, set b~f~=2.5. Keep everything else as before.
 * Think about your expectations, run the simulation and compare your expectations with the results.
-* Anything surprising happening? Do you understand why you are seeing what you see?
+* Anything surprising happening? Do you understand why you see what you see?
 
 
 ###Task 3: 
@@ -87,13 +87,13 @@ _Note: For the following tasks, it is assumed that the model runs in units of mo
 * What do you expect to see for the frequency and density dependent scenarios? Run simulations and check. Pay attention to both the numbers and fractions of S/I/R individuals at the end of the outbreak.  
 
 ###Task 4: 
-* If you double the population size as you just did, how do you need to adjust the area to obtain the same sized outbreak (in terms of fraction of people getting infected/remaining susceptible) for density-dependent transmission?
-* Try with the simulation if your expectation is correct.
+* If you double the population size as you just did, how do you need to adjust the area to obtain the same sized outbreak (regarding the fraction of people getting infected/remaining susceptible) for density-dependent transmission?
+* Try with the simulation and see if your expectation is correct.
 
 ###Task 5: 
 * Keep exploring by trying different parameters and transmission settings and see how they influence results.
 * You can also go beyond a single outbreak and turn on births/deaths (which can impact population size) or waning immunity.
-* As you continue your exploration, think about potential real infectious diseases that might be approximated by either one of the transmission types, and what approximate choices for the model parameters would describe those IDs.
+* As you continue your exploration, think about real infectious diseases that might be approximated by either one of the transmission types, and what approximate choices for the model parameters would describe those IDs.
 
 
 
