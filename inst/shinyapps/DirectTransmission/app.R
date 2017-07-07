@@ -93,15 +93,15 @@ ui <- fluidPage(
            h2('Simulation Settings'),
            fluidRow(
              column(6,
-                    sliderInput("PopSize", "Population Size", min = 1000, max = 5000, value = 1000, step = 500)
+                    numericInput("PopSize", "Population Size", min = 1000, max = 5000, value = 1000, step = 500)
              ),
              column(6,
-                    sliderInput("I0", "initial number of infected hosts", min = 0, max = 100, value = 0, step = 1)
+                    numericInput("I0", "initial number of infected hosts", min = 0, max = 100, value = 0, step = 1)
              )
            ), #close fluidRow structure for input
            fluidRow(
              column(6,
-                    sliderInput("tmax", "Maximum simulation time", min = 1, max = 500, value = 100, step = 1)
+                    numericInput("tmax", "Maximum simulation time", min = 1, max = 500, value = 100, step = 1)
              ),
              column(6,
                     selectInput("scenario", "Transmission scenario:",c("density dependent" = 1, 'frequency dependent' = 2))
@@ -109,29 +109,29 @@ ui <- fluidPage(
            ), #close fluidRow structure for input
            fluidRow(
              column(6,
-                    sliderInput("bf", "frequency dependent transmission rate (bf)", min = 0, max = 10, value = 0, step = 0.1 , sep ='')
+                    numericInput("bf", "frequency dependent transmission rate (bf)", min = 0, max = 10, value = 0, step = 0.1 , sep ='')
              ),
              column(6,
-                    sliderInput("bd", "density dependent transmission rate (bd)", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
+                    numericInput("bd", "density dependent transmission rate (bd)", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
              )
            ), #close fluidRow structure for input
            fluidRow(
              column(6,
-                    sliderInput("A", "Area where hosts interact (for density dependent transmission, arbitrary units)", min = 0.1, max = 10, value = 1, step = 0.1)
+                    numericInput("A", "Area where hosts interact (for density dependent transmission, arbitrary units)", min = 0.1, max = 10, value = 1, step = 0.1)
              ),
              column(6,
-                    sliderInput("g", "Rate of recovery of infected hosts (g)", min = 0, max = 10, value = 1, step = 0.1)
+                    numericInput("g", "Rate of recovery of infected hosts (g)", min = 0, max = 10, value = 1, step = 0.1)
              )
            ), #close fluidRow structure for input
            fluidRow(
              column(4,
-                    sliderInput("w", "Rate of immunity loss (w)", min = 0, max = 0.1, value = 0.0, step = 0.01 , sep ='')
+                    numericInput("w", "Rate of immunity loss (w)", min = 0, max = 0.1, value = 0.0, step = 0.01 , sep ='')
              ),
              column(4,
-                    sliderInput("m", "Rate of new births (m)", min = 0, max = 100, value = 0, step = 1)
+                    numericInput("m", "Rate of new births (m)", min = 0, max = 100, value = 0, step = 1)
              ),
              column(4,
-                    sliderInput("n", "Natural death rate (n)", min = 0, max = 0.02, value = 0, step = 0.0005, sep ='')
+                    numericInput("n", "Natural death rate (n)", min = 0, max = 0.02, value = 0, step = 0.0005, sep ='')
              ),
              align = "center"
            ) #close fluidRow structure for input

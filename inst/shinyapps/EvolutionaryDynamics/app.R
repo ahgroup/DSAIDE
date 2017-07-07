@@ -101,58 +101,58 @@ ui <- fluidPage(
            h2('Simulation Settings'),
            fluidRow(
              column(4,
-                    sliderInput("S0", "initial number of susceptible hosts", min = 100, max = 3000, value = 1000, step = 50)
+                    numericInput("S0", "initial number of susceptible hosts", min = 100, max = 3000, value = 1000, step = 50)
              ),
              column(4,
-                    sliderInput("Iu0", "initial number of untreated wild-type infected hosts", min = 0, max = 100, value = 1, step = 1)
+                    numericInput("Iu0", "initial number of untreated wild-type infected hosts", min = 0, max = 100, value = 1, step = 1)
              ),
              column(4,
-                    sliderInput("tmax", "Maximum simulation time", min = 1, max = 1200, value = 100, step = 1)
+                    numericInput("tmax", "Maximum simulation time", min = 1, max = 1200, value = 100, step = 1)
              )
            ), #close fluidRow structure for input
            fluidRow(
              column(4,
-                    sliderInput("It0", "initial number of treated wild-type infected hosts", min = 0, max = 100, value = 0, step = 1)
+                    numericInput("It0", "initial number of treated wild-type infected hosts", min = 0, max = 100, value = 0, step = 1)
              ),
              column(4,
-                    sliderInput("Ir0", "initial number of resistant infected hosts", min = 0, max = 100, value = 0, step = 1)
+                    numericInput("Ir0", "initial number of resistant infected hosts", min = 0, max = 100, value = 0, step = 1)
              ),
              column(4,
-                    sliderInput("bu", "Rate of transmission of untreated wild-type hosts", min = 0, max = 0.02, value = 0.001, step = 0.0001 , sep ='')
+                    numericInput("bu", "Rate of transmission of untreated wild-type hosts", min = 0, max = 0.02, value = 0.001, step = 0.0001 , sep ='')
              )
            ), #close fluidRow structure for input
            fluidRow(
              column(4,
-                    sliderInput("bt", "Rate of transmission of treated wild-type hosts", min = 0, max = 0.02, value = 0, step = 0.0001 , sep ='')
+                    numericInput("bt", "Rate of transmission of treated wild-type hosts", min = 0, max = 0.02, value = 0, step = 0.0001 , sep ='')
              ),
              column(4,
-                    sliderInput("br", "Rate of transmission of resistant hosts", min = 0, max = 0.02, value = 0, step = 0.0001 , sep ='')
+                    numericInput("br", "Rate of transmission of resistant hosts", min = 0, max = 0.02, value = 0, step = 0.0001 , sep ='')
              ),
              column(4,
-                    sliderInput("cu", "Fraction of resistant generation by untreated hosts", min = 0, max = 0.5, value = 0.0, step = 0.005, sep ='')
+                    numericInput("cu", "Fraction of resistant generation by untreated hosts", min = 0, max = 0.5, value = 0.0, step = 0.005, sep ='')
              )
            ), #close fluidRow structure for input
            
            fluidRow(
              column(4,
-                    sliderInput("ct", "Fraction of resistant generation by treated hosts", min = 0, max = 0.5, value = 0.0, step = 0.005, sep ='')
+                    numericInput("ct", "Fraction of resistant generation by treated hosts", min = 0, max = 0.5, value = 0.0, step = 0.005, sep ='')
              ),
              column(4,
-                    sliderInput("gu", "Rate at which untreated hosts leave compartment", min = 0, max = 5, value = 0.5, step = 0.05)
+                    numericInput("gu", "Rate at which untreated hosts leave compartment", min = 0, max = 5, value = 0.5, step = 0.05)
              ),
              column(4,
-                    sliderInput("gt", "Rate at which treated hosts leave compartment", min = 0, max = 5, value = 0.5, step = 0.05)
+                    numericInput("gt", "Rate at which treated hosts leave compartment", min = 0, max = 5, value = 0.5, step = 0.05)
              )
            ), #close fluidRow structure for input
            fluidRow(
              column(4,
-                    sliderInput("gr", "Rate at which resistant hosts leave compartment", min = 0, max = 5, value = 0.5, step = 0.1)
+                    numericInput("gr", "Rate at which resistant hosts leave compartment", min = 0, max = 5, value = 0.5, step = 0.1)
              ),
              column(4,
-                    sliderInput("f", "Fraction of infected receiving treatment", min = 0, max = 1, value = 0.0, step = 0.05)
+                    numericInput("f", "Fraction of infected receiving treatment", min = 0, max = 1, value = 0.0, step = 0.05)
              ),
              column(4,
-                         sliderInput("nreps", "Number of simulations", min = 1, max = 50, value = 1, step = 1)
+                         numericInput("nreps", "Number of simulations", min = 1, max = 50, value = 1, step = 1)
               )
             ) #close fluidRow structure for input
            

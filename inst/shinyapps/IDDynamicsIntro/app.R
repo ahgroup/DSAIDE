@@ -88,23 +88,23 @@ ui <- fluidPage(
            h2('Simulation Settings'),
            fluidRow( class = 'myrow',
              column(4,
-                    sliderInput("S0", "Initial number of susceptible hosts (S0)", min = 500, max = 5000, value = 1000, step = 500)
+                    numericInput("S0", "Initial number of susceptible hosts (S0)", min = 500, max = 5000, value = 1000, step = 500)
              ),
              column(4,
-                    sliderInput("I0", "Initial number of infected hosts (I0)", min = 0, max = 100, value = 0, step = 1)
+                    numericInput("I0", "Initial number of infected hosts (I0)", min = 0, max = 100, value = 0, step = 1)
              ),
              column(4,
-                    sliderInput("tmax", "Maximum simulation time (tmax)", min = 10, max = 1000, value = 300, step = 10)
+                    numericInput("tmax", "Maximum simulation time (tmax)", min = 10, max = 1000, value = 300, step = 10)
              ),
              align = "center"
            ), #close fluidRow structure for input
            
            fluidRow(class = 'myrow',
              column(6,
-                    sliderInput("b", "Rate of transmission (b)", min = 0, max = 0.01, value = 0, step = 0.0001, sep ='')
+                    numericInput("b", "Rate of transmission (b)", min = 0, max = 0.01, value = 0, step = 0.0001, sep ='')
              ),
              column(6,
-                    sliderInput("g", "Rate at which a host leaves the infectious compartment (g)", min = 0, max = 2, value = 0.5, step = 0.1)
+                    numericInput("g", "Rate at which a host leaves the infectious compartment (g)", min = 0, max = 2, value = 0.5, step = 0.1)
              ),
              align = "center" 
            ) #close fluidRow structure for input

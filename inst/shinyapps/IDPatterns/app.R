@@ -103,62 +103,62 @@ ui <- fluidPage(
            
            fluidRow(
              column(4,
-                    sliderInput("PopSize", "Population Size (PopSize)", min = 1000, max = 5000, value = 1000, step = 500)
+                    numericInput("PopSize", "Population Size (PopSize)", min = 1000, max = 5000, value = 1000, step = 500)
              ),
              column(4,
-                    sliderInput("P0", "Initial number of presymptomatic hosts (P0)", min = 0, max = 100, value = 0, step = 1)
+                    numericInput("P0", "Initial number of presymptomatic hosts (P0)", min = 0, max = 100, value = 0, step = 1)
              ),
              column(4,
-                    sliderInput("tmax", "Maximum simulation time (tmax)", min = 6, max = 12000, value = 120, step = 12)
+                    numericInput("tmax", "Maximum simulation time (tmax)", min = 6, max = 12000, value = 120, step = 12)
              ),
              align = "center"
            ), #close fluidRow structure for input
            
            fluidRow(
              column(4,
-                    sliderInput("bP", "Level/Rate of transmission by presymptomatic hosts (bP)", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
+                    numericInput("bP", "Level/Rate of transmission by presymptomatic hosts (bP)", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
              ),
              column(4,
-                    sliderInput("bA", "Level/Rate of transmission by asymptomatic hosts (bA)", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
+                    numericInput("bA", "Level/Rate of transmission by asymptomatic hosts (bA)", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
              ),
              column(4,
-                    sliderInput("bI", "Level/Rate of transmission by symptomatic hosts (bI)", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
-             ),
-             align = "center"
-           ), #close fluidRow structure for input
-           fluidRow(
-             column(4,
-                    sliderInput("gP", "Rate at which presymptomatic hosts leave compartment (gP,)", min = 0, max = 5, value = 0.5, step = 0.1)
-             ),
-             column(4,
-                    sliderInput("gA", "Rate at which asymptomatic hosts leave compartment (gA)", min = 0, max = 5, value = 0.5, step = 0.1)
-             ),
-             column(4,
-                    sliderInput("gI", "Rate at which symptomatic hosts leave compartment (gI)", min = 0, max = 5, value = 0.5, step = 0.1)
+                    numericInput("bI", "Level/Rate of transmission by symptomatic hosts (bI)", min = 0, max = 0.01, value = 0, step = 0.0001 , sep ='')
              ),
              align = "center"
            ), #close fluidRow structure for input
            fluidRow(
              column(4,
-                    sliderInput("f", "Fraction of asymptomatic infections (f)", min = 0, max = 1, value = 0, step = 0.1)
+                    numericInput("gP", "Rate at which presymptomatic hosts leave compartment (gP,)", min = 0, max = 5, value = 0.5, step = 0.1)
              ),
              column(4,
-                    sliderInput("d", "Fraction of deaths in symptomatic hosts (d)", min = 0, max = 1, value = 0, step = 0.1)
+                    numericInput("gA", "Rate at which asymptomatic hosts leave compartment (gA)", min = 0, max = 5, value = 0.5, step = 0.1)
              ),
              column(4,
-                    sliderInput("w", "Rate of immunity loss (w)", min = 0, max = 0.5, value = 0.0, step = 0.01 , sep ='')
+                    numericInput("gI", "Rate at which symptomatic hosts leave compartment (gI)", min = 0, max = 5, value = 0.5, step = 0.1)
+             ),
+             align = "center"
+           ), #close fluidRow structure for input
+           fluidRow(
+             column(4,
+                    numericInput("f", "Fraction of asymptomatic infections (f)", min = 0, max = 1, value = 0, step = 0.1)
+             ),
+             column(4,
+                    numericInput("d", "Fraction of deaths in symptomatic hosts (d)", min = 0, max = 1, value = 0, step = 0.1)
+             ),
+             column(4,
+                    numericInput("w", "Rate of immunity loss (w)", min = 0, max = 0.5, value = 0.0, step = 0.01 , sep ='')
              ),
              align = "center"
            ),
            fluidRow(
              column(4,
-                    sliderInput("m", "Rate of births (m)", min = 0, max = 100, value = 0, step = 1)
+                    numericInput("m", "Rate of births (m)", min = 0, max = 100, value = 0, step = 1)
              ),
              column(4,
-                    sliderInput("n", "Natural death rate (n)", min = 0, max = 0.02, value = 0, step = 0.0005, sep ='')
+                    numericInput("n", "Natural death rate (n)", min = 0, max = 0.02, value = 0, step = 0.0005, sep ='')
              ),
              column(4,
-                    sliderInput("s", "Strength of seasonal variation of transmission (s)", min = 0, max = 1, value = 0, step = 0.1)
+                    numericInput("s", "Strength of seasonal variation of transmission (s)", min = 0, max = 1, value = 0, step = 0.1)
              ),
              align = "center"
            ) #close fluidRow structure for input

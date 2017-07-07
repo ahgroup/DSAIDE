@@ -92,10 +92,10 @@ ui <- fluidPage(
            h2('Simulation Settings'),
            fluidRow(
              column(6,
-                    sliderInput("S0", "initial number of susceptible hosts (S0)", min = 1000, max = 5000, value = 1000, step = 500)
+                    numericInput("S0", "initial number of susceptible hosts (S0)", min = 1000, max = 5000, value = 1000, step = 500)
              ),
              column(6,
-                    sliderInput("I0", "initial number of infected hosts (I0)", min = 0, max = 100, value = 0, step = 1)
+                    numericInput("I0", "initial number of infected hosts (I0)", min = 0, max = 100, value = 0, step = 1)
              )
            ), #close fluidRow structure for input
            fluidRow(
@@ -103,31 +103,31 @@ ui <- fluidPage(
                     numericInput("tmax", "Maximum simulation time (tmax)", min = 1, max = 12000, value = 100)
              ),
              column(6,
-                    sliderInput("w", "Rate of immunity loss (w)", min = 0, max = 10, value = 0, step = 0.01)
+                    numericInput("w", "Rate of immunity loss (w)", min = 0, max = 10, value = 0, step = 0.01)
              )
            ), #close fluidRow structure for input
            fluidRow(
              column(6,
-                    sliderInput("b", "Rate of transmission (b)", min = 0, max = 0.1, value = 0, step = 0.001 , sep ='')
+                    numericInput("b", "Rate of transmission (b)", min = 0, max = 0.1, value = 0, step = 0.001 , sep ='')
              ),
              column(6,
-                    sliderInput("g", "Rate at which a host leaves the infectious compartment (g)", min = 0, max = 25, value = 10, step = 0.25, sep ='')
+                    numericInput("g", "Rate at which a host leaves the infectious compartment (g)", min = 0, max = 25, value = 10, step = 0.25, sep ='')
              )
            ), #close fluidRow structure for input
            fluidRow(
              column(6,
-                    sliderInput("f", "Fraction vaccinated prior to outbreak (f)", min = 0, max = 1, value = 0, step = 0.05, sep ='')
+                    numericInput("f", "Fraction vaccinated prior to outbreak (f)", min = 0, max = 1, value = 0, step = 0.05, sep ='')
              ),
              column(6,
-                    sliderInput("e", "Efficacy of vaccine (e)", min = 0, max = 1, value = 0, step = 0.05, sep ='')
+                    numericInput("e", "Efficacy of vaccine (e)", min = 0, max = 1, value = 0, step = 0.05, sep ='')
              )
            ), #close fluidRow structure for input
            fluidRow(
              column(6,
-                    sliderInput("m", "Rate of new births (m)", min = 0, max = 100, value = 0, step = 1)
+                    numericInput("m", "Rate of new births (m)", min = 0, max = 100, value = 0, step = 1)
              ),
              column(6,
-                    sliderInput("n", "Natural death rate (n)", min = 0, max = 0.02, value = 0, step = 0.0005, sep ='')
+                    numericInput("n", "Natural death rate (n)", min = 0, max = 0.02, value = 0, step = 0.0005, sep ='')
              )
            ) #close fluidRow structure for input
            
