@@ -46,11 +46,10 @@ For compartmental models (and also often other types of models), it is useful to
 
 
 ###Model Implementation
-To allow us to simulate this model, we need to implement it on the computer. For that purpose, it is often useful to write the model as mathematical equations (this is not strictly needed, some computer simulation models are never formulated as mathematical models). A very common way (but not the only one) to implement compartmental models such as the simple SIR model is a set of ordinary differential equations. Each compartment/variable gets an equation. The right side of each equation specifies the processes going on in the system and how they change the numbers in each compartment via inflows and outflows. For the model described above, the equations look like this:
-
-S:$$\dot S = -b SI$$ 
-I:$$\dot I = b S I - g I$$
-R:$$\dot R = g I$$
+To allow us to simulate this model, we need to implement it on the computer. For that purpose, it is often useful to write the model as mathematical equations (this is not strictly needed, some computer simulation models are never formulated as mathematical models). A very common way (but not the only one) to implement compartmental models such as the simple SIR model is a set of ordinary differential equations. Each compartment/variable gets an equation. The right side of each equation specifies the processes going on in the system and how they change the numbers in each compartment via inflows and outflows. For the model described above, the equations look like this: 
+$\dot S = -bSI$ 
+$\dot I = bSI - gI$
+$\dot R = gI$
 
 *Note: If you don't see equations but instead gibberish, try opening the app with a different browser. I have found that occasionally, on some computers, the built-in RStudio viewer does not process the equations correctly. Firefox and Chrome seem to work.* 
 
