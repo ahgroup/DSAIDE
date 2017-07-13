@@ -10,7 +10,7 @@
 </ul></div>&#13;
 <div id="task-2" class="section level3">&#13;
 <h3>Task 2:</h3>&#13;
-<ul><li>Use the equation that expresses R<sub>0</sub> as function of model parameters for the simple SIR model. Using the values of the model parameters, compute R<sub>0</sub> that way. Check that it agrees with what you found in task #1.</li>&#13;
+<ul><li>Use the equation that expresses R<sub>0</sub> as a function of model parameters for the simple SIR model. Using the values of the model parameters, compute R<sub>0</sub> that way. Check that it agrees with what you found in task #1.</li>&#13;
 </ul></div>&#13;
 <div id="task-3" class="section level3">&#13;
 <h3>Task 3:</h3>&#13;
@@ -31,7 +31,7 @@
 </ul></div>&#13;
 <div id="task-6" class="section level3">&#13;
 <h3>Task 6:</h3>&#13;
-<ul><li>What is the value of R at the time the outbreak peaks? (It’s only called R<sub>0</sub> at the beginning for a fully susceptible population). Explain how you can find that value for R, both using intuitive reasoning and using the equation for R<sub>0</sub> given above (R<sub>0</sub> = 1+rD). Note that at this R value, the outbreak wanes, but people still get infected. What R value would you need to completely halt any further infections?</li>&#13;
+<ul><li>What is the value of R at the time the outbreak peaks? (It’s only called R<sub>0</sub> at the beginning for a fully susceptible population). Explain how you can find that value for R, both using intuitive reasoning and using the equation for R<sub>0</sub> given above (R<sub>0</sub> = 1+rD). Note that at this R value, the outbreak wanes, but people still get infected. What R value would you need to halt any further infections completely?</li>&#13;
 </ul></div>&#13;
 <div id="task-7" class="section level3">&#13;
 <h3>Task 7:</h3>&#13;
@@ -39,11 +39,11 @@
 </ul></div>&#13;
 <div id="task-8" class="section level3">&#13;
 <h3>Task 8:</h3>&#13;
-<ul><li>R<sub>0</sub> quantifies the level of transmissibility of an ID, which determines how many people will become infected or what level of intervention is needed to stop/prevent an outbreak. However, it is important to be aware that R<sub>0</sub> says nothing about the timing/dynamics of the outbreak. Set parameter values as in #1. Run an outbreak, record the time of peak and duration of the outbreak (the latter is somewhat ill defined, so just come up with a rough number). Then increase the infectious duration by a factor of 4 (rate reduced by factor of 4) and adjust the infectiousness-level such that you get the same R<sub>0</sub> as before. Run again and compare the results with respect to total outbreak size and timing of outbreak.</li>&#13;
+<ul><li>R<sub>0</sub> quantifies the level of transmissibility of an ID, which determines how many people will become infected or what level of intervention is needed to stop/prevent an outbreak. However, it is important to be aware that R<sub>0</sub> says nothing about the timing/dynamics of the outbreak. Set parameter values as in #1. Run an outbreak, record the time of peak and duration of the outbreak (the latter is somewhat ill-defined, so just come up with a rough number). Then increase the infectious duration by a factor of 4 (rate reduced by a factor of 4) and adjust the infectiousness-level such that you get the same R<sub>0</sub> as before. Run again and compare the results concerning total outbreak size and timing of outbreak.</li>&#13;
 </ul></div>&#13;
 <div id="task-9" class="section level3">&#13;
 <h3>Task 9:</h3>&#13;
-<ul><li>One usually obtains R<sub>0</sub> from the data/literature and uses it to pick values for the transmission parameter. Let’s try that. Go online and find (approximate) values for the duration of the infectious period and for R<sub>0</sub> for SARS. Keep the population size at 1000. Use those values to compute the transmission parameter, <em>b</em>. Run an outbreak, see if things work out right. Specifically, using the equation involving the final number of susceptibles left should give you an R<sub>0</sub> that roughly agrees with the one you started out with.</li>&#13;
+<ul><li>One usually obtains R<sub>0</sub> from the data/literature and uses it to pick values for the transmission parameter. Let’s try that. Go online and find (approximate) values for the duration of the infectious period and R<sub>0</sub> for SARS. Keep the population size at 1000. Use those values to compute the transmission parameter, <em>b</em>. Run an outbreak, see if things work out right. Specifically, using the equation involving the final number of susceptibles left should give you an R<sub>0</sub> that roughly agrees with the one you started out with.</li>&#13;
 </ul></div>&#13;
 <div id="task-10" class="section level3">&#13;
 <h3>Task 10:</h3>&#13;
@@ -62,12 +62,12 @@
 </ul></div>&#13;
 <div id="task-13" class="section level3">&#13;
 <h3>Task 13:</h3>&#13;
-<ul><li>So far, we looked at an individual outbreak. Now we introduce births and deaths. For our model, we use a constant birth rate <em>m</em>, and a fixed per-capita death rate <em>n</em>. It is possible to have population dynamics (births, deaths) in the absence of an ID. It is useful to first figure out what’s going on there before you introduce the disease dynamics.</li>&#13;
+<ul><li>So far, we looked at an individual outbreak. Now we introduce births and deaths. For our model, we use a constant birth rate <em>m</em> and a fixed per-capita death rate <em>n</em>. It is possible to have population dynamics (births, deaths) in the absence of an ID. It is useful first to figure out what’s going on there before you introduce the disease dynamics.</li>&#13;
 <li>Choose various values for the birthrate and lifespan, run the model and see what the population does in the absence of an infectious disease. Can you figure out the equation that relates births, deaths and steady state level for our model? Test it with the simulation.</li>&#13;
 </ul></div>&#13;
 <div id="task-14" class="section level3">&#13;
 <h3>Task 14:</h3>&#13;
-<ul><li>If births (and deaths) are present, you will be able to get multiple outbreaks and endemic states. Set the parameter values such that your hosts have approximately an average life-span of 41 years. Make sure to convert to months and convert to a rate. Set birth rate such that the population is steady at 1000 in the absence of the ID. Set simulation time to around 500 years, 1 infected, <em>g</em>=5, <em>b</em>=0.015. No vaccine. (Be patient, running the simulation takes some time.)</li>&#13;
+<ul><li>If births (and deaths) are present, you will be able to get multiple outbreaks and endemic states. Set the parameter values such that your hosts have approximately an average lifespan of 41 years. Make sure to convert to months and convert to a rate. Set birth rate such that the population is steady at 1000 in the absence of the ID. Set simulation time to around 500 years, 1 infected, <em>g</em>=5, <em>b</em>=0.015. No vaccine. (Be patient, running the simulation takes some time.)</li>&#13;
 <li>Run the simulation, make sure you reach a steady state. Compare the steady state values for S, I and R from the simulation with those predicted from the SIR steady state equations.</li>&#13;
 </ul></div>&#13;
 <div id="task-15" class="section level3">&#13;

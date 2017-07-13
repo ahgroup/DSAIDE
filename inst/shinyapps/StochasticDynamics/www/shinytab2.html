@@ -2,7 +2,7 @@
 <h2>The Model</h2>&#13;
 <div id="model-overview" class="section level3">&#13;
 <h3>Model Overview</h3>&#13;
-<p>This model tracks susceptibles, exposed/pre-sympomatic, infected/symptomatic and recovered hosts. The following compartments are included:</p>&#13;
+<p>This model tracks susceptibles, exposed/pre-symptomatic, infected/symptomatic and recovered hosts. The following compartments are included:</p>&#13;
 <ul><li><strong>S</strong> - uninfected and susceptible individuals</li>&#13;
 <li><strong>E</strong> - individuals who are infected and do not yet show symptoms. Those individuals can be infectious.</li>&#13;
 <li><strong>I</strong> - individuals who are infected and show symptoms. Those individuals are likely infectious, but the model allows to adjust this, including no infectiousness.</li>&#13;
@@ -11,7 +11,7 @@
 <ul><li>Susceptible individuals (S) can become infected by pre-symptomatic/exposed (E) or symptomatic (I) hosts at rates <em>b<sub>E</sub></em> and <em>b<sub>I</sub></em>.</li>&#13;
 <li>All infected hosts first enter the exposed/presymptomatic stage and leave the stage at rate <em>g<sub>E</sub></em>, the inverse of which is the average time spent in this stage.</li>&#13;
 <li>All infected hosts go from the presymptomatic to the symptomatic stage and leave the stage at rate <em>g<sub>I</sub></em>.</li>&#13;
-<li>Recovered individuals are initially immune to reinfection. They can lose their immunity at rate <em>w</em> and return back to the susceptible compartment.</li>&#13;
+<li>Recovered individuals are initially immune to reinfection. They can lose their immunity at rate <em>w</em> and return to the susceptible compartment.</li>&#13;
 <li>New susceptible hosts enter the system (are born) at rate <em>e</em>. Natural death occurs at rate <em>n</em>.</li>&#13;
 </ul></div>&#13;
 <div id="model-implementation" class="section level3">&#13;
