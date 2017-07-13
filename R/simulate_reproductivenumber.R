@@ -65,7 +65,7 @@ reproductivenumberode <- function(t, y, parms)
 #' @export
 
 
-simulate_reproductivenumber <- function(S0 = 1000, I0 = 0, f = 0.0, e = 0.0, tmax = 300, g = 50, b = 1e-1, m = 20, n = 1/50, w = 0){
+simulate_reproductivenumber <- function(S0 = 1000, I0 = 1, f = 0.0, e = 0.0, tmax = 300, g = 10, b = 1e-2, m = 0, n = 0, w = 0){
 
   S0eff = (1 - f*e) * S0;
   R0 = f*e * S0;

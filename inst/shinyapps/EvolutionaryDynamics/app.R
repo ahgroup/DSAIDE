@@ -74,7 +74,7 @@ ui <- fluidPage(
   includeCSS("../styles/dsaide.css"),
   
   #add header and title
-  tags$head( tags$script(src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML", type = 'text/javascript') ),
+   
   div( includeHTML("www/header.html"), align = "center"),
   h1('Evolutionary Dynamics App', align = "center", style = "background-color:#123c66; color:#fff"),
   
