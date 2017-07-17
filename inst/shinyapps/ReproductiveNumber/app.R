@@ -142,7 +142,7 @@ ui <- fluidPage(
            #################################
            #Start with results on top
            h2('Simulation Results'),
-           plotOutput(outputId = "plot", height = "500px"),
+           plotOutput(outputId = "plot", width = "auto"),
            # PLaceholder for results of type text
            htmlOutput(outputId = "text"),
            #Placeholder for any possible warning or error messages (this will be shown in red)

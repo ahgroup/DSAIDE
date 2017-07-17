@@ -140,7 +140,7 @@ generate_simoutput <- function(input,output,allres,varlist = NULL)
       resfinal = resfinal/nreps #mean for each variable
       resfracfinal = resfracfinal/nreps #mean for each variable
       
-      txt <- ""
+     
       for (nn in 1:length(varnames))
       {
         maxval = round(resmax[nn],2)
@@ -149,7 +149,8 @@ generate_simoutput <- function(input,output,allres,varlist = NULL)
         fracfinal = round(resfracfinal[nn], 2)
         newtxt1 <- paste('Minimum and Maximum of ',varnames[nn],' during simulation: ',minval,' and ', maxval,sep='')
         newtxt2 <- paste('Number and Fraction of ',varnames[nn],' at end of simulation: ',numfinal,' and ',fracfinal,sep='')
-        txt <- paste(txt, newtxt1, newtxt2, sep = "<br/>")
+        if (nn == 1) {txt <- paste(newtxt1, newtxt2, sep = "<br/>")}
+        if (nn > 1) {txt <- paste(txt, newtxt1, newtxt2, sep = "<br/>")}
       }
     alltext <- paste(alltext, txt, sep = "<hr>" ) #add text blocks together
       
