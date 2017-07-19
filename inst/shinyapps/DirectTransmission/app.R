@@ -93,15 +93,15 @@ ui <- fluidPage(
            h2('Simulation Settings'),
            fluidRow(
              column(6,
-                    numericInput("PopSize", "Population Size", min = 1000, max = 5000, value = 1000, step = 500)
+                    numericInput("PopSize", "Population Size (P0)", min = 1000, max = 5000, value = 1000, step = 500)
              ),
              column(6,
-                    numericInput("I0", "initial number of infected hosts", min = 0, max = 100, value = 0, step = 1)
+                    numericInput("I0", "initial number of infected hosts (I0)", min = 0, max = 100, value = 0, step = 1)
              )
            ), #close fluidRow structure for input
            fluidRow(
              column(6,
-                    numericInput("tmax", "Maximum simulation time", min = 1, max = 500, value = 100, step = 1)
+                    numericInput("tmax", "Maximum simulation time (tmax)", min = 1, max = 500, value = 100, step = 1)
              ),
              column(6,
                     selectInput("scenario", "Transmission scenario:",c("density dependent" = 1, 'frequency dependent' = 2))
