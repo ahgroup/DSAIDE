@@ -75,7 +75,7 @@ $$\dot I = bSI - gI$$
 
 
 ###Task 1: 
-* Run the simulation with a population size of 1000, 1 initially infected host, simulation duration 100 days, recovery rate _g_=0.5 per day, and infectiousness _b_=0.001. You will get an outbreak of some - currently unspecified - infectious disease. 
+* Run the simulation with a population size (*S0*) of 1000, 1 initially infected host (*I0*) , simulation duration 100 days, recovery rate _g_=0.5 per day, and infectiousness _b_=0.001. You will get an outbreak of some - currently unspecified - infectious disease. 
 * Record the number and fraction of susceptible/infected/recovered remaining at the end of the outbreak.    
 * From the graph, get a (rough) estimate of the day at which the outbreak peaks.
 * Contemplate the fact that the outbreak ends even though there are still susceptible remaining, i.e. not everyone got infected. 
@@ -94,7 +94,7 @@ $$\dot I = bSI - gI$$
 * Compare your expectations with the results. How do they agree/disagree? Does it make sense? Anything surprising happening?
 
 ###Task 4: 
-* Now, double the number of susceptibles (i.e. the population size), leave everything else as you just had.
+* Now, double the number of susceptibles (i.e. *S0*), leave everything else as you just had.
 * How do you expect the results to change?
 * Run the simulation with these new parameter settings, record the same values as above.
 * Compare your expectations with what results. How do they agree/disagree? Does it make sense? Anything surprising happening?
