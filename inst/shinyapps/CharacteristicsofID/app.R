@@ -93,47 +93,47 @@ ui <- fluidPage(
            h2('Simulation Settings'),
            fluidRow(
              column(4,
-                    numericInput("PopSize", "Population Size", min = 1000, max = 5000, value = 1000, step = 500)
+                    numericInput("PopSize", "Population Size (S0)", min = 1000, max = 5000, value = 1000, step = 500)
              ),
              column(4,
-                    numericInput("P0", "Initial number of presymptomatic hosts", min = 0, max = 100, value = 1, step = 1)
+                    numericInput("P0", "Initial number of presymptomatic hosts (P0) ", min = 0, max = 100, value = 1, step = 1)
              ),
              column(4,
-                    numericInput("tmax", "Maximum simulation time", min = 10, max = 1000, value = 300, step = 10)
+                    numericInput("tmax", "Maximum simulation time (tmax)", min = 10, max = 1000, value = 300, step = 10)
              ),
              align = "center"
            ), #close fluidRow structure for input
            
            fluidRow(
              column(4,
-                    numericInput("bP", "Rate of transmission by presymptomatic hosts", min = 0, max = 0.01, value = 0, step = 0.0001  )
+                    numericInput("bP", "Rate of transmission by presymptomatic hosts (bP)", min = 0, max = 0.01, value = 0, step = 0.0001  )
              ),
              column(4,
-                    numericInput("bA", "Rate of transmission by asymptomatic hosts", min = 0, max = 0.01, value = 0, step = 0.0001  )
+                    numericInput("bA", "Rate of transmission by asymptomatic hosts (bA)", min = 0, max = 0.01, value = 0, step = 0.0001  )
              ),
              column(4,
-                    numericInput("bI", "Rate of transmission by symptomatic hosts", min = 0, max = 0.01, value = 0.001, step = 0.0001  )
-             ),
-             align = "center"
-           ), #close fluidRow structure for input
-           fluidRow(
-             column(4,
-                    numericInput("gP", "Rate of recovery of presymptomatic hosts", min = 0, max = 2, value = 0.5, step = 0.1)
-             ),
-             column(4,
-                    numericInput("gA", "Rate of recovery of asymptomatic hosts", min = 0, max = 2, value = 0.5, step = 0.1)
-             ),
-             column(4,
-                    numericInput("gI", "Rate of recovery of symptomatic hosts", min = 0, max = 2, value = 0.5, step = 0.1)
+                    numericInput("bI", "Rate of transmission by symptomatic hosts (bI)", min = 0, max = 0.01, value = 0.001, step = 0.0001  )
              ),
              align = "center"
            ), #close fluidRow structure for input
            fluidRow(
              column(4,
-                    numericInput("f", "Fraction of asymptomatic infections", min = 0, max = 1, value = 0, step = 0.1)
+                    numericInput("gP", "Rate of recovery of presymptomatic hosts (gP)", min = 0, max = 2, value = 0.5, step = 0.1)
              ),
              column(4,
-                    numericInput("d", "Fraction of deaths in symptomatic hosts", min = 0, max = 1, value = 0, step = 0.1)
+                    numericInput("gA", "Rate of recovery of asymptomatic hosts (gA)", min = 0, max = 2, value = 0.5, step = 0.1)
+             ),
+             column(4,
+                    numericInput("gI", "Rate of recovery of symptomatic hosts (gI)", min = 0, max = 2, value = 0.5, step = 0.1)
+             ),
+             align = "center"
+           ), #close fluidRow structure for input
+           fluidRow(
+             column(4,
+                    numericInput("f", "Fraction of asymptomatic infections (f)", min = 0, max = 1, value = 0, step = 0.1)
+             ),
+             column(4,
+                    numericInput("d", "Fraction of deaths in symptomatic hosts (d)", min = 0, max = 1, value = 0, step = 0.1)
              ),
              align = "center"
            )
