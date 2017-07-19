@@ -96,26 +96,26 @@ ui <- fluidPage(
            h2('Simulation Settings'),
            fluidRow(
              column(6,
-                    numericInput("S0", "initial number of susceptible hosts", min = 1000, max = 5000, value = 1000, step = 500)
+                    numericInput("S0", "initial number of susceptible hosts (S0)", min = 1000, max = 5000, value = 1000, step = 500)
              ),
              column(6,
-                    numericInput("I0", "initial number of infected hosts", min = 0, max = 50, value = 0, step = 1)
+                    numericInput("I0", "initial number of infected hosts (I0)", min = 0, max = 50, value = 0, step = 1)
              )
            ), #close fluidRow structure for input
            fluidRow(
              column(6,
-                    numericInput("E0", "initial amount of environmental pathogen", min = 0, max = 100, value = 0, step = 1)
+                    numericInput("E0", "initial amount of environmental pathogen (E0)", min = 0, max = 100, value = 0, step = 1)
              ),
              column(6,
-                    numericInput("tmax", "Maximum simulation time", min = 1, max = 500, value = 100, step = 1)
+                    numericInput("tmax", "Maximum simulation time (tmax)", min = 1, max = 500, value = 100, step = 1)
              )
            ), #close fluidRow structure for input
            fluidRow(
              column(6,
-                    numericInput("bd", "direct transmission rate (bd)", min = 0, max = 0.01, value = 0, step = 0.0001  )
+                    numericInput("bd", "direct transmission rate (bD)", min = 0, max = 0.01, value = 0, step = 0.0001  )
              ),
              column(6,
-                    numericInput("be", "environmental transmission rate (be)", min = 0, max = 0.01, value = 0, step = 0.0001  )
+                    numericInput("be", "environmental transmission rate (bE)", min = 0, max = 0.01, value = 0, step = 0.0001  )
              )
            ), #close fluidRow structure for input
            fluidRow(
