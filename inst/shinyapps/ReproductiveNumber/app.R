@@ -17,16 +17,20 @@ refresh <- function(input, output){
     # Read all the input values from the UI
     S0 = isolate(input$S0);
     I0 = isolate(input$I0);
-    f = isolate(input$f);
     tmax = isolate(input$tmax);
-    g = isolate(input$g);
+
+    w = isolate(input$w);
     b = isolate(input$b);
-    m = isolate(input$m);
-    n = isolate(input$n);
+    g = isolate(input$g);
+    
+    f = isolate(input$f);
     e = isolate(input$e);
     
+    m = isolate(input$m);
+    n = isolate(input$n);
+    
     # Call the ODE solver with the given parameters
-    result <- simulate_reproductivenumber(S0 = S0, I0 = I0, f = f, e=e, tmax = tmax, g = g, b = b, m = m, n = n)
+    result <- simulate_reproductivenumber(S0 = S0, I0 = I0, f = f, e=e, tmax = tmax, g = g, b = b, m = m, n = n, w = w)
 
     return(list(result)) #this is returned as the res variable
   })
@@ -62,9 +66,8 @@ server <- function(input, output, session) {
 
 #This is the UI part of the shiny App
 ui <- fluidPage(
-  includeCSS("../styles/dsaide.css"),
+  includeCSS("../styles/dsaide.css"), #styling for app
   #add header and title
-  tags$head( tags$script(src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML", type = 'text/javascript') ),
   div( includeHTML("www/header.html"), align = "center"),
   #specify name of App below, will show up in title
   h1('Reproductive Number App', align = "center", style = "background-color:#123c66; color:#fff"),
@@ -139,7 +142,7 @@ ui <- fluidPage(
            #################################
            #Start with results on top
            h2('Simulation Results'),
-           plotOutput(outputId = "plot", height = "500px"),
+           plotOutput(outputId = "plot", width = "auto"),
            # PLaceholder for results of type text
            htmlOutput(outputId = "text"),
            #Placeholder for any possible warning or error messages (this will be shown in red)

@@ -1,0 +1,22 @@
+---
+title: Main Menu Documentation
+output:
+  html_document:
+    theme: null
+    highlight: null
+    css: ../styles/dsaide.css
+    fig_caption: true
+    mathjax: default 
+    keep_md: false
+    includes:
+      #in_header: in_header.txt
+      before_body: ../styles/dsaide_before_body.txt
+      after_body: ../styles/dsaide_after_body.txt 
+bibliography: ../media/references.bib
+---
+
+##Overview {#shinytab1}
+The main menu doesn't have tabs, therefore this text will not be displayed.
+The file exists such that header and footer are properly generated and placed into the app's www folder.
+In the future, it would be possible to have extra text written here included as tabs below the main menu.
+

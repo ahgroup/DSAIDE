@@ -4,8 +4,8 @@
 \alias{simulate_reproductivenumber}
 \title{Simulation of a compartmental infectious disease transmission model to study the reproductive number}
 \usage{
-simulate_reproductivenumber(S0 = 1000, I0 = 0, f = 0, e = 0,
-  tmax = 300, g = 50, b = 0.1, m = 20, n = 1/50, w = 0)
+simulate_reproductivenumber(S0 = 1000, I0 = 1, f = 0, e = 0,
+  tmax = 300, g = 10, b = 0.01, m = 0, n = 0, w = 0)
 }
 \arguments{
 \item{S0}{initial number of susceptible hosts}

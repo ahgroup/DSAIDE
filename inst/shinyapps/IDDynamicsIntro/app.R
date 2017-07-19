@@ -59,7 +59,7 @@ ui <- fluidPage(
   includeCSS("../styles/dsaide.css"),
   #add header and title
   withMathJax(),
-  #tags$head( tags$script(src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML", type = 'text/javascript') ),
+  # 
   tags$head(tags$style(".myrow{vertical-align: bottom;}")),
   div( includeHTML("www/header.html"), align = "center"),
   #specify name of App below, will show up in title

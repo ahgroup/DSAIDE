@@ -84,7 +84,7 @@ server <- function(input, output, session) {
 ui <- fluidPage(
   includeCSS("../styles/dsaide.css"),
   #add header and title
-  tags$head( tags$script(src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML", type = 'text/javascript') ),
+   
   div( includeHTML("www/header.html"), align = "center"),
   #specify name of App below, will show up in title
   h1('ID Control App', align = "center", style = "background-color:#123c66; color:#fff"),
