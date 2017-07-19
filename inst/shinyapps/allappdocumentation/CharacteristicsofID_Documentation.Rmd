@@ -70,10 +70,10 @@ For the following tasks, it is assumed that the model runs in units of days.
 
 ###Task 1: 
 * Set the model parameters such that it corresponds to the following setting: 
-    * A population size of 1000, 1 initially infected, presymptomatic host, simulation duration 200 days.
+    * A population size, _S~0~_, of 1000, 1 initially infected presymptomatic host, _P~0~_, simulation duration _tmax_= 200 days.
     * Assume that only symptomatic individuals transmit, at rate _b~I~_ = 0.001.
     * Assume that the duration of the presymptomatic, asymptomatic and symptomatic periods are all 5 days long. (Hint: The parameters _g~P~_, _g~A~_ and _g~I~_ are the inverses of these periods.)
-    * Assume that there are no asymptomatic infections and nobody dies due to disease.
+    * Assume that there are no asymptomatic infections, _b~A~_= 0, and nobody dies due to disease _d_=0.
 
 * With parameters set to correspond to the scenario just described, run the simulation.
 * Record the number and fraction of susceptible/infected/recovered remaining at the end of the outbreak.    
@@ -82,19 +82,19 @@ For the following tasks, it is assumed that the model runs in units of days.
 * Rerun the simulation, with the same values you just had. Does anything change? Why (not)?
 
 ###Task 2: 
-* Assume now that half of the infected are asymptomatic. Don't change any other assumption.
+* Assume now that half of the infected are asymptomatic (_f_= 0.5). Don't change any other assumption.
 * What do you expect to get for the number/fraction of S/I/R at the end of the outbreak and the time at which the outbreak peaks?
 * Run another simulation, record the same values as above.
 * Compare your expectations with the results. How do they agree/disagree? Does it make sense? Anything surprising happening?
 
 ###Task 3: 
-* Now assume that the asymptomatics transmit at the same rate as the symptomatic. Leave everything as in #2.
+* Now assume that the asymptomatics transmit at the same rate as the symptomatic (_b~A~_= 0.001). Leave everything as in #2.
 * How do you expect the results to change? (Try to make as precise/quantitative a prediction as you can)
 * Run another simulation, record the same values as above.
 * Compare your expectations with the results. How do they agree/disagree? Does it make sense? Anything surprising happening?
 
 ###Task 4: 
-* Next, let's assume that half the symptomatic infected die. Leave everything as in #3.
+* Next, let's assume that half the symptomatic infected die (_d_= 0.5). Leave everything as in #3.
 * How do you expect the results to change?
 * Run another simulation, record the same values as above.
 * Compare your expectations with the results. How do they agree/disagree? Does it make sense? Anything surprising happening?
