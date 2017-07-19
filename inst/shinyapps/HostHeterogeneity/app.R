@@ -100,18 +100,18 @@ ui <- fluidPage(
            p('All parameters are assumed to be in units of (inverse) months'),
            fluidRow(
              column(6,
-                    numericInput("S10", "initial number of susceptible type 1 hosts (S10)", min = 100, max = 5000, value = 1000, step = 100)
+                    numericInput("S10", "initial number of susceptible type 1 hosts (S01)", min = 100, max = 5000, value = 1000, step = 100)
              ),
              column(6,
-                    numericInput("I10", "initial number of infected type 1  hosts (I10)", min = 0, max = 100, value = 0, step = 1)
+                    numericInput("I10", "initial number of infected type 1  hosts (I01)", min = 0, max = 100, value = 0, step = 1)
              )
            ), #close fluidRow structure for input
            fluidRow(
              column(6,
-                    numericInput("S20", "initial  number of susceptible type 2 hosts (S20)", min = 0, max = 5000, value = 0, step = 100)
+                    numericInput("S20", "initial  number of susceptible type 2 hosts (S02)", min = 0, max = 5000, value = 0, step = 100)
              ),
              column(6,
-                    numericInput("I20", "initial  number of infected type 2 hosts (I20)", min = 0, max = 100, value = 0, step = 1)
+                    numericInput("I20", "initial  number of infected type 2 hosts (I02)", min = 0, max = 100, value = 0, step = 1)
              )
            ), #close fluidRow structure for input
            fluidRow(
