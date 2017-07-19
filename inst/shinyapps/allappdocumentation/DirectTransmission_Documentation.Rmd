@@ -68,21 +68,21 @@ _Note: For the following tasks, it is assumed that the model runs in units of mo
 
 ###Task 1: 
 * Set the model parameters such that it corresponds to the following setting: 
-    * A population size of 1000, 1 initially infected host, simulation duration approximately 10 years.
-    * Consider density-dependent transmission, with a transmission rate of b~d~ = 0.005, and an area of size 2.
+    * A population size, _P~0~_, of 1000, 1 initially infected host, simulation duration, _tmax_ approximately 10 years.
+    * Consider density-dependent transmission, with a transmission rate of _b~d~_ = 0.005, and an area of size 2.
     * Assume that the duration of the infectious period is 15 days long (and that there are 30 days in a month). 
     * Turn off births, deaths and waning immunity for now.
 * With parameters set to correspond to the scenario just described, run the simulation.
 * Record the number and fraction of susceptible/infected/recovered remaining at the end of the outbreak.    
 
 ###Task 2: 
-* Now switch to frequency-dependent transmission, set b~f~=2.5. Keep everything else as before.
+* Now switch to frequency-dependent transmission, set _b~f~_=2.5. Keep everything else as before.
 * Think about your expectations, run the simulation and compare your expectations with the results.
 * Anything surprising happening? Do you understand why you see what you see?
 
 
 ###Task 3: 
-* Let's assume we are now in a location with twice the number of people as before, living in roughly the same area.
+* Let's assume we are now in a location with twice the number of people as before (_P~0~_ = 2000) , living in roughly the same area.
 * Implement that in the simulation by changing population size, keep all other settings as above. 
 * What do you expect to see for the frequency and density dependent scenarios? Run simulations and check. Pay attention to both the numbers and fractions of S/I/R individuals at the end of the outbreak.  
 

@@ -82,7 +82,7 @@ For the following tasks, it is assumed that the model runs in units of days.
 * Rerun the simulation, with the same values you just had. Does anything change? Why (not)?
 
 ###Task 2: 
-* Assume now that half of the infected are asymptomatic (_f_= 0.5). Don't change any other assumption.
+* Assume now that half of the infected are asymptomatic (_f_ = 0.5). Don't change any other assumption.
 * What do you expect to get for the number/fraction of S/I/R at the end of the outbreak and the time at which the outbreak peaks?
 * Run another simulation, record the same values as above.
 * Compare your expectations with the results. How do they agree/disagree? Does it make sense? Anything surprising happening?
@@ -94,7 +94,7 @@ For the following tasks, it is assumed that the model runs in units of days.
 * Compare your expectations with the results. How do they agree/disagree? Does it make sense? Anything surprising happening?
 
 ###Task 4: 
-* Next, let's assume that half the symptomatic infected die (_d_= 0.5). Leave everything as in #3.
+* Next, let's assume that half the symptomatic infected die (_d_ = 0.5). Leave everything as in #3.
 * How do you expect the results to change?
 * Run another simulation, record the same values as above.
 * Compare your expectations with the results. How do they agree/disagree? Does it make sense? Anything surprising happening?
