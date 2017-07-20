@@ -34,7 +34,6 @@ idcharacteristicsode <- function(t, y, parms)
 #'
 #' @param S0 specifies the initial number of susceptible hosts
 #' @param P0 initial number of infected, pre-symptomatic hosts
-#'
 #' @param bP level/rate of infectiousness for hosts in the P compartment
 #' @param bA level/rate of infectiousness for hosts in the A compartment
 #' @param bI level/rate of infectiousness for hosts in the I compartment

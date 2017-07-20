@@ -27,9 +27,9 @@ heterogeneityeq <- function(t, y, parms)
 #' @description  This model allows for the simulation of an ID with 2 types of hosts
 #' 
 #'
-#' @param S10 initial total number of type 1 hosts 
+#' @param S10 initial number of susceptible type 1 hosts 
 #' @param I10 initial number of infected type 1 hosts
-#' @param S20 initial total number of type 2 hosts 
+#' @param S20 initial number of susceptible type 2 hosts 
 #' @param I20 initial number of infected type 2 hosts
 #' @param tmax maximum simulation time, units of months
 #' @param b11 rate of transmission from infected type 1 host to susceptible type 1 host

@@ -1,6 +1,6 @@
 ############################################################
 #This is the Shiny file for the Multiple Pathogen App
-#written by Andreas Handel and Spencer Hall
+#written by Andreas Handel, with contributions from others 
 #maintained by Andreas Handel (ahandel@uga.edu)
 #last updated 7/13/2017
 ############################################################
@@ -97,7 +97,6 @@ ui <- fluidPage(
                #################################
                # Inputs section
                h2('Simulation Settings'),
-               p('All parameters are assumed to be in units of (inverse) months'),
                fluidRow(
                    column(6,
                           numericInput("S0", "initial number of susceptible hosts (S0)", min = 100, max = 5000, value = 1000, step = 100)

@@ -4,10 +4,10 @@
 <div id="task-1" class="section level3">&#13;
 <h3>Task 1:</h3>&#13;
 <ul><li>Set the model parameters such that it corresponds to the following setting:&#13;
-<ul><li>500 susceptible, <em>S<sub>0</sub></em>, and 1 initially untreated infected host, <em>Iu<sub>0</sub></em>. No other infected hosts.</li>&#13;
+<ul><li>Susceptible <em>S<sub>0</sub> = 500</em>, and initially untreated infected host <em>Iu<sub>0</sub> = 1</em>. No other infected hosts <em>It<sub>0</sub> = 0</em> and <em>Ir<sub>0</sub> = 0</em>.</li>&#13;
 <li>Set simulation duration, <em>tmax</em>, to approximately half a year.</li>&#13;
-<li>Assume that untreated individuals transmit at rate <em>b<sub>U</sub> = 0.001</em>, treated at rate <em>b<sub>T</sub> = 0.0005</em>, and resistant at rate <em>b<sub>R</sub> = 0.0008</em>.</li>&#13;
-<li>Assume that the duration in days of the infectious period is <em>g<sub>U</sub> = 5</em> for untreated, <em>g<sub>T</sub> = 4</em> for treated, and <em>g<sub>R</sub> = 5</em> for resistant.</li>&#13;
+<li>Assume that untreated individuals transmit at <em>b<sub>U</sub> = 0.001</em>, treated at <em>b<sub>T</sub> = 0.0005</em>, and resistant at <em>b<sub>R</sub> = 0.0008</em>.</li>&#13;
+<li>Assume that the duration in days of the infectious period is <em>g<sub>U</sub> = 1/5</em> for untreated, <em>g<sub>T</sub> = 1/4</em> for treated, and <em>g<sub>R</sub> = 1/5</em> for resistant.</li>&#13;
 <li>Set the number of simulations to 20.</li>&#13;
 </ul></li>&#13;
 <li>With parameters set to correspond to the scenario just described, run the simulation.</li>&#13;
@@ -15,19 +15,19 @@
 </ul></div>&#13;
 <div id="task-2" class="section level3">&#13;
 <h3>Task 2:</h3>&#13;
-<ul><li>With everything as before, set the <em>Iu<sub>0</sub> = 10</em>.</li>&#13;
+<ul><li>With everything as before, set the initial number of untreated infected hosts to 10.</li>&#13;
 <li>Run simulations. You should pretty much always get outbreaks. Record the average number of susceptibles left.</li>&#13;
 </ul></div>&#13;
 <div id="task-3" class="section level3">&#13;
 <h3>Task 3:</h3>&#13;
-<ul><li>With the same settings in <em>Task 2</em> turn on treatment ( <em>f != 0</em> ). Run the simulation with fraction receiving treatment, <em>f</em>, at 0, 0.25, 0.5, 0.75 and 1.</li>&#13;
+<ul><li>With the same settings as <em>Task 2</em> turn on treatment ( <em>f &gt; 0</em> ). Run the simulation with fraction receiving treatment, <em>f</em>, at 0, 0.25, 0.5, 0.75 and 1.</li>&#13;
 <li>Observe what happens to the susceptibles, <em>S</em>, at the end of the outbreak as you change treatment. Draw conclusions about the usefulness of treatment.</li>&#13;
 </ul></div>&#13;
 <div id="task-4" class="section level3">&#13;
 <h3>Task 4:</h3>&#13;
-<ul><li>Now allow resistance to be generated during treatment ( <em>c<sub>T</sub> != 0</em> ).</li>&#13;
+<ul><li>Now allow resistance to be generated during treatment ( <em>c<sub>T</sub> &gt; 0</em> ).</li>&#13;
 <li>Set <em>c<sub>T</sub> = 0.2</em> for the fraction of resistant generation from treatment.</li>&#13;
-<li>Set <em>f = 0</em>. Contemplate what you expect to see. Run simulations to check.</li>&#13;
+<li>Set treatment level to 0. Contemplate what you expect to see. Run simulations to check.</li>&#13;
 <li>Now turn on treatment. Run the simulation with <em>f</em> at 0.25, 0.5, 0.75 and 1.</li>&#13;
 </ul></div>&#13;
 <div id="task-5" class="section level3">&#13;
@@ -39,8 +39,8 @@
 </ul></div>&#13;
 <div id="task-6" class="section level3">&#13;
 <h3>Task 6:</h3>&#13;
-<ul><li>Keep exploring.</li>&#13;
-<li>Turn on resistance generation by treated, <em>c<sub>T</sub></em> and untreated, <em>c<sub>U</sub></em>.</li>&#13;
+<p>Keep exploring. For instance, try the following:</p>&#13;
+<ul><li>Turn on resistance generation by treated, <em>c<sub>T</sub></em>, and untreated, <em>c<sub>U</sub></em>.</li>&#13;
 <li>Explore how population size, <em>S<sub>0</sub></em>, the fraction of resistance generation ( <em>c<sub>T</sub></em> or <em>c<sub>U</sub></em> ) and fitness of the different strains ( <em>b<sub>T</sub></em> or <em>b<sub>U</sub></em> or <em>b<sub>R</sub></em> ) affect outcomes.</li>&#13;
 </ul></div>&#13;
 </div> </body>

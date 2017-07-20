@@ -1,4 +1,9 @@
+############################################################
 #This is the Shiny file for the ID Characteristics App
+#written by Andreas Handel, with contributions from others 
+#maintained by Andreas Handel (ahandel@uga.edu)
+#last updated 7/13/2017
+############################################################
 
 
 #the main server-side function 

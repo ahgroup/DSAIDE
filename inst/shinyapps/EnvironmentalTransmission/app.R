@@ -1,8 +1,8 @@
 ############################################################
 #This is the Shiny file for the Environmental Transmission App
-#written by Andreas Handel and Sina Solaimanpour 
+#written by Andreas Handel, with contributions from others 
 #maintained by Andreas Handel (ahandel@uga.edu)
-#last updated 10/13/2016
+#last updated 7/13/2017
 ############################################################
 
 #the server-side function with the main functionality

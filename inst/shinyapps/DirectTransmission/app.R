@@ -1,8 +1,8 @@
 ############################################################
 #This is the Shiny file for the Direct Transmission App
-#written by Andreas Handel and Sina Solaimanpour  
+#written by Andreas Handel, with contributions from others 
 #maintained by Andreas Handel (ahandel@uga.edu)
-#last updated 10/13/2016
+#last updated 7/13/2017
 ############################################################
 
 #the server-side function with the main functionality
@@ -15,7 +15,7 @@ refresh <- function(input, output){
     input$submitBtn
     
     # Read all the input values from the UI
-    PopSize = isolate(input$PopSize);
+    S0 = isolate(input$S0);
     I0 = isolate(input$I0);
     tmax = isolate(input$tmax);
     g = isolate(input$g);
@@ -30,7 +30,7 @@ refresh <- function(input, output){
     
     # Call the ODE solver with the given parameters
     
-    result <- simulate_directtransmission(PopSize = PopSize, I0 = I0, tmax = tmax, scenario = scenario, bd = bd, bf = bf, A = A, m = m, n = n, g = g, w = w)
+    result <- simulate_directtransmission(S0 = S0, I0 = I0, tmax = tmax, scenario = scenario, bd = bd, bf = bf, A = A, m = m, n = n, g = g, w = w)
 
     return(list(result)) #this is returned as the res variable
   })
@@ -93,7 +93,7 @@ ui <- fluidPage(
            h2('Simulation Settings'),
            fluidRow(
              column(6,
-                    numericInput("PopSize", "Population Size (P0)", min = 1000, max = 5000, value = 1000, step = 500)
+                    numericInput("S0", "initial number of susceptible hosts (S0)", min = 1000, max = 5000, value = 1000, step = 500)
              ),
              column(6,
                     numericInput("I0", "initial number of infected hosts (I0)", min = 0, max = 100, value = 0, step = 1)
