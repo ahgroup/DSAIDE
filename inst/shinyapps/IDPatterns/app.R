@@ -103,7 +103,7 @@ ui <- fluidPage(
            
            fluidRow(
              column(4,
-                    numericInput("S)", "Initial number of susceptible hosts (S0)", min = 1000, max = 5000, value = 1000, step = 500)
+                    numericInput("S0", "Initial number of susceptible hosts (S0)", min = 1000, max = 5000, value = 1000, step = 500)
              ),
              column(4,
                     numericInput("P0", "Initial number of presymptomatic hosts (P0)", min = 0, max = 100, value = 0, step = 1)

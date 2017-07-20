@@ -63,6 +63,9 @@ Often the letter _E_ is used for the _exposed_ stage, which would then be called
 _A general note: Some of the tasks below are fairly open-ended. You shouldn't go through the tasks like a check-list. Instead, explore these simulations, play with them, query them. As you do, loop through iterations of formulating your expectations for a specific scenario/task, running the model and observing results, and if results don't agree with your expectations, figure out why. Essentially, **"do science/research"**._ 
 
 
+**The tasks below are described in way that assumes that everything is in units of MONTHS (rate parameters, therefore, have units of inverse days). If any quantity is not given in those units, you need to convert it first (e.g. if it says a week, you need to convert it to 7 days).**
+
+
 ###Task 1: 
 * Set the model parameters such that it corresponds to the following setting: 
     * A population size, _S~0~_, of 1000, 1 initially infected host, _I~0~_, no pathogen in environment (_E~0~_ = 0) , simulation duration, _tmax_, approximately 5 years.
