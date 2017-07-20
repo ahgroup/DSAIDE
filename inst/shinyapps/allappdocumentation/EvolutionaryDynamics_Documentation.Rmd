@@ -79,18 +79,18 @@ __All parameters described below and in the model are assumed to be in units of 
 * You should see some simulations with outbreaks and some without. For those with outbreaks, you should have around 10-100 susceptible left at the end.
 
 ###Task 2: 
-* With everything as before, set _Iu~0~ = 10_. 
+* With everything as before, set the initial number of untreated infected hosts to 10. 
 * Run simulations. You should pretty much always get outbreaks. Record the average number of susceptibles left.
 
 
 ###Task 3: 
-* With the same settings as _Task 2_ turn on treatment ( _f != 0_ ). Run the simulation with fraction receiving treatment, _f_, at 0, 0.25, 0.5, 0.75 and 1.
+* With the same settings as _Task 2_ turn on treatment ( _f > 0_ ). Run the simulation with fraction receiving treatment, _f_, at 0, 0.25, 0.5, 0.75 and 1.
 * Observe what happens to the susceptibles, _S_, at the end of the outbreak as you change treatment. Draw conclusions about the usefulness of treatment.
 
 ###Task 4: 
-* Now allow resistance to be generated during treatment ( _c~T~ != 0_ ). 
+* Now allow resistance to be generated during treatment ( _c~T~ > 0_ ). 
 * Set _c~T~ = 0.2_ for the fraction of resistant generation from treatment.
-* Set _f = 0_. Contemplate what you expect to see. Run simulations to check.
+* Set treatment level to 0. Contemplate what you expect to see. Run simulations to check.
 * Now turn on treatment. Run the simulation with _f_ at 0.25, 0.5, 0.75 and 1.
 
 ###Task 5: 
@@ -100,7 +100,8 @@ __All parameters described below and in the model are assumed to be in units of 
 * In your head or on a piece of paper, sketch out the relationship between treatment level ( _f_ ) and the number of susceptibles ( _S_ ) left at the end in the absence and presence of resistance evolution, _c~T~_. What do you conclude from that?
 
 ###Task 6: 
-* Keep exploring. 
+Keep exploring. For instance, try the following:
+
 * Turn on resistance generation by treated, _c~T~_, and untreated, _c~U~_. 
 * Explore how population size, _S~0~_, the fraction of resistance generation ( _c~T~_ or _c~U~_ ) and fitness of the different strains ( _b~T~_ or _b~U~_ or _b~R~_ ) affect outcomes.
 

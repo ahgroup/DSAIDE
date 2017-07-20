@@ -4,15 +4,13 @@
 \alias{simulate_idcharacteristics}
 \title{Simulation of an infectious disease transmission model with multiple compartments}
 \usage{
-simulate_idcharacteristics(PopSize = 1000, P0 = 1, tmax = 300, bP = 0,
+simulate_idcharacteristics(S0 = 1000, P0 = 1, tmax = 300, bP = 0,
   bA = 0, bI = 1/1000, gP = 0.5, gA = 0.5, gI = 0.5, f = 0, d = 0)
 }
 \arguments{
-\item{PopSize}{specifies the initial number of individuals
-(Suceptibles + Infected & Pre-symptomatic).
-All other compartments start at 0.}
+\item{S0}{specifies the initial number of susceptible hosts}
 
-\item{P0}{initial number of infected, pre-symptomatic hosts,}
+\item{P0}{initial number of infected, pre-symptomatic hosts}
 
 \item{tmax}{maximum simulation time, units depend on choice of units for your
 parameters}
@@ -59,7 +57,7 @@ the code will likely abort with an error message
 # To run the simulation with default parameters just call this function
 result <- simulate_idcharacteristics()
 # To choose parameter values other than the standard one, specify them e.g. like such
-result <- simulate_idcharacteristics(PopSize = 2000, P0 = 10, tmax = 100, f = 0.1, d = 0.2)
+result <- simulate_idcharacteristics(S0 = 2000, P0 = 10, tmax = 100, f = 0.1, d = 0.2)
 # You should then use the simulation result returned from the function, e.g. like this:
 plot(result[,1],result[,2],xlab='Time',ylab='Number Susceptible',type='l')
 }

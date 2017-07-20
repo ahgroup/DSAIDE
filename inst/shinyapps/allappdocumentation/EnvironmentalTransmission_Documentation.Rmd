@@ -91,7 +91,7 @@ Note: The 'pathogen in the environment' units are arbitrary here, and parameters
 * Run simulations and see how your expectations hold up.
 
 ###Task 5: 
-* Now set _I~0~ = 0_ and  _E~0~ = 1_. What do you expect to see?
+* Now set the initial number of infected to 0 and initial pathogen in the environment to 1. What do you expect to see?
 * Run simulations and see how your expectations hold up.
 
 ###Task 6: 

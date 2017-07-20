@@ -31,7 +31,7 @@ multipatheq <- function(t, y, parms)
 #' @description  This model allows for the simulation of 2 IDs in a single host
 #' 
 #'
-#' @param S0 initial total number of hosts 
+#' @param S0 initial number of susceptible hosts 
 #' @param I10 initial number of hosts infected with type 1
 #' @param I20 initial number of hosts infected with type 2
 #' @param I120 initial number of double infected hosts

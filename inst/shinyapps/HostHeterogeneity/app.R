@@ -1,6 +1,6 @@
 ############################################################
 #This is the Shiny file for the Host Heterogeneity App
-#written by Andreas Handel and Sina Solaimanpour 
+#written by Andreas Handel, with contributions from others 
 #maintained by Andreas Handel (ahandel@uga.edu)
 #last updated 7/13/2017
 ############################################################
@@ -97,7 +97,6 @@ ui <- fluidPage(
            #################################
            # Inputs section
            h2('Simulation Settings'),
-           p('All parameters are assumed to be in units of (inverse) months'),
            fluidRow(
              column(6,
                     numericInput("S10", "initial number of susceptible type 1 hosts (S10)", min = 100, max = 5000, value = 1000, step = 100)

@@ -29,7 +29,7 @@ directtransmissioneq <- function(t, y, parms)
 #' @description  This model allows for the simulation of different direct transmission modes
 #' 
 #'
-#' @param PopSize initial population size
+#' @param S0 initial number of susceptibles
 #' @param I0 initial number of infected hosts
 #' @param tmax maximum simulation time, units of months
 #' @param bd rate of transmission for density-dependent transmission
@@ -54,7 +54,7 @@ directtransmissioneq <- function(t, y, parms)
 #'   # To run the simulation with default parameters just call this function
 #'   result <- simulate_directtransmission()
 #'   # To choose parameter values other than the standard one, specify them e.g. like such
-#'   result <- simulate_directtransmission(PopSize = 100,   tmax = 100, A=10)
+#'   result <- simulate_directtransmission(S0 = 100, tmax = 100, A=10)
 #'   # You should then use the simulation result returned from the function, e.g. like this:
 #'   plot(result[,1],result[,2],xlab='Time',ylab='Number Susceptible',type='l')
 #' @seealso The UI of the shiny app 'DirectTransmission', which is part of this package, contains more details on the model
@@ -65,10 +65,10 @@ directtransmissioneq <- function(t, y, parms)
 
 
 
-simulate_directtransmission <- function(PopSize = 1e3, I0 = 1, tmax = 120, scenario = 1, bd = 0.01, bf = 0, A = 1, m = 0, n = 0, g = 0.1, w = 0)
+simulate_directtransmission <- function(S0 = 1e3, I0 = 1, tmax = 120, scenario = 1, bd = 0.01, bf = 0, A = 1, m = 0, n = 0, g = 0.1, w = 0)
 {
   ############################################################
-  Y0 = c(S = PopSize-I0, I = I0, R = 0);  #combine initial conditions into a vector
+  Y0 = c(S = S0, I = I0, R = 0);  #combine initial conditions into a vector
   dt = min(0.1, tmax / 1000); #time step for which to get results back
   timevec = seq(0, tmax, dt); #vector of times for which solution is returned (not that internal timestep of the integrator is different)
   

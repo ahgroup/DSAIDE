@@ -1,6 +1,6 @@
 ############################################################
 #This is the Shiny file for the ID Patterns App
-#written by Andreas Handel and Sina Solaimanpour  
+#written by Andreas Handel, with contributions from others 
 #maintained by Andreas Handel (ahandel@uga.edu)
 #last updated 7/13/2017
 ############################################################
@@ -16,7 +16,7 @@ refresh <- function(input, output){
     
     
     # Read all the input values from the UI
-    PopSize = isolate(input$PopSize);
+    S0 = isolate(input$S0);
     P0 = isolate(input$P0);
     tmax = isolate(input$tmax);
     
@@ -38,7 +38,7 @@ refresh <- function(input, output){
     
     
     # Call the ODE solver with the given parameters
-    result <- simulate_idpatterns(PopSize = PopSize, P0 = P0, tmax = tmax, bP = bP, bA = bA, bI = bI, gP = gP , gA = gA, gI = gI, f = f, d = d, w = w, m = m, n = n, s = s)
+    result <- simulate_idpatterns(S0 = S0, P0 = P0, tmax = tmax, bP = bP, bA = bA, bI = bI, gP = gP , gA = gA, gI = gI, f = f, d = d, w = w, m = m, n = n, s = s)
     
     return(list(result))
   })
@@ -103,7 +103,7 @@ ui <- fluidPage(
            
            fluidRow(
              column(4,
-                    numericInput("PopSize", "Population Size (PopSize)", min = 1000, max = 5000, value = 1000, step = 500)
+                    numericInput("S)", "Initial number of susceptible hosts (S0)", min = 1000, max = 5000, value = 1000, step = 500)
              ),
              column(4,
                     numericInput("P0", "Initial number of presymptomatic hosts (P0)", min = 0, max = 100, value = 0, step = 1)

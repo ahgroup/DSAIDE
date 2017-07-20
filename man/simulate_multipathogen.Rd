@@ -9,7 +9,7 @@ simulate_multipathogen(S0 = 1000, I10 = 1, I20 = 0, I120 = 0,
   g12 = 1, a = 0)
 }
 \arguments{
-\item{S0}{initial total number of hosts}
+\item{S0}{initial number of susceptible hosts}
 
 \item{I10}{initial number of hosts infected with type 1}
 

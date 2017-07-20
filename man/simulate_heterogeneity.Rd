@@ -9,11 +9,11 @@ simulate_heterogeneity(S10 = 1000, I10 = 1, S20 = 1000, I20 = 0,
   g2 = 1, w1 = 0, w2 = 0)
 }
 \arguments{
-\item{S10}{initial total number of type 1 hosts}
+\item{S10}{initial number of susceptible type 1 hosts}
 
 \item{I10}{initial number of infected type 1 hosts}
 
-\item{S20}{initial total number of type 2 hosts}
+\item{S20}{initial number of susceptible type 2 hosts}
 
 \item{I20}{initial number of infected type 2 hosts}
 

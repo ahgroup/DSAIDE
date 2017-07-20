@@ -1,6 +1,6 @@
 ############################################################
 #This is the Shiny file for the ID Control App
-#written by Andreas Handel and Sina Solaimanpour 
+#written by Andreas Handel, with contributions from others 
 #maintained by Andreas Handel (ahandel@uga.edu)
 #last updated 7/13/2017
 ############################################################

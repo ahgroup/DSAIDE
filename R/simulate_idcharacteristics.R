@@ -32,11 +32,8 @@ idcharacteristicsode <- function(t, y, parms)
 #' Infected and Asymptomatic (A), Infected and Symptomatic (I),
 #' Recovered and Immune (R) and Dead (D)
 #'
-#' @param PopSize specifies the initial number of individuals
-#' (Suceptibles + Infected & Pre-symptomatic).
-#' All other compartments start at 0.
-#' @param P0 initial number of infected, pre-symptomatic hosts,
-#'
+#' @param S0 specifies the initial number of susceptible hosts
+#' @param P0 initial number of infected, pre-symptomatic hosts
 #' @param bP level/rate of infectiousness for hosts in the P compartment
 #' @param bA level/rate of infectiousness for hosts in the A compartment
 #' @param bI level/rate of infectiousness for hosts in the I compartment
@@ -60,7 +57,7 @@ idcharacteristicsode <- function(t, y, parms)
 #' # To run the simulation with default parameters just call this function
 #' result <- simulate_idcharacteristics()
 #' # To choose parameter values other than the standard one, specify them e.g. like such
-#' result <- simulate_idcharacteristics(PopSize = 2000, P0 = 10, tmax = 100, f = 0.1, d = 0.2)
+#' result <- simulate_idcharacteristics(S0 = 2000, P0 = 10, tmax = 100, f = 0.1, d = 0.2)
 #' # You should then use the simulation result returned from the function, e.g. like this:
 #' plot(result[,1],result[,2],xlab='Time',ylab='Number Susceptible',type='l')
 #' @references See e.g. Keeling and Rohani 2008 for SIR models and the
@@ -68,9 +65,8 @@ idcharacteristicsode <- function(t, y, parms)
 #' @author Andreas Handel
 #' @export
 
-simulate_idcharacteristics <- function(PopSize = 1000, P0 = 1, tmax = 300, bP = 0, bA = 0, bI = 1/1000, gP = 0.5, gA = 0.5, gI = 0.5, f = 0, d = 0)
+simulate_idcharacteristics <- function(S0 = 1000, P0 = 1, tmax = 300, bP = 0, bA = 0, bI = 1/1000, gP = 0.5, gA = 0.5, gI = 0.5, f = 0, d = 0)
 {
-  S0 = PopSize - P0; #initial number of uninfected hosts
   Y0 = c(S = S0, P = P0, A = 0, I = 0, R = 0, D = 0);  #combine initial conditions into a vector
   dt = min(0.1, tmax / 1000); #time step for which to get results back
   timevec = seq(0, tmax, dt); #vector of times for which solution is returned (not that internal timestep of the integrator is different)

@@ -1,4 +1,10 @@
+############################################################
 #This is the Shiny file for the Evolutionary Dynamics App
+#written by Andreas Handel, with contributions from others 
+#maintained by Andreas Handel (ahandel@uga.edu)
+#last updated 7/13/2017
+############################################################
+
 
 #the main function with all the functionality for the server
 #this function is wrapped inside the shiny server function below to allow return to main menu when window is closed
