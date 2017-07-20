@@ -82,7 +82,7 @@ $$\dot R_{12} = g_{1} I_{1X} + g_{2} I_{2X} + g_{12} I_{12} $$
 
 
 ##What to do {#shinytab3}
-_For the following tasks, it is assumed that the model runs in units of days._
+**The tasks below are described in way that assumes that everything is in units of DAYS (rate parameters, therefore, have units of inverse days). If any quantity is not given in those units, you need to convert it first (e.g. if it says a week, you need to convert it to 7 days).**
 
 ###Task 1: 
 * First, make sure each pathogen can produce an outbreak by itself.

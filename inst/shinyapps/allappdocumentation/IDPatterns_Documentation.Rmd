@@ -71,7 +71,9 @@ Also note that the transmission rates, _b~i~_, can be time varying as described 
 
 ##What to do {#shinytab3}
 
-_Notes: The model runs in time units of months. This is hard-coded into the seasonal dynamics and can't be changed (unless you modify the underlying simulation code). Some of the simulations might take a few seconds to run. Be patient._
+**The tasks below are described in way that assumes that everything is in units of MONTHS (rate parameters, therefore, have units of inverse Months). If any quantity is not given in those units, you need to convert it first (e.g. if it says a year, you need to convert it to 12 Months).**
+
+_Some of the simulations might take a few seconds to run. Be patient._
 
 ###Task 1: 
 * Set the model parameters such that it corresponds to the following setting: 

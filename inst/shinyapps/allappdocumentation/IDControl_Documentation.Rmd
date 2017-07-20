@@ -75,7 +75,8 @@ Births and natural deaths are not drawn to keep the diagram from getting too clu
 ##What to do {#shinytab3}
 
 ###Notes
-_All parameters are assumed to be in units of (inverse) months._
+
+**The tasks below are described in way that assumes that everything is in units of MONTHS (rate parameters, therefore, have units of inverse Months). If any quantity is not given in those units, you need to convert it first (e.g. if it says a year, you need to convert it to 12 Months).**
 
 _Some of the simulations might take a few seconds to run. Be patient._
 
