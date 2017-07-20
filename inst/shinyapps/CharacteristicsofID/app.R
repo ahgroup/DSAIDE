@@ -11,7 +11,7 @@ refresh <- function(input, output){
     input$submitBtn
 
     # Read all the input values from the UI
-    PopSize = isolate(input$PopSize);
+    S0 = isolate(input$S0);
     P0 = isolate(input$P0);
     tmax = isolate(input$tmax);
 
@@ -27,7 +27,7 @@ refresh <- function(input, output){
     d = isolate(input$d);
  
     # Call the ODE solver with the given parameters
-    result <- simulate_idcharacteristics(PopSize = PopSize, P0 = P0, tmax = tmax, bP = bP, bA = bA, bI = bI, gP = gP , gA = gA, gI = gI, f = f, d = d)
+    result <- simulate_idcharacteristics(S0 = S0, P0 = P0, tmax = tmax, bP = bP, bA = bA, bI = bI, gP = gP , gA = gA, gI = gI, f = f, d = d)
 
     return(list(result)) #need to return as list since that's the structure the generate_simoutput function needs
   })
@@ -93,7 +93,7 @@ ui <- fluidPage(
            h2('Simulation Settings'),
            fluidRow(
              column(4,
-                    numericInput("PopSize", "Population Size (S0)", min = 1000, max = 5000, value = 1000, step = 500)
+                    numericInput("S0", "Initial number of susceptible hosts (S0)", min = 1000, max = 5000, value = 1000, step = 500)
              ),
              column(4,
                     numericInput("P0", "Initial number of presymptomatic hosts (P0) ", min = 0, max = 100, value = 1, step = 1)
