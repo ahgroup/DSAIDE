@@ -36,8 +36,7 @@ The included processes/mechanisms are the following:
 * Susceptible individuals of type 1 or 2 can become infected by infected hosts of type 1 or 2. The rates at which infections from type 1/2 to type 1/2 occur are given by the parameters _b~11~_, _b~12~_, _b~21~_ and _b~22~_. 
 * Infected hosts of type 1/2 recover after some time at rates _g~1~_/_g~2~_. 
 * Recovered individuals are initially immune to reinfection. They can lose their immunity at rates _w~1~_/_w~2~_ and return to the susceptible state. 
-* New susceptible hosts and vectors enter the system at rates _e~1~_ and _e~2~_. Natural death occurs at rates _n~1~_ and _n~2~_. 
-
+ 
 
 
 ###Model Implementation
@@ -45,12 +44,12 @@ The flow diagram and equations describe the model implemented in this app:
 
 ![Flow diagram for this model. Natural births and deaths are not drawn.](../media/heterogeneitymodel.png)
 
-$$\dot S_1 = e_1 - S_1 (b_{11} I_1 + b_{12} I_2) + w_1 R_1 - n_1 S_1 $$ 
-$$\dot I_1 =  S_1 (b_{11} I_1 + b_{12} I_2) - g_1 I_1 - n_1 I_1 $$ 
-$$\dot R_1 = g_1 I_1 - w_1 R_1 - n_1 R_1$$
-$$\dot S_2 = e_2 - S_2 (b_{22} I_2 + b_{21} I_1) + w_2 R_2 - n_2 S_2 $$ 
-$$\dot I_2 =  S_2 (b_{22} I_2 + b_{21} I_1) - g_2 I_2 - n_2 I_2 $$ 
-$$\dot R_2 = g_2 I_2 - w_2 R_2 - n_2 R_2$$
+$$\dot S_1 = - S_1 (b_{11} I_1 + b_{12} I_2) + w_1 R_1 $$ 
+$$\dot I_1 =  S_1 (b_{11} I_1 + b_{12} I_2) - g_1 I_1 $$ 
+$$\dot R_1 = g_1 I_1 - w_1 R_1 $$
+$$\dot S_2 = - S_2 (b_{22} I_2 + b_{21} I_1) + w_2 R_2 $$ 
+$$\dot I_2 =  S_2 (b_{22} I_2 + b_{21} I_1) - g_2 I_2  $$ 
+$$\dot R_2 = g_2 I_2 - w_2 R_2 $$
 
 
 
@@ -60,50 +59,49 @@ $$\dot R_2 = g_2 I_2 - w_2 R_2 - n_2 R_2$$
 
 ###Task 1: 
 * Set the model parameters such that it corresponds to the following setting: 
-    * 1000 susceptible hosts and 1 infected host of type 1.
-    * 200 susceptible hosts and 1 infected host of type 2.
+    * For type 1; susceptible _S1~0~ = 1000_ and infected _I1~0~ = 1_.
+    * For type 2; susceptible _S2~0~ = 200_ and infected _I2~0~ = 1_.
     * Simulation duration approximately 5 years.
-    * Assume that transmission from host 1 to host 1 is 0.002, from host 2 to host 2 is 0.01. No transmission from one host type to the other.
-    * Assume that the duration of the infectious period is 1 month long for both types. 
-    * Assume nobody dies due to disease, and immunity does not wane.
-    * No waning immunity or natural births/deaths.
+    * Assume that transmission from host 1 to host 1 is _b~11~ = 0.002_, from host 2 to host 2 is _b~22~ = 0.01_. No transmission from one host type to the other _b~12~ = 0_ and _b~21~ = 0_.
+    * Assume that the duration of the infectious period is 1 month long for both types ( _g~1~_ and _g~2~_ ). 
+    * No waning immunity.
     
-* With parameters set to correspond to the scenario just described, run the simulation and ensure you get outbreaks in both populations with 20% susceptibles left at the end.
+* With parameters set to correspond to the scenario described, run the simulation and ensure you get outbreaks in both populations with 20% susceptibles left at the end.
 
 ###Task 2: 
-* Set the transmission rate from host 1 to host 1 to 0.001. Rest as before. Run the simulation.
-* Now set the transmission rate from host 2 to host 1 to 0.001. You should see an outbreak in both populations. This is an example of a core group driving the dynamics. Contemplate what the core group does.
+* Set _b~11~ = 0.001_. Rest as before. Run the simulation.
+* Now set the transmission rate from host 2 to host 1 _b~21~ = 0.001_. You should see an outbreak in both populations. This is an example of a core group driving the dynamics. Contemplate what the core group does.
 
 ###Task 3: 
-* Keep all settings as before, but set initial number of infected type 1 hosts to 0. 
+* Keep all settings as before, but set _I1~0~ = 0_. 
 * Contemplate what you expect to see, run the simulation, see if your expectations are confirmed.
-* Now set the initial number of infected type 1 hosts back to 1, and infected type 2 hosts to 0. 
+* Now set _I1~0~ = 1_, and infected type 2 _I2~0~ = 0_. 
 * Contemplate what you expect to see, run the simulation, see if your expectations are confirmed.
 
 ###Task 4: 
-* Set the transmission rate from host 1 to host 1 to 0. Same for the transmission rate between type 2 hosts. 
-* Set the transmission rate from host 2 to host 1 to 0.01, from host 1 to host 2 to 0.002. Those are the same values used in task 1 for transmission among the same hosts. 
-* Set the number of infected for type 1 and 2 both to 1.
+* Set _b~11~ = 0_ and _b~22~ = 0.002_. 
+* Set the transmission rate _b~21~ = 0.01_, and _b~12~ = 0.002_. Those are the same values used in task 1 for transmission among the same hosts. 
+* Set _I1~0~ = 1_ and _I2~0~ = 1_.
 * Contemplate what you expect to see, run the simulation, see if your expectations are confirmed.
-* Now set the transmission rate from host 1 to host 2 to 0.01, from host 2 to host 1 to 0.002. Again, think about your expectations, run simulation and check.
+* Now set the transmission rate _b~12~ = 0.01_, and _b~21~ = 0.002_. Again, think about your expectations, run simulation and check.
 
 ###Task 5: 
-* Repeat the previous task, with only infected of type 1 initially present.
+* Repeat _Task 5_, with _I1~0~ = 1_, and _I2~0~ = 0_.
 * Contemplate what you expect to see, run the simulation, see if your expectations are confirmed.
 
 ###Task 6: 
-* Repeat the previous task, with only infected of type 2 initially present.
+* Repeat _Task 5_, with _I1~0~ = 0_, and _I2~0~ = 1_.
 * Contemplate what you expect to see, run the simulation, see if your expectations are confirmed.
 
 ###Task 7: 
-* Set everything as in task 1, but with waning immunity for both types at a rate 0.2.
+* Set everything as in task 1, but with waning immunity _w~1~ = w~2~ = 0.2_ .
 * Run simulation, confirm that both populations reach a steady endemic state.
-* Set transmission from type 2 to type 1 to 0.005, run the simulation and see what changes.
-* Set transmission from type 1 to type 2 to 0.005, other cross-transmission back to 0. Run the simulation and see what changes.
+* Set transmission rate _b~21~ = 0.005_, run the simulation and see what changes.
+* Set transmission rate _b~12~ = 0.005_, and _b~21~ = 0_. Run the simulation and see what changes.
 
 ###Task 8: 
-* With the settings you just had, turn off waning immunity for type 1, run the simulation and see what you get.
-* Turn waning immunity for type 1 back on and turn off for type 2, run the simulation and see what you get.
+* With the settings you just had, set waning immunity _w~1~ = 0_, run the simulation and see what you get.
+* Set waning immunity _w~1~ = 0.2_ and _w~2~ = 0_, run the simulation and see what you get.
 
 ###Task 9: 
 * Keep exploring. Think of a real ID where accounting for 2 types of hosts is important, see if you can use the simulation to approximate and explore that ID.
