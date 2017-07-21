@@ -18,6 +18,7 @@ refresh <- function(input, output){
     # Read all the input values from the UI
     S0 = isolate(input$S0);
     P0 = isolate(input$P0);
+    timeunit = as.numeric(isolate(input$timeunit));
     tmax = isolate(input$tmax);
     
     bP = isolate(input$bP);
@@ -38,7 +39,7 @@ refresh <- function(input, output){
     
     
     # Call the ODE solver with the given parameters
-    result <- simulate_idpatterns(S0 = S0, P0 = P0, tmax = tmax, bP = bP, bA = bA, bI = bI, gP = gP , gA = gA, gI = gI, f = f, d = d, w = w, m = m, n = n, s = s)
+    result <- simulate_idpatterns(S0 = S0, P0 = P0, timeunit = timeunit, tmax = tmax, bP = bP, bA = bA, bI = bI, gP = gP , gA = gA, gI = gI, f = f, d = d, w = w, m = m, n = n, s = s)
     
     return(list(result))
   })
@@ -91,7 +92,6 @@ ui <- fluidPage(
   ), #end section to add buttons
   
   tags$hr(),
-  
   ################################
   #Split screen with input on left, output on right
   fluidRow(
@@ -100,20 +100,25 @@ ui <- fluidPage(
            #################################
            # Inputs section
            h2('Simulation Settings'),
-           
            fluidRow(
+             column(12,
+                    selectInput("timeunit", "Time units for simulation",c("days" = 1, 'weeks' = 2, 'months' = 3, 'years' = 4) )
+             ),
+             align = "center"
+           ), #close fluidRow structure for input   
+           fluidRow(
+             column(4,
+                    numericInput("tmax", "Maximum simulation time (tmax)", min = 6, max = 12000, value = 300, step = 1)
+             ),
              column(4,
                     numericInput("S0", "Initial number of susceptible hosts (S0)", min = 1000, max = 5000, value = 1000, step = 500)
              ),
              column(4,
-                    numericInput("P0", "Initial number of presymptomatic hosts (P0)", min = 0, max = 100, value = 0, step = 1)
-             ),
-             column(4,
-                    numericInput("tmax", "Maximum simulation time (tmax)", min = 6, max = 12000, value = 120, step = 12)
+                    numericInput("P0", "Initial number of presymptomatic hosts (P0)", min = 0, max = 100, value = 1, step = 1)
              ),
              align = "center"
            ), #close fluidRow structure for input
-           
+        
            fluidRow(
              column(4,
                     numericInput("bP", "Level/Rate of transmission by presymptomatic hosts (bP)", min = 0, max = 0.01, value = 0, step = 0.0001  )
@@ -122,7 +127,7 @@ ui <- fluidPage(
                     numericInput("bA", "Level/Rate of transmission by asymptomatic hosts (bA)", min = 0, max = 0.01, value = 0, step = 0.0001  )
              ),
              column(4,
-                    numericInput("bI", "Level/Rate of transmission by symptomatic hosts (bI)", min = 0, max = 0.01, value = 0, step = 0.0001  )
+                    numericInput("bI", "Level/Rate of transmission by symptomatic hosts (bI)", min = 0, max = 0.01, value = 0.001, step = 0.0001  )
              ),
              align = "center"
            ), #close fluidRow structure for input
@@ -146,7 +151,7 @@ ui <- fluidPage(
                     numericInput("d", "Fraction of deaths in symptomatic hosts (d)", min = 0, max = 1, value = 0, step = 0.1)
              ),
              column(4,
-                    numericInput("w", "Rate of immunity loss (w)", min = 0, max = 0.5, value = 0.0, step = 0.01  )
+                    numericInput("w", "Rate of immunity loss (w)", min = 0, max = 0.5, value = 0, step = 0.01  )
              ),
              align = "center"
            ),

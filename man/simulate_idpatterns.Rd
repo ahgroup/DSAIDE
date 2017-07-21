@@ -4,14 +4,16 @@
 \alias{simulate_idpatterns}
 \title{Simulation of a compartmental infectious disease transmission model including seasonality}
 \usage{
-simulate_idpatterns(S0 = 1000, P0 = 1, tmax = 300, bP = 0, bA = 0,
-  bI = 1/1000, gP = 0.5, gA = 0.5, gI = 0.5, f = 0, d = 0, w = 0,
-  m = 0, n = 0, s = 0)
+simulate_idpatterns(S0 = 1000, P0 = 1, timeunit = 1, tmax = 300,
+  bP = 0, bA = 0, bI = 1/1000, gP = 0.5, gA = 0.5, gI = 0.5,
+  f = 0, d = 0, w = 0, m = 0, n = 0, s = 0)
 }
 \arguments{
 \item{S0}{specifies the initial number of susceptible hosts}
 
 \item{P0}{initial number of infected, pre-symptomatic hosts,}
+
+\item{timeunit}{units of time in which the model should run, needs to be one of (1=day,2=week,3=month,4=year)}
 
 \item{tmax}{maximum simulation time, in units of months}
 

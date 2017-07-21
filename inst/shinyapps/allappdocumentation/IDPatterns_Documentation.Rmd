@@ -20,8 +20,6 @@ This app allows you to explore a model that tracks the same compartments as the 
 
 Read about the model in the "Model" tab. Then do the tasks described in the "What to do" tab.
 
-_Note that this model runs in time units of months. This is hard-coded into the seasonal dynamics and can't be changed (unless you modify the underlying simulation code)_
-
 ##The Model {#shinytab2}
 
 ###Model Overview
@@ -53,9 +51,9 @@ The flow diagram and equations describe the model implemented in this app:
 
 ![Flow diagram for this model.](../media/idpatternsmodel.png)
 
-$$b_P^s = b_P(1+s \sin(2\pi t /12))$$
-$$b_A^s = b_A(1+s \sin(2\pi t /12))$$
-$$b_I^s = b_I(1+s \sin(2\pi t /12))$$
+$$b_P^s = b_P(1+s \sin(2\pi t / T))$$
+$$b_A^s = b_A(1+s \sin(2\pi t /T))$$
+$$b_I^s = b_I(1+s \sin(2\pi t /T))$$
 $$\dot S = m - S (b_P^s P + b_A^s A + b_I^s I) + wR - n S $$ 
 $$\dot P = S (b_P^s P + b_A^s A + b_I^s I) - g_P P - n P$$ 
 $$\dot A = f g_P P - g_A A - n A$$ 
@@ -65,13 +63,13 @@ $$\dot D = d g_I I $$
 
 Since we do not track people dying due to non-disease causes, all the "n - arrows" are not pointing to another compartment, instead of those individuals just "leave the system". Similarly new susceptibles enter the system (are born) from "outside the system".
 
-Also note that the transmission rates, _b~i~_, can be time varying as described above.
+Also note that the transmission rates, _b~i~_, can be time varying as described above. The parameter _T_ is set depending on the time units chosen for the model. E.g. if you want to run the model in units of days, the underlying simulation code will set _T=365_, similarly for weeks it will be _T=52_. This ensures that the seasonal variation always has a period of a year.
 
 
 
 ##What to do {#shinytab3}
 
-**The tasks below are described in way that assumes that everything is in units of MONTHS (rate parameters, therefore, have units of inverse Months). If any quantity is not given in those units, you need to convert it first (e.g. if it says a year, you need to convert it to 12 Months).**
+**The tasks below are described in way that assumes that everything is in units of MONTHS (rate parameters, therefore, have units of inverse months). If any quantity is not given in those units, you need to convert it first (e.g. if it says a year, you need to convert it to 12 months).**
 
 _Some of the simulations might take a few seconds to run. Be patient._
 
