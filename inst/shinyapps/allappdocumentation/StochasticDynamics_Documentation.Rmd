@@ -68,7 +68,7 @@ Death of recovered      |  R => R-1           |   nR          |
 
 ##What to do {#shinytab3}
 
-**The tasks below are described in way that assumes that everything is in units of MONTHS (rate parameters, therefore, have units of inverse months). If any quantity is not given in those units, you need to convert it first (e.g. if it says a year, you need to convert it to 12 months).**
+**The tasks below are described in a way that assumes that everything is in units of MONTHS (rate parameters, therefore, have units of inverse months). If any quantity is not given in those units, you need to convert it first (e.g. if it says a year, you need to convert it to 12 months).**
 
 _Some of the simulations might take a few seconds to run. Be patient._
 
@@ -106,7 +106,7 @@ _Some of the simulations might take a few seconds to run. Be patient._
     
 ###Task 5: 
 * Record the fraction of susceptibles at the end of the simulation for the setting you just had. They will change.
-* Now change the number of simulations to 5, 10, 20 (be patient). See how the average number of susceptibles at simulation end settles down to some number. It will still fluctuate a bit, but as you take the average of more simulations, results become more stable (deterministic). 
+* Now change the number of simulations to 5, 10, 20 (be patient). See how the average number of susceptibles at the end of the simulation settles down to some number. It will still fluctuate a bit, but as you take the average of more simulations, results become more stable (deterministic). 
 
 ###Task 6: 
 * Set simulation number to 5, rest as before.

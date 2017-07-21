@@ -64,7 +64,7 @@ Note that quite often, we assume that the area is constant and do not include it
 ##What to do {#shinytab3}
 
 
-**The tasks below are described in way that assumes that everything is in units of MONTHS (rate parameters, therefore, have units of inverse days). If any quantity is not given in those units, you need to convert it first (e.g. if it says a year, you need to convert it to 12 months).**
+**The tasks below are described in a way that assumes that everything is in units of MONTHS (rate parameters, therefore, have units of inverse days). If any quantity is not given in those units, you need to convert it first (e.g. if it says a year, you need to convert it to 12 months).**
 
 
 ###Task 1: 
