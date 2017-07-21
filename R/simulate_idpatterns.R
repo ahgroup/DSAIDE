@@ -6,9 +6,9 @@ idpatternsode <- function(t, y, parms)
     as.list(c(y,parms)), #lets us access variables and parameters stored in y and pars by name
     {
       #seasonally varying transmission parameters
-      bPs <- bP * (1 + s * sin(2*pi*t/12) )
-      bAs <- bA * (1 + s * sin(2*pi*t/12) )
-      bIs <- bI * (1 + s * sin(2*pi*t/12) )
+      bPs <- bP * (1 + s * sin(2*pi*t/tunit) )
+      bAs <- bA * (1 + s * sin(2*pi*t/tunit) )
+      bIs <- bI * (1 + s * sin(2*pi*t/tunit) )
 
       #the ordinary differential equations
       dS =  m - S * (bPs * P + bAs * A + bIs * I) + w * R - n *S; #susceptibles
@@ -53,6 +53,7 @@ idpatternsode <- function(t, y, parms)
 #' @param w rate at which recovered persons loose immunity and return to susceptible state
 #' @param m the rate at which new individuals enter the model (are born)
 #' @param n the rate of natural death (the inverse it the average lifespan)
+#' @param timeunit units of time in which the model should run, needs to be one of (1=day,2=week,3=month,4=year)
 #' @param tmax maximum simulation time, in units of months
 #' @return This function returns the simulation result as obtained from a call
 #'   to the deSolve ode solver
@@ -77,14 +78,18 @@ idpatternsode <- function(t, y, parms)
 #' @author Andreas Handel
 #' @export
 
-simulate_idpatterns <- function(S0 = 1000, P0 = 1, tmax = 300, bP = 0, bA = 0, bI = 1/1000, gP = 0.5, gA = 0.5, gI = 0.5, f = 0, d = 0, w = 0, m = 0, n = 0, s = 0)
+simulate_idpatterns <- function(S0 = 1000, P0 = 1, timeunit = 1, tmax = 300, bP = 0, bA = 0, bI = 1/1000, gP = 0.5, gA = 0.5, gI = 0.5, f = 0, d = 0, w = 0, m = 0, n = 0, s = 0)
 {
   Y0 = c(S = S0, P = P0, A = 0, I = 0, R = 0, D = 0);  #combine initial conditions into a vector
   dt = min(0.1, tmax / 1000); #time step for which to get results back
   timevec = seq(0, tmax, dt); #vector of times for which solution is returned (not that internal timestep of the integrator is different)
 
+  tunitvec=c(365,52,12,1) #depending on choice of units (days/weeks/months/years), pick divisor for annual variation in transmission in the ODEs
+  tunit=tunitvec[timeunit]
+  
+  
   #combining parameters into a parameter vector
-  pars = c(bP = bP, bA = bA, bI = bI, gP = gP , gA = gA, gI = gI, f = f, d = d, w = w, m = m, n = n, s = s);
+  pars = c(bP = bP, bA = bA, bI = bI, gP = gP , gA = gA, gI = gI, f = f, d = d, w = w, m = m, n = n, s = s , tunit = tunit);
 
   #this line runs the simulation, i.e. integrates the differential equations describing the infection process
   #the result is saved in the odeoutput matrix, with the 1st column the time, the 2nd, 3rd, 4th column the variables S, I, R
