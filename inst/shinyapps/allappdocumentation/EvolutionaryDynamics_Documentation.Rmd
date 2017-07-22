@@ -35,7 +35,7 @@ The following compartments are included:
 
 The included processes/mechanisms are the following:
 
-* Susceptible individuals (S) can become infected by untreated or treated hosts infected with the wild-type strain at rates _b~u~_ and _b~t~_. A fraction _f_ of those hosts are assumed to receive treatment, while the remainder do not. Small fractions (_c~u~_ and _c~t~_) of wild-type infected untreated or treated hosts can generate resistant mutants and transmit those, leading to resistant infections.  
+* Susceptible individuals (S) can become infected by untreated or treated hosts infected with the wild-type strain at rates _b~u~_ and _b~t~_. A fraction _f_ of those hosts are assumed to receive treatment, while the remainder does not. Small fractions (_c~u~_ and _c~t~_) of wild-type infected untreated or treated hosts can generate resistant mutants and transmit those, leading to resistant infections.  
 * Susceptible individuals (S) can become infected by hosts infected with the resistant strain at rate _b~r~_. 
 * All infected hosts recover at some rate _g~i~_, with _i=u,t,r_. 
 * Recovered individuals are immune to reinfection. 
@@ -66,7 +66,7 @@ Recovery of I~r~        |  I~r~ => I~r~-1, R => R+1  |   g~r~ * I~r~       |
 ##What to do {#shinytab3}
 
 
-**The tasks below are described in way that assumes that everything is in units of DAYS (rate parameters, therefore, have units of inverse days). If any quantity is not given in those units, you need to convert it first (e.g. if it says a week, you need to convert it to 7 days).**
+**The tasks below are described in a way that assumes that everything is in units of DAYS (rate parameters, therefore, have units of inverse days). If any quantity is not given in those units, you need to convert it first (e.g. if it says a week, you need to convert it to 7 days).**
       
 ###Task 1: 
 * Set the model parameters such that it corresponds to the following setting: 
