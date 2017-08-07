@@ -10,3 +10,7 @@
 * Continue streamlining code base to make it more general/modular/flexible
 
 
+## Ideas for further apps
+
+* Surveillance app, which has underlying dynamics and observed dynamics, based on clinical status and infection status
+* 
