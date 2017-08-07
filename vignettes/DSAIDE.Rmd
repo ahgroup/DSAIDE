@@ -137,7 +137,7 @@ for (n in 1:length(gvec))
 #plot final result
 plot(gvec,peak,type='p',xlab='Rate of recovery',ylab='Max number of infected')
 ```
-
+devtools::release()
 Thus, the user can add their own custom code to the existing simulator functions and with a few lines of extra code analyze and explore many more questions and scenarios than those accessible through the graphical interface. This provides a lot more flexibility, but requires writing some R code to interface with the supplied simulator functions. 
 
 

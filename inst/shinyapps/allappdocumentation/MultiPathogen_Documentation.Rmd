@@ -82,34 +82,34 @@ $$\dot R_{12} = g_{1} I_{1X} + g_{2} I_{2X} + g_{12} I_{12} $$
 
 
 ##What to do {#shinytab3}
-**The tasks below are described in way that assumes that everything is in units of DAYS (rate parameters, therefore, have units of inverse days). If any quantity is not given in those units, you need to convert it first (e.g. if it says a week, you need to convert it to 7 days).**
+**The tasks below are described in a way that assumes that everything is in units of DAYS (rate parameters, therefore, have units of inverse days). If any quantity is not given in those units, you need to convert it first (e.g. if it says a week, you need to convert it to 7 days).**
 
 ###Task 1: 
 * First, make sure each pathogen can produce an outbreak by itself.
 * Set the initial number of infected with pathogen 1 to 1, all other infected at zero. Susceptibles at 1000.
 * Set all transmission rates to 0.001, all recovery rates at 0.5.
-* Set fraction of pathogen 1 infections to a=0.5.
+* Set fraction of pathogen 1 infections to _a=0.5_.
 * Run the simulation for 100 days, check that you only get a single outbreak with pathogen 1.
 * Now set initial number of infected with pathogen 1 to 0, with pathogen 2 to 1. Run the simulation and check that you get exactly the same size outbreak with pathogen 2.
 
 ###Task 2: 
-* Leave everything as before but now start with 1 infected for both pathogen 1 and 2. You should see outbreaks for both pathogens with the same dynamics (in fact, you won't see the curves for I1, R1, etc. since they are covered by the curves for I2, R2.)
+* Leave everything as before but now start with 1 infected for both pathogen 1 and 2. You should see outbreaks for both pathogens with the same dynamics (in fact, you won't see the curves for _I~1~_, _R~1~_, etc. since they are covered by the curves for _I~2~_, _R~2~_.)
 
 ###Task 3: 
-* Now start with I10=1 and I20=10. What do you expect to see? What do you find?
+* Now start with _I~1~0=1_ and _I~2~0=10_. What do you expect to see? What do you find?
 
 ###Task 4: 
-* Go back to I10=I20=1, instead set b2=0.002. What do you expect to see? What do you find?
+* Go back to _I~1~0=I~2~0=1_, instead set _b~2~=0.002_. What do you expect to see? What do you find?
 * What do you conclude has the stronger impact, higher initial number of infected for pathogen 2 or higher transmissibility?
 
 ###Task 5: 
-* To confirm that things are completely "symmetric", re-do the 2 previous tasks but now instead of changing pathogen 2 initial infected or transmission rate, do it for pathogen 1.
-
-###Task 5:
-* Set everything back as in task #2, i.e. the 2 pathogens have the same starting numbers and transmission rates.
-* Now play around with the fraction of pathogen 1 infections, a. What do you expect? What do you find?
+* To confirm that things are completely "symmetric", redo the 2 previous tasks but now instead of changing pathogen 2 initial infected or transmission rate, do it for pathogen 1.
 
 ###Task 6:
+* Set everything back as in task #2, i.e. the 2 pathogens have the same starting numbers and transmission rates.
+* Now play around with the fraction of pathogen 1 infections, _a_. What do you expect? What do you find?
+
+###Task 7:
 * Keep exploring. Investigate how some of the other parameters influence the outbreak dynamics for the 2 pathogens.
 * Always follow the same pattern: Think about what you results you expect to get from a certain scenario/parameter setting and why. Then check with the simulation. If things don't agree, figure out why not. 
 
