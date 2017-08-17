@@ -63,13 +63,13 @@ $$\dot D = d g_I I $$
 
 Since we do not track people dying due to non-disease causes, all the "n - arrows" are not pointing to another compartment, instead of those individuals just "leave the system". Similarly new susceptibles enter the system (are born) from "outside the system".
 
-Also note that the transmission rates, _b~i~_, can be time varying as described above. The parameter _T_ is set depending on the time units chosen for the model. For example if you want to run the model in units of days, the underlying simulation code will set _T=365_, similarly, for weeks it will be _T=52_. This ensures that the seasonal variation always has a period of a year.
+Also note that the transmission rates, _b~I~_, can be time varying as described above. The parameter _T_ is set depending on the time units chosen for the model. For example if you want to run the model in units of days, the underlying simulation code will set _T=365_, similarly, for weeks it will be _T=52_. This ensures that the seasonal variation always has a period of a year.
 
 
 
 ##What to do {#shinytab3}
 
-**The tasks below are described in a way that assumes that everything is in units of MONTHS (rate parameters, therefore, have units of inverse months). If any quantity is not given in those units, you need to convert it first (e.g. if it says a year, you need to convert it to 12 months).**
+**The tasks below are described in a way that assumes everything is in units of MONTHS (rate parameters, therefore, have units of inverse months). If any quantity is not given in those units, you need to convert it first (e.g. if it says a year, you need to convert it to 12 months).**
 
 _Some of the simulations might take a few seconds to run. Be patient._
 
@@ -77,7 +77,7 @@ _Some of the simulations might take a few seconds to run. Be patient._
 * Set the model parameters such that it corresponds to the following setting: 
     * A population size of 1000, 1 initially infected, presymptomatic host, simulation duration (approximately) 10 years.
     * Assume that only symptomatic individuals transmit, at rate _b~I~ = 0.002_ and that there is no seasonal variation.
-    * Assume that the duration of the symptomatic period is 1 month long. (Hint: The parameter _g~i~_ is the inverse of this period.)
+    * Assume that the duration of the symptomatic period is 1 month long. (Hint: The parameter _g~I~_ is the inverse of this period.)
     * Assume that the duration of the presymptomatic period is approximately 6 days long. (Make sure you convert units correctly.)
     * Assume that there are no asymptomatic infections. You can, therefore, set the rate of recovery of asymptomatics, _g~A~_ to anything, it doesn't matter because nobody will be asymptomatic.
     * Assume nobody dies due to disease, and immunity does not wane.
@@ -86,14 +86,14 @@ _Some of the simulations might take a few seconds to run. Be patient._
 * With parameters set to correspond to the scenario just described, run the simulation and ensure you get a single outbreak.
 
 ###Task 2: 
-* Next, turn on births and deaths. It's always good to check parts of a model. Here, we want to first look at births and deaths in the absence of disease. Therefore, set initial number of infected to 0, keep the initial population size at 1000. 
-* Set the natural death rate, _n_, to a value that corresponds to an average lifespan of 41 years. Recall that the unit of _n_ needs to be in 1/months. You, therefore, need to convert lifespan to months, then take the inverse to get the death rate. Set the slider to a value as close as possible (you can't set it to exactly the value you get).
+* Next, turn on births and deaths. It's always good to check parts of a model. Here, we want to first look at births and deaths in the absence of disease. Therefore, set initial number of presymptomatic to 0, keep the initial population size at 1000. 
+* Set the natural death rate, _n_, to a value that corresponds to an average lifespan of 41 years. Recall that the unit of _n_ needs to be in 1/months. You, therefore, need to convert lifespan to months, then take the inverse to get the death rate. Set the value as close as possible (no need to write out more than 5 decimal places).
 * Set the birth rate to _m=4_ per month. 
-* Also increase the simulation duration to 1000 years. (Depending on the speed of your computer, it will take several seconds for the simulation to finish).
+* Also increase the simulation duration to 3000 years. (Depending on the speed of your computer, it will take several seconds for the simulation to finish).
 * It is possible to compute the steady state population size of susceptibles in the absence of infection, by setting the differential equation for S to 0 and solving for S as a function of birth and death parameters. Compute this quantity and make sure it's the same you get from the simulation (once it has settled down to a steady state). 
 
 ###Task 3: 
-* Try out different values for the initial population size, run the simulation and note what you get for the final, steady-state population size. 
+* Try out different values for the initial population size, run the simulation and note what you get for the final, steady-state population size.
 * Try out different values for the birth and death rate and note how that influences the final, steady-state population size.
 * Compare with the theory/math and your expectations.
 
@@ -123,7 +123,7 @@ _Some of the simulations might take a few seconds to run. Be patient._
 * Now combine births and deaths with waning immunity. Explore how the two different mechanisms interact and influence the observed ID dynamics.
 
 ###Task 8: 
-* So far, the cycles were due to the intrinsic dynamics of the system. Now we'll explore what happens if some outside phenomenon - e.g. the weather - influences some model parameters. This is systematically different than before, where we kept all parameters constant while the simulation was running. Now we change that. Specifically, the model allows you to let the transmission rates vary sinusoidally with a period of 1 year.
+* So far, the cycles were due to the intrinsic dynamics of the system. Now we'll explore what happens if some outside phenomenon - e.g. the weather - influences some model parameters. This is systematically different than before, where we kept all parameters constant while the simulation was running. This is not the case when we use the _s_ parameter. Specifically, the model allows you to let the transmission rates vary sinusoidally with a period of 1 year.
 * Set everything as in task #1, do a quick run to make sure you only get one outbreak.
 * Now try different non-zero values for the parameter _s_. Think about your expectations. Run the model and compare. Figure out why you see what you see.
 

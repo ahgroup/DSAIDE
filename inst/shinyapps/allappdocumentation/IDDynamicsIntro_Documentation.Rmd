@@ -75,7 +75,7 @@ R:$$\dot R = gI$$
 
 * This and most other simulations/apps in DSAIDE do not have natural time units (unless specifically stated). You could, therefore, assume that your model runs in units of days or weeks/months/years, based on what's most suitable for the disease you want to study. You have to make sure that all your parameters are in the right time units. Always make sure to check if a given simulation can handle different time units or assumes specific ones.
 
-**The tasks below are described in a way that assumes that everything is in units of DAYS (rate parameters, therefore, have units of inverse days). If any quantity is not given in those units, you need to convert it first (e.g. if it says a week, you need to convert it to 7 days).**
+**The tasks below are described in a way that assumes everything is in units of DAYS (rate parameters, therefore, have units of inverse days). If any quantity is not given in those units, you need to convert it first (e.g. if it says a week, you need to convert it to 7 days).**
 
 
 ###Task 1: 
