@@ -1,4 +1,4 @@
-#DSAIDE version 0.5
+#DSAIDE version 0.50
 
 * Added one new app
 * Various bug fixes in the apps and documentation
