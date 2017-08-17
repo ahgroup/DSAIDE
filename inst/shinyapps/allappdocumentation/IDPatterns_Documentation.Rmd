@@ -89,7 +89,7 @@ _Some of the simulations might take a few seconds to run. Be patient._
 * Next, turn on births and deaths. It's always good to check parts of a model. Here, we want to first look at births and deaths in the absence of disease. Therefore, set initial number of presymptomatic to 0, keep the initial population size at 1000. 
 * Set the natural death rate, _n_, to a value that corresponds to an average lifespan of 41 years. Recall that the unit of _n_ needs to be in 1/months. You, therefore, need to convert lifespan to months, then take the inverse to get the death rate. Set the value as close as possible (no need to write out more than 5 decimal places).
 * Set the birth rate to _m=4_ per month. 
-* Also increase the simulation duration to 3000 years. (Depending on the speed of your computer, it will take several seconds for the simulation to finish).
+* Also increase the simulation duration to 1000 years. (Depending on the speed of your computer, it will take several seconds for the simulation to finish).
 * It is possible to compute the steady state population size of susceptibles in the absence of infection, by setting the differential equation for S to 0 and solving for S as a function of birth and death parameters. Compute this quantity and make sure it's the same you get from the simulation (once it has settled down to a steady state). 
 
 ###Task 3: 
