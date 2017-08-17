@@ -68,7 +68,7 @@ Death of recovered      |  R => R-1           |   nR          |
 
 ##What to do {#shinytab3}
 
-**The tasks below are described in a way that assumes that everything is in units of MONTHS (rate parameters, therefore, have units of inverse months). If any quantity is not given in those units, you need to convert it first (e.g. if it says a year, you need to convert it to 12 months).**
+**The tasks below are described in a way that assumes everything is in units of MONTHS (rate parameters, therefore, have units of inverse months). If any quantity is not given in those units, you need to convert it first (e.g. if it says a year, you need to convert it to 12 months).**
 
 _Some of the simulations might take a few seconds to run. Be patient._
 
