@@ -63,49 +63,52 @@ $$\dot I_v = b_2 S_v I_h  - n I_v$$
 
 ##What to do {#shinytab3}
 
-_A general note: Some of the tasks below are fairly open-ended. You shouldn't go through the tasks like a check-list. Instead, explore these simulations, play with them, query them. As you do, loop through iterations of formulating your expectations for a specific scenario/task, running the model and observing results, and if results don't agree with your expectations, figure out why. Essentially, **"do science/research"**._ 
-
 **The tasks below are described in a way that assumes everything is in units of MONTHS (rate parameters, therefore, have units of inverse months). If any quantity is not given in those units, you need to convert it first (e.g. if it says a year, you need to convert it to 12 months).**
 
 ###Task 1: 
 * Set the model parameters such that it corresponds to the following setting: 
-    * A population size of 1000 for both hosts and vectors, 1 initially infected host, no infected vector, simulation duration approximately 10 years.
-    * Set host -> vector transmission rate, _b~2~_=0.001. Keep _b~1~_ = 0.
+    * 1000 initially susceptible for both hosts and vectors, 1 initially infected host, no infected vector, simulation duration approximately 10 years.
+    * Set host -> vector transmission rate, _b~2~_=0.003. Keep _b~1~_ = 0.
     * Assume that the duration of the infectious period in hosts is half a month (about 2 weeks) long. 
-    * Turn off births and deaths and waning immunity for now.
+    * Assume that vectors live for half a month (about 2 weeks). Set the birth rate such that in the absence of the ID, you get a steady population of 1000 vectors.  
+    * Turn off waning immunity for now.
 * Run the simulation, observe what you get. 
-* Now set _b~1~_ = _b~2~_, rerun. Then set _b~1~_ = 2 _b~2~_, run again.
-* Record the number and fraction of susceptible/infected/recovered remaining at the end of the outbreak.    
+* You should not see any outbreak happening. Make sure you know why.
 
 ###Task 2: 
-* Now start with no infected hosts and 1 infected vector. What do you expect to see? Run the simulation to check your expectation.
+* Set _b~1~_ = _b~2~_, rerun. 
+* You should see an outbreak with around 183 susceptible hosts left.
+* Record the numbers/fractions of susceptible/infected/recovered hosts and vectors. 
+
+###Task 3: 
+* Play around with _b~1~_ and _b~2~_ and see how different values affect the ID dynamics.
+
+###Task 4: 
+* Now set everything back as in task #2 and start with no infected hosts and 1 infected vector. 
+* What do you expect to see? Run the simulation to check your expectation.
 * Play around with a different initial number of infected hosts and vectors and different transmission rates.
 * Anything surprising happening? Do you understand why you see what you see?
 
-###Task 3: 
-* Turn off any infection process by setting the number of initial infected hosts and vectors to 0. 
-* Let's assume our vectors are mosquitos, and that they live for about 1 month. Set the death rate accordingly.
-* Set the birth rate such that the vector population settles at 2000.
-
-###Task 4: 
-* Turn infection process back on by having an infected host. Everything else as above.
-* Contemplate the dynamics you see. 
-* You have births and deaths now, and usually with those, you can get multiple outbreaks. Why not here?
-
 ###Task 5: 
-* Assume host immunity wanes after an average of 4 months. 
-* What do you expect to see? Run simulations to check your expectations.
+* Turn off any infection process by setting the number of initial infected hosts and vectors to 0. 
+* Adjust the birth rate such that the vector population settles at 5000.
+* Set the maximum simulation time to 12 months. Note the time it takes for the vector population to go from the initial 1000 to 5000. This rapid increase can be a problem for vector control measures.
 
 ###Task 6: 
+* Turn infection process back on by having an infected host. Everything else as above.
+* Set simulation time back to 10 years. Run the simulation, contemplate the dynamics you see. 
+* You have births and deaths now, and usually with those, you can get multiple outbreaks and an endemic state. Why not here?
+
+###Task 7: 
+* Assume host immunity wanes after an average of 2 months. 
+* What do you expect to see? Run simulations to check your expectations.
+* You should get a steady endemic state with a constant, non-zero number of infected hosts and vectors. The number of infected vectors at steady, endemic state should be around 1052.
+
+###Task 8: 
 * Keep exploring. 
 * Try to figure out how the different parameters influence the dynamics, specifically the (lack of) sustained cycles.
 
 
-##Answers 
-This section does not have the shinytab label and is therefore ignored and not included in the app. One could provide the answers here. Note that if this file is supplied with the package, the answers are in principle available.
-
-###Answer 1: 
-Answer to task 1.
 
 
 ##Further Information {#shinytab4}
