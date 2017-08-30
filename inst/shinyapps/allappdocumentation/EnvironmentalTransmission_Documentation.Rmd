@@ -60,18 +60,18 @@ Often the letter _E_ is used for the _exposed_ stage, which would then be called
 
 ##What to do {#shinytab3}
 
-**The tasks below are described in a way that assumes that everything is in units of MONTHS (rate parameters, therefore, have units of inverse days). If any quantity is not given in those units, you need to convert it first (e.g. if it says a week, you need to convert it to 7 days).**
+**The tasks below are described in a way that assumes that everything is in units of MONTHS (rate parameters, therefore, have units of inverse months). If any quantity is not given in those units, you need to convert it first.**
 
 
 ###Task 1: 
 * Set the model parameters such that it corresponds to the following setting: 
-    * A population size, _S~0~_, of 1000, 1 initially infected host, _I~0~_, no pathogen in the environment (_E~0~_ = 0) , simulation duration, _tmax_, approximately 5 years.
+    * 1000 initially susceptible individuals, _S~0~_, 1 initially infected host, _I~0~_, no pathogen in the environment (_E~0~_ = 0) , simulation duration, _tmax_, approximately 5 years.
     * We'll first look at direct transmission. Set transmission rate of _b~D~ = 0.001_, environmental transmission _b~E~ = 0_.
-    * Set environmental pathogen shedding,_p_, and clearance,_c_ to 0. 
+    * Set environmental pathogen shedding, _p_, and clearance, _c_, to 0. 
     * Assume that the duration of the infectious period, _g_, is about 2 months long. 
     * Turn off births,_m_, and deaths,_n_, for now.
-* Run the simulation. You should get the usual direct transmission outbreak and SIR dynamics.
-* Record the number and fraction of susceptible/infected/recovered remaining at the end of the outbreak.    
+* Run the simulation. You should get the usual direct transmission dynamics and a single outbreak.
+* Record the number and fraction of susceptible/infected/recovered remaining at the end of the outbreak. You should be left with around 202 susceptibles at the end of the simulation.    
 
 ###Task 2: 
 * Now try various values for the rate of shedding into the environment, _p_, and environmental clearance _c_. Leave everything else unchanged.
@@ -79,24 +79,23 @@ Often the letter _E_ is used for the _exposed_ stage, which would then be called
 * Think about your expectations, run the simulation and compare your expectations with the results.
 * Anything surprising happening? Do you understand why you see what you see?
 
-Note: The 'pathogen in the environment' units are arbitrary here, and parameters are chosen such that everything fits (mostly) into a single plot. To compare with real data, where environmental pathogen load might be very high, you would need to show separate plots or plot on a log scale.
 
 ###Task 3: 
 * Now set _p = 10_ and _c = 10_ . Turn off direct transmission. Run to make sure you don't get an outbreak.
-* Turn on environmental transmission, set it to _b~E~ = 0.001_. What do you expect to see? 
-* Run simulations and compare with the direct transmission results.
+* Turn on environmental transmission, set it to _b~E~ = 0.001_. Leave everyhing else unchanged.
+* What do you expect to see? Run simulations and compare with the direct transmission results.
 
 ###Task 4: 
-* Now also turn on direct transmission by setting _b~D~ = b~E~ = 0.001_. What do you expect to see?
-* Run simulations and see how your expectations hold up.
+* Now also turn on direct transmission by setting _b~D~ = b~E~ = 0.001_. Leave everyhing else unchanged.
+* What do you expect to see? Run simulations and see how your expectations hold up.
 
 ###Task 5: 
-* Now set the initial number of infected to 0 and initial pathogen in the environment to 1. What do you expect to see?
-* Run simulations and see how your expectations hold up.
+* Now set the initial number of infected to 0 and initial pathogen in the environment to 1. Leave everyhing else unchanged.
+* What do you expect to see? Run simulations and see how your expectations hold up.
 
 ###Task 6: 
-* Try different combinations of direct and environmental transmission only and having only infected hosts or only pathogen in the environment at the start. What do you expect to see?
-* Run simulations and see how your expectations hold up.
+* Try different combinations of direct and environmental transmission only and having only infected hosts or only pathogen in the environment at the start. 
+* What do you expect to see? Run simulations and see how your expectations hold up.
 
 ###Task 7: 
 * Keep exploring by trying different parameters and transmission settings and see how they influence results.

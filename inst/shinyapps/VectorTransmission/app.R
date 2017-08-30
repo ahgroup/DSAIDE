@@ -114,19 +114,19 @@ ui <- fluidPage(
                     numericInput("tmax", "Maximum simulation time (tmax)", min = 1, max = 500, value = 100, step = 1)
              ),
              column(4,
-                    numericInput("b1", "vector to host transmission rate (b1)", min = 0, max = 0.01, value = 0, step = 0.0001  )
+                    numericInput("w", "Rate of waning immunity (w)", min = 0, max = 1, value = 0, step = 0.01 )
              ),
              align = "center"
            ), #close fluidRow structure for input
            fluidRow(
              column(4,
+                    numericInput("b1", "vector to host transmission rate (b1)", min = 0, max = 0.01, value = 0, step = 0.0001  )
+             ),
+             column(4,
                     numericInput("b2", "host to vector transmission rate (b2)", min = 0, max = 0.01, value = 0, step = 0.0001  )
              ),
              column(4,
-                    numericInput("w", "Rate of waning immunity (w)", min = 0, max = 1, value = 0, step = 0.01 )
-             ),
-             column(4,
-                    numericInput("g", "Rate of recovery of infected hosts (g)", min = 0, max = 2, value = 0.5, step = 0.1)
+                    numericInput("g", "Rate of recovery of infected hosts (g)", min = 0, max = 10, value = 1, step = 0.1)
              ),
              align = "center"
            ), #close fluidRow structure for input
