@@ -60,7 +60,7 @@ Here, S~0~ is the initial population of susceptibles, and S~v~ is the susceptibl
 
 _The following tasks ask you to use various equations to compute the reproductive number. If you are not familiar with those, you need to do some background reading, e.g. the books listed in the ID introduction app or some of the papers listed in the _Further Resources_ section of this app._
 
-**The tasks below are described in a way that assumes that everything is in units of MONTHS (rate parameters, therefore, have units of inverse months). If any quantity is not given in those units, you need to convert it first (e.g. if it says a year, you need to convert it to 12 months).**
+**The tasks below are described in a way that assumes everything is in units of MONTHS (rate parameters, therefore, have units of inverse months). If any quantity is not given in those units, you need to convert it first (e.g. if it says a year, you need to convert it to 12 months).**
 
 ###Task 1: 
 * Set the simulation with a population size of 1000, 1 infected, simulation time 60 months, _g_=5, _b_=0.01. Everything else at 0.

@@ -66,7 +66,7 @@ Recovery of I~r~        |  I~r~ => I~r~-1, R => R+1  |   g~r~ * I~r~       |
 ##What to do {#shinytab3}
 
 
-**The tasks below are described in a way that assumes that everything is in units of DAYS (rate parameters, therefore, have units of inverse days). If any quantity is not given in those units, you need to convert it first (e.g. if it says a week, you need to convert it to 7 days).**
+**The tasks below are described in a way that assumes everything is in units of DAYS (rate parameters, therefore, have units of inverse days). If any quantity is not given in those units, you need to convert it first (e.g. if it says a week, you need to convert it to 7 days).**
       
 ###Task 1: 
 * Set the model parameters such that it corresponds to the following setting: 
