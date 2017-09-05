@@ -50,7 +50,7 @@ generate_simoutput <- function(input,output,allres,varlist = NULL)
       
       #process first simulation to build plot
       res = allres()[[1]]      
-      ymax = max(res[,-1])
+      ymax = max(res[,varnames]) #each subplot gets a separate ymax
       tvec = res[,1]
 
     
