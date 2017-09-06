@@ -44,11 +44,11 @@ The flow diagram and equations describe the model implemented in this app:
 
 ![Flow diagram for this model. Natural births and deaths are not drawn.](../media/heterogeneitymodel.png)
 
-$$\dot S_1 = - S_1 (b_{11} I_1 + b_{12} I_2) + w_1 R_1 $$ 
-$$\dot I_1 =  S_1 (b_{11} I_1 + b_{12} I_2) - g_1 I_1 $$ 
+$$\dot S_1 = - S_1 (b_{11} I_1 + b_{21} I_2) + w_1 R_1 $$ 
+$$\dot I_1 =  S_1 (b_{11} I_1 + b_{21} I_2) - g_1 I_1 $$ 
 $$\dot R_1 = g_1 I_1 - w_1 R_1 $$
-$$\dot S_2 = - S_2 (b_{22} I_2 + b_{21} I_1) + w_2 R_2 $$ 
-$$\dot I_2 =  S_2 (b_{22} I_2 + b_{21} I_1) - g_2 I_2  $$ 
+$$\dot S_2 = - S_2 (b_{22} I_2 + b_{12} I_1) + w_2 R_2 $$ 
+$$\dot I_2 =  S_2 (b_{22} I_2 + b_{12} I_1) - g_2 I_2  $$ 
 $$\dot R_2 = g_2 I_2 - w_2 R_2 $$
 
 
@@ -69,48 +69,65 @@ Set the model parameters such that it corresponds to the following setting:
  * Assume that transmission from host 1 to host 1 is _b~11~ = 0.002_, from host 2 to host 2 is _b~22~ = 0.01_. No transmission from one host type to the other _b~12~ = 0_ and _b~21~ = 0_.
  * Assume that the duration of the infectious period is 1 month long for both types ( _g~1~_ and _g~2~_ ). 
  * No waning immunity.
-    
-With parameters set to correspond to the scenario described, run the simulation and ensure you get outbreaks in both populations with 20% susceptibles left at the end.
+ * Run the simulation and ensure you get outbreaks in both populations with 20% susceptibles left at the end.
 
 ###Task 2: 
-* Set _b~11~ = 0.001_. Rest as before. Run the simulation.
-* Now set the transmission rate from host 2 to host 1 _b~21~ = 0.001_. You should see an outbreak in both populations. This is an example of a core group driving the dynamics. Contemplate what the core group does.
+* Set _b~11~ = 0.001_. Rest as before. 
+* Run the simulation. You should get the same outbreak as before among type 2 hosts, no real outbreak among type 1 hosts.
+* If you have worked through the reproductive number app already, contemplate what R was for both types/populations in task 1, what it is now in task 2, and how that influences what you see in the simulation. 
 
 ###Task 3: 
+* Now set the transmission rate from host 2 to host 1 _b~21~ = 0.001_. Everything as before.
+* Run the simulation. You should see an outbreak in both populations. This is an example of a core group driving the dynamics. Contemplate what the core group does.
+
+###Task 4: 
 * Keep all settings as before, but set initial number of infected type 1 hosts to 0.
 * Contemplate what you expect to see, run the simulation, see if your expectations are confirmed.
+
+###Task 5: 
 * Now set the initial number of infected type 1 hosts back to 1, and infected type 2 hosts to 0. 
 * Contemplate what you expect to see, run the simulation, see if your expectations are confirmed.
 
-###Task 4: 
-* Set the transmission rate from host 1 to host 1 and from host 2 to host 2 to 0. 
-* Set the transmission rate from host 2 to host 1 to 0.01, from host 1 to host 2 to 0.002. Those are the same values used in task 1 for transmission among the same hosts.
+###Task 6: 
 * Set _I1~0~ = 1_ and _I2~0~ = 1_.
+* Set the transmission rate from host 1 to host 1 and from host 2 to host 2 to 0. 
+* Set the transmission rate from host 2 to host 1 to _b~21~_ = 0.01, from host 1 to host 2 to _b~12~_ = 0.002. Those are the same values used in task 1 for transmission among the same hosts.
 * Contemplate what you expect to see, run the simulation, see if your expectations are confirmed.
-* Now set the transmission rate _b~12~ = 0.01_, and _b~21~ = 0.002_. Again, think about your expectations, run simulation and check.
 
-###Task 5: 
+Transmission only between hosts of different type could for instance represent a sexually transmitted disease in a heterosexual population, with the 2 types of hosts being females and males.
+
+###Task 7: 
+* Now set the transmission rate _b~12~ = 0.01_, and _b~21~ = 0.002_. Everything else as before.
+* Again, think about your expectations, run simulation and check.
+
+###Task 8: 
 * Repeat the previous task, with only an infected of type 1 initially present.
 * Contemplate what you expect to see, run the simulation, see if your expectations are confirmed.
 
-###Task 6: 
+###Task 9: 
 * Repeat the previous task, with only an infected of type 2 initially present.
 * Contemplate what you expect to see, run the simulation, see if your expectations are confirmed.
 
-###Task 7: 
-* Set everything as in task 1, but with waning immunity _w~1~ = w~2~ = 0.2_ .
+###Task 10: 
+* Set everything back as in task 1, but with waning immunity with an average duration of immunity of 5 months for each population (i.e. rates _w~1~_ and _w~2~_ need to be the inverse of 5 months.).
 * Run simulation, confirm that both populations reach a steady endemic state.
-* Set transmission rate _b~21~ = 0.005_, run the simulation and see what changes.
-* Set transmission rate _b~12~ = 0.005_, and _b~21~ = 0_. Run the simulation and see what changes.
 
-###Task 8: 
+###Task 10: 
+* Set transmission rate _b~21~ = 0.005_, everything else as before.
+* Run the simulation and see what changes.
+
+###Task 11: 
+* Set transmission rate _b~12~ = 0.005_, and _b~21~ = 0_, everything else as before. 
+* Run the simulation and see what changes.
+
+###Task 12: 
 * With the settings you just had, turn off waning immunity for type 1, run the simulation and see what you get.
+
+###Task 13: 
 * Turn waning immunity for type 1 back on and turn off for type 2, run the simulation and see what you get.
 
-###Task 9: 
+###Task 14: 
 * Keep exploring. Think of a real ID where accounting for 2 types of hosts is important, see if you can use the simulation to approximate and explore that ID.
-
-  
 
 
 ##Further Information {#shinytab4}
