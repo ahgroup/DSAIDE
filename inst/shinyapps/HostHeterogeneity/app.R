@@ -123,10 +123,10 @@ ui <- fluidPage(
            ), #close fluidRow structure for input
            fluidRow(
              column(6,
-                    numericInput("b12", "Rate of transmission from type 2 to type 1 (b12)", min = 0, max = 0.01, value = 0, step = 0.0001  )
+                    numericInput("b12", "Rate of transmission from type 1 to type 2 (b12)", min = 0, max = 0.01, value = 0, step = 0.0001  )
              ),
              column(6,
-                    numericInput("b21", "Rate of transmission from type 1 to type 2 (b21)", min = 0, max = 0.01, value = 0, step = 0.0001  )
+                    numericInput("b21", "Rate of transmission from type 2 to type 1 (b21)", min = 0, max = 0.01, value = 0, step = 0.0001  )
              )
            ), #close fluidRow structure for input
            fluidRow(

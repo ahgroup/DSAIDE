@@ -21,9 +21,9 @@ simulate_heterogeneity(S10 = 1000, I10 = 1, S20 = 1000, I20 = 0,
 
 \item{b11}{rate of transmission from infected type 1 host to susceptible type 1 host}
 
-\item{b12}{rate of transmission from infected type 2 host to susceptible type 1 host}
+\item{b12}{rate of transmission from infected type 1 host to susceptible type 2 host}
 
-\item{b21}{rate of transmission from infected type 1 host to susceptible type 2 host}
+\item{b21}{rate of transmission from infected type 2 host to susceptible type 1 host}
 
 \item{b22}{rate of transmission from infected type 2 host to susceptible type 2 host}
 

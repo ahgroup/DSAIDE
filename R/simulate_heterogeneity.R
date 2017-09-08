@@ -6,12 +6,12 @@ heterogeneityeq <- function(t, y, parms)
     {
       
       #the ordinary differential equations
-      dS1 =  - S1 * (b11 * I1 + b12 * I2) + w1 * R1; #susceptibles
-      dI1 =  S1 * (b11 * I1 + b12 * I2)  - g1 * I1 #infected, symptomatic
+      dS1 =  - S1 * (b11 * I1 + b21 * I2) + w1 * R1; #susceptibles
+      dI1 =  S1 * (b11 * I1 + b21 * I2)  - g1 * I1 #infected, symptomatic
       dR1 =   g1 * I1 - w1 * R1 #recovered, immune
 
-      dS2 =  - S2 * (b21 * I1 + b22 * I2) + w2 * R2; #susceptibles type 2
-      dI2 =  S2 * (b21 * I1 + b22 * I2)  - g2 * I2 #infected, symptomatic type 2
+      dS2 =  - S2 * (b12 * I1 + b22 * I2) + w2 * R2; #susceptibles type 2
+      dI2 =  S2 * (b12 * I1 + b22 * I2)  - g2 * I2 #infected, symptomatic type 2
       dR2 =   g2 * I2 - w2 * R2 #recovered, immune type 2
       
 
@@ -33,9 +33,9 @@ heterogeneityeq <- function(t, y, parms)
 #' @param I20 initial number of infected type 2 hosts
 #' @param tmax maximum simulation time, units of months
 #' @param b11 rate of transmission from infected type 1 host to susceptible type 1 host
-#' @param b12 rate of transmission from infected type 2 host to susceptible type 1 host
-#' @param b21 rate of transmission from infected type 1 host to susceptible type 2 host
 #' @param b22 rate of transmission from infected type 2 host to susceptible type 2 host
+#' @param b12 rate of transmission from infected type 1 host to susceptible type 2 host
+#' @param b21 rate of transmission from infected type 2 host to susceptible type 1 host
 #' @param g1 the rate at which infected type 1 hosts recover
 #' @param g2 the rate at which infected type 2 hosts recover
 #' @param w1 the rate at which type 1 host immunity wanes
