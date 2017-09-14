@@ -96,10 +96,10 @@ $$\dot R_{12} = g_{1} I_{1X} + g_{2} I_{2X} + g_{12} I_{12} $$
 * Leave everything as before but now start with 1 infected for both pathogen 1 and 2. You should see outbreaks for both pathogens with the same dynamics (in fact, you won't see the curves for _I~1~_, _R~1~_, etc. since they are covered by the curves for _I~2~_, _R~2~_.)
 
 ###Task 3: 
-* Now start with _I~1~0=1_ and _I~2~0=10_. What do you expect to see? What do you find?
+* Now start with _I~10~=1_ and _I~20~=10_. What do you expect to see? What do you find?
 
 ###Task 4: 
-* Go back to _I~1~0=I~2~0=1_, instead set _b~2~=0.002_. What do you expect to see? What do you find?
+* Go back to _I~10~ = I~20~ = 1_, instead set _b~2~ = 0.002_. What do you expect to see? What do you find?
 * What do you conclude has the stronger impact, higher initial number of infected for pathogen 2 or higher transmissibility?
 
 ###Task 5: 
