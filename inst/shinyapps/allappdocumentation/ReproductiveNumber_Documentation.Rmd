@@ -72,11 +72,13 @@ _The following tasks ask you to use various equations to compute the reproductiv
 * Use the equation that expresses R~0~ as a function of model parameters for the simple SIR model. Using the values of the model parameters, compute R~0~ that way. Check that it agrees with what you found in task #1.
 
 ###Task 3: 
-* Double the value of the transmission parameter, _b_. Before you run the simulation, what do you expect to see and what do you expect to get for R~0~?
+* Double the value of the transmission parameter, _b_. Leave everything else as before.
+* Before you run the simulation, what do you expect to see and what do you expect to get for R~0~?
 * Run the simulation and compute R~0~ using the final outbreak size to test your expectations. 
 
 ###Task 4: 
-* Now, double the rate of the recovery parameter, _g_. Think about your expectations for R~0~ and the dynamics.
+* Next, double the rate of the recovery parameter, _g_. Leave everything else unchanged.
+* Think about your expectations for R~0~ and the dynamics.
 * Run the simulation to check your expectations. Use the final outbreak size to compute R~0~.
 
 ###Task 5: 
