@@ -112,21 +112,21 @@ Transmission only between hosts of different type could for instance represent a
 * Set everything back as in task 1, but with waning immunity with an average duration of immunity of 5 months for each population (i.e. rates _w~1~_ and _w~2~_ need to be the inverse of 5 months.).
 * Run simulation, confirm that both populations reach a steady endemic state.
 
-###Task 10: 
+###Task 11: 
 * Set transmission rate _b~21~ = 0.005_, everything else as before.
 * Run the simulation and see what changes.
 
-###Task 11: 
+###Task 12: 
 * Set transmission rate _b~12~ = 0.005_, and _b~21~ = 0_, everything else as before. 
 * Run the simulation and see what changes.
 
-###Task 12: 
+###Task 13: 
 * With the settings you just had, turn off waning immunity for type 1, run the simulation and see what you get.
 
-###Task 13: 
+###Task 14: 
 * Turn waning immunity for type 1 back on and turn off for type 2, run the simulation and see what you get.
 
-###Task 14: 
+###Task 15: 
 * Keep exploring. Think of a real ID where accounting for 2 types of hosts is important, see if you can use the simulation to approximate and explore that ID.
 
 
