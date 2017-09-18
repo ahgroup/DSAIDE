@@ -90,7 +90,7 @@ Set the model parameters such that it corresponds to the following setting:
 
 ###Task 6: 
 * Set _I1~0~ = 1_ and _I2~0~ = 1_.
-* Set the transmission rate from host 1 to host 1 and from host 2 to host 2 to 0. 
+* Set the transmission rates from host 1 to host 1 and host 2 to host 2 to 0. 
 * Set the transmission rate from host 2 to host 1 to _b~21~_ = 0.01, from host 1 to host 2 to _b~12~_ = 0.002. Those are the same values used in task 1 for transmission among the same hosts.
 * Contemplate what you expect to see, run the simulation, see if your expectations are confirmed.
 
