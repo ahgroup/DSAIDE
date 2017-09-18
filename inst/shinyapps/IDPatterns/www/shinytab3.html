@@ -5,7 +5,7 @@
 <div id="task-1" class="section level3">&#13;
 <h3>Task 1:</h3>&#13;
 <ul><li>Set the model parameters such that it corresponds to the following setting:&#13;
-<ul><li>A population size of 1000, 1 initially infected, presymptomatic host, simulation duration (approximately) 10 years.</li>&#13;
+<ul><li>1000 initially susceptible hosts, 1 initially infected and presymptomatic host, simulation duration (approximately) 10 years.</li>&#13;
 <li>Assume that only symptomatic individuals transmit, at rate <em>b<sub>I</sub> = 0.002</em> and that there is no seasonal variation.</li>&#13;
 <li>Assume that the duration of the symptomatic period is 1 month long. (Hint: The parameter <em>g<sub>I</sub></em> is the inverse of this period.)</li>&#13;
 <li>Assume that the duration of the presymptomatic period is approximately 6 days long. (Make sure you convert units correctly.)</li>&#13;
@@ -17,8 +17,8 @@
 </ul></div>&#13;
 <div id="task-2" class="section level3">&#13;
 <h3>Task 2:</h3>&#13;
-<ul><li>Next, turn on births and deaths. It’s always good to check parts of a model. Here, we want to first look at births and deaths in the absence of disease. Therefore, set initial number of presymptomatic to 0, keep the initial population size at 1000.</li>&#13;
-<li>Set the natural death rate, <em>n</em>, to a value that corresponds to an average lifespan of 41 years. Recall that the unit of <em>n</em> needs to be in 1/months. You, therefore, need to convert lifespan to months, then take the inverse to get the death rate. Set the value as close as possible (no need to write out more than 5 decimal places).</li>&#13;
+<ul><li>Next, turn on births and deaths. It’s always good to check parts of a model. Here, we want to first look at births and deaths in the absence of disease. Therefore, set initial number of presymptomatic to 0, keep the numer of susceptible at 1000.</li>&#13;
+<li>Set the natural death rate, <em>n</em>, to a value that corresponds to an average lifespan of 41 years. Recall that the unit of <em>n</em> needs to be in 1/months. You, therefore, need to convert lifespan to months, then take the inverse to get the death rate. Round to the first significant digit (i.e. 0.00X).</li>&#13;
 <li>Set the birth rate to <em>m=4</em> per month.</li>&#13;
 <li>Also increase the simulation duration to 1000 years. (Depending on the speed of your computer, it will take several seconds for the simulation to finish).</li>&#13;
 <li>It is possible to compute the steady state population size of susceptibles in the absence of infection, by setting the differential equation for S to 0 and solving for S as a function of birth and death parameters. Compute this quantity and make sure it’s the same you get from the simulation (once it has settled down to a steady state).</li>&#13;

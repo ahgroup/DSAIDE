@@ -63,7 +63,8 @@ _The following tasks ask you to use various equations to compute the reproductiv
 **The tasks below are described in a way that assumes everything is in units of MONTHS (rate parameters, therefore, have units of inverse months). If any quantity is not given in those units, you need to convert it first (e.g. if it says a year, you need to convert it to 12 months).**
 
 ###Task 1: 
-* Set the simulation with a population size of 1000, 1 infected, simulation time 60 months, _g_=5, _b_=0.01. Everything else at 0.
+* Set the simulation with a total population size of 1000, 999 susceptibles and 1 infected.
+* Simulation time 60 months, _g_=5, _b_=0.01. Everything else at 0.
 * Run the simulation, you should get an outbreak.
 * Use the final size equation linking R~0~ and the fraction of susceptible hosts left at the end of the outbreak to compute the reproductive number. 
 
@@ -71,11 +72,13 @@ _The following tasks ask you to use various equations to compute the reproductiv
 * Use the equation that expresses R~0~ as a function of model parameters for the simple SIR model. Using the values of the model parameters, compute R~0~ that way. Check that it agrees with what you found in task #1.
 
 ###Task 3: 
-* Double the value of the transmission parameter, _b_. Before you run the simulation, what do you expect to see and what do you expect to get for R~0~?
+* Double the value of the transmission parameter, _b_. Leave everything else as before.
+* Before you run the simulation, what do you expect to see and what do you expect to get for R~0~?
 * Run the simulation and compute R~0~ using the final outbreak size to test your expectations. 
 
 ###Task 4: 
-* Now, double the rate of the recovery parameter, _g_. Think about your expectations for R~0~ and the dynamics.
+* Next, double the rate of the recovery parameter, _g_. Leave everything else unchanged.
+* Think about your expectations for R~0~ and the dynamics.
 * Run the simulation to check your expectations. Use the final outbreak size to compute R~0~.
 
 ###Task 5: 
