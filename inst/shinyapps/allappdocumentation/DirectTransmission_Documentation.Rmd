@@ -78,7 +78,7 @@ Note that quite often, we assume that the area is constant and do not include it
 * Record the number and fraction of susceptible/infected/recovered remaining at the end of the outbreak. You should be left with 625 susceptibles.
 
 ###Task 2: 
-* Now switch to frequency-dependent transmission, set _b~f~_=2.5. Keep everything else as before.
+* Now switch to frequency-dependent transmission, set _b~f~_ = 2.5. Keep everything else as before.
 * Think about your expectations, run the simulation and compare your expectations with the results.
 * Anything surprising happening? Do you understand why you see what you see?
 
