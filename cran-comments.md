@@ -19,6 +19,8 @@ I have excluded the folders containing the files with the figures and all the ra
 
 ## Submission History
 
+version 0.6: bug fixes in apps and documentation, updates to teaching tasks for several apps.
+
 version 0.5: added one new app, lots of bug fixes in other apps and documentation.
 
 version 0.4.: This is the first submission of this package.
