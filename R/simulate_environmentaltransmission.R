@@ -33,7 +33,7 @@ environmentaltransmissioneq <- function(t, y, parms)
 #' @param m rate of births of hosts
 #' @param n the rate of natural death of hosts
 #' @param g the rate at which infected hosts recover/die
-#' @param p the rate at which infected host shed pathogen in the enviroment
+#' @param p the rate at which infected host shed pathogen in the environment
 #' @param c the rate at which pathogen in the enviroment decays
 #' @return This function returns the simulation result as obtained from a call
 #'   to the deSolve ode solver

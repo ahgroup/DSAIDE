@@ -14,7 +14,7 @@ simulate_reproductivenumber(S0 = 1000, I0 = 1, f = 0, e = 0,
 
 \item{f}{fraction of vaccinated individuals. Those individuals are moved from S to R at the beginning of the simulation}
 
-\item{e}{efficay of vaccine, given as fraction between 0 and 1}
+\item{e}{efficacy of vaccine, given as fraction between 0 and 1}
 
 \item{tmax}{maximum simulation time, units depend on choice of units for your
 parameters}

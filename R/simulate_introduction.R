@@ -31,7 +31,7 @@ introductionode <- function(t, y, parms)
 #' The function simulates the ODE using an ODE solver from the deSolve package.
 #' The function returns a matrix containing time-series of each variable and time.
 #'
-#' @param S0 initial number of suceptibles individuals
+#' @param S0 initial number of susceptible individuals
 #' @param I0 initial number of infected hosts
 #' @param b level of infectiousness, i.e. rate of transmission of pathogen
 #'   from infected to susceptible host

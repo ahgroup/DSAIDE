@@ -27,7 +27,7 @@ simulate_environmentaltransmission(S0 = 1000, I0 = 1, E0 = 0,
 
 \item{g}{the rate at which infected hosts recover/die}
 
-\item{p}{the rate at which infected host shed pathogen in the enviroment}
+\item{p}{the rate at which infected host shed pathogen in the environment}
 
 \item{c}{the rate at which pathogen in the enviroment decays}
 }

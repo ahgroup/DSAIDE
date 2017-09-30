@@ -33,7 +33,7 @@ reproductivenumberode <- function(t, y, parms)
 #' @param S0 initial number of susceptible hosts
 #' @param I0 initial number of infected hosts
 #' @param f fraction of vaccinated individuals. Those individuals are moved from S to R at the beginning of the simulation
-#' @param e efficay of vaccine, given as fraction between 0 and 1
+#' @param e efficacy of vaccine, given as fraction between 0 and 1
 #' @param b level/rate of infectiousness for hosts in the I compartment
 #' @param g rate at which a person leaves the I compartment
 #' @param w rate at which recovered persons loose immunity and return to susceptible state

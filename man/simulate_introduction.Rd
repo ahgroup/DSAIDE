@@ -8,7 +8,7 @@ simulate_introduction(S0 = 1000, I0 = 1, tmax = 300, g = 0.5,
   b = 1/1000)
 }
 \arguments{
-\item{S0}{initial number of suceptibles individuals}
+\item{S0}{initial number of susceptible individuals}
 
 \item{I0}{initial number of infected hosts}
 
