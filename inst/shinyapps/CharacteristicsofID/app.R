@@ -69,6 +69,7 @@ server <- function(input, output, session) {
 ui <- fluidPage(
   
   includeCSS("../styles/dsaide.css"),
+  withMathJax(),
   
   #add header and title
    
