@@ -1,0 +1,18 @@
+citHeader("To cite package 'DSAIDE' in publications use:")
+
+citEntry(entry="Article",
+  title         = "Learning infectious disease epidemiology in a modern framework",
+  author        = as.person("Andreas Handel"),
+  journal       = "PLoS Computational Biology",
+  year          = "2017",
+  volume        = "13",
+  number        = "10",
+  pages         = "e1005642",
+  url           = "https://doi.org/10.1371/journal.pcbi.1005642",
+  publisher     = "Public Library of Science",
+  textVersion  =
+  paste("Andreas Handel (2017).",
+        "Learning infectious disease epidemiology in a modern framework.",
+        "PLoS Computational Biology, 13(10), e1005642.",
+        "URL https://doi.org/10.1371/journal.pcbi.1005642")
+)

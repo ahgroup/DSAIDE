@@ -68,7 +68,7 @@ reproductivenumberode <- function(t, y, parms)
 simulate_reproductivenumber <- function(S0 = 1000, I0 = 1, f = 0.0, e = 0.0, tmax = 300, g = 10, b = 1e-2, m = 0, n = 0, w = 0){
 
   S0eff = (1 - f*e) * S0;
-  R0 = f*e * S0;
+  R0 = f*e * S0; #initial number of recovered/removed (inlcudes vaccinated)
   Y0 = c(S = S0eff, I = I0, R = R0);  #combine initial conditions into a vector
   dt = min(0.1, tmax / 1000); #time step for which to get results back
   timevec = seq(0, tmax, dt); #vector of times for which solution is returned (not that internal timestep of the integrator is different)

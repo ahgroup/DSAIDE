@@ -68,7 +68,7 @@ Often the letter _E_ is used for the _exposed_ stage, which would then be called
     * 1000 initially susceptible individuals, _S~0~_, 1 initially infected host, _I~0~_, no pathogen in the environment (_E~0~_ = 0) , simulation duration, _tmax_, approximately 5 years.
     * We'll first look at direct transmission. Set transmission rate of _b~D~ = 0.001_, environmental transmission _b~E~ = 0_.
     * Set environmental pathogen shedding, _p_, and clearance, _c_, to 0. 
-    * Assume that the duration of the infectious period, _g_, is about 2 months long. 
+    * Assume that the duration of the infectious period is about 2 months long. 
     * Turn off births, _m_, and deaths, _n_, for now.
 * Run the simulation. You should get the usual direct transmission dynamics and a single outbreak.
 * Record the number and fraction of susceptible/infected/recovered remaining at the end of the outbreak. You should be left with around 202 susceptibles at the end of the simulation. Remember that in a model like this, where the only flow from the susceptible class is outflow through becoming infected, everyone who is not in the susceptible compartment at the end has been infected. Thus the total number of infected during the outbreak is the different between susceptibles at the beginning and at the end.    

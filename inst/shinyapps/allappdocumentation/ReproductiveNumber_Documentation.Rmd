@@ -143,7 +143,8 @@ _The following tasks ask you to use various equations to compute the reproductiv
 * For this app, the underlying function running the simulation is called `simulate_reproductivenumber.R`. You can call this function directly, without going through the shiny app. Type `?simulate_reproductivenumber` into the R console for more information (you need to exit the graphical interface first or start a new R session). If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself. 
 * You could also modify this R function for your own purposes - though that requires some more R coding knowledge. 
 * To get a quick start explaining how to interact with the simulator functions directly, read the vignette for the package (type `vignette('DSAIDE')` into the R console).
-* For some information on the reproductive number, see e.g. [@fine11, @heffernan05a, @roberts07, @wallinga07].
+* For the equations mentioned in the tasks, see e.g. [@heffernan05a; @keeling08; @vynnycky10].
+* For some information on the reproductive number, see e.g. [@fine11; @heffernan05a; @roberts07; @wallinga07].
 
 ### References
 

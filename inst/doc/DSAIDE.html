@@ -4,7 +4,7 @@
 
 <head>
 
-<meta charset="utf-8">
+<meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 
@@ -12,7 +12,7 @@
 
 <meta name="author" content="Andreas Handel" />
 
-<meta name="date" content="2017-02-28" />
+<meta name="date" content="2018-01-02" />
 
 <title>DSAIDE Package Tutorial</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">DSAIDE Package Tutorial</h1>
 <h4 class="author"><em><a href="http://handelgroup.uga.edu">Andreas Handel</a></em></h4>
-<h4 class="date"><em>2017-02-28</em></h4>
+<h4 class="date"><em>2018-01-02</em></h4>
 
 
 
@@ -84,74 +84,74 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>The underlying models are written as compartmental dynamical models, either deterministic using differential equations (deSolve package) or stochastic using a Gillespie-type approach (adaptivetau package). A graphical user interface is wrapped around each simulation/app. The graphical user interfaces are written using the functionality of the R Shiny package. This allows exploration of models and infectious disease epidemiology concepts without the need to write any code. At the same time, the package is structured in a modular way that should allow those interested in the actual models and learning R coding to easily move from one stage to another.</p>
 <p>Each app is meant to be fully self-explanatory and contains a description of the model, a list of tasks the user could try, and information on further details and readings.</p>
 <p>The following simulations/apps are currently available:</p>
-<table style="width:44%;">
-<colgroup>
-<col width="9%"></col>
-<col width="12%"></col>
-<col width="22%"></col>
-</colgroup>
+<table>
 <thead>
 <tr class="header">
-<th>App Name</th>
-<th>Model</th>
-<th>Topic Covered</th>
+<th align="left">App_Name</th>
+<th align="left">Model</th>
+<th align="left">Topic_covered</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>ID Dynamics Intro</td>
-<td>3 compartment (SIR) ODE model</td>
-<td>A first introduction to a simple compartmental SIR model. Allows simulation of a single outbreak for different parameter and initial condition settings.</td>
+<td align="left">ID Dynamics Intro</td>
+<td align="left">3 compartment (SIR) ODE model</td>
+<td align="left">A first introduction to a simple compartmental SIR model. Allows simulation of a single outbreak for different parameter and initial condition settings.</td>
 </tr>
 <tr class="even">
-<td>Characteristics of ID</td>
-<td>6 compartment ODE model</td>
-<td>The potential role of different disease states (e.g. pre-symptomatic, asymptomatic, symptomatic) on ID dynamics.</td>
+<td align="left">Characteristics of ID</td>
+<td align="left">6 compartment ODE model</td>
+<td align="left">The potential role of different disease states (e.g. pre-symptomatic, asymptomatic, symptomatic) on ID dynamics.</td>
 </tr>
 <tr class="odd">
-<td>ID Patterns</td>
-<td>6 compartment ODE model. Includes births-deaths, waning immunity, seasonality.</td>
-<td>Different ID patterns (single outbreak, oscillations, steady states).</td>
+<td align="left">ID Patterns</td>
+<td align="left">6 compartment ODE model. Includes births-deaths, waning immunity, seasonality.</td>
+<td align="left">Different ID patterns (single outbreak, osciallations, steady states).</td>
 </tr>
 <tr class="even">
-<td>Direct Transmission</td>
-<td>3 compartment ODE model. Births-deaths and waning immunity are included.</td>
-<td>The differences between density-dependent and frequency-dependent transmission and their impact on ID dynamics.</td>
+<td align="left">Direct Transmission</td>
+<td align="left">3 compartment ODE model. Births, deaths and waning immunity are included.</td>
+<td align="left">The differences between density-dependent and frequency-dependent transmission and their impact on ID dynamics.</td>
 </tr>
 <tr class="odd">
-<td>Environmental Transmission</td>
-<td>4 compartment ODE model. Includes explicit environmental stage. Births-deaths and waning immunity are included.</td>
-<td>The impact of environmental shedding, decay and transmission.</td>
+<td align="left">Environmental Transmission</td>
+<td align="left">4 compartment ODE model. Includes explicit environmental stage. Births-deaths and waning immunity are included.</td>
+<td align="left">The impact of environmental shedding, decay and transmission.</td>
 </tr>
 <tr class="even">
-<td>Vector Transmission</td>
-<td>5 compartment ODE model. Includes susceptible and infected vectors and their dynamics. Births-deaths for vectors and waning immunity for hosts are included.</td>
-<td>Exploration of a simple vector-borne transmission model.</td>
+<td align="left">Vector Transmission</td>
+<td align="left">5 compartment ODE model. Includes susceptible and infected vectors and their dynamics. Births and deaths for vectors and waning immunity for hosts are included.</td>
+<td align="left">Exploration of a simple vector-borne transmission model.</td>
 </tr>
 <tr class="odd">
-<td>Reproductive Number</td>
-<td>3 compartment ODE model. Includes vaccination of population at beginning of simulation. Births-deaths and waning immunity are included.</td>
-<td>The reproductive number concept and how to estimate it from (simulated) data.</td>
+<td align="left">Reproductive Number</td>
+<td align="left">3 compartment ODE model. Includes vaccination of population at the beginning of the simulation. Births, deaths and waning immunity are included.</td>
+<td align="left">The reproductive number concept and how to estimate it from (simulated) data.</td>
 </tr>
 <tr class="even">
-<td>ID Control</td>
-<td>9 compartment ODE model. An environmental and 2 vector stages as well as 6 host stages.</td>
-<td>The impact of different control measures for different types of ID.</td>
+<td align="left">ID Control</td>
+<td align="left">9 compartment ODE model. An environmental and 2 vector stages as well as 6 host stages.</td>
+<td align="left">The impact of different control measures for different types of ID.</td>
 </tr>
 <tr class="odd">
-<td>Host Heterogeneity</td>
-<td>6 compartment ODE model. 2x SIR for 2 different hosts.</td>
-<td>The impact of host heterogeneity and core groups on ID dynamics and control.</td>
+<td align="left">Host Heterogeneity</td>
+<td align="left">6 compartment ODE model. 2x SIR for 2 different hosts.</td>
+<td align="left">The impact of host heterogeneity and core groups on ID dynamics and control.</td>
 </tr>
 <tr class="even">
-<td>Stochastic dynamics</td>
-<td>4 compartment (SEIR) stochastic model.</td>
-<td>The impact of stochasticity on dynamics, the phenomenon of ID extinction.</td>
+<td align="left">Stochastic dynamics</td>
+<td align="left">4 compartment (SEIR) stochastic model.</td>
+<td align="left">The impact of stochasticity on dynamics, the phenomenon of ID extinction.</td>
 </tr>
 <tr class="odd">
-<td>Evolutionary dynamics</td>
-<td>5 compartment stochastic model. Untreated and treated hosts infected with wild-type, and hosts infected with resistant strain.</td>
-<td>Interaction between drug treatment and evolution/emergence of drug resistance.</td>
+<td align="left">Evolutionary dynamics</td>
+<td align="left">5 compartment stochastic model. Untreated and treated hosts infected with wild-type, and hosts infected with a resistant strain.</td>
+<td align="left">Interaction between drug treatment and evolution/emergence of drug resistance.</td>
+</tr>
+<tr class="even">
+<td align="left">Multi-Pathogen Dynamics</td>
+<td align="left">9 compartment ODE model with basic SIR dynamics.</td>
+<td align="left">Infection dynamics with 2 pathogens that act independently.</td>
 </tr>
 </tbody>
 </table>
@@ -195,17 +195,17 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Consider as example the first app, called “ID Dynamics Intro”. The simulator function for this model is called <code>simulate_introduction.R</code>, the user can learn about the inputs and outputs of the function by looking at its documentation</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">help</span>(<span class="st">'simulate_introduction'</span>)</code></pre></div>
 <p>The help file explains that one can run the simulation by specifying initial number of susceptibles and infected, the duration for which the simulation should be run, and the infection and recovery parameters. Unless explicitly specified, the models do not have inherent time units. Instead, those are set by the user based on choices for parameters. It is important to ensure that all quantities have time units. For this simulation, <em>tmax</em>, <em>g</em>, and <em>b</em> are expressed in the same time units, e.g. days or months (or the inverse of those units for the rate parameters). Each parameter has some default. The user can modify those default settings. For instance one can call the simulator with the following settings, overwriting the defaults:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">result &lt;-<span class="st"> </span><span class="kw">simulate_introduction</span>(<span class="dt">S0 =</span> <span class="dv">500</span>, <span class="dt">I0 =</span> <span class="dv">5</span>, <span class="dt">tmax =</span> <span class="dv">100</span>, <span class="dt">g =</span> <span class="fl">0.1</span>,  <span class="dt">b =</span> <span class="dv">1</span>/<span class="dv">2500</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">result &lt;-<span class="st"> </span><span class="kw">simulate_introduction</span>(<span class="dt">S0 =</span> <span class="dv">500</span>, <span class="dt">I0 =</span> <span class="dv">5</span>, <span class="dt">tmax =</span> <span class="dv">100</span>, <span class="dt">g =</span> <span class="fl">0.1</span>,  <span class="dt">b =</span> <span class="dv">1</span><span class="op">/</span><span class="dv">2500</span>)</code></pre></div>
 <p>Calling the simulation function execuctes the underlying dynamical model (here a simple 3 compartment ODE model, as described in the “Model” section of the app). The simulation function produces and returns time-series for the dynamics of each of the variables that are tracked. Users can produce their own plots, e.g. plotting susceptible as function of time:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(result[,<span class="st">&quot;time&quot;</span>],result[,<span class="st">&quot;S&quot;</span>],<span class="dt">xlab=</span><span class="st">'Time'</span>,<span class="dt">ylab=</span><span class="st">'Number Susceptible'</span>,<span class="dt">type=</span><span class="st">'l'</span>)</code></pre></div>
-<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASAAAAEgCAMAAAAjXV6yAAAAUVBMVEUAAAAAADoAAGYAOpAAZrY6AAA6ADo6OpA6kNtmAABmADpmtrZmtv+QOgCQZgCQ2/+2ZgC2/7a2///bkDrb2//b////tmb/25D//7b//9v///+EIwg6AAAACXBIWXMAAA7DAAAOwwHHb6hkAAAJMklEQVR4nO2diXarNhRFyeC+pHX6/EKDE///hxZJ4CFBOtLVCD57rbZrBSHhXQ0XIUF3Ik662hfQOhQEoCAABQEoCEBBAAoCUBCAggAUBKAgAAUBKAhAQQAKAlAQgIIAFASgIAAFASgIQEEACgJQEICCABQEoCAABQEoCEBBAAoCUBCAggAUBKAgAAUBKAhAQQAKAlAQgIIAFASgIAAFASgIQEEACgJQEICCABQEoCAABQEoCEBBAAoCUBCAggAUBKAgAAUBKAhAQYArQZ+v3dPH4aXetTTJRdDw8Lt/+vh8paEbzoK+3l5Oo6BT//he83qa4yzo83WvBQ0UdMOPGnQY/yEXvvdBfbeveDUNcjuKdd3D73rX0iRhcdDXW6e5o34qSFDfTTHA0N1NMBAiSPXjE/3ddOVGkO5+OtR8VCQwcT/BAGsQILAPmqrQffZBup25a8bcFO+m/twEirp69AyEbrm51VDE3Wp0qyFY0DxEOccnGCiuZv4tXNDX27P+r2t8woHihgVNP3pw9EEew/xWBcUGit+atn8Lr4agBmH8a1BYP1iDLII8AsXr7JqWlEcQDhS/Z9eso+A+6OXcDUXdhi6U26ajTDVImF2DigSB4t9mfHcEiuaZ2SAJFJtTJBfkeC6mBenx62rA9y23MUWhgg6XSMY+kaEETWokgWJThuQ1yIESdNxpQbaG6Cy3pUqUpZOOrEGnliqRRBCcMDORwPNp7q4F5TZTiSQ3q/o2FUyYjY7GBPYZV1xuI4Yk0x1mYIqcMPNI0oShLHFQonKbMCSvQXEPdLzKbcGQaMJMT9rHre7wK7cBQ5I5aZ85s0Tl1jfU1s3qQrrahloXVH32WhgoRi8DDhBU15AsUIxfBhzwq+sakgzzKZYBh/zoqoZkT1bjlwEH/eaahuQ1KPutxnXqeobEfVCRQFGaPCHi6Q7Z6pfwRRPzeZLSUtB+HDSlr2VoLYKqNTKJINU9xy4+DP+9lQwJBJnh6/P1uUi5lzPqGJLFQYqCcdB0ShVDsjhIUS6SjjknGkETMxHQcVfqXuxyTg1Dkk76uBPHQeHl3pxUwdBqhvkcF5G0yCYEVTAkEKRmgvrYXQZSQcUNyeKg4+75dCgcB8WdJ0YWB6knP8XjoMgTc5d3I+gwynHGQfm2IpRuZJIm9vz5quakHU0s51aE9gXphRvzjo1F8m5FKGsoyzDvsWc1RlBRQ1kEZd7M0rggn4XkYVsRQilahcQ1yD3KB29FCKKkIXkTqxMopjg7T1E/ElYKFM3Z5QzJBVUKFJOcnqOk7wmrBYppzk9f0I9RzHE3X2DParFGVjhQlD5ZjbueIuU0FCimyiFtMXNCPVk/gDnpvIHilEMZQ6GC9CYeNR007eaxkDdQTJZFylKmhDo8VNNBVQNFk0URQ4GC9MpEM9VRM1Cc8ihhKFjQ/rwlFQpy9VRJflurgkz349yrcei6l+OvD8me1RAKGJL0QXqrmHNKUS0AOZhtZVlfblKgkYUKGh5+qxnpqaO2YOrZX0pQhhnFDNmkKGFOOOix+7hzb8lUndTXf6f8r8fJbijPo+fznb54z6ov2RtZpmfz047WwbpWONnvym1oZYsXsuYUl32zgjIb2oKgrIbCBV3NZZQo1yevnIZkixcKlls8M2nel4RJ3oCc9jdlNJTnyWrCcv1yy2doA520zi6boY0IymdIIqjsrmffDDMZknTShXc9++aYx5AsDiq767leliG53sRBhXc9V8wzogaJdj2ne7K6mHvNPL/3QWV3PXtmWrPh3o5idXb71Mh2K3FQtny3Jih5MxM3schPimS8eap0H3zVSaf48EjO++86Uyk/JsxKvtwkMO+ks3HBCattCw/IPKEiSQ3CHx5JWK4w+3SPlcIT4g+PpCxXmn8qRcGrO1K8RDGkXHkJhReQrCUOuioiiaINC0qjSCBobmZr+HxWvCLJKIaHr4Y+nxWrKMuDw7Y+nxWnKMuj57x7VsOJmaAT9EFmbZ2LtmqQKU/qSCJoV3nPqhCZI/mthpMSWxEESN7gGJywwdUdYSWHSdrC+iBB6f6WsnTS7QSKTryeQOVZ/tJQoIhxP6vLci/W4DDvQ/cN80fvswNKKrFntRRZmthKa9Ai4hrknJJuMlCUIW9izi2ZjQaKAuSCIp9qrAaxoLgFVJZMw47HHY49HSSPfJ+03zWsUpDHuzvCM5Udb1OQB94Ph+5V0BgI+XVQ2xPkWze8Jo22KOjCwf1ZBPtmzJBrWK+gsSaVmDZbraDjLsWWqO0K6pOM8RvjIujrLfKrLNvkOlBM0f1sjlnQELcuaLtMgtj92AgLFO+Q1cxw1YKCABQEoCAABQEoCEBBgPSCHO+h1ItDXpyJzGaj5cNqDdyz4+x+zH0PLiGY5ILUZg/Lho+vt/HvvfqN1kSDjuiXDw9PH+ahi+VstdVNT+g5LiGc1ILM8/vlx7PTqz4f362J9NsxLHmYv9rPNtPB459dlxBOakFnCdYU4/9ba6L+6V/9Nselw+cFXpazz4LwJYSQXJDzRZ2Kw+O7LdH4d9UHLR8eHv+86h7MdvbcxPAlhJBakGn7jh5ALQyxJFJtQ39PefFwr26jVTWxFjH1zfASgigtaJj76IVE85sxLIIepophK0K9hla9eb5tQaB+m4VFy4n0X+1NzHQqYwdjKeLc9bTdxNw95LQKdDlRP01I7ZcPm188/npLEeeK03Yn7Rxj5xVqjkQH6zBvVkgO1mHeeLEfF1IyULx8R9qe6GAPFPvZneXsuQ9qO1DULcVycVMbUketicytxvLhYb5RsZx9AMdF8GYVQEEACgJQEICCABQEoCAABQEoCEBBAAoCUBCAggAUBKAgAAUBKAhAQQAKAlAQgIIAFASgIAAFASgIQEEACgI0J+jyoqc/SV5cGEtzghQ+L+QrBQUBGhakVkwdd/+opa1qjb1eNjYvcClH84L04vzHd72kTq3jvKzCKkPzgl5O87/25vuLqVZnetK8oP3p/C+zrM6sRSzGqgTNy2BLXsuqBCVbeBjAmgSleeV1IGsSZHYjHMrWo1UJ0nFQ4TdDNCmoJSgIQEEACgJQEICCABQEoCAABQEoCEBBAAoCUBCAggAUBKAgAAUBKAhAQQAKAlAQgIIAFASgIMD/B0cZi2LOaLsAAAAASUVORK5CYII=" /><!-- --></p>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
 <p>The ability to call the simulation functions directly instead of going through the graphical interface allows additional exploration of the models. For instance if one wanted to explore the behavior of a model systematically for different values of a given parameter, this would need to be done manually if run through the graphical interface. Calling the function directly allows one to automate this by wrapping the function inside a loop over the parameter of interest, recording some quantity of interest for each run, and report the result at the end. The following is a simple example, showing a loop over different values of the recovery rate and recording the peak of the outbreak each time, with the final result <em>peak of outbreak as function of recovery time</em> shown in a plot:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gvec =<span class="st"> </span><span class="kw">seq</span>(<span class="fl">0.01</span>,<span class="fl">0.3</span>,<span class="dt">by=</span><span class="fl">0.01</span>) <span class="co">#values of recovery rate, g, for which to run the simulation </span>
 peak =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>,<span class="kw">length</span>(gvec)) <span class="co">#this will record the peak values for each g</span>
-for (n in <span class="dv">1</span>:<span class="kw">length</span>(gvec))
+<span class="cf">for</span> (n <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(gvec))
 {
   <span class="co">#call the simulator function with different values of g each time</span>
-  result &lt;-<span class="st"> </span><span class="kw">simulate_introduction</span>(<span class="dt">S0 =</span> <span class="dv">500</span>, <span class="dt">I0 =</span> <span class="dv">5</span>, <span class="dt">tmax =</span> <span class="dv">200</span>, <span class="dt">g =</span> gvec[n],  <span class="dt">b =</span> <span class="dv">1</span>/<span class="dv">2500</span>)
+  result &lt;-<span class="st"> </span><span class="kw">simulate_introduction</span>(<span class="dt">S0 =</span> <span class="dv">500</span>, <span class="dt">I0 =</span> <span class="dv">5</span>, <span class="dt">tmax =</span> <span class="dv">200</span>, <span class="dt">g =</span> gvec[n],  <span class="dt">b =</span> <span class="dv">1</span><span class="op">/</span><span class="dv">2500</span>)
   peak[n] &lt;-<span class="st"> </span><span class="kw">max</span>(result[,<span class="st">&quot;I&quot;</span>]) <span class="co">#record max number of infected for each value of g</span>
 }
 <span class="co">#plot final result</span>
@@ -221,28 +221,28 @@ for (n in <span class="dv">1</span>:<span class="kw">length</span>(gvec))
 <p>The following provides a simple example of this process of modifying a simulator function and exploring its results. Assume that we want to modify the simple SIR model encoded in <code>simulate_introduction.R</code>. After finding the file and making a copy (let’s call the modified function <code>mysimulator.R</code>), we can make modifications. Say we want to include waning immunity with recovered returning to the susceptible class at rate <em>w</em>.</p>
 <p>We will need to modify the following lines of code:</p>
 <p>old:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">simulate_introduction &lt;-<span class="st"> </span>function(<span class="dt">S0 =</span> <span class="dv">1000</span>, <span class="dt">I0 =</span> <span class="dv">1</span>, <span class="dt">tmax =</span> <span class="dv">300</span>, <span class="dt">g =</span> <span class="fl">0.5</span>, <span class="dt">b =</span> <span class="dv">1</span>/<span class="dv">1000</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">simulate_introduction &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">S0 =</span> <span class="dv">1000</span>, <span class="dt">I0 =</span> <span class="dv">1</span>, <span class="dt">tmax =</span> <span class="dv">300</span>, <span class="dt">g =</span> <span class="fl">0.5</span>, <span class="dt">b =</span> <span class="dv">1</span><span class="op">/</span><span class="dv">1000</span>)</code></pre></div>
 <p>new:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mysimulator &lt;-<span class="st"> </span>function(<span class="dt">S0 =</span> <span class="dv">1000</span>, <span class="dt">I0 =</span> <span class="dv">1</span>, <span class="dt">tmax =</span> <span class="dv">300</span>, <span class="dt">g =</span> <span class="fl">0.5</span>, <span class="dt">b =</span> <span class="dv">1</span>/<span class="dv">1000</span>, <span class="dt">w =</span> <span class="dv">0</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mysimulator &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">S0 =</span> <span class="dv">1000</span>, <span class="dt">I0 =</span> <span class="dv">1</span>, <span class="dt">tmax =</span> <span class="dv">300</span>, <span class="dt">g =</span> <span class="fl">0.5</span>, <span class="dt">b =</span> <span class="dv">1</span><span class="op">/</span><span class="dv">1000</span>, <span class="dt">w =</span> <span class="dv">0</span>)</code></pre></div>
 <p>old:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pars =<span class="st"> </span><span class="kw">c</span>(<span class="dt">b =</span> b, <span class="dt">g =</span> g);</code></pre></div>
 <p>new:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pars =<span class="st"> </span><span class="kw">c</span>(<span class="dt">b =</span> b, <span class="dt">g =</span> g, <span class="dt">w =</span> w);</code></pre></div>
 <p>old:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dS =<span class="st">  </span>-<span class="st"> </span>b *<span class="st"> </span>S *<span class="st"> </span>I; <span class="co">#susceptibles</span>
-dI =<span class="st"> </span>b *<span class="st"> </span>S *<span class="st"> </span>I -<span class="st"> </span>g *<span class="st"> </span>I; <span class="co">#infected/infectious</span>
-dR =<span class="st"> </span>g *<span class="st"> </span>I; <span class="co">#recovered</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dS =<span class="st">  </span><span class="op">-</span><span class="st"> </span>b <span class="op">*</span><span class="st"> </span>S <span class="op">*</span><span class="st"> </span>I; <span class="co">#susceptibles</span>
+dI =<span class="st"> </span>b <span class="op">*</span><span class="st"> </span>S <span class="op">*</span><span class="st"> </span>I <span class="op">-</span><span class="st"> </span>g <span class="op">*</span><span class="st"> </span>I; <span class="co">#infected/infectious</span>
+dR =<span class="st"> </span>g <span class="op">*</span><span class="st"> </span>I; <span class="co">#recovered</span></code></pre></div>
 <p>new:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dS =<span class="st">  </span>-<span class="st"> </span>b *<span class="st"> </span>S *<span class="st"> </span>I +<span class="st"> </span>w *<span class="st"> </span>R; <span class="co">#susceptibles</span>
-dI =<span class="st"> </span>b *<span class="st"> </span>S *<span class="st"> </span>I -<span class="st"> </span>g *<span class="st"> </span>I; <span class="co">#infected/infectious</span>
-dR =<span class="st"> </span>g *<span class="st"> </span>I -<span class="st">  </span>w *<span class="st"> </span>R; <span class="co">#recovered</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dS =<span class="st">  </span><span class="op">-</span><span class="st"> </span>b <span class="op">*</span><span class="st"> </span>S <span class="op">*</span><span class="st"> </span>I <span class="op">+</span><span class="st"> </span>w <span class="op">*</span><span class="st"> </span>R; <span class="co">#susceptibles</span>
+dI =<span class="st"> </span>b <span class="op">*</span><span class="st"> </span>S <span class="op">*</span><span class="st"> </span>I <span class="op">-</span><span class="st"> </span>g <span class="op">*</span><span class="st"> </span>I; <span class="co">#infected/infectious</span>
+dR =<span class="st"> </span>g <span class="op">*</span><span class="st"> </span>I <span class="op">-</span><span class="st">  </span>w <span class="op">*</span><span class="st"> </span>R; <span class="co">#recovered</span></code></pre></div>
 <p>We could now for instance explore how different rates of waning immunity impact the maximum peak size over all outbreaks. This requires a slight modification of the code shown above in <em>Level 2</em> as follows:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">source</span>(<span class="st">'mysimulator.R'</span>) <span class="co">#to initialize the new function - it needs to be in same directory as this code</span>
 wvec =<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dt">by=</span><span class="fl">0.02</span>) <span class="co">#values of immunity loss rate, w, for which to run the simulation </span>
 peak =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>,<span class="kw">length</span>(wvec)) <span class="co">#this will record the peak values for each g</span>
-for (n in <span class="dv">1</span>:<span class="kw">length</span>(wvec))
+<span class="cf">for</span> (n <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(wvec))
 {
-  result &lt;-<span class="st"> </span><span class="kw">mysimulator</span>(<span class="dt">S0 =</span> <span class="dv">1000</span>, <span class="dt">I0 =</span> <span class="dv">1</span>, <span class="dt">tmax =</span> <span class="dv">300</span>, <span class="dt">g =</span> <span class="fl">0.5</span>,  <span class="dt">b =</span> <span class="dv">1</span>/<span class="dv">1000</span>, <span class="dt">w =</span> wvec[n])
+  result &lt;-<span class="st"> </span><span class="kw">mysimulator</span>(<span class="dt">S0 =</span> <span class="dv">1000</span>, <span class="dt">I0 =</span> <span class="dv">1</span>, <span class="dt">tmax =</span> <span class="dv">300</span>, <span class="dt">g =</span> <span class="fl">0.5</span>,  <span class="dt">b =</span> <span class="dv">1</span><span class="op">/</span><span class="dv">1000</span>, <span class="dt">w =</span> wvec[n])
   peak[n] &lt;-<span class="st"> </span><span class="kw">max</span>(result[,<span class="st">&quot;I&quot;</span>])
 }
 <span class="kw">plot</span>(wvec,peak,<span class="dt">type=</span><span class="st">'p'</span>,<span class="dt">xlab=</span><span class="st">'Rate of waning immunity'</span>,<span class="dt">ylab=</span><span class="st">'Max number of infected'</span>)</code></pre></div>
@@ -251,12 +251,12 @@ for (n in <span class="dv">1</span>:<span class="kw">length</span>(wvec))
 </div>
 <div id="developing-and-contributing-new-apps-to-the-package" class="section level2">
 <h2>Developing and contributing new apps to the package</h2>
-<p>The package is built in a way that makes it (hopefully) easy for others to contribute new simulations/apps. To that end, the package contains a subfolder called <em>docsfordevelopers</em>, which provides information on how the apps are structured and how to add new ones. In brief, each app consists of a simulator function and a shiny app function which calls the simulator function. Further HTML files provide the documentation displayed in each app. Developing a new app consists of writing (at least) 2 R functions (<em>simulate_NNNNNN.R</em> and the corresponding <em>app.R</em>) and filling the provided RMarkdown template for the documentation, then running a few functions to process everything.</p>
+<p>The package is built in a way that makes it (hopefully) easy for others to contribute new simulations/apps. To that end, the package contains a subfolder called <em>docsfordevelopers</em>, which provides information on how the apps are structured and how to add new ones. In brief, each app consists of a simulator function and a shiny app function which calls the simulator function. AN R Markdown file, which is turned into multiple HTML files by a provided script, should include the documentation displayed in each app. Developing a new app consists of writing (at least) 2 R functions (<em>simulate_NNNNNN.R</em> and the corresponding <em>app.R</em>) and filling the provided RMarkdown template for the documentation, then running a few functions to process everything.</p>
 <p>The information in the <em>docsfordevelopers</em> folder contains more details and is hopefully complete enough to allow fairly easy development and contribution to the package. If you are interested in contributing further apps, I suggest you get in touch with me, either by email (<a href="mailto:ahandel@uga.edu">ahandel@uga.edu</a>) or through the github site for the package (<a href="https://github.com/ahgroup/DSAIDE" class="uri">https://github.com/ahgroup/DSAIDE</a>).</p>
 </div>
 <div id="acknowledgements" class="section level2">
 <h2>Acknowledgements</h2>
-<p>The following individuals contributed to this package: Sina Solaimanpour, Brian McKay, John Rossow.</p>
+<p>The following individuals contributed to this package: Spencer Hall, Brian McKay, John Rossow, Sina Solaimanpour.</p>
 </div>
 <div id="references" class="section level2 unnumbered">
 <h2>References</h2>
@@ -277,7 +277,7 @@ for (n in <span class="dv">1</span>:<span class="kw">length</span>(wvec))
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>
