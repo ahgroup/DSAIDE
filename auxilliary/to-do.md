@@ -14,6 +14,7 @@
 ## Ideas for further apps
 
 * Surveillance app, which has underlying dynamics and observed dynamics, based on clinical status and infection status
+
 * Add pulsed births model (Peel et al 2014) to DSAIDE?
 
 
