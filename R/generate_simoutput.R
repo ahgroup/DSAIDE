@@ -18,7 +18,7 @@ generate_simoutput <- function(input,output,allres,varlist = NULL)
 {
   
   #nplots contains the number of plots to be produced. 
-  #Buy default it's a single plot
+  #By default it's a single plot
   #some apps ask for more than 1 plot, this is then sent in as a list to this function
   #check if user provided a list of variables to be processed separately
   nplots = 1; 

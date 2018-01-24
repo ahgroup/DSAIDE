@@ -17,6 +17,7 @@
 
 * Add pulsed births model (Peel et al 2014) to DSAIDE?
 
+* (Evolution of) virulence, optimal virulence and R0.
 
 ## Resources
 A good source of shiny examples and tips and tricks that might be helpful. E.g. the ""Busy..." / "Done!" / "Error" example on that website might be useful for the progress bar task below: https://github.com/daattali
