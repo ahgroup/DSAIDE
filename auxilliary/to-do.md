@@ -20,5 +20,5 @@
 * (Evolution of) virulence, optimal virulence and R0.
 
 ## Resources
-A good source of shiny examples and tips and tricks that might be helpful. E.g. the ""Busy..." / "Done!" / "Error" example on that website might be useful for the progress bar task below: https://github.com/daattali
-
+A good source of shiny examples and tips and tricks that might be helpful:
+https://deanattali.com/blog/advanced-shiny-tips/
