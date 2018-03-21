@@ -100,8 +100,7 @@ simulate_stochastic <- function(S0 = 1000, I0 = 10, tmax = 100, bP = 0, bI = 1/1
 
 
 
-    #this line runs the simulation, i.e. integrates the differential equations describing the infection process
-    #the result is saved in the odeoutput matrix, with the 1st column the time, the 2nd, 3rd, 4th column the variables S, I, R
+    #this line runs the simulation using the SSA algorithm in the adaptivetau package
     output = adaptivetau::ssa.adaptivetau(init.values = Y0, transitions = transitions,  rateFunc = stochasticratefunc, params = pars, tf = tmax)
 
     #since I use P above, but it's better to rename as SEIR in the plots, do a rename here

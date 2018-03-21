@@ -1,5 +1,5 @@
 ---
-title: Stochastic Dynamics and Extinctions - Practice
+title: Stochastic Dynamics and Extinctions 
 output:
   html_document:
     theme: null
@@ -16,7 +16,7 @@ bibliography: ../media/references.bib
 ---
 
 ##Overview {#shinytab1}
-For this module, we will explore an SEIR model. This model is implemented in a _stochastic_ framework. Read about the model in the "Model" tab. Then do the tasks described in the "What to do" tab.
+This app lets you explore a _stochastic_ SEIR model. Read about the model in the "Model" tab. Then do the tasks described in the "What to do" tab.
 
 ##The Model {#shinytab2}
 
