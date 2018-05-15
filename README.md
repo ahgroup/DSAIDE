@@ -25,5 +25,6 @@ DSAIDE is built in a way that makes it (hopefully) easy for others to contribute
 
 
 ## Further information
-The vignette provides additional details about the different ways the package can be used.
-For feedback, bug reports etc., use the packages' github site https://github.com/ahgroup/DSAIDE
+* I published a paper describing the package and how to use it which you can find and read [here](https://doi.org/10.1371/journal.pcbi.1005642). Also use this paper if you ever want to cite the package.
+* The vignette provides details about the different ways the package can be used. Currently the paper is probably better than the vignette, but in the future the vignette will be more up-to-date. 
+* For feedback, bug reports etc., use the packages' github site https://github.com/ahgroup/DSAIDE
