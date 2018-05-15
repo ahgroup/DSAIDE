@@ -2,9 +2,9 @@
 
 * Fix non-displaying of equations when using Rstudio viewer
 
-* Add a 'simulation running' message. This message should go away as soon as the simulation has finished and output has been displayed. Depending on how many lines of code this is, maybe turn it into a stand-alone function. But only do that if it doesn't make the code more complex.
+* Add a 'simulation running' message to all apps. See DSAIRM package 
 
-* Improve plot displays, make figures, their look, size and placement better - switch to DSAIRM framework
+* Switch plot and text setup to DSAIRM framework
 
 * Continue streamlining code base to make it more general/modular/flexible
 
