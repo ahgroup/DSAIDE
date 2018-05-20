@@ -2,13 +2,9 @@
 
 * Fix non-displaying of equations when using Rstudio viewer
 
-* Add a 'simulation running' message to all apps. See DSAIRM package 
-
-* Switch plot and text setup to DSAIRM framework
-
 * Continue streamlining code base to make it more general/modular/flexible
 
-* Left or block align text on main menu page
+* Write up all solutions into the DSAIDEsolutions repository
 
 * Make sure to follow ROpenSci guidelines, submit for review: https://github.com/ropensci/onboarding
 
