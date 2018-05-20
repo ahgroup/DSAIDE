@@ -4,7 +4,9 @@
 
 * Continue streamlining code base to make it more general/modular/flexible
 
-* Write up all solutions into the DSAIDEsolutions repository
+* Switch plot and text production to DSAIRM setoup
+
+* Write up all solutions into the DSAIRMsolutions repository
 
 * Make sure to follow ROpenSci guidelines, submit for review: https://github.com/ropensci/onboarding
 
