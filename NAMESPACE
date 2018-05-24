@@ -2,7 +2,9 @@
 
 export(dsaidemenu)
 export(generate_instruction_tabs)
+export(generate_plots)
 export(generate_simoutput)
+export(generate_text)
 export(simulate_directtransmission)
 export(simulate_environmentaltransmission)
 export(simulate_evolution)
