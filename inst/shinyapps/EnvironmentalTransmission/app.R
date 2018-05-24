@@ -9,10 +9,11 @@
 #this function is wrapped inside the shiny server function below to allow return to main menu when window is closed
 refresh <- function(input, output){
   
-  # This reactive takes the input data and sends it over to the simulator
-  # Then it will get the results back and return it as the "res" variable
-  res <- reactive({
-    input$submitBtn
+# This reactive takes the input data and sends it over to the simulator
+# Then it will get the results back and return it as the "res" variable
+  
+  result <- reactive({
+      input$submitBtn
     
     # Read all the input values from the UI
     S0 = isolate(input$S0);
@@ -26,48 +27,124 @@ refresh <- function(input, output){
     n  = isolate(input$n);
     c  = isolate(input$c);
     p  = isolate(input$p);
+    plotscale = isolate(input$plotscale) # this is to change the scale of x and y axises interactively
+    
+   
+#save all results to a list for processing plots and text
+    
+    listlength = 1;                      #here we do all simulations in the same figure
+    result = vector("list", listlength)  #create empty list of right size for results
+    
+#shows a 'running simulation' message
+    
+     withProgress(message = 'Running Simulation', value = 0,
+                 {
+     simresult <- simulate_environmentaltransmission(S = S0, I = I0, E = E0, tmax = tmax, bd = bd, be = be, m = m, n = n, g = g, p = p, c = c)
+                   
+                 })
+     colnames(simresult) = c('xvals','S','I','R','E') 
+    
+#reformat data to be in the right format for plotting
+#each plot/text output is a list entry with a data frame in form xvals, yvals, extra variables for stratifications for each plot
+    
+    dat = tidyr::gather(as.data.frame(simresult), -xvals, value = "yvals", key = "varnames")
+    
+#code variable names as factor and level them so they show up right in plot
+    
+    mylevels = unique(dat$varnames)
+    dat$varnames = factor(dat$varnames, levels = mylevels)
+    
+#data for plots and text
+#each variable listed in the varnames column will be plotted on the y-axis, with its values in yvals
+#each variable listed in varnames will also be processed to produce text
+    
+    result[[1]]$dat = dat
+    
+#Meta-information for each plot
+    
+    result[[1]]$plottype = "Lineplot"
+    result[[1]]$xlab = "Time"
+    result[[1]]$ylab = "Numbers"
+    result[[1]]$legend = "Compartments"
+    
+    result[[1]]$xscale = 'identity'
+    result[[1]]$yscale = 'identity'
+    if (plotscale == 'x' | plotscale == 'both') { result[[1]]$xscale = 'log10'}
+    if (plotscale == 'y' | plotscale == 'both') { result[[1]]$yscale = 'log10'}
     
     
-    # Call the ODE solver with the given parameters
-    result <- simulate_environmentaltransmission(S = S0, I = I0, E = E0, tmax = tmax, bd = bd, be = be, m = m, n = n, g = g, p = p, c = c)
+#set min and max for scales. If not provided ggplot will auto-set
     
-    return(list(result)) #this is returned as the res variable
-  })
+    result[[1]]$ymin = 1e-12
+    result[[1]]$ymax = max(simresult)
+    result[[1]]$xmin = 1e-12
+    result[[1]]$xmax = tmax
+    
+#the following are for text display for each plot
+    
+    result[[1]]$maketext = TRUE #if true we want the generate_text function to process data and generate text, if 0 no result processing will occur insinde generate_text
+    result[[1]]$showtext = '' #text can be added here which will be passed through to generate_text and displayed for each plot
+    result[[1]]$finaltext = 'Numbers are rounded to 2 significant digits.' #text can be added here which will be passed through to generate_text and displayed for each plot
+    
+    return(result)
+    
+  })          #ends inner shiny server function that runs the simulation and returns output
   
-  #if we want certain variables plotted and reported separately, we can specify them manually as a list
-  #if nothing is specified, all variables are plotted and reported at once
-  varlist = list(c("S","I","R"), c("E"))
-  #function that takes result saved in res and produces output
-  #output (plots, text, warnings) is stored in and modifies the global variable 'output'
-  generate_simoutput(input,output,res,varlist=varlist)
-} #ends the 'refresh' shiny server function that runs the simulation and returns output
+  
+#functions below take result saved in reactive expression result and produce output
+#to produce figures, the function generate_plot is used
+#function generate_text produces text
+#data needs to be in a specific structure for processing
+#see information for those functions to learn how data needs to look like
+#output (plots, text) is stored in reactive variable 'output'
+  
+   output$plot  <- renderPlot({
+           input$submitBtn
+           res=isolate(result())                  #list of all results that are to be turned into plots
+          generate_plots(res)                    #create plots with a non-reactive function
+       }, width = 'auto', height = 'auto'
+  )                                           #finish render-plot statement
+  
+  output$text <- renderText({
+          input$submitBtn
+         res=isolate(result())      #list of all results that are to be turned into plots
+        generate_text(res)         #create text for display with a non-reactive function
+     })
+  
+ }             #ends the 'refresh' shiny server function that runs the simulation and returns output   
+
 
 #main shiny server function
+
 server <- function(input, output, session) {
   
   # Waits for the Exit Button to be pressed to stop the app and return to main menu
+  
   observeEvent(input$exitBtn, {
-    input$exitBtn
-    stopApp(returnValue = 0)
-  })
+         input$exitBtn
+         stopApp(returnValue = 0)
+   })
   
   # This function is called to refresh the content of the Shiny App
+  
   refresh(input, output)
   
   # Event handler to listen for the webpage and see when it closes.
   # Right after the window is closed, it will stop the app server and the main menu will
   # continue asking for inputs.
+  
   session$onSessionEnded(function(){
-    stopApp(returnValue = 0)
-  })
-} #ends the main shiny server function
+          stopApp(returnValue = 0)
+        })
+   }        #ends the main shiny server function
 
 
 #This is the UI part of the shiny App
+
 ui <- fluidPage(
-  includeCSS("../styles/dsaide.css"),
+     includeCSS("../styles/dsaide.css"),
   
-   
+  # Add the app title
   
   div( includeHTML("www/header.html"), align = "center"),
   h1('Environmental Transmission App', align = "center", style = "background-color:#123c66; color:#fff"),
@@ -136,7 +213,14 @@ ui <- fluidPage(
              column(4,
                     numericInput("n", "Natural death rate (n)", min = 0, max = 0.02, value = 0, step = 0.0005 )
              )
-           ) #close fluidRow structure for input
+           ),
+           fluidRow(
+             column(6,
+                    selectInput("plotscale", "Log-scale for plot:",c("none" = "none", 'x-axis' = "x", 'y-axis' = "y", 'both axes' = "both"))
+             ),
+             
+             align = "center"
+           ) 
     ), #end sidebar column for inputs
     
     #all the outcomes here
@@ -156,22 +240,26 @@ ui <- fluidPage(
                                 }")),
            tags$hr()
            
-           ) #end main panel column with outcomes
-  ), #end layout with side and main panel
+           )          #end main panel column with outcomes
+  ),          #end layout with side and main panel
   #################################
   #Ends the 2 column structure with inputs on left and outputs on right
   
   
   
   #################################
+  
   #Instructions section at bottom as tabs
+  
   h2('Instructions'),
   
   #use external function to generate all tabs with instruction content
+  
   do.call(tabsetPanel,generate_instruction_tabs()),
   
-  div(includeHTML("www/footer.html"), align="center", style="font-size:small") #footer
-) #end fluidpage
+  div(includeHTML("www/footer.html"), align="center", style="font-size:small")     #footer
+  
+)     #end fluidpage
 
 
 
