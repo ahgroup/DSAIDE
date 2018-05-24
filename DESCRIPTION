@@ -25,9 +25,12 @@ Imports:
     deSolve (>= 1.13),
     knitr (>= 1.15),
     adaptivetau (>= 2.2),
-    utils
+    utils,
+    tidyr (>= 0.7),
+    dplyr (>= 0.7.4),
 Depends:
-    shiny (>= 1.0)
+    shiny (>= 1.0),
+    ggplot2 (>= 2.0)
 Suggests:
     rmarkdown
 RoxygenNote: 6.0.1
