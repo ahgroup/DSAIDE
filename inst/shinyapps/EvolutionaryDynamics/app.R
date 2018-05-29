@@ -10,7 +10,7 @@
 #this function is wrapped inside the shiny server function below to allow return to main menu when window is closed
 refresh <- function(input, output){
 
-    res <- reactive({
+    result <- reactive({
     input$submitBtn
     
     # Read all the input values from the UI
@@ -34,25 +34,94 @@ refresh <- function(input, output){
     gr = isolate(input$gr);
     
     nreps = isolate(input$nreps)
-
-    # Call the adaptivetau simulator with the given parameters
-    # simulation will be run multiple times based on value of nreps
-    #result is returned as list
-    result <- list()
-    for (nn in 1:nreps)
-    {
-     result[[nn]] <- simulate_evolution(S0 = S0, Iu0 = Iu0, It0 = It0, Ir0 = Ir0, tmax = tmax, bu = bu, bt = bt, br = br, cu = cu, ct = ct, f = f, gu = gu, gt = gt, gr = gr)
-    }
+    plotscale = isolate(input$plotscale) # Change the scale of axis interactively 
+    
+#save all results to a list for processing plots and text
+    
+    listlength = 1; #here we do all simulations in the same figure
+    result = vector("list", listlength) #create empty list of right size for results
+    
+#shows a 'running simulation' message
+    
+   withProgress(message = 'Running Simulation', value = 0,
+                 {
+          simresult <- simulate_evolution(S0 = S0, Iu0 = Iu0, It0 = It0, Ir0 = Ir0, tmax = tmax, 
+                                            bu = bu, bt = bt, br = br, cu = cu, ct = ct, f = f, gu = gu, gt = gt, gr = gr)
+                   
+          })
+    colnames(simresult) = c('xvals','S','Iu','It','Ir','R') 
+    
+#reformat data to be in the right format for plotting
+#each plot/text output is a list entry with a data frame in form xvals, yvals, extra variables for stratifications for each plot
+    
+    dat = tidyr::gather(as.data.frame(simresult), -xvals, value = "yvals", key = "varnames")
+    
+ #code variable names as factor and level them so they show up right in plot
+    
+    mylevels = unique(dat$varnames)
+    dat$varnames = factor(dat$varnames, levels = mylevels)
+    
+#data for plots and text
+#each variable listed in the varnames column will be plotted on the y-axis, with its values in yvals
+#each variable listed in varnames will also be processed to produce text
+    
+    result[[1]]$dat = dat
+    
+#Meta-information for each plot
+    
+    result[[1]]$plottype = "Lineplot"
+    result[[1]]$xlab = "Time"
+    result[[1]]$ylab = "Numbers"
+    result[[1]]$legend = "Compartments"
+    
+    result[[1]]$xscale = 'identity'
+    result[[1]]$yscale = 'identity'
+    if (plotscale == 'x' | plotscale == 'both') { result[[1]]$xscale = 'log10'}
+    if (plotscale == 'y' | plotscale == 'both') { result[[1]]$yscale = 'log10'}
+    
+    
+#set min and max for scales. If not provided ggplot will auto-set
+    
+    result[[1]]$ymin = 1e-12
+    result[[1]]$ymax = max(simresult)
+    result[[1]]$xmin = 1e-12
+    result[[1]]$xmax = tmax
+    
+#the following are for text display for each plot
+    
+    result[[1]]$maketext = TRUE #if true we want the generate_text function to process data and generate text, if 0 no result processing will occur insinde generate_text
+    result[[1]]$showtext = '' #text can be added here which will be passed through to generate_text and displayed for each plot
+    result[[1]]$finaltext = 'Numbers are rounded to 2 significant digits.' #text can be added here which will be passed through to generate_text and displayed for each plot
     
     return(result)
-    })
     
-    #function that takes result saved in res and produces output
-    #output (plots, text, warnings) is stored in and modifies the global variable output
-    generate_simoutput(input,output,res)
+    })          #ends inner shiny server function that runs the simulation and returns output
     
-} #ends inner shiny server function that runs the simulation and returns output
+    
+#functions below take result saved in reactive expression result and produce output
+#to produce figures, the function generate_plot is used
+#function generate_text produces text
+#data needs to be in a specific structure for processing
+#see information for those functions to learn how data needs to look like
+#output (plots, text) is stored in reactive variable 'output'
+    
+  output$plot  <- renderPlot({
+              input$submitBtn
+             res = isolate(result())                  #list of all results that are to be turned into plots
+           generate_plots(res)                    #create plots with a non-reactive function
+       }, width = 'auto', height = 'auto'
+    )                                           #finish render-plot statement
+    
+  output$text <- renderText({
+           input$submitBtn
+          res = isolate(result())      #list of all results that are to be turned into plots
+         generate_text(res)         #create text for display with a non-reactive function
+     })
+    
+   }             #ends the 'refresh' shiny server function that runs the simulation and returns output   
 
+
+#main shiny server function
 
 server <- function(input, output, session) {
 
@@ -99,6 +168,7 @@ ui <- fluidPage(
   
   ################################
   #Split screen with input on left, output on right
+  
   fluidRow(
     #all the inputs in here
     column(6,
@@ -160,37 +230,52 @@ ui <- fluidPage(
              column(4,
                          numericInput("nreps", "Number of simulations", min = 1, max = 50, value = 1, step = 1)
               )
-            ) #close fluidRow structure for input
+            ),  #close fluidRow structure for input
            
-    ), #end sidebar column for inputs
+           fluidRow(
+             column(4,align = "left",
+                    selectInput("plotscale", "Log-scale for plot:",c("none" = "none", 'x-axis' = "x", 'y-axis' = "y", 'both axes' = "both"))
+                 )
+             
+             )  
+           
+        ),         #end sidebar column for inputs
     
-    #all the outcomes here
+     
+  #all the outcomes here
+    
     column(6,
            
-           #################################
-           #Start with results on top
-           h2('Simulation Results'),
-           plotOutput(outputId = "plot", height = "500px"),
-           # PLaceholder for results of type text
-           htmlOutput(outputId = "text"),
-           #Placeholder for any possible warning or error messages (this will be shown in red)
-           htmlOutput(outputId = "warn"),
+#################################
+#Start with results on top
+  
+      h2('Simulation Results'),
+      plotOutput(outputId = "plot", height = "500px"),
+  
+# PLaceholder for results of type text
+  
+      htmlOutput(outputId = "text"),
+
+#Placeholder for any possible warning or error messages (this will be shown in red)
+
+        htmlOutput(outputId = "warn"),
            
-           tags$head(tags$style("#warn{color: red;
+        tags$head(tags$style("#warn{color: red;
                                 font-style: italic;
                                 }")),
-           tags$hr()
+        tags$hr()
            
-           ) #end main panel column with outcomes
-  ), #end layout with side and main panel
+      )         #end main panel column with outcomes
+  ),        #end layout with side and main panel
   
   #################################
+
   #Instructions section at bottom as tabs
-  h2('Instructions'),
-  #use external function to generate all tabs with instruction content
-  do.call(tabsetPanel,generate_instruction_tabs()),
-  div(includeHTML("www/footer.html"), align="center", style="font-size:small") #footer
-) #end fluidpage
+
+     h2('Instructions'),
+     do.call(tabsetPanel,generate_instruction_tabs()),  #use external function to generate all tabs with instruction content
+    div(includeHTML("www/footer.html"), align="center", style="font-size:small") #footer
+    )    #end fluidpage
 
 shinyApp(ui = ui, server = server)
 
