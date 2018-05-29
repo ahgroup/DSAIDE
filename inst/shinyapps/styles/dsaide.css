@@ -144,12 +144,20 @@ iframe {
 
 .shiny-progress-container {
 	top: 40px;
+	
 }
 
 .progress-message {
 	color: red;
+	
 }
 
+.shiny-notification{
+  position: fixed;
+  top: 43%;
+  left: 53%;
+  right: 33%;
+}
 
 
 .mainbutton {
