@@ -10,36 +10,26 @@
 #' @importFrom knitr knit
 #' @export
 
+
 dsaidemenu <- function() {
-
+  
   cond <- 1
-
-    while (cond == 1){
+  
+  while (cond == 1)
+  {
     
     appname <- NULL
     appDir <- system.file("shinyapps", "MainMenu", package = "DSAIDE")
-    op = shiny::runApp(appDir = appDir)
+    appname = shiny::runApp(appDir = appDir)
     
-    if (op == "X") {cond = 0} #leave while loop/menu
-    if (op == "A") {appname = "IDDynamicsIntro"}
-    if (op == "B") {appname = "CharacteristicsofID"}
-    if (op == "C") {appname = "IDPatterns"}
-    if (op == "D") {appname = "ReproductiveNumber"}
-    if (op == "E") {appname = "DirectTransmission"}
-    if (op == "F") {appname = "EnvironmentalTransmission"}
-    if (op == "G") {appname = "VectorTransmission"}
-    if (op == "H") {appname = "IDControl"}
-    if (op == "I") {appname = "HostHeterogeneity"}
-    if (op == "J") {appname = "StochasticDynamics"}
-    if (op == "K") {appname = "EvolutionaryDynamics"}
-    if (op == "L") {appname = "MultiPathogen"}
-    
-    if (!is.null(appname))     #run the shiny app chosen
+    if (!is.null(appname) & appname != "Exit")     #run the shiny app chosen
     {
-        appDir <- system.file("shinyapps", appname, package = "DSAIDE")
-        shiny::runApp(appDir = appDir)
+      appDir <- system.file("shinyapps", appname, package = "DSAIDE")
+      shiny::runApp(appDir = appDir)
     }
-
+    
+    if (appname == "Exit") {cond = 0} #leave while loop/menu
+    
   }
   print('*************************************************')
   print('Exiting the DSAIDE main menu.')
