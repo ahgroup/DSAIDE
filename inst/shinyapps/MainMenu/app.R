@@ -5,31 +5,26 @@ server <- function(input, output, session) {
   
   observeEvent(input$IDDynamicsIntro, {
     input$IDDynamicsIntro
-    print ("Running IDDynamicsIntro...")
-    stopApp(returnValue = 'A')
+    stopApp(returnValue = 'IDDynamicsIntro')
   })
   
   observeEvent(input$CharacteristicsofID, {
     input$CharacteristicsofID
-    print ("Running CharacteristicsofID...")
-    stopApp(returnValue = 'B')
+    stopApp(returnValue = 'CharacteristicsofID')
   })
   
   observeEvent(input$IDPatterns, {
     input$IDPatterns
-    print ("Running IDPatterns...")
     stopApp(returnValue = 'C')
   })
   
   observeEvent(input$ReproductiveNumber, {
     input$ReproductiveNumber
-    print ("Running ReproductiveNumber...")
     stopApp(returnValue = 'D')
   })
   
   observeEvent(input$DirectTransmission, {
     input$DirectTransmission
-    print ("Running DirectTransmission...")
     stopApp(returnValue = 'E')
   })
   

@@ -5,9 +5,7 @@
 #' @details Run this function with no arguments to start the main menu (a shiny App) for DSAIDE 
 #' @examples
 #' \dontrun{dsaidemenu()}
-#' @author Andreas Handel, Sina Solaimanpour
-#' @import shiny
-#' @importFrom knitr knit
+#' @author Andreas Handel
 #' @export
 
 
@@ -41,4 +39,3 @@ dsaidemenu <- function() {
 .onAttach <- function(libname, pkgname){
   packageStartupMessage("Welcome to the DSAIDE package. Type dsaidemenu() to get started.")
 }
-
