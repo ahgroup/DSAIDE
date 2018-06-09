@@ -11,7 +11,7 @@ refresh <- function(input, output){
   
   # This reactive takes the input data and sends it over to the simulator
   # Then it will get the results back and return it as the "res" variable
-  res <- reactive({
+  result <- reactive({
     input$submitBtn
     
     
@@ -36,46 +36,125 @@ refresh <- function(input, output){
     m = isolate(input$m)
     n = isolate(input$n);
     s = isolate(input$s)
+    plotscale = isolate(input$plotscale)
+    
+#save all results to a list for processing plots and text
+    
+    listlength = 1;       #here we do all simulations in the same figure
+    result = vector("list", listlength) #create empty list of right size for results
+    
+#shows a 'running simulation' message
+    
+  withProgress(message = 'Running Simulation', value = 0,
+                 {
+               simresult <- simulate_idpatterns(S0 = S0, P0 = P0, timeunit = timeunit, tmax = tmax, bP = bP,
+                                          bA = bA, bI = bI, gP = gP , gA = gA, gI = gI, f = f, d = d, w = w, m = m, n = n, s = s)
+                 })
+    
+    colnames(simresult) = c('xvals','S','P','A','I','R','D')
+    
+#reformat data to be in the right format for plotting
+#each plot/text output is a list entry with a data frame in form xvals, yvals, extra variables for stratifications for each plot
+    
+    dat = tidyr::gather(as.data.frame(simresult), -xvals, value = "yvals", key = "varnames")
+    
+#code variable names as factor and level them so they show up right in plot
+    
+    mylevels = unique(dat$varnames)
+    dat$varnames = factor(dat$varnames, levels = mylevels)
+    
+#data for plots and text
+#each variable listed in the varnames column will be plotted on the y-axis, with its values in yvals
+#each variable listed in varnames will also be processed to produce text
+    
+    result[[1]]$dat = dat
+    
+#Meta-information for each plot
+    
+    result[[1]]$plottype = "Lineplot"
+    result[[1]]$xlab = "Time"
+    result[[1]]$ylab = "Numbers"
+    result[[1]]$legend = "Compartments"
+    
+    result[[1]]$xscale = 'identity'
+    result[[1]]$yscale = 'identity'
+    if (plotscale == 'x' | plotscale == 'both') { result[[1]]$xscale = 'log10'}
+    if (plotscale == 'y' | plotscale == 'both') { result[[1]]$yscale = 'log10'}
     
     
-    # Call the ODE solver with the given parameters
-    result <- simulate_idpatterns(S0 = S0, P0 = P0, timeunit = timeunit, tmax = tmax, bP = bP, bA = bA, bI = bI, gP = gP , gA = gA, gI = gI, f = f, d = d, w = w, m = m, n = n, s = s)
+#set min and max for scales. If not provided ggplot will auto-set
     
-    return(list(result))
+    result[[1]]$ymin = 1e-12
+    result[[1]]$ymax = max(simresult)
+    result[[1]]$xmin = 1e-12
+    result[[1]]$xmax = tmax
+    
+#the following are for text display for each plot
+    
+    result[[1]]$maketext = TRUE #if true we want the generate_text function to process data and generate text, if 0 no result processing will occur insinde generate_text
+    result[[1]]$showtext = '' #text can be added here which will be passed through to generate_text and displayed for each plot
+    result[[1]]$finaltext = 'Numbers are rounded to 2 significant digits.' #text can be added here which will be passed through to generate_text and displayed for each plot
+    
+    return(result)
+    
+  })   #ends inner shiny server function that runs the simulation and returns output
+  
+  
+#functions below take result saved in reactive expression result and produce output
+#to produce figures, the function generate_plot is used
+#function generate_text produces text
+#data needs to be in a specific structure for processing
+#see information for those functions to learn how data needs to look like
+#output (plots, text) is stored in reactive variable 'output'
+  
+  output$plot  <- renderPlot({
+    input$submitBtn
+    res=isolate(result())   #list of all results that are to be turned into plots
+    generate_plots(res)      #create plots with a non-reactive function
+     }, width = 'auto', height = 'auto'
+  )            #finish render-plot statement
+  
+  output$text <- renderText({
+    input$submitBtn
+    res=isolate(result())        #list of all results that are to be turned into plots
+    generate_text(res)     #create text for display with a non-reactive function
   })
   
-  #function that takes result saved in res and produces output
-  #output (plots, text, warnings) is stored in and modifies the global variable output
-  generate_simoutput(input,output,res)
   
-} #ends the 'refresh' shiny server function that runs the simulation and returns output
+  
+} #ends the 'refresh' shiny server function that runs the simulation and returns output   
 
-#main shiny server function
+
+#main shiny server function    
+
 server <- function(input, output, session) {
   
-  # Waits for the Exit Button to be pressed to stop the app and return to main menu
+# Waits for the Exit Button to be pressed to stop the app and return to main menu
   observeEvent(input$exitBtn, {
     input$exitBtn
     stopApp(returnValue = 0)
   })
   
-  # This function is called to refresh the content of the Shiny App
+# This function is called to refresh the content of the Shiny App
   refresh(input, output)
   
-  # Event handler to listen for the webpage and see when it closes.
-  # Right after the window is closed, it will stop the app server and the main menu will
-  # continue asking for inputs.
+# Event handler to listen for the webpage and see when it closes.
+# Right after the window is closed, it will stop the app server and the main menu will
+# continue asking for inputs.
+  
   session$onSessionEnded(function(){
     stopApp(returnValue = 0)
   })
-} #ends the main shiny server function
+}        #ends the main shiny server function
 
 
 #This is the UI part of the shiny App
+
 ui <- fluidPage(
   includeCSS("../styles/dsaide.css"),
+  
   #add header and title
-   
+  
   div( includeHTML("www/header.html"), align = "center"),
   #specify name of App below, will show up in title
   h1('ID Patterns App', align = "center", style = "background-color:#123c66; color:#fff"),
@@ -92,7 +171,8 @@ ui <- fluidPage(
   ), #end section to add buttons
   
   tags$hr(),
-  ################################
+  
+################################
   #Split screen with input on left, output on right
   fluidRow(
     #all the inputs in here
@@ -118,7 +198,7 @@ ui <- fluidPage(
              ),
              align = "center"
            ), #close fluidRow structure for input
-        
+           
            fluidRow(
              column(4,
                     numericInput("bP", "Level/Rate of transmission by presymptomatic hosts (bP)", min = 0, max = 0.01, value = 0, step = 0.0001  )
@@ -166,12 +246,18 @@ ui <- fluidPage(
                     numericInput("s", "Strength of seasonal variation of transmission (s)", min = 0, max = 1, value = 0, step = 0.1)
              ),
              align = "center"
-           ) #close fluidRow structure for input
-         
+           ), 
+           fluidRow(
+             column(4,
+                    selectInput("plotscale", "Log-scale for plot:",c("none" = "none", 'x-axis' = "x", 'y-axis' = "y", 'both axes' = "both")) #--
+             ),
+             
+             align = "center"
+           )
            
     ), #end sidebar column for inputs
     
-    #all the outcomes here
+#all the outcomes here
     column(6,
            
            #################################
@@ -188,11 +274,11 @@ ui <- fluidPage(
                                 }")),
            tags$hr()
            
-           ) #end main panel column with outcomes
+    ) #end main panel column with outcomes
   ), #end layout with side and main panel
   
-  #################################
-  #Instructions section at bottom as tabs
+#################################
+#Instructions section at bottom as tabs
   h2('Instructions'),
   #use external function to generate all tabs with instruction content
   do.call(tabsetPanel,generate_instruction_tabs()),
