@@ -6,8 +6,9 @@
 #' @examples
 #' \dontrun{dsaidemenu()}
 #' @author Andreas Handel
+#' @import shiny
+#' @importFrom knitr knit
 #' @export
-
 
 dsaidemenu <- function() {
   

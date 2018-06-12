@@ -15,70 +15,61 @@ server <- function(input, output, session) {
   
   observeEvent(input$IDPatterns, {
     input$IDPatterns
-    stopApp(returnValue = 'C')
+    stopApp(returnValue = 'IDPatterns')
   })
   
   observeEvent(input$ReproductiveNumber, {
     input$ReproductiveNumber
-    stopApp(returnValue = 'D')
+    stopApp(returnValue = 'ReproductiveNumber')
   })
   
   observeEvent(input$DirectTransmission, {
     input$DirectTransmission
-    stopApp(returnValue = 'E')
+    stopApp(returnValue = 'DirectTransmission')
   })
   
   observeEvent(input$EnvironmentalTransmission, {
     input$EnvironmentalTransmission
-    print ("Running EnvironmentalTransmission...")
-    stopApp(returnValue = 'F')
+    stopApp(returnValue = 'EnvironmentalTransmission')
   })
   
   observeEvent(input$VectorTransmission, {
     input$VectorTransmission
-    print ("Running VectorTransmission...")
-    stopApp(returnValue = 'G')
+    stopApp(returnValue = 'VectorTransmission')
   })
   
   observeEvent(input$IDControl, {
     input$IDControl
-    print ("Running IDControl...")
-    stopApp(returnValue = 'H')
+    stopApp(returnValue = 'IDControl')
   })
   
   observeEvent(input$HostHeterogeneity, {
     input$HostHeterogeneity
-    print ("Running HostHeterogeneity...")
-    stopApp(returnValue = 'I')
+    stopApp(returnValue = 'HostHeterogeneity')
   })
 
   observeEvent(input$StochasticDynamics, {
     input$StochasticDynamics
-    print ("Running StochasticDynamics...")
-    stopApp(returnValue = 'J')
+    stopApp(returnValue = 'StochasticDynamics')
   })
   
   observeEvent(input$EvolutionaryDynamics, {
     input$EvolutionaryDynamics
-    print ("Running EvolutionaryDynamics...")
-    stopApp(returnValue = 'K')
+    stopApp(returnValue = 'EvolutionaryDynamics')
   })
 
   observeEvent(input$MultiPathogen, {
       input$MultiPathogen
-      print ("Running MultiPathogen...")
-      stopApp(returnValue = 'L')
+      stopApp(returnValue = 'MultiPathogen')
   })
-  
-  
+
   observeEvent(input$Exit, {
     input$Exit
-    print ("Exiting")
-    stopApp(returnValue = 'X')
+    stopApp(returnValue = 'Exit')
   })
 
   session$onSessionEnded(function(){
-    stopApp(returnValue = 'X')
+    stopApp(returnValue = 'Exit')
   })
   
 }
