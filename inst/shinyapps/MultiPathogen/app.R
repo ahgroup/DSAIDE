@@ -11,10 +11,11 @@ refresh <- function(input, output){
     
     # This reactive takes the input data and sends it over to the simulator
     # Then it will get the results back and return it as the "res" variable
-    res <- reactive({
+    result <- reactive({
         input$submitBtn
         
-        # Read all the input values from the UI
+# Read all the input values from the UI
+      
         S0 = isolate(input$S0);
         I10 = isolate(input$I10);
         I20 = isolate(input$I20);
@@ -30,23 +31,116 @@ refresh <- function(input, output){
         g1 = isolate(input$g1);
         g2 = isolate(input$g2);
         g12 = isolate(input$g12);
+        plotscale = isolate(input$plotscale)
         
-        # Call the ODE solver with the given parameters
-        result <- simulate_multipathogen(S0 = S0, I10 = I10, I20 = I20, I120 = I120, tmax = tmax, b1 = b1, b2 = b2, b12 = b12, g1 = g1, g2 = g2, g12 = g12, a = a)
         
-        return(list(result)) #this is returned as the res variable
+#save all results to a list for processing plots and text
+        
+        listlength = 2; #here we do all simulations in the same figure
+        result = vector("list", listlength) #create empty list of right size for results
+        
+# Call the ODE solver with the given parameters
+        
+        withProgress(message = 'Running Simulation', value = 0, {
+          
+        simresult <- simulate_multipathogen(S0 = S0, I10 = I10, I20 = I20, I120 = I120, tmax = tmax, b1 = b1, b2 = b2,
+                                              b12 = b12, g1 = g1, g2 = g2, g12 = g12, a = a)
+        
+        })
+        
+        
+#rename time to xvals for consistent plotting
+        
+        colnames(simresult) = c('xvals',"S","I1","I2",'R1','R2',"I1X","I2X","I12",'R12')  
+        
+        
+# reformat data to be in the right format for plotting 
+# dat1 store the input used for plot 1
+# dat2 store the input used for plot 2
+        
+        dat1 = tidyr::gather(as.data.frame(simresult[,c(1,2:6)]), -xvals, value = "yvals", key = "varnames")
+        dat2 = tidyr::gather(as.data.frame(simresult[,c(1,7:10)]), -xvals, value = "yvals", key = "varnames")      
+        
+#code variable names as factor and level them so they show up right in plot   
+        mylevels1 = unique(dat1$varnames)
+        dat1$varnames = factor(dat1$varnames, levels = mylevels1)
+        
+        mylevels2 = unique(dat2$varnames)
+        dat2$varnames = factor(dat2$varnames, levels = mylevels2)
+        
+#data for plots and text
+#each variable listed in the varnames column will be plotted on the y-axis, with its values in yvals
+#each variable listed in varnames will also be processed to produce text
+        
+        result[[1]]$dat = dat1
+        result[[2]]$dat = dat2   
+        
+        for (i in 1 :2) {
+          
+          #Meta-information for each plot
+          
+          result[[i]]$plottype = "Lineplot"
+          result[[i]]$xlab = "Time"
+          result[[i]]$ylab = "Numbers"
+          result[[i]]$legend = "Compartments"
+          
+          result[[i]]$xscale = 'identity'
+          result[[i]]$yscale = 'identity'
+          if (plotscale == 'x' | plotscale == 'both') { result[[i]]$xscale = 'log10'}
+          if (plotscale == 'y' | plotscale == 'both') { result[[i]]$yscale = 'log10'}
+          
+          
+#set min and max for scales. If not provided ggplot will auto-set
+          
+          result[[i]]$ymin = 1e-12
+          result[[i]]$ymax = max(simresult)
+          result[[i]]$xmin = 1e-12
+          result[[i]]$xmax = tmax
+          
+#the following are for text display for each plot
+          
+          result[[i]]$maketext = TRUE  #if true we want the generate_text function to process data and generate  
+                                       # text,if 0 no result processing will occur insinde generate_text
+          result[[i]]$showtext = ''   #text can be added here which will be passed through to generate_text
+                                      #and displayed for each plot
+          result[[i]]$finaltext = 'Numbers are rounded to 2 significant digits.' #text can be added here which 
+                                     #will be passed through to generate_text and displayed for each plot
+          
+         }
+        
+        
+        return(result) #this is returned as the res variable
+        
+  })
+    
+#functions below take result saved in reactive expression result and produce output
+#to produce figures, the function generate_plot is used
+#function generate_text produces text
+#data needs to be in a specific structure for processing
+#see information for those functions to learn how data needs to look like
+#output (plots, text) is stored in reactive variable 'output'
+    
+  output$plot  <- renderPlot({
+          input$submitBtn
+         res=isolate(result())             #list of all results that are to be turned into plots
+         generate_plots(res)              #create plots with a non-reactive function
+      }, width = 'auto', height = 'auto'
+    )                                       #finish render-plot statement
+    
+  output$text <- renderText({
+          input$submitBtn
+        res=isolate(result())     #list of all results that are to be turned into plots
+      generate_text(res)         #create text for display with a non-reactive function
     })
     
-    #if we want certain variables plotted and reported separately, we can specify them manually as a list
-    #if nothing is specified, all variables are plotted and reported at once
-    varlist = list(c("S","I1","I2",'R1','R2'), c("I1X","I2X","I12",'R12'))
     
-    #function that takes result saved in res and produces output
-    #output (plots, text, warnings) is stored in and modifies the global variable 'output'
-    generate_simoutput(input,output,res,varlist=varlist)
+    
+    
 } #ends the 'refresh' shiny server function that runs the simulation and returns output
 
+
 #main shiny server function
+
 server <- function(input, output, session) {
     
     # Waits for the Exit Button to be pressed to stop the app and return to main menu
@@ -147,7 +241,16 @@ ui <- fluidPage(
                           numericInput("tmax", "Maximum simulation time (tmax)", min = 1, max = 1200, value = 100, step = 1)
                    )
                    
-               ) #close fluidRow structure for input
+                   
+               ),#close fluidRow structure for input
+               
+              fluidRow(
+                column(6,
+                       selectInput("plotscale", "Log-scale for plot:",c("none" = "none", 'x-axis' = "x", 'y-axis' = "y", 'both axes' = "both"))
+                  ) 
+              )
+               
+               #close fluidRow structure for input
                
         ), #end sidebar column for inputs
         
