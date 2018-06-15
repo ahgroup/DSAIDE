@@ -4,7 +4,7 @@
 
 * Continue streamlining code base to make it more general/modular/flexible
 
-* Switch plot and text production to DSAIRM setoup
+* Switch main menu call to DSAIRM setup
 
 * Write up all solutions into the DSAIRMsolutions repository
 
