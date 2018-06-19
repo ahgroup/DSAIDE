@@ -35,4 +35,4 @@ DSAIDE is built in a way that makes it (hopefully) easy for others to contribute
 * For feedback, bug reports etc., use github at https://github.com/ahgroup/DSAIDE
 
 ## Contributors
-This R package is developed and maintained by [Andreas Handel](http://handelgroup.publichealth.uga.edu/). The following individuals have made contributions to this package: Isaac Fung, Spencer Hall, Brian McKay, John Rossow, and Sina Solaimanpour.
+This R package is developed and maintained by [Andreas Handel](http://handelgroup.publichealth.uga.edu/). The following individuals have made contributions to this package: Isaac Fung, Spencer Hall, Ben Listyg, Brian McKay, John Rossow, Sina Solaimanpour, Henok Woldu.
