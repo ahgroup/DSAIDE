@@ -6,35 +6,26 @@
 #' @examples
 #' \dontrun{dsaidemenu()}
 #' @author Andreas Handel
-#' @import shiny
-#' @importFrom knitr knit
 #' @export
 
 dsaidemenu <- function() {
-  
   cond <- 1
-  
   while (cond == 1)
   {
-    
     appname <- NULL
     appDir <- system.file("shinyapps", "MainMenu", package = "DSAIDE")
     appname = shiny::runApp(appDir = appDir)
-    
     if (!is.null(appname) & appname != "Exit")     #run the shiny app chosen
     {
-      appDir <- system.file("shinyapps", appname, package = "DSAIDE")
-      shiny::runApp(appDir = appDir)
+      appDirname <- system.file("shinyapps", appname, package = "DSAIDE")
+      shiny::runApp(appDir = appDirname)
     }
-    
     if (appname == "Exit") {cond = 0} #leave while loop/menu
-    
   }
   print('*************************************************')
   print('Exiting the DSAIDE main menu.')
   print('I hope you had a fun and educational experience!')
   print('*************************************************')
-  
 }
 
 .onAttach <- function(libname, pkgname){

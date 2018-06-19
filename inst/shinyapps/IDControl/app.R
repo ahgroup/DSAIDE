@@ -110,10 +110,11 @@ refresh <- function(input, output){
       
 #set min and max for scales. If not provided ggplot will auto-set
       
-      result[[i]]$ymin = 1e-12
-      result[[i]]$ymax = max(simresult)
-      result[[i]]$xmin = 1e-12
-      result[[i]]$xmax = tmax
+      #set min and max for scales. If not provided ggplot will auto-set
+      result[[i]]$ymin = max(1e-10,min(dat$yvals))
+      result[[i]]$ymax = min(1e20,max(dat$yvals))
+      result[[i]]$xmin = max(1e-10,min(dat$xvals))
+      result[[i]]$xmax = max(dat$xvals)
       
 #the following are for text display for each plot
       
@@ -161,22 +162,18 @@ refresh <- function(input, output){
 
 #main shiny server function
 server <- function(input, output, session) {
+ 
   
   # Waits for the Exit Button to be pressed to stop the app and return to main menu
   observeEvent(input$exitBtn, {
     input$exitBtn
-    stopApp(returnValue = 0)
+    stopApp(returnValue = NULL)
   })
   
   # This function is called to refresh the content of the Shiny App
   refresh(input, output)
   
-  # Event handler to listen for the webpage and see when it closes.
-  # Right after the window is closed, it will stop the app server and the main menu will
-  # continue asking for inputs.
-  session$onSessionEnded(function(){
-    stopApp(returnValue = 0)
-  })
+ 
 } #ends the main shiny server function
 
 
@@ -320,13 +317,7 @@ ui <- fluidPage(
            h2('Simulation Results'),
            plotOutput(outputId = "plot", height = "1000px"),
            # PLaceholder for results of type text
-           htmlOutput(outputId = "text"),
-           #Placeholder for any possible warning or error messages (this will be shown in red)
-           htmlOutput(outputId = "warn"),
-           
-           tags$head(tags$style("#warn{color: red;
-                                font-style: italic;
-                                }"))
+           htmlOutput(outputId = "text")
 
            ) #end main panel column with outcomes
   ), #end layout with side and main panel

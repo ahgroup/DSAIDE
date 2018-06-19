@@ -2,77 +2,26 @@
 
 #this function is the server part of the app
 server <- function(input, output, session) {
-  
-  observeEvent(input$IDDynamicsIntro, {
-    input$IDDynamicsIntro
-    stopApp(returnValue = 'IDDynamicsIntro')
-  })
-  
-  observeEvent(input$CharacteristicsofID, {
-    input$CharacteristicsofID
-    stopApp(returnValue = 'CharacteristicsofID')
-  })
-  
-  observeEvent(input$IDPatterns, {
-    input$IDPatterns
-    stopApp(returnValue = 'IDPatterns')
-  })
-  
-  observeEvent(input$ReproductiveNumber, {
-    input$ReproductiveNumber
-    stopApp(returnValue = 'ReproductiveNumber')
-  })
-  
-  observeEvent(input$DirectTransmission, {
-    input$DirectTransmission
-    stopApp(returnValue = 'DirectTransmission')
-  })
-  
-  observeEvent(input$EnvironmentalTransmission, {
-    input$EnvironmentalTransmission
-    stopApp(returnValue = 'EnvironmentalTransmission')
-  })
-  
-  observeEvent(input$VectorTransmission, {
-    input$VectorTransmission
-    stopApp(returnValue = 'VectorTransmission')
-  })
-  
-  observeEvent(input$IDControl, {
-    input$IDControl
-    stopApp(returnValue = 'IDControl')
-  })
-  
-  observeEvent(input$HostHeterogeneity, {
-    input$HostHeterogeneity
-    stopApp(returnValue = 'HostHeterogeneity')
-  })
 
-  observeEvent(input$StochasticDynamics, {
-    input$StochasticDynamics
-    stopApp(returnValue = 'StochasticDynamics')
+  appNames <- c(unlist(strsplit(DSAIDE::dsaideapps(),', ')),'Exit') #get list of all existing apps
+  
+  stopping <- FALSE
+  
+  lapply(appNames, function(appName) {
+    observeEvent(input[[appName]], {
+      stopping <<- TRUE
+      stopApp(appName)
+    })
   })
   
-  observeEvent(input$EvolutionaryDynamics, {
-    input$EvolutionaryDynamics
-    stopApp(returnValue = 'EvolutionaryDynamics')
-  })
-
-  observeEvent(input$MultiPathogen, {
-      input$MultiPathogen
-      stopApp(returnValue = 'MultiPathogen')
-  })
-
-  observeEvent(input$Exit, {
-    input$Exit
-    stopApp(returnValue = 'Exit')
-  })
-
   session$onSessionEnded(function(){
-    stopApp(returnValue = 'Exit')
+    if (!stopping) {
+      stopApp('Exit')
+    }
   })
   
 }
+
 
 
 #This is the UI for the Main Menu of DSAIDE
