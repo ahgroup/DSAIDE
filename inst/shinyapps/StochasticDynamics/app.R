@@ -129,19 +129,11 @@ server <- function(input, output, session) {
   
   observeEvent(input$exitBtn, {
     input$exitBtn
-    stopApp(returnValue = 0)
+    stopApp(returnValue = NULL)
   })
 
 # This function is called to refresh the content of the UI
   refresh(input, output)
-
-# Event handler to listen for the webpage and see when it closes.
-# Right after the window is closed, it will stop the app server and the main menu will
-# continue asking for inputs.
-  
-  session$onSessionEnded(function(){
-    stopApp(returnValue = 0)
-  })
 
 } #ends main/outer shiny server function
 

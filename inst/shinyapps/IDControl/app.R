@@ -109,12 +109,10 @@ refresh <- function(input, output){
       
       
 #set min and max for scales. If not provided ggplot will auto-set
-      
-      #set min and max for scales. If not provided ggplot will auto-set
-      result[[i]]$ymin = max(1e-10,min(dat$yvals))
-      result[[i]]$ymax = min(1e20,max(dat$yvals))
-      result[[i]]$xmin = max(1e-10,min(dat$xvals))
-      result[[i]]$xmax = max(dat$xvals)
+      result[[i]]$ymin = 1e-12
+      result[[i]]$ymax = max(simresult)
+      result[[i]]$xmin = 1e-12
+      result[[i]]$xmax = tmax
       
 #the following are for text display for each plot
       
