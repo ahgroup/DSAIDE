@@ -14,7 +14,7 @@
 #' @export
 
 
-dsairmapps <- function(appname = NULL)
+dsaideapps <- function(appname = NULL)
 {
   if (is.null(appname))
   {
