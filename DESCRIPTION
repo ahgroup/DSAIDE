@@ -30,9 +30,9 @@ Imports:
     tidyr (>= 0.7),
     gridExtra (>= 2.3),
     dplyr (>= 0.7.4),
-Depends:
     shiny (>= 1.0),
     ggplot2 (>= 2.0)
+Depends: R (>= 3.5.0)
 Suggests:
     rmarkdown
 RoxygenNote: 6.0.1
