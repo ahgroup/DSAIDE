@@ -23,16 +23,21 @@ Maintainer: Andreas Handel <ahandel@uga.edu>
 License: GPL-3
 LazyData: TRUE
 Imports:
-    deSolve (>= 1.13),
-    knitr (>= 1.15),
     adaptivetau (>= 2.2),
-    utils,
-    tidyr (>= 0.7),
-    gridExtra (>= 2.3),
+    boot (>= 1.3-20),
+    deSolve (>= 1.20),
     dplyr (>= 0.7.4),
+    ggplot2 (>= 2.2.1),
+    gridExtra (>= 2.3),
+    knitr (>= 1.15),
+    lhs (>= 0.15),
+    nloptr (>= 1.0.4),
+    sensitivity (>= 1.15),
+    tidyr (>= 0.7),
+    utils
 Depends:
-    shiny (>= 1.0),
-    ggplot2 (>= 2.0)
+    R (>= 3.5),
+    shiny 
 Suggests:
     rmarkdown
 RoxygenNote: 6.0.1
