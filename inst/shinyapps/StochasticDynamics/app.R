@@ -107,13 +107,17 @@ refresh <- function(input, output){
 #see information for those functions to learn how data needs to look like
 #output (plots, text) is stored in reactive variable 'output'
     
+    
     output$plot  <- renderPlot({
+      withProgress(message = 'Plot in progress', value = 0, { 
       input$submitBtn
       res=isolate(result())       #list of all results that are to be turned into plots
       generate_plots(res)        #create plots with a non-reactive function
+      })
     }, width = 'auto', height = 'auto'
     )   #finish render-plot statement
-    
+
+  
     output$text <- renderText({
       input$submitBtn
       res=isolate(result())         #list of all results that are to be turned into plots
