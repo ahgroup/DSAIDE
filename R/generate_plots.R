@@ -33,7 +33,8 @@ generate_plots <- function(res)
   allplots=list() #will hold all plots
   
   #lower and upper bounds for plots, these are used if none are provided by calling fuction
-  lb = 1e-10; ub = 1e20;
+  lb = 1e-10;
+  ub = 1e20;
   
   for (n in 1:nplots) #loop to create each plot
   {
@@ -49,6 +50,13 @@ generate_plots <- function(res)
     if (xscaletrans !='identity') {dat$xvals[dat$xvals<=0]=lb}
     if (yscaletrans !='identity') {dat$yvals[dat$yvals<=0]=lb}
     
+    #if exist, apply user-supplied x- and y-axis limits
+    #if min/max axes values are not supplied
+    #we'll set them here to make sure they are not crazy high or low
+    xmin <- if(is.null(res[[n]]$xmin)) {lb} else  {res[[n]]$xmin}
+    ymin <- if(is.null(res[[n]]$ymin)) {lb} else  {res[[n]]$ymin}
+    xmax <- if(is.null(res[[n]]$xmax)) {ub} else  {res[[n]]$xmax}
+    ymax <- if(is.null(res[[n]]$ymax)) {ub} else  {res[[n]]$ymax}
     
     #set line size as given by app or to 1.5 by default
     linesize = ifelse(is.null(res[[n]]$linesize), 1.5, res[[n]]$linesize)
@@ -82,12 +90,7 @@ generate_plots <- function(res)
       p2 = p1a + ggplot2::geom_point(data = dplyr::filter(dat,style == 'point'), size = 2*linesize)
     }
     
-    #if exist, apply user-supplied x- and y-axis limits
-    #if min/max axes values are supplied by app, make sure they are not crazy high or low
-    xmin <- if(is.null(res[[n]]$xmin)) NULL else  {max(lb, res[[n]]$xmin)}        #make sure it's non-zero for log plots
-    xmax <- if(is.null(res[[n]]$xmax)) NULL else  {min(ub, res[[n]]$xmax)}       #prevent crazy large x-axis
-    ymin <- if(is.null(res[[n]]$ymin)) NULL else  {max(lb, res[[n]]$ymin)}        #make sure it's non-zero for log plots
-    ymax <- if(is.null(res[[n]]$ymax)) NULL else  {min(ub, res[[n]]$ymax)}       #prevent crazy large y-axis
+    
     
     #no numbering/labels on x-axis for boxplots
     if (plottype == 'Boxplot')
@@ -111,7 +114,7 @@ generate_plots <- function(res)
     }
     else
     {
-      p6 = p5 + ggplot2::theme(legend.key.width = unit(3,"line")) + ggplot2::scale_colour_discrete(name  = res[[n]]$legend) + ggplot2::scale_linetype_discrete(name = res[[n]]$legend) + ggplot2::scale_shape_discrete(name = res[[n]]$legend)
+      p6 = p5 + ggplot2::theme(legend.key.width = grid::unit(3,"line")) + ggplot2::scale_colour_discrete(name  = res[[n]]$legend) + ggplot2::scale_linetype_discrete(name = res[[n]]$legend) + ggplot2::scale_shape_discrete(name = res[[n]]$legend)
     }
     
     pfinal = p6
