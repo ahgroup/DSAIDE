@@ -3,6 +3,17 @@
 language: R
 sudo: false
 cache: packages
-addons:
-apt:
+warnings_are_errors: true
 update: true
+
+os:
+  - linux
+  - osx
+
+r:
+  - 3.4
+  - release
+
+after_success:
+    - Rscript -e 'covr::codecov( type = "all")'
+
