@@ -11,8 +11,3 @@
 * Consider making a website for the package with  http://pkgdown.r-lib.org
 
 * Run package through 'goodpractice': https://github.com/MangoTheCat/goodpractice/ - tried, not sure this package works
-
-
-## Resources
-A good source of shiny examples and tips and tricks that might be helpful:
-https://deanattali.com/blog/advanced-shiny-tips/
