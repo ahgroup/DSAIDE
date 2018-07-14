@@ -2,15 +2,33 @@
 #'
 #' @description This function generates text to be displayed in the Shiny UI.
 #' This is a helper function. This function processes results returned from the simulation, supplied as a list
-#' @param res a list containing all simulation results and other information
-#'    if the list entry 'maketext'  exists for a given plot (list element in allres)
-#'    the data needs to follow the structure described in the generate_plots function
-#'    if 'maketext' is false, this function only uses - if present' the entries 'showtext'
-#'    for each plot and finaltext of the 1st list elemnt for an overall message/text
-#'    see the generate_plots function for more details on the structure of the list
+#' @param res a list structure containing all simulation results that are to be processed
+#'    this function is meant to be used together with generate_plots and requires similar information
+#'    the length of the list indicates the number of separate plots to make, and for each plot this function produces text
+#'    each list entry needs to contain the following information/elements:
+#'    1. a data frame called "dat" with one column called xvals, one column yvals,
+#'    one column called varnames that contains names for different variables.
+#'    varnames needs to be a factor variable or will be converted to one.
+#'    Optional, one column called IDvar for further grouping (i.e. multiple lines for stochastic simulations).
+#'    If plottype is 'mixedplot' an additional column called 'style' indicating line or point plot
+#'    for each variable is needed.
+#'    For stochastic simulations that require averaging, an variable called nreps is needed,
+#'    which should indicate the number of simulation.
+#'    2. meta-data for the plot, provided in the following variables:
+#'    optinal: plottype - one of "Lineplot" (chosen if nothing is provided),"Scatterplot","Boxplot", "Mixedplot"
+#'    the plottype determines what kind of text is generated.
+#'    For lineplots and mixedplot, min/max/final values of each line are shown
+#'    for scatterplots, a correlation coefficient is computed
+#'    boxplots show min/max/median/average
+#'    if the list entry 'maketext' is set to TRUE (or not provided) exists for a given plot the just described outputs will be generated
+#'    if 'maketext' is FALSE, no text is generated
+#'    if present' the entries 'showtext'
+#'    for each plot and finaltext of the 1st list element for an overall message/text
+#'    are also shown
 #' @return HTML formatted text for display in a shiny UI
 #' @details This function is called by the shiny server to produce output returned to the shiny UI
 #' @author Andreas Handel
+#' @importFrom stats median
 #' @export
 
 generate_text <- function(res)
@@ -28,15 +46,25 @@ generate_text <- function(res)
     {
       #for each plot, get names of variables
       dat <- res[[vn]]$dat
+
+      #code variable names as factor and level them so they show up right in plot - factor is needed for plotting and text
+      mylevels = unique(dat$varnames)
+      dat$varnames = factor(dat$varnames, levels = mylevels)
+
+
       allvarnames = levels(dat$varnames)
       nvars = length(allvarnames)
-      plottype = res[[vn]]$plottype
+
+      plottype <- if(is.null(res[[vn]]$plottype)) {'Lineplot'} else  {res[[vn]]$plottype} #if nothing is provided, we assume a line plot. That could lead to silly plots.
+
       xlabel =  res[[vn]]$xlab
       ylabel =  res[[vn]]$ylab
 
+      maketext <- if(is.null(res[[vn]]$maketext)) {TRUE} else  {res[[vn]]$maketext} #if maketext is not set, we assume user wants it, otherwise they need to set to FALSE
+
       txt = '' #no text to start out
 
-      if (res[[vn]]$maketext == TRUE) #if the plot wants text display based on result processing, do the stuff below
+      if (maketext == TRUE) #if the app wants text display based on result processing, do the stuff below
       {
         #for each plot, process each variable by looping over them
         for (nn in  1:nvars)
@@ -44,13 +72,13 @@ generate_text <- function(res)
           #data for a given variable
           currentvar = allvarnames[[nn]]
           vardat = dplyr::filter(dat, varnames == currentvar)
-
-          if (plottype == 'Lineplot') #for lineplots, we show the min/max/final for each variable
+            #for lineplots, we show the min/max/final for each variable
+          if (plottype == 'Lineplot')
           {
             #check if multiple runs are done
             #unless the data frame has a column indicating the number of runs, assume it's 1
             nreps = 1
-            if ('nreps' %in% colnames(dat) ) {nreps=max(dat$nreps)}
+            if ('nreps' %in% colnames(vardat) ) {nreps=max(vardat$nreps)}
 
             resmax = 0; resmin = 0; resfinal = 0;
             for (n1 in 1:nreps) #average over reps (if there are any)
@@ -65,8 +93,6 @@ generate_text <- function(res)
               resfinal = resfinal + currentsim$yvals[nrows]
             } #finish loop over reps
 
-            #produce 2 types of text outcomes: for time-series/lineplots, report min/max/final of each plotted variable
-            #for scatterplots, report correlation between x and every y-value
 
             #store values for each variable
             maxvals = format(resmax/nreps, digits =2, nsmall = 2) #mean across simulations (for stochastic models)
@@ -75,6 +101,7 @@ generate_text <- function(res)
             newtxt <- paste('Minimum / Maximum / Final value of ',currentvar,': ',minvals,' / ', maxvals,' / ',numfinal,sep='')
           } #finish creating text outpot for lineplot/time-series
 
+          #for scatterplots, report correlation between x and every y-value
           if (plottype == 'Scatterplot' )
           {
             rcc = stats::cor.test(vardat[,1],y=vardat[,2], alternative = c("two.sided"), method = c("spearman"))
@@ -85,9 +112,9 @@ generate_text <- function(res)
           {
             mymin = format(min(vardat$yvals), digits =2, nsmall = 2)
             mymean = format(mean(vardat$yvals), digits =2, nsmall = 2)
-            mymedian = format(median(vardat$yvals), digits =2, nsmall = 2)
+            mymedian = format(stats::median(vardat$yvals), digits =2, nsmall = 2)
             mymax = format(max(vardat$yvals), digits =2, nsmall = 2)
-            newtxt = paste('Min/Mean/Median/Max for ',xlabel,' / ',ylabel,': ',mymin,' / ',mymean,' / ', mymedian,' / ',mymax,' / ')
+            newtxt = paste('Min/Mean/Median/Max for ',ylabel,': ',mymin,' / ',mymean,' / ', mymedian,' / ',mymax,' / ')
           }
           if (plottype == 'Mixedplot' )
           {
@@ -111,11 +138,12 @@ generate_text <- function(res)
 
     } #finishes loop over all plots
 
+
     #as requested by app, add additional final text at bottom
     if (!is.null(res[[1]]$finaltext))
     {
       finaltext <- res[[1]]$finaltext
       alltext <- paste(alltext, finaltext, sep = "<hr/>")
     }
-    HTML(alltext)
+    shiny::HTML(alltext)
 } #end function

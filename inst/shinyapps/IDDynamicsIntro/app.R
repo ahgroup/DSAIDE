@@ -136,7 +136,7 @@ ui <- fluidPage(
   withMathJax(),
   # 
   tags$head(tags$style(".myrow{vertical-align: bottom;}")),
-  div( includeHTML("www/header.html"), align = "center"),
+  div( includeHTML("../styles/header.html"), align = "center"),
   #specify name of App below, will show up in title
   h1('ID Dynamics Introduction App', align = "center", style = "background-color:#123c66; color:#fff"),
   
@@ -216,11 +216,9 @@ ui <- fluidPage(
 #Instructions section at bottom as tabs
   h2('Instructions'),
 #use external function to generate all tabs with instruction content
-  currentdir = here::here(),
-  browser(),
-  tablist = generate_documentation(currentdir=currentdir),
-  do.call(tabsetPanel,tablist),
-  div(includeHTML("www/footer.html"), align="center", style="font-size:small") #footer
+  #browser(),
+  do.call(tabsetPanel, generate_documentation() ),
+  div(includeHTML("../styles/footer.html"), align="center", style="font-size:small") #footer
   
 ) #end fluidpage function, i.e. the UI part of the app
 
