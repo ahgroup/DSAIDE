@@ -216,7 +216,10 @@ ui <- fluidPage(
 #Instructions section at bottom as tabs
   h2('Instructions'),
 #use external function to generate all tabs with instruction content
-  do.call(tabsetPanel,generate_instruction_tabs()),
+  currentdir = here::here(),
+  browser(),
+  tablist = generate_documentation(currentdir=currentdir),
+  do.call(tabsetPanel,tablist),
   div(includeHTML("www/footer.html"), align="center", style="font-size:small") #footer
   
 ) #end fluidpage function, i.e. the UI part of the app

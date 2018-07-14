@@ -8,7 +8,7 @@ Description: A collection of Shiny apps that allow for the simulation and
     All apps include explanations of the underlying models and instructions on
     what to do with the models. 
 Version: 0.7.0
-Date: 2018-6-14
+Date: 2018-7-12
 Authors@R: c(
     person("Andreas", "Handel", email = "ahandel@uga.edu", role = c("aut", "cre")),
 	person("Isaac", "Fung",  role = "ctb"), 
@@ -28,14 +28,16 @@ Imports:
     dplyr (>= 0.7.4),
     ggplot2 (>= 2.0),
     gridExtra (>= 2.3),
+    here,
     knitr (>= 1.15),
+    rmarkdown (>= 1.10),
     tidyr (>= 0.7),
-    utils (>= 3.4)
+    utils (>= 3.4),
+    XML
 Depends:
     R (>= 3.4),
     shiny (>= 1.0)
 Suggests: 
-    rmarkdown,
     covr
 RoxygenNote: 6.0.1
 VignetteBuilder: knitr
