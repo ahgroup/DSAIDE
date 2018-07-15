@@ -28,7 +28,6 @@ Imports:
     dplyr (>= 0.7.4),
     ggplot2 (>= 2.0),
     gridExtra (>= 2.3),
-    here,
     knitr (>= 1.15),
     rmarkdown (>= 1.10),
     tidyr (>= 0.7),
