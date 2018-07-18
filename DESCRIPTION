@@ -40,5 +40,5 @@ Suggests:
     covr
 RoxygenNote: 6.0.1
 VignetteBuilder: knitr
-URL: https://github.com/ahgroup/DSAIDE
+URL: https://ahgroup.github.io/DSAIDE
 BugReports: https://github.com/ahgroup/DSAIDE/issues

@@ -1,0 +1,38 @@
+url: https://ahgroup.github.io/DSAIDE/index.html
+
+authors:
+  Andreas Handel:
+    href: http://handelgroup.uga.edu/
+
+navbar:
+  structure:
+    left:
+    - home
+    - intro
+    - reference
+    - articles
+    - tutorials
+    - news
+    - related packages
+    right: github
+  components:
+    home:
+      icon: fa-home fa-lg
+      href: index.html
+    reference:
+      text: Reference
+      href: reference/index.html
+    intro:
+      text: Get started
+      href: articles/DSAIDE.html
+    news:
+      text: Changelog
+      href: news/index.html
+    related packages: 
+      text: Related Packages
+      menu:
+      - text: DSAIRM
+      - href: https://ahgroup.github.io/DSAIRM/index.html
+    github:
+      icon: fa-github fa-lg
+      href: https://github.com/ahgroup/DSAIDE
