@@ -10,8 +10,7 @@ generate_documentation()
 tablist a list of tabs for display in a shiny UI
 }
 \description{
-This function take the documentation provided as Rmd file
-If not present our outdated, it turns the Rmd file into an html file
+This function take the documentation provided as html file
 it then takes the html file and extracts sections 
 to generate the tabs with content for each Shiny app. 
 This is a helper function and only useful for this package.
