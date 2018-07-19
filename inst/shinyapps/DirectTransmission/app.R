@@ -38,13 +38,12 @@ refresh <- function(input, output){
                  {
       simresult <- simulate_directtransmission(S0 = S0, I0 = I0, tmax = tmax, scenario = scenario, bd = bd, bf = bf, A = A, m = m, n = n, g = g, w = w)
 
-                 })
-    colnames(simresult) = c('xvals','S','I','R') 
+                 }) 
     
     #reformat data to be in the right format for plotting
     #each plot/text output is a list entry with a data frame in form xvals, yvals, extra variables for stratifications for each plot
     
-    dat = tidyr::gather(as.data.frame(simresult), -xvals, value = "yvals", key = "varnames")
+    dat = tidyr::gather(simresult$ts, -xvals, value = "yvals", key = "varnames")
     
     #code variable names as factor and level them so they show up right in plot
     
