@@ -83,7 +83,9 @@ simulate_directtransmission <- function(S0 = 1e3, I0 = 1, tmax = 120, scenario =
   odeoutput = deSolve::lsoda(Y0, timevec, func = directtransmissioneq, parms=pars, atol=1e-12, rtol=1e-12);
   
   result = list()
-  result$ts = as.data.frame(odeoutput)
+  result$ts <- odeoutput
+  
+  print(as.data.frame(odeoutput))
   
   return(result)
   # return(odeoutput)
