@@ -85,8 +85,6 @@ simulate_directtransmission <- function(S0 = 1e3, I0 = 1, tmax = 120, scenario =
   result = list()
   result$ts <- odeoutput
   
-  print(as.data.frame(odeoutput))
-  
-  # return(result)
-  return(odeoutput)
+  return(result)
+  # return(odeoutput)
 }
