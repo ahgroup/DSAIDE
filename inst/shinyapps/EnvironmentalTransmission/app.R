@@ -42,12 +42,11 @@ refresh <- function(input, output){
      simresult <- simulate_environmentaltransmission(S = S0, I = I0, E = E0, tmax = tmax, bd = bd, be = be, m = m, n = n, g = g, p = p, c = c)
                    
                  })
-     colnames(simresult) = c('xvals','S','I','R','E') 
     
 #reformat data to be in the right format for plotting
 #each plot/text output is a list entry with a data frame in form xvals, yvals, extra variables for stratifications for each plot
     
-    dat = tidyr::gather(as.data.frame(simresult), -xvals, value = "yvals", key = "varnames")
+    dat = tidyr::gather(as.data.frame(simresult$ts), -xvals, value = "yvals", key = "varnames")
     
 #code variable names as factor and level them so they show up right in plot
     
@@ -76,7 +75,7 @@ refresh <- function(input, output){
 #set min and max for scales. If not provided ggplot will auto-set
     
     result[[1]]$ymin = 1e-12
-    result[[1]]$ymax = max(simresult)
+    result[[1]]$ymax = max(simresult$ts)
     result[[1]]$xmin = 1e-12
     result[[1]]$xmax = tmax
     
