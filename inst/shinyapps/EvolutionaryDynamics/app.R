@@ -49,12 +49,11 @@ refresh <- function(input, output){
                                             bu = bu, bt = bt, br = br, cu = cu, ct = ct, f = f, gu = gu, gt = gt, gr = gr)
                    
           })
-    colnames(simresult) = c('xvals','S','Iu','It','Ir','R') 
     
 #reformat data to be in the right format for plotting
 #each plot/text output is a list entry with a data frame in form xvals, yvals, extra variables for stratifications for each plot
     
-    dat = tidyr::gather(as.data.frame(simresult), -xvals, value = "yvals", key = "varnames")
+    dat = tidyr::gather(simresult, -xvals, value = "yvals", key = "varnames")
     
  #code variable names as factor and level them so they show up right in plot
     
