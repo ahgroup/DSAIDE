@@ -76,6 +76,12 @@ simulate_environmentaltransmission <- function(S0 = 1e3, I0 = 1, E0 = 0, tmax = 
   #the result is saved in the odeoutput matrix, with the 1st column the time, the remaining columns the values for the variables
   #returned in the order as specified in Y0 and the return from the solver function
   odeoutput = deSolve::lsoda(Y0, timevec, func = environmentaltransmissioneq, parms=pars, atol=1e-12, rtol=1e-12);
+  
+  colnames(odeoutput) <- c("xvals", "S", "I", "R", "E")
 
-  return (odeoutput)
+  #return result as list, with element ts containing the time-series
+  result <- list()
+  result$ts <- as.data.frame(odeoutput)
+
+  return(result)
 }

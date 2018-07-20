@@ -81,6 +81,12 @@ simulate_directtransmission <- function(S0 = 1e3, I0 = 1, tmax = 120, scenario =
   #the result is saved in the odeoutput matrix, with the 1st column the time, the 2nd, 3rd, 4th column the variables S, I, R
   #This odeoutput matrix will be re-created every time you run the code, so any previous results will be overwritten
   odeoutput = deSolve::lsoda(Y0, timevec, func = directtransmissioneq, parms=pars, atol=1e-12, rtol=1e-12);
-
-  return(odeoutput)
+  
+  colnames(odeoutput) = c('xvals','S','I','R')
+  
+  result = list()
+  result$ts <- as.data.frame(odeoutput)
+  
+  return(result)
+  # return(odeoutput)
 }
