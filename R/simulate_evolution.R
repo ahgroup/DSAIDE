@@ -100,7 +100,8 @@ simulate_evolution <- function(S0 = 1000, Iu0 = 1, It0 = 1, Ir0 = 1, tmax = 100,
     #the result is saved in the odeoutput matrix, with the 1st column the time, the 2nd, 3rd, 4th column the variables S, I, R
     result <- adaptivetau::ssa.adaptivetau(init.values = Y0, transitions = transitions,  rateFunc = evolutionratefunc, params = pars, tf = tmax)
 
+    colnames(result) = c('xvals','S','Iu','It','Ir','R')
     output <- list()
-    output$ts <- result
+    output$ts <- as.data.frame(result)
     return(output)
 }
