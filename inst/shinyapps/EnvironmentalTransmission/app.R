@@ -42,7 +42,7 @@ refresh <- function(input, output){
      simresult <- simulate_environmentaltransmission(S = S0, I = I0, E = E0, tmax = tmax, bd = bd, be = be, m = m, n = n, g = g, p = p, c = c)
                    
                  })
-    
+    print("Made it through the simulation")
 #reformat data to be in the right format for plotting
 #each plot/text output is a list entry with a data frame in form xvals, yvals, extra variables for stratifications for each plot
     
