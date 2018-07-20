@@ -36,7 +36,7 @@ refresh <- function(input, output){
     result = vector("list", listlength)  #create empty list of right size for results
     
 #shows a 'running simulation' message
-    
+     print("About to run the simulation")
      withProgress(message = 'Running Simulation', value = 0,
                  {
      simresult <- simulate_environmentaltransmission(S = S0, I = I0, E = E0, tmax = tmax, bd = bd, be = be, m = m, n = n, g = g, p = p, c = c)
