@@ -50,6 +50,7 @@ refresh <- function(input, output){
                    
           })
         
+    # Putting the time series from simresult into the dat structure
     dat = simresult$ts
     
 #data for plots and text
