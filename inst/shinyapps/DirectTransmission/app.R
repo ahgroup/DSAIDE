@@ -61,7 +61,6 @@ refresh <- function(input, output){
     
     #the following are for text display for each plot
     
-    print("Checkpoint 5")
     result[[1]]$maketext = TRUE #if true we want the generate_text function to process data and generate text, if 0 no result processing will occur insinde generate_text
     result[[1]]$showtext = '' #text can be added here which will be passed through to generate_text and displayed for each plot
     result[[1]]$finaltext = 'Numbers are rounded to 2 significant digits.' #text can be added here which will be passed through to generate_text and displayed for each plot
