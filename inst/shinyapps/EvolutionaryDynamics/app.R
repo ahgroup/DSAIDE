@@ -49,17 +49,9 @@ refresh <- function(input, output){
                                             bu = bu, bt = bt, br = br, cu = cu, ct = ct, f = f, gu = gu, gt = gt, gr = gr)
                    
           })
-    colnames(simresult) = c('xvals','S','Iu','It','Ir','R') 
-    
-#reformat data to be in the right format for plotting
-#each plot/text output is a list entry with a data frame in form xvals, yvals, extra variables for stratifications for each plot
-    
-    dat = tidyr::gather(as.data.frame(simresult), -xvals, value = "yvals", key = "varnames")
-    
- #code variable names as factor and level them so they show up right in plot
-    
-    mylevels = unique(dat$varnames)
-    dat$varnames = factor(dat$varnames, levels = mylevels)
+        
+    # Putting the time series from simresult into the dat structure
+    dat = simresult$ts
     
 #data for plots and text
 #each variable listed in the varnames column will be plotted on the y-axis, with its values in yvals
@@ -83,7 +75,7 @@ refresh <- function(input, output){
 #set min and max for scales. If not provided ggplot will auto-set
     
     result[[1]]$ymin = 1e-12
-    result[[1]]$ymax = max(simresult)
+    result[[1]]$ymax = max(simresult$ts)
     result[[1]]$xmin = 1e-12
     result[[1]]$xmax = tmax
     

@@ -98,8 +98,11 @@ simulate_evolution <- function(S0 = 1000, Iu0 = 1, It0 = 1, Ir0 = 1, tmax = 100,
 
     #this line runs the simulation, i.e. integrates the differential equations describing the infection process
     #the result is saved in the odeoutput matrix, with the 1st column the time, the 2nd, 3rd, 4th column the variables S, I, R
-    output = adaptivetau::ssa.adaptivetau(init.values = Y0, transitions = transitions,  rateFunc = evolutionratefunc, params = pars, tf = tmax)
+    result <- adaptivetau::ssa.adaptivetau(init.values = Y0, transitions = transitions,  rateFunc = evolutionratefunc, params = pars, tf = tmax)
 
-    #The output produced by a call to the odesolver is odeoutput matrix is returned by the function
+    colnames(result) = c('Time','S','Iu','It','Ir','R')
+    output <- list()
+    output$ts <- as.data.frame(result)
+    print(head(output$ts))
     return(output)
 }
