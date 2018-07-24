@@ -48,6 +48,7 @@ refresh <- function(input, output){
     
     #code variable names as factor and level them so they show up right in plot
     
+    print("Checkpoint 1")
     mylevels = unique(dat$varnames)
     dat$varnames = factor(dat$varnames, levels = mylevels)
     
@@ -55,15 +56,18 @@ refresh <- function(input, output){
     #each variable listed in the varnames column will be plotted on the y-axis, with its values in yvals
     #each variable listed in varnames will also be processed to produce text
     
+    print("Checkpoint 2")
     result[[1]]$dat = dat
     
     #Meta-information for each plot
     
+    print("Checkpoint 3")
     result[[1]]$plottype = "Lineplot"
     result[[1]]$xlab = "Time"
     result[[1]]$ylab = "Numbers"
     result[[1]]$legend = "Compartments"
     
+    print("Checkpoint 4")
     result[[1]]$xscale = 'identity'
     result[[1]]$yscale = 'identity'
     if (plotscale == 'x' | plotscale == 'both') { result[[1]]$xscale = 'log10'}
@@ -79,6 +83,7 @@ refresh <- function(input, output){
     
     #the following are for text display for each plot
     
+    print("Checkpoint 5")
     result[[1]]$maketext = TRUE #if true we want the generate_text function to process data and generate text, if 0 no result processing will occur insinde generate_text
     result[[1]]$showtext = '' #text can be added here which will be passed through to generate_text and displayed for each plot
     result[[1]]$finaltext = 'Numbers are rounded to 2 significant digits.' #text can be added here which will be passed through to generate_text and displayed for each plot
