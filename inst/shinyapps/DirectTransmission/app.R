@@ -40,10 +40,7 @@ refresh <- function(input, output){
 
                  }) 
     
-    #reformat data to be in the right format for plotting
-    #each plot/text output is a list entry with a data frame in form xvals, yvals, extra variables for stratifications for each plot
     
-    # dat = tidyr::gather(simresult$ts, -xvals, value = "yvals", key = "varnames")
     dat <- simresult$ts
     
     #data for plots and text
