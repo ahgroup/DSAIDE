@@ -48,9 +48,9 @@ refresh <- function(input, output){
     
     #code variable names as factor and level them so they show up right in plot
     
-    print("Checkpoint 1")
-    mylevels = unique(dat$varnames)
-    dat$varnames = factor(dat$varnames, levels = mylevels)
+    # print("Checkpoint 1")
+    # mylevels = unique(dat$varnames)
+    # dat$varnames = factor(dat$varnames, levels = mylevels)
     
     #data for plots and text
     #each variable listed in the varnames column will be plotted on the y-axis, with its values in yvals
@@ -59,7 +59,7 @@ refresh <- function(input, output){
     print("Checkpoint 2")
     result[[1]]$dat = dat
     
-    #Meta-information for each plot
+    # Meta-information for each plot
     
     print("Checkpoint 3")
     result[[1]]$plottype = "Lineplot"
