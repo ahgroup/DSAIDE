@@ -46,40 +46,21 @@ refresh <- function(input, output){
     # dat = tidyr::gather(simresult$ts, -xvals, value = "yvals", key = "varnames")
     dat <- simresult$ts
     
-    #code variable names as factor and level them so they show up right in plot
-    
-    # print("Checkpoint 1")
-    # mylevels = unique(dat$varnames)
-    # dat$varnames = factor(dat$varnames, levels = mylevels)
-    
     #data for plots and text
     #each variable listed in the varnames column will be plotted on the y-axis, with its values in yvals
     #each variable listed in varnames will also be processed to produce text
-    
-    print("Checkpoint 2")
     result[[1]]$dat = dat
     
     # Meta-information for each plot
-    
-    print("Checkpoint 3")
     result[[1]]$plottype = "Lineplot"
     result[[1]]$xlab = "Time"
     result[[1]]$ylab = "Numbers"
     result[[1]]$legend = "Compartments"
-    
-    print("Checkpoint 4")
+
     result[[1]]$xscale = 'identity'
     result[[1]]$yscale = 'identity'
     if (plotscale == 'x' | plotscale == 'both') { result[[1]]$xscale = 'log10'}
     if (plotscale == 'y' | plotscale == 'both') { result[[1]]$yscale = 'log10'}
-    
-    
-    #set min and max for scales. If not provided ggplot will auto-set
-    
-    # result[[1]]$ymin = 1e-12
-    # result[[1]]$ymax = max(simresult$ts)
-    # result[[1]]$xmin = 1e-12
-    # result[[1]]$xmax = tmax
     
     #the following are for text display for each plot
     
