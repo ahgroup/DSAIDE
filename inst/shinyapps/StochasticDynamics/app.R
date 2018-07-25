@@ -51,12 +51,13 @@ refresh <- function(input, output){
                                                        bI = bI, gP = gP, gI = gI, w = w, m = m, n = n)
            }) # progress message ends here
     
-    colnames(simresult)[1] = 'xvals' #rename time to xvals for consistent plotting
+    # colnames(simresult)[1] = 'xvals' #rename time to xvals for consistent plotting
                                        #reformat data to be in the right format for plotting
-    datnew = tidyr::gather(as.data.frame(simresult), -xvals, value = "yvals", key = "varnames")
-    datnew$IDvar = paste(datnew$varnames,nn,sep='')    #trying to make a variable for plotting same color 
+    # datnew = tidyr::gather(as.data.frame(simresult), -xvals, value = "yvals", key = "varnames")
+    # datnew$IDvar = paste(datnew$varnames,nn,sep='')    #trying to make a variable for plotting same color 
                                                         #lines for each run in ggplot2. doesn't work yet.
-    dat = rbind(dat, datnew)
+    # dat = rbind(dat, datnew)
+    dat <- simresult$ts
     
     
     }

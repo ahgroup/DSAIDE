@@ -63,8 +63,8 @@ result <- simulate_stochastic()
 result <- simulate_stochastic(S0 = 2000,  tmax = 200, bP = 1/100)
 
 # You can display or further process the result, e.g. like this
-plot(result[,'time'],result[,'S'],xlab='Time',ylab='Number Susceptible',type='l')
-print(paste('Total number of infected at end of simulation:',result[nrow(result),'R'])) 
+plot(result$ts[,'Time'],result$ts[,'S'],xlab='Time',ylab='Number Susceptible',type='l')
+print(paste('Total number of infected at end of simulation:',result$ts[nrow(result),'R'])) 
 }
 \seealso{
 See the shiny app documentation corresponding to this simulator

@@ -64,8 +64,8 @@ stochasticratefunc <- function(y, parms, t)
 #' result <- simulate_stochastic(S0 = 2000,  tmax = 200, bP = 1/100)
 #' 
 #' # You can display or further process the result, e.g. like this
-#' plot(result[,'time'],result[,'S'],xlab='Time',ylab='Number Susceptible',type='l')
-#' print(paste('Total number of infected at end of simulation:',result[nrow(result),'R'])) 
+#' plot(result$ts[,'Time'],result$ts[,'S'],xlab='Time',ylab='Number Susceptible',type='l')
+#' print(paste('Total number of infected at end of simulation:',result$ts[nrow(result),'R'])) 
 #' @seealso See the shiny app documentation corresponding to this simulator
 #' function for more details on this model. See the manual for the adaptivetau
 #' package for details on the stochastic algorithm.
@@ -103,9 +103,9 @@ simulate_stochastic <- function(S0 = 1000, I0 = 10, tmax = 100, bP = 0, bI = 1/1
     #this line runs the simulation using the SSA algorithm in the adaptivetau package
     output = adaptivetau::ssa.adaptivetau(init.values = Y0, transitions = transitions,  rateFunc = stochasticratefunc, params = pars, tf = tmax)
 
-    #since I use P above, but it's better to rename as SEIR in the plots, do a rename here
-    colnames(output)[3]<-"E"
+    colnames(output) <- c("Time", "S", "E", "I", "R")
+    result <- list()
+    result$ts <- output
     
-    #The output produced by a call to the odesolver is odeoutput matrix is returned by the function
-    return(output)
+    return(result)
 }
