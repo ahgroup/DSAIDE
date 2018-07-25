@@ -93,8 +93,6 @@ simulate_multipathogen <- function(S0 = 1e3, I10 = 1, I20 = 0, I120 = 0, tmax = 
     
     colnames(odeoutput) <- c("Time","S","I1","I2",'R1','R2',"I1X","I2X","I12",'R12')
     result <- list()
-   # result$ts1 <- as.data.frame(odeoutput[ , c(1, 2:6)])
-   # result$ts2 <- as.data.frame(odeoutput[ , c(1, 7:10)])
     result$ts <- as.data.frame(odeoutput)
     
     return(result)

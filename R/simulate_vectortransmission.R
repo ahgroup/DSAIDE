@@ -78,5 +78,8 @@ simulate_vectortransmission <- function(Sh0 = 1e3, Ih0 = 1, Sv0 = 0, Iv0 = 0, tm
   #This odeoutput matrix will be re-created every time you run the code, so any previous results will be overwritten
   odeoutput = deSolve::lsoda(Y0, timevec, func = vectortransmissioneq, parms=pars, atol=1e-12, rtol=1e-12);
 
-  return (odeoutput)
+  colnames(odeoutput) <- c('Time',"Sh","Ih","Rh","Sv","Iv")
+  result <- list()
+  result$ts <- as.data.frame(odeoutput)
+  return(result)
 }

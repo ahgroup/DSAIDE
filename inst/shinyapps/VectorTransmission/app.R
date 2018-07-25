@@ -7,7 +7,7 @@
 
 #the server-side function with the main functionality
 #this function is wrapped inside the shiny server function below to allow return to main menu when window is closed
-refresh <- function(input, output){
+refresh <- function(input, output) {
   
   # This reactive takes the input data and sends it over to the simulator
   # Then it will get the results back and return it as the "res" variable
@@ -42,23 +42,21 @@ refresh <- function(input, output){
         
   })
     
-#rename time to xvals for consistent plotting
-    
-   colnames(simresult) = c('xvals',"Sh","Ih","Rh","Sv","Iv")
-    
 # reformat data to be in the right format for plotting 
 # dat1 store the input used for plot 1
 # dat2 store the input used for plot 2
    
-    dat1 = tidyr::gather(as.data.frame(simresult[,c(1,2:4)]), -xvals, value = "yvals", key = "varnames")
-    dat2 = tidyr::gather(as.data.frame(simresult[,c(1,5:6)]), -xvals, value = "yvals", key = "varnames")
+    # dat1 = tidyr::gather(as.data.frame(simresult[,c(1,2:4)]), -xvals, value = "yvals", key = "varnames")
+    # dat2 = tidyr::gather(as.data.frame(simresult[,c(1,5:6)]), -xvals, value = "yvals", key = "varnames")
+    dat1 <- simresult$ts[ , c(1, 2:4)]
+    dat2 <- simresult$ts[ , c(1, 5:6)]
     
 #code variable names as factor and level them so they show up right in plot   
-    mylevels1 = unique(dat1$varnames)
-    dat1$varnames = factor(dat1$varnames, levels = mylevels1)
-    
-    mylevels2 = unique(dat2$varnames)
-    dat2$varnames = factor(dat2$varnames, levels = mylevels2)
+    # mylevels1 = unique(dat1$varnames)
+    # dat1$varnames = factor(dat1$varnames, levels = mylevels1)
+    # 
+    # mylevels2 = unique(dat2$varnames)
+    # dat2$varnames = factor(dat2$varnames, levels = mylevels2)
     
     #data for plots and text
     #each variable listed in the varnames column will be plotted on the y-axis, with its values in yvals
@@ -68,7 +66,7 @@ refresh <- function(input, output){
     result[[2]]$dat = dat2
     
     
-    for (i in 1 :2) {
+    for (i in 1:2) {
      
 #Meta-information for each plot
       
@@ -77,16 +75,16 @@ refresh <- function(input, output){
       result[[i]]$ylab = "Numbers"
       result[[i]]$legend = "Compartments"
       
-               result[[i]]$xscale = 'identity'
-               result[[i]]$yscale = 'identity'
-             if (plotscale == 'x' | plotscale == 'both') { result[[i]]$xscale = 'log10'}
-             if (plotscale == 'y' | plotscale == 'both') { result[[i]]$yscale = 'log10'}
+      result[[i]]$xscale = 'identity'
+      result[[i]]$yscale = 'identity'
+      if (plotscale == 'x' | plotscale == 'both') { result[[i]]$xscale = 'log10'}
+      if (plotscale == 'y' | plotscale == 'both') { result[[i]]$yscale = 'log10'}
       
       
 #set min and max for scales. If not provided ggplot will auto-set
       
              result[[i]]$ymin = 1e-12
-             result[[i]]$ymax = max(simresult)
+             result[[i]]$ymax = max(simresult$ts)
              result[[i]]$xmin = 1e-12
              result[[i]]$xmax = tmax
       
