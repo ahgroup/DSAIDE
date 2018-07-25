@@ -123,7 +123,7 @@ result <- simulate_introduction(S0 = 500, I0 = 5, tmax = 100, g = 0.1,  b = 1/25
 Calling the simulation function execuctes the underlying dynamical model (here a simple 3 compartment ODE model, as described in the "Model" section of the app). The simulation function produces and returns time-series for the dynamics of each of the variables that are tracked. Users can produce their own plots, e.g. plotting susceptible as function of time:
 
 ```{r, eval=TRUE, echo=TRUE}
-plot(result[,"time"],result[,"S"],xlab='Time',ylab='Number Susceptible',type='l')
+plot(result$ts[ , "Time"],result$ts[ , "S"],xlab='Time',ylab='Number Susceptible',type='l')
 ```
 
 The ability to call the simulation functions directly instead of going through the graphical interface allows additional exploration of the models. For instance if one wanted to explore the behavior of a model systematically for different values of a given parameter, this would need to be done manually if run through the graphical interface. Calling the function directly allows one to automate this by wrapping the function inside a loop over the parameter of interest, recording some quantity of interest for each run, and report the result at the end. The following is a simple example, showing a loop over different values of the recovery rate and recording the peak of the outbreak each time, with the final result _peak of outbreak as function of recovery time_ shown in a plot:
@@ -135,7 +135,7 @@ for (n in 1:length(gvec))
 {
   #call the simulator function with different values of g each time
   result <- simulate_introduction(S0 = 500, I0 = 5, tmax = 200, g = gvec[n],  b = 1/2500)
-  peak[n] <- max(result[,"I"]) #record max number of infected for each value of g
+  peak[n] <- max(result$ts[,"I"]) #record max number of infected for each value of g
 }
 #plot final result
 plot(gvec,peak,type='p',xlab='Rate of recovery',ylab='Max number of infected')

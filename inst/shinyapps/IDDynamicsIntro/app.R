@@ -37,17 +37,17 @@
                  {
                    simresult <- simulate_introduction(S0 = S0, I0 = I0, g = g, b = b, tmax = tmax)
                  })
-    colnames(simresult) = c('xvals','S','I','R')
     
 #reformat data to be in the right format for plotting
 #each plot/text output is a list entry with a data frame in form xvals, yvals, extra variables for stratifications for each plot
     
-    dat = tidyr::gather(as.data.frame(simresult), -xvals, value = "yvals", key = "varnames")
+    # dat = tidyr::gather(as.data.frame(simresult), -xvals, value = "yvals", key = "varnames")
+    dat <- simresult$ts
     
     #code variable names as factor and level them so they show up right in plot
     
-    mylevels = unique(dat$varnames)
-    dat$varnames = factor(dat$varnames, levels = mylevels)
+    # mylevels = unique(dat$varnames)
+    # dat$varnames = factor(dat$varnames, levels = mylevels)
     
 #data for plots and text
 #each variable listed in the varnames column will be plotted on the y-axis, with its values in yvals
@@ -71,7 +71,7 @@
 #set min and max for scales. If not provided ggplot will auto-set
     
     result[[1]]$ymin = 1e-12
-    result[[1]]$ymax = max(simresult)
+    result[[1]]$ymax = max(simresult$ts)
     result[[1]]$xmin = 1e-12
     result[[1]]$xmax = tmax
     
