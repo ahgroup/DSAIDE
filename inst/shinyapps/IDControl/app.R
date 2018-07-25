@@ -61,29 +61,28 @@ refresh <- function(input, output){
     
     })
     
-    
-#rename time to xvals for consistent plotting
-    
-    colnames(simresult) = c('xvals','S','P','A','I','R','D','Sv','Iv','E')
-    
 # reformat data to be in the right format for plotting 
 # dat1 store the input used for plot 1
 # dat2 store the input used for plot 2
     
-    dat1 = tidyr::gather(as.data.frame(simresult[,c(1,2:7)]), -xvals, value = "yvals", key = "varnames")
-    dat2 = tidyr::gather(as.data.frame(simresult[,c(1,8:9)]), -xvals, value = "yvals", key = "varnames")
-    dat3 = tidyr::gather(as.data.frame(simresult[,c(1,10)]), -xvals, value = "yvals", key = "varnames")
+    # dat1 = tidyr::gather(as.data.frame(simresult[,c(1,2:7)]), -xvals, value = "yvals", key = "varnames")
+    # dat2 = tidyr::gather(as.data.frame(simresult[,c(1,8:9)]), -xvals, value = "yvals", key = "varnames")
+    # dat3 = tidyr::gather(as.data.frame(simresult[,c(1,10)]), -xvals, value = "yvals", key = "varnames")
+    dat1 <- simresult$ts[ , c(1, 2:7)]
+    dat2 <- simresult$ts[ , c(1, 8:9)]
+    dat3 <- simresult$ts[ , c(1, 10)]
+    
     
     
 #code variable names as factor and level them so they show up right in plot   
-    mylevels1 = unique(dat1$varnames)
-    dat1$varnames = factor(dat1$varnames, levels = mylevels1)
-    
-    mylevels2 = unique(dat2$varnames)
-    dat2$varnames = factor(dat2$varnames, levels = mylevels2)
-    
-    mylevels3 = unique(dat3$varnames)
-    dat3$varnames = factor(dat3$varnames, levels = mylevels3)
+    # mylevels1 = unique(dat1$varnames)
+    # dat1$varnames = factor(dat1$varnames, levels = mylevels1)
+    # 
+    # mylevels2 = unique(dat2$varnames)
+    # dat2$varnames = factor(dat2$varnames, levels = mylevels2)
+    # 
+    # mylevels3 = unique(dat3$varnames)
+    # dat3$varnames = factor(dat3$varnames, levels = mylevels3)
     
     #data for plots and text
     #each variable listed in the varnames column will be plotted on the y-axis, with its values in yvals
