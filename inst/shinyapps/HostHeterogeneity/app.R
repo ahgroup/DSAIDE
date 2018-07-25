@@ -62,8 +62,8 @@ refresh <- function(input, output){
     dat <- simresult$ts
     #code variable names as factor and level them so they show up right in plot
     
-    mylevels = unique(dat$varnames)
-    dat$varnames = factor(dat$varnames, levels = mylevels)
+    # mylevels = unique(dat$varnames)
+    # dat$varnames = factor(dat$varnames, levels = mylevels)
     
 #data for plots and text
 #each variable listed in the varnames column will be plotted on the y-axis, with its values in yvals

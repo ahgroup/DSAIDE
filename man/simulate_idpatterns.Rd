@@ -77,7 +77,7 @@ A compartmental ID model with several states/compartments
   # To choose parameter values other than the standard one, specify them e.g. like such
   result <- simulate_idpatterns(S0 = 2000, P0 = 10, tmax = 100, f = 0.1, d = 0.2, s = 0.1)
   # You should then use the simulation result returned from the function, e.g. like this:
-  plot(result[,1],result[,2],xlab='Time',ylab='Number Susceptible',type='l')
+  plot(result$ts[ , "Time"],result$ts[ , "S"],xlab='Time',ylab='Number Susceptible',type='l')
 }
 \references{
 See e.g. Keeling and Rohani 2008 for SIR models and the

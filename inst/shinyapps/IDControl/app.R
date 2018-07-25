@@ -109,7 +109,7 @@ refresh <- function(input, output){
       
 #set min and max for scales. If not provided ggplot will auto-set
       result[[i]]$ymin = 1e-12
-      result[[i]]$ymax = max(simresult)
+      result[[i]]$ymax = max(simresult$ts)
       result[[i]]$xmin = 1e-12
       result[[i]]$xmax = tmax
       

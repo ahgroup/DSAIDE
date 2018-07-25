@@ -60,15 +60,15 @@ refresh <- function(input, output){
         
       #  dat1 = tidyr::gather(as.data.frame(simresult[,c(1,2:6)]), -xvals, value = "yvals", key = "varnames")
       #  dat2 = tidyr::gather(as.data.frame(simresult[,c(1,7:10)]), -xvals, value = "yvals", key = "varnames")      
-        dat1 <- result$ts[ , c(1, 2:6)]
-        dat2 <- result$ts[ , c(1, 7:10)]
+        dat1 <- simresult$ts[ , c(1, 2:6)]
+        dat2 <- simresult$ts[ , c(1, 7:10)]
         
 #code variable names as factor and level them so they show up right in plot   
-        mylevels1 = unique(dat1$varnames)
-        dat1$varnames = factor(dat1$varnames, levels = mylevels1)
-        
-        mylevels2 = unique(dat2$varnames)
-        dat2$varnames = factor(dat2$varnames, levels = mylevels2)
+        # mylevels1 = unique(dat1$varnames)
+        # dat1$varnames = factor(dat1$varnames, levels = mylevels1)
+        # 
+        # mylevels2 = unique(dat2$varnames)
+        # dat2$varnames = factor(dat2$varnames, levels = mylevels2)
         
 #data for plots and text
 #each variable listed in the varnames column will be plotted on the y-axis, with its values in yvals
@@ -95,7 +95,7 @@ refresh <- function(input, output){
 #set min and max for scales. If not provided ggplot will auto-set
           
           result[[i]]$ymin = 1e-12
-          result[[i]]$ymax = max(simresult$ts1, simresult$ts2)
+          result[[i]]$ymax = max(result[[i]]$dat)
           result[[i]]$xmin = 1e-12
           result[[i]]$xmax = tmax
           
