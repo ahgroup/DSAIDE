@@ -129,7 +129,7 @@ ui <- fluidPage(
   
   # Add the app title
   
-  div( includeHTML("www/header.html"), align = "center"),
+  div( includeHTML("../styles/footer.html"), align = "center"),
   h1('Environmental Transmission App', align = "center", style = "background-color:#123c66; color:#fff"),
   
   #section to add buttons
@@ -238,9 +238,10 @@ ui <- fluidPage(
   
   #use external function to generate all tabs with instruction content
   
-  do.call(tabsetPanel,generate_instruction_tabs()),
+  # do.call(tabsetPanel,generate_instruction_tabs()),
+  do.call(tabsetPanel, generate_documentation()),
   
-  div(includeHTML("www/footer.html"), align="center", style="font-size:small")     #footer
+  div(includeHTML("../styles/footer.html"), align="center", style="font-size:small")     #footer
   
 )     #end fluidpage
 
