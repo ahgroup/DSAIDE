@@ -57,7 +57,10 @@ A compartmental ID model with several states/compartments
   # To choose parameter values other than the standard one, specify them e.g. like such
   result <- simulate_environmentaltransmission(S0 = 100, E0 = 1e5,  tmax = 100)
   # You should then use the simulation result returned from the function, e.g. like this:
-  plot(result[,1],result[,2],xlab='Time',ylab='Number Susceptible',type='l')
+  plot(result$ts[ , "Time"],result$ts[ , "S"],xlab='Time',ylab='Number Susceptible',type='l')
+  # Consider also:
+  result <- simulate_environmentaltransmission(S0 = 1000, E0 = 100, tmax = 400)
+  plot(result$ts[ , "Time"], result$ts[ , "S"], xlab = "Time", ylab = "Number Susceptible", type = "l")
 }
 \references{
 See e.g. the book "Modeling Infectious Diseases in Humans and Animals" by Keeling and Rohani 

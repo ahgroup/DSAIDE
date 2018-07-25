@@ -99,8 +99,17 @@ The exploration of the models through the graphical interface is the first and m
 To facilitate direct interaction and modification of the underlying simulations, each app is structured in such a way that the underlying model/simulation is a stand-alone function. For some apps, there are multiple underlying functions involved. You can call/use any of these functions directly, without going through the graphical interface. The 'Further Information' tab inside each app provides the name of the corresponding underlying function(s).
 
 Consider as example the first app, called "ID Dynamics Intro". The simulator function for this model is called `simulate_introduction.R`, the user can learn about the inputs and outputs of the function by looking at its documentation 
+
+Consider as example the first app, called "ID Dynamics Intro". The simulator function for this model is called `simulate_introduction.R`. After loading the package (if not already loaded) with 
+
+```{r eval=TRUE, echo=TRUE}
+library('DSAIDE') 
+```
+
+the user can learn about the inputs and outputs of the function by looking at its documentation 
+
 ```{r eval=FALSE, echo=TRUE}
-library('DSAIDE') #Load package if not yet loaded
+
 help('simulate_introduction')
 ```
 
@@ -108,6 +117,7 @@ The help file explains that one can run the simulation by specifying initial num
 
 ```{r, eval=TRUE, echo=TRUE}
 result <- simulate_introduction(S0 = 500, I0 = 5, tmax = 100, g = 0.1,  b = 1/2500)
+
 ```
 
 Calling the simulation function execuctes the underlying dynamical model (here a simple 3 compartment ODE model, as described in the "Model" section of the app). The simulation function produces and returns time-series for the dynamics of each of the variables that are tracked. Users can produce their own plots, e.g. plotting susceptible as function of time:
