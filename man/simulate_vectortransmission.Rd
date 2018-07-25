@@ -57,7 +57,7 @@ A compartmental ID model with several states/compartments
   # To choose parameter values other than the standard one, specify them e.g. like such
   result <- simulate_vectortransmission(Sh0 = 100, Sv0 = 1e5,  tmax = 100)
   # You should then use the simulation result returned from the function, e.g. like this:
-  plot(result[,1],result[,2],xlab='Time',ylab='Number Susceptible',type='l')
+  plot(result$ts[ , "Time"],result$ts[ , "Sh"],xlab='Time',ylab='Number Susceptible',type='l')
 }
 \references{
 See the information in the corresponding shiny app for model details

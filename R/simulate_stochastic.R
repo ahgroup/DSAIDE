@@ -105,7 +105,7 @@ simulate_stochastic <- function(S0 = 1000, I0 = 10, tmax = 100, bP = 0, bI = 1/1
 
     colnames(output) <- c("Time", "S", "E", "I", "R")
     result <- list()
-    result$ts <- output
+    result$ts <- as.data.frame(output)
     
     return(result)
 }

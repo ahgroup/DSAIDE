@@ -63,8 +63,8 @@ refresh <- function(input, output){
     }
     
 #code variable names as factor and level them so they show up right in plot
-    mylevels = unique(dat$varnames)
-    dat$varnames = factor(dat$varnames, levels = mylevels)
+    # mylevels = unique(dat$varnames)
+    # dat$varnames = factor(dat$varnames, levels = mylevels)
     
     
 #data for plots and text
@@ -81,7 +81,7 @@ refresh <- function(input, output){
     
 #set min and max for scales. If not provided ggplot will auto-set
     result[[1]]$ymin = 1e-12
-    result[[1]]$ymax = max(result[[1]]$dat$yvals)
+    result[[1]]$ymax = max(simresult$ts)
     result[[1]]$xmin = 1e-12
     result[[1]]$xmax = tmax
     
