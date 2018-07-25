@@ -40,8 +40,10 @@ This model allows for the simulation of different direct transmission modes
 \details{
 A compartmental ID model with several states/compartments
   is simulated as a set of ordinary differential
-  equations. The function returns the output from the odesolver as a matrix,
-  with one column per compartment/variable. The first column is time.
+  equations. The function returns the output from the odesolver as a list,
+  with the element ts, which is a dataframe whose columns represent time,
+  the number of susceptibles, the number of infected, and the number of
+  recovered.
 }
 \section{Warning}{
 
@@ -58,7 +60,7 @@ A compartmental ID model with several states/compartments
   # You should then use the simulation result returned from the function, e.g. like this:
   plot(result$ts[ , "Time"], result$ts[ , "S"], xlab='Time',ylab='Number Susceptible',type='l')
   # Consider also:
-  result <- simulate_directtransmission(S0 = 1e5, I0 = 5, tmax = 60)
+  result <- simulate_directtransmission(S0 = 1e5, I0 = 5, m = 0.5)
   plot(result$ts[ , "Time"], result$ts[ , "S"], xlab = "Time", ylab = "Number Susceptible", type = "l")
 }
 \references{

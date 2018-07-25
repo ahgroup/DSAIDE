@@ -51,15 +51,17 @@ refresh <- function(input, output){
         
 #rename time to xvals for consistent plotting
         
-        colnames(simresult) = c('xvals',"S","I1","I2",'R1','R2',"I1X","I2X","I12",'R12')  
+      #  colnames(simresult) = c('xvals',"S","I1","I2",'R1','R2',"I1X","I2X","I12",'R12')  
         
         
 # reformat data to be in the right format for plotting 
 # dat1 store the input used for plot 1
 # dat2 store the input used for plot 2
         
-        dat1 = tidyr::gather(as.data.frame(simresult[,c(1,2:6)]), -xvals, value = "yvals", key = "varnames")
-        dat2 = tidyr::gather(as.data.frame(simresult[,c(1,7:10)]), -xvals, value = "yvals", key = "varnames")      
+      #  dat1 = tidyr::gather(as.data.frame(simresult[,c(1,2:6)]), -xvals, value = "yvals", key = "varnames")
+      #  dat2 = tidyr::gather(as.data.frame(simresult[,c(1,7:10)]), -xvals, value = "yvals", key = "varnames")      
+        dat1 <- result$ts[ , c(1, 2:6)]
+        dat2 <- result$ts[ , c(1, 7:10)]
         
 #code variable names as factor and level them so they show up right in plot   
         mylevels1 = unique(dat1$varnames)
@@ -93,7 +95,7 @@ refresh <- function(input, output){
 #set min and max for scales. If not provided ggplot will auto-set
           
           result[[i]]$ymin = 1e-12
-          result[[i]]$ymax = max(simresult)
+          result[[i]]$ymax = max(simresult$ts1, simresult$ts2)
           result[[i]]$xmin = 1e-12
           result[[i]]$xmax = tmax
           

@@ -44,8 +44,10 @@ directtransmissioneq <- function(t, y, parms)
 #'   to the deSolve ode solver
 #' @details A compartmental ID model with several states/compartments
 #'   is simulated as a set of ordinary differential
-#'   equations. The function returns the output from the odesolver as a matrix,
-#'   with one column per compartment/variable. The first column is time.
+#'   equations. The function returns the output from the odesolver as a list,
+#'   with the element ts, which is a dataframe whose columns represent time,
+#'   the number of susceptibles, the number of infected, and the number of
+#'   recovered.
 #' @section Warning:
 #'   This function does not perform any error checking. So if you try to do
 #'   something nonsensical (e.g. any negative values or fractions > 1),
@@ -58,7 +60,7 @@ directtransmissioneq <- function(t, y, parms)
 #'   # You should then use the simulation result returned from the function, e.g. like this:
 #'   plot(result$ts[ , "Time"], result$ts[ , "S"], xlab='Time',ylab='Number Susceptible',type='l')
 #'   # Consider also:
-#'   result <- simulate_directtransmission(S0 = 1e5, I0 = 5, tmax = 60)
+#'   result <- simulate_directtransmission(S0 = 1e5, I0 = 5, m = 0.5)
 #'   plot(result$ts[ , "Time"], result$ts[ , "S"], xlab = "Time", ylab = "Number Susceptible", type = "l")
 #' @seealso The UI of the shiny app 'DirectTransmission', which is part of this package, contains more details on the model
 #' @author Andreas Handel
