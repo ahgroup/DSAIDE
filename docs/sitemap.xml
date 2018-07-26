@@ -16,9 +16,6 @@
     <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/generate_documentation.html</loc>
   </url>
   <url>
-    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/generate_instruction_tabs.html</loc>
-  </url>
-  <url>
     <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/generate_plots.html</loc>
   </url>
   <url>
@@ -55,7 +52,10 @@
     <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_reproductivenumber.html</loc>
   </url>
   <url>
-    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_stochastic.html</loc>
+    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_stochastic_SEIR.html</loc>
+  </url>
+  <url>
+    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_stochastic_SIR.html</loc>
   </url>
   <url>
     <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_vectortransmission.html</loc>

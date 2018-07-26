@@ -81,10 +81,10 @@ idcontrolode <- function(t, y, parms)
 #'   # Consider also a case where recoverd persons become susceptible again at a 
 #'   # rate of 1.5.
 #'   result <- simulate_idcontrol(S0 = 2000, I0 = 10, tmax = 100, w = 1.5)
-#'   plot(result$ts[ , "Time"], result$ts[ , "S"], xlab = "Time", ylab = "Number Susceptible", type = "l")
+#'   plot(result$ts[,"Time"], result$ts[,"S"],xlab = "Time",ylab = "Number Susceptible",type="l")
 #'   # Make death rate of natural hosts 0.5 and rate of pathogen decay 0.1.
 #'   result <- simulate_idcontrol(S0 = 2000, I0 = 10, tmax = 100, nh = 0.5, c = 0.1)
-#'   plot(result$ts[ , "Time"], result$ts[ , "S"], xlab = "Time", ylab = "Number Susceptible", type = "l")
+#'   plot(result$ts[,"Time"], result$ts[,"S"],xlab = "Time",ylab = "Number Susceptible",type="l")
 #' @seealso The UI of the shiny app 'IDPatterns', which is part of this package, contains more details on the model
 #' @references See e.g. Keeling and Rohani 2008 for SIR models and the
 #'   documentation for the deSolve package for details on ODE solvers

@@ -135,7 +135,7 @@ Recovered and Immune (R)</p>
 
     <pre class="usage"><span class='fu'>simulate_evolution</span>(<span class='kw'>S0</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>Iu0</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>It0</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>Ir0</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>tmax</span> <span class='kw'>=</span> <span class='fl'>100</span>,
   <span class='kw'>bu</span> <span class='kw'>=</span> <span class='fl'>1</span>/<span class='fl'>1000</span>, <span class='kw'>bt</span> <span class='kw'>=</span> <span class='fl'>1</span>/<span class='fl'>1000</span>, <span class='kw'>br</span> <span class='kw'>=</span> <span class='fl'>1</span>/<span class='fl'>1000</span>, <span class='kw'>cu</span> <span class='kw'>=</span> <span class='fl'>1</span>/<span class='fl'>1000</span>, <span class='kw'>ct</span> <span class='kw'>=</span> <span class='fl'>1</span>/<span class='fl'>100</span>,
-  <span class='kw'>f</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>gu</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>gt</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>gr</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
+  <span class='kw'>f</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>gu</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>gt</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>gr</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>rngseed</span> <span class='kw'>=</span> <span class='fl'>100</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -198,20 +198,28 @@ is the inverse of the average time spent in that compartment</p></td>
       <th>gr</th>
       <td><p>rate at which a person leaves the Ir compartment</p></td>
     </tr>
+    <tr>
+      <th>rngseed</th>
+      <td><p>seed for random number generator to allow reproducibility</p></td>
+    </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>This function returns the simulation result as obtained from a call
-  to the adaptivetau integrator</p>
+  to the adaptivetau integrator in list form. The list element ts is a
+  dataframe where the first column is "Time," and the remaining columns
+  represent the evolution of the model parameters: the number of susceptibles,
+  the number infected by the drug-sensitive strain and not on treatment, the number
+  infected by the drug-sensitive strain and being treated, the number infected by
+  the drug-resistant strain (treatment does not affect these), and the recovered
+  (and therefore immune) individuals.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>A compartmental ID model with several states/compartments
 is simulated as a stochastic model using the adaptive tau algorithm as implemented by ssa.adaptivetau
-in the adpativetau package. See the manual of this package for more details.
-The function returns the time series of the simulated disease as output matrix,
-with one column per compartment/variable. The first column is time.</p>
+in the adpativetau package. See the manual of this package for more details.</p>
     
     <h2 class="hasAnchor" id="warning"><a class="anchor" href="#warning"></a>Warning</h2>
 
@@ -234,7 +242,10 @@ the code will likely abort with an error message</p>
 <span class='co'># To choose parameter values other than the standard one, specify them e.g. like such</span>
 <span class='no'>result</span> <span class='kw'>&lt;-</span> <span class='fu'>simulate_evolution</span>(<span class='kw'>S0</span> <span class='kw'>=</span> <span class='fl'>2000</span>,  <span class='kw'>tmax</span> <span class='kw'>=</span> <span class='fl'>200</span>, <span class='kw'>bt</span> <span class='kw'>=</span> <span class='fl'>1</span>/<span class='fl'>100</span>)
 <span class='co'># You should then use the simulation result returned from the function, e.g. like this:</span>
-<span class='fu'>plot</span>(<span class='no'>result</span>[,<span class='fl'>1</span>],<span class='no'>result</span>[,<span class='fl'>2</span>],<span class='kw'>xlab</span><span class='kw'>=</span><span class='st'>'Time'</span>,<span class='kw'>ylab</span><span class='kw'>=</span><span class='st'>'Number Susceptible'</span>,<span class='kw'>type</span><span class='kw'>=</span><span class='st'>'l'</span>)</div><div class='img'><img src='simulate_evolution-1.png' alt='' width='700' height='433' /></div></pre>
+<span class='fu'>plot</span>(<span class='no'>result</span>$<span class='no'>ts</span>[ , <span class='st'>"Time"</span>],<span class='no'>result</span>$<span class='no'>ts</span>[ , <span class='st'>"S"</span>],<span class='kw'>xlab</span><span class='kw'>=</span><span class='st'>'Time'</span>,<span class='kw'>ylab</span><span class='kw'>=</span><span class='st'>'Number Susceptible'</span>,<span class='kw'>type</span><span class='kw'>=</span><span class='st'>'l'</span>)</div><div class='img'><img src='simulate_evolution-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Consider also a case in which the fraction of resistant mutant infections that an</span>
+<span class='co'># untreated host produces is high, at 0.9.</span>
+<span class='no'>result</span> <span class='kw'>&lt;-</span> <span class='fu'>simulate_evolution</span>(<span class='kw'>S0</span> <span class='kw'>=</span> <span class='fl'>2000</span>, <span class='kw'>tmax</span> <span class='kw'>=</span> <span class='fl'>200</span>, <span class='kw'>bt</span> <span class='kw'>=</span> <span class='fl'>1</span>/<span class='fl'>100</span>, <span class='kw'>cu</span> <span class='kw'>=</span> <span class='fl'>0.9</span>)
+<span class='fu'>plot</span>(<span class='no'>result</span>$<span class='no'>ts</span>[,<span class='st'>"Time"</span>], <span class='no'>result</span>$<span class='no'>ts</span>[,<span class='st'>"S"</span>], <span class='kw'>xlab</span> <span class='kw'>=</span><span class='st'>"Time"</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"Number Susceptible"</span>,<span class='kw'>type</span> <span class='kw'>=</span><span class='st'>"l"</span>)</div><div class='img'><img src='simulate_evolution-2.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

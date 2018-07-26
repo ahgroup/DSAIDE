@@ -2,7 +2,7 @@
 #This is the Shiny file for the Evolutionary Dynamics App
 #written by Andreas Handel, with contributions from others 
 #maintained by Andreas Handel (ahandel@uga.edu)
-#last updated 7/13/2017
+#last updated 7/13/2018
 ############################################################
 
 
@@ -18,21 +18,17 @@ refresh <- function(input, output){
     Iu0 = isolate(input$Iu0);
     It0 = isolate(input$It0);
     Ir0 = isolate(input$Ir0);
-    tmax = isolate(input$tmax);
-
-    bu = isolate(input$bu);
-    bt = isolate(input$bt);
-    br = isolate(input$br);
-
-    cu = isolate(input$cu);
-    ct = isolate(input$ct);
-
-    f = isolate(input$f);
-    
-    gu = isolate(input$gu);
-    gt = isolate(input$gt);
-    gr = isolate(input$gr);
-    
+    tmax = isolate(input$tmax)
+    bu = isolate(input$bu)
+    bt = isolate(input$bt)
+    br = isolate(input$br)
+    cu = isolate(input$cu)
+    ct = isolate(input$ct)
+    f = isolate(input$f)
+    gu = isolate(input$gu)
+    gt = isolate(input$gt)
+    gr = isolate(input$gr)
+    rngseed = isolate(input$rngseed)
     nreps = isolate(input$nreps)
     plotscale = isolate(input$plotscale) # Change the scale of axis interactively 
     
@@ -41,23 +37,32 @@ refresh <- function(input, output){
     listlength = 1; #here we do all simulations in the same figure
     result = vector("list", listlength) #create empty list of right size for results
     
-#shows a 'running simulation' message
     
-   withProgress(message = 'Running Simulation', value = 0,
-                 {
-          simresult <- simulate_evolution(S0 = S0, Iu0 = Iu0, It0 = It0, Ir0 = Ir0, tmax = tmax, 
-                                            bu = bu, bt = bt, br = br, cu = cu, ct = ct, f = f, gu = gu, gt = gt, gr = gr)
-                   
-          })
+    #show progress bar during simulation run
+    withProgress(message = 'Running Simulation', value = 0, {
+      
+      datall = NULL
+      # Call the adaptivetau simulator with the given parameters
+      # simulation will be run multiple times based on value of nreps
+      for (nn in 1:nreps)
+      {
+        #add number of rep to seed, otherwise it's exactly the same trajectory each time
         
-    # Putting the time series from simresult into the dat structure
-    dat = simresult$ts
+        simresult <- simulate_evolution(S0 = S0, Iu0 = Iu0, It0 = It0, Ir0 = Ir0, tmax = tmax, 
+                                        bu = bu, bt = bt, br = br, cu = cu, ct = ct, f = f, gu = gu, gt = gt, gr = gr, rngseed = rngseed + nn) 
+        simresult <- simresult$ts
+        colnames(simresult)[1] = 'xvals' #rename time to xvals for consistent plotting
+        #reformat data to be in the right format for plotting
+        dat = tidyr::gather(as.data.frame(simresult), -xvals, value = "yvals", key = "varnames")
+        dat$IDvar = paste(dat$varnames,nn,sep='') #make a variable for plotting same color lines for each run in ggplot2
+        dat$nreps = nn
+        datall = rbind(datall,dat)
+      }
+      
+    }) #end progress bar wrapper
     
-#data for plots and text
-#each variable listed in the varnames column will be plotted on the y-axis, with its values in yvals
-#each variable listed in varnames will also be processed to produce text
     
-    result[[1]]$dat = dat
+    result[[1]]$dat = datall
     
 #Meta-information for each plot
     
@@ -65,19 +70,13 @@ refresh <- function(input, output){
     result[[1]]$xlab = "Time"
     result[[1]]$ylab = "Numbers"
     result[[1]]$legend = "Compartments"
+    result[[1]]$linesize = 1
     
     result[[1]]$xscale = 'identity'
     result[[1]]$yscale = 'identity'
     if (plotscale == 'x' | plotscale == 'both') { result[[1]]$xscale = 'log10'}
     if (plotscale == 'y' | plotscale == 'both') { result[[1]]$yscale = 'log10'}
     
-    
-#set min and max for scales. If not provided ggplot will auto-set
-    
-    result[[1]]$ymin = 1e-12
-    result[[1]]$ymax = max(simresult$ts)
-    result[[1]]$xmin = 1e-12
-    result[[1]]$xmax = tmax
     
 #the following are for text display for each plot
     
@@ -135,7 +134,7 @@ ui <- fluidPage(
   
   #add header and title
    
-  div( includeHTML("www/header.html"), align = "center"),
+  div( includeHTML("../styles/header.html"), align = "center"),
   h1('Evolutionary Dynamics App', align = "center", style = "background-color:#123c66; color:#fff"),
   
   #start section to add buttons
@@ -218,13 +217,17 @@ ui <- fluidPage(
             ),  #close fluidRow structure for input
            
            fluidRow(
-             column(4,align = "left",
+             column(6,
                     selectInput("plotscale", "Log-scale for plot:",c("none" = "none", 'x-axis' = "x", 'y-axis' = "y", 'both axes' = "both"))
+                    ),
+                    column(6,
+                           numericInput("rngseed", "Random number seed", min = 1, max = 1000, value = 123, step = 1)
+                           
+                    ),
+                    align = "center"
                  )
-             
-             )  
            
-        ),         #end sidebar column for inputs
+      ),         #end sidebar column for inputs
     
      
   #all the outcomes here

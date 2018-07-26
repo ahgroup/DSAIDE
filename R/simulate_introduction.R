@@ -57,10 +57,10 @@ introductionode <- function(t, y, parms)
 #' # the inverse of this is 0.25, which is the rate at which the person leaves
 #' # the infectious stage.
 #' result <- simulate_introduction(S0 = 2000, I0 = 10, tmax = 100, g = 0.25)
-#' plot(result$ts[ , "Time"], result$ts[ , "S"], xlab = "Time", ylab = "Number Susceptible", type = "l")
+#' plot(result$ts[,"Time"],result$ts[,"S"], xlab = "Time", ylab = "Number Susceptible",type="l")
 #' # We could also set the rate of infectiousness very low.
 #' result <- simulate_introduction(S0 = 2000, I0 = 10, tmax = 100, b = 0.0001)
-#' plot(result$ts[ , "Time"], result$ts[ , "S"], xlab = "Time", ylab = "Number Susceptible", type = "l")
+#' plot(result$ts[,"Time"],result$ts[,"S"], xlab = "Time", ylab = "Number Susceptible",type="l")
 #' @seealso See the shiny app documentation corresponding to this simulator
 #' function for more details on this model. See the manual for the deSolve
 #' package for details on the underlying ODE simulator algorithm.

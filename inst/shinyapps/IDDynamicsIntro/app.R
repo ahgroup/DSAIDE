@@ -2,32 +2,29 @@
 #This is the Shiny file for the ID Dynamics Introduction App
 #written by Andreas Handel, with contributions from others 
 #maintained by Andreas Handel (ahandel@uga.edu)
-#last updated 7/13/2017
+#last updated 7/13/2018
 ############################################################
 
 #the server-side function with the main functionality
 #this function is wrapped inside the shiny server function below to allow return to main menu when window is closed
 
- refresh <- function(input, output){
+refresh <- function(input, output){
   
   # This reactive takes the input data and sends it over to the simulator
   # Then it will get the results back and return it as the "res" variable
    
   result <- reactive({
     input$submitBtn
-    
-    
-# Read all the input values from the UI
-    
+
+  # Read all the input values from the UI
     S0 = isolate(input$S0);
     I0 = isolate(input$I0);
     b = isolate(input$b);
     g = isolate(input$g);
     tmax = isolate(input$tmax);
     plotscale = isolate(input$plotscale)     # Change the scale of axis interactively
-    
-#save all results to a list for processing plots and text
-    
+      
+  #save all results to a list for processing plots and text
     listlength = 1;       #here we do all simulations in the same figure
     result = vector("list", listlength) #create empty list of right size for results
     
@@ -38,25 +35,12 @@
                    simresult <- simulate_introduction(S0 = S0, I0 = I0, g = g, b = b, tmax = tmax)
                  })
     
-#reformat data to be in the right format for plotting
-#each plot/text output is a list entry with a data frame in form xvals, yvals, extra variables for stratifications for each plot
-    
-    # dat = tidyr::gather(as.data.frame(simresult), -xvals, value = "yvals", key = "varnames")
-    dat <- simresult$ts
-    
-    #code variable names as factor and level them so they show up right in plot
-    
-    # mylevels = unique(dat$varnames)
-    # dat$varnames = factor(dat$varnames, levels = mylevels)
-    
 #data for plots and text
-#each variable listed in the varnames column will be plotted on the y-axis, with its values in yvals
-#each variable listed in varnames will also be processed to produce text
+#needs to be in the right format to be passed to generate_plots and generate_text
+#see documentation for those functions for details
+    result[[1]]$dat = simresult$ts
     
-    result[[1]]$dat = dat
-    
-#Meta-information for each plot
-    
+    #Meta-information for each plot
     result[[1]]$plottype = "Lineplot"
     result[[1]]$xlab = "Time"
     result[[1]]$ylab = "Numbers"
@@ -67,13 +51,6 @@
     if (plotscale == 'x' | plotscale == 'both') { result[[1]]$xscale = 'log10'}
     if (plotscale == 'y' | plotscale == 'both') { result[[1]]$yscale = 'log10'}
     
-    
-#set min and max for scales. If not provided ggplot will auto-set
-    
-    result[[1]]$ymin = 1e-12
-    result[[1]]$ymax = max(simresult$ts)
-    result[[1]]$xmin = 1e-12
-    result[[1]]$xmax = tmax
     
 #the following are for text display for each plot
     
