@@ -5,6 +5,7 @@ sudo: false
 cache: packages
 warnings_are_errors: true
 update: true
+install: travis_wait mvn install
 
 os:
   - linux
