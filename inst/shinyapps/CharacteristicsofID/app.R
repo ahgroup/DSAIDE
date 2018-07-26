@@ -2,9 +2,8 @@
 #This is the Shiny file for the ID Characteristics App
 #written by Andreas Handel, with contributions from others 
 #maintained by Andreas Handel (ahandel@uga.edu)
-#last updated 7/13/2017
+#last updated 7/13/2018
 ############################################################
-
 
 #the main server-side function 
 #this function is wrapped inside the shiny server function below to allow return to main menu when window is closed
@@ -19,20 +18,15 @@ refresh <- function(input, output){
     S0 = isolate(input$S0);
     P0 = isolate(input$P0);
     tmax = isolate(input$tmax);
-
     bP = isolate(input$bP);
     bA = isolate(input$bA);
     bI = isolate(input$bI);
-
     gP = isolate(input$gP);
     gA = isolate(input$gA);
     gI = isolate(input$gI);
-
     f = isolate(input$f);
     d = isolate(input$d);
-    
-     plotscale = isolate(input$plotscale) #---
-    
+    plotscale = isolate(input$plotscale) 
     
     #save all results to a list for processing plots and text
     listlength = 1; #here we do all simulations in the same figure
@@ -43,20 +37,11 @@ refresh <- function(input, output){
                  {
       simresult <- simulate_idcharacteristics(S0 = S0, P0 = P0, tmax = tmax, bP = bP, bA = bA, bI = bI, gP = gP , gA = gA, gI = gI, f = f, d = d)
                  })
-    colnames(simresult) = c('xvals','S','P','A', 'I', 'R', 'D')
-    
-    #reformat data to be in the right format for plotting
-    #each plot/text output is a list entry with a data frame in form xvals, yvals, extra variables for stratifications for each plot
-    dat = tidyr::gather(as.data.frame(simresult), -xvals, value = "yvals", key = "varnames")
- 
-    #code variable names as factor and level them so they show up right in plot
-    mylevels = unique(dat$varnames)
-    dat$varnames = factor(dat$varnames, levels = mylevels)
     
     #data for plots and text
-    #each variable listed in the varnames column will be plotted on the y-axis, with its values in yvals
-    #each variable listed in varnames will also be processed to produce text
-    result[[1]]$dat = dat
+    #needs to be in the right format to be passed to generate_plots and generate_text
+    #see documentation for those functions for details
+    result[[1]]$dat = simresult$ts
     
     #Meta-information for each plot
     result[[1]]$plottype = "Lineplot"
@@ -69,12 +54,6 @@ refresh <- function(input, output){
     if (plotscale == 'x' | plotscale == 'both') { result[[1]]$xscale = 'log10'}
     if (plotscale == 'y' | plotscale == 'both') { result[[1]]$yscale = 'log10'}
     
-    
-    #set min and max for scales. If not provided ggplot will auto-set
-    result[[1]]$ymin = 1e-12
-    result[[1]]$ymax = max(simresult)
-    result[[1]]$xmin = 1e-12
-    result[[1]]$xmax = tmax
     
     #the following are for text display for each plot
     result[[1]]$maketext = TRUE #if true we want the generate_text function to process data and generate text, if 0 no result processing will occur insinde generate_text
@@ -105,8 +84,6 @@ refresh <- function(input, output){
       res=isolate(result()) #list of all results that are to be turned into plots
       generate_text(res) #create text for display with a non-reactive function
     })
-    
-    
     
 } #ends the 'refresh' shiny server function that runs the simulation and returns output   
     

@@ -6,7 +6,7 @@
 \usage{
 simulate_evolution(S0 = 1000, Iu0 = 1, It0 = 1, Ir0 = 1, tmax = 100,
   bu = 1/1000, bt = 1/1000, br = 1/1000, cu = 1/1000, ct = 1/100,
-  f = 0, gu = 1, gt = 1, gr = 1)
+  f = 0, gu = 1, gt = 1, gr = 1, rngseed = 100)
 }
 \arguments{
 \item{S0}{initial number of susceptible hosts}
@@ -38,6 +38,8 @@ is the inverse of the average time spent in that compartment}
 \item{gt}{rate at which a person leaves the It compartment}
 
 \item{gr}{rate at which a person leaves the Ir compartment}
+
+\item{rngseed}{seed for random number generator to allow reproducibility}
 }
 \value{
 This function returns the simulation result as obtained from a call
@@ -59,8 +61,6 @@ Recovered and Immune (R)
 A compartmental ID model with several states/compartments
 is simulated as a stochastic model using the adaptive tau algorithm as implemented by ssa.adaptivetau
 in the adpativetau package. See the manual of this package for more details.
-The function returns the time series of the simulated disease as output matrix,
-with one column per compartment/variable. The first column is time.
 }
 \section{Warning}{
 
@@ -79,7 +79,7 @@ plot(result$ts[ , "Time"],result$ts[ , "S"],xlab='Time',ylab='Number Susceptible
 # Consider also a case in which the fraction of resistant mutant infections that an
 # untreated host produces is high, at 0.9.
 result <- simulate_evolution(S0 = 2000, tmax = 200, bt = 1/100, cu = 0.9)
-plot(result$ts[ , "Time"], result$ts[ , "S"], xlab = "Time", ylab = "Number Susceptible", type = "l")
+plot(result$ts[,"Time"], result$ts[,"S"], xlab ="Time", ylab = "Number Susceptible",type ="l")
 }
 \references{
 See the manual for the adaptivetau package for details on the algorithm.

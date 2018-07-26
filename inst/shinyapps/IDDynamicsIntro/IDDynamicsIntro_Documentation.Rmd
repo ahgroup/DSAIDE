@@ -5,11 +5,8 @@ output:
     theme: null
     highlight: null
     fig_caption: true
+    mathjax: default 
     keep_md: false
-    includes:
-      #in_header: in_header.txt
-      #before_body: ../styles/dsaide_before_body.txt
-      #after_body: ../styles/dsaide_after_body.txt 
 bibliography: ../media/references.bib
 ---
 
