@@ -49,7 +49,10 @@ introductionode <- function(t, y, parms)
 #'     people who were infected but are now removed from the model (from
 #'     recovery or death), respectively. There are two processes in the model.
 #'     First, a susceptible individual (S) can become infected by an
-#'     infected individual (I), at rate *b*.
+#'     infected individual (I), at rate *b*. This is represented by the
+#'     individual leaving compartment S and moving to compartment I.
+#'     Second, an infected individual dies or recovers and moves to the R
+#'     component, at rate *g*.
 #' @section Warning: This function does not perform any error checking. So if
 #'   you try to do something nonsensical (e.g. specify negative parameter values
 #'   or fractions > 1), the code will likely abort with an error message
