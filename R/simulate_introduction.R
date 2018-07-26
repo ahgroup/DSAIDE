@@ -41,8 +41,15 @@ introductionode <- function(t, y, parms)
 #'   parameters
 #' @return The function returns the output from the odesolver as a matrix,
 #' with one column per compartment/variable. The first column is time.
-#' @details A simple SIR model is simulated as a set of ordinary differential
-#' equations, using an ode solver from the deSolve package.
+#' @details: A simple SIR (Susceptible, Infected, Recovered) model is simulated
+#'     as a set of ordinary differential equations, using an ode solver from
+#'     the deSolve package. The S, I, and R parameters are the compartments of
+#'     the model, representing people who are uninfected but susceptible to
+#'     infection, people who are infected **and** infectious to others, and
+#'     people who were infected but are now removed from the model (from
+#'     recovery or death), respectively. There are two processes in the model.
+#'     First, a susceptible individual (S) can become infected by an
+#'     infected individual (I), at rate *b*.
 #' @section Warning: This function does not perform any error checking. So if
 #'   you try to do something nonsensical (e.g. specify negative parameter values
 #'   or fractions > 1), the code will likely abort with an error message
