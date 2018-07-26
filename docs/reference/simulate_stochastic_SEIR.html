@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Simulation of a compartmental infectious disease transmission model illustrating different types of direct transmission — simulate_directtransmission • DSAIDE</title>
+<title>Stochastic simulation of an SEIR-type model — simulate_stochastic_SEIR • DSAIDE</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,11 @@
 
 
 
-<meta property="og:title" content="Simulation of a compartmental infectious disease transmission model illustrating different types of direct transmission — simulate_directtransmission" />
+<meta property="og:title" content="Stochastic simulation of an SEIR-type model — simulate_stochastic_SEIR" />
 
-<meta property="og:description" content="This model allows for the simulation of different direct transmission modes" />
+<meta property="og:description" content="Simulation of a stochastic SEIR type model with the following
+  compartments: Susceptibles (S), Infected and pre-symptomatic/exposed (E), 
+  Infected and Symptomatic (I), Recovered and Immune (R)" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -116,107 +118,110 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Simulation of a compartmental infectious disease transmission model illustrating different types of direct transmission</h1>
+    <h1>Stochastic simulation of an SEIR-type model</h1>
     
-    <div class="hidden name"><code>simulate_directtransmission.Rd</code></div>
+    <div class="hidden name"><code>simulate_stochastic_SEIR.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>This model allows for the simulation of different direct transmission modes</p>
+    <p>Simulation of a stochastic SEIR type model with the following
+  compartments: Susceptibles (S), Infected and pre-symptomatic/exposed (E), 
+  Infected and Symptomatic (I), Recovered and Immune (R)</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>simulate_directtransmission</span>(<span class='kw'>S0</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>I0</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>tmax</span> <span class='kw'>=</span> <span class='fl'>120</span>, <span class='kw'>scenario</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>bd</span> <span class='kw'>=</span> <span class='fl'>0.01</span>, <span class='kw'>bf</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>A</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>m</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>g</span> <span class='kw'>=</span> <span class='fl'>0.1</span>, <span class='kw'>w</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
+    <pre class="usage"><span class='fu'>simulate_stochastic_SEIR</span>(<span class='kw'>S0</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>I0</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>tmax</span> <span class='kw'>=</span> <span class='fl'>100</span>, <span class='kw'>bE</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>bI</span> <span class='kw'>=</span> <span class='fl'>1</span>/<span class='fl'>1000</span>, <span class='kw'>gE</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>gI</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>w</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>m</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>rngseed</span> <span class='kw'>=</span> <span class='fl'>100</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>S0</th>
-      <td><p>initial number of susceptibles</p></td>
+      <td><p>initial number of susceptible hosts</p></td>
     </tr>
     <tr>
       <th>I0</th>
-      <td><p>initial number of infected hosts</p></td>
+      <td><p>initial number of infected, symptomatic hosts</p></td>
     </tr>
     <tr>
       <th>tmax</th>
-      <td><p>maximum simulation time, units of months</p></td>
+      <td><p>maximum simulation time, units depend on choice of units for 
+your parameters</p></td>
     </tr>
     <tr>
-      <th>scenario</th>
-      <td><p>choice between density dependent (=1) and frequency dependent (=2) transmission scenarios</p></td>
+      <th>bE</th>
+      <td><p>level/rate of infectiousness for hosts in the E compartment</p></td>
     </tr>
     <tr>
-      <th>bd</th>
-      <td><p>rate of transmission for density-dependent transmission</p></td>
+      <th>bI</th>
+      <td><p>level/rate of infectiousness for hosts in the I compartment</p></td>
     </tr>
     <tr>
-      <th>bf</th>
-      <td><p>rate of transmission for frequency-dependent transmission</p></td>
+      <th>gE</th>
+      <td><p>rate at which a person leaves the E compartment, which is the
+inverse of the average time spent in that compartment</p></td>
     </tr>
     <tr>
-      <th>A</th>
-      <td><p>the size of the area in which the hosts are assumed to reside/interact</p></td>
-    </tr>
-    <tr>
-      <th>m</th>
-      <td><p>the rate of births</p></td>
-    </tr>
-    <tr>
-      <th>n</th>
-      <td><p>the rate of natural deaths</p></td>
-    </tr>
-    <tr>
-      <th>g</th>
-      <td><p>the rate at which infected hosts recover</p></td>
+      <th>gI</th>
+      <td><p>rate at which a person leaves the I compartment</p></td>
     </tr>
     <tr>
       <th>w</th>
-      <td><p>the rate of waning immunity</p></td>
+      <td><p>rate at which recovered persons loose immunity and return to
+susceptible state</p></td>
+    </tr>
+    <tr>
+      <th>m</th>
+      <td><p>the rate at which new individuals enter the model (are born)</p></td>
+    </tr>
+    <tr>
+      <th>n</th>
+      <td><p>the rate of natural death (the inverse is the average lifespan)</p></td>
+    </tr>
+    <tr>
+      <th>rngseed</th>
+      <td><p>seed for random number generator to allow reproducibility</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>This function returns the simulation result as obtained from a call
-  to the deSolve ode solver</p>
+    <p>The function returns a list. The list has one element, a data frame ts
+which cotains the time series of the simulated model, 
+with one column per compartment/variable. The first column is time.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>A compartmental ID model with several states/compartments
-  is simulated as a set of ordinary differential
-  equations. The function returns the output from the odesolver as a list,
-  with the element ts, which is a dataframe whose columns represent time,
-  the number of susceptibles, the number of infected, and the number of
-  recovered.</p>
+    <p>A compartmental ID model with several states/compartments is
+  simulated. Initial conditions for the E and R variables are 0. Units of
+  time depend on the time units chosen for model parameters. The simulation
+  runs as a stochastic model using the adaptive-tau algorithm as implemented
+  by ssa.adaptivetau in the adpativetau package. See the manual of this
+  package for more details.</p>
     
     <h2 class="hasAnchor" id="warning"><a class="anchor" href="#warning"></a>Warning</h2>
 
-    
-    <p>This function does not perform any error checking. So if you try to do
-  something nonsensical (e.g. any negative values or fractions &gt; 1),
-  the code will likely abort with an error message</p>
-    
-    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
-
-    <p>See e.g. Keeling and Rohani 2008 for SIR models and the
-  documentation for the deSolve package for details on ODE solvers</p>
+    <p>This function does not perform any error checking. So if
+  you try to do something nonsensical (e.g. specify negative parameter values
+  or fractions &gt; 1), the code will likely abort with an error message</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>The UI of the shiny app 'DirectTransmission', which is part of this package, contains more details on the model</p></div>
+    <div class='dont-index'><p>See the shiny app documentation corresponding to this simulator
+function for more details on this model. See the manual for the adaptivetau
+package for details on the stochastic algorithm.</p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>  <span class='co'># To run the simulation with default parameters just call this function</span>
-  <span class='no'>result</span> <span class='kw'>&lt;-</span> <span class='fu'>simulate_directtransmission</span>()
-  <span class='co'># To choose parameter values other than the standard one, specify them e.g. like such</span>
-  <span class='no'>result</span> <span class='kw'>&lt;-</span> <span class='fu'>simulate_directtransmission</span>(<span class='kw'>S0</span> <span class='kw'>=</span> <span class='fl'>100</span>, <span class='kw'>tmax</span> <span class='kw'>=</span> <span class='fl'>100</span>, <span class='kw'>A</span><span class='kw'>=</span><span class='fl'>10</span>)
-  <span class='co'># You should then use the simulation result returned from the function, e.g. like this:</span>
-  <span class='fu'>plot</span>(<span class='no'>result</span>$<span class='no'>ts</span>[,<span class='st'>"Time"</span>],<span class='no'>result</span>$<span class='no'>ts</span>[,<span class='st'>"S"</span>],<span class='kw'>xlab</span><span class='kw'>=</span><span class='st'>'Time'</span>,<span class='kw'>ylab</span><span class='kw'>=</span><span class='st'>'Number Susceptible'</span>,<span class='kw'>type</span><span class='kw'>=</span><span class='st'>'l'</span>)</div><div class='img'><img src='simulate_directtransmission-1.png' alt='' width='700' height='433' /></div></pre>
+    <pre class="examples"><div class='input'><span class='co'># To run the simulation with default parameters </span>
+<span class='no'>result</span> <span class='kw'>&lt;-</span> <span class='fu'>simulate_stochastic_SEIR</span>()
+<span class='co'># To choose parameter values other than the standard one, specify them e.g. like this</span>
+<span class='no'>result</span> <span class='kw'>&lt;-</span> <span class='fu'>simulate_stochastic_SEIR</span>(<span class='kw'>S0</span> <span class='kw'>=</span> <span class='fl'>2000</span>,  <span class='kw'>tmax</span> <span class='kw'>=</span> <span class='fl'>200</span>, <span class='kw'>bE</span> <span class='kw'>=</span> <span class='fl'>1</span>/<span class='fl'>100</span>)
+<span class='co'># You can display or further process the result, e.g. like this</span>
+<span class='fu'>plot</span>(<span class='no'>result</span>$<span class='no'>ts</span>[,<span class='st'>'Time'</span>],<span class='no'>result</span>$<span class='no'>ts</span>[,<span class='st'>'S'</span>],<span class='kw'>xlab</span><span class='kw'>=</span><span class='st'>'Time'</span>,<span class='kw'>ylab</span><span class='kw'>=</span><span class='st'>'Number Susceptible'</span>,<span class='kw'>type</span><span class='kw'>=</span><span class='st'>'l'</span>)</div><div class='img'><img src='simulate_stochastic_SEIR-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>print</span>(<span class='fu'>paste</span>(<span class='st'>'Max number of infected: '</span>,<span class='fu'>max</span>(<span class='no'>result</span>$<span class='no'>ts</span>[,<span class='st'>'I'</span>])))</div><div class='output co'>#&gt; [1] "Max number of infected:  739"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -228,8 +233,6 @@
       <li><a href="#details">Details</a></li>
 
       <li><a href="#warning">Warning</a></li>
-
-      <li><a href="#references">References</a></li>
 
       <li><a href="#see-also">See also</a></li>
       
