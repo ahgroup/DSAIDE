@@ -59,7 +59,14 @@ A compartmental ID model with several states/compartments
   # To choose parameter values other than the standard one, specify them e.g. like such
   result <- simulate_multipathogen(S0 = 100, I20 = 10,  tmax = 100, a = 0.5)
   # You should then use the simulation result returned from the function, e.g. like this:
-  plot(result[,1],result[,2],xlab='Time',ylab='Number Susceptible',type='l')
+  plot(result$ts[ , "Time"], result$ts[ , "S"], xlab='Time', ylab='Number Susceptible', type='l')
+  # We could set the infected type 1 host recovery rate at a high level, e.g., 1.2, and
+  # examine the infected 1 curve.
+  result <- simulate_multipathogen(S0 = 100, I20 = 10, tmax = 100, g1 = 1.2)
+  plot(result$ts[ , "Time"], result$ts[ , "I1"], xlab = "Time", ylab = "Number Infected Type 1", type = "l")
+  # Additionally, consider making type 1 hosts transmit at a high rate.
+  result <- simulate_multipathogen(S0 = 100, I20 = 10, tmax = 100, b1 = 2.5)
+  plot(result$ts[ , "Time"], result$ts[ , "I1"], xlab = "Time", ylab = "Number Infected Type 1", type = "l")
 }
 \references{
 See e.g. Keeling and Rohani 2008 for SIR models and the

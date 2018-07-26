@@ -51,19 +51,20 @@ refresh <- function(input, output){
                                                        bI = bI, gP = gP, gI = gI, w = w, m = m, n = n)
            }) # progress message ends here
     
-    colnames(simresult)[1] = 'xvals' #rename time to xvals for consistent plotting
+    # colnames(simresult)[1] = 'xvals' #rename time to xvals for consistent plotting
                                        #reformat data to be in the right format for plotting
-    datnew = tidyr::gather(as.data.frame(simresult), -xvals, value = "yvals", key = "varnames")
-    datnew$IDvar = paste(datnew$varnames,nn,sep='')    #trying to make a variable for plotting same color 
+    # datnew = tidyr::gather(as.data.frame(simresult), -xvals, value = "yvals", key = "varnames")
+    # datnew$IDvar = paste(datnew$varnames,nn,sep='')    #trying to make a variable for plotting same color 
                                                         #lines for each run in ggplot2. doesn't work yet.
-    dat = rbind(dat, datnew)
+    # dat = rbind(dat, datnew)
+    dat <- simresult$ts
     
     
     }
     
 #code variable names as factor and level them so they show up right in plot
-    mylevels = unique(dat$varnames)
-    dat$varnames = factor(dat$varnames, levels = mylevels)
+    # mylevels = unique(dat$varnames)
+    # dat$varnames = factor(dat$varnames, levels = mylevels)
     
     
 #data for plots and text
@@ -80,7 +81,7 @@ refresh <- function(input, output){
     
 #set min and max for scales. If not provided ggplot will auto-set
     result[[1]]$ymin = 1e-12
-    result[[1]]$ymax = max(result[[1]]$dat$yvals)
+    result[[1]]$ymax = max(simresult$ts)
     result[[1]]$xmin = 1e-12
     result[[1]]$xmax = tmax
     
@@ -149,7 +150,7 @@ ui <- fluidPage(
   
   #add header and title
    
-  div( includeHTML("www/header.html"), align = "center"),
+  div( includeHTML("../styles/header.html"), align = "center"),
   h1('Stochastic Dynamics App', align = "center", style = "background-color:#123c66; color:#fff"),
   
   #start section to add buttons
@@ -247,8 +248,9 @@ ui <- fluidPage(
   #Instructions section at bottom as tabs
   h2('Instructions'),
   #use external function to generate all tabs with instruction content
-  do.call(tabsetPanel,generate_instruction_tabs()),
-  div(includeHTML("www/footer.html"), align="center", style="font-size:small") #footer
+  # do.call(tabsetPanel,generate_instruction_tabs()),
+  do.call(tabsetPanel, generate_documentation()),
+  div(includeHTML("../styles/footer.html"), align="center", style="font-size:small") #footer
 ) #end fluidpage
 
 shinyApp(ui = ui, server = server)

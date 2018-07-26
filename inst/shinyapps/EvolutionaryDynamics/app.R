@@ -258,8 +258,9 @@ ui <- fluidPage(
   #Instructions section at bottom as tabs
 
      h2('Instructions'),
-     do.call(tabsetPanel,generate_instruction_tabs()),  #use external function to generate all tabs with instruction content
-    div(includeHTML("www/footer.html"), align="center", style="font-size:small") #footer
+     # do.call(tabsetPanel,generate_instruction_tabs()),  #use external function to generate all tabs with instruction content
+    do.call(tabsetPanel, generate_documentation()),
+    div(includeHTML("../styles/footer.html"), align="center", style="font-size:small") #footer
     )    #end fluidpage
 
 shinyApp(ui = ui, server = server)

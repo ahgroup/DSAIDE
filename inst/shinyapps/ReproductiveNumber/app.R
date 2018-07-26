@@ -43,17 +43,17 @@ refresh <- function(input, output){
                                                             b = b, m = m, n = n, w = w)
                    
                  })
-    colnames(simresult) = c('xvals','S','I','R') 
     
     #reformat data to be in the right format for plotting
     #each plot/text output is a list entry with a data frame in form xvals, yvals, extra variables for stratifications for each plot
     
-    dat = tidyr::gather(as.data.frame(simresult), -xvals, value = "yvals", key = "varnames")
+    # dat = tidyr::gather(as.data.frame(simresult), -xvals, value = "yvals", key = "varnames")
+    dat <- simresult$ts
     
     #code variable names as factor and level them so they show up right in plot
     
-    mylevels = unique(dat$varnames)
-    dat$varnames = factor(dat$varnames, levels = mylevels)
+    # mylevels = unique(dat$varnames)
+    # dat$varnames = factor(dat$varnames, levels = mylevels)
     
     #data for plots and text
     #each variable listed in the varnames column will be plotted on the y-axis, with its values in yvals
@@ -77,7 +77,7 @@ refresh <- function(input, output){
     #set min and max for scales. If not provided ggplot will auto-set
     
     result[[1]]$ymin = 1e-12
-    result[[1]]$ymax = max(simresult)
+    result[[1]]$ymax = max(simresult$ts)
     result[[1]]$xmin = 1e-12
     result[[1]]$xmax = tmax
     
@@ -137,7 +137,7 @@ ui <- fluidPage(
   
   #add header and title
   
-  div( includeHTML("www/header.html"), align = "center"),
+  div( includeHTML("../styles/header.html"), align = "center"),
   
   #specify name of App below, will show up in title
   
@@ -235,8 +235,9 @@ ui <- fluidPage(
   #Instructions section at bottom as tabs
   h2('Instructions'),
   #use external function to generate all tabs with instruction content
-  do.call(tabsetPanel,generate_instruction_tabs()),
-  div(includeHTML("www/footer.html"), align="center", style="font-size:small") #footer
+  # do.call(tabsetPanel,generate_instruction_tabs()),
+  do.call(tabsetPanel, generate_documentation()),
+  div(includeHTML("../styles/footer.html"), align="center", style="font-size:small") #footer
   
 ) #end fluidpage function, i.e. the UI part of the app
 

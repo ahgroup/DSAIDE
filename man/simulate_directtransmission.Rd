@@ -40,8 +40,10 @@ This model allows for the simulation of different direct transmission modes
 \details{
 A compartmental ID model with several states/compartments
   is simulated as a set of ordinary differential
-  equations. The function returns the output from the odesolver as a matrix,
-  with one column per compartment/variable. The first column is time.
+  equations. The function returns the output from the odesolver as a list,
+  with the element ts, which is a dataframe whose columns represent time,
+  the number of susceptibles, the number of infected, and the number of
+  recovered.
 }
 \section{Warning}{
 

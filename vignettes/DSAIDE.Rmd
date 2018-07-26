@@ -98,12 +98,14 @@ The exploration of the models through the graphical interface is the first and m
 
 To facilitate direct interaction and modification of the underlying simulations, each app is structured in such a way that the underlying model/simulation is a stand-alone function. For some apps, there are multiple underlying functions involved. You can call/use any of these functions directly, without going through the graphical interface. The 'Further Information' tab inside each app provides the name of the corresponding underlying function(s).
 
-Consider as example the first app, called "ID Dynamics Intro". The simulator function for this model is called `simulate_introduction.R`.
-After loading the package (if not already loaded) with 
+Consider as example the first app, called "ID Dynamics Intro". The simulator function for this model is called `simulate_introduction.R`. After loading the package (if not already loaded) with 
+
 ```{r eval=TRUE, echo=TRUE}
 library('DSAIDE') 
 ```
+
 the user can learn about the inputs and outputs of the function by looking at its documentation 
+
 ```{r eval=FALSE, echo=TRUE}
 help('simulate_introduction')
 ```
@@ -112,12 +114,13 @@ The help file explains that one can run the simulation by specifying initial num
 
 ```{r, eval=TRUE, echo=TRUE}
 result <- simulate_introduction(S0 = 500, I0 = 5, tmax = 100, g = 0.1,  b = 1/2500)
+
 ```
 
 Calling the simulation function execuctes the underlying dynamical model (here a simple 3 compartment ODE model, as described in the "Model" section of the app). The simulation function produces and returns time-series for the dynamics of each of the variables that are tracked. Users can produce their own plots, e.g. plotting susceptible as function of time:
 
 ```{r, eval=TRUE, echo=TRUE}
-plot(result[,"time"],result[,"S"],xlab='Time',ylab='Number Susceptible',type='l')
+plot(result$ts[ , "Time"],result$ts[ , "S"],xlab='Time',ylab='Number Susceptible',type='l')
 ```
 
 The ability to call the simulation functions directly instead of going through the graphical interface allows additional exploration of the models. For instance if one wanted to explore the behavior of a model systematically for different values of a given parameter, this would need to be done manually if run through the graphical interface. Calling the function directly allows one to automate this by wrapping the function inside a loop over the parameter of interest, recording some quantity of interest for each run, and report the result at the end. The following is a simple example, showing a loop over different values of the recovery rate and recording the peak of the outbreak each time, with the final result _peak of outbreak as function of recovery time_ shown in a plot:
@@ -129,7 +132,7 @@ for (n in 1:length(gvec))
 {
   #call the simulator function with different values of g each time
   result <- simulate_introduction(S0 = 500, I0 = 5, tmax = 200, g = gvec[n],  b = 1/2500)
-  peak[n] <- max(result[,"I"]) #record max number of infected for each value of g
+  peak[n] <- max(result$ts[,"I"]) #record max number of infected for each value of g
 }
 #plot final result
 plot(gvec,peak,type='p',xlab='Rate of recovery',ylab='Max number of infected')

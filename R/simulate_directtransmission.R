@@ -44,8 +44,10 @@ directtransmissioneq <- function(t, y, parms)
 #'   to the deSolve ode solver
 #' @details A compartmental ID model with several states/compartments
 #'   is simulated as a set of ordinary differential
-#'   equations. The function returns the output from the odesolver as a matrix,
-#'   with one column per compartment/variable. The first column is time.
+#'   equations. The function returns the output from the odesolver as a list,
+#'   with the element ts, which is a dataframe whose columns represent time,
+#'   the number of susceptibles, the number of infected, and the number of
+#'   recovered.
 #' @section Warning:
 #'   This function does not perform any error checking. So if you try to do
 #'   something nonsensical (e.g. any negative values or fractions > 1),

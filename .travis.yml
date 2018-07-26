@@ -5,6 +5,7 @@ sudo: false
 cache: packages
 warnings_are_errors: true
 update: true
+install: travis_wait mvn install
 
 os:
   - linux
@@ -13,7 +14,7 @@ os:
 r:
   - 3.5
   - release
-
+  
 after_success:
     - Rscript -e 'covr::codecov( type = "all")'
 

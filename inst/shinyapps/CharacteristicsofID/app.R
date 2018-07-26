@@ -135,7 +135,7 @@ ui <- fluidPage(
   
   #add header and title
    
-  div( includeHTML("www/header.html"), align = "center"),
+  div( includeHTML("../styles/header.html"), align = "center"),
   h1('ID Characteristics App', align = "center", style = "background-color:#123c66; color:#fff"),
   
   #start section to add buttons
@@ -235,8 +235,9 @@ ui <- fluidPage(
   #Instructions section at bottom as tabs
   h2('Instructions'),
   #use external function to generate all tabs with instruction content
-  do.call(tabsetPanel,generate_instruction_tabs()),
-  div(includeHTML("www/footer.html"), align="center", style="font-size:small") #footer
+  # do.call(tabsetPanel,generate_instruction_tabs()),
+  do.call(tabsetPanel, generate_documentation()),
+  div(includeHTML("../styles/footer.html"), align="center", style="font-size:small") #footer
 
 ) #end fluidpage, i.e. the UI part of the app
 
