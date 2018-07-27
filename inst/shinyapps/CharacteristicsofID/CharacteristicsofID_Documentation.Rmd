@@ -68,9 +68,8 @@ $$\dot D = d g_I I$$
     * Assume that the duration of the presymptomatic, asymptomatic and symptomatic periods are all 5 days long. (Hint: The parameters _g~P~_, _g~A~_, and _g~I~_ are the inverses of these periods.)
     * Assume that there are no asymptomatic infections, _f_=0, and nobody dies due to disease _d_=0.
 
-* With parameters set to correspond to the scenario just described, run the simulation.
-* Record the number and fraction of susceptible/infected/recovered remaining at the end of the outbreak.    
-* Check the results with the assumptions for the model and make sure they agree (you shouldn't get any deaths, no asymptomatics, etc.)
+* With parameters set to correspond to the scenario just described, run the simulation. You should end up with around 7 susceptibles left at the end of the simulation.
+* Check the results with the assumptions for the model and make sure they agree. For instance you shouldn't get any deaths, and no asymptomatic infected.
 * From the graph, contemplate how you would estimate the day at which the outbreak peaks. What's the problem? How would you solve it?
 * Rerun the simulation, with the same values you just had. Does anything change? Why (not)?
 
@@ -81,43 +80,31 @@ $$\dot D = d g_I I$$
 * Compare your expectations with the results. How do they agree/disagree? Does it make sense? Anything surprising happening?
 
 ###Task 3: 
-* Now assume that the asymptomatics transmit at the same rate as the symptomatic (_b~A~_= 0.001). Leave everything as in #2.
-* How do you expect the results to change? (Try to make as precise/quantitative a prediction as you can)
-* Run another simulation, record the same values as above.
-* Compare your expectations with the results. How do they agree/disagree? Does it make sense? Anything surprising happening?
+* Now assume that the asymptomatics transmit at the same rate as the symptomatic. Change _b~A~_ accordingly. Leave everything else as before. How do you expect the results to change? (Try to make as precise/quantitative a prediction as you can).
+* Run another simulation, compare your expectations with the results. How do they agree/disagree? Does it make sense? Anything surprising happening?
 
 ###Task 4: 
-* Next, let's assume that half the symptomatic infected die. Leave everything as in #3.
+* Next, let's assume that half the symptomatic infected die. Change the corresponding parameter in the model to reflect this new assumption. Leave everything as in #3.
 * How do you expect the results to change?
 * Run another simulation, record the same values as above.
 * Compare your expectations with the results. How do they agree/disagree? Does it make sense? Anything surprising happening?
 
 ###Task 5: 
+* Set all transmission parameters to 0.0005, leave everything else as before. What do you expect will happen to the peak of _P_ and _I_ as well as the total fraction of population ever infected (i.e., _R_ + _D_ at the end of simulation), compared to the previous task?_
 * Further explore how changes in the infectiousness of the different groups (_b~P~_, _b~A~_, _b~I~_) and the average time a person spends in each of those states (_g~P~_, _g~A~_, _g~I~_) affects the infection dynamics.
 * Every time, think about what you expect to get, then run the simulation, compare your expectations with the results. Then make sense of it.
 
 ###Task 6: 
+* Now assume that 90% of infections are asymptomatic. How do things change?  
 * Further explore how changes in the fraction becoming asymptomatic and fraction dying does (or does not) affect the infection dynamics.
 * Every time, think about what you expect to get, then run the simulation, compare your expectations with the results. Then make sense of it.
 
-###Task 7:
-* Keep exploring.
-* Think about real-world IDs and interventions. What groups would those interventions target, how would that affect the outcome?
-
-
-##Answers 
-##Answer 1: 
-
-###Answer 2: 
-
-###Answer 3: 
 
 
 ##Further Information {#shinytab4}
 
-* For this app, the underlying function running the simulation is called `simulate_idcharacteristics.R`. You can call this function directly, without going through the shiny app. Check the help file for the function for more information. If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself. 
-* You could also modify this R function for your own purposes - though that requires R coding knowledge.
-* Some further information covering the concepts this app addresses can be found in [@kajita07, @milwid16].
+* For this app, the underlying function running the simulation is called `simulate_idcharacteristics.R`. You can call this function directly, without going through the shiny app. Check the help file for the function for more information. 
+* Some further information covering the concepts this app addresses can be found in [@keeling08, @vynnycky10, @kajita07, @milwid16].
 
 ###References
 

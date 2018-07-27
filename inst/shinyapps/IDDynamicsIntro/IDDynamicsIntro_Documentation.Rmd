@@ -74,8 +74,7 @@ R:$$\dot R = gI$$
 
 
 ###Task 1: 
-* Run the simulation with a population size, _S~0~_, of 1000, 1 initially infected host, _I~0~_, simulation duration 100 days, recovery rate _g_=0.5 per day, and infectiousness _b_=0.001. You will get an outbreak of some - currently unspecified - infectious disease. 
-* Record the min/max and the number and fraction of susceptible/infected/recovered remaining at the end of the outbreak.    
+* Run the simulation with a population size, _S~0~_, of 1000, 1 initially infected host, _I~0~_, simulation duration 100 days, recovery rate _g_=0.5 per day, and infectiousness _b_=0.001. You will get an outbreak of some - currently unspecified - infectious disease. If you did it correctly, your outbreak should end with around 203 uninfected individuals still remaining.
 * From the graph, get a (rough) estimate of the day at which the outbreak peaks. You can adjust the simulation duration to "zoom in" and get a better estimate.
 * Contemplate the fact that the outbreak ends even though there are still susceptible remaining, i.e. not everyone got infected. Do you find that surprising? How could you maybe explain that? This topic is discussed in more detail in the reproductive number app. 
 * You have no infected left at the end of the outbreak. Figure out how you can use the information from either the susceptibles or recovered left at the end of the outbreak to figure out how many people in total got infected during the outbreak.
