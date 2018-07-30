@@ -1,7 +1,9 @@
 ############################################################
-##code to simulate a basic SIR model as set of ODEs
-##written by Andreas Handel (ahandel@uga.edu)
-##last modified: 10/13/16
+##a template for a new model
+## currently contains the basic SIR implemented as ODE as example
+## replace with your own code, or use another one of the simulate_ functions
+## as starting point for yours
+
 ############################################################
 
 # reproductive_number_ode_eq function
@@ -67,7 +69,7 @@ introductionode <- function(t, y, parms)
 #' @author Andreas Handel
 #' @export
 
-simulate_introduction <- function(S0 = 1000, I0 = 1, tmax = 300, g = 0.5, b = 1/1000)
+simulate_newmodel <- function(S0 = 1000, I0 = 1, tmax = 300, g = 0.5, b = 1/1000)
 {
   Y0 = c(S = S0, I = I0, R = 0);  #combine initial conditions into a vector
   dt = min(0.1, tmax / 1000); #time step for which to get results back
@@ -81,6 +83,11 @@ simulate_introduction <- function(S0 = 1000, I0 = 1, tmax = 300, g = 0.5, b = 1/
   odeoutput = deSolve::ode(y = Y0, times = timevec, func = introductionode, parms=pars, atol=1e-12, rtol=1e-12);
   
   colnames(odeoutput) <- c('Time','S','I','R')
+  
+  #return result as list, with element ts containing the time-series
+  #your function needs to return a list with either ts as time series or $dat as general data
+  #depending on what you return, it might need to be processed a bit in the app.R file
+  
   result <- list()
   result$ts <- as.data.frame(odeoutput)
 

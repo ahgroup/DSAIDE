@@ -44,8 +44,10 @@ directtransmissioneq <- function(t, y, parms)
 #'   to the deSolve ode solver
 #' @details A compartmental ID model with several states/compartments
 #'   is simulated as a set of ordinary differential
-#'   equations. The function returns the output from the odesolver as a matrix,
-#'   with one column per compartment/variable. The first column is time.
+#'   equations. The function returns the output from the odesolver as a list,
+#'   with the element ts, which is a dataframe whose columns represent time,
+#'   the number of susceptibles, the number of infected, and the number of
+#'   recovered.
 #' @section Warning:
 #'   This function does not perform any error checking. So if you try to do
 #'   something nonsensical (e.g. any negative values or fractions > 1),
@@ -56,7 +58,7 @@ directtransmissioneq <- function(t, y, parms)
 #'   # To choose parameter values other than the standard one, specify them e.g. like such
 #'   result <- simulate_directtransmission(S0 = 100, tmax = 100, A=10)
 #'   # You should then use the simulation result returned from the function, e.g. like this:
-#'   plot(result[,1],result[,2],xlab='Time',ylab='Number Susceptible',type='l')
+#'   plot(result$ts[,"Time"],result$ts[,"S"],xlab='Time',ylab='Number Susceptible',type='l')
 #' @seealso The UI of the shiny app 'DirectTransmission', which is part of this package, contains more details on the model
 #' @author Andreas Handel
 #' @references See e.g. Keeling and Rohani 2008 for SIR models and the
@@ -81,6 +83,12 @@ simulate_directtransmission <- function(S0 = 1e3, I0 = 1, tmax = 120, scenario =
   #the result is saved in the odeoutput matrix, with the 1st column the time, the 2nd, 3rd, 4th column the variables S, I, R
   #This odeoutput matrix will be re-created every time you run the code, so any previous results will be overwritten
   odeoutput = deSolve::lsoda(Y0, timevec, func = directtransmissioneq, parms=pars, atol=1e-12, rtol=1e-12);
-
-  return(odeoutput)
+  
+  colnames(odeoutput) = c('Time','S','I','R')
+  
+  result = list()
+  result$ts <- as.data.frame(odeoutput)
+  
+  return(result)
+  # return(odeoutput)
 }

@@ -53,7 +53,7 @@ vectortransmissioneq <- function(t, y, parms)
 #'   # To choose parameter values other than the standard one, specify them e.g. like such
 #'   result <- simulate_vectortransmission(Sh0 = 100, Sv0 = 1e5,  tmax = 100)
 #'   # You should then use the simulation result returned from the function, e.g. like this:
-#'   plot(result[,1],result[,2],xlab='Time',ylab='Number Susceptible',type='l')
+#'   plot(result$ts[ , "Time"],result$ts[ , "Sh"],xlab='Time',ylab='Number Susceptible',type='l')
 #' @seealso The UI of the shiny app 'VectorTransmission', which is part of this package, contains more details on the model
 #' @author Andreas Handel
 #' @references See the information in the corresponding shiny app for model details
@@ -78,5 +78,8 @@ simulate_vectortransmission <- function(Sh0 = 1e3, Ih0 = 1, Sv0 = 0, Iv0 = 0, tm
   #This odeoutput matrix will be re-created every time you run the code, so any previous results will be overwritten
   odeoutput = deSolve::lsoda(Y0, timevec, func = vectortransmissioneq, parms=pars, atol=1e-12, rtol=1e-12);
 
-  return (odeoutput)
+  colnames(odeoutput) <- c('Time',"Sh","Ih","Rh","Sv","Iv")
+  result <- list()
+  result$ts <- as.data.frame(odeoutput)
+  return(result)
 }

@@ -8,7 +8,7 @@ Description: A collection of Shiny apps that allow for the simulation and
     All apps include explanations of the underlying models and instructions on
     what to do with the models. 
 Version: 0.7.0
-Date: 2018-7-12
+Date: 2018-8-1
 Authors@R: c(
     person("Andreas", "Handel", email = "ahandel@uga.edu", role = c("aut", "cre")),
 	person("Isaac", "Fung",  role = "ctb"), 
@@ -41,5 +41,5 @@ Suggests:
     testthat
 RoxygenNote: 6.0.1
 VignetteBuilder: knitr
-URL: https://ahgroup.github.io/DSAIDE
+URL: https://ahgroup.github.io/DSAIDE, https://github.com/ahgroup/DSAIDE/
 BugReports: https://github.com/ahgroup/DSAIDE/issues
