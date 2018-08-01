@@ -125,29 +125,29 @@
 <a href="#advanced-use" class="anchor"></a>Advanced Use</h2>
 <p>You can call the underlying simulation functions directly from the <code>R</code> console. You can also access all functions and modify them to your own needs. To find the folder on your computer where the simulator functions are stored, use the following command:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.file</span>(<span class="st">"simulatorfunctions"</span>, <span class="dt">package =</span> <span class="st">"DSAIDE"</span>)</code></pre></div>
-<p>See <a href="https://rawgit.com/ahgroup/DSAIDE/master/inst/doc/DSAIDE.html">the package vignette</a> for more details on the different ways to use the package. You can get to the vignette by typing <code><a href="articles/DSAIDE.html">vignette('DSAIDE')</a></code> at the <code>R</code> console. Also see <a href="https://doi.org/10.1371/journal.pcbi.1005642">the DSAIDE publication in PLoS Comp Bio</a>.</p>
+<p>See <a href="https://ahgroup.github.io/DSAIDE/articles/DSAIDE.html">the package vignette</a> for more details on the different ways to use the package. You can get to the vignette by typing <code><a href="articles/DSAIDE.html">vignette('DSAIDE')</a></code> at the <code>R</code> console. Also see <a href="https://doi.org/10.1371/journal.pcbi.1005642">the DSAIDE publication in PLoS Comp Bio</a>.</p>
 </div>
 <div id="contributing-to-the-package" class="section level2">
 <h2 class="hasAnchor">
 <a href="#contributing-to-the-package" class="anchor"></a>Contributing to the package</h2>
-<p>DSAIDE is built in a way that makes it (hopefully) easy for others to contribute new simulations/apps. The package contains a sub-folder called <em>/docsfordevelopers</em> (in the locally installed version of the package, this folder is in the main package folder, on Github it is inside the <em>/inst</em> folder). The documentation.md file in this folder explains the overall structure of the package and gives detailed instructions on how to create new apps. The information provided is meant to be detailed and complete enough to allow fairly easy development and contribution of new apps (or other enhancements) to the package. For any further questions, feel free to contact me via email or github.</p>
+<p>The package is built in a way that makes it (hopefully) easy for others to contribute new simulations/apps. To that end, the package contains a subfolder called <em>docsfordevelopers</em>, which provides information on how the apps are structured and how to add new ones. <a href="https://github.com/ahgroup/DSAIDE/blob/master/inst/docsfordevelopers/documentation.html">This Markdown file, documentation.md,</a> provides further information. The information provided is meant to be detailed and complete enough to allow fairly easy development and contribution of new apps (or other enhancements) to the package. If you plan to develop new apps, or for any further questions, feel free to get in touch via email or github.</p>
 </div>
 <div id="further-information" class="section level2">
 <h2 class="hasAnchor">
 <a href="#further-information" class="anchor"></a>Further information</h2>
 <ul>
 <li>I published a paper describing the package and how to use it which you can find and read <a href="https://doi.org/10.1371/journal.pcbi.1005642">here</a>. Also use this paper if you want to cite the package.</li>
-<li>The vignette provides details about the different ways the package can be used. Currently the paper is probably better than the vignette, but in the future the vignette will be more up-to-date.</li>
+<li>The vignette provides details about the different ways the package can be used. The paper provides some more background and general information, while the vignette is more up-to-date.</li>
 <li>The `documentation.md’ file described above contains more information about the package structure.</li>
 <li>For feedback, bug reports etc., file a github issue.</li>
-<li>A ‘companion’ package to this one, called Dynamical Systems Approaches for Immune Respone Modeling (DSAIRM), focuses on models for analyzing with-host models. It has the same structure as DSAIDE. <a href="https://github.com/ahgroup/DSAIRM">See the DSAIRM Github site for more information.</a>
+<li>A ‘companion’ package to this one, called Dynamical Systems Approaches for Immune Respone Modeling (DSAIRM), focuses on models for analyzing with-host infection dynamics. It has the same structure as DSAIDE. <a href="https://ahgroup.github.io/DSAIRM">See the DSAIRM site for more information.</a>
 </li>
 </ul>
 </div>
 <div id="contributors" class="section level2">
 <h2 class="hasAnchor">
 <a href="#contributors" class="anchor"></a>Contributors</h2>
-<p>This R package is developed and maintained by <a href="http://handelgroup.publichealth.uga.edu/">Andreas Handel</a>. The following individuals have made contributions to this package: Isaac Fung, Spencer Hall, Ben Listyg, Brian McKay, John Rossow, Sina Solaimanpour, Henok Woldu.</p>
+<p>This R package is developed and maintained by <a href="http://handelgroup.uga.edu/">Andreas Handel</a>. The following individuals have made contributions to this package: Isaac Fung, Spencer Hall, Ben Listyg, Brian McKay, John Rossow, Sina Solaimanpour, Henok Woldu.</p>
 </div>
 </div>
 
@@ -158,6 +158,8 @@
 <h2>Links</h2>
 <ul class="list-unstyled">
 <li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=DSAIDE">https://​cloud.r-project.org/​package=DSAIDE</a>
+</li>
+<li>Browse source code at <br><a href="https://github.com/ahgroup/DSAIDE/">https://​github.com/​ahgroup/​DSAIDE/​</a>
 </li>
 <li>Report a bug at <br><a href="https://github.com/ahgroup/DSAIDE/issues">https://​github.com/​ahgroup/​DSAIDE/​issues</a>
 </li>

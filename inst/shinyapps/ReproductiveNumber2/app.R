@@ -47,18 +47,9 @@ refresh <- function(input, output){
     #reformat data to be in the right format for plotting
     #each plot/text output is a list entry with a data frame in form xvals, yvals, extra variables for stratifications for each plot
     
-    # dat = tidyr::gather(as.data.frame(simresult), -xvals, value = "yvals", key = "varnames")
     dat <- simresult$ts
     
-    #code variable names as factor and level them so they show up right in plot
-    
-    # mylevels = unique(dat$varnames)
-    # dat$varnames = factor(dat$varnames, levels = mylevels)
-    
-    #data for plots and text
-    #each variable listed in the varnames column will be plotted on the y-axis, with its values in yvals
-    #each variable listed in varnames will also be processed to produce text
-    
+  
     result[[1]]$dat = dat
     
     #Meta-information for each plot
@@ -73,14 +64,7 @@ refresh <- function(input, output){
     if (plotscale == 'x' | plotscale == 'both') { result[[1]]$xscale = 'log10'}
     if (plotscale == 'y' | plotscale == 'both') { result[[1]]$yscale = 'log10'}
     
-    
-    #set min and max for scales. If not provided ggplot will auto-set
-    
-    result[[1]]$ymin = 1e-12
-    result[[1]]$ymax = max(simresult$ts)
-    result[[1]]$xmin = 1e-12
-    result[[1]]$xmax = tmax
-    
+  
     #the following are for text display for each plot
     
     result[[1]]$maketext = TRUE #if true we want the generate_text function to process data and generate text, if 0 no result processing will occur insinde generate_text
@@ -141,7 +125,7 @@ ui <- fluidPage(
   
   #specify name of App below, will show up in title
   
-  h1('Reproductive Number App', align = "center", style = "background-color:#123c66; color:#fff"),
+  h1('Reproductive Number 2 App', align = "center", style = "background-color:#123c66; color:#fff"),
   
   #section to add buttons
   

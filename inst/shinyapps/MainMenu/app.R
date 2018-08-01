@@ -28,12 +28,13 @@ server <- function(input, output, session) {
 ui <- fluidPage(
   includeCSS("../styles/dsaide.css"),
   #add header and title
-   
   div( includeHTML("../styles/header.html"), align = "center"),
   p(paste('This is DSAIDE version ',utils::packageVersion("DSAIDE"),' last updated ', utils::packageDescription('DSAIDE')$Date,sep=''), class='infotext'),
   
   #specify name of App below, will show up in title
-  h1('DSAIDE - Main Menu', align = "center", style = "background-color:#123c66; color:#fff"),
+  h1('DSAIRM - Main Menu', align = "center", style = "background-color:#123c66; color:#fff"),
+
+  p('The Basics', class='mainsectionheader'),
 
   fluidRow(
     column(4,
@@ -47,6 +48,33 @@ ui <- fluidPage(
     ),
     class = "mainmenurow"
   ), #close fluidRow structure for input
+  
+  
+  p('The Reproductive Number', class='mainsectionheader'),
+  fluidRow(
+    column(6,
+           actionButton("ReproductiveNumber1", "Reproductive Number I", class="mainbutton")  
+    ),
+    column(6,
+           actionButton("ReproductiveNumber2", "Reproductive Number 2", class="mainbutton")  
+    ),
+    class = "mainmenurow"
+  ), #close fluidRow structure for input
+  
+  p('Controlling Infectious Diseases', class='mainsectionheader'),
+  fluidRow(
+    column(6,
+           actionButton("IDControl1", "ID Control 1", class="mainbutton")  
+    ),
+    column(6,
+           actionButton("IDControl2", "ID Control 2", class="mainbutton")  
+    ),
+    class = "mainmenurow"
+  ), #close fluidRow structure for input
+  
+  p('Types of Transmission', class='mainsectionheader'),
+  
+  
   fluidRow(
     column(4,
            actionButton("DirectTransmission", "Direct Transmission", class="mainbutton")  
@@ -59,18 +87,10 @@ ui <- fluidPage(
     ),
     class = "mainmenurow"
   ), #close fluidRow structure for input
-  fluidRow(
-    column(4,
-           actionButton("ReproductiveNumber", "Reproductive Number", class="mainbutton")  
-    ),
-    column(4,
-           actionButton("IDControl", "ID Control", class="mainbutton")  
-    ),
-    column(4,
-           actionButton("HostHeterogeneity", "Host Heterogeneity", class="mainbutton")  
-    ),
-    class = "mainmenurow"
-  ), #close fluidRow structure for input
+  
+  
+  p('Stochastic Models', class='mainsectionheader'),
+  
   fluidRow(
     column(4,
            actionButton("StochasticSIR", "Stochastic SIR Model", class="mainbutton")  
@@ -84,24 +104,44 @@ ui <- fluidPage(
     class = "mainmenurow"
   ),
   fluidRow(
-    column(12, 
+    
+    class = "mainmenurow"
+  ),
+
+  p('Further Topics', class='mainsectionheader'),
+  fluidRow(
+    column(6,
+           actionButton("HostHeterogeneity", "Host Heterogeneity", class="mainbutton")  
+    ),
+    column(6, 
            actionButton("MultiPathogen", "Multi-Pathogen Dynamics", class="mainbutton")
     ),
     class = "mainmenurow"
-  ),
+  ), #close fluidRow structure for input
+  
   fluidRow(
-      
+    
     column(12,
            actionButton("Exit", "Exit", class="exitbutton")
     ),
     class = "mainmenurow"
-    ), #close fluidRow structure for input
+  ), #close fluidRow structure for input
   
-  p('This collection of Shiny apps provides you with a "learning by doing" way to explore various topics of infectious disease epidemiology from a dynamical systems perspective. Ideally, you would use these apps as part of a course on the topic. Alternatively, you should be able to obtain the needed background information by going through the materials listed in the "Further Information" section of the apps.',class='infotext', align="left"),
-  p('The main way of using the ID simulations is through this graphical interface. You can also access the simulations directly. This requires a bit of R coding but gives you many more options of things you can try. See the package vignette or the "Further Information" section of the apps for more on that.',class='infotext', align="left"),
-  p('You should start with the "ID Dynamics Intro" app and read all its instruction tabs since they contain information relevant for all apps.',class='infotext', align="left"),
-  p('Have fun exploring the infectious disease models!', class='maintext'),
+  
+  withTags({
+    div(class="header", checked=NA, style = "text-align:left", class="infotext",
+        
+        p('This collection of Shiny apps provides you with a "learning by doing" way to explore various topics of infectious disease epidemiology from a dynamical systems perspective. Ideally, you would use these apps as part of a course on the topic. Alternatively, you should be able to obtain the needed background information by going through the materials listed in the "Further Information" section of the apps.'),
+        p('The main way of using the simulations is through this graphical interface. You can also access the simulations directly. This requires a bit of R coding but gives you many more options of things you can try. See the package vignette or the "Further Information" section of the apps for more on that.'),
+        p('You should start with the "ID Dynamics Intro" app and read all its instruction tabs since they contain information relevant for all apps.')
+        
+    )
+  }),
+  
+  p('Have fun exploring the models!', class='maintext'),
   div(includeHTML("../styles/footer.html"), align="center", style="font-size:small") #footer
 ) #end fluidpage
 
 shinyApp(ui = ui, server = server)
+
+  

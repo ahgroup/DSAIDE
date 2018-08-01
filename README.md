@@ -2,6 +2,7 @@
 [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/ahgroup/DSAIDE?branch=master&svg=true)](https://ci.appveyor.com/project/ahgroup/DSAIDE)
 [![Coverage status](https://codecov.io/gh/ahgroup/DSAIDE/branch/master/graph/badge.svg)](https://codecov.io/github/ahgroup/DSAIDE?branch=master)
 [![CRAN status](https://www.r-pkg.org/badges/version/DSAIDE)](https://cran.r-project.org/package=DSAIDE)
+[![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/2059/badge)](https://bestpractices.coreinfrastructure.org/projects/2059)
 
 # DSAIDE
 Dynamical Systems Approach to Infectious Disease Epidemiology
