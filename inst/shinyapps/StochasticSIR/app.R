@@ -33,6 +33,7 @@ refresh <- function(input, output){
     
     listlength = 1; #here we do all simulations in the same figure
     result = vector("list", listlength) #create empty list of right size for results
+    noutbreak = 0 #keep track of number of outbreaks for stochastic simulations
     
     #show progress bar during simulation run
     withProgress(message = 'Running Simulation', value = 0, {
@@ -58,7 +59,7 @@ refresh <- function(input, output){
         {
           #add number of rep to seed, otherwise it's exactly the same trajectory each time
           
-          simresult <- simulate_stochastic_SIR(S0 = S0, I0 = I0, tmax = tmax, b = b, g = g, m = m, n = n, rngseed = rngseed + nn)
+          simresult <- simulate_stochastic_SIR(S0 = S0, I0 = I0, tmax = tmax, b = b, g = g, m = m, n = n, rngseed = rngseed+nn-1)
           
           simresult <- simresult$ts
           colnames(simresult)[1] = 'xvals' #rename time to xvals for consistent plotting
@@ -67,6 +68,7 @@ refresh <- function(input, output){
           dat$IDvar = paste(dat$varnames,nn,sep='') #make a variable for plotting same color lines for each run in ggplot2
           dat$nreps = nn
           datall = rbind(datall,dat)
+          if ( (S0-tail(simresult[,'S'],1))/S0>0.2 ) {noutbreak = noutbreak + 1} #keep track of outbreaks occurence among stochastic simulations
         }
       } #end stochastic model
       
@@ -105,7 +107,7 @@ refresh <- function(input, output){
     #the following are for text display for each plot
     result[[1]]$maketext = TRUE #if true we want the generate_text function to process data and generate text, if 0 no result processing will occur insinde generate_text
     #the 1st plot can have a field with text that is displayed once at the end of the text block.
-    result[[1]]$finaltext = 'For stochastic simulation scenarios, values shown are the mean over all simulations.'
+    result[[1]]$finaltext = paste('For stochastic simulation scenarios, values shown are the mean over all simulations.', noutbreak,' simulations produced an outbreak (susceptibles dropped by at least 20%)')
     
     return(result)
     

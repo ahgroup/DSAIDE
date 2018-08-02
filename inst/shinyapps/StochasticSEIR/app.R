@@ -47,7 +47,7 @@ refresh <- function(input, output){
           #add number of rep to seed, otherwise it's exactly the same trajectory each time
           
           simresult <- simulate_stochastic_SEIR(S0 = S0, I0 = I0, tmax = tmax, bE = bE, 
-                                           bI = bI, gE = gE, gI = gI, w = w, m = m, n = n, rngseed = rngseed + nn)
+                                           bI = bI, gE = gE, gI = gI, w = w, m = m, n = n, rngseed = rngseed + nn-1)
           
           simresult <- simresult$ts
           colnames(simresult)[1] = 'xvals' #rename time to xvals for consistent plotting

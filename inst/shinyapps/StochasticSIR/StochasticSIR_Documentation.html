@@ -34,6 +34,14 @@
 <div id="shinytab1" class="section level2">
 <h2>Overview</h2>
 <p>This app lets you explore a <em>stochastic</em> SIR model. Read about the model in the “Model” tab. Then do the tasks described in the “What to do” tab.</p>
+<div id="learning-objectives" class="section level3">
+<h3>Learning Objectives</h3>
+<ul>
+<li>Get an introduction to stochastic compartmental models</li>
+<li>Understand differences and similarities between stochastic models and their deterministic equivalent</li>
+<li>Understand the concept of reproducibility with random numbers</li>
+</ul>
+</div>
 </div>
 <div id="shinytab2" class="section level2">
 <h2>The Model</h2>
@@ -105,13 +113,33 @@
 <p><span class="math display">\[\dot S = m - bSI - nS\]</span> <span class="math display">\[\dot I = bSI - gI - nI\]</span> <span class="math display">\[\dot R = gI - nR\]</span></p>
 <p>This is almost the same model as the basic SIR model from the introductory app, with the only difference that this model also allows natural births and deaths. In this app, you can run the basic SIR model together with the stochastic one and for m=n=0 you can compare the 2 models.</p>
 </div>
+<div id="a-note-on-randomness-in-computer-simulations" class="section level3">
+<h3>A note on randomness in computer simulations</h3>
+<p>This simulation (as well as some of the others) involves using random numbers to introduce stochasticity/uncertainty/noise into the model. This leads to a model that usually more closely reflects the underlying real system. However, in science, we want to be as reproducible as possible. Fortunately, random numbers on a computer are not completely random, but can be reproduced. In practice, this is done by specifing a random number seed, in essence a starting position for the algorithm to produce pseudo-random numbers. As long as the seed is the same, the code should produce the same pseudo-random numbers each time, thus ensuring reproducibility.</p>
+</div>
 </div>
 <div id="shinytab3" class="section level2">
 <h2>What to do</h2>
-<p><strong>The tasks below are described in a way that assumes everything is in units of MONTHS (rate parameters, therefore, have units of inverse months). If any quantity is not given in those units, you need to convert it first (e.g. if it says a year, you need to convert it to 12 months).</strong></p>
+<p><strong>The tasks below are described in a way that assumes everything is in units of DAYS (rate parameters, therefore, have units of inverse days). If any quantity is not given in those units, you need to convert it first (e.g. if it says a week, you need to convert it to 7 days).</strong></p>
 <p><em>Some of the simulations might take a few seconds to run. Be patient.</em></p>
 <div id="task-1" class="section level3">
-<h3>Task 1:</h3>
+<h3>Task 1</h3>
+<ul>
+<li>Start with 1000 susceptibles, 1 infected, simulation time of 100 days. Transmission rate of 0.0005, duration of infectious period 5 days, no births and deaths, random seed of 123.</li>
+<li>Run the deterministic simulation multiple times. You should always see the same result.</li>
+<li>Now run a single stochastic simulation multiple times. What do you expect? What do you see?</li>
+<li>Change the random seed to a different number, test how this changes the simulation.</li>
+</ul>
+</div>
+<div id="task-2" class="section level3">
+<h3>Task 2</h3>
+<ul>
+<li>Keep everyhing as in task 1, with random number seed at 123. Run both simulations and set the number of stochastic simulations to 5. You’ll get a plot showing the deterministic model dynamics and 5 runs for the stochastic one (each of the stochastic run gets a different random number seed).</li>
+<li>Try to understand and explain why you see some stochastic simulations lead to an outbreak, while some do not.</li>
+</ul>
+</div>
+<div id="task-3" class="section level3">
+<h3>Task 3</h3>
 </div>
 </div>
 <div id="shinytab4" class="section level2">
