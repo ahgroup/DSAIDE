@@ -39,7 +39,7 @@ The processes being modeled are:
 * New susceptible vectors are born at a rate _b_. Susceptible and infected vectors die at rate _n_. The inverse of this rate is the average lifespan. 
 * Recovered hosts lose their immunity at rate _w_.
 
-We envision hosts to be humans and vectors to be e.g. mosquitos. We further assume the time scale for the model is short enough that we can ignore births and deaths for human hosts but not vectors. This is likely a decent approximation as long as our simulation time is only a few years.
+We envision hosts to be humans and vectors to be e.g. mosquitoes. We further assume the time scale for the model is short enough that we can ignore births and deaths for human hosts but not vectors. This is likely a decent approximation as long as our simulation time is only a few years.
 
 
 ###Model Implementation

@@ -27,7 +27,7 @@ your parameters}
 }
 \value{
 The function returns a list. The list has one element, a data frame ts
-which cotains the time series of the simulated model, 
+which contains the time series of the simulated model, 
 with one column per compartment/variable. The first column is time.
 }
 \description{

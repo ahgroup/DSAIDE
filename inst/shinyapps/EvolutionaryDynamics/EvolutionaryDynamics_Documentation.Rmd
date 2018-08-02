@@ -108,7 +108,7 @@ Keep exploring. For instance, try the following:
 
 * Turn on resistance generation for both treated, _c~t~_, and untreated, _c~u~_. 
 * Explore how population size, _S~0~_, the fraction of resistance generation ( _c~t~_ or _c~u~_ ) and fitness of the different strains ( _b~t~_ or _b~u~_ or _b~r~_ ) affect outcomes.
-* If you want to explore the relation between treatment level and outbreak size (tasks 3-5) in more detail, you could access the underlying simuation directly and write a bit of R code to loop over treatment values following the "Level 2" example described in the DSAIDE tutorial.
+* If you want to explore the relation between treatment level and outbreak size (tasks 3-5) in more detail, you could access the underlying simulation directly and write a bit of R code to loop over treatment values following the "Level 2" example described in the DSAIDE tutorial.
 
 
 ##Further Information {#shinytab4}

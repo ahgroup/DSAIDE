@@ -29,7 +29,7 @@ simulate_environmentaltransmission(S0 = 1000, I0 = 1, E0 = 0,
 
 \item{p}{the rate at which infected host shed pathogen in the environment}
 
-\item{c}{the rate at which pathogen in the enviroment decays}
+\item{c}{the rate at which pathogen in the environment decays}
 }
 \value{
 This function returns the simulation result as obtained from a call

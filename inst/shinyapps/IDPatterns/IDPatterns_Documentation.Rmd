@@ -81,7 +81,7 @@ _Some of the simulations might take a few seconds to run. Be patient._
 * With parameters set to correspond to the scenario just described, run the simulation and ensure you get a single outbreak with around 203 susceptibles left at the end.
 
 ###Task 2 
-* Next, turn on births and deaths. It's always good to check parts of a model. Here, we want to first look at births and deaths in the absence of disease. Therefore, set initial number of presymptomatic to 0, keep the numer of susceptible at 1000. 
+* Next, turn on births and deaths. It's always good to check parts of a model. Here, we want to first look at births and deaths in the absence of disease. Therefore, set initial number of presymptomatic to 0, keep the number of susceptible at 1000. 
 * Set the natural death rate, _n_, to a value that corresponds to an average lifespan of 41 years. Recall that the unit of _n_ needs to be in 1/months. You need to convert lifespan to months, then take the inverse to get the death rate. Round to the first significant digit (i.e. 0.00X). 
 * Set the birth rate to _m=4_ per month. 
 * Also increase the simulation duration to 1000 years. (Depending on the speed of your computer, it will take several seconds for the simulation to finish). 
@@ -131,7 +131,7 @@ Let's compare the model simulations with the equations you found. Substitute the
 
 ###Task 10
 * Now combine births and deaths with waning immunity. Explore how the two different mechanisms interact and influence the observed ID dynamics.
-* Set everyhing as in the beginning of the previous task. Then, let birth rate _m=10_, natural death rate _n=0.005_, and simulation time of 600 months, and record the simulation results and explain what you observe.
+* Set everything as in the beginning of the previous task. Then, let birth rate _m=10_, natural death rate _n=0.005_, and simulation time of 600 months, and record the simulation results and explain what you observe.
 
 
 

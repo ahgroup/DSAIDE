@@ -71,7 +71,7 @@ $$\dot R = gI - nR$$
 This is almost the same model as the basic SIR model from the introductory app, with the only difference that this model also allows natural births and deaths. In this app, you can run the basic SIR model together with the stochastic one and for m=n=0 you can compare the 2 models.
 
 ### A note on randomness in computer simulations
-This simulation (as well as some of the others) involves using random numbers to introduce stochasticity/uncertainty/noise into the model. This leads to a model that usually more closely reflects the underlying real system. However, in science, we want to be as reproducible as possible. Fortunately, random numbers on a computer are not completely random, but can be reproduced. In practice, this is done by specifing a random number seed, in essence a starting position for the algorithm to produce pseudo-random numbers. As long as the seed is the same, the code should produce the same pseudo-random numbers each time, thus ensuring reproducibility.
+This simulation (as well as some of the others) involves using random numbers to introduce stochasticity/uncertainty/noise into the model. This leads to a model that usually more closely reflects the underlying real system. However, in science, we want to be as reproducible as possible. Fortunately, random numbers on a computer are not completely random, but can be reproduced. In practice, this is done by specifying a random number seed, in essence a starting position for the algorithm to produce pseudo-random numbers. As long as the seed is the same, the code should produce the same pseudo-random numbers each time, thus ensuring reproducibility.
 
 
 ##What to do {#shinytab3}
@@ -88,7 +88,7 @@ _Some of the simulations might take a few seconds to run. Be patient._
 
 
 ### Task 2
-* Keep everyhing as in task 1, with random number seed at 100. Run both simulations and set the number of stochastic simulations to 5. You'll get a plot showing the deterministic model dynamics and 5 runs for the stochastic model (each of the stochastic runs gets consecutive random number seeds, i.e. the first one is 100, the 2nd is 101,...).
+* Keep everything as in task 1, with random number seed at 100. Run both simulations and set the number of stochastic simulations to 5. You'll get a plot showing the deterministic model dynamics and 5 runs for the stochastic model (each of the stochastic runs gets consecutive random number seeds, i.e. the first one is 100, the 2nd is 101,...).
 * Try to understand and explain why you see some stochastic simulations lead to an outbreak, while some do not.
 
 ### Task 3

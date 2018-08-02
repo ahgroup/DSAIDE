@@ -2,8 +2,6 @@
 ^\.Rproj\.user$
 ^\.travis\.yml$
 ^auxilliary$
-^allappdocumentation$
-^media$
 ^README\.md$
 ^cran-comments\.md$
 ^to-do\.md$
@@ -11,3 +9,4 @@
 ^codecov\.yml$
 ^_pkgdown\.yml$
 ^docs$
+^media$

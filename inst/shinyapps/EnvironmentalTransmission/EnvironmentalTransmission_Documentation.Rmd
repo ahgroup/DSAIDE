@@ -77,15 +77,15 @@ Often the letter _E_ is used for the _exposed_ stage, which would then be called
 
 ###Task 3: 
 * Now set _p = 10_ and _c = 10_ . Turn off direct transmission. Run to make sure you don't get an outbreak.
-* Turn on environmental transmission, set it to _b~E~ = 0.001_. Leave everyhing else unchanged.
+* Turn on environmental transmission, set it to _b~E~ = 0.001_. Leave everything else unchanged.
 * What do you expect to see? Run simulations and compare with the direct transmission results.
 
 ###Task 4: 
-* Now also turn on direct transmission by setting _b~D~ = b~E~ = 0.001_. Leave everyhing else unchanged.
+* Now also turn on direct transmission by setting _b~D~ = b~E~ = 0.001_. Leave everything else unchanged.
 * What do you expect to see? Run simulations and see how your expectations hold up.
 
 ###Task 5: 
-* Now set the initial number of infected to 0 and initial pathogen in the environment to 1. Leave everyhing else unchanged.
+* Now set the initial number of infected to 0 and initial pathogen in the environment to 1. Leave everything else unchanged.
 * What do you expect to see? Run simulations and see how your expectations hold up.
 
 ###Task 6: 
