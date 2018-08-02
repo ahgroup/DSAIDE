@@ -31,7 +31,9 @@
 
 
 
-<p>##Overview {#shinytab1} This app is meant to teach you about the basic concepts behind the reproductive number. Read about the model in the “Model” tab. Then do the tasks described in the “What to do” tab.</p>
+<div id="shinytab1" class="section level2">
+<h2>Overview</h2>
+<p>This app is meant to teach you about the basic concepts behind the reproductive number. Read about the model in the “Model” tab. Then do the tasks described in the “What to do” tab.</p>
 <div id="learning-objectives" class="section level3">
 <h3>Learning Objectives</h3>
 <ul>
@@ -40,8 +42,13 @@
 <li>Be able to determine the reproductive number using final outbreak size information</li>
 <li>Be able to determine the reproductive number using initial infected numbers</li>
 </ul>
-<p>##The Model {#shinytab2}</p>
-<p>###Model Overview For this app, we’ll use the basic compartmental SIR model. We allow for 3 different stages/compartments:</p>
+</div>
+</div>
+<div id="shinytab2" class="section level2">
+<h2>The Model</h2>
+<div id="model-overview" class="section level3">
+<h3>Model Overview</h3>
+<p>For this app, we’ll use the basic compartmental SIR model. We allow for 3 different stages/compartments:</p>
 <ul>
 <li><strong>S</strong> - uninfected and susceptible individuals</li>
 <li><strong>I</strong> - infected and infectious individuals (note that these terms are often used interchangeably, but technically we are talking about someone who is infected <strong>and</strong> is infectious, i.e. can infect others)</li>
@@ -69,38 +76,101 @@
 <p><em>The app and tasks deal with the reproductive number concept. The following section provides a very brief introduction. I recommend reading a bit more about it. I’m following the terminology of <a href="https://ahgroup.github.io/DSAIDEbook/reproductive-number.html">my own write-up</a>. You can also check the books listed in the ID introduction app or some of the papers listed in the <em>Further Resources</em> section of this app.</em></p>
 <p>The reproductive number is defined as the average number of new infected (and infectious) individuals caused by one infectious individual. The <em>basic</em> reproductive number is the reproductive number in a scenario where everyone is susceptible. For the SIR model shown above, this quantity is <span class="math display">\[R_0=\frac{bS_0}{g}\]</span> where <em>S<sub>0</sub></em> is the initial number of susceptibles. For a single outbreak (no births, natural death or waning immunity) and a basic SIR model, an equation linking the number of susceptibles left at the end and the basic reproductive number is <span class="math display">\[R_0=\frac{\ln(S_f)}{(S_f - 1)}\]</span> where <span class="math inline">\(\ln()\)</span> is the natural logarithm and <em>S<sub>f</sub></em> is the <strong>fraction</strong> of susceptibles still left.</p>
 <p>Note the unfortunate fact that the letter <em>R</em> is used both for the recovered compartment in the model and the reproductive number. This is standard notation and I’ll therefore use it here. Just be careful to figure out from the context if someone is talking about the recovered individuals or the reproductive number.</p>
-<p>##What to do {#shinytab3}</p>
-<p><strong>The tasks below are described in a way that assumes everything is in units of months (rate parameters, therefore, have units of inverse months). If any quantity is not given in those units, you need to convert it first (e.g. if it says a year, you need to convert it to 12 months).</strong></p>
-<p>###Task 1 * Set the simulation with 1000 susceptibles and 1 infected. * Simulation time 12 months, <em>g</em>=5, <em>b</em>=0.01. * Run the simulation, you should get an outbreak. Use the final size equation linking R<sub>0</sub> and the fraction of susceptible hosts left at the end of the outbreak to compute the reproductive number.</p>
-<p>###Task 2 * Use the equation that expresses R<sub>0</sub> as a function of model parameters for the simple SIR model. Using the values of the model parameters, compute R<sub>0</sub> that way. Check that it agrees with what you found in the previous task.</p>
-<p>###Task 3 * Double the value of the transmission parameter, <em>b</em>. Leave everything else as before. * Before you run the simulation, what do you expect to see and what do you expect to get for R<sub>0</sub>? * Run the simulation and compute R<sub>0</sub> using the final outbreak size to test your expectations.</p>
-<p>###Task 4 * Double the rate of the recovery parameter, <em>g</em>. Leave everything else unchanged. * Think about your expectations for R<sub>0</sub> and the resulting outbreak dynamics. * Run the simulation to check your expectations. Use the final outbreak size to compute R<sub>0</sub>.</p>
-<p>###Task 5 * Set the model parameters back to those given in task #1. * Another way to estimate R<sub>0</sub> is to determine the rate of increase in infected hosts at the beginning of the outbreak. During the initial phase, new infections increase exponentially according to <em>I(t)=I<sub>0</sub> exp(rt)</em>, with <em>r</em> being the rate of growth. Usually, for any real outbreak, you do not know the number of infected at the start, I<sub>0</sub>, or the exact time the outbreak starts. It is still possible to estimate <em>r</em> by obtaining two values of <em>I</em> at two time points during that initial growth rate, i.e. <em>I<sub>1</sub></em> at time <em>t<sub>1</sub></em> and <em>I<sub>2</sub></em> at time <em>t<sub>2</sub></em>. One obtains equation <em>I<sub>1</sub>=I<sub>0</sub> exp(r t<sub>1</sub>)</em> and <em>I<sub>2</sub>=I<sub>0</sub> exp(r t<sub>2</sub>)</em>. By solving one of these equations for <em>I<sub>0</sub></em> and substituting into the other, we get <em>I<sub>2</sub>= I<sub>1</sub> exp(r (t<sub>2</sub> - t<sub>1</sub>))</em>. By solving the model for <em>r</em> and entering numbers for <em>I<sub>1</sub></em> and <em>I<sub>2</sub></em> and times <em>t<sub>1</sub></em> and <em>t<sub>2</sub></em> we can figure out <em>r</em>. * Let’s try that. Run the model with tmax = 0.2 and tmax = 0.4 and record the number of infected at the end of the simulation for each time. Then substitute all the values into the equation you found for <em>r</em> and thus compute the growth rate. * For this model, the growth rate and R<sub>0</sub> are related through <em>R<sub>0</sub> = 1+rD</em>, where <em>D</em> is the average duration of the infectious period (i.e. the inverse of the recovery rate). Use this to determine R<sub>0</sub>. You should get essentially the same answer (up to some rounding differences) as for task #1. * Note that the choice of <em>t<sub>1</sub></em> and <em>t<sub>2</sub></em> can influence the results. Earlier times are better since once the number of susceptibles starts to drop markedly, the growth of infected slows down and is not exponential anymore.</p>
-<p>###Task 6 * What is the value of the reproductive number <em>R</em> at the time the outbreak peaks? (It’s only called R<sub>0</sub> at the beginning for a fully susceptible population). Explain how you can find that value for R, both using intuitive reasoning and using the equation for R<sub>0</sub> given above (R<sub>0</sub> = 1+rD). Note that at this R value, the outbreak wanes, but people still get infected. What R value would you need to halt any further infections completely?</p>
-<p>###Task 7 * What would happen if a new ID came along that had an R<sub>0</sub> value that was the same as the one you just determined in the previous question, namely the value of R at the peak of an outbreak? Test this with the simulation. Choose parameter values for which you get the right R<sub>0</sub> and observe what the model produces.</p>
-<p>###Task 8 * R<sub>0</sub> quantifies the level of transmissibility of an ID, which determines how many people will become infected or what level of intervention is needed to stop/prevent an outbreak. However, it is important to be aware that R<sub>0</sub> says nothing about the timing/dynamics of the outbreak. Set parameter values as in #1. Run an outbreak, record the time of peak and duration of the outbreak (the latter is somewhat ill-defined, so just come up with a rough number). Then increase the infectious duration by a factor of 4 (rate reduced by a factor of 4) and adjust the infectiousness-level such that you get the same R<sub>0</sub> as before. Run again and compare the results concerning total outbreak size and timing of outbreak.</p>
-<p>##Further Information {#shinytab4} * This app (and all others) are structured such that the Shiny part (the graphical interface you are currently using and the server-side function that goes with it) calls an underlying R script which runs the simulation for the model of interest and returns the results. * For this app, the underlying function running the simulation is <code>simulate_introduction.R</code>. You can call this function directly, without going through the shiny app. Type <code>?simulate_introduction</code> into the R console for more information (you need to exit the graphical interface first or start a new R session). * You could also modify this R function for your own purposes - though that requires some more R coding knowledge. * To get a quick start explaining how to interact with the simulator functions directly, read the vignette for the package (type <code>vignette('DSAIDE')</code> into the R console). * For the equations mentioned in the tasks, see e.g. <span class="citation">(Heffernan, Smith, and Wahl 2005; Keeling and Rohani 2008; Vynnycky and White 2010)</span>. * For some information on the reproductive number, see e.g. <span class="citation">(Fine, Eames, and Heymann 2011; Heffernan, Smith, and Wahl 2005; Roberts 2007; Wallinga and Lipsitch 2007)</span>.</p>
 </div>
+</div>
+<div id="shinytab3" class="section level2">
+<h2>What to do</h2>
+<p><strong>The tasks below are described in a way that assumes everything is in units of months (rate parameters, therefore, have units of inverse months). If any quantity is not given in those units, you need to convert it first (e.g. if it says a year, you need to convert it to 12 months).</strong></p>
+<div id="task-1" class="section level3">
+<h3>Task 1</h3>
+<ul>
+<li>Set the simulation with 1000 susceptibles and 1 infected.</li>
+<li>Simulation time 12 months, <em>g</em>=5, <em>b</em>=0.01.</li>
+<li>Run the simulation, you should get an outbreak. Use the final size equation linking R<sub>0</sub> and the fraction of susceptible hosts left at the end of the outbreak to compute the reproductive number.</li>
+</ul>
+</div>
+<div id="task-2" class="section level3">
+<h3>Task 2</h3>
+<ul>
+<li>Use the equation that expresses R<sub>0</sub> as a function of model parameters for the simple SIR model. Using the values of the model parameters, compute R<sub>0</sub> that way. Check that it agrees with what you found in the previous task.</li>
+</ul>
+</div>
+<div id="task-3" class="section level3">
+<h3>Task 3</h3>
+<ul>
+<li>Double the value of the transmission parameter, <em>b</em>. Leave everything else as before.</li>
+<li>Before you run the simulation, what do you expect to see and what do you expect to get for R<sub>0</sub>?</li>
+<li>Run the simulation and compute R<sub>0</sub> using the final outbreak size to test your expectations.</li>
+</ul>
+</div>
+<div id="task-4" class="section level3">
+<h3>Task 4</h3>
+<ul>
+<li>Double the rate of the recovery parameter, <em>g</em>. Leave everything else unchanged.</li>
+<li>Think about your expectations for R<sub>0</sub> and the resulting outbreak dynamics.</li>
+<li>Run the simulation to check your expectations. Use the final outbreak size to compute R<sub>0</sub>.</li>
+</ul>
+</div>
+<div id="task-5" class="section level3">
+<h3>Task 5</h3>
+<ul>
+<li>Set the model parameters back to those given in task #1.</li>
+<li>Another way to estimate R<sub>0</sub> is to determine the rate of increase in infected hosts at the beginning of the outbreak. During the initial phase, new infections increase exponentially according to <em>I(t)=I<sub>0</sub> exp(rt)</em>, with <em>r</em> being the rate of growth. Usually, for any real outbreak, you do not know the number of infected at the start, I<sub>0</sub>, or the exact time the outbreak starts. It is still possible to estimate <em>r</em> by obtaining two values of <em>I</em> at two time points during that initial growth rate, i.e. <em>I<sub>1</sub></em> at time <em>t<sub>1</sub></em> and <em>I<sub>2</sub></em> at time <em>t<sub>2</sub></em>. One obtains equation <em>I<sub>1</sub>=I<sub>0</sub> exp(r t<sub>1</sub>)</em> and <em>I<sub>2</sub>=I<sub>0</sub> exp(r t<sub>2</sub>)</em>. By solving one of these equations for <em>I<sub>0</sub></em> and substituting into the other, we get <em>I<sub>2</sub>= I<sub>1</sub> exp(r (t<sub>2</sub> - t<sub>1</sub>))</em>. By solving the model for <em>r</em> and entering numbers for <em>I<sub>1</sub></em> and <em>I<sub>2</sub></em> and times <em>t<sub>1</sub></em> and <em>t<sub>2</sub></em> we can figure out <em>r</em>.</li>
+<li>Let’s try that. Run the model with tmax = 0.2 and tmax = 0.4 and record the number of infected at the end of the simulation for each time. Then substitute all the values into the equation you found for <em>r</em> and thus compute the growth rate.</li>
+<li>For this model, the growth rate and R<sub>0</sub> are related through <em>R<sub>0</sub> = 1+rD</em>, where <em>D</em> is the average duration of the infectious period (i.e. the inverse of the recovery rate). Use this to determine R<sub>0</sub>. You should get essentially the same answer (up to some rounding differences) as for task #1.</li>
+<li>Note that the choice of <em>t<sub>1</sub></em> and <em>t<sub>2</sub></em> can influence the results. Earlier times are better since once the number of susceptibles starts to drop markedly, the growth of infected slows down and is not exponential anymore.</li>
+</ul>
+</div>
+<div id="task-6" class="section level3">
+<h3>Task 6</h3>
+<ul>
+<li>What is the value of the reproductive number <em>R</em> at the time the outbreak peaks? (It’s only called R<sub>0</sub> at the beginning for a fully susceptible population). Explain how you can find that value for R, both using intuitive reasoning and using the equation for R<sub>0</sub> given above (R<sub>0</sub> = 1+rD). Note that at this R value, the outbreak wanes, but people still get infected. What R value would you need to halt any further infections completely?</li>
+</ul>
+</div>
+<div id="task-7" class="section level3">
+<h3>Task 7</h3>
+<ul>
+<li>What would happen if a new ID came along that had an R<sub>0</sub> value that was the same as the one you just determined in the previous question, namely the value of R at the peak of an outbreak? Test this with the simulation. Choose parameter values for which you get the right R<sub>0</sub> and observe what the model produces.</li>
+</ul>
+</div>
+<div id="task-8" class="section level3">
+<h3>Task 8</h3>
+<ul>
+<li>R<sub>0</sub> quantifies the level of transmissibility of an ID, which determines how many people will become infected or what level of intervention is needed to stop/prevent an outbreak. However, it is important to be aware that R<sub>0</sub> says nothing about the timing/dynamics of the outbreak. Set parameter values as in #1. Run an outbreak, record the time of peak and duration of the outbreak (the latter is somewhat ill-defined, so just come up with a rough number). Then increase the infectious duration by a factor of 4 (rate reduced by a factor of 4) and adjust the infectiousness-level such that you get the same R<sub>0</sub> as before. Run again and compare the results concerning total outbreak size and timing of outbreak.</li>
+</ul>
+</div>
+</div>
+<div id="shinytab4" class="section level2">
+<h2>Further Information</h2>
+<ul>
+<li>This app (and all others) are structured such that the Shiny part (the graphical interface you are currently using and the server-side function that goes with it) calls an underlying R script which runs the simulation for the model of interest and returns the results.</li>
+<li>For this app, the underlying function running the simulation is <code>simulate_introduction.R</code>. You can call this function directly, without going through the shiny app. Type <code>?simulate_introduction</code> into the R console for more information (you need to exit the graphical interface first or start a new R session).</li>
+<li>You could also modify this R function for your own purposes - though that requires some more R coding knowledge.</li>
+<li>To get a quick start explaining how to interact with the simulator functions directly, read the vignette for the package (type <code>vignette('DSAIDE')</code> into the R console).</li>
+<li>For the equations mentioned in the tasks, see e.g. <span class="citation">(Heffernan, Smith, and Wahl 2005; Keeling and Rohani 2008; Vynnycky and White 2010)</span>.</li>
+<li>For some information on the reproductive number, see e.g. <span class="citation">(Fine, Eames, and Heymann 2011; Heffernan, Smith, and Wahl 2005; Roberts 2007; Wallinga and Lipsitch 2007)</span>.</li>
+</ul>
 <div id="references" class="section level3 unnumbered">
 <h3>References</h3>
 <div id="refs" class="references">
 <div id="ref-fine11">
-<p>Fine, Paul, Ken Eames, and David L Heymann. 2011. “&quot;Herd Immunity&quot;: A Rough Guide.” <em>Clinical Infectious Diseases : An Official Publication of the Infectious Diseases Society of America</em> 52 (7):911–16. <a href="https://doi.org/10.1093/cid/cir007" class="uri">https://doi.org/10.1093/cid/cir007</a>.</p>
+<p>Fine, Paul, Ken Eames, and David L Heymann. 2011. “‘Herd Immunity’: A Rough Guide.” <em>Clinical Infectious Diseases : An Official Publication of the Infectious Diseases Society of America</em> 52 (7): 911–16. doi:<a href="https://doi.org/10.1093/cid/cir007">10.1093/cid/cir007</a>.</p>
 </div>
 <div id="ref-heffernan05a">
-<p>Heffernan, J M, R J Smith, and L M Wahl. 2005. “Perspectives on the Basic Reproductive Ratio.” <em>Journal of the Royal Society, Interface</em> 2 (4):281–93. <a href="https://doi.org/10.1098/rsif.2005.0042" class="uri">https://doi.org/10.1098/rsif.2005.0042</a>.</p>
+<p>Heffernan, J M, R J Smith, and L M Wahl. 2005. “Perspectives on the Basic Reproductive Ratio.” <em>Journal of the Royal Society, Interface</em> 2 (4): 281–93. doi:<a href="https://doi.org/10.1098/rsif.2005.0042">10.1098/rsif.2005.0042</a>.</p>
 </div>
 <div id="ref-keeling08">
 <p>Keeling, Matt J, and Pejman Rohani. 2008. <em>Modeling Infectious Diseases in Humans and Animals</em>. Princeton University Press.</p>
 </div>
 <div id="ref-roberts07">
-<p>Roberts, M G. 2007. “The Pluses and Minuses of R0.” <em>Journal of the Royal Society, Interface</em> 4 (16):949–61. <a href="https://doi.org/10.1098/rsif.2007.1031" class="uri">https://doi.org/10.1098/rsif.2007.1031</a>.</p>
+<p>Roberts, M G. 2007. “The Pluses and Minuses of R0.” <em>Journal of the Royal Society, Interface</em> 4 (16): 949–61. doi:<a href="https://doi.org/10.1098/rsif.2007.1031">10.1098/rsif.2007.1031</a>.</p>
 </div>
 <div id="ref-vynnycky10">
 <p>Vynnycky, Emilia, and Richard White. 2010. <em>An Introduction to Infectious Disease Modelling</em>. Oxford University Press.</p>
 </div>
 <div id="ref-wallinga07">
-<p>Wallinga, J., and M. Lipsitch. 2007. “How generation intervals shape the relationship between growth rates and reproductive numbers.” <em>Proceedings of the Royal Society B</em> 274 (1609):599–604.</p>
+<p>Wallinga, J., and M. Lipsitch. 2007. “How generation intervals shape the relationship between growth rates and reproductive numbers.” <em>Proceedings of the Royal Society B</em> 274 (1609): 599–604.</p>
+</div>
 </div>
 </div>
 </div>

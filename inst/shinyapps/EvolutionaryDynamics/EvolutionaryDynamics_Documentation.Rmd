@@ -10,13 +10,13 @@ output:
 bibliography: ../../media/references.bib
 ---
 
-##Overview {#shinytab1}
+## Overview {#shinytab1}
 For this module, we will explore a stochastic SIR-type model with 2 different pathogen strains, wild-type and a drug resistant mutant in the presence of drug treatment. Read about the model in the "Model" tab. Then do the tasks described in the "What to do" tab.
 
 
-##The Model {#shinytab2}
+## The Model {#shinytab2}
 
-###Model Overview
+### Model Overview
 
 This model tracks susceptibles, wild-type infected untreated, wild-type infected treated, drug-resistant infected and recovered hosts. 
 The following compartments are included:  
@@ -36,7 +36,7 @@ The included processes/mechanisms are the following:
 * Recovered individuals are immune to reinfection. 
 
 
-###Model Implementation
+### Model Implementation
 The flow diagram for the model implemented in this app is:
 
 ![Flow diagram for this model.](../../media/evolutionmodel.png)
@@ -58,12 +58,12 @@ Recovery of I~r~        |  I~r~ => I~r~-1, R => R+1  |   g~r~ * I~r~       |
 
 
 
-##What to do {#shinytab3}
+## What to do {#shinytab3}
 
 
 **The tasks below are described in a way that assumes everything is in units of DAYS (rate parameters, therefore, have units of inverse days). If any quantity is not given in those units, you need to convert it first (e.g. if it says a week, you need to convert it to 7 days).**
       
-###Task 1: 
+### Task 1: 
 * Set the model parameters such that it corresponds to the following setting: 
     * Susceptible _S~0~_ = 500, and initially untreated infected host _I~u0~_ = 1. No other infected hosts _I~t0~_ = 0 and _I~r0~_ = 0.
     * Set simulation duration, _tmax_, to approximately half a year.
@@ -75,26 +75,26 @@ Recovery of I~r~        |  I~r~ => I~r~-1, R => R+1  |   g~r~ * I~r~       |
 * With parameters set to correspond to the scenario just described, run the simulation.
 * You should see some simulations with outbreaks and some without. For those _with outbreaks_, you should have around 10-100 susceptible left at the end.
 
-###Task 2: 
+### Task 2: 
 * With everything as before, set the initial number of untreated infected hosts to 10. 
 * Run simulations. You should pretty much always get outbreaks. Record the average number of susceptibles left.
 * Why do you see almost always outbreaks for this setting and fewer outbreaks/more extinctions for task 1?
 
 
-###Task 3: 
+### Task 3: 
 * With the same settings as _Task 2_ turn on treatment ( _f_ > 0 ). 
 * Set number of simulations to 50 (the simulations might take a few seconds to run).
 * Run the simulation with fraction receiving treatment, _f_, at 0, 0.25, 0.5, 0.75 and 1.
 * Observe what happens to the number susceptibles left at the end of the outbreak as you change treatment levels. Draw conclusions about the usefulness of treatment.
 
-###Task 4: 
+### Task 4: 
 * Now allow resistance to be generated during treatment (_c~t~_ > 0). Set _c~t~ = 0.2_ for the fraction of resistant generation from treatment.
 * Run the simulation for the treatment levels specified in the previous task.
 * Observe what happens to the number susceptibles left at the end of the outbreak as you change treatment levels. Draw conclusions about the usefulness of treatment.
 * In your head or on a piece of paper, sketch out the relationship between treatment level and the number of susceptibles left at the end in the absence and presence of resistance generation (_c~t~_ = 0 and _c~t~_ > 0). What do you conclude from that?
 
 
-###Task 5: 
+### Task 5: 
 * Set the rate of transmission for resistant hosts to _b~r~ = 0.001_. Keep untreated hosts and treated host values as before.
 * Set resistance generation during treatment to _c~t~ = 0.3_. 
 * Keep everything else as previously.
@@ -103,7 +103,7 @@ Recovery of I~r~        |  I~r~ => I~r~-1, R => R+1  |   g~r~ * I~r~       |
 * Again, sketch out the relationship between treatment level and the number of susceptibles left at the end and compare to what you found in tasks 3 and 4. What do you conclude from that?
 
 
-###Task 6: 
+### Task 6: 
 Keep exploring. For instance, try the following:
 
 * Turn on resistance generation for both treated, _c~t~_, and untreated, _c~u~_. 
@@ -111,14 +111,14 @@ Keep exploring. For instance, try the following:
 * If you want to explore the relation between treatment level and outbreak size (tasks 3-5) in more detail, you could access the underlying simulation directly and write a bit of R code to loop over treatment values following the "Level 2" example described in the DSAIDE tutorial.
 
 
-##Further Information {#shinytab4}
+## Further Information {#shinytab4}
 
 * The model is a simpler version of a previously published model in [@handel09a]. 
 * For this app, the underlying function running the simulation is called `simulate_evolution.R`. You can call this function directly, without going through the shiny app. Check the help file for the function for more information. 
 * If you call the function directly, you need to process the results returned from this function and produce useful output (such as a plot) yourself. 
 * You can also modify this R function for your own purposes. To find out how to do that, type `?DSAIDE` at the R console.
 
-###References
+### References
 
 
 

@@ -34,7 +34,7 @@ The following steps are required:
 
 The app will make use of 3 generate_ helper functions which are part of the package. It will also use the provided CSS file. Once you have written your new app, you should be able to run it by itself.
 
-Before you run the app.R file, make sure you source the simulator function and load the package so all functions needed by the app.R file are availabel.
+Before you run the app.R file, make sure you source the simulator function and load the package so all functions needed by the app.R file are available.
 
 
 ### Contributing your App
@@ -69,6 +69,7 @@ spelling::spell_check_files(files)
 * To re-build all Rmd documentation files at once, use these commands:
 files = list.files(path = "C:/data/git/DSAIDE/inst/shinyapps/", recursive=TRUE, pattern = "\\.(Rnw|Rmd)$", full.names = TRUE)
 for (n in 1: length(files)) {rmarkdown::render(files[n])}
+Adjust paths as needed
 
 
 ### To build the package

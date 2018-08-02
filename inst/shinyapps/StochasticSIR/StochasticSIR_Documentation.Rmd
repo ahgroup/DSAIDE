@@ -10,7 +10,7 @@ output:
 bibliography: ../../media/references.bib
 ---
 
-##Overview {#shinytab1}
+## Overview {#shinytab1}
 This app lets you explore a _stochastic_ SIR model. Read about the model in the "Model" tab. Then do the tasks described in the "What to do" tab.
 
 ### Learning Objectives
@@ -19,9 +19,9 @@ This app lets you explore a _stochastic_ SIR model. Read about the model in the 
 * Understand the concept of reproducibility with random numbers
 * Know how the reproductive number affects outbreaks in stochastic models
 
-##The Model {#shinytab2}
+## The Model {#shinytab2}
 
-###Model Overview
+### Model Overview
 
 This model tracks susceptibles, infected/infectious and recovered hosts. 
 The following compartments are included:  
@@ -39,7 +39,7 @@ The included processes/mechanisms are the following:
 
 
 
-###Model Implementation
+### Model Implementation
 The flow diagram for the model implemented in this app is:
 
 
@@ -74,7 +74,7 @@ This is almost the same model as the basic SIR model from the introductory app, 
 This simulation (as well as some of the others) involves using random numbers to introduce stochasticity/uncertainty/noise into the model. This leads to a model that usually more closely reflects the underlying real system. However, in science, we want to be as reproducible as possible. Fortunately, random numbers on a computer are not completely random, but can be reproduced. In practice, this is done by specifying a random number seed, in essence a starting position for the algorithm to produce pseudo-random numbers. As long as the seed is the same, the code should produce the same pseudo-random numbers each time, thus ensuring reproducibility.
 
 
-##What to do {#shinytab3}
+## What to do {#shinytab3}
 
 **The tasks below are described in a way that assumes everything is in units of DAYS (rate parameters, therefore, have units of inverse days). If any quantity is not given in those units, you need to convert it first (e.g. if it says a week, you need to convert it to 7 days).**
 
@@ -106,7 +106,7 @@ _Some of the simulations might take a few seconds to run. Be patient._
 * Plot (either by hand or using the computer) a relation between the probability of getting an outbreak and _I~0~_.
 
 
-##Further Information {#shinytab4}
+## Further Information {#shinytab4}
 * This app (and all others) are structured such that the Shiny part (the graphical interface you are currently using and the server-side function that goes with it) calls an underlying R script which runs the simulation for the model of interest and returns the results.
 * For this app, the underlying function running the stochastic simulation is called `simulate_stochastic_SIR.R`, the deterministic model is implemented in `simulate_introduction.R`. Check the help files for those functions to see how you can call them directly.
 * To get a quick start explaining how to interact with the simulator functions directly, read the vignette for the package (type `vignette('DSAIDE')` into the R console).

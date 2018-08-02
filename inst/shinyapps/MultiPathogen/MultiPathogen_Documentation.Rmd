@@ -13,9 +13,9 @@ bibliography: ../../media/references.bib
 
 ```{r}
 ################
-#This R chunk only exists as an easy way to add comments - a bit trickier in Markdown itself
+# This R chunk only exists as an easy way to add comments - a bit trickier in Markdown itself
 ################
-#You can adjust settings in the YAML header for styling 
+# You can adjust settings in the YAML header for styling 
 #first make sure your simulator function is in the \R folder 
 #and your App is in an appropriately named folder inside \shinyapps
 #use this template and fill it with information for your App
@@ -26,12 +26,12 @@ bibliography: ../../media/references.bib
 #note that the processing script changes some of the styling as specified in the shinystyle.css file
 ```
 
-##Overview {#shinytab1}
+## Overview {#shinytab1}
 This app allows you to explore a model with 2 pathogens. Read about the model in the "Model" tab. Then do the tasks described in the "What to do" tab.
 
-##The Model {#shinytab2}
+## The Model {#shinytab2}
 
-###Model Overview
+### Model Overview
 
 This model tracks susceptible hosts, hosts infected with either pathogen 1, pathogen 2 or both, and individuals recovered from infection with pathogen 1, pathogen 2 or both. As usual, infected hosts are assumed to be infectious.
 
@@ -58,7 +58,7 @@ The included processes/mechanisms are the following:
 * Recovered individuals are immune to reinfection by the pathogen they have already been infected with (either at the same time or consecutively) but can still be infected with the pathogen they have not yet been infected with. 
 
 
-###Model Implementation
+### Model Implementation
 The flow diagram and the set of differential equations for the mathematical model implemented in this app are as follows:
 
 ![Flow diagram for this model.](../../media/multipathogenmodel.png)
@@ -76,10 +76,10 @@ $$\dot R_{12} = g_{1} I_{1X} + g_{2} I_{2X} + g_{12} I_{12} $$
 
 
 
-##What to do {#shinytab3}
+## What to do {#shinytab3}
 **The tasks below are described in a way that assumes everything is in units of DAYS (rate parameters, therefore, have units of inverse days). If any quantity is not given in those units, you need to convert it first (e.g. if it says a week, you need to convert it to 7 days).**
 
-###Task 1: 
+### Task 1: 
 * First, make sure each pathogen can produce an outbreak by itself.
 * Set the initial number of infected with pathogen 1 to 1, all other infected at zero. Susceptibles at 1000.
 * Set all transmission rates to 0.001, all recovery rates at 0.5.
@@ -87,30 +87,30 @@ $$\dot R_{12} = g_{1} I_{1X} + g_{2} I_{2X} + g_{12} I_{12} $$
 * Run the simulation for 100 days, check that you only get a single outbreak with pathogen 1.
 * Now set initial number of infected with pathogen 1 to 0, with pathogen 2 to 1. Run the simulation and check that you get exactly the same size outbreak with pathogen 2.
 
-###Task 2: 
+### Task 2: 
 * Leave everything as before but now start with 1 infected for both pathogen 1 and 2. You should see outbreaks for both pathogens with the same dynamics (in fact, you won't see the curves for _I~1~_, _R~1~_, etc. since they are covered by the curves for _I~2~_, _R~2~_.)
 
-###Task 3: 
+### Task 3: 
 * Now start with _I~10~=1_ and _I~20~=10_. What do you expect to see? What do you find?
 
-###Task 4: 
+### Task 4: 
 * Go back to _I~10~ = I~20~ = 1_, instead set _b~2~ = 0.002_. What do you expect to see? What do you find?
 * What do you conclude has the stronger impact, higher initial number of infected for pathogen 2 or higher transmissibility?
 
-###Task 5: 
+### Task 5: 
 * To confirm that things are completely "symmetric", redo the 2 previous tasks but now instead of changing pathogen 2 initial infected or transmission rate, do it for pathogen 1.
 
-###Task 6:
+### Task 6:
 * Set everything back as in task #2, i.e. the 2 pathogens have the same starting numbers and transmission rates.
 * Now play around with the fraction of pathogen 1 infections, _a_. What do you expect? What do you find?
 
-###Task 7:
+### Task 7:
 * Keep exploring. Investigate how some of the other parameters influence the outbreak dynamics for the 2 pathogens.
 * Always follow the same pattern: Think about what you results you expect to get from a certain scenario/parameter setting and why. Then check with the simulation. If things don't agree, figure out why not. 
 
 
 
-##Further Information {#shinytab4}
+## Further Information {#shinytab4}
 
 * This app (and all others) are structured such that the Shiny part (the graphical interface you are currently using and the server-side function that goes with it) calls an underlying R script which runs the simulation for the model of interest and returns the results.
 * For this app, the underlying function running the simulation is called `simulate_multipathogen.R`. You can call this function directly, without going through the shiny app. Type `?simulate_multipathogen` into the R console for more information (you need to exit the graphical interface first or start a new R session). If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself. 
