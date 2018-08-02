@@ -158,11 +158,11 @@ server <- function(input, output, session) {
 #This is the UI for the Stochastic Dynamics App
 
 ui <- fluidPage(
-  includeCSS("../styles/dsaide.css"),
+  includeCSS("../../media/dsaide.css"),
   
   #add header and title
    
-  div( includeHTML("../styles/header.html"), align = "center"),
+  div( includeHTML("../../media/header.html"), align = "center"),
   h1('Stochastic SIR App', align = "center", style = "background-color:#123c66; color:#fff"),
   
   #start section to add buttons
@@ -260,7 +260,7 @@ ui <- fluidPage(
   #use external function to generate all tabs with instruction content
   # do.call(tabsetPanel,generate_instruction_tabs()),
   do.call(tabsetPanel, generate_documentation()),
-  div(includeHTML("../styles/footer.html"), align="center", style="font-size:small") #footer
+  div(includeHTML("../../media/footer.html"), align="center", style="font-size:small") #footer
 ) #end fluidpage
 
 shinyApp(ui = ui, server = server)

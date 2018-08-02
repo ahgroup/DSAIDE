@@ -7,14 +7,13 @@
 ### Main content
 * The main R functions, i.e. the menu and the simulation scripts are in the /R folder. They all start with simulate_. The /R folder also has a few helper functions.
 * The /inst folder contains several subfolders: 
-  * The shiny apps are in the inst/shinyapps/ subfolder (which gets copied to /shinyapps in the deployed package). Each App has an app.R file and Rmd+HTML files containing the documentation.
-  * There are a few other folders in the inst/shinyapps/ directory which do not correspond to shiny apps. Those are:
-    * The /media folder contains figures and a bib file used as part of the documentation (i.e. the Rmd files). Note that this is not part of the CRAN R package for size reasons, but if you fork the project from github it will be included.
-    * The /styles folder contains css styling for the documentation
+  * inst/shinyapps/ contains all shiny apps (which get copied to /shinyapps in the deployed package). Each App has its own folder with an app.R file and Rmd+HTML files containing the documentation.
   * /inst/docsfordevelopers contains this file. It also contains a sub-folder with starter files to allow development of new apps for the package.
   * /inst/simulatorfunctions contains the R code for all simulator functions for easy access and editing by users.
   * /inst/doc contains the vignettes, this folder should not be edited, see below.
-
+  * inst/media folder contains figures and a bib file used as part of the documentation (i.e. the Rmd files). It also contains some css and html files used in other files.
+    Note that this is not part of the CRAN R package for size reasons, but if you fork the project from github it will be included.
+    
 
 ### Other folders
 * folder /auxilliary contains package related resources, not needed for package build
@@ -67,6 +66,10 @@ The best approach is to contact me by email (ahandel@uga.edu) or through the Git
 * To spell-check all Rmd documentation files, use these commands:
 files = list.files(path = "C:/data/git/DSAIDE/inst/shinyapps/", recursive=TRUE, pattern = "\\.(Rnw|Rmd)$", full.names = TRUE)
 spelling::spell_check_files(files)
+* To re-build all Rmd documentation files at once, use these commands:
+files = list.files(path = "C:/data/git/DSAIDE/inst/shinyapps/", recursive=TRUE, pattern = "\\.(Rnw|Rmd)$", full.names = TRUE)
+for (n in 1: length(files)) {rmarkdown::render(files[n])}
+
 
 ### To build the package
 * "by hand" edit the DESCRIPTION file to make sure it's up to date

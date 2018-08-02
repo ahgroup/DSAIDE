@@ -37,7 +37,7 @@ stochasticSIRfunc <- function(y, parms, t)
 #' @param tmax maximum simulation time, units depend on choice of units for 
 #' your parameters
 #' @return The function returns a list. The list has one element, a data frame ts
-#' which cotains the time series of the simulated model, 
+#' which contains the time series of the simulated model, 
 #' with one column per compartment/variable. The first column is time.
 #' @details A compartmental SIR model is
 #'   simulated. Initial conditions for the R variable is 0. Units of

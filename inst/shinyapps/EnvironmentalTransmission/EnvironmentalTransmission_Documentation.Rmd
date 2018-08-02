@@ -7,7 +7,7 @@ output:
     fig_caption: true
     mathjax: default 
     keep_md: false
-bibliography: ../media/references.bib
+bibliography: ../../media/references.bib
 ---
 
 ##Overview {#shinytab1}
@@ -40,7 +40,7 @@ The processes being modeled are:
 ###Model Implementation
 The flow diagram and the set of ordinary differential equations (ODE) which are used to implement this model are as follows:
 
-![Flow diagram for the model with environmental transmission.](../media/environmentaltransmissionmodel.png)
+![Flow diagram for the model with environmental transmission.](../../media/environmentaltransmissionmodel.png)
 
 
 $$\dot S =b - b_d S I - b_e S E - nS$$ 

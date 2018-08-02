@@ -7,7 +7,7 @@ output:
     fig_caption: true
     mathjax: default 
     keep_md: false
-bibliography: ../media/references.bib
+bibliography: ../../media/references.bib
 ---
 
 ##Overview {#shinytab1}
@@ -44,7 +44,7 @@ The flow diagram for the model implemented in this app is:
 
 
 ```{r BIdiagram,  fig.cap='Flow diagram for this model. ',  echo=FALSE}
-knitr::include_graphics("../media/stochasticSEIRmodel.png")
+knitr::include_graphics("../../media/stochasticSEIRmodel.png")
 ```
 
 

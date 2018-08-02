@@ -7,7 +7,7 @@ output:
     fig_caption: true
     mathjax: default 
     keep_md: false
-bibliography: ../media/references.bib
+bibliography: ../../media/references.bib
 ---
 
 
@@ -43,7 +43,7 @@ For our system, we specify the following processes/flows:
 ###Model Implementation
 The flow diagram and the set of equations which are used to implement this model are as follows:
 
-![Model Figure](../media/R0modelfigure.png)
+![Model Figure](../../media/R0modelfigure.png)
 
 
 $$\dot S =m - b SI - nS + wR$$ 

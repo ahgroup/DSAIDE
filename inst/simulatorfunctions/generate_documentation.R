@@ -16,7 +16,7 @@ generate_documentation <- function()
     tablist = NULL
     tabtitles = c('Overview','The Model','What to do','Further Information')
     htmlfile = list.files(path = currentdir, pattern = "\\.html$")
-    html.raw <- XML::htmlTreeParse(htmlfile, useInternalNodes = TRUE, encoding='UTF-8')
+   html.raw <- XML::htmlTreeParse(htmlfile, useInternalNodes = TRUE, encoding='UTF-8')
     shinyblocks = XML::getNodeSet(html.raw, "//div[@id[starts-with(., 'shinytab')]]")
     for (i in 1:4)
     {

@@ -114,11 +114,11 @@ server <- function(input, output, session) {
 
 ui <- fluidPage(
   
-     includeCSS("../styles/dsaide.css"), 
+     includeCSS("../../media/dsaide.css"), 
      
    #add header and title
    
-     div( includeHTML("../styles/header.html"), align = "center"),
+     div( includeHTML("../../media/header.html"), align = "center"),
   
    #specify name of App below, will show up in title
   
@@ -226,7 +226,7 @@ ui <- fluidPage(
   #use external function to generate all tabs with instruction content
   # do.call(tabsetPanel,generate_instruction_tabs()),
   do.call(tabsetPanel, generate_documentation()),
-  div(includeHTML("../styles/footer.html"), align="center", style="font-size:small") #footer
+  div(includeHTML("../../media/footer.html"), align="center", style="font-size:small") #footer
   
 ) #end fluidpage function, i.e. the UI part of the app
 
