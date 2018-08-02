@@ -39,7 +39,7 @@ Depends:
 Suggests: 
     covr,
     testthat
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.0
 VignetteBuilder: knitr
 URL: https://ahgroup.github.io/DSAIDE, https://github.com/ahgroup/DSAIDE/
 BugReports: https://github.com/ahgroup/DSAIDE/issues
