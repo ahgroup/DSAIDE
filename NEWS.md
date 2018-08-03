@@ -1,22 +1,27 @@
 # DSAIDE 0.7.0
 
-## New features
+## User facing changes
 
-* Major changes to underlying plotting and text generating approaches.
-
-* Standardized all simulator functions to return lists.
-
-* Added some unit tests.
+* Major changes to underlying plotting and text generating approaches, now uses ggplot, shows better plots and more informative text.
 
 * Added a function that lets one call apps without going through the main menu.
 
-* Added one new app.
-
-## Fixes
+* Added new apps.
 
 * Updated a lot of the instructions and documentation.
 
-* Fixed bug that prevented opening of apps from the main menu.
+* Fixed bug that prevented opening of apps from the main menu for some versions of shiny.
+
+## Other changes
+
+* Standardized all simulator functions to return lists.
+
+* Simplified underlying code and documentation structure of shiny apps.
+
+* Added some unit tests.
+
+* Lots of other code cleanup to make things more robust and streamlined
+
 
 # DSAIDE 0.6.0
 
