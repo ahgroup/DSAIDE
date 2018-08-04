@@ -4,8 +4,8 @@
 #' it then takes the html file and extracts sections
 #' to generate the tabs with content for each Shiny app.
 #' This is a helper function and only useful for this package.
-#' @return tablist a list of tabs for display in a shiny UI
-#' @details This function is called by the shiny UIs to populate the documentation and information tabs
+#' @return A list of tabs for display in a Shiny UI
+#' @details This function is called by the Shiny UIs to populate the documentation and information tabs
 #' @author Andreas Handel
 #' @export
 

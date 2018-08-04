@@ -37,7 +37,7 @@ vectortransmissioneq <- function(t, y, parms)
 #' @param g the rate at which infected hosts recover/die
 #' @param w the rate at which host immunity wanes
 #' @return This function returns the simulation result as obtained from a call
-#'   to the deSolve ode solver
+#'   to the deSolve ode solver.
 #' @details A compartmental ID model with several states/compartments
 #'   is simulated as a set of ordinary differential
 #'   equations. The compartments are Sh, Ih, Rh, and Sv, Iv.
@@ -46,18 +46,18 @@ vectortransmissioneq <- function(t, y, parms)
 #' @section Warning:
 #'   This function does not perform any error checking. So if you try to do
 #'   something nonsensical (e.g. any negative values or fractions > 1),
-#'   the code will likely abort with an error message
+#'   the code will likely abort with an error message.
 #' @examples
-#'   # To run the simulation with default parameters just call this function
+#'   # To run the simulation with default parameters just call the function:
 #'   result <- simulate_vectortransmission()
-#'   # To choose parameter values other than the standard one, specify them e.g. like such
+#'   # To choose parameter values other than the standard one, specify them like such:
 #'   result <- simulate_vectortransmission(Sh0 = 100, Sv0 = 1e5,  tmax = 100)
-#'   # You should then use the simulation result returned from the function, e.g. like this:
+#'   # You should then use the simulation result returned from the function, like this:
 #'   plot(result$ts[ , "Time"],result$ts[ , "Sh"],xlab='Time',ylab='Number Susceptible',type='l')
-#' @seealso The UI of the shiny app 'VectorTransmission', which is part of this package, contains more details on the model
+#' @seealso The UI of the Shiny app 'VectorTransmission', which is part of this package, contains more details on the model.
 #' @author Andreas Handel
-#' @references See the information in the corresponding shiny app for model details
-#'            See the documentation for the deSolve package for details on ODE solvers
+#' @references See the information in the corresponding Shiny app for model details.
+#'            See the documentation for the deSolve package for details on ODE solvers.
 #' @export
 
 
