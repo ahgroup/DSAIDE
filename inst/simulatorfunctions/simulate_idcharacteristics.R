@@ -59,7 +59,7 @@ idcharacteristicsode <- function(t, y, parms)
 #' # To choose parameter values other than the standard one, specify them e.g. like such
 #' result <- simulate_idcharacteristics(S0 = 2000, P0 = 10, tmax = 100, f = 0.1, d = 0.2)
 #' # You should then use the simulation result returned from the function, e.g. like this:
-#' plot(result[,1],result[,2],xlab='Time',ylab='Number Susceptible',type='l')
+#' plot(result$ts[,"Time"],result$ts[,"S"],xlab='Time',ylab='Number Susceptible',type='l')
 #' @references See e.g. Keeling and Rohani 2008 for SIR models and the
 #'   documentation for the deSolve package for details on ODE solvers
 #' @author Andreas Handel
@@ -78,6 +78,10 @@ simulate_idcharacteristics <- function(S0 = 1000, P0 = 1, tmax = 300, bP = 0, bA
   #the result is saved in the odeoutput matrix, with the 1st column the time, the 2nd, 3rd, 4th column the variables S, I, R
   odeoutput = deSolve::ode(y = Y0, times = timevec, func = idcharacteristicsode, parms=pars, atol=1e-12, rtol=1e-12);
 
+  colnames(odeoutput) <- c('Time','S','P','A','I','R','D')
+  result <- list()
+  result$ts <- as.data.frame(odeoutput)
+  
   #The output produced by a call to the odesolver is odeoutput matrix is returned by the function
-  return(odeoutput)
+  return(result)
 }

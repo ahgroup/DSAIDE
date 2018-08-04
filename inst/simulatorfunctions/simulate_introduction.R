@@ -31,7 +31,7 @@ introductionode <- function(t, y, parms)
 #' The function simulates the ODE using an ODE solver from the deSolve package.
 #' The function returns a matrix containing time-series of each variable and time.
 #'
-#' @param S0 initial number of suceptibles individuals
+#' @param S0 initial number of susceptible individuals
 #' @param I0 initial number of infected hosts
 #' @param b level of infectiousness, i.e. rate of transmission of pathogen
 #'   from infected to susceptible host
@@ -52,7 +52,15 @@ introductionode <- function(t, y, parms)
 #' # To choose parameter values other than the standard one, specify them e.g. like such
 #' result <- simulate_introduction(S0 = 2000, I0 = 10, tmax = 100, g = 1, b = 1/100)
 #' # You should then use the simulation result returned from the function, e.g. like this:
-#' plot(result[,1],result[,2],xlab='Time',ylab='Number Susceptible',type='l')
+#' plot(result$ts[ , "Time"], result$ts[ , "S"],xlab='Time',ylab='Number Susceptible',type='l')
+#' # Suppose we want to model the average duration of the infectious period as 4 days;
+#' # the inverse of this is 0.25, which is the rate at which the person leaves
+#' # the infectious stage.
+#' result <- simulate_introduction(S0 = 2000, I0 = 10, tmax = 100, g = 0.25)
+#' plot(result$ts[,"Time"],result$ts[,"S"], xlab = "Time", ylab = "Number Susceptible",type="l")
+#' # We could also set the rate of infectiousness very low.
+#' result <- simulate_introduction(S0 = 2000, I0 = 10, tmax = 100, b = 0.0001)
+#' plot(result$ts[,"Time"],result$ts[,"S"], xlab = "Time", ylab = "Number Susceptible",type="l")
 #' @seealso See the shiny app documentation corresponding to this simulator
 #' function for more details on this model. See the manual for the deSolve
 #' package for details on the underlying ODE simulator algorithm.
@@ -71,7 +79,10 @@ simulate_introduction <- function(S0 = 1000, I0 = 1, tmax = 300, g = 0.5, b = 1/
   #this line runs the simulation, i.e. integrates the differential equations describing the infection process
   #the result is saved in the odeoutput matrix, with the 1st column the time, the 2nd, 3rd, 4th column the variables S, I, R
   odeoutput = deSolve::ode(y = Y0, times = timevec, func = introductionode, parms=pars, atol=1e-12, rtol=1e-12);
+  
+  colnames(odeoutput) <- c('Time','S','I','R')
+  result <- list()
+  result$ts <- as.data.frame(odeoutput)
 
-  #The output produced by a call to the odesolver is odeoutput matrix is returned by the function
-  return(odeoutput)
+  return(result)
 }

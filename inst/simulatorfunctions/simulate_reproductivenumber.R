@@ -57,7 +57,14 @@ reproductivenumberode <- function(t, y, parms)
 #'   # To choose parameter values other than the standard one, specify them e.g. like such
 #'   result <- simulate_reproductivenumber(S0 = 2000, I0 = 10, tmax = 100, g = 0.5, n = 0.1)
 #'   # You should then use the simulation result returned from the function, e.g. like this:
-#'   plot(result[,1],result[,2],xlab='Time',ylab='Number Susceptible',type='l')
+#'   plot(result$ts[ , "Time"],result$ts[ , "S"],xlab='Time',ylab='Number Susceptible',type='l')
+#'   # We might also want to have infectiousness rate for hosts in the I compartment
+#'   # of 0.4.
+#'   result <- simulate_reproductivenumber(S0 = 2000, I0 = 10, tmax = 100, b = 0.4)
+#'   plot(result$ts[,"Time"],result$ts[,"S"],xlab = "Time", ylab = "Number Susceptible",type="l")
+#'   # We could also have infectiousness rate of 0.6 and recovery rate of 0.2.
+#'   result <- simulate_reproductivenumber(S0 = 2000, I0 = 10, tmax = 100, b = 0.6, g = 0.2)
+#'   plot(result$ts[,"Time"],result$ts[,"S"],xlab = "Time", ylab = "Number Susceptible",type="l")
 #' @seealso The UI of the shiny app 'ReproductiveNumber', which is part of this package, contains more details on the model.
 #' @references See e.g. Keeling and Rohani 2008 for SIR models and the
 #'   documentation for the deSolve package for details on ODE solvers
@@ -80,6 +87,10 @@ simulate_reproductivenumber <- function(S0 = 1000, I0 = 1, f = 0.0, e = 0.0, tma
   #the result is saved in the odeoutput matrix, with the 1st column the time, the 2nd, 3rd, 4th column the variables S, I, R
   #This odeoutput matrix will be re-created every time you run the code, so any previous results will be overwritten
   odeoutput = deSolve::ode(y = Y0, times = timevec, func = reproductivenumberode, parms=pars, method = "vode", atol=1e-8, rtol=1e-8);
+  
+  colnames(odeoutput) <- c('Time','S','I','R') 
+  result <- list()
+  result$ts <- as.data.frame(odeoutput)
 
-  return (odeoutput)
+  return(result)
 }

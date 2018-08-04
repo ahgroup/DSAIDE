@@ -5,7 +5,8 @@
 \title{Simulation of an infectious disease transmission model with multiple compartments}
 \usage{
 simulate_idcharacteristics(S0 = 1000, P0 = 1, tmax = 300, bP = 0,
-  bA = 0, bI = 1/1000, gP = 0.5, gA = 0.5, gI = 0.5, f = 0, d = 0)
+  bA = 0, bI = 1/1000, gP = 0.5, gA = 0.5, gI = 0.5, f = 0,
+  d = 0)
 }
 \arguments{
 \item{S0}{specifies the initial number of susceptible hosts}

@@ -82,10 +82,8 @@
 <li>Assume that the duration of the presymptomatic, asymptomatic and symptomatic periods are all 5 days long. (Hint: The parameters <em>g<sub>P</sub></em>, <em>g<sub>A</sub></em>, and <em>g<sub>I</sub></em> are the inverses of these periods.)</li>
 <li>Assume that there are no asymptomatic infections, <em>f</em>=0, and nobody dies due to disease <em>d</em>=0.</li>
 </ul></li>
-<li>With parameters set to correspond to the scenario just described, run the simulation.</li>
-<li>Record the number and fraction of susceptible/infected/recovered remaining at the end of the outbreak.<br />
-</li>
-<li>Check the results with the assumptions for the model and make sure they agree (you shouldn’t get any deaths, no asymptomatics, etc.)</li>
+<li>With parameters set to correspond to the scenario just described, run the simulation. You should end up with around 7 susceptibles left at the end of the simulation.</li>
+<li>Check the results with the assumptions for the model and make sure they agree. For instance you shouldn’t get any deaths, and no asymptomatic infected.</li>
 <li>From the graph, contemplate how you would estimate the day at which the outbreak peaks. What’s the problem? How would you solve it?</li>
 <li>Rerun the simulation, with the same values you just had. Does anything change? Why (not)?</li>
 </ul>
@@ -102,16 +100,14 @@
 <div id="task-3" class="section level3">
 <h3>Task 3:</h3>
 <ul>
-<li>Now assume that the asymptomatics transmit at the same rate as the symptomatic (<em>b<sub>A</sub></em>= 0.001). Leave everything as in #2.</li>
-<li>How do you expect the results to change? (Try to make as precise/quantitative a prediction as you can)</li>
-<li>Run another simulation, record the same values as above.</li>
-<li>Compare your expectations with the results. How do they agree/disagree? Does it make sense? Anything surprising happening?</li>
+<li>Now assume that the asymptomatics transmit at the same rate as the symptomatic. Change <em>b<sub>A</sub></em> accordingly. Leave everything else as before. How do you expect the results to change? (Try to make as precise/quantitative a prediction as you can).</li>
+<li>Run another simulation, compare your expectations with the results. How do they agree/disagree? Does it make sense? Anything surprising happening?</li>
 </ul>
 </div>
 <div id="task-4" class="section level3">
 <h3>Task 4:</h3>
 <ul>
-<li>Next, let’s assume that half the symptomatic infected die. Leave everything as in #3.</li>
+<li>Next, let’s assume that half the symptomatic infected die. Change the corresponding parameter in the model to reflect this new assumption. Leave everything as in #3.</li>
 <li>How do you expect the results to change?</li>
 <li>Run another simulation, record the same values as above.</li>
 <li>Compare your expectations with the results. How do they agree/disagree? Does it make sense? Anything surprising happening?</li>
@@ -120,6 +116,7 @@
 <div id="task-5" class="section level3">
 <h3>Task 5:</h3>
 <ul>
+<li>Set all transmission parameters to 0.0005, leave everything else as before. What do you expect will happen to the peak of <em>P</em> and <em>I</em> as well as the total fraction of population ever infected (i.e., <em>R</em> + <em>D</em> at the end of simulation), compared to the previous task?_</li>
 <li>Further explore how changes in the infectiousness of the different groups (<em>b<sub>P</sub></em>, <em>b<sub>A</sub></em>, <em>b<sub>I</sub></em>) and the average time a person spends in each of those states (<em>g<sub>P</sub></em>, <em>g<sub>A</sub></em>, <em>g<sub>I</sub></em>) affects the infection dynamics.</li>
 <li>Every time, think about what you expect to get, then run the simulation, compare your expectations with the results. Then make sense of it.</li>
 </ul>
@@ -127,36 +124,18 @@
 <div id="task-6" class="section level3">
 <h3>Task 6:</h3>
 <ul>
+<li>Now assume that 90% of infections are asymptomatic. How do things change?<br />
+</li>
 <li>Further explore how changes in the fraction becoming asymptomatic and fraction dying does (or does not) affect the infection dynamics.</li>
 <li>Every time, think about what you expect to get, then run the simulation, compare your expectations with the results. Then make sense of it.</li>
 </ul>
-</div>
-<div id="task-7" class="section level3">
-<h3>Task 7:</h3>
-<ul>
-<li>Keep exploring.</li>
-<li>Think about real-world IDs and interventions. What groups would those interventions target, how would that affect the outcome?</li>
-</ul>
-</div>
-</div>
-<div id="answers" class="section level2">
-<h2>Answers</h2>
-</div>
-<div id="answer-1" class="section level2">
-<h2>Answer 1:</h2>
-<div id="answer-2" class="section level3">
-<h3>Answer 2:</h3>
-</div>
-<div id="answer-3" class="section level3">
-<h3>Answer 3:</h3>
 </div>
 </div>
 <div id="shinytab4" class="section level2">
 <h2>Further Information</h2>
 <ul>
-<li>For this app, the underlying function running the simulation is called <code>simulate_idcharacteristics.R</code>. You can call this function directly, without going through the shiny app. Check the help file for the function for more information. If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself.</li>
-<li>You could also modify this R function for your own purposes - though that requires R coding knowledge.</li>
-<li>Some further information covering the concepts this app addresses can be found in <span class="citation">(Kajita et al. 2007, <span class="citation">Milwid et al. (2016)</span>)</span>.</li>
+<li>For this app, the underlying function running the simulation is called <code>simulate_idcharacteristics.R</code>. You can call this function directly, without going through the shiny app. Check the help file for the function for more information.</li>
+<li>Some further information covering the concepts this app addresses can be found in <span class="citation">(Keeling and Rohani 2008, <span class="citation">Vynnycky and White (2010)</span>, <span class="citation">Kajita et al. (2007)</span>, <span class="citation">Milwid et al. (2016)</span>)</span>.</li>
 </ul>
 <div id="references" class="section level3 unnumbered">
 <h3>References</h3>
@@ -164,8 +143,14 @@
 <div id="ref-kajita07">
 <p>Kajita, Emily, Justin T Okano, Erin N Bodine, Scott P Layne, and Sally Blower. 2007. “Modelling an Outbreak of an Emerging Pathogen.” <em>Nature Reviews. Microbiology</em> 5 (9): 700–709. doi:<a href="https://doi.org/10.1038/nrmicro1660">10.1038/nrmicro1660</a>.</p>
 </div>
+<div id="ref-keeling08">
+<p>Keeling, Matt J, and Pejman Rohani. 2008. <em>Modeling Infectious Diseases in Humans and Animals</em>. Princeton University Press.</p>
+</div>
 <div id="ref-milwid16">
 <p>Milwid, Rachael, Andreea Steriu, Julien Arino, Jane Heffernan, Ayaz Hyder, Dena Schanzer, Emma Gardner, et al. 2016. “Toward Standardizing a Lexicon of Infectious Disease Modeling Terms.” <em>Frontiers in Public Health</em> 4: 213. doi:<a href="https://doi.org/10.3389/fpubh.2016.00213">10.3389/fpubh.2016.00213</a>.</p>
+</div>
+<div id="ref-vynnycky10">
+<p>Vynnycky, Emilia, and Richard White. 2010. <em>An Introduction to Infectious Disease Modelling</em>. Oxford University Press.</p>
 </div>
 </div>
 </div>

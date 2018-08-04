@@ -1,0 +1,202 @@
+############################################################
+#This is a shiny file template for a new app
+#currently it contains the content of the ID Dynamics Introduction App
+#replace with your content
+############################################################
+
+#the server-side function with the main functionality
+#this function is wrapped inside the shiny server function below to allow return to main menu when window is closed
+
+refresh <- function(input, output){
+  
+  # This reactive takes the input data and sends it over to the simulator
+  # Then it will get the results back and return it as the "res" variable
+   
+  result <- reactive({
+    input$submitBtn
+
+  # Read all the input values from the UI
+    S0 = isolate(input$S0);
+    I0 = isolate(input$I0);
+    b = isolate(input$b);
+    g = isolate(input$g);
+    tmax = isolate(input$tmax);
+    plotscale = isolate(input$plotscale)     # Change the scale of axis interactively
+      
+  #save all results to a list for processing plots and text
+    listlength = 1;       #here we do all simulations in the same figure
+    result = vector("list", listlength) #create empty list of right size for results
+    
+#shows a 'running simulation' message
+    
+    withProgress(message = 'Running Simulation', value = 0,
+                 {
+                   simresult <- simulate_newmodel(S0 = S0, I0 = I0, g = g, b = b, tmax = tmax)
+                 })
+    
+    #the results returned from your simulate_ function need to be put in a certain form
+    #to allow processing by the generate_plots and generate_text functions (which are part of the package)
+    #results need to be saved in a list, one top list element per plot
+    #each list entry needs to have different elements which will be processed by the plot and text functions
+    #at teh minimum a $ts or $dat element containing the data to be plotted needs to be provided
+    #other information for the plots and text is likely needed too.
+    #see the help files for the generate_plots and generate_text functions
+    
+    result[[1]]$dat = simresult$ts
+    
+    #Meta-information for each plot
+    result[[1]]$plottype = "Lineplot"
+    result[[1]]$xlab = "Time"
+    result[[1]]$ylab = "Numbers"
+    result[[1]]$legend = "Compartments"
+    
+    result[[1]]$xscale = 'identity'
+    result[[1]]$yscale = 'identity'
+    if (plotscale == 'x' | plotscale == 'both') { result[[1]]$xscale = 'log10'}
+    if (plotscale == 'y' | plotscale == 'both') { result[[1]]$yscale = 'log10'}
+    
+    #the following are for text display for each plot
+    result[[1]]$maketext = TRUE #if true we want the generate_text function to process data and generate text, if 0 no result processing will occur insinde generate_text
+    result[[1]]$showtext = '' #text can be added here which will be passed through to generate_text and displayed for each plot
+    result[[1]]$finaltext = 'Numbers are rounded to 2 significant digits.' #text can be added here which will be passed through to generate_text and displayed for each plot
+    
+    
+    return(result)
+    
+  })   #ends inner shiny server function that runs the simulation and returns output
+  
+  
+#functions below take result saved in reactive expression result and produce output
+#to produce figures, the function generate_plot is used
+#function generate_text produces text
+#data needs to be in a specific structure for processing
+#see information for those functions to learn how data needs to look like
+#output (plots, text) is stored in reactive variable 'output'
+  
+  output$plot  <- renderPlot({
+    input$submitBtn
+    res=isolate(result())   #list of all results that are to be turned into plots
+    DSAIDE::generate_plots(res)      #create plots with a non-reactive function
+  }, width = 'auto', height = 'auto'
+  )    #finish render-plot statement
+  
+  output$text <- renderText({
+    input$submitBtn
+    res=isolate(result())        #list of all results that are to be turned into plots
+    DSAIDE::generate_text(res)     #create text for display with a non-reactive function
+  })
+  
+  
+  
+} #ends the 'refresh' shiny server function that runs the simulation and returns output   
+
+
+#main shiny server function
+ 
+server <- function(input, output, session) {
+  
+  # Waits for the Exit Button to be pressed to stop the app and return to main menu
+  
+  observeEvent(input$exitBtn, {
+    input$exitBtn
+    stopApp(returnValue = NULL)
+  })
+  
+  # This function is called to refresh the content of the Shiny App
+  refresh(input, output)
+
+}       #ends the main shiny server function
+
+
+#This is the UI part of the shiny App
+
+ui <- fluidPage(
+  includeCSS("dsaide.css"),
+  #add header and title
+  withMathJax(),
+  tags$head(tags$style(".myrow{vertical-align: bottom;}")),
+  #specify name of App below, will show up in title
+  h1('My new App', align = "center", style = "background-color:#123c66; color:#fff"),
+  
+  #section to add buttons
+  
+  fluidRow(
+    column(6,
+           actionButton("submitBtn", "Run Simulation", class="submitbutton")  
+    ),
+    column(6,
+           actionButton("exitBtn", "Exit App", class="exitbutton")
+    ),
+    align = "center"
+  ), #end section to add buttons
+  
+  tags$hr(),
+  
+################################
+#Split screen with input on left, output on right
+  
+  fluidRow(
+    #all the inputs in here
+    column(6,
+           #################################
+           # Inputs section
+           h2('Simulation Settings'),
+           fluidRow( class = 'myrow',
+                     column(4,
+                            numericInput("S0", "Initial number of susceptible hosts (S0)", min = 500, max = 5000, value = 1000, step = 500)
+                     ),
+                     column(4,
+                            numericInput("I0", "Initial number of infected hosts (I0)", min = 0, max = 100, value = 0, step = 1)
+                     ),
+                     column(4,
+                            numericInput("tmax", "Maximum simulation time (tmax)", min = 10, max = 1000, value = 300, step = 10)
+                     ),
+                     align = "center"
+           ), #close fluidRow structure for input
+           
+           fluidRow(class = 'myrow',
+                    column(4,
+                           numericInput("b", "Rate of transmission (b)", min = 0, max = 0.01, value = 0, step = 0.0001 )
+                    ),
+                    column(4,
+                           numericInput("g", "Rate at which a host leaves the infectious compartment (g)", min = 0, max = 2, value = 0.5, step = 0.1)
+                    ),
+                    column(4,
+                           selectInput("plotscale", "Log-scale for plot:",c("none" = "none", 'x-axis' = "x", 'y-axis' = "y", 'both axes' = "both")) 
+                    ),
+                    align = "center" 
+           ) #close fluidRow structure for input
+           
+           
+    ), #end sidebar column for inputs
+    
+#all the outcomes here
+    column(6,
+           
+           #################################
+           #Start with results on top
+           h2('Simulation Results'),
+           plotOutput(outputId = "plot", height = "500px"),
+           # PLaceholder for results of type text
+           htmlOutput(outputId = "text"),
+           #Placeholder for any possible warning or error messages (this will be shown in red)
+           htmlOutput(outputId = "warn"),
+           
+           tags$head(tags$style("#warn{color: red;
+                                font-style: italic;
+                                }")),
+           tags$hr()
+           
+    ) #end main panel column with outcomes
+  ), #end layout with side and main panel
+  
+#################################
+#Instructions section at bottom as tabs
+  h2('Instructions'),
+#use external function to generate all tabs with instruction content
+  #browser(),
+  do.call(tabsetPanel, DSAIDE::generate_documentation() )
+
+) #end fluidpage function, i.e. the UI part of the app
+
+shinyApp(ui = ui, server = server)

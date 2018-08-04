@@ -125,11 +125,11 @@ server <- function(input, output, session) {
 #This is the UI part of the shiny App
 
 ui <- fluidPage(
-     includeCSS("../styles/dsaide.css"),
+     includeCSS("../../media/dsaide.css"),
   
   # Add the app title
   
-  div( includeHTML("../styles/footer.html"), align = "center"),
+  div( includeHTML("../../media/footer.html"), align = "center"),
   h1('Environmental Transmission App', align = "center", style = "background-color:#123c66; color:#fff"),
   
   #section to add buttons
@@ -241,7 +241,7 @@ ui <- fluidPage(
   # do.call(tabsetPanel,generate_instruction_tabs()),
   do.call(tabsetPanel, generate_documentation()),
   
-  div(includeHTML("../styles/footer.html"), align="center", style="font-size:small")     #footer
+  div(includeHTML("../../media/footer.html"), align="center", style="font-size:small")     #footer
   
 )     #end fluidpage
 

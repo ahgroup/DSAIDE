@@ -34,6 +34,15 @@
 <div id="shinytab1" class="section level2">
 <h2>Overview</h2>
 <p>This app lets you explore a <em>stochastic</em> SIR model. Read about the model in the “Model” tab. Then do the tasks described in the “What to do” tab.</p>
+<div id="learning-objectives" class="section level3">
+<h3>Learning Objectives</h3>
+<ul>
+<li>Get an introduction to stochastic compartmental models</li>
+<li>Understand differences and similarities between stochastic models and their deterministic equivalent</li>
+<li>Understand the concept of reproducibility with random numbers</li>
+<li>Know how the reproductive number affects outbreaks in stochastic models</li>
+</ul>
+</div>
 </div>
 <div id="shinytab2" class="section level2">
 <h2>The Model</h2>
@@ -105,13 +114,52 @@
 <p><span class="math display">\[\dot S = m - bSI - nS\]</span> <span class="math display">\[\dot I = bSI - gI - nI\]</span> <span class="math display">\[\dot R = gI - nR\]</span></p>
 <p>This is almost the same model as the basic SIR model from the introductory app, with the only difference that this model also allows natural births and deaths. In this app, you can run the basic SIR model together with the stochastic one and for m=n=0 you can compare the 2 models.</p>
 </div>
+<div id="a-note-on-randomness-in-computer-simulations" class="section level3">
+<h3>A note on randomness in computer simulations</h3>
+<p>This simulation (as well as some of the others) involves using random numbers to introduce stochasticity/uncertainty/noise into the model. This leads to a model that usually more closely reflects the underlying real system. However, in science, we want to be as reproducible as possible. Fortunately, random numbers on a computer are not completely random, but can be reproduced. In practice, this is done by specifying a random number seed, in essence a starting position for the algorithm to produce pseudo-random numbers. As long as the seed is the same, the code should produce the same pseudo-random numbers each time, thus ensuring reproducibility.</p>
+</div>
 </div>
 <div id="shinytab3" class="section level2">
 <h2>What to do</h2>
-<p><strong>The tasks below are described in a way that assumes everything is in units of MONTHS (rate parameters, therefore, have units of inverse months). If any quantity is not given in those units, you need to convert it first (e.g. if it says a year, you need to convert it to 12 months).</strong></p>
+<p><strong>The tasks below are described in a way that assumes everything is in units of DAYS (rate parameters, therefore, have units of inverse days). If any quantity is not given in those units, you need to convert it first (e.g. if it says a week, you need to convert it to 7 days).</strong></p>
 <p><em>Some of the simulations might take a few seconds to run. Be patient.</em></p>
 <div id="task-1" class="section level3">
-<h3>Task 1:</h3>
+<h3>Task 1</h3>
+<ul>
+<li>Start with 1000 susceptibles, 1 infected, simulation time of 100 days. Transmission rate of 0.0005, duration of infectious period 5 days, no births and deaths, random seed of 100.</li>
+<li>Run the deterministic simulation multiple times. You should always see the same result.</li>
+<li>Now run a single stochastic simulation multiple times. What do you expect? What do you see?</li>
+<li>Change the random seed to 101, then 102. Test how this changes the simulation.</li>
+</ul>
+</div>
+<div id="task-2" class="section level3">
+<h3>Task 2</h3>
+<ul>
+<li>Keep everything as in task 1, with random number seed at 100. Run both simulations and set the number of stochastic simulations to 5. You’ll get a plot showing the deterministic model dynamics and 5 runs for the stochastic model (each of the stochastic runs gets consecutive random number seeds, i.e. the first one is 100, the 2nd is 101,…).</li>
+<li>Try to understand and explain why you see some stochastic simulations lead to an outbreak, while some do not.</li>
+</ul>
+</div>
+<div id="task-3" class="section level3">
+<h3>Task 3</h3>
+<ul>
+<li>Try to understand and explain what the fact that you outbreaks in some of the stochastic simulations but not in others (for exactly the same model parameter values) says about the role of <em>R<sub>0</sub></em> in stochastic models and how that differs in deterministic models.</li>
+</ul>
+</div>
+<div id="task-4" class="section level3">
+<h3>Task 4</h3>
+<ul>
+<li>One can mathematically derive an equation linking the probability that an outbreak occurs, <em>p</em>, to the reproductive number (see e.g. <span class="citation">(Matt J Keeling and Rohani 2008)</span>). We won’t try to do the math here but instead see if we can use the simulation to figure it out.</li>
+<li>Start with the settings in task 1. Run the stochastic model for b = 0.0002, 0.0003, 0.0004, 0.0005, 0.0006, 0.001, 0.002. For each value, compute R<sub>0</sub>, run the model 100 times, with max time 300 and record the number of times you get an outbreak.</li>
+<li>Plot (either by hand or using the computer) a relation between the probability of getting an outbreak and <em>R<sub>0</sub></em>.</li>
+</ul>
+</div>
+<div id="task-5" class="section level3">
+<h3>Task 5</h3>
+<ul>
+<li>There is a similar relation between outbreak probability an the initial number of infected individuals. Let’s see if we can use the model to determine it.</li>
+<li>Follow the steps of the previous task. Keep <em>b</em> fixed at 0.0003, vary the initial number of infected individuals, <em>I<sub>0</sub></em>, from 1 to 10. Record the fraction of outbreaks you got for each <em>I<sub>0</sub></em>.</li>
+<li>Plot (either by hand or using the computer) a relation between the probability of getting an outbreak and <em>I<sub>0</sub></em>.</li>
+</ul>
 </div>
 </div>
 <div id="shinytab4" class="section level2">
@@ -120,7 +168,7 @@
 <li>This app (and all others) are structured such that the Shiny part (the graphical interface you are currently using and the server-side function that goes with it) calls an underlying R script which runs the simulation for the model of interest and returns the results.</li>
 <li>For this app, the underlying function running the stochastic simulation is called <code>simulate_stochastic_SIR.R</code>, the deterministic model is implemented in <code>simulate_introduction.R</code>. Check the help files for those functions to see how you can call them directly.</li>
 <li>To get a quick start explaining how to interact with the simulator functions directly, read the vignette for the package (type <code>vignette('DSAIDE')</code> into the R console).</li>
-<li>For some further reading concerning stochastic dynamics of ID, see e.g. <span class="citation">(Lloyd-Smith et al. 2005, <span class="citation">Black (1966)</span>, <span class="citation">Keeling (1997)</span>)</span>.</li>
+<li>For some further reading concerning stochastic dynamics of ID, see e.g. <span class="citation">(Lloyd-Smith et al. 2005, <span class="citation">Black (1966)</span>, <span class="citation">M J Keeling (1997)</span>)</span>.</li>
 </ul>
 <div id="references" class="section level3 unnumbered">
 <h3>References</h3>
@@ -130,6 +178,9 @@
 </div>
 <div id="ref-keeling97">
 <p>Keeling, M J. 1997. “Modelling the Persistence of Measles.” <em>Trends in Microbiology</em> 5 (12): 513–18. doi:<a href="https://doi.org/10.1016/S0966-842X(97)01147-5">10.1016/S0966-842X(97)01147-5</a>.</p>
+</div>
+<div id="ref-keeling08">
+<p>Keeling, Matt J, and Pejman Rohani. 2008. <em>Modeling Infectious Diseases in Humans and Animals</em>. Princeton University Press.</p>
 </div>
 <div id="ref-lloyd-smith05a">
 <p>Lloyd-Smith, James O, Paul C Cross, Cheryl J Briggs, Matt Daugherty, Wayne M Getz, John Latto, Maria S Sanchez, Adam B Smith, and Andrea Swei. 2005. “Should We Expect Population Thresholds for Wildlife Disease?” <em>Trends in Ecology &amp; Evolution</em> 20 (9): 511–19. doi:<a href="https://doi.org/10.1016/j.tree.2005.07.004">10.1016/j.tree.2005.07.004</a>.</p>

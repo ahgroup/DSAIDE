@@ -59,7 +59,14 @@ multipatheq <- function(t, y, parms)
 #'   # To choose parameter values other than the standard one, specify them e.g. like such
 #'   result <- simulate_multipathogen(S0 = 100, I20 = 10,  tmax = 100, a = 0.5)
 #'   # You should then use the simulation result returned from the function, e.g. like this:
-#'   plot(result[,1],result[,2],xlab='Time',ylab='Number Susceptible',type='l')
+#'   plot(result$ts[,"Time"], result$ts[ , "S"], xlab='Time', ylab='Number Susceptible', type='l')
+#'   # We could set the infected type 1 host recovery rate at a high level, e.g., 1.2, and
+#'   # examine the infected 1 curve.
+#'   result <- simulate_multipathogen(S0 = 100, I20 = 10, tmax = 100, g1 = 1.2)
+#'   plot(result$ts[,"Time"],result$ts[,"I1"], xlab="Time",ylab="Number Infected Type 1",type="l")
+#'   # Additionally, consider making type 1 hosts transmit at a high rate.
+#'   result <- simulate_multipathogen(S0 = 100, I20 = 10, tmax = 100, b1 = 2.5)
+#'   plot(result$ts[,"Time"],result$ts[,"I1"], xlab="Time",ylab="Number Infected Type 1",type="l")
 #' @seealso The UI of the shiny app 'Multi-Pathogen Dynamics', which is part of this package, contains more details on the model
 #' @author Andreas Handel and Spencer Hall
 #' @references See e.g. Keeling and Rohani 2008 for SIR models and the
@@ -84,5 +91,9 @@ simulate_multipathogen <- function(S0 = 1e3, I10 = 1, I20 = 0, I120 = 0, tmax = 
     #This odeoutput matrix will be re-created every time you run the code, so any previous results will be overwritten
     odeoutput = deSolve::lsoda(Y0, timevec, func = multipatheq, parms=pars, atol=1e-12, rtol=1e-12);
     
-    return (odeoutput)
+    colnames(odeoutput) <- c("Time","S","I1","I2",'R1','R2',"I1X","I2X","I12",'R12')
+    result <- list()
+    result$ts <- as.data.frame(odeoutput)
+    
+    return(result)
 }

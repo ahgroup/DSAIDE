@@ -1,8 +1,8 @@
 ############################################################
-#This is the Shiny file for the Reproductive Number App
+#This is the Shiny file for the Reproductive Number 1 App
 #written by Andreas Handel, with contributions from others 
 #maintained by Andreas Handel (ahandel@uga.edu)
-#last updated 7/13/2017
+#last updated 8/1/2018
 ############################################################
 
 #the server-side function with the main functionality
@@ -44,16 +44,7 @@ refresh <- function(input, output){
                    
                  })
     
-    #reformat data to be in the right format for plotting
-    #each plot/text output is a list entry with a data frame in form xvals, yvals, extra variables for stratifications for each plot
-    
-    # dat = tidyr::gather(as.data.frame(simresult), -xvals, value = "yvals", key = "varnames")
     dat <- simresult$ts
-    
-    #code variable names as factor and level them so they show up right in plot
-    
-    # mylevels = unique(dat$varnames)
-    # dat$varnames = factor(dat$varnames, levels = mylevels)
     
     #data for plots and text
     #each variable listed in the varnames column will be plotted on the y-axis, with its values in yvals
@@ -72,14 +63,6 @@ refresh <- function(input, output){
     result[[1]]$yscale = 'identity'
     if (plotscale == 'x' | plotscale == 'both') { result[[1]]$xscale = 'log10'}
     if (plotscale == 'y' | plotscale == 'both') { result[[1]]$yscale = 'log10'}
-    
-    
-    #set min and max for scales. If not provided ggplot will auto-set
-    
-    result[[1]]$ymin = 1e-12
-    result[[1]]$ymax = max(simresult$ts)
-    result[[1]]$xmin = 1e-12
-    result[[1]]$xmax = tmax
     
     #the following are for text display for each plot
     
@@ -133,15 +116,15 @@ server <- function(input, output, session) {
 #This is the UI part of the shiny App
 
 ui <- fluidPage(
-  includeCSS("../styles/dsaide.css"), #styling for app
+  includeCSS("../../media/dsaide.css"), #styling for app
   
   #add header and title
   
-  div( includeHTML("../styles/header.html"), align = "center"),
+  div( includeHTML("../../media/header.html"), align = "center"),
   
   #specify name of App below, will show up in title
   
-  h1('Reproductive Number App', align = "center", style = "background-color:#123c66; color:#fff"),
+  h1('Reproductive Number 1 App', align = "center", style = "background-color:#123c66; color:#fff"),
   
   #section to add buttons
   
@@ -237,7 +220,7 @@ ui <- fluidPage(
   #use external function to generate all tabs with instruction content
   # do.call(tabsetPanel,generate_instruction_tabs()),
   do.call(tabsetPanel, generate_documentation()),
-  div(includeHTML("../styles/footer.html"), align="center", style="font-size:small") #footer
+  div(includeHTML("../../media/footer.html"), align="center", style="font-size:small") #footer
   
 ) #end fluidpage function, i.e. the UI part of the app
 

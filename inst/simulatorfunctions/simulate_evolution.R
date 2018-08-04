@@ -45,15 +45,20 @@ evolutionratefunc <- function(y, parms, t)
 #'   is the inverse of the average time spent in that compartment
 #' @param gt rate at which a person leaves the It compartment
 #' @param gr rate at which a person leaves the Ir compartment
+#' @param rngseed seed for random number generator to allow reproducibility
 #' @param tmax maximum simulation time, units depend on choice of units for your
 #'   parameters
 #' @return This function returns the simulation result as obtained from a call
-#'   to the adaptivetau integrator
+#'   to the adaptivetau integrator in list form. The list element ts is a
+#'   dataframe where the first column is "Time," and the remaining columns
+#'   represent the evolution of the model parameters: the number of susceptibles,
+#'   the number infected by the drug-sensitive strain and not on treatment, the number
+#'   infected by the drug-sensitive strain and being treated, the number infected by
+#'   the drug-resistant strain (treatment does not affect these), and the recovered
+#'   (and therefore immune) individuals. 
 #' @details A compartmental ID model with several states/compartments
 #' is simulated as a stochastic model using the adaptive tau algorithm as implemented by ssa.adaptivetau
-#' in the adpativetau package. See the manual of this package for more details.
-#' The function returns the time series of the simulated disease as output matrix,
-#' with one column per compartment/variable. The first column is time.
+#' in the adpativetau package. See the manual of this package for more details. 
 #' @section Warning:
 #' This function does not perform any error checking. So if you try to do
 #' something nonsensical (e.g. have I0 > PopSize or any negative values or fractions > 1),
@@ -64,7 +69,11 @@ evolutionratefunc <- function(y, parms, t)
 #' # To choose parameter values other than the standard one, specify them e.g. like such
 #' result <- simulate_evolution(S0 = 2000,  tmax = 200, bt = 1/100)
 #' # You should then use the simulation result returned from the function, e.g. like this:
-#' plot(result[,1],result[,2],xlab='Time',ylab='Number Susceptible',type='l')
+#' plot(result$ts[ , "Time"],result$ts[ , "S"],xlab='Time',ylab='Number Susceptible',type='l')
+#' # Consider also a case in which the fraction of resistant mutant infections that an
+#' # untreated host produces is high, at 0.9.
+#' result <- simulate_evolution(S0 = 2000, tmax = 200, bt = 1/100, cu = 0.9)
+#' plot(result$ts[,"Time"], result$ts[,"S"], xlab ="Time", ylab = "Number Susceptible",type ="l")
 #' @references See the manual for the adaptivetau package for details on the algorithm.
 #'             The implemented model is loosely based on: Handel et al 2009 JTB 
 #'            "Antiviral resistance and the control of pandemic influenza: The roles of
@@ -75,7 +84,7 @@ evolutionratefunc <- function(y, parms, t)
 
 
 
-simulate_evolution <- function(S0 = 1000, Iu0 = 1, It0 = 1, Ir0 = 1, tmax = 100, bu = 1/1000, bt = 1/1000, br = 1/1000, cu = 1/1000, ct = 1/100, f = 0, gu = 1, gt = 1, gr = 1)
+simulate_evolution <- function(S0 = 1000, Iu0 = 1, It0 = 1, Ir0 = 1, tmax = 100, bu = 1/1000, bt = 1/1000, br = 1/1000, cu = 1/1000, ct = 1/100, f = 0, gu = 1, gt = 1, gr = 1 ,rngseed = 100)
 {
     Y0 = c(S = S0, Iu = Iu0,  It = It0, Ir = Ir0, R = 0);  #combine initial conditions into a vector
     dt = tmax / 1000; #time step for which to get results back
@@ -98,8 +107,12 @@ simulate_evolution <- function(S0 = 1000, Iu0 = 1, It0 = 1, Ir0 = 1, tmax = 100,
 
     #this line runs the simulation, i.e. integrates the differential equations describing the infection process
     #the result is saved in the odeoutput matrix, with the 1st column the time, the 2nd, 3rd, 4th column the variables S, I, R
-    output = adaptivetau::ssa.adaptivetau(init.values = Y0, transitions = transitions,  rateFunc = evolutionratefunc, params = pars, tf = tmax)
+    set.seed(rngseed) # to allow reproducibility
+    simres <- adaptivetau::ssa.adaptivetau(init.values = Y0, transitions = transitions,  rateFunc = evolutionratefunc, params = pars, tf = tmax)
 
-    #The output produced by a call to the odesolver is odeoutput matrix is returned by the function
-    return(output)
+    colnames(simres) = c('Time','S','Iu','It','Ir','R')
+    result <- list()
+    result$ts <- as.data.frame(simres)
+    
+    return(result)
 }

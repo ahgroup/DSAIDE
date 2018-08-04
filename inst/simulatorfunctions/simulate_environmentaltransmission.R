@@ -33,8 +33,8 @@ environmentaltransmissioneq <- function(t, y, parms)
 #' @param m rate of births of hosts
 #' @param n the rate of natural death of hosts
 #' @param g the rate at which infected hosts recover/die
-#' @param p the rate at which infected host shed pathogen in the enviroment
-#' @param c the rate at which pathogen in the enviroment decays
+#' @param p the rate at which infected host shed pathogen in the environment
+#' @param c the rate at which pathogen in the environment decays
 #' @return This function returns the simulation result as obtained from a call
 #'   to the deSolve ode solver
 #' @details A compartmental ID model with several states/compartments
@@ -51,7 +51,14 @@ environmentaltransmissioneq <- function(t, y, parms)
 #'   # To choose parameter values other than the standard one, specify them e.g. like such
 #'   result <- simulate_environmentaltransmission(S0 = 100, E0 = 1e5,  tmax = 100)
 #'   # You should then use the simulation result returned from the function, e.g. like this:
-#'   plot(result[,1],result[,2],xlab='Time',ylab='Number Susceptible',type='l')
+#'   plot(result$ts[,"Time"],result$ts[ , "S"],xlab='Time',ylab='Number Susceptible',type='l')
+#'   # Consider also a case in which we set the birth rate of hosts at 0.2, and
+#'   # the rate at which infected hosts recover or die at 0.8.
+#'   result <- simulate_environmentaltransmission(S0 = 1000, E0 = 1e5, m = 0.2, g = 0.8)
+#'   plot(result$ts[,"Time"],result$ts[,"S"], xlab="Time", ylab = "Number Susceptible",type="l")
+#'   # Additionally, consider a case in which we assume that no new hosts are born.
+#'   result <- simulate_environmentaltransmission(S0 = 1000, E0 = 1e5, m = 0)
+#'   plot(result$ts[,"Time"], result$ts[,"S"], xlab = "Time", ylab = "Number Susecptible")
 #' @seealso The UI of the shiny app 'EnvironmentalTransmission', which is part of this package, contains more details on the model
 #' @author Andreas Handel
 #' @references See e.g. the book "Modeling Infectious Diseases in Humans and Animals" by Keeling and Rohani 
@@ -76,6 +83,12 @@ simulate_environmentaltransmission <- function(S0 = 1e3, I0 = 1, E0 = 0, tmax = 
   #the result is saved in the odeoutput matrix, with the 1st column the time, the remaining columns the values for the variables
   #returned in the order as specified in Y0 and the return from the solver function
   odeoutput = deSolve::lsoda(Y0, timevec, func = environmentaltransmissioneq, parms=pars, atol=1e-12, rtol=1e-12);
+  
+  colnames(odeoutput) <- c("Time", "S", "I", "R", "E")
 
-  return (odeoutput)
+  #return result as list, with element ts containing the time-series
+  result <- list()
+  result$ts <- as.data.frame(odeoutput)
+
+  return(result)
 }

@@ -56,7 +56,16 @@ heterogeneityeq <- function(t, y, parms)
 #'   # To choose parameter values other than the standard one, specify them e.g. like such
 #'   result <- simulate_heterogeneity(S10 = 100, S20 = 1e3,  tmax = 100)
 #'   # You should then use the simulation result returned from the function, e.g. like this:
-#'   plot(result[,1],result[,2],xlab='Time',ylab='Number Susceptible',type='l')
+#'   plot(result$ts[,"Time"],result$ts[,"S1"],xlab='Time',ylab='Number Susceptible 1',type='l')
+#'   # Consider also if we want to make the rate of transmission from infected type 1
+#'   # host to susceptible type 1 host 0.7, and then plot the rate of infection for
+#'   # type 1 hosts.
+#'   result <- simulate_heterogeneity(S10 = 100, S20 = 1e3, b11 = 0.7, tmax = 100)
+#'   plot(result$ts[,"Time"],result$ts[,"I1"],xlab="Time",ylab="Number Infected 1", type = "l")
+#'   # We can do the same for the infection of susceptible type 2 hosts from infected
+#'   # type 1 hosts, and plot the type 2 rate of infection.
+#'   result <- simulate_heterogeneity(S10 = 100, S20 = 1e3, b12 = 0.7, tmax = 100)
+#'   plot(result$ts[,"Time"],result$ts[,"I2"],xlab="Time",ylab="Number Infected 2", type = "l")
 #' @seealso The UI of the shiny app 'Host Heterogeneity', which is part of this package, contains more details on the model
 #' @author Andreas Handel
 #' @references See e.g. Keeling and Rohani 2008 for SIR models and the
@@ -81,5 +90,8 @@ simulate_heterogeneity <- function(S10 = 1e3, I10 = 1, S20 = 1e3, I20 = 0, tmax 
   #This odeoutput matrix will be re-created every time you run the code, so any previous results will be overwritten
   odeoutput = deSolve::lsoda(Y0, timevec, func = heterogeneityeq, parms=pars, atol=1e-12, rtol=1e-12);
 
-  return (odeoutput)
+  colnames(odeoutput) <- c("Time", "S1", "I1", "R1", "S2", "I2", "R2")
+  result <- list()
+  result$ts <- as.data.frame(odeoutput)
+  return(result)
 }
