@@ -62,7 +62,7 @@ idcontrolode <- function(t, y, parms)
 #' @param nv the rate of natural death of vectors (the inverse it the average lifespan)
 #' @param tmax maximum simulation time, in units of months
 #' @return This function returns the simulation result as obtained from a call
-#'   to the deSolve ode solver
+#'   to the deSolve ode solver.
 #' @details A compartmental ID model with several states/compartments
 #'   is simulated as a set of ordinary differential
 #'   equations. The function returns the output from the odesolver as a matrix,
@@ -72,11 +72,11 @@ idcontrolode <- function(t, y, parms)
 #'   something nonsensical (e.g. have I0 > PopSize or any negative values or fractions > 1),
 #'   the code will likely abort with an error message
 #' @examples
-#'   # To run the simulation with default parameters just call this function
+#'   # To run the simulation with default parameters just call the function:
 #'   result <- simulate_idcontrol()
-#'   # To choose parameter values other than the standard one, specify them e.g. like such
+#'   # To choose parameter values other than the standard one, specify them like such:
 #'   result <- simulate_idcontrol(S0 = 2000, I0 = 10, tmax = 100, f = 0.1, d = 0.2)
-#'   # You should then use the simulation result returned from the function, e.g. like this:
+#'   # You should then use the simulation result returned from the function, like this:
 #'   plot(result$ts[ , "Time"], result$ts[ , "S"],xlab='Time',ylab='Number Susceptible',type='l')
 #'   # Consider also a case where recoverd persons become susceptible again at a 
 #'   # rate of 1.5.
@@ -85,7 +85,7 @@ idcontrolode <- function(t, y, parms)
 #'   # Make death rate of natural hosts 0.5 and rate of pathogen decay 0.1.
 #'   result <- simulate_idcontrol(S0 = 2000, I0 = 10, tmax = 100, nh = 0.5, c = 0.1)
 #'   plot(result$ts[,"Time"], result$ts[,"S"],xlab = "Time",ylab = "Number Susceptible",type="l")
-#' @seealso The UI of the shiny app 'IDPatterns', which is part of this package, contains more details on the model
+#' @seealso The UI of the Shiny app 'IDPatterns', which is part of this package, contains more details on the model.
 #' @references See e.g. Keeling and Rohani 2008 for SIR models and the
 #'   documentation for the deSolve package for details on ODE solvers
 #' @author Andreas Handel

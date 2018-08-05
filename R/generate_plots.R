@@ -24,9 +24,9 @@
 #'    optional: linesize - width of line, numeric, i.e. 1.5, 2, etc. set to 1.5 if not supplied.
 #'    optional: title - a title for each plot.
 #'
-#' @return a plot structure for display in a shiny UI
-#' @details This function is called by the shiny server to produce plots returned to the shiny UI
-#' Create plots run the simulation with default parameters just call this function
+#' @return A plot structure for display in a Shiny UI
+#' @details This function is called by the Shiny server to produce plots returned to the Shiny UI
+#' To create plots run the simulation with default parameters, just call a function, e.g.:
 #' result <- simulate_basicbacteria()
 #' @author Andreas Handel
 #' @import ggplot2
