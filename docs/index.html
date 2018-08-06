@@ -105,9 +105,9 @@
 <li>Install the CRAN release in the usual way with <code>install.packages('DSAIDE')</code>.</li>
 <li>The latest development version (potentially buggy) can be installed from github, using the devtools package. If you don’t have it, install the devtools package. Then, install DSAIDE through devtools. The following commands should get you up and running:</li>
 </ol>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="st">'devtools'</span>)</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">library</span>(<span class="st">'devtools'</span>)</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw">install_github</span>(<span class="st">'ahgroup/DSAIDE'</span>, <span class="dt">build_vignettes =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">'devtools'</span>)
+<span class="kw">library</span>(<span class="st">'devtools'</span>)
+<span class="kw">install_github</span>(<span class="st">'ahgroup/DSAIDE'</span>, <span class="dt">build_vignettes =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <p>The extra <code>build_vignettes</code> ensures you get the vignette (tutorial) for the package installed/created.</p>
 </div>
 <div id="basic-use" class="section level2">
@@ -124,7 +124,7 @@
 <h2 class="hasAnchor">
 <a href="#advanced-use" class="anchor"></a>Advanced Use</h2>
 <p>You can call the underlying simulation functions directly from the <code>R</code> console. You can also access all functions and modify them to your own needs. To find the folder on your computer where the simulator functions are stored, use the following command:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">system.file</span>(<span class="st">"simulatorfunctions"</span>, <span class="dt">package =</span> <span class="st">"DSAIDE"</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.file</span>(<span class="st">"simulatorfunctions"</span>, <span class="dt">package =</span> <span class="st">"DSAIDE"</span>)</code></pre></div>
 <p>See <a href="https://ahgroup.github.io/DSAIDE/articles/DSAIDE.html">the package vignette</a> for more details on the different ways to use the package. You can get to the vignette by typing <code><a href="articles/DSAIDE.html">vignette('DSAIDE')</a></code> at the <code>R</code> console. Also see <a href="https://doi.org/10.1371/journal.pcbi.1005642">the DSAIDE publication in PLoS Comp Bio</a>.</p>
 </div>
 <div id="contributing-to-the-package" class="section level2">
