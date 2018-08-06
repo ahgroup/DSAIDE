@@ -157,7 +157,7 @@ parameters</p></td>
     <tr>
       <th>g</th>
       <td><p>rate at which a person leaves the infectious compartment, which
-is the inverse of the average duration of the infections period</p></td>
+is the inverse of the average duration of the infectious period</p></td>
     </tr>
     <tr>
       <th>b</th>
@@ -173,26 +173,36 @@ with one column per compartment/variable. The first column is time.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>A simple SIR model is simulated as a set of ordinary differential
-equations, using an ode solver from the deSolve package.</p>
+    <p>: A simple SIR (Susceptible, Infected, Recovered) model is simulated
+    as a set of ordinary differential equations, using an ode solver from
+    the deSolve package. The S, I, and R parameters are the compartments of
+    the model, representing people who are uninfected but susceptible to
+    infection, people who are infected **and** infectious to others, and
+    people who were infected but are now removed from the model (from
+    recovery or death), respectively. There are two processes in the model.
+    First, a susceptible individual (S) can become infected by an
+    infected individual (I), at rate *b*. This is represented by the
+    individual leaving compartment S and moving to compartment I.
+    Second, an infected individual dies or recovers and moves to the R
+    component, at rate *g*.</p>
     
     <h2 class="hasAnchor" id="warning"><a class="anchor" href="#warning"></a>Warning</h2>
 
     <p>This function does not perform any error checking. So if
   you try to do something nonsensical (e.g. specify negative parameter values
-  or fractions &gt; 1), the code will likely abort with an error message</p>
+  or fractions &gt; 1), the code will likely abort with an error message.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>See the shiny app documentation corresponding to this simulator
+    <div class='dont-index'><p>See the Shiny app documentation corresponding to this simulator
 function for more details on this model. See the manual for the deSolve
 package for details on the underlying ODE simulator algorithm.</p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># To run the simulation with default parameters just call this function</span>
+    <pre class="examples"><div class='input'><span class='co'># To run the simulation with default parameters just call the function:</span>
 <span class='no'>result</span> <span class='kw'>&lt;-</span> <span class='fu'>simulate_introduction</span>()
-<span class='co'># To choose parameter values other than the standard one, specify them e.g. like such</span>
+<span class='co'># To choose parameter values other than the standard one, specify them like such:</span>
 <span class='no'>result</span> <span class='kw'>&lt;-</span> <span class='fu'>simulate_introduction</span>(<span class='kw'>S0</span> <span class='kw'>=</span> <span class='fl'>2000</span>, <span class='kw'>I0</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>tmax</span> <span class='kw'>=</span> <span class='fl'>100</span>, <span class='kw'>g</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>1</span>/<span class='fl'>100</span>)
 <span class='co'># You should then use the simulation result returned from the function, e.g. like this:</span>
 <span class='fu'>plot</span>(<span class='no'>result</span>$<span class='no'>ts</span>[ , <span class='st'>"Time"</span>], <span class='no'>result</span>$<span class='no'>ts</span>[ , <span class='st'>"S"</span>],<span class='kw'>xlab</span><span class='kw'>=</span><span class='st'>'Time'</span>,<span class='kw'>ylab</span><span class='kw'>=</span><span class='st'>'Number Susceptible'</span>,<span class='kw'>type</span><span class='kw'>=</span><span class='st'>'l'</span>)</div><div class='img'><img src='simulate_introduction-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Suppose we want to model the average duration of the infectious period as 4 days;</span>

@@ -16,7 +16,7 @@ simulate_introduction(S0 = 1000, I0 = 1, tmax = 300, g = 0.5,
 parameters}
 
 \item{g}{rate at which a person leaves the infectious compartment, which
-is the inverse of the average duration of the infections period}
+is the inverse of the average duration of the infectious period}
 
 \item{b}{level of infectiousness, i.e. rate of transmission of pathogen
 from infected to susceptible host}
@@ -33,19 +33,29 @@ The function simulates the ODE using an ODE solver from the deSolve package.
 The function returns a matrix containing time-series of each variable and time.
 }
 \details{
-A simple SIR model is simulated as a set of ordinary differential
-equations, using an ode solver from the deSolve package.
+: A simple SIR (Susceptible, Infected, Recovered) model is simulated
+    as a set of ordinary differential equations, using an ode solver from
+    the deSolve package. The S, I, and R parameters are the compartments of
+    the model, representing people who are uninfected but susceptible to
+    infection, people who are infected **and** infectious to others, and
+    people who were infected but are now removed from the model (from
+    recovery or death), respectively. There are two processes in the model.
+    First, a susceptible individual (S) can become infected by an
+    infected individual (I), at rate *b*. This is represented by the
+    individual leaving compartment S and moving to compartment I.
+    Second, an infected individual dies or recovers and moves to the R
+    component, at rate *g*.
 }
 \section{Warning}{
  This function does not perform any error checking. So if
   you try to do something nonsensical (e.g. specify negative parameter values
-  or fractions > 1), the code will likely abort with an error message
+  or fractions > 1), the code will likely abort with an error message.
 }
 
 \examples{
-# To run the simulation with default parameters just call this function
+# To run the simulation with default parameters just call the function:
 result <- simulate_introduction()
-# To choose parameter values other than the standard one, specify them e.g. like such
+# To choose parameter values other than the standard one, specify them like such:
 result <- simulate_introduction(S0 = 2000, I0 = 10, tmax = 100, g = 1, b = 1/100)
 # You should then use the simulation result returned from the function, e.g. like this:
 plot(result$ts[ , "Time"], result$ts[ , "S"],xlab='Time',ylab='Number Susceptible',type='l')
@@ -59,7 +69,7 @@ result <- simulate_introduction(S0 = 2000, I0 = 10, tmax = 100, b = 0.0001)
 plot(result$ts[,"Time"],result$ts[,"S"], xlab = "Time", ylab = "Number Susceptible",type="l")
 }
 \seealso{
-See the shiny app documentation corresponding to this simulator
+See the Shiny app documentation corresponding to this simulator
 function for more details on this model. See the manual for the deSolve
 package for details on the underlying ODE simulator algorithm.
 }

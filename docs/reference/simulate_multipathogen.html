@@ -160,7 +160,7 @@
     </tr>
     <tr>
       <th>b2</th>
-      <td><p>rate at which type 1 infected hosts transmit</p></td>
+      <td><p>rate at which type 2 infected hosts transmit</p></td>
     </tr>
     <tr>
       <th>b12</th>
@@ -187,7 +187,7 @@
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>This function returns the simulation result as obtained from a call
-  to the deSolve ode solver</p>
+  to the deSolve ode solver.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
@@ -201,7 +201,7 @@
     
     <p>This function does not perform any error checking. So if you try to do
   something nonsensical (e.g. any negative values or fractions &gt; 1),
-  the code will likely abort with an error message</p>
+  the code will likely abort with an error message.</p>
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
@@ -210,15 +210,15 @@
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>The UI of the shiny app 'Multi-Pathogen Dynamics', which is part of this package, contains more details on the model</p></div>
+    <div class='dont-index'><p>The UI of the Shiny app 'Multi-Pathogen Dynamics', which is part of this package, contains more details on the model</p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>  <span class='co'># To run the simulation with default parameters just call this function</span>
+    <pre class="examples"><div class='input'>  <span class='co'># To run the simulation with default parameters just call the function:</span>
   <span class='no'>result</span> <span class='kw'>&lt;-</span> <span class='fu'>simulate_multipathogen</span>()
-  <span class='co'># To choose parameter values other than the standard one, specify them e.g. like such</span>
+  <span class='co'># To choose parameter values other than the standard one, specify them like such:</span>
   <span class='no'>result</span> <span class='kw'>&lt;-</span> <span class='fu'>simulate_multipathogen</span>(<span class='kw'>S0</span> <span class='kw'>=</span> <span class='fl'>100</span>, <span class='kw'>I20</span> <span class='kw'>=</span> <span class='fl'>10</span>,  <span class='kw'>tmax</span> <span class='kw'>=</span> <span class='fl'>100</span>, <span class='kw'>a</span> <span class='kw'>=</span> <span class='fl'>0.5</span>)
-  <span class='co'># You should then use the simulation result returned from the function, e.g. like this:</span>
+  <span class='co'># You should then use the simulation result returned from the function, like this:</span>
   <span class='fu'>plot</span>(<span class='no'>result</span>$<span class='no'>ts</span>[,<span class='st'>"Time"</span>], <span class='no'>result</span>$<span class='no'>ts</span>[ , <span class='st'>"S"</span>], <span class='kw'>xlab</span><span class='kw'>=</span><span class='st'>'Time'</span>, <span class='kw'>ylab</span><span class='kw'>=</span><span class='st'>'Number Susceptible'</span>, <span class='kw'>type</span><span class='kw'>=</span><span class='st'>'l'</span>)</div><div class='img'><img src='simulate_multipathogen-1.png' alt='' width='700' height='433' /></div><div class='input'>  <span class='co'># We could set the infected type 1 host recovery rate at a high level, e.g., 1.2, and</span>
   <span class='co'># examine the infected 1 curve.</span>
   <span class='no'>result</span> <span class='kw'>&lt;-</span> <span class='fu'>simulate_multipathogen</span>(<span class='kw'>S0</span> <span class='kw'>=</span> <span class='fl'>100</span>, <span class='kw'>I20</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>tmax</span> <span class='kw'>=</span> <span class='fl'>100</span>, <span class='kw'>g1</span> <span class='kw'>=</span> <span class='fl'>1.2</span>)

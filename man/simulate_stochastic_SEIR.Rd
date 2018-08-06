@@ -25,7 +25,7 @@ inverse of the average time spent in that compartment}
 
 \item{gI}{rate at which a person leaves the I compartment}
 
-\item{w}{rate at which recovered persons loose immunity and return to
+\item{w}{rate at which recovered persons lose immunity and return to
 susceptible state}
 
 \item{m}{the rate at which new individuals enter the model (are born)}
@@ -49,26 +49,26 @@ A compartmental ID model with several states/compartments is
   simulated. Initial conditions for the E and R variables are 0. Units of
   time depend on the time units chosen for model parameters. The simulation
   runs as a stochastic model using the adaptive-tau algorithm as implemented
-  by ssa.adaptivetau in the adpativetau package. See the manual of this
+  by ssa.adaptivetau() in the adpativetau package. See the manual of this
   package for more details.
 }
 \section{Warning}{
  This function does not perform any error checking. So if
   you try to do something nonsensical (e.g. specify negative parameter values
-  or fractions > 1), the code will likely abort with an error message
+  or fractions > 1), the code will likely abort with an error message.
 }
 
 \examples{
-# To run the simulation with default parameters 
+# To run the simulation with default parameters, just call the function:
 result <- simulate_stochastic_SEIR()
-# To choose parameter values other than the standard one, specify them e.g. like this
+# To choose parameter values other than the standard one, specify them like this:
 result <- simulate_stochastic_SEIR(S0 = 2000,  tmax = 200, bE = 1/100)
-# You can display or further process the result, e.g. like this
+# You can display or further process the result, like this:
 plot(result$ts[,'Time'],result$ts[,'S'],xlab='Time',ylab='Number Susceptible',type='l')
 print(paste('Max number of infected: ',max(result$ts[,'I']))) 
 }
 \seealso{
-See the shiny app documentation corresponding to this simulator
+See the Shiny app documentation corresponding to this simulator
 function for more details on this model. See the manual for the adaptivetau
 package for details on the stochastic algorithm.
 }

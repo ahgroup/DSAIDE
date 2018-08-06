@@ -59,8 +59,8 @@ Recovered and Immune (R)
 }
 \details{
 A compartmental ID model with several states/compartments
-is simulated as a stochastic model using the adaptive tau algorithm as implemented by ssa.adaptivetau
-in the adpativetau package. See the manual of this package for more details.
+is simulated as a stochastic model using the adaptive tau algorithm as implemented by ssa.adaptivetau()
+in the adaptivetau package. See the manual of this package for more details.
 }
 \section{Warning}{
 
@@ -70,11 +70,11 @@ the code will likely abort with an error message
 }
 
 \examples{
-# To run the simulation with default parameters just call this function
+# To run the simulation with default parameters just call the function:
 result <- simulate_evolution()
-# To choose parameter values other than the standard one, specify them e.g. like such
+# To choose parameter values other than the standard one, specify them like such:
 result <- simulate_evolution(S0 = 2000,  tmax = 200, bt = 1/100)
-# You should then use the simulation result returned from the function, e.g. like this:
+# You should then use the simulation result returned from the function, like this:
 plot(result$ts[ , "Time"],result$ts[ , "S"],xlab='Time',ylab='Number Susceptible',type='l')
 # Consider also a case in which the fraction of resistant mutant infections that an
 # untreated host produces is high, at 0.9.

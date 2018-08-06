@@ -33,7 +33,7 @@ simulate_environmentaltransmission(S0 = 1000, I0 = 1, E0 = 0,
 }
 \value{
 This function returns the simulation result as obtained from a call
-  to the deSolve ode solver
+  to the deSolve ode solver.
 }
 \description{
 This model allows for the simulation of an environmentally transmitted infectious disease
@@ -48,15 +48,15 @@ A compartmental ID model with several states/compartments
 
   This function does not perform any error checking. So if you try to do
   something nonsensical (e.g. any negative values or fractions > 1),
-  the code will likely abort with an error message
+  the code will likely abort with an error message.
 }
 
 \examples{
-  # To run the simulation with default parameters just call this function
+  # To run the simulation with default parameters just call the function:
   result <- simulate_environmentaltransmission()
-  # To choose parameter values other than the standard one, specify them e.g. like such
-  result <- simulate_environmentaltransmission(S0 = 100, E0 = 1e5,  tmax = 100)
-  # You should then use the simulation result returned from the function, e.g. like this:
+  # To choose parameter values other than the standard one, specify them like such:
+  result <- simulate_environmentaltransmission(S0 = 100, E0 = 1e5, tmax = 100)
+  # You should then use the simulation result returned from the function, like this:
   plot(result$ts[,"Time"],result$ts[ , "S"],xlab='Time',ylab='Number Susceptible',type='l')
   # Consider also a case in which we set the birth rate of hosts at 0.2, and
   # the rate at which infected hosts recover or die at 0.8.
@@ -64,7 +64,7 @@ A compartmental ID model with several states/compartments
   plot(result$ts[,"Time"],result$ts[,"S"], xlab="Time", ylab = "Number Susceptible",type="l")
   # Additionally, consider a case in which we assume that no new hosts are born.
   result <- simulate_environmentaltransmission(S0 = 1000, E0 = 1e5, m = 0)
-  plot(result$ts[,"Time"], result$ts[,"S"], xlab = "Time", ylab = "Number Susecptible")
+  plot(result$ts[,"Time"], result$ts[,"S"], xlab = "Time", ylab = "Number Susceptible")
 }
 \references{
 See e.g. the book "Modeling Infectious Diseases in Humans and Animals" by Keeling and Rohani 
@@ -72,7 +72,7 @@ for information on models of this type
 see the documentation for the deSolve package for details on ODE solvers
 }
 \seealso{
-The UI of the shiny app 'EnvironmentalTransmission', which is part of this package, contains more details on the model
+The UI of the Shiny app 'EnvironmentalTransmission', which is part of this package, contains more details on the model.
 }
 \author{
 Andreas Handel

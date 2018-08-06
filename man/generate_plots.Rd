@@ -30,15 +30,15 @@ optional: linesize - width of line, numeric, i.e. 1.5, 2, etc. set to 1.5 if not
 optional: title - a title for each plot.}
 }
 \value{
-a plot structure for display in a shiny UI
+A plot structure for display in a Shiny UI
 }
 \description{
 This function generates plots to be displayed in the Shiny UI.
 This is a helper function. This function processes results returned from the simulation, supplied as a list
 }
 \details{
-This function is called by the shiny server to produce plots returned to the shiny UI
-Create plots run the simulation with default parameters just call this function
+This function is called by the Shiny server to produce plots returned to the Shiny UI
+To create plots run the simulation with default parameters, just call a function, e.g.:
 result <- simulate_basicbacteria()
 }
 \author{

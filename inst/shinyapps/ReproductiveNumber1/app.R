@@ -2,7 +2,7 @@
 #This is the Shiny file for the Reproductive Number 1 App
 #written by Andreas Handel, with contributions from others 
 #maintained by Andreas Handel (ahandel@uga.edu)
-#last updated 8/1/2018
+#last updated 8/6/2018
 ############################################################
 
 #the server-side function with the main functionality
@@ -19,15 +19,9 @@ refresh <- function(input, output){
     I0 = isolate(input$I0);
     tmax = isolate(input$tmax);
     
-    w = isolate(input$w);
     b = isolate(input$b);
     g = isolate(input$g);
-    
-    f = isolate(input$f);
-    e = isolate(input$e);
-    
-    m = isolate(input$m);
-    n = isolate(input$n);
+
     plotscale = isolate(input$plotscale)  # Change the scale of axis interactively 
     
     #save all results to a list for processing plots and text
@@ -39,8 +33,7 @@ refresh <- function(input, output){
     
     withProgress(message = 'Running Simulation', value = 0,
                  {
-                   simresult <- simulate_reproductivenumber(S0 = S0, I0 = I0, f = f, e=e, tmax = tmax, g = g, 
-                                                            b = b, m = m, n = n, w = w)
+                   simresult <- simulate_introduction(S0 = S0, I0 = I0,tmax = tmax, g = g,  b = b)
                    
                  })
     
@@ -149,48 +142,28 @@ ui <- fluidPage(
            # Inputs section
            h2('Simulation Settings'),
            fluidRow(
-             column(6,
+             column(4,
                     numericInput("S0", "initial number of susceptible hosts (S0)", min = 1000, max = 5000, value = 1000, step = 500)
              ),
-             column(6,
+             column(4,
                     numericInput("I0", "initial number of infected hosts (I0)", min = 0, max = 100, value = 0, step = 1)
-             )
-           ), #close fluidRow structure for input
-           fluidRow(
-             column(6,
-                    numericInput("tmax", "Maximum simulation time (tmax)", min = 1, max = 12000, value = 100)
              ),
-             column(6,
-                    numericInput("w", "Rate of immunity loss (w)", min = 0, max = 10, value = 0, step = 0.01)
+             column(4,
+                    numericInput("tmax", "Maximum simulation time (tmax)", min = 1, max = 12000, value = 100)
              )
            ), #close fluidRow structure for input
+
            fluidRow(
-             column(6,
+             column(4,
                     numericInput("b", "Rate of transmission (b)", min = 0, max = 0.1, value = 0, step = 0.001  )
              ),
-             column(6,
+             column(4,
                     numericInput("g", "Rate at which a host leaves the infectious compartment (g)", min = 0, max = 25, value = 10, step = 0.25 )
-             )
-           ), #close fluidRow structure for input
-           fluidRow(
-             column(6,
-                    numericInput("f", "Fraction vaccinated prior to outbreak (f)", min = 0, max = 1, value = 0, step = 0.05 )
-             ),
-             column(6,
-                    numericInput("e", "Efficacy of vaccine (e)", min = 0, max = 1, value = 0, step = 0.05 )
-             )
-           ), #close fluidRow structure for input
-           fluidRow(
-             column(4,
-                    numericInput("m", "Rate of new births (m)", min = 0, max = 100, value = 0, step = 1)
-             ),
-             column(4,
-                    numericInput("n", "Natural death rate (n)", min = 0, max = 0.02, value = 0, step = 0.0005 )
              ),
              column(4,align = "left",
                     selectInput("plotscale", "Log-scale for plot:",c("none" = "none", 'x-axis' = "x", 'y-axis' = "y", 'both axes' = "both"))
              )
-           ) #close fluidRow structure for input
+            ) #close fluidRow structure for input
            
     ), #end sidebar column for inputs
     

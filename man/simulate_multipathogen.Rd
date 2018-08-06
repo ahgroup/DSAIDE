@@ -21,7 +21,7 @@ simulate_multipathogen(S0 = 1000, I10 = 1, I20 = 0, I120 = 0,
 
 \item{b1}{rate at which type 1 infected hosts transmit}
 
-\item{b2}{rate at which type 1 infected hosts transmit}
+\item{b2}{rate at which type 2 infected hosts transmit}
 
 \item{b12}{rate at which double infected hosts transmit}
 
@@ -35,7 +35,7 @@ simulate_multipathogen(S0 = 1000, I10 = 1, I20 = 0, I120 = 0,
 }
 \value{
 This function returns the simulation result as obtained from a call
-  to the deSolve ode solver
+  to the deSolve ode solver.
 }
 \description{
 This model allows for the simulation of 2 IDs in a single host
@@ -50,15 +50,15 @@ A compartmental ID model with several states/compartments
 
   This function does not perform any error checking. So if you try to do
   something nonsensical (e.g. any negative values or fractions > 1),
-  the code will likely abort with an error message
+  the code will likely abort with an error message.
 }
 
 \examples{
-  # To run the simulation with default parameters just call this function
+  # To run the simulation with default parameters just call the function:
   result <- simulate_multipathogen()
-  # To choose parameter values other than the standard one, specify them e.g. like such
+  # To choose parameter values other than the standard one, specify them like such:
   result <- simulate_multipathogen(S0 = 100, I20 = 10,  tmax = 100, a = 0.5)
-  # You should then use the simulation result returned from the function, e.g. like this:
+  # You should then use the simulation result returned from the function, like this:
   plot(result$ts[,"Time"], result$ts[ , "S"], xlab='Time', ylab='Number Susceptible', type='l')
   # We could set the infected type 1 host recovery rate at a high level, e.g., 1.2, and
   # examine the infected 1 curve.
@@ -73,7 +73,7 @@ See e.g. Keeling and Rohani 2008 for SIR models and the
   documentation for the deSolve package for details on ODE solvers
 }
 \seealso{
-The UI of the shiny app 'Multi-Pathogen Dynamics', which is part of this package, contains more details on the model
+The UI of the Shiny app 'Multi-Pathogen Dynamics', which is part of this package, contains more details on the model
 }
 \author{
 Andreas Handel and Spencer Hall

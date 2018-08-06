@@ -7,7 +7,7 @@
 generate_documentation()
 }
 \value{
-tablist a list of tabs for display in a shiny UI
+A list of tabs for display in a Shiny UI
 }
 \description{
 This function take the documentation provided as html file
@@ -16,7 +16,7 @@ to generate the tabs with content for each Shiny app.
 This is a helper function and only useful for this package.
 }
 \details{
-This function is called by the shiny UIs to populate the documentation and information tabs
+This function is called by the Shiny UIs to populate the documentation and information tabs
 }
 \author{
 Andreas Handel

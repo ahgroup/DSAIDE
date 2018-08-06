@@ -33,7 +33,7 @@ simulate_directtransmission(S0 = 1000, I0 = 1, tmax = 120,
 }
 \value{
 This function returns the simulation result as obtained from a call
-  to the deSolve ode solver
+  to the deSolve ode solver.
 }
 \description{
 This model allows for the simulation of different direct transmission modes
@@ -54,11 +54,11 @@ A compartmental ID model with several states/compartments
 }
 
 \examples{
-  # To run the simulation with default parameters just call this function
+  # To run the simulation with default parameters just call this function:
   result <- simulate_directtransmission()
-  # To choose parameter values other than the standard one, specify them e.g. like such
+  # To choose parameter values other than the standard one, specify them like such:
   result <- simulate_directtransmission(S0 = 100, tmax = 100, A=10)
-  # You should then use the simulation result returned from the function, e.g. like this:
+  # You should then use the simulation result returned from the function, like this:
   plot(result$ts[,"Time"],result$ts[,"S"],xlab='Time',ylab='Number Susceptible',type='l')
 }
 \references{
@@ -66,7 +66,7 @@ See e.g. Keeling and Rohani 2008 for SIR models and the
   documentation for the deSolve package for details on ODE solvers
 }
 \seealso{
-The UI of the shiny app 'DirectTransmission', which is part of this package, contains more details on the model
+The UI of the Shiny app 'DirectTransmission', which is part of this package, contains more details on the model.
 }
 \author{
 Andreas Handel

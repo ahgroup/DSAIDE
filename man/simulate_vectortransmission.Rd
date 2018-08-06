@@ -32,7 +32,7 @@ simulate_vectortransmission(Sh0 = 1000, Ih0 = 1, Sv0 = 0, Iv0 = 0,
 }
 \value{
 This function returns the simulation result as obtained from a call
-  to the deSolve ode solver
+  to the deSolve ode solver.
 }
 \description{
 This model allows for the simulation of a vector-borne infectious disease
@@ -48,23 +48,23 @@ A compartmental ID model with several states/compartments
 
   This function does not perform any error checking. So if you try to do
   something nonsensical (e.g. any negative values or fractions > 1),
-  the code will likely abort with an error message
+  the code will likely abort with an error message.
 }
 
 \examples{
-  # To run the simulation with default parameters just call this function
+  # To run the simulation with default parameters just call the function:
   result <- simulate_vectortransmission()
-  # To choose parameter values other than the standard one, specify them e.g. like such
+  # To choose parameter values other than the standard one, specify them like such:
   result <- simulate_vectortransmission(Sh0 = 100, Sv0 = 1e5,  tmax = 100)
-  # You should then use the simulation result returned from the function, e.g. like this:
+  # You should then use the simulation result returned from the function, like this:
   plot(result$ts[ , "Time"],result$ts[ , "Sh"],xlab='Time',ylab='Number Susceptible',type='l')
 }
 \references{
-See the information in the corresponding shiny app for model details
-           See the documentation for the deSolve package for details on ODE solvers
+See the information in the corresponding Shiny app for model details.
+           See the documentation for the deSolve package for details on ODE solvers.
 }
 \seealso{
-The UI of the shiny app 'VectorTransmission', which is part of this package, contains more details on the model
+The UI of the Shiny app 'VectorTransmission', which is part of this package, contains more details on the model.
 }
 \author{
 Andreas Handel
