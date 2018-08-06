@@ -9,9 +9,7 @@
 
 There were no errors and warnings.
 
-There were 2 NOTES:
-
-Note 1:
+There was 1 NOTE:
 
 checking installed package size ... NOTE
   installed size is  5.3Mb
@@ -19,19 +17,7 @@ checking installed package size ... NOTE
     media       2.2Mb
     shinyapps   2.7Mb
 
-
 The package has diagrams/figures of the implemented simulation models which are shown as part of the documentation for each app. They take up some space.
-
-
-Note 2:
-
-* checking R code for possible problems ... NOTE
-generate_plots: no visible binding for global variable 'xvals'
-
-And several further statements of that type. It sems to come from various dplyr and ggplot commands. 
-Based on an online search, this seems to be a common issue. 
-I found several suggested solutions to getting rid of the notes, but they all seemed like hacks, and it doesn't seem to affect anything.
-
 
 
 

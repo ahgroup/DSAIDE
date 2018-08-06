@@ -29,6 +29,9 @@ dsaidemenu <- function() {
   print('*************************************************')
 }
 
+#needed to prevent NOTE messages on CRAN checks
+utils::globalVariables(c("xvals", "yvals", "varnames","IDvar","style"))
+
 .onAttach <- function(libname, pkgname){
   packageStartupMessage("Welcome to the DSAIDE package. Type dsaidemenu() to get started.")
 }
