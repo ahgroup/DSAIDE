@@ -37,14 +37,14 @@ multipatheq <- function(t, y, parms)
 #' @param I120 initial number of double infected hosts
 #' @param tmax maximum simulation time, units of months
 #' @param b1 rate at which type 1 infected hosts transmit
-#' @param b2 rate at which type 1 infected hosts transmit
+#' @param b2 rate at which type 2 infected hosts transmit
 #' @param b12 rate at which double infected hosts transmit
 #' @param g1 the rate at which infected type 1 hosts recover
 #' @param g2 the rate at which infected type 2 hosts recover
 #' @param g12 the rate at which double infected hosts recover
 #' @param a fraction of type 1 infections produced by double infected hosts
 #' @return This function returns the simulation result as obtained from a call
-#'   to the deSolve ode solver
+#'   to the deSolve ode solver.
 #' @details A compartmental ID model with several states/compartments
 #'   is simulated as a set of ordinary differential
 #'   equations. The function returns the output from the odesolver as a matrix,
@@ -52,13 +52,13 @@ multipatheq <- function(t, y, parms)
 #' @section Warning:
 #'   This function does not perform any error checking. So if you try to do
 #'   something nonsensical (e.g. any negative values or fractions > 1),
-#'   the code will likely abort with an error message
+#'   the code will likely abort with an error message.
 #' @examples
-#'   # To run the simulation with default parameters just call this function
+#'   # To run the simulation with default parameters just call the function:
 #'   result <- simulate_multipathogen()
-#'   # To choose parameter values other than the standard one, specify them e.g. like such
+#'   # To choose parameter values other than the standard one, specify them like such:
 #'   result <- simulate_multipathogen(S0 = 100, I20 = 10,  tmax = 100, a = 0.5)
-#'   # You should then use the simulation result returned from the function, e.g. like this:
+#'   # You should then use the simulation result returned from the function, like this:
 #'   plot(result$ts[,"Time"], result$ts[ , "S"], xlab='Time', ylab='Number Susceptible', type='l')
 #'   # We could set the infected type 1 host recovery rate at a high level, e.g., 1.2, and
 #'   # examine the infected 1 curve.
@@ -67,7 +67,7 @@ multipatheq <- function(t, y, parms)
 #'   # Additionally, consider making type 1 hosts transmit at a high rate.
 #'   result <- simulate_multipathogen(S0 = 100, I20 = 10, tmax = 100, b1 = 2.5)
 #'   plot(result$ts[,"Time"],result$ts[,"I1"], xlab="Time",ylab="Number Infected Type 1",type="l")
-#' @seealso The UI of the shiny app 'Multi-Pathogen Dynamics', which is part of this package, contains more details on the model
+#' @seealso The UI of the Shiny app 'Multi-Pathogen Dynamics', which is part of this package, contains more details on the model
 #' @author Andreas Handel and Spencer Hall
 #' @references See e.g. Keeling and Rohani 2008 for SIR models and the
 #'   documentation for the deSolve package for details on ODE solvers

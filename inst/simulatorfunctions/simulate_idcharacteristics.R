@@ -48,17 +48,30 @@ idcharacteristicsode <- function(t, y, parms)
 #' @return The function returns the output from the odesolver as a matrix,
 #' with one column per compartment/variable. The first column is time.
 #' @details A compartmental ID model with several states/compartments
-#' is simulated as a set of ordinary differential equations.
+#' is simulated as a set of ordinary differential equations. The states
+#' are:
+#' **S**: Susceptible, uninfected individuals
+#' **P**: Presymptomatic individuals who are infected and possibly infectious
+#' **A**: Asymptomatic individuals who are infected and possibly infectious
+#' **I**: Sympomatic infected individuals, most likely infectious
+#' **R**: Removed / recovered individuals, no longer infectious or susceptible
+#' **D**: Individuals who have died from the disease
+#' The model app contains detailed information on the processes, but briefly,
+#' susceptible (S) individuals can become infected by presymptomatic (P), asymptomatic (A),
+#' or infected (I) hosts. All infected individuals enter the presymptomatic stage first,
+#' from which they can become symptomatic or asymptomatic. Asymptomatic hosts recover
+#' within some specified duration of time, while infected hosts either recover or die,
+#' thus entering either R or D. Recovered individuals are immune to reinfection.
 #' @section Warning:
 #' This function does not perform any error checking. So if you try to do
 #' something nonsensical (e.g. have I0 > PopSize or any negative values or fractions > 1),
-#' the code will likely abort with an error message
+#' the code will likely abort with an error message.
 #' @examples
-#' # To run the simulation with default parameters just call this function
+#' # To run the simulation with default parameters just call the function:
 #' result <- simulate_idcharacteristics()
-#' # To choose parameter values other than the standard one, specify them e.g. like such
+#' # To choose parameter values other than the standard one, specify them like such:
 #' result <- simulate_idcharacteristics(S0 = 2000, P0 = 10, tmax = 100, f = 0.1, d = 0.2)
-#' # You should then use the simulation result returned from the function, e.g. like this:
+#' # You should then use the simulation result returned from the function, like this:
 #' plot(result$ts[,"Time"],result$ts[,"S"],xlab='Time',ylab='Number Susceptible',type='l')
 #' @references See e.g. Keeling and Rohani 2008 for SIR models and the
 #'   documentation for the deSolve package for details on ODE solvers
