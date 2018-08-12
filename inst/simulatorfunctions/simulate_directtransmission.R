@@ -41,7 +41,7 @@ directtransmissioneq <- function(t, y, parms)
 #' @param g the rate at which infected hosts recover
 #' @param w the rate of waning immunity
 #' @return This function returns the simulation result as obtained from a call
-#'   to the deSolve ode solver
+#'   to the deSolve ode solver.
 #' @details A compartmental ID model with several states/compartments
 #'   is simulated as a set of ordinary differential
 #'   equations. The function returns the output from the odesolver as a list,
@@ -53,13 +53,13 @@ directtransmissioneq <- function(t, y, parms)
 #'   something nonsensical (e.g. any negative values or fractions > 1),
 #'   the code will likely abort with an error message
 #' @examples
-#'   # To run the simulation with default parameters just call this function
+#'   # To run the simulation with default parameters just call this function:
 #'   result <- simulate_directtransmission()
-#'   # To choose parameter values other than the standard one, specify them e.g. like such
+#'   # To choose parameter values other than the standard one, specify them like such:
 #'   result <- simulate_directtransmission(S0 = 100, tmax = 100, A=10)
-#'   # You should then use the simulation result returned from the function, e.g. like this:
+#'   # You should then use the simulation result returned from the function, like this:
 #'   plot(result$ts[,"Time"],result$ts[,"S"],xlab='Time',ylab='Number Susceptible',type='l')
-#' @seealso The UI of the shiny app 'DirectTransmission', which is part of this package, contains more details on the model
+#' @seealso The UI of the Shiny app 'DirectTransmission', which is part of this package, contains more details on the model.
 #' @author Andreas Handel
 #' @references See e.g. Keeling and Rohani 2008 for SIR models and the
 #'   documentation for the deSolve package for details on ODE solvers

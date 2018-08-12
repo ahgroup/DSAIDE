@@ -50,16 +50,16 @@ stochasticSIRfunc <- function(y, parms, t)
 #'   compartment/variable. The first column is time.
 #' @section Warning: This function does not perform any error checking. So if
 #'   you try to do something nonsensical (e.g. specify negative parameter values
-#'   or fractions > 1), the code will likely abort with an error message
+#'   or fractions > 1), the code will likely abort with an error message.
 #' @examples
-#' # To run the simulation with default parameters 
+#' # To run the simulation with default parameters, just call the function:
 #' result <- simulate_stochastic_SIR()
-#' # To choose parameter values other than the standard one, specify them e.g. like this
+#' # To choose parameter values other than the standard one, specify them like this:
 #' result <- simulate_stochastic_SIR(S0 = 2000,  tmax = 200, b = 1/100)
-#' # You can display or further process the result, e.g. like this
+#' # You can display or further process the result, like this:
 #' plot(result$ts[,'Time'],result$ts[,'S'],xlab='Time',ylab='Number Susceptible',type='l')
 #' print(paste('Max number of infected: ',max(result$ts[,'I']))) 
-#' @seealso See the shiny app documentation corresponding to this simulator
+#' @seealso See the Shiny app documentation corresponding to this simulator
 #' function for more details on this model. See the manual for the adaptivetau
 #' package for details on the stochastic algorithm.
 #' @author Andreas Handel

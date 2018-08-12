@@ -41,7 +41,7 @@ heterogeneityeq <- function(t, y, parms)
 #' @param w1 the rate at which type 1 host immunity wanes
 #' @param w2 the rate at which type 2 host immunity wanes
 #' @return This function returns the simulation result as obtained from a call
-#'   to the deSolve ode solver
+#'   to the deSolve ode solver.
 #' @details A compartmental ID model with several states/compartments
 #'   is simulated as a set of ordinary differential
 #'   equations. The function returns the output from the odesolver as a matrix,
@@ -49,13 +49,13 @@ heterogeneityeq <- function(t, y, parms)
 #' @section Warning:
 #'   This function does not perform any error checking. So if you try to do
 #'   something nonsensical (e.g. any negative values or fractions > 1),
-#'   the code will likely abort with an error message
+#'   the code will likely abort with an error message.
 #' @examples
-#'   # To run the simulation with default parameters just call this function
+#'   # To run the simulation with default parameters just call the function:
 #'   result <- simulate_heterogeneity()
-#'   # To choose parameter values other than the standard one, specify them e.g. like such
+#'   # To choose parameter values other than the standard one, specify them like such:
 #'   result <- simulate_heterogeneity(S10 = 100, S20 = 1e3,  tmax = 100)
-#'   # You should then use the simulation result returned from the function, e.g. like this:
+#'   # You should then use the simulation result returned from the function, like this:
 #'   plot(result$ts[,"Time"],result$ts[,"S1"],xlab='Time',ylab='Number Susceptible 1',type='l')
 #'   # Consider also if we want to make the rate of transmission from infected type 1
 #'   # host to susceptible type 1 host 0.7, and then plot the rate of infection for
@@ -66,7 +66,7 @@ heterogeneityeq <- function(t, y, parms)
 #'   # type 1 hosts, and plot the type 2 rate of infection.
 #'   result <- simulate_heterogeneity(S10 = 100, S20 = 1e3, b12 = 0.7, tmax = 100)
 #'   plot(result$ts[,"Time"],result$ts[,"I2"],xlab="Time",ylab="Number Infected 2", type = "l")
-#' @seealso The UI of the shiny app 'Host Heterogeneity', which is part of this package, contains more details on the model
+#' @seealso The UI of the Shiny app 'Host Heterogeneity', which is part of this package, contains more details on the model.
 #' @author Andreas Handel
 #' @references See e.g. Keeling and Rohani 2008 for SIR models and the
 #'   documentation for the deSolve package for details on ODE solvers
