@@ -32,7 +32,7 @@ ui <- fluidPage(
   p(paste('This is DSAIDE version ',utils::packageVersion("DSAIDE"),' last updated ', utils::packageDescription('DSAIDE')$Date,sep=''), class='infotext'),
   
   #specify name of App below, will show up in title
-  h1('DSAIRM - Main Menu', align = "center", style = "background-color:#123c66; color:#fff"),
+  h1('DSAIDE - Main Menu', align = "center", style = "background-color:#123c66; color:#fff"),
 
   p('The Basics', class='mainsectionheader'),
 
