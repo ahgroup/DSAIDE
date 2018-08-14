@@ -5,7 +5,8 @@ library(dlstats)
 library(forecast)
 library(ggplot2)
 
-packagename = 'DSAIDE'
+#packagename = 'DSAIDE'
+#packagename = 'DSAIRM'
 
 
 ##using cranlogs package
