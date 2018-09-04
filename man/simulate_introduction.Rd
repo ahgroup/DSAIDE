@@ -22,7 +22,8 @@ is the inverse of the average duration of the infectious period}
 from infected to susceptible host}
 }
 \value{
-The function returns the output from the odesolver as a matrix,
+The function returns  a list. The output from the odesolver as 
+saved in a data frame called ts,
 with one column per compartment/variable. The first column is time.
 }
 \description{
