@@ -39,7 +39,8 @@ introductionode <- function(t, y, parms)
 #'   is the inverse of the average duration of the infectious period
 #' @param tmax maximum simulation time, units depend on choice of units for your
 #'   parameters
-#' @return The function returns the output from the odesolver as a matrix,
+#' @return The function returns  a list. The output from the odesolver as 
+#' saved in a data frame called ts,
 #' with one column per compartment/variable. The first column is time.
 #' @details: A simple SIR (Susceptible, Infected, Recovered) model is simulated
 #'     as a set of ordinary differential equations, using an ode solver from
