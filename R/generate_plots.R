@@ -70,8 +70,8 @@ generate_plots <- function(res)
       
       #if the first column is called 'Time' (as returned from several of the simulators)
       #rename to xvals for consistency and so the code below will work
-      if (colnames(rawdat)[1] == 'Time' ) {colnames(rawdat)[1] <- 'xvals'}
-
+      if ( colnames(rawdat)[1] == 'Time' | colnames(rawdat)[1] == 'time' ) {colnames(rawdat)[1] <- 'xvals'}
+      
       #for the plotting below, the data need to be in the form xvals/yvals/varnames
       #if the data is instead in xvals/var1/var2/var3/etc. - which is what the simulator functions produce
       #we need to re-format
