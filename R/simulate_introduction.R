@@ -11,12 +11,14 @@ introductionode <- function(t, y, parms)
    with(
     as.list(c(y,parms)), #lets us access variables and parameters stored in y and parms by name
     {
-  
-      #the ordinary differential equations
-  	  dS =  - b * S * I; #susceptibles
-	  	dI = b * S * I - g * I; #infected/infectious
-	 	  dR = g * I; #recovered
-
+      #StartODES
+      #Susceptible : infection of susceptibles :
+      dS = -b*S*I
+      #Infected : infection of susceptibles : recovery of infected :
+      dI = +b*S*I -g*I
+      #Recovered : recovery of infected :
+      dR = +g*I
+      #EndODES
 	 	  list(c(dS, dI, dR))
     }
    ) #close with statement
