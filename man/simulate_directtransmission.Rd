@@ -4,9 +4,8 @@
 \alias{simulate_directtransmission}
 \title{Simulation of a compartmental infectious disease transmission model illustrating different types of direct transmission}
 \usage{
-simulate_directtransmission(S0 = 1000, I0 = 1, tmax = 120,
-  scenario = 1, bd = 0.01, bf = 0, A = 1, m = 0, n = 0,
-  g = 0.1, w = 0)
+simulate_directtransmission(S0 = 1000, I0 = 1, tmax = 120, scenario = 1,
+  bd = 0.01, bf = 0, A = 1, m = 0, n = 0, g = 0.1, w = 0)
 }
 \arguments{
 \item{S0}{initial number of susceptibles}

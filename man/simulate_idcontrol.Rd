@@ -4,11 +4,10 @@
 \alias{simulate_idcontrol}
 \title{Simulation of a compartmental infectious disease transmission model including different control mechanisms}
 \usage{
-simulate_idcontrol(S0 = 1000, I0 = 1, E0 = 0, Sv0 = 1000,
-  Iv0 = 0, tmax = 300, bP = 0, bA = 0, bI = 1/1000, bE = 0,
-  bv = 1/1000, bh = 1/1000, gP = 0.5, gA = 0.5, gI = 0.5,
-  pA = 1, pI = 10, c = 1, f = 0, d = 0, w = 0, mh = 0,
-  nh = 0, mv = 0, nv = 0)
+simulate_idcontrol(S0 = 1000, I0 = 1, E0 = 0, Sv0 = 1000, Iv0 = 0,
+  tmax = 300, bP = 0, bA = 0, bI = 1/1000, bE = 0, bv = 1/1000,
+  bh = 1/1000, gP = 0.5, gA = 0.5, gI = 0.5, pA = 1, pI = 10,
+  c = 1, f = 0, d = 0, w = 0, mh = 0, nh = 0, mv = 0, nv = 0)
 }
 \arguments{
 \item{S0}{initial number of susceptible hosts}
