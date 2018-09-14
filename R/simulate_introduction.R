@@ -1,30 +1,3 @@
-############################################################
-##code to simulate a basic SIR model as set of ODEs
-##written by Andreas Handel (ahandel@uga.edu)
-##last modified: 10/13/16
-############################################################
-
-# reproductive_number_ode_eq function
-# This function is used in the solver function and has no independent usages
-introductionode <- function(t, y, parms)
-{
-   with(
-    as.list(c(y,parms)), #lets us access variables and parameters stored in y and parms by name
-    {
-      #StartODES
-      #Susceptible : infection of susceptibles :
-      dS = -b*S*I
-      #Infected : infection of susceptibles : recovery of infected :
-      dI = +b*S*I -g*I
-      #Recovered : recovery of infected :
-      dR = +g*I
-      #EndODES
-	 	  list(c(dS, dI, dR))
-    }
-   ) #close with statement
-} #end function specifying the ODEs
-	 	  
-
 #' Simulation of a basic SIR model illustrating a single infectious disease outbreak
 #'
 #' @description This function runs a simulation of a basic SIR model
@@ -82,6 +55,26 @@ introductionode <- function(t, y, parms)
 
 simulate_introduction <- function(S0 = 1000, I0 = 1, tmax = 300, g = 0.5, b = 1/1000)
 {
+  
+  introductionode <- function(t, y, parms)
+  {
+    with(
+      as.list(c(y,parms)), #lets us access variables and parameters stored in y and parms by name
+      {
+        #StartODES
+        #Susceptible : infection of susceptibles :
+        dS = -b*S*I
+        #Infected : infection of susceptibles : recovery of infected :
+        dI = +b*S*I -g*I
+        #Recovered : recovery of infected :
+        dR = +g*I
+        #EndODES
+        list(c(dS, dI, dR))
+      }
+    ) #close with statement
+  } #end function specifying the ODEs
+  
+  
   Y0 = c(S = S0, I = I0, R = 0);  #combine initial conditions into a vector
   dt = min(0.1, tmax / 1000); #time step for which to get results back
   timevec = seq(0, tmax, dt); #vector of times for which solution is returned (not that internal timestep of the integrator is different)

@@ -35,7 +35,13 @@ ui <- fluidPage(
   h1('DSAIDE - Main Menu', align = "center", style = "background-color:#123c66; color:#fff"),
 
   p('The Basics', class='mainsectionheader'),
-
+  fluidRow(
+    column(12,
+           actionButton("IDDynamicsIntroNew", "New ID Dynamics Intro", class="mainbutton")
+    ),
+    class = "mainmenurow"
+  ), #close fluidRow structure for input
+  
   fluidRow(
     column(4,
            actionButton("IDDynamicsIntro", "ID Dynamics Intro", class="mainbutton")
