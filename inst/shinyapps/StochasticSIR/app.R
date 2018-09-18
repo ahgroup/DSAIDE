@@ -40,7 +40,7 @@ refresh <- function(input, output){
       
       if (models == 1 | models == 3) #deterministic model
       {
-        result_ode <- simulate_introduction(S0 = S0, I0 = I0, g = g, b = b, tmax = tmax)
+        result_ode <- simulate_SIR_model_ode(vars = c(S = S0, I = I0, R=0), pars=c(b = b, g = g), times = c(tstart = 0, tmax = tmax, dt = 0.1))
         result_ode <- result_ode$ts
         colnames(result_ode) = c('xvals','Sdet','Idet','Rdet')
         dat_ode = tidyr::gather(as.data.frame(result_ode), -xvals, value = "yvals", key = "varnames")

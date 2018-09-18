@@ -17,8 +17,10 @@ generate_shinyinput <- function(model, output)
         nvars = length(model$var)  #number of variables/compartments in model
         allv = lapply(1:nvars, function(n) {
             numericInput(model$var[[n]]$varname,
-                         model$var[[n]]$vartext,
-                         value = model$var[[n]]$varval)
+                         paste0(model$var[[n]]$vartext,' (',model$var[[n]]$varname,')'),
+                         value = model$var[[n]]$varval,
+                         min = 0,
+                         step = model$var[[n]]$varval/100)
         })
         do.call(mainPanel, allv)
     })
@@ -28,9 +30,10 @@ generate_shinyinput <- function(model, output)
         allp = lapply(1:npars, function(n) {
             numericInput(
                 model$par[[n]]$parname,
-                model$par[[n]]$partext,
+                paste0(model$par[[n]]$partext,' (',model$par[[n]]$parname,')'),
                 value = model$par[[n]]$parval,
-                step = model$par[[n]]$parval
+                min = 0,
+                step = model$par[[n]]$parval/100
             )
         })
         do.call(mainPanel, allp)
@@ -41,9 +44,10 @@ generate_shinyinput <- function(model, output)
         allt = lapply(1:ntime, function(n) {
             numericInput(
                 model$time[[n]]$timename,
-                model$time[[n]]$timetext,
+                paste0(model$time[[n]]$timetext,' (',model$time[[n]]$timename,')'),
                 value = model$time[[n]]$timeval,
-                step = model$time[[n]]$timeval
+                min = 0,
+                step = model$time[[n]]$timeval/100
             )
         })
         do.call(mainPanel, allt)

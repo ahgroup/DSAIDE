@@ -7,6 +7,8 @@
 generate_fctcall(input, model, modeltype)
 }
 \arguments{
+\item{input}{shiny input structure}
+
 \item{model}{a modelbuilder model structure}
 
 \item{modeltype}{type of model/code that should be run}

@@ -1,4 +1,4 @@
-#This is the Shiny App for the main menu
+#This is the Shiny App for the main menu for the DSAIDE package
 
 #this function is the server part of the app
 server <- function(input, output, session) {
@@ -35,12 +35,6 @@ ui <- fluidPage(
   h1('DSAIDE - Main Menu', align = "center", style = "background-color:#123c66; color:#fff"),
 
   p('The Basics', class='mainsectionheader'),
-  fluidRow(
-    column(12,
-           actionButton("IDDynamicsIntroNew", "New ID Dynamics Intro", class="mainbutton")
-    ),
-    class = "mainmenurow"
-  ), #close fluidRow structure for input
   
   fluidRow(
     column(4,

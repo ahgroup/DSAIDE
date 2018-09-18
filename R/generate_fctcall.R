@@ -54,7 +54,7 @@ generate_fctcall <- function(input,model,modeltype)
     timestring = substr(timestring, 1, nchar(timestring) - 2)
     timestring = paste0(timestring, ') ')
 
-    filename = paste0(gsub(" ", "_", model$title), "_",modeltype) #name of function to be called
+    filename = paste0('simulate_',gsub(" ", "_", model$title), "_",modeltype) #name of function to be called
     fctargs = paste0(varstring, parstring, timestring) #arguments for function
     fctcall = paste0('simresult <- ', filename, '(', fctargs, ')') # complete string for function call
 

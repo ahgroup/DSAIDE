@@ -8,6 +8,8 @@ generate_shinyinput(model, output)
 }
 \arguments{
 \item{model}{a modelbuilder model structure}
+
+\item{output}{shiny output structure}
 }
 \value{
 HTML formatted text for display in a Shiny UI

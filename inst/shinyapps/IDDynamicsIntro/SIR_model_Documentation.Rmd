@@ -11,7 +11,7 @@ bibliography: ../../media/references.bib
 ---
 
 ## Overview {#shinytab1}
-This app allows you to explore a very basic infectious disease simulation. The main goal is to provide familiarity with the overall setup and ideas behind using these simulations, and how to run them. Read about the model in the "Model" tab. Make sure to read the 'general notes' section. Then do the tasks described in the "What to do" tab. Finally, check out the "Further Information" tab to learn where you can find some background information on this (and many of the other) apps.
+This app implements the basic SIR (susceptible-infected-recovered) model and allows you to explore a very basic infectious disease simulation. The main goal is to provide familiarity with the overall setup and ideas behind using these simulations, and how to run them. Read about the model in the "Model" tab. Make sure to read the 'general notes' section. Then do the tasks described in the "What to do" tab. Finally, check out the "Further Information" tab to learn where you can find some background information on this (and many of the other) apps.
 
 
 ## The Model {#shinytab2}
@@ -59,7 +59,7 @@ R:$$\dot R = gI$$
 * Sometimes, parameters can vary during the simulation, but most often they do not.
 * If you want to study a specific ID, you choose parameters such that they match the specific disease you want to study. For now, just play around with the model without trying to relate it to some specific ID.
 * There are no fixed rules concerning the naming of variables and parameters. Compartments (e.g. SIR) tend to be labeled very similarly by different researchers, while parameter labels are much more variable. Always check carefully for a given paper/model what the meaning of each parameter is.
-* Some people prefer diagrams, others equations. In my opinion, it is,  best to show both. 
+* Some people prefer diagrams, others equations. In my opinion, it is best to show both. 
 
 
 ## What to do {#shinytab3}
@@ -70,11 +70,13 @@ R:$$\dot R = gI$$
 
 * This and most other simulations/apps in DSAIDE do not have natural time units (unless specifically stated). You could, therefore, assume that your model runs in units of days or weeks/months/years, based on what's most suitable for the disease you want to study. You have to make sure that all your parameters are in the right time units. Always make sure to check if a given simulation can handle different time units or assumes specific ones.
 
+* The app lets you choose starting time, final time and time step. Starting time generally does not matter and is almost always set to 0. For models like this one based on differential equations, the time step does not affect the internal time steps taken by the numeric solver, only the times for which results are returned. Only for 
+
 **The tasks below are described in a way that assumes everything is in units of days (rate parameters, therefore, have units of inverse days). If any quantity is not given in those units, you need to convert it first (e.g. if it says a week, you need to convert it to 7 days).**
 
 
 ### Task 1: 
-* Run the simulation with a population size, _S~0~_, of 1000, 1 initially infected host, _I~0~_, simulation duration 100 days, recovery rate _g_=0.5 per day, and infectiousness _b_=0.001. You will get an outbreak of some - currently unspecified - infectious disease. If you did it correctly, your outbreak should end with around 203 uninfected individuals still remaining.
+* Run the simulation with 1000 susceptible individuals and 1 initially infected host, no recovered. Set simulation duration to 100 days, start time and time step can remain at 0 and 0.1. Set recovery rate _g_=0.5 per day, and infectiousness _b_=0.001. You will get an outbreak of some - currently unspecified - infectious disease. If you did it correctly, your outbreak should end with around 203 uninfected individuals still remaining.
 * From the graph, get a (rough) estimate of the day at which the outbreak peaks. You can adjust the simulation duration to "zoom in" and get a better estimate.
 * Contemplate the fact that the outbreak ends even though there are still susceptible remaining, i.e. not everyone got infected. Do you find that surprising? How could you maybe explain that? This topic is discussed in more detail in the reproductive number app. 
 * You have no infected left at the end of the outbreak. Figure out how you can use the information from either the susceptibles or recovered left at the end of the outbreak to figure out how many people in total got infected during the outbreak.
@@ -110,7 +112,7 @@ R:$$\dot R = gI$$
 
 ## Further Information {#shinytab4}
 * This app (and all others) are structured such that the Shiny part (the graphical interface you are currently using and the server-side function that goes with it) calls an underlying R script which runs the simulation for the model of interest and returns the results.
-* For this app, the underlying function running the simulation is called `simulate_introduction.R`. You can call this function directly, without going through the shiny app. Type `?simulate_introduction` into the R console for more information (you need to exit the graphical interface first or start a new R session). If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself. 
+* For this app, the underlying function running the simulation is called `simulate_SIR_model_ode.R`. You can call this function directly, without going through the shiny app. Type `?simulate_SIR_model_ode` into the R console for more information (you need to exit the graphical interface first or start a new R session). If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself. 
 * You could also modify this R function for your own purposes - though that requires some more R coding knowledge. 
 * To get a quick start explaining how to interact with the simulator functions directly, read the vignette for the package (type `vignette('DSAIDE')` into the R console).
 * Some useful books which cover the material of this and most of the other apps (though often at a somewhat more challenging mathematical level) are [@vynnycky10] and [@keeling08].
