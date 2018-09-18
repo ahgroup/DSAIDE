@@ -107,7 +107,7 @@ result <- simulate_SIR_model_ode(vars = c(S = 2000, I = 1, R = 0), pars = c(b = 
 Calling the simulation function execuctes the underlying dynamical model (here a simple 3 compartment ODE model, as described in the "Model" section of the app). The simulation function produces and returns time-series for the dynamics of each of the variables that are tracked. Users can produce their own plots, e.g. plotting susceptible as function of time:
 
 ```{r, eval=TRUE, echo=TRUE}
-plot(result$ts[ , "Time"],result$ts[ , "S"],xlab='Time',ylab='Number Susceptible',type='l')
+plot(result$ts[ , "time"],result$ts[ , "S"],xlab='Time',ylab='Number Susceptible',type='l')
 ```
 
 The ability to call the simulation functions directly instead of going through the graphical interface allows additional exploration of the models. For instance if one wanted to explore the behavior of a model systematically for different values of a given parameter, this would need to be done manually if run through the graphical interface. Calling the function directly allows one to automate this by wrapping the function inside a loop over the parameter of interest, recording some quantity of interest for each run, and report the result at the end. The following is a simple example, showing a loop over different values of the recovery rate and recording the peak of the outbreak each time, with the final result _peak of outbreak as function of recovery time_ shown in a plot:
@@ -178,7 +178,7 @@ peak = rep(0,length(wvec)) #this will record the peak values for each g
 for (n in 1:length(wvec))
 {
   result <- mysimulator( vars = c(S = 1000, I = 1, R = 0), pars = c(b = 1/1000, g = 0.5, w = wvec[n]), times = c(tstart = 0, tfinal = 300, dt = 0.1))
-  peak[n] <- max(result[,"I"])
+  peak[n] <- max(result$ts[,"I"])
 }
 plot(wvec,peak,type='p',xlab='Rate of waning immunity',ylab='Max number of infected')
 ```

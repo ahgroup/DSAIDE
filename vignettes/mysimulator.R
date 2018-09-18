@@ -25,7 +25,7 @@
 #' The \code{ts} dataframe has one column per compartment/variable. The first column is time.   
 #' @examples  
 #' # To run the simulation with default parameters:  
-#' result <- simulate_SIR_model_ode() 
+#' result <- mysimulator() 
 #' @section Warning: This function does not perform any error checking. So if you try to do something nonsensical (e.g. have negative values for parameters), the code will likely abort with an error message.
 #' @section Model Author: Andreas Handel
 #' @section Model creation date: 2018-09-14
@@ -33,7 +33,7 @@
 #' @section Code creation date: 2018-09-14
 #' @export 
  
-simulate_SIR_model_ode <- function(vars = c(S = 1000, I = 1, R = 0), pars = c(b = 0.002, g = 1, w = 0), times = c(tstart = 0, tfinal = 100, dt = 0.1) ) 
+mysimulator <- function(vars = c(S = 1000, I = 1, R = 0), pars = c(b = 0.002, g = 1, w = 0), times = c(tstart = 0, tfinal = 100, dt = 0.1) ) 
 { 
   #Block of ODE equations for deSolve 
   SIR_model_ode <- function(t, y, parms) 
