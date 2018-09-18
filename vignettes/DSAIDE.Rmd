@@ -86,7 +86,7 @@ The exploration of the models through the graphical interface is the first and m
 
 To facilitate direct interaction and modification of the underlying simulations, each app is structured in such a way that the underlying model/simulation is a stand-alone function. For some apps, there are multiple underlying functions involved. You can call/use any of these functions directly, without going through the graphical interface. The 'Further Information' tab inside each app provides the name of the corresponding underlying function(s).
 
-Consider as example the first app, called "ID Dynamics Intro". The simulator function for this model is called `simulate_introduction.R`. After loading the package (if not already loaded) with 
+Consider as example the first app, called "ID Dynamics Intro". The simulator function for this model is called `simulate_SIR_model_ode.R`. After loading the package (if not already loaded) with 
 
 ```{r eval=TRUE, echo=FALSE}
 library('DSAIDE') 
@@ -95,14 +95,13 @@ library('DSAIDE')
 the user can learn about the inputs and outputs of the function by looking at its documentation 
 
 ```{r eval=FALSE, echo=TRUE}
-help('simulate_introduction')
+help('simulate_SIR_model_ode')
 ```
 
 The help file explains that one can run the simulation by specifying initial number of susceptibles and infected, the duration for which the simulation should be run, and the infection and recovery parameters. Unless explicitly specified, the models do not have inherent time units. Instead, those are set by the user based on choices for parameters. It is important to ensure that all quantities have time units. For this simulation, _tmax_, _g_, and _b_ are expressed in the same time units, e.g. days or months (or the inverse of those units for the rate parameters). Each parameter has some default. The user can modify those default settings. For instance one can call the simulator with the following settings, overwriting the defaults:  
 
 ```{r, eval=TRUE, echo=TRUE}
-result <- simulate_introduction(S0 = 500, I0 = 5, tmax = 100, g = 0.1,  b = 1/2500)
-
+result <- simulate_SIR_model_ode(vars = c(S = 2000, I = 1, R = 0), pars = c(b = 0.001, g = 0.5), times = c(tstart = 0, tfinal = 100, dt = 0.1))
 ```
 
 Calling the simulation function execuctes the underlying dynamical model (here a simple 3 compartment ODE model, as described in the "Model" section of the app). The simulation function produces and returns time-series for the dynamics of each of the variables that are tracked. Users can produce their own plots, e.g. plotting susceptible as function of time:
@@ -119,7 +118,7 @@ peak = rep(0,length(gvec)) #this will record the peak values for each g
 for (n in 1:length(gvec))
 {
   #call the simulator function with different values of g each time
-  result <- simulate_introduction(S0 = 500, I0 = 5, tmax = 200, g = gvec[n],  b = 1/2500)
+  result <- simulate_SIR_model_ode(vars = c(S = 500, I = 1, R = 0), pars = c(b = 1/2500, g = gvec[n]), times = c(tstart = 0, tfinal = 200, dt = 0.1))
   peak[n] <- max(result$ts[,"I"]) #record max number of infected for each value of g
 }
 #plot final result
@@ -139,43 +138,33 @@ While the functions in this subfolder are not used to run the code in the packag
 
 All simulator functions are (hopefully) well documented. Some basic to intermediate level of R coding experience is likely required to successfully modify the functions. In addition to modifying the simulator function of interest, you will likely also have to write some additional code to interact with your modified function (as described in _Level 2_).
 
-The following provides a simple example of this process of modifying a simulator function and exploring its results. Assume that we want to modify the simple SIR model encoded in `simulate_introduction.R`. After finding the file and making a copy (let's call the modified function `mysimulator.R`), we can make modifications. Say we want to include waning immunity with recovered returning to the susceptible class at rate _w_. 
+The following provides a simple example of this process of modifying a simulator function and exploring its results. Assume that we want to modify the simple SIR model encoded in `simulate_SIR_model_ode.R`. After finding the file and making a copy (let's call the modified function `mysimulator.R`), we can make modifications. Say we want to include waning immunity with recovered returning to the susceptible class at rate _w_. 
 
 We will need to modify the following lines of code:
 
 old:
 ```{r eval=FALSE, echo=TRUE}
-simulate_introduction <- function(S0 = 1000, I0 = 1, tmax = 300, g = 0.5, b = 1/1000)
+simulate_SIR_model_ode <- function(vars = c(S = 1000, I = 1, R = 0), pars = c(b = 0.002, g = 1), times = c(tstart = 0, tfinal = 100, dt = 0.1) ) 
 ```
 
 new:
 ```{r eval=FALSE, echo=TRUE}
-mysimulator <- function(S0 = 1000, I0 = 1, tmax = 300, g = 0.5, b = 1/1000, w = 0)
+mysimulator <- function(vars = c(S = 1000, I = 1, R = 0), pars = c(b = 0.002, g = 1, w = 0), times = c(tstart = 0, tfinal = 100, dt = 0.1) ) 
 ```
 
-old:
+
+old (ignoring comments present in the code):
 ```{r eval=FALSE, echo=TRUE}
-pars = c(b = b, g = g);
-```
-
-new:
-```{r eval=FALSE, echo=TRUE, color='red'}
-pars = c(b = b, g = g, w = w);
-```
-
-
-old:
-```{r eval=FALSE, echo=TRUE}
-dS =  - b * S * I; #susceptibles
-dI = b * S * I - g * I; #infected/infectious
-dR = g * I; #recovered
+dS = -b*S*I
+dI = +b*S*I -g*I
+dR = +g*I
 ```
 
 new:
 ```{r eval=FALSE, echo=TRUE}
-dS =  - b * S * I + w * R; #susceptibles
-dI = b * S * I - g * I; #infected/infectious
-dR = g * I -  w * R; #recovered
+dS = -b*S*I +w*R
+dI = +b*S*I -g*I
+dR = +g*I -w*R
 ```
 
 
@@ -188,7 +177,7 @@ wvec = seq(0,1,by=0.02) #values of immunity loss rate, w, for which to run the s
 peak = rep(0,length(wvec)) #this will record the peak values for each g
 for (n in 1:length(wvec))
 {
-  result <- mysimulator(S0 = 1000, I0 = 1, tmax = 300, g = 0.5,  b = 1/1000, w = wvec[n])
+  result <- mysimulator( vars = c(S = 1000, I = 1, R = 0), pars = c(b = 1/1000, g = 0.5, w = wvec[n]), times = c(tstart = 0, tfinal = 300, dt = 0.1))
   peak[n] <- max(result[,"I"])
 }
 plot(wvec,peak,type='p',xlab='Rate of waning immunity',ylab='Max number of infected')
