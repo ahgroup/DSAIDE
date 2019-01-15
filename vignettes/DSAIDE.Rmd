@@ -86,7 +86,7 @@ The exploration of the models through the graphical interface is the first and m
 
 To facilitate direct interaction and modification of the underlying simulations, each app is structured in such a way that the underlying model/simulation is a stand-alone function. For some apps, there are multiple underlying functions involved. You can call/use any of these functions directly, without going through the graphical interface. The 'Further Information' tab inside each app provides the name of the corresponding underlying function(s).
 
-Consider as example the first app, called "ID Dynamics Intro". The simulator function for this model is called `simulate_SIR_model_ode.R`. After loading the package (if not already loaded) with 
+Consider as example the first app, called "ID Dynamics Intro". The simulator function for this model is called `simulate_sir_ode.R`. After loading the package (if not already loaded) with 
 
 ```{r eval=TRUE, echo=FALSE}
 library('DSAIDE') 
@@ -95,13 +95,13 @@ library('DSAIDE')
 the user can learn about the inputs and outputs of the function by looking at its documentation 
 
 ```{r eval=FALSE, echo=TRUE}
-help('simulate_SIR_model_ode')
+help('simulate_sir_ode')
 ```
 
-The help file explains that one can run the simulation by specifying initial number of susceptibles and infected, the duration for which the simulation should be run, and the infection and recovery parameters. Unless explicitly specified, the models do not have inherent time units. Instead, those are set by the user based on choices for parameters. It is important to ensure that all quantities have time units. For this simulation, _tmax_, _g_, and _b_ are expressed in the same time units, e.g. days or months (or the inverse of those units for the rate parameters). Each parameter has some default. The user can modify those default settings. For instance one can call the simulator with the following settings, overwriting the defaults:  
+The help file explains that one can run the simulation by specifying initial number of susceptibles and infected, the duration for which the simulation should be run, and the infection and recovery parameters. Unless explicitly specified, the models do not have inherent time units. Instead, those are set by the user based on choices for parameters. It is important to ensure that all quantities (parameters and time settings) have the same time units, e.g. days or months (or the inverse of those units for the rate parameters). Each parameter has some default. The user can modify those default settings. For instance one can call the simulator with the following settings, overwriting the defaults:  
 
 ```{r, eval=TRUE, echo=TRUE}
-result <- simulate_SIR_model_ode(vars = c(S = 2000, I = 1, R = 0), pars = c(b = 0.001, g = 0.5), times = c(tstart = 0, tfinal = 100, dt = 0.1))
+result <- simulate_sir_ode(S = 2000, I = 1, R = 0, b = 0.001, g = 0.5, tstart = 0, tfinal = 100, dt = 0.1)
 ```
 
 Calling the simulation function execuctes the underlying dynamical model (here a simple 3 compartment ODE model, as described in the "Model" section of the app). The simulation function produces and returns time-series for the dynamics of each of the variables that are tracked. Users can produce their own plots, e.g. plotting susceptible as function of time:
@@ -118,7 +118,7 @@ peak = rep(0,length(gvec)) #this will record the peak values for each g
 for (n in 1:length(gvec))
 {
   #call the simulator function with different values of g each time
-  result <- simulate_SIR_model_ode(vars = c(S = 500, I = 1, R = 0), pars = c(b = 1/2500, g = gvec[n]), times = c(tstart = 0, tfinal = 200, dt = 0.1))
+  result <- simulate_sir_ode(S = 500, I = 1, R = 0, b = 1/2500, g = gvec[n], tstart = 0, tfinal = 200, dt = 0.1)
   peak[n] <- max(result$ts[,"I"]) #record max number of infected for each value of g
 }
 #plot final result
@@ -127,29 +127,41 @@ plot(gvec,peak,type='p',xlab='Rate of recovery',ylab='Max number of infected')
 
 Thus, you can add your own custom code to the existing simulator functions and with a few lines of extra code analyze and explore many more questions and scenarios than those accessible through the graphical interface. This provides a lot more flexibility, but requires writing some R code to interface with the supplied simulator functions. 
 
-
 ### Level 3: Modifying the simulation functions
-As a next step, it is possible to not only interact with the simulation functions, but instead directly access the code and modify the underlying simulator functions. To make this easy, copies of all simulator functions are in a subdirectory called _simulatorfunctions_ inside the DSAIDE package folder. Each function in that folder starts with `simulate_`. The following `R` code should tell you where on your computer the directory is that contains the simulator functions:
+
+Level 2 provides a user with some flexibility, but the main constraint is that only existing models can be used and analyzed. This constraint can be overcome by directly modifiying and customizing the underlying simulation functions. As was true for moving from level 1 to 2, this move from level 2 to what I call level 3 provides further (almost unlimited) flexibility at the cost of having to write increasingly more `R` code.
+
+To make modifying the existing functions easy, copies of all simulator functions are provided in a subdirectory called _simulatorfunctions_ inside the package folder. Each function in that folder starts with `simulate_`. The following `R` command will point the user to the location of this directory on their computer:
 ```{r, eval=FALSE, echo=TRUE}
 system.file("simulatorfunctions", package = "DSAIDE")
 ```
 
-While the functions in this subfolder are not used to run the code in the package, and one could therefore edit them without breaking the package, it is better to copy the whole folder to a new location. This way the chance of accidentally overwriting any modifications you make is reduced.
+Don't edit the functions in this subfolder (they are being used by the package as well), but instead to copy the whole folder to a new location and then work with the copies of these functions. 
 
-All simulator functions are (hopefully) well documented. Some basic to intermediate level of R coding experience is likely required to successfully modify the functions. In addition to modifying the simulator function of interest, you will likely also have to write some additional code to interact with your modified function (as described in _Level 2_).
+The code for each simulator function is (hopefully) well documented. Some basic to intermediate level of `R` coding experience is likely required to successfully modify the functions. In addition to modifying the simulator function of interest, a user will likely also have to write some additional code to interact with their modified function (as described in _Level 2_).
 
-The following provides a simple example of this process of modifying a simulator function and exploring its results. Assume that we want to modify the simple SIR model encoded in `simulate_SIR_model_ode.R`. After finding the file and making a copy (let's call the modified function `mysimulator.R`), we can make modifications. Say we want to include waning immunity with recovered returning to the susceptible class at rate _w_. 
+The following provides a simple example of this process of modifying a simulator function and exploring its results. Assume that we want to modify the simple SIR model encoded in `simulate_sir_ode.R`. After finding the file and making a copy (let's call the modified function `mysimulator.R`), we can make modifications. Say we want to include waning immunity with recovered returning to the susceptible class at rate _w_. 
 
 We will need to modify the following lines of code:
 
 old:
 ```{r eval=FALSE, echo=TRUE}
-simulate_SIR_model_ode <- function(vars = c(S = 1000, I = 1, R = 0), pars = c(b = 0.002, g = 1), times = c(tstart = 0, tfinal = 100, dt = 0.1) ) 
+simulate_sir_ode <- function(S = 1000, I = 1, R = 0, b = 0.002, g = 1, tstart = 0, tfinal = 100, dt = 0.1 ) 
 ```
 
 new:
+```{r eval=FALSE, echo=TRUE, color='red'}
+mysimulator <- function( S = 1000, I = 1, R = 0, b = 0.002, g = 1, w = 0, tstart = 0, tfinal = 100, dt = 0.1 ) 
+```
+
+old:
 ```{r eval=FALSE, echo=TRUE}
-mysimulator <- function(vars = c(S = 1000, I = 1, R = 0), pars = c(b = 0.002, g = 1, w = 0), times = c(tstart = 0, tfinal = 100, dt = 0.1) ) 
+pars = c(b = b, g = g)
+```
+
+new:
+```{r eval=FALSE, echo=TRUE, color='red'}
+pars = c(b = b, g = g, w = w)
 ```
 
 
@@ -161,12 +173,13 @@ dR = +g*I
 ```
 
 new:
-```{r eval=FALSE, echo=TRUE}
+```{r eval=FALSE, echo=TRUE, color='red'}
 dS = -b*S*I +w*R
 dI = +b*S*I -g*I
 dR = +g*I -w*R
 ```
 
+Note that if we wanted to share this function with others, we would need to also update the function documentation at the start of the file. For personal use of the function, this is a good idea but not required.
 
 We could now for instance explore how different rates of waning immunity impact the maximum peak size over all outbreaks. This requires a slight modification of the code shown above in _Level 2_ as follows:
 
@@ -177,23 +190,27 @@ wvec = seq(0,1,by=0.02) #values of immunity loss rate, w, for which to run the s
 peak = rep(0,length(wvec)) #this will record the peak values for each g
 for (n in 1:length(wvec))
 {
-  result <- mysimulator( vars = c(S = 1000, I = 1, R = 0), pars = c(b = 1/1000, g = 0.5, w = wvec[n]), times = c(tstart = 0, tfinal = 300, dt = 0.1))
+  result <- mysimulator( S = 1000, I = 1, R = 0, b = 1e-3, g = 0.5, w = wvec[n], tstart = 0, tfinal = 300, dt = 0.1)
   peak[n] <- max(result$ts[,"I"])
 }
 plot(wvec,peak,type='p',xlab='Rate of waning immunity',ylab='Max number of infected')
 ```
 
 
+For most users and especially novice coders, it is likely best to start with one of the provided models and modify as needed. However, at this level, a user has essentially full control and is only limited by what can be accomplished using the `R` programming language and their ability and interest in writing customized code. 
 
 
-## Developing and contributing new apps to the package
+## Contributing to the package
+The package is on GitHub and you can use the usual GitHub process to contribute updated, bug fixes, etc. If you don't know how to do that or don't have the time, you can also file an issue on GitHub and let me know what should be changed. 
 
-The package is built in a way that makes it (hopefully) easy for others to contribute new simulations/apps. To that end, the package contains a subfolder called _docsfordevelopers_, which provides information on how the apps are structured and how to add new ones. The information is hopefully complete enough to allow fairly easy development and contribution to the package. If you are interested in contributing new apps, I suggest you get in touch with me, either by email or through [the github site for the package.](https://github.com/ahgroup/DSAIDE)
+The package is built in a way that makes it (hopefully) easy for others to contribute new simulations/apps. To that end, the package contains [this Markdown file, documentation.md,](https://github.com/ahgroup/DSAIDE/blob/master/inst/docsfordevelopers/documentation.md) which provides further information on the details of the package structure. If you plan to develop new apps, or add other substantial updates, it's best to get in touch with me first via email or GitHub.
 
-## Further Information
-* I published a paper describing the package and how to use it which you can find and read [here](https://doi.org/10.1371/journal.pcbi.1005642). Also use this paper if you want to cite the package. Currently the paper is probably a bit more 'polished' than the vignette, but in the future the vignette will be more up-to-date. 
-* The `documentation.md' file described above contains more information about the package structure.
-* For feedback, bug reports etc., file a github issue.
+
+## Further information
+* I published a paper describing the package and how to use it which you can find and read [here](https://doi.org/10.1371/journal.pcbi.1005642). Also use this paper if you want to cite the package. The paper is probably a bit more 'polished' than the vignette, but the vignette is more up-to-date. The package has changed some since the paper was published. 
+* The [package vignette](https://ahgroup.github.io/DSAIDE/articles/DSAIDE.html) provides details about the different ways the package can be used. I highly recommend going through it. 
+* The [documentation.md](https://github.com/ahgroup/DSAIDE/blob/master/inst/docsfordevelopers/documentation.md) file described above contains more information about the package structure.
+* For feedback, bug reports, feature requests, etc., file a [GitHub issue](https://github.com/ahgroup/DSAIDE/issues).
 * A 'companion' package to this one, called Dynamical Systems Approaches for Immune Respone Modeling (DSAIRM), focuses on models for analyzing with-host models. It has the same structure as DSAIDE. [See the DSAIRM Github site for more information.](https://github.com/ahgroup/DSAIRM)
 
 

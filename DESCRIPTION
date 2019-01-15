@@ -7,8 +7,8 @@ Description: A collection of 'shiny' apps that allow for the simulation and
     about infectious disease epidemiology from a dynamical systems perspective.
     All apps include explanations of the underlying models and instructions on
     what to do with the models. 
-Version: 0.7.0
-Date: 2018-8-6
+Version: 0.8.0
+Date: 2019-1-15
 Authors@R: c(
     person("Andreas", "Handel", email = "ahandel@uga.edu", 
     role = c("aut", "cre"), comment = c(ORCID = "0000-0002-4622-1146") ),
@@ -33,6 +33,7 @@ Imports:
     knitr (>= 1.15),
     rmarkdown (>= 1.10),
     stats (>= 3.4),
+    stringr,
     tidyr (>= 0.7),
     utils (>= 3.4),
     XML
@@ -41,6 +42,7 @@ Depends:
     shiny (>= 1.0)
 Suggests: 
     covr,
+    pkgdown,
     testthat
 RoxygenNote: 6.1.1
 VignetteBuilder: knitr

@@ -1,13 +1,13 @@
 #' @title A helper function that takes result from the simulators and produces plots
 #'
 #' @description This function generates plots to be displayed in the Shiny UI.
-#' This is a helper function. This function processes results returned from the simulation, supplied as a list
-#' @param res a list structure containing all simulation results that are to be plotted.
+#' This is a helper function. This function processes results returned from the simulation, supplied as a list.
+#' @param res A list structure containing all simulation results that are to be plotted.
 #'    The length of the list indicates the number of separate plots to make.
 #'    Each list entry corresponds to one plot and
 #'    needs to contain the following information/elements:
-#'    1. a data frame called "dat" or "ts". If the data frame is "ts" it is assumed to be 
-#'    a time series and by default a line plot will be produced and labeled Time/Numbers. 
+#'    1. A data frame called "dat" or "ts". If the data frame is "ts" it is assumed to be
+#'    a time series and by default a line plot will be produced and labeled Time/Numbers.
 #'    For plotting, the data needs to be in a format with one column called xvals, one column yvals,
 #'    one column called varnames that contains names for different variables.
 #'    Varnames needs to be a factor variable or will be converted to one.
@@ -15,24 +15,23 @@
 #'    An optional column called IDvar can be provided for further grouping (i.e. multiple lines for stochastic simulations).
 #'    If plottype is 'mixedplot' an additional column called 'style' indicating line or point plot
 #'    for each variable is needed.
-#'    2. meta-data for the plot, provided in the following variables:
-#'    optional: plottype - one of "Lineplot" (default is nothing is provided),"Scatterplot","Boxplot", "Mixedplot".
-#'    optional: xlab, ylab - strings to label axes.
-#'    optional: xscale, yscale - scaling of axes, valid ggplot2 expression, e.g. "identity" or "log10".
-#'    optional: xmin, xmax, ymin, ymax - manual min and max for axes.
-#'    optional: legendtitle - legend title, if NULL/not supplied no legend will be plotted.
-#'    optional: linesize - width of line, numeric, i.e. 1.5, 2, etc. set to 1.5 if not supplied.
-#'    optional: title - a title for each plot.
+#'    2. Meta-data for the plot, provided in the following variables:
+#'    optional: plottype - One of "Lineplot" (default is nothing is provided),"Scatterplot","Boxplot", "Mixedplot".
+#'    optional: xlab, ylab - Strings to label axes.
+#'    optional: xscale, yscale - Scaling of axes, valid ggplot2 expression, e.g. "identity" or "log10".
+#'    optional: xmin, xmax, ymin, ymax - Manual min and max for axes.
+#'    optional: legendtitle - Legend title, if NULL/not supplied no legend will be plotted.
+#'    optional: linesize - Width of line, numeric, i.e. 1.5, 2, etc. set to 1.5 if not supplied.
+#'    optional: title - A title for each plot.
 #'
-#' @return A plot structure for display in a Shiny UI
-#' @details This function is called by the Shiny server to produce plots returned to the Shiny UI
-#' To create plots run the simulation with default parameters, just call a function, e.g.:
+#' @return A plot structure for display in a Shiny UI.
+#' @details This function is called by the Shiny server to produce plots returned to the Shiny UI.
+#' Create plots run the simulation with default parameters just call the function:
 #' result <- simulate_basicbacteria()
 #' @author Andreas Handel
 #' @import ggplot2
 #' @importFrom gridExtra grid.arrange
 #' @export
-
 
 generate_plots <- function(res)
 {
@@ -49,7 +48,7 @@ generate_plots <- function(res)
     for (n in 1:nplots) #loop to create each plot
     {
       resnow = res[[n]]
-      
+
       #if a data frame called 'ts' exists, assume that this one is the data to be plotted
       #otherwise use the data frame called 'dat'
       #one of the 2 must exist, otherwise the function will not work
@@ -62,16 +61,15 @@ generate_plots <- function(res)
       else {
         rawdat = resnow$dat
       }
-      
+
       plottype <- if(is.null(resnow$plottype)) {'Lineplot'} else  {resnow$plottype} #if nothing is provided, we assume a line plot. That could lead to silly plots.
 
-      
-     
-      
+
+
       #if the first column is called 'Time' (as returned from several of the simulators)
       #rename to xvals for consistency and so the code below will work
       if ( colnames(rawdat)[1] == 'Time' | colnames(rawdat)[1] == 'time' ) {colnames(rawdat)[1] <- 'xvals'}
-      
+
       #for the plotting below, the data need to be in the form xvals/yvals/varnames
       #if the data is instead in xvals/var1/var2/var3/etc. - which is what the simulator functions produce
       #we need to re-format
@@ -169,8 +167,10 @@ generate_plots <- function(res)
 
       #apply title if provided
       if (!is.null(resnow$title)) { p6 = p6 + ggplot2::ggtitle(resnow$title) }
-      
-      pfinal = p6 + ggplot2::theme_bw()
+
+      #modify overall theme and legend details
+      pfinal = p6 + ggplot2::theme_bw(base_size = 18) + ggplot2::theme(legend.position = c(0, 1), legend.justification=c(0,1), legend.key.width = unit(4,"line"), legend.background = element_rect(size=0.5, linetype="solid", colour ="black"))
+
       allplots[[n]] = pfinal
 
     } #end loop over individual plots
