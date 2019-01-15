@@ -115,10 +115,14 @@ $$
 
 
 ## Further Information {#shinytab4}
-* This app (and all others) are structured such that the Shiny part (the graphical interface you are currently using and the server-side function that goes with it) calls an underlying R script which runs the simulation for the model of interest and returns the results.
-* For this app, the underlying function running the simulation is called `simulate_SIR_model_ode.R`. You can call this function directly, without going through the shiny app. Type `?simulate_SIR_model_ode` into the R console for more information (you need to exit the graphical interface first or start a new R session). If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself. 
-* You could also modify this R function for your own purposes - though that requires some more R coding knowledge. 
-* To get a quick start explaining how to interact with the simulator functions directly, read the vignette for the package (type `vignette('DSAIDE')` into the R console).
+```{r, echo = FALSE}
+source(list.files( pattern = "settings.R" ))
+```
+
+* This app (and all others) are structured such that the Shiny part (the graphical interface you see and the server-side function that goes with it) calls an underlying R script (or several) which runs the simulation for the model of interest and returns the results.
+* For this app, the underlying function running the simulation is called ``r simfunction``. You can call it directly, without going through the shiny app. Use the `help()` command for more information on how to use the functions directly. If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself. 
+* You could also modify the simulator functions and adopt them for your own purposes. All simulator functions can be found in a sub-folder of the package called `simulatorfunctions`. Of course to modify these functions, you'll need to do some coding.
+* For examples on using the simulators directly and how to modify them, check out the package tutorial on the package website.
 * Some useful books which cover the material of this and most of the other apps (though often at a somewhat more challenging mathematical level) are [@vynnycky10] and [@keeling08].
 
 

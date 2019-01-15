@@ -98,17 +98,15 @@ Often the letter _E_ is used for the _exposed_ stage, which would then be called
 * As you continue your exploration, think about potential real infectious diseases that might be approximated by either one of the transmission types, and what settings for other model parameters would be for those ID.
 
 
-## Answers 
-This section does not have the shinytab label and is therefore ignored and not included in the app. One could provide the answers here. Note that if this file is supplied with the package, the answers are in principle available, so most users might not know where/how to look.
-
-### Answer 1: 
-Answer to task 1.
-
-
 ## Further Information {#shinytab4}
+```{r, echo = FALSE}
+source(list.files( pattern = "settings.R" ))
+```
 
-* For this app, the underlying function running the simulation is called `simulate_environmentaltransmission.R`. You can call this function directly, without going through the shiny app. Check the help file for the function for more information. If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself. 
-* You could also modify this R function for your own purposes - though that requires R coding knowledge.
+* This app (and all others) are structured such that the Shiny part (the graphical interface you see and the server-side function that goes with it) calls an underlying R script (or several) which runs the simulation for the model of interest and returns the results.
+* For this app, the underlying function running the simulation is called ``r simfunction``. You can call it directly, without going through the shiny app. Use the `help()` command for more information on how to use the functions directly. If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself. 
+* You could also modify the simulator functions and adopt them for your own purposes. All simulator functions can be found in a sub-folder of the package called `simulatorfunctions`. Of course to modify these functions, you'll need to do some coding.
+* For examples on using the simulators directly and how to modify them, check out the package tutorial on the package website.
 * Some more information on environmentally transmitted ID and modeling can be found in [@codeco01].
 
 

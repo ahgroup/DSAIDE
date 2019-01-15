@@ -14,8 +14,8 @@ You will also learn how models can be used to study such concepts.
 ## Installation
 I assume you have `R` installed. I also highly recommend `RStudio`, though it's not required.
 
-1. Install the CRAN release in the usual way with `install.packages('DSAIRM')`.
-2. The latest development version (potentially buggy) can be installed from github, using the devtools package. If you don't have it, install the devtools package. Then, install DSAIRM through devtools. The following commands will get you up and running:
+1. Install the CRAN release in the usual way with `install.packages('DSAIDE')`.
+2. The latest development version (potentially buggy) can be installed from github, using the devtools package. If you don't have it, install the devtools package. The following commands will get you up and running:
 
 ```r
 install.packages('devtools')
@@ -36,7 +36,7 @@ See [the package vignette](https://ahgroup.github.io/DSAIDE/articles/DSAIDE.html
 ## Contributing to the package
 The package is on GitHub and you can use the usual GitHub process to contribute updated, bug fixes, etc. If you don't know how to do that or don't have the time, you can also file an issue on GitHub and let me know what should be changed. 
 
-The package is built in a way that makes it (hopefully) easy for others to contribute new simulations/apps. To that end, the package contains [this Markdown file, documentation.md,](https://github.com/ahgroup/DSAIRM/blob/master/inst/docsfordevelopers/documentation.md) which provides further information on the details of the package structure. If you plan to develop new apps, or add other substantial updates, it's best to get in touch with me first via email or GitHub.
+The package is built in a way that makes it (hopefully) easy for others to contribute new simulations/apps. To that end, the package contains [this Markdown file, documentation.md,](https://github.com/ahgroup/DSAIDE/blob/master/inst/docsfordevelopers/documentation.md) which provides further information on the details of the package structure. If you plan to develop new apps, or add other substantial updates, it's best to get in touch with me first via email or GitHub.
 
 
 
