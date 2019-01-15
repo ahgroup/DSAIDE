@@ -11,9 +11,8 @@
 #'   This assumption is hard-coded into the sinusoidally varying
 #'   transmission coefficient, which is assumed to have a period of a year.
 #'   
-#'
 #' @param S : initial number of susceptible hosts : numeric
-#' @param P0 : initial number of infected, pre-symptomatic hosts : numeric
+#' @param P : initial number of infected, pre-symptomatic hosts : numeric
 #' @param bP : level/rate of infectiousness for hosts in the P compartment : numeric
 #' @param bA : level/rate of infectiousness for hosts in the A compartment : numeric
 #' @param bI : level/rate of infectiousness for hosts in the I compartment : numeric

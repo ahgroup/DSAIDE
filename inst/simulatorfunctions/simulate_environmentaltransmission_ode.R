@@ -47,6 +47,8 @@ simulate_environmentaltransmission_ode <- function(S = 10000, I = 1, R = 0, E = 
  
   #Main function code block 
   timevec=seq(tstart,tfinal, by = dt) 
+  vars = c(S = S, I = I, R = R, E = E)
+  pars = c(bd = bd, be = be, m = m, n = n, g = g, p = p, c = c)
   odeout = deSolve::ode(y = vars, parms = pars, times = timevec,  func = Environmental_Transmission_model_ode) 
   result <- list() 
   result$ts <- as.data.frame(odeout) 

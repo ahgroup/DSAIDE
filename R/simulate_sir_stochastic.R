@@ -1,41 +1,17 @@
-############################################################
-##simulating a stochastic SIR type model
-##written by Andreas Handel, ahandel@uga.edu, last change: 7/18/18
-############################################################
-
-#this specifies the rates used by the adapativetau routine
-stochasticSIRfunc <- function(y, parms, t)
-{
-    with(as.list(c(y, parms)),
-         {
-            #specify each rate/transition/reaction that can happen in the system
-             rates=c(  m,
-                       n * S,
-                       n * I,
-                       n * R,
-                       b * I * S,
-                       g * I
-             ) #end specification of each rate/transition/reaction
-             return(rates)
-         })
-} #end function specifying rates used by adaptivetau
-
-
 #' Stochastic simulation of an SIR-type model
 #' 
 #' @description  Simulation of a stochastic SIR type model with the following
 #'   compartments: Susceptibles (S), 
 #'   Infected and Infectious (I), Recovered and Immune (R)
 #'   
-#' @param S0 initial number of susceptible hosts
-#' @param I0 initial number of infected, symptomatic hosts
-#' @param b level/rate of infectiousness for hosts in the I compartment
-#' @param g rate at which a person leaves the I compartment
-#' @param m the rate at which new individuals enter the model (are born)
-#' @param n the rate of natural death (the inverse is the average lifespan)
-#' @param rngseed seed for random number generator to allow reproducibility
-#' @param tmax maximum simulation time, units depend on choice of units for 
-#' your parameters
+#' @param S : initial number of susceptible hosts : numeric
+#' @param I :  initial number of infected, symptomatic hosts : numeric
+#' @param b : level/rate of infectiousness for hosts in the I compartment : numeric
+#' @param g : rate at which a person leaves the I compartment : numeric
+#' @param m : the rate at which new individuals enter the model (are born) : numeric
+#' @param n : the rate of natural death (the inverse is the average lifespan) : numeric
+#' @param rngseed : seed for random number generator to allow reproducibility : numeric
+#' @param tmax : maximum simulation time : numeric
 #' @return The function returns a list. The list has one element, a data frame ts
 #' which contains the time series of the simulated model, 
 #' with one column per compartment/variable. The first column is time.
@@ -53,11 +29,11 @@ stochasticSIRfunc <- function(y, parms, t)
 #'   or fractions > 1), the code will likely abort with an error message.
 #' @examples
 #' # To run the simulation with default parameters, just call the function:
-#' result <- simulate_stochastic_SIR()
+#' result <- simulate_sir_stochastic()
 #' # To choose parameter values other than the standard one, specify them like this:
-#' result <- simulate_stochastic_SIR(S0 = 2000,  tmax = 200, b = 1/100)
+#' result <- simulate_sir_stochastic(S = 2000,  tmax = 200, b = 0.01)
 #' # You can display or further process the result, like this:
-#' plot(result$ts[,'Time'],result$ts[,'S'],xlab='Time',ylab='Number Susceptible',type='l')
+#' plot(result$ts[,'time'],result$ts[,'S'],xlab='Time',ylab='Number Susceptible',type='l')
 #' print(paste('Max number of infected: ',max(result$ts[,'I']))) 
 #' @seealso See the Shiny app documentation corresponding to this simulator
 #' function for more details on this model. See the manual for the adaptivetau
@@ -66,11 +42,27 @@ stochasticSIRfunc <- function(y, parms, t)
 #' @export
 
 
-
-
-simulate_stochastic_SIR <- function(S0 = 1000, I0 = 10, tmax = 100,  b = 1/1000,  g = 0.5,  m = 0, n = 0, rngseed  = 100)
+simulate_sir_stochastic <- function(S = 1000, I = 10, tmax = 100,  b = 1e-3,  g = 0.5,  m = 0, n = 0, rngseed  = 100)
 {
-    Y0 = c(S = S0,  I = I0, R = 0);  #combine initial conditions into a vector
+    #this specifies the rates used by the adapativetau routine
+    stochasticSIRfunc <- function(y, parms, t)
+    {
+        with(as.list(c(y, parms)),
+             {
+                 #specify each rate/transition/reaction that can happen in the system
+                 rates=c(  m,
+                           n * S,
+                           n * I,
+                           n * R,
+                           b * I * S,
+                           g * I
+                 ) #end specification of each rate/transition/reaction
+                 return(rates)
+             })
+    } #end function specifying rates used by adaptivetau
+    
+    
+    Y0 = c(S = S,  I = I, R = 0);  #combine initial conditions into a vector
     dt = tmax / 1000; #time step for which to get results back
     timevec = seq(0, tmax, dt); #vector of times for which solution is returned (not that internal timestep of the integrator is different)
 
@@ -92,7 +84,6 @@ simulate_stochastic_SIR <- function(S0 = 1000, I0 = 10, tmax = 100,  b = 1/1000,
     set.seed(rngseed) # to allow reproducibility
     simres = adaptivetau::ssa.adaptivetau(init.values = Y0, transitions = transitions,  rateFunc = stochasticSIRfunc, params = pars, tf = tmax)
 
-    colnames(simres) <- c("Time", "S", "I", "R")
     result <- list()
     result$ts <- as.data.frame(simres)
     

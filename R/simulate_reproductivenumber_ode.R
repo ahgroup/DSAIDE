@@ -31,10 +31,11 @@
 #' @examples
 #'   # To run the simulation with default parameters just call the function:
 #'   result <- simulate_reproductivenumber_ode()
-#'   # To choose parameter values other than the standard one, specify the parameters you want to change, e.g. like such:
-#'   result <- simulate_reproductivenumber(S = 2000, I = 10, tmax = 100, g = 0.5, n = 0.1)
+#'   # To choose parameter values other than the standard one, 
+#'   # specify the parameters you want to change, e.g. like such:
+#'   result <- simulate_reproductivenumber_ode(S = 2000, I = 10, tmax = 100, g = 0.5, n = 0.1)
 #'   # You should then use the simulation result returned from the function, like this:
-#'   plot(result$ts[ , "rime"],result$ts[ , "S"],xlab='Time',ylab='Number Susceptible',type='l')
+#'   plot(result$ts[ , "time"],result$ts[ , "S"],xlab='Time',ylab='Number Susceptible',type='l')
 #' @seealso The UI of the app 'ReproductiveNumber 2', which is part of this package, contains more details on the model.
 #' @references See e.g. Keeling and Rohani 2008 for SIR models and the
 #'   documentation for the deSolve package for details on ODE solvers

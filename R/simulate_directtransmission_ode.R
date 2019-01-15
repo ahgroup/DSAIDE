@@ -1,7 +1,6 @@
 #' Simulation of a compartmental infectious disease transmission model illustrating different types of direct transmission
 #'
 #' @description  This model allows for the simulation of different direct transmission modes
-#' 
 #'
 #' @param S : initial number of susceptibles : numeric
 #' @param I : initial number of infected hosts : numeric
@@ -32,7 +31,7 @@
 #'   # To choose parameter values other than the standard one, specify them like such:
 #'   result <- simulate_directtransmission_ode(S = 100, tmax = 100, A=10)
 #'   # You should then use the simulation result returned from the function, like this:
-#'   plot(result$ts[,"Time"],result$ts[,"S"],xlab='Time',ylab='Number Susceptible',type='l')
+#'   plot(result$ts[,"time"],result$ts[,"S"],xlab='Time',ylab='Number Susceptible',type='l')
 #' @seealso The UI of the Shiny app 'DirectTransmission', which is part of this package, contains more details on the model.
 #' @author Andreas Handel
 #' @references See e.g. Keeling and Rohani 2008 for SIR models and the

@@ -59,7 +59,7 @@ A compartmental ID model with several states/compartments
   # To choose parameter values other than the standard one, specify them like such:
   result <- simulate_directtransmission_ode(S = 100, tmax = 100, A=10)
   # You should then use the simulation result returned from the function, like this:
-  plot(result$ts[,"Time"],result$ts[,"S"],xlab='Time',ylab='Number Susceptible',type='l')
+  plot(result$ts[,"time"],result$ts[,"S"],xlab='Time',ylab='Number Susceptible',type='l')
 }
 \references{
 See e.g. Keeling and Rohani 2008 for SIR models and the

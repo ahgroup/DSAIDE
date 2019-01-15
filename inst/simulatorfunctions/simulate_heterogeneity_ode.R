@@ -1,45 +1,21 @@
-# This function is used in the solver function and has no independent usages
-heterogeneityeq <- function(t, y, parms)
-{
-  with(
-    as.list(c(y,parms)), #lets us access variables and parameters stored in y and pars by name
-    {
-      
-      #the ordinary differential equations
-      dS1 =  - S1 * (b11 * I1 + b21 * I2) + w1 * R1; #susceptibles
-      dI1 =  S1 * (b11 * I1 + b21 * I2)  - g1 * I1 #infected, symptomatic
-      dR1 =   g1 * I1 - w1 * R1 #recovered, immune
-
-      dS2 =  - S2 * (b12 * I1 + b22 * I2) + w2 * R2; #susceptibles type 2
-      dI2 =  S2 * (b12 * I1 + b22 * I2)  - g2 * I2 #infected, symptomatic type 2
-      dR2 =   g2 * I2 - w2 * R2 #recovered, immune type 2
-      
-
-      list(c(dS1, dI1, dR1, dS2, dI2, dR2))
-    }
-  ) #close with statement
-} #end function specifying the ODEs
-
- 
-  
 #' Simulation of a compartmental infectious disease transmission model with 2 types of hosts
 #'
 #' @description  This model allows for the simulation of an ID with 2 types of hosts
 #' 
 #'
-#' @param S10 initial number of susceptible type 1 hosts 
-#' @param I10 initial number of infected type 1 hosts
-#' @param S20 initial number of susceptible type 2 hosts 
-#' @param I20 initial number of infected type 2 hosts
-#' @param tmax maximum simulation time, units of months
-#' @param b11 rate of transmission from infected type 1 host to susceptible type 1 host
-#' @param b22 rate of transmission from infected type 2 host to susceptible type 2 host
-#' @param b12 rate of transmission from infected type 1 host to susceptible type 2 host
-#' @param b21 rate of transmission from infected type 2 host to susceptible type 1 host
-#' @param g1 the rate at which infected type 1 hosts recover
-#' @param g2 the rate at which infected type 2 hosts recover
-#' @param w1 the rate at which type 1 host immunity wanes
-#' @param w2 the rate at which type 2 host immunity wanes
+#' @param S1 : initial number of susceptible type 1 hosts : numeric 
+#' @param I1 :  initial number of infected type 1 hosts : numeric
+#' @param S2 :  initial number of susceptible type 2 hosts : numeric
+#' @param I2 :  initial number of infected type 2 hosts : numeric
+#' @param tmax :  maximum simulation time, units of months : numeric
+#' @param b11 :  rate of transmission from infected type 1 host to susceptible type 1 host : numeric
+#' @param b22 :  rate of transmission from infected type 2 host to susceptible type 2 host : numeric
+#' @param b12 :  rate of transmission from infected type 1 host to susceptible type 2 host : numeric
+#' @param b21 :  rate of transmission from infected type 2 host to susceptible type 1 host : numeric
+#' @param g1 :  the rate at which infected type 1 hosts recover : numeric
+#' @param g2 :  the rate at which infected type 2 hosts recover : numeric
+#' @param w1 :  the rate at which type 1 host immunity wanes : numeric
+#' @param w2 :  the rate at which type 2 host immunity wanes : numeric
 #' @return This function returns the simulation result as obtained from a call
 #'   to the deSolve ode solver.
 #' @details A compartmental ID model with several states/compartments
@@ -52,20 +28,11 @@ heterogeneityeq <- function(t, y, parms)
 #'   the code will likely abort with an error message.
 #' @examples
 #'   # To run the simulation with default parameters just call the function:
-#'   result <- simulate_heterogeneity()
+#'   result <- simulate_heterogeneity_ode()
 #'   # To choose parameter values other than the standard one, specify them like such:
-#'   result <- simulate_heterogeneity(S10 = 100, S20 = 1e3,  tmax = 100)
+#'   result <- simulate_heterogeneity(S1 = 100, S2 = 1e3, b11 = 0.7, tmax = 100)
 #'   # You should then use the simulation result returned from the function, like this:
-#'   plot(result$ts[,"Time"],result$ts[,"S1"],xlab='Time',ylab='Number Susceptible 1',type='l')
-#'   # Consider also if we want to make the rate of transmission from infected type 1
-#'   # host to susceptible type 1 host 0.7, and then plot the rate of infection for
-#'   # type 1 hosts.
-#'   result <- simulate_heterogeneity(S10 = 100, S20 = 1e3, b11 = 0.7, tmax = 100)
-#'   plot(result$ts[,"Time"],result$ts[,"I1"],xlab="Time",ylab="Number Infected 1", type = "l")
-#'   # We can do the same for the infection of susceptible type 2 hosts from infected
-#'   # type 1 hosts, and plot the type 2 rate of infection.
-#'   result <- simulate_heterogeneity(S10 = 100, S20 = 1e3, b12 = 0.7, tmax = 100)
-#'   plot(result$ts[,"Time"],result$ts[,"I2"],xlab="Time",ylab="Number Infected 2", type = "l")
+#'   plot(result$ts[,"time"],result$ts[,"S1"],xlab='Time',ylab='Number Susceptible 1',type='l')
 #' @seealso The UI of the Shiny app 'Host Heterogeneity', which is part of this package, contains more details on the model.
 #' @author Andreas Handel
 #' @references See e.g. Keeling and Rohani 2008 for SIR models and the
@@ -73,10 +40,35 @@ heterogeneityeq <- function(t, y, parms)
 #' @export
 
 
-simulate_heterogeneity <- function(S10 = 1e3, I10 = 1, S20 = 1e3, I20 = 0, tmax = 120, b11 = 0.01, b12 = 0, b21 = 0, b22 = 0, g1 = 1, g2 = 1, w1 = 0, w2 = 0)
+simulate_heterogeneity_ode <- function(S1 = 1e3, I1 = 1, S2 = 1e3, I2 = 0, tmax = 120, b11 = 0.01, b12 = 0, b21 = 0, b22 = 0, g1 = 1, g2 = 1, w1 = 0, w2 = 0)
 {
-  ############################################################
-  Y0 = c(S1 = S10, I1 = I10, R1 = 0, S2 = S20, I2 = I20, R2 = 0);  #combine initial conditions into a vector
+  
+  # This function is used in the solver function and has no independent usages
+  heterogeneityeq <- function(t, y, parms)
+  {
+    with(
+      as.list(c(y,parms)), #lets us access variables and parameters stored in y and pars by name
+      {
+        
+        #the ordinary differential equations
+        dS1 =  - S1 * (b11 * I1 + b21 * I2) + w1 * R1; #susceptibles
+        dI1 =  S1 * (b11 * I1 + b21 * I2)  - g1 * I1 #infected, symptomatic
+        dR1 =   g1 * I1 - w1 * R1 #recovered, immune
+        
+        dS2 =  - S2 * (b12 * I1 + b22 * I2) + w2 * R2; #susceptibles type 2
+        dI2 =  S2 * (b12 * I1 + b22 * I2)  - g2 * I2 #infected, symptomatic type 2
+        dR2 =   g2 * I2 - w2 * R2 #recovered, immune type 2
+        
+        
+        list(c(dS1, dI1, dR1, dS2, dI2, dR2))
+      }
+    ) #close with statement
+  } #end function specifying the ODEs
+  
+  
+  
+    ############################################################
+  Y0 = c(S1 = S1, I1 = I1, R1 = 0, S2 = S2, I2 = I2, R2 = 0);  #combine initial conditions into a vector
   dt = min(0.1, tmax / 1000); #time step for which to get results back
   timevec = seq(0, tmax, dt); #vector of times for which solution is returned (not that internal timestep of the integrator is different)
   
@@ -90,7 +82,6 @@ simulate_heterogeneity <- function(S10 = 1e3, I10 = 1, S20 = 1e3, I20 = 0, tmax 
   #This odeoutput matrix will be re-created every time you run the code, so any previous results will be overwritten
   odeoutput = deSolve::lsoda(Y0, timevec, func = heterogeneityeq, parms=pars, atol=1e-12, rtol=1e-12);
 
-  colnames(odeoutput) <- c("Time", "S1", "I1", "R1", "S2", "I2", "R2")
   result <- list()
   result$ts <- as.data.frame(odeoutput)
   return(result)

@@ -15,7 +15,7 @@
 #' @param b2 : infection rate of vectors : numeric
 #' @param g : recovery rate of hosts : numeric
 #' @param w : wanning immunity rate : numeric
-#' @param b : vector birth rate : numeric
+#' @param m : vector birth rate : numeric
 #' @param n : vector death rate : numeric
 #' @param tstart : Start time of simulation : numeric
 #' @param tfinal : Final time of simulation : numeric
@@ -29,7 +29,7 @@
 #' @section Warning: This function does not perform any error checking. So if you try to do something nonsensical (e.g. have negative values for parameters), the code will likely abort with an error message.
 #' @export 
  
-simulate_vectortransmission_ode <- function(Sh = 1000, Ih = 1, Rh = 0, Sv = 1000, Iv = 1, b1 = 0.002, b2 = 0.002, g = 1, w = 0.1, b = 100, n = 0.1, tstart = 0, tfinal = 100, dt = 0.1 ) 
+simulate_vectortransmission_ode <- function(Sh = 1000, Ih = 1, Rh = 0, Sv = 1000, Iv = 1, b1 = 0.002, b2 = 0.002, g = 1, w = 0.1, m = 100, n = 0.1, tstart = 0, tfinal = 100, dt = 0.1 ) 
 { 
   #Block of ODE equations for deSolve 
   Vector_transmission_model_ode <- function(t, y, parms) 
@@ -43,7 +43,7 @@ simulate_vectortransmission_ode <- function(Sh = 1000, Ih = 1, Rh = 0, Sv = 1000
     #Recovered hosts : recovery of infected hosts : waning immunity :
     dRh = +g*Ih -w*Rh
     #Susceptible Vectors : vector births : infection of susceptible vectors : death of susceptible vectors :
-    dSv = +b -b2*Sv*Ih +n*Sv
+    dSv = +m -b2*Sv*Ih +n*Sv
     #Infected Vectors : infection of susceptible vectors : death of infected vectors :
     dIv = +b2*Sv*Ih -n*Iv
     #EndODES
@@ -51,7 +51,10 @@ simulate_vectortransmission_ode <- function(Sh = 1000, Ih = 1, Rh = 0, Sv = 1000
   } ) } #close with statement, end ODE code block 
  
   #Main function code block 
-  timevec=seq(tsart, tfinal, by = dt) 
+  timevec=seq(tstart, tfinal, by = dt) 
+  vars = c(Sh = Sh, Ih = Ih, Rh = Rh, Sv = Sv, Iv = Iv)
+  pars = c(b1 = b1, b2 = b2, g = g, w = w, m = m, n = n)
+  
   odeout = deSolve::ode(y = vars, parms = pars, times = timevec,  func = Vector_transmission_model_ode) 
   result <- list() 
   result$ts <- as.data.frame(odeout) 

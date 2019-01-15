@@ -1,50 +1,21 @@
-############################################################
-##simulating a stochastic SEIR type model
-##written by Andreas Handel, ahandel@uga.edu, last change: 6/18/18
-############################################################
-
-#this specifies the rates used by the adapativetau routine
-stochasticSEIRfunc <- function(y, parms, t)
-{
-    with(as.list(c(y, parms)),
-         {
-            #specify each rate/transition/reaction that can happen in the system
-             rates=c(  m,
-                       n * S,
-                       n * E,
-                       n * I,
-                       n * R,
-                       S * bE * E,
-                       S * bI * I,
-                       gE * E,
-                       gI * I,
-                       w * R
-             ) #end specification of each rate/transition/reaction
-             return(rates)
-         })
-} #end function specifying rates used by adaptivetau
-
-
 #' Stochastic simulation of an SEIR-type model
 #' 
 #' @description  Simulation of a stochastic SEIR type model with the following
 #'   compartments: Susceptibles (S), Infected and pre-symptomatic/exposed (E), 
 #'   Infected and Symptomatic (I), Recovered and Immune (R)
 #'   
-#' @param S0 initial number of susceptible hosts
-#' @param I0 initial number of infected, symptomatic hosts
-#' @param bE level/rate of infectiousness for hosts in the E compartment
-#' @param bI level/rate of infectiousness for hosts in the I compartment
-#' @param gE rate at which a person leaves the E compartment, which is the
-#'   inverse of the average time spent in that compartment
-#' @param gI rate at which a person leaves the I compartment
-#' @param w rate at which recovered persons lose immunity and return to
-#'   susceptible state
-#' @param m the rate at which new individuals enter the model (are born)
-#' @param n the rate of natural death (the inverse is the average lifespan)
-#' @param rngseed seed for random number generator to allow reproducibility
-#' @param tmax maximum simulation time, units depend on choice of units for 
-#' your parameters
+#' @param S : initial number of susceptible hosts : numeric
+#' @param I : initial number of infected, symptomatic hosts : numeric
+#' @param bE : level/rate of infectiousness for hosts in the E compartment : numeric
+#' @param bI : level/rate of infectiousness for hosts in the I compartment : numeric
+#' @param gE : rate at which a person leaves the E compartment : numeric
+#' @param gI : rate at which a person leaves the I compartment : numeric
+#' @param w : rate at which recovered persons lose immunity and return to
+#'   susceptible state : numeric
+#' @param m : the rate at which new individuals enter the model (are born) : numeric
+#' @param n : the rate of natural death (the inverse is the average lifespan) : numeric
+#' @param rngseed : seed for random number generator to allow reproducibility : numeric
+#' @param tmax : maximum simulation time : numeric
 #' @return The function returns a list. The list has one element, a data frame ts
 #' which contains the time series of the simulated model, 
 #' with one column per compartment/variable. The first column is time.
@@ -59,11 +30,11 @@ stochasticSEIRfunc <- function(y, parms, t)
 #'   or fractions > 1), the code will likely abort with an error message.
 #' @examples
 #' # To run the simulation with default parameters, just call the function:
-#' result <- simulate_stochastic_SEIR()
+#' result <- simulate_seir_stochastic()
 #' # To choose parameter values other than the standard one, specify them like this:
-#' result <- simulate_stochastic_SEIR(S0 = 2000,  tmax = 200, bE = 1/100)
+#' result <- simulate_seir_stochastic(S = 2000,  tmax = 200, bE = 0.01)
 #' # You can display or further process the result, like this:
-#' plot(result$ts[,'Time'],result$ts[,'S'],xlab='Time',ylab='Number Susceptible',type='l')
+#' plot(result$ts[,'time'],result$ts[,'S'],xlab='Time',ylab='Number Susceptible',type='l')
 #' print(paste('Max number of infected: ',max(result$ts[,'I']))) 
 #' @seealso See the Shiny app documentation corresponding to this simulator
 #' function for more details on this model. See the manual for the adaptivetau
@@ -72,11 +43,32 @@ stochasticSEIRfunc <- function(y, parms, t)
 #' @export
 
 
-
-
-simulate_stochastic_SEIR <- function(S0 = 1000, I0 = 10, tmax = 100, bE = 0, bI = 1/1000, gE = 0.5, gI = 0.5, w = 0, m = 0, n = 0, rngseed = 100)
+simulate_seir_stochastic <- function(S = 1000, I = 10, tmax = 100, bE = 0, bI = 1e-3, gE = 0.5, gI = 0.5, w = 0, m = 0, n = 0, rngseed = 100)
 {
-    Y0 = c(S = S0, E = 0,  I = I0, R = 0);  #combine initial conditions into a vector
+ 
+    #this specifies the rates used by the adapativetau routine
+    stochasticSEIRfunc <- function(y, parms, t)
+    {
+        with(as.list(c(y, parms)),
+             {
+                 #specify each rate/transition/reaction that can happen in the system
+                 rates=c(  m,
+                           n * S,
+                           n * E,
+                           n * I,
+                           n * R,
+                           S * bE * E,
+                           S * bI * I,
+                           gE * E,
+                           gI * I,
+                           w * R
+                 ) #end specification of each rate/transition/reaction
+                 return(rates)
+             })
+    } #end function specifying rates used by adaptivetau
+    
+    
+    Y0 = c(S = S, E = 0,  I = I, R = 0);  #combine initial conditions into a vector
     dt = tmax / 1000; #time step for which to get results back
     timevec = seq(0, tmax, dt); #vector of times for which solution is returned (not that internal timestep of the integrator is different)
 
@@ -102,8 +94,6 @@ simulate_stochastic_SEIR <- function(S0 = 1000, I0 = 10, tmax = 100, bE = 0, bI 
     #this line runs the simulation using the SSA algorithm in the adaptivetau package
     set.seed(rngseed) # to allow reproducibility
     simres = adaptivetau::ssa.adaptivetau(init.values = Y0, transitions = transitions,  rateFunc = stochasticSEIRfunc, params = pars, tf = tmax)
-
-    colnames(simres) <- c("Time", "S", "E", "I", "R")
     result <- list()
     result$ts <- as.data.frame(simres)
     
