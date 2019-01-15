@@ -62,10 +62,10 @@ The best approach is to contact me by email (ahandel@uga.edu) or through the Git
 * To spell-check all Rmd documentation files, use these commands:
 files = list.files(path = "C:/data/git/DSAIRM/inst/allapps/", recursive=TRUE, pattern = "\\.(Rnw|Rmd)$", full.names = TRUE)
 spelling::spell_check_files(files)
-* To re-build all html documentation files from the rmd files at once, use these commands:
-files = list.files(path = "C:/data/git/DSAIDE/inst/shinyapps/", recursive=TRUE, pattern = "\\.(Rnw|Rmd)$", full.names = TRUE)
+* To re-build all html documentation files from the rmd files at once, use these commands (adjust paths as needed):
+files = list.files(path = "C:/data/git/DSAIDE/inst/allapps/", recursive=TRUE, pattern = "\\.(Rnw|Rmd)$", full.names = TRUE)
 for (n in 1: length(files)) {rmarkdown::render(files[n])}
-Adjust paths as needed
+
 
 
 ### To build the package

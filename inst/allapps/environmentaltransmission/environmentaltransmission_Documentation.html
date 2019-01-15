@@ -135,19 +135,13 @@
 </ul>
 </div>
 </div>
-<div id="answers" class="section level2">
-<h2>Answers</h2>
-<p>This section does not have the shinytab label and is therefore ignored and not included in the app. One could provide the answers here. Note that if this file is supplied with the package, the answers are in principle available, so most users might not know where/how to look.</p>
-<div id="answer-1" class="section level3">
-<h3>Answer 1:</h3>
-<p>Answer to task 1.</p>
-</div>
-</div>
 <div id="shinytab4" class="section level2">
 <h2>Further Information</h2>
 <ul>
-<li>For this app, the underlying function running the simulation is called <code>simulate_environmentaltransmission.R</code>. You can call this function directly, without going through the shiny app. Check the help file for the function for more information. If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself.</li>
-<li>You could also modify this R function for your own purposes - though that requires R coding knowledge.</li>
+<li>This app (and all others) are structured such that the Shiny part (the graphical interface you see and the server-side function that goes with it) calls an underlying R script (or several) which runs the simulation for the model of interest and returns the results.</li>
+<li>For this app, the underlying function running the simulation is called <code>simulate_environmentaltransmission_ode</code>. You can call it directly, without going through the shiny app. Use the <code>help()</code> command for more information on how to use the functions directly. If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself.</li>
+<li>You could also modify the simulator functions and adopt them for your own purposes. All simulator functions can be found in a sub-folder of the package called <code>simulatorfunctions</code>. Of course to modify these functions, you’ll need to do some coding.</li>
+<li>For examples on using the simulators directly and how to modify them, check out the package tutorial on the package website.</li>
 <li>Some more information on environmentally transmitted ID and modeling can be found in <span class="citation">(Codeço 2001)</span>.</li>
 </ul>
 <div id="references" class="section level3 unnumbered">

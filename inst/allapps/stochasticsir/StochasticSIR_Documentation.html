@@ -148,7 +148,7 @@
 <div id="task-4" class="section level3">
 <h3>Task 4</h3>
 <ul>
-<li>One can mathematically derive an equation linking the probability that an outbreak occurs, <em>p</em>, to the reproductive number (see e.g. <span class="citation">(Matt J Keeling and Rohani 2008)</span>). We won’t try to do the math here but instead see if we can use the simulation to figure it out.</li>
+<li>One can mathematically derive an equation linking the probability that an outbreak occurs, <em>p</em>, to the reproductive number (see e.g. <span class="citation">(Keeling and Rohani 2008)</span>). We won’t try to do the math here but instead see if we can use the simulation to figure it out.</li>
 <li>Start with the settings in task 1. Run the stochastic model for b = 0.0002, 0.0003, 0.0004, 0.0005, 0.0006, 0.001, 0.002. For each value, compute R<sub>0</sub>, run the model 100 times, with max time 300 and record the number of times you get an outbreak.</li>
 <li>Plot (either by hand or using the computer) a relation between the probability of getting an outbreak and <em>R<sub>0</sub></em>.</li>
 </ul>
@@ -167,8 +167,8 @@
 <ul>
 <li>This app (and all others) are structured such that the Shiny part (the graphical interface you are currently using and the server-side function that goes with it) calls an underlying R script which runs the simulation for the model of interest and returns the results.</li>
 <li>For this app, the underlying function running the stochastic simulation is called <code>simulate_stochastic_SIR.R</code>, the deterministic model is implemented in <code>simulate_introduction.R</code>. Check the help files for those functions to see how you can call them directly.</li>
-<li>To get a quick start explaining how to interact with the simulator functions directly, read the vignette for the package (type <code>vignette('DSAIDE')</code> into the R console).</li>
-<li>For some further reading concerning stochastic dynamics of ID, see e.g. <span class="citation">(Lloyd-Smith et al. 2005, <span class="citation">Black (1966)</span>, <span class="citation">M J Keeling (1997)</span>)</span>.</li>
+<li>To get a quick start explaining how to interact with the simulator functions directly, read the vignette for the package (type <code>vignette(&#39;DSAIDE&#39;)</code> into the R console).</li>
+<li>For some further reading concerning stochastic dynamics of ID, see e.g. <span class="citation">(Lloyd-Smith et al. 2005, <span class="citation">@black66</span>, <span class="citation">@keeling97</span>)</span>.</li>
 </ul>
 <div id="references" class="section level3 unnumbered">
 <h3>References</h3>
@@ -176,14 +176,14 @@
 <div id="ref-black66">
 <p>Black, F L. 1966. “Measles Endemicity in Insular Populations: Critical Community Size and Its Evolutionary Implication.” <em>Journal of Theoretical Biology</em> 11 (2): 207–11.</p>
 </div>
-<div id="ref-keeling97">
-<p>Keeling, M J. 1997. “Modelling the Persistence of Measles.” <em>Trends in Microbiology</em> 5 (12): 513–18. doi:<a href="https://doi.org/10.1016/S0966-842X(97)01147-5">10.1016/S0966-842X(97)01147-5</a>.</p>
-</div>
 <div id="ref-keeling08">
 <p>Keeling, Matt J, and Pejman Rohani. 2008. <em>Modeling Infectious Diseases in Humans and Animals</em>. Princeton University Press.</p>
 </div>
+<div id="ref-keeling97">
+<p>Keeling, M J. 1997. “Modelling the Persistence of Measles.” <em>Trends in Microbiology</em> 5 (12): 513–18. <a href="https://doi.org/10.1016/S0966-842X(97)01147-5">https://doi.org/10.1016/S0966-842X(97)01147-5</a>.</p>
+</div>
 <div id="ref-lloyd-smith05a">
-<p>Lloyd-Smith, James O, Paul C Cross, Cheryl J Briggs, Matt Daugherty, Wayne M Getz, John Latto, Maria S Sanchez, Adam B Smith, and Andrea Swei. 2005. “Should We Expect Population Thresholds for Wildlife Disease?” <em>Trends in Ecology &amp; Evolution</em> 20 (9): 511–19. doi:<a href="https://doi.org/10.1016/j.tree.2005.07.004">10.1016/j.tree.2005.07.004</a>.</p>
+<p>Lloyd-Smith, James O, Paul C Cross, Cheryl J Briggs, Matt Daugherty, Wayne M Getz, John Latto, Maria S Sanchez, Adam B Smith, and Andrea Swei. 2005. “Should We Expect Population Thresholds for Wildlife Disease?” <em>Trends in Ecology &amp; Evolution</em> 20 (9): 511–19. <a href="https://doi.org/10.1016/j.tree.2005.07.004">https://doi.org/10.1016/j.tree.2005.07.004</a>.</p>
 </div>
 </div>
 </div>
