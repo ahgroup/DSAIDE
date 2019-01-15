@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>A helper function that takes result from the simulators and produces text output — generate_text • DSAIDE</title>
+<title>Vector transmission model — simulate_vectortransmission_ode • DSAIDE</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,10 +30,9 @@
 
 
 
-<meta property="og:title" content="A helper function that takes result from the simulators and produces text output — generate_text" />
+<meta property="og:title" content="Vector transmission model — simulate_vectortransmission_ode" />
 
-<meta property="og:description" content="This function generates text to be displayed in the Shiny UI.
-This is a helper function. This function processes results returned from the simulation, supplied as a list." />
+<meta property="og:description" content="A basic model with several compartments to model vector-borne transmission" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -119,47 +118,104 @@ This is a helper function. This function processes results returned from the sim
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>A helper function that takes result from the simulators and produces text output</h1>
-    <small class="dont-index">Source: <a href='https://github.com/ahgroup/DSAIDE/blob/master/R/generate_text.R'><code>R/generate_text.R</code></a></small>
-    <div class="hidden name"><code>generate_text.Rd</code></div>
+    <h1>Vector transmission model</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ahgroup/DSAIDE/blob/master/R/simulate_vectortransmission_ode.R'><code>R/simulate_vectortransmission_ode.R</code></a></small>
+    <div class="hidden name"><code>simulate_vectortransmission_ode.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>This function generates text to be displayed in the Shiny UI.
-This is a helper function. This function processes results returned from the simulation, supplied as a list.</p>
+    <p>A basic model with several compartments to model vector-borne transmission</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>generate_text</span>(<span class='no'>res</span>)</pre>
+    <pre class="usage"><span class='fu'>simulate_vectortransmission_ode</span>(<span class='kw'>Sh</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>Ih</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>Rh</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>Sv</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>Iv</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>b1</span> <span class='kw'>=</span> <span class='fl'>0.002</span>, <span class='kw'>b2</span> <span class='kw'>=</span> <span class='fl'>0.002</span>, <span class='kw'>g</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>w</span> <span class='kw'>=</span> <span class='fl'>0.1</span>,
+  <span class='kw'>m</span> <span class='kw'>=</span> <span class='fl'>100</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>0.1</span>, <span class='kw'>tstart</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>tfinal</span> <span class='kw'>=</span> <span class='fl'>100</span>, <span class='kw'>dt</span> <span class='kw'>=</span> <span class='fl'>0.1</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>res</th>
-      <td><p>A list structure containing all simulation results that are to be processed.
-This function is meant to be used together with generate_plots() and requires similar input information.
-See the generate_plots() function for most details.
-Specific entries for this function are 'maketext', 'showtext' and 'finaltext'.
-If 'maketext' is set to TRUE (or not provided) the function processes the data corresponding to each plot
-and reports min/max/final values (lineplots) or correlation coefficient (scatterplot)
-If 'maketext' is FALSE or missing, no text based on the data is generated.
-If the entries 'showtext' or 'finaltext' are present, their values
-will be returned for each plot or for all together.
-The overall message of finaltext should be in the 1st plot.</p></td>
+      <th>Sh</th>
+      <td><p>: starting value for Susceptible hosts : numeric</p></td>
+    </tr>
+    <tr>
+      <th>Ih</th>
+      <td><p>: starting value for Infected hosts : numeric</p></td>
+    </tr>
+    <tr>
+      <th>Rh</th>
+      <td><p>: starting value for Recovered hosts : numeric</p></td>
+    </tr>
+    <tr>
+      <th>Sv</th>
+      <td><p>: starting value for Susceptible Vectors : numeric</p></td>
+    </tr>
+    <tr>
+      <th>Iv</th>
+      <td><p>: starting value for Infected Vectors : numeric</p></td>
+    </tr>
+    <tr>
+      <th>b1</th>
+      <td><p>: infection rate of hosts : numeric</p></td>
+    </tr>
+    <tr>
+      <th>b2</th>
+      <td><p>: infection rate of vectors : numeric</p></td>
+    </tr>
+    <tr>
+      <th>g</th>
+      <td><p>: recovery rate of hosts : numeric</p></td>
+    </tr>
+    <tr>
+      <th>w</th>
+      <td><p>: wanning immunity rate : numeric</p></td>
+    </tr>
+    <tr>
+      <th>m</th>
+      <td><p>: vector birth rate : numeric</p></td>
+    </tr>
+    <tr>
+      <th>n</th>
+      <td><p>: vector death rate : numeric</p></td>
+    </tr>
+    <tr>
+      <th>tstart</th>
+      <td><p>: Start time of simulation : numeric</p></td>
+    </tr>
+    <tr>
+      <th>tfinal</th>
+      <td><p>: Final time of simulation : numeric</p></td>
+    </tr>
+    <tr>
+      <th>dt</th>
+      <td><p>: Time step : numeric</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>HTML formatted text for display in a Shiny UI.</p>
+    <p>The function returns the output as a list. 
+The time-series from the simulation is returned as a dataframe saved as list element <code>ts</code>. 
+The <code>ts</code> dataframe has one column per compartment/variable. The first column is time.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>This function is called by the Shiny server to produce output returned to the Shiny UI.</p>
+    <p>The model tracks the dynamics of susceptible, infected, and recovered hosts, and susceptible and infected vectors. Infection, recovery, and waning immunity processes are implemented for hosts. Births and deaths and infection processes are implemented for vectors.
+This code is based on a dynamical systems model created by the modelbuilder package.  
+The model is implemented here as a set of ordinary differential equations, 
+using the deSolve package.</p>
+    
+    <h2 class="hasAnchor" id="warning"><a class="anchor" href="#warning"></a>Warning</h2>
+
+    <p>This function does not perform any error checking. So if you try to do something nonsensical (e.g. have negative values for parameters), the code will likely abort with an error message.</p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'>
+<span class='co'># To run the simulation with default parameters:  </span>
+<span class='no'>result</span> <span class='kw'>&lt;-</span> <span class='fu'>simulate_vectortransmission_ode</span>()</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -169,10 +225,12 @@ The overall message of finaltext should be in the 1st plot.</p></td>
       <li><a href="#value">Value</a></li>
 
       <li><a href="#details">Details</a></li>
-          </ul>
 
-    <h2>Author</h2>
-    <p>Andreas Handel</p>
+      <li><a href="#warning">Warning</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
+
   </div>
 </div>
 
