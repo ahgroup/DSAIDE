@@ -1,54 +1,29 @@
-/* Handel midifications for shiny apps
- * Last Modified: 2016-06-06
+/* styling for DSAIRM app
 ------------------------------------------- */
-
-
-/* Color Glossary for easy changing of colors later
- * grey:  #403c3d
- * dark grey:  #333
- * light grey: #ccc
- * near white: #f9f9f9
- * light blue: #3388CC
- * blue: #005599
- * red: #FF0000
------------------------------------------------- */
 
 
 /* Image
 ---------------*/
-img {
-	max-width: 100%;
-	max-height: 90%;
-	padding: 6px;
 
-}
 .image {
-	display: inline-block;
-	margin-left: 10px;
-	margin-right: 10px;
-	max-width: 100%;
-	max-height: 90%;
+  	max-width: 100%;
 	padding: 0;
 	text-align: center;
-
-  /* Visual */
-	border-radius: 5px;
-	border: 1px solid #ccc;  /* light grey */
+	display: block;
+ 	margin-left: auto;
+  	margin-right: auto;
 }
 .figure {
-	margin-left: 10px;
-	margin-right: 10px;
-	padding: 0;
 	text-align: center;
-
-  /* Visual */
-	border-radius: 5px;
-	border: 1px solid #ccc;  /* light grey */
+	font-style: italic;
+  	border: thin silver solid;
+	display: block;
+ 	margin-left: auto;
+  	margin-right: auto;
 }
 .caption {
 	padding: 0;
 	margin: auto;
-	margin-bottom: 6px;
 }
 
 /* ------- Tables ------- */
@@ -58,7 +33,7 @@ table {
 }
 table th {
  /* Box-model */
-	padding: 2px;
+	padding: 5px;
 
   /* Typography */
 	font-size: 16px;
@@ -107,6 +82,14 @@ table td {
 	font-size: 100%;
 }
 
+#shinyapptitle
+{
+	color: #123c66;
+	font-weight: bold;
+	text-align: center;
+	font-size: 1.5em;
+}
+
 
 #classauthor
 {
@@ -136,8 +119,24 @@ iframe {
 	font-weight: normal;
 }
 
+.myinput
+{
+	display: inline-block;
+	width: 100px;
+	vertical-align: bottom;
+	font-size: 0.8em;
+}
+
+
 .MathJax {
 	font-size: 2em;
+}
+
+.diagramfig {
+  	width: 50%;
+	display: block;
+ 	margin-left: auto;
+  	margin-right: auto;
 }
 
 
@@ -164,30 +163,31 @@ iframe {
 .mainbutton {
 	text-align: center;
 	color: #000000;
-	background-color: #D2FFE2;
-	border-spacing: 2px;
-	width: 200px;
+	background-color: #bfc8ef;
+	font-size: 1.2em;
+	display: inline-block;
+	margin-right: 10px;
 }
 
 .submitbutton {
 	text-align: center;
 	color: #000000;
-	background-color: #D2FFE2;
-	border-spacing: 10px;
-	width: 200px;
+	background-color: #bfc8ef;
 }
 
 .exitbutton {
+	padding-top: 10px;
 	text-align: center;
 	color: #000000;
-	background-color: #FF0000;
-	width: 200px;
+	background-color: #eaac9d;
+	font-size: 1.2em;
+	display: inline-block;
 }
 
 .mainmenurow {
 	text-align: center;
-	padding-top: 1em;
-    padding-bottom: 1em;
+	padding-top: 0em;
+    padding-bottom: 0em;
 }
 
 .maintext {
@@ -197,14 +197,15 @@ iframe {
 }
 
 .mainsectionheader {
-	text-align: left;
-	color: green;
+	text-align: center;
+	color: #2846cc;
 	font-weight: bold;
-	font-size: 2em;
+	font-size: 1.5em;
+    padding-top: 1em;
 }
 
 
-.infotext {
+#infotext {
 	text-align: center;
 	color: #2a3f9e;
 

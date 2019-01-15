@@ -1,8 +1,8 @@
 #' @title The main menu for the DSAIDE package
 #'
-#' @description This function opens a Shiny App menu that will allow the user to run the different simulation apps
+#' @description This function opens a Shiny app with a menu that will allow the user to run the different simulations.
 #'
-#' @details Run this function with no arguments to start the main menu (a shiny App) for DSAIDE 
+#' @details Run this function with no arguments to start the main menu (a Shiny app) for DSAIDE
 #' @examples
 #' \dontrun{dsaidemenu()}
 #' @author Andreas Handel
@@ -10,27 +10,22 @@
 #' @export
 
 dsaidemenu <- function() {
-  cond <- 1
-  while (cond == 1)
-  {
-    appname <- NULL
-    appDir <- system.file("shinyapps", "MainMenu", package = "DSAIDE")
-    appname = shiny::runApp(appDir = appDir)
-    if (!is.null(appname) & appname != "Exit")     #run the shiny app chosen
-    {
-      appDirname <- system.file("shinyapps", appname, package = "DSAIDE")
-      shiny::runApp(appDir = appDirname)
-    }
-    if (appname == "Exit") {cond = 0} #leave while loop/menu
-  }
-  print('*************************************************')
-  print('Exiting the DSAIDE main menu.')
-  print('I hope you had a fun and educational experience!')
-  print('*************************************************')
+
+
+    appDir <- system.file( "mainmenu", package = "DSAIDE") #get directory for main menu app
+    shiny::runApp(appDir = appDir, launch.browser = TRUE) #run main menu app
+
+    print('*************************************************')
+    print('Exiting the DSAIDE main menu.')
+    print('I hope you had a fun and educational experience!')
+    print('*************************************************')
 }
 
 #needed to prevent NOTE messages on CRAN checks
-utils::globalVariables(c("xvals", "yvals", "varnames","IDvar","style"))
+#most of those are from the ggplot commands in the generate_ functions,
+#the last one is from the subset function in the fit functions
+utils::globalVariables(c("xvals", "yvals", "varnames","IDvar","style","Condition"))
+
 
 .onAttach <- function(libname, pkgname){
   packageStartupMessage("Welcome to the DSAIDE package. Type dsaidemenu() to get started.")

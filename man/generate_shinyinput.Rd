@@ -2,24 +2,29 @@
 % Please edit documentation in R/generate_shinyinput.R
 \name{generate_shinyinput}
 \alias{generate_shinyinput}
-\title{A helper function that takes a model and generates the shiny UI elements for it output}
+\title{A helper function that takes a model and generates the shiny UI elements for the analyze tab}
 \usage{
-generate_shinyinput(model, output)
+generate_shinyinput(mbmodel, otherinputs, output)
 }
 \arguments{
-\item{model}{a modelbuilder model structure}
+\item{mbmodel}{a name of a file/function or a modelbuilder model structure}
+
+\item{otherinputs}{a list of other inputs to include}
 
 \item{output}{shiny output structure}
 }
 \value{
-HTML formatted text for display in a Shiny UI
+No direct return. output structure is modified to contain text for display in a Shiny UI
 }
 \description{
-This function generates input buttons and sliders for a supplied model.
+This function generates numeric shiny UI inputs for a supplied model.
 This is a helper function called by the shiny app.
 }
 \details{
-This function is called by the Shiny server to produce the Shiny input UI elements.
+This function is called by the Shiny app to produce the Shiny input UI elements.
+If mbmodel is an object, it is assumed to be a mbmodel type and will be parsed to create the UI elements.
+If mbmodel is a character, it is assumed to be the name of a function which will be parsed to create UI elements.
+Non-numeric arguments of functions are removed.
 }
 \author{
 Andreas Handel

@@ -1,60 +1,64 @@
-#' @title A helper function that takes a model and generates the shiny UI elements for it output
+#' @title A helper function that takes a model and generates the shiny UI elements for the analyze tab
 #'
-#' @description This function generates input buttons and sliders for a supplied model.
+#' @description This function generates numeric shiny UI inputs for a supplied model.
 #' This is a helper function called by the shiny app.
-#' @param model a modelbuilder model structure
+#' @param mbmodel a name of a file/function or a modelbuilder model structure
+#' @param otherinputs a list of other inputs to include
 #' @param output shiny output structure
-#' @return HTML formatted text for display in a Shiny UI
-#' @details This function is called by the Shiny server to produce the Shiny input UI elements.
+#' @return No direct return. output structure is modified to contain text for display in a Shiny UI
+#' @details This function is called by the Shiny app to produce the Shiny input UI elements.
+#' If mbmodel is an object, it is assumed to be a mbmodel type and will be parsed to create the UI elements.
+#' If mbmodel is a character, it is assumed to be the name of a function which will be parsed to create UI elements.
+#' Non-numeric arguments of functions are removed.
 #' @author Andreas Handel
 #' @export
 
-generate_shinyinput <- function(model, output)
+#not used in DSAIRM, might need to turn on again for modelbuilder
+generate_shinyinput <- function(mbmodel, otherinputs, output)
 {
+
+    #function to wrap input elements in specified class
+    #allows further styling with CSS
+    myclassfct = function (x) {
+        tags$div(class="myinput", x)
+    }
+
     ###########################################
-    #server part that dynamically creates the UI
-    output$vars <- renderUI({
-        nvars = length(model$var)  #number of variables/compartments in model
-        allv = lapply(1:nvars, function(n) {
-            numericInput(model$var[[n]]$varname,
-                         paste0(model$var[[n]]$vartext,' (',model$var[[n]]$varname,')'),
-                         value = model$var[[n]]$varval,
-                         min = 0,
-                         step = model$var[[n]]$varval/100)
-        })
-        do.call(mainPanel, allv)
-    })
+    #create UI elements as input/output for shiny by parsing a function/R code
+    #currently requires that function arguments are given in a vector, not a list like mbmodel functions do
+    ###########################################
 
-    output$pars <- renderUI({
-        npars = length(model$par)  #number of parameters in model
-        allp = lapply(1:npars, function(n) {
-            numericInput(
-                model$par[[n]]$parname,
-                paste0(model$par[[n]]$partext,' (',model$par[[n]]$parname,')'),
-                value = model$par[[n]]$parval,
-                min = 0,
-                step = model$par[[n]]$parval/100
-            )
-        })
-        do.call(mainPanel, allp)
-    })
+    fcfile = paste0(system.file("simulatorfunctions", package = "DSAIDE"),'/',mbmodel,'.R')
+    #get every line in documentation part of file that starts with @param
+    x = readLines(fcfile)
+    x2 = grep('@param', x, value = TRUE)
+    pattern = ":.+:" #regex for capturing text between colons
+    x3 = stringr::str_extract_all(x2, pattern, simplify = TRUE)
+    x3=substr(x3,3,nchar(x3)-2); #remove : and blanks in front and back
+    ip = formals(mbmodel) #get model inputs
+    #remove function arguments that are not numeric
+    ip = ip[unlist(lapply(ip,is.numeric))]
+    modelargs = lapply(1:length(ip), function(n)
+    {
+        iplabel = paste0(names(ip[n]),', ', x3[n]) #text label for input
+        myclassfct(
 
-    output$time <- renderUI({
-        ntime = length(model$time)  #number of time variables in model
-        allt = lapply(1:ntime, function(n) {
-            numericInput(
-                model$time[[n]]$timename,
-                paste0(model$time[[n]]$timetext,' (',model$time[[n]]$timename,')'),
-                value = model$time[[n]]$timeval,
-                min = 0,
-                step = model$time[[n]]$timeval/100
-            )
-        })
-        do.call(mainPanel, allt)
-    })
+            numericInput(names(ip[n]), label = iplabel, value = ip[n][[1]])
+        ) #close myclassfct
+    }) #close lapply
 
-    output$title <- renderUI({
-        HTML(model$title)
-    }) #creates title
+    if (!is.null(otherinputs))
+    {
+        otherargs = lapply(otherinputs,myclassfct)
+    }
 
-}
+    #return structure
+    output$modelinputs <- renderUI({
+        tagList(
+            p(actionButton("submitBtn", "Run Simulation", class = "submitbutton"), align = 'center'),
+            modelargs,
+            otherargs
+        ) #end tagList
+    }) #end renderuI
+} #end overall function
+
