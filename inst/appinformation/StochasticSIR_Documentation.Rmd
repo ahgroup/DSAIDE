@@ -1,0 +1,116 @@
+---
+title: Stochastic SIR Model 
+output:
+  html_document:
+    theme: null
+    highlight: null
+    fig_caption: true
+    mathjax: default 
+    keep_md: false
+bibliography: ../../media/references.bib
+---
+
+## Overview {#shinytab1}
+This app lets you explore a _stochastic_ SIR model. Read about the model in the "Model" tab. Then do the tasks described in the "What to do" tab.
+
+### Learning Objectives
+* Get an introduction to stochastic compartmental models
+* Understand differences and similarities between stochastic models and their deterministic equivalent
+* Understand the concept of reproducibility with random numbers
+* Know how the reproductive number affects outbreaks in stochastic models
+
+## The Model {#shinytab2}
+
+### Model Overview
+
+This model tracks susceptibles, infected/infectious and recovered hosts. 
+The following compartments are included:  
+
+* **S** - uninfected and susceptible individuals 
+* **I** - individuals who are infected and infectious.
+* **R** - recovered/removed individuals. Those individuals have recovered and are immune. 
+
+
+The included processes/mechanisms are the following:
+
+* Susceptible individuals (S) can become infected at rate _b_. 
+* Infected hosts recover at rate _g_. 
+* New susceptible hosts enter the system (are born) at rate _m_. Natural death occurs at rate _n_.
+
+
+
+### Model Implementation
+The flow diagram for the model implemented in this app is:
+
+
+```{r BIdiagram,  fig.cap='Flow diagram for this model. ',  echo=FALSE}
+knitr::include_graphics("../../media/stochasticSIRmodel.png")
+```
+
+
+Note that this model is _not_ an ordinary differential equation model. It is instead its stochastic equivalent.
+We can specify the model by writing down every possible transition/event/reaction that can occur and their propensities (the propensity multiplied with the
+time step gives the probability that a given event/transition occurs). For our model these are the following:
+
+Event type              |  Transitions        |   Propensity      |
+----------              |  -----------        |   ----------      |
+Infection               |  S => S-1, I => I+1 |   bSI   |
+Recovery                |  I => I-1, R => R+1 |   gI           |
+Births                  |  S => S+1           |   m          |
+Death of susceptible    |  S => S-1           |   nS          | 
+Death of infected       |  I => I-1           |   nI          |
+Death of recovered      |  R => R-1           |   nR          |
+
+
+The differential equations - if we wanted to implement the model as an ODE - would look like this:
+
+$$\dot S = m - bSI - nS$$
+$$\dot I = bSI - gI - nI$$
+$$\dot R = gI - nR$$
+
+This is almost the same model as the basic SIR model from the introductory app, with the only difference that this model also allows natural births and deaths. In this app, you can run the basic SIR model together with the stochastic one and for m=n=0 you can compare the 2 models.
+
+### A note on randomness in computer simulations
+This simulation (as well as some of the others) involves using random numbers to introduce stochasticity/uncertainty/noise into the model. This leads to a model that usually more closely reflects the underlying real system. However, in science, we want to be as reproducible as possible. Fortunately, random numbers on a computer are not completely random, but can be reproduced. In practice, this is done by specifying a random number seed, in essence a starting position for the algorithm to produce pseudo-random numbers. As long as the seed is the same, the code should produce the same pseudo-random numbers each time, thus ensuring reproducibility.
+
+
+## What to do {#shinytab3}
+
+**The tasks below are described in a way that assumes everything is in units of DAYS (rate parameters, therefore, have units of inverse days). If any quantity is not given in those units, you need to convert it first (e.g. if it says a week, you need to convert it to 7 days).**
+
+_Some of the simulations might take a few seconds to run. Be patient._
+
+### Task 1
+* Start with 1000 susceptibles, 1 infected, simulation time of 100 days. Transmission rate of 0.0005, duration of infectious period 5 days, no births and deaths, random seed of 100.
+* Run the deterministic simulation multiple times. You should always see the same result.
+* Now run a single stochastic simulation multiple times. What do you expect? What do you see?
+* Change the random seed to 101, then 102. Test how this changes the simulation.
+
+
+### Task 2
+* Keep everything as in task 1, with random number seed at 100. Run both simulations and set the number of stochastic simulations to 5. You'll get a plot showing the deterministic model dynamics and 5 runs for the stochastic model (each of the stochastic runs gets consecutive random number seeds, i.e. the first one is 100, the 2nd is 101,...).
+* Try to understand and explain why you see some stochastic simulations lead to an outbreak, while some do not.
+
+### Task 3
+* Try to understand and explain what the fact that you outbreaks in some of the stochastic simulations but not in others (for exactly the same model parameter values) says about the role of _R~0~_ in stochastic models and how that differs in deterministic models.
+
+
+### Task 4
+* One can mathematically derive an equation linking the probability that an outbreak occurs, _p_, to the reproductive number (see e.g. [@keeling08]). We won't try to do the math here but instead see if we can use the simulation to figure it out.
+* Start with the settings in task 1. Run the stochastic model for b = 0.0002, 0.0003, 0.0004, 0.0005, 0.0006, 0.001, 0.002. For each value, compute R~0~, run the model 100 times, with max time 300 and record the number of times you get an outbreak.
+* Plot (either by hand or using the computer) a relation between the probability of getting an outbreak and _R~0~_.
+
+### Task 5
+* There is a similar relation between outbreak probability an the initial number of infected individuals. Let's see if we can use the model to determine it.
+* Follow the steps of the previous task. Keep _b_ fixed at 0.0003, vary the initial number of infected individuals, _I~0~_, from 1 to 10. Record the fraction of outbreaks you got for each _I~0~_. 
+* Plot (either by hand or using the computer) a relation between the probability of getting an outbreak and _I~0~_.
+
+
+## Further Information {#shinytab4}
+* This app (and all others) are structured such that the Shiny part (the graphical interface you are currently using and the server-side function that goes with it) calls an underlying R script which runs the simulation for the model of interest and returns the results.
+* For this app, the underlying function running the stochastic simulation is called `simulate_stochastic_SIR.R`, the deterministic model is implemented in `simulate_introduction.R`. Check the help files for those functions to see how you can call them directly.
+* To get a quick start explaining how to interact with the simulator functions directly, read the vignette for the package (type `vignette('DSAIDE')` into the R console).
+* For some further reading concerning stochastic dynamics of ID, see e.g. [@lloyd-smith05a, @black66, @keeling97].
+
+### References
+

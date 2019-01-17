@@ -1,0 +1,169 @@
+---
+title: ID Patterns - Practice
+output:
+  html_document:
+    theme: null
+    highlight: null
+    fig_caption: true
+    mathjax: default 
+    keep_md: false
+bibliography: ../../media/references.bib
+---
+
+## Overview {#shinytab1}
+This app allows you to explore a model that tracks the same compartments as the _Characteristics of ID_  model. If you haven't yet explored the _Characteristics of ID_ model, I suggest you try out that one first. The model for this app adds a few more processes. It includes natural births and deaths of hosts, seasonal variation in transmission, and waning immunity.
+
+Read about the model in the "Model" tab. Then do the tasks described in the "What to do" tab.
+
+## The Model {#shinytab2}
+
+### Model Overview
+
+This model has the same compartments as the _Characteristics of ID_ model:  
+
+* **S** - uninfected and susceptible individuals 
+* **P** - individuals who are infected and do not yet show symptoms. Those individuals can potentially be infectious
+* **A** - individuals who are infected and do not show symptoms. Those individuals can potentially be infectious
+* **I** - individuals who are infected and show symptoms. Those individuals are likely infectious, but the model allows to adjust this, including no infectiousness.
+* **R** - recovered/removed individuals. Those individuals have recovered and are immune. They can loose their immunity in this model.
+* **D** - individuals who have died due to the disease.
+
+
+We include the following processes in this model:
+
+* Susceptible individuals (S) can become infected by pre-symptomatic (P), asymptomatic (A) or symptomatic (I) hosts. The rates at which infections from the different types of infected individuals (P, A and I) occur are governed by 3 parameters, _b~P~_, _b~A~_, and _b~I~_. 
+* All infected individuals first enter the presymptomatic stage. They remain there for some time (determined by rate _g~P~_, the inverse of which is the average time spent in the presymptomatic stage). A fraction _f_ of presymptomatic hosts move into the asymptomatic category, and the rest become symptomatic infected hosts.
+* Asymptomatic infected hosts recover after some time (specified by the rate _g~A~_). Similarly, the rate _g~I~_ determines the duration the symptomatic hosts stay in the symptomatic state. For symptomatic hosts, two outcomes are possible. Either recovery or death. The parameter _d_ determines the fraction of hosts that die.
+* Recovered individuals are initially immune to reinfection. They can loose their immunity at rate _w_ and return to the susceptible compartment. 
+* New susceptibles enter the system/model at a fixed rate _m_. From each compartment (apart from the dead compartment), hosts "leave" after some time (i.e. they die) at rate _n_. The inverse of this rate is the average lifespan of a host. 
+* The rates of transmission, _b~P~_, _b~A~_ and _b~I~_ can vary seasonally/annually, modeled as a sinusoidal function. The strength of this seasonal variation is controlled by the parameter _s_.
+
+Note that we only track people that die due to the disease in our $D$ compartment. All hosts dying due to other causes just "exit the system" and we don't further keep track of them (though we could add another compartment to "collect" and track all individuals who died from non-disease-related causes.)
+
+
+### Model Implementation
+The flow diagram and equations describe the model implemented in this app:
+
+![Flow diagram for this model.](../../media/idpatternsmodel.png)
+
+$$b_P^s = b_P(1+s \sin(2\pi t / T))$$
+$$b_A^s = b_A(1+s \sin(2\pi t /T))$$
+$$b_I^s = b_I(1+s \sin(2\pi t /T))$$
+$$\dot S = m - S (b_P^s P + b_A^s A + b_I^s I) + wR - n S $$ 
+$$\dot P = S (b_P^s P + b_A^s A + b_I^s I) - g_P P - n P$$ 
+$$\dot A = f g_P P - g_A A - n A$$ 
+$$\dot I = (1-f) g_P P - g_I I - n I $$ 
+$$\dot R = g_A A + (1-d) g_I I - wR - n R$$
+$$\dot D = d g_I I $$
+
+Since we do not track people dying due to non-disease causes, all the "n - arrows" are not pointing to another compartment, instead of those individuals just "leave the system". Similarly new susceptibles enter the system (are born) from "outside the system".
+
+Also note that the transmission rates, _b~I~_, can be time varying as described above. The parameter _T_ is set depending on the time units chosen for the model. For example if you want to run the model in units of days, the underlying simulation code will set _T=365_, similarly, for weeks it will be _T=52_. This ensures that the seasonal variation always has a period of a year.
+
+
+
+## What to do {#shinytab3}
+
+**The tasks below are described in a way that assumes everything is in units of MONTHS (rate parameters, therefore, have units of inverse months). If any quantity is not given in those units, you need to convert it first (e.g. if it says a year, you need to convert it to 12 months).**
+
+_Some of the simulations might take a few seconds to run. Be patient._
+
+### Task 1 
+* Set the model parameters such that it corresponds to the following setting: 
+    * 1000 initially susceptible hosts, 1 initially infected and presymptomatic host, simulation duration (approximately) 10 years.
+    * Assume that only symptomatic individuals transmit, at rate _b~I~ = 0.002_ and that there is no seasonal variation.
+    * Assume that the duration of the symptomatic period is 1 month long. (Hint: The parameter _g~I~_ is the inverse of this period.)
+    * Assume that the duration of the presymptomatic period is approximately 6 days long. (Make sure you convert units correctly. You can assume that a month is roughly 30 days.)
+    * Assume that there are no asymptomatic infections. You can, therefore, set the rate of recovery of asymptomatics, _g~A~_ to anything, it doesn't matter because nobody will be asymptomatic.
+    * Assume nobody dies due to disease, and immunity does not wane.
+    * Assume that there are no births and non-disease deaths occurring.
+
+* With parameters set to correspond to the scenario just described, run the simulation and ensure you get a single outbreak with around 203 susceptibles left at the end.
+
+### Task 2 
+* Next, turn on births and deaths. It's always good to check parts of a model. Here, we want to first look at births and deaths in the absence of disease. Therefore, set initial number of presymptomatic to 0, keep the number of susceptible at 1000. 
+* Set the natural death rate, _n_, to a value that corresponds to an average lifespan of 41 years. Recall that the unit of _n_ needs to be in 1/months. You need to convert lifespan to months, then take the inverse to get the death rate. Round to the first significant digit (i.e. 0.00X). 
+* Set the birth rate to _m=4_ per month. 
+* Also increase the simulation duration to 1000 years. (Depending on the speed of your computer, it will take several seconds for the simulation to finish). 
+* Run the simulation, record number of susceptibles at steady state.
+
+### Task 3 
+* It is possible to compute the steady state population size of susceptibles in the absence of infection, by setting the differential equation for S to 0 and solving for S as a function of birth and death parameters. Compute this equation (you should get something like _S=.._ with the right side involving parameters _m_ and _n_. Then stick in the values for the parameters from the previous task and compute _S_ at steady state. Make sure it's the same you get from the simulation (once it has settled down to a steady state). 
+
+### Task 4 
+* Try out different values for the initial number of susceptibles (e.g. 500 and 3000), keep everything else unchanged. Run the simulation and note what you get for the final, steady-state population size.
+* Set population size back to 1000, now try out different values for the birth and death rates, specifically, set _m=2_ and _n=0.002_ and _m=6_ and _n=0.003_.
+* For each setting, think about what you expect to see, based on your intuition and based on the theory/math, i.e. the equation from the previous task, and compare with the simulation results.
+
+
+### Task 5
+* Next, set the birth and death rate as in task #2 and also adjust the population size to the steady state value you found in task #2. We do that because we don't want a mixing of underlying population growth/decline dynamics on top if the ID dynamics. That would make it more complicated to understand what's going on. (You get to do that later).
+* Ensure that if you run the simulation now, nothing changes.
+* Now introduce an infected individual (_P0=1_), with other values as set in task #1. If needed, adjust the simulation duration to see the initial pattern and have everything reach the steady state.
+* What do you expect to see? Run the simulation, compare expectations with results.
+
+
+### Task 6 
+* It is possible to compute the steady state values for the model variables at the endemic scenario, i.e. when the number of infected is non-zero. This computation is a bit messy for the model above because it has the extra _P_ and _A_ states that make the math more complicated (you can try for yourself as a challenge after you've done the simple model we'll do next.) To keep the math simpler, we consider a simplified approximation of the above model. Since the way we have set our parameters so far, individuals spend a very short time in _P_ compared to _I_, so we can ignore the _P_ compartment and assume that individuals directly go from _S_ to _I_. Further, for our parameter choices, nobody enters _A_ and _D_, so we can ignore those compartments too. This produces the following simpler SIR model:
+
+$$\dot S = m -   b_I IS - n S $$ 
+$$\dot I = b_I SI - g_I I - n I $$ 
+$$\dot R =  g_I I  - n R$$
+
+* Following the procedure above for computing the steady state for _S_ in the absence of a pathogen, now compute the endemic steady state by setting the left side of the equations to 0 and solving for the variables _S_, _I_ and _R_ as functions of model parameters only. You should get _S=(g~I~ + n)/b~I~ _ and similar equations for _I_ and _R_. 
+* For more on steady state calculations, see e.g. [@vynnycky10] or [@keeling08] (but note that each of those references uses their own notation which is not the same as used here.)
+
+### Task 7 
+Let's compare the model simulations with the equations you found. Substitute the parameter values from the task above into the equations and confirm that you get the approximately the same results as you get from running the model to steady state.
+
+
+
+### Task 8 
+* The patterns we've seen so far are oscillations/cycles (i.e. repeated outbreaks) that eventually settle down to a steady state. The oscillations are what is often referred to as _intrinsic_, purely produced by the interplay between depletion of susceptibles due to infection and replenishment due to birth.
+* Waning immunity is another mechanism of resource replenishment. To investigate that, set everything back as in task #1 (i.e. no more births and deaths). Do a quick run to ensure you get a single outbreak.
+* Now, assume that immunity wanes within on average 10 months and set simulation time for 100 years. 
+* Think about your expectations, run the simulation and check with what you expected.
+* Double the _duration_ of immunity. What do you expect? What do you see?
+
+### Task 9
+* Take the SIR model from above, add the terms describing waning immunity, and use this new set of equations to again solve for the steady states of the model. Then compare the steady state values from the equations with those from the simulations. The equations will directly let you see which variables do and don't change if waning immunity changes. This allows you to confirm what you found in the previous task.
+* This task is challenging! The equations are getting big and ugly. You might want to consider using software that can solve such equations analytically. The free [Maxima software](http://maxima.sourceforge.net/) might be a good option.
+
+### Task 10
+* Now combine births and deaths with waning immunity. Explore how the two different mechanisms interact and influence the observed ID dynamics.
+* Set everything as in the beginning of the previous task. Then, let birth rate _m=10_, natural death rate _n=0.005_, and simulation time of 600 months, and record the simulation results and explain what you observe.
+
+
+
+### Task 11 
+* So far, the cycles were due to the intrinsic dynamics of the system. Now we'll explore what happens if some outside phenomenon - e.g. the weather - influences some model parameters. 
+* Generally, when running the kind of models we investigate here, the variables change (and each gets its own equation) and the parameters remain fixed during the simulation. Here, we are looking at a model where this is not the case. The model allows you to let the transmission rate parameters vary sinusoidally with a period of 1 year. (It would also be possible to instead give each changing parameter their own equation, but that would be more complicated here).
+* Set everything as in task #1, do a quick run to make sure you only get one outbreak.
+* Now run the model with increasing seasonality by setting s = 0.001, 0.01, 0.1, and 1. How many outbreaks do you observe? What else new is going on? Always first formulate expectations, then run the model to check.
+
+
+### Task 12 
+* Assume now that immunity wanes within 10 months. Also, set the strength of seasonal variation to 0.5. Everything else as before.
+* Think about your expectations. Run the model and compare. Adjust the simulation time to "zoom in/out" by running for both 120 and 1200 months.
+* Explore how prolonging immunity, i.e. decreasing _w_ to 0.05 and 0.01, changes the patterns you see.  
+* Repeat the simulations for the 3 values of the immunity parameter at a lower seasonal variation value of s=0.1.
+* Contemplate the main difference between the pattern you now observe and the ones you've seen so far with no external driver.
+
+
+
+### Task 13 
+* Keep exploring! You can let people enter the A and D compartments, have an underlying growing or declining population in the absence of disease and let the disease run on top of it, allow for birth/death, waning immunity and seasonality, etc.
+* There is lots to explore. While it can be fun running simulations with random parameters, I suggest a more deliberate exploration. Before you run a simulation, think about what you expect. Then run and compare results with expectations. If they don't agree, try to figure out what's going on. This way, you will gain more and more insight into how the different components and processes influence the observed outcome - the basics of a systems science approach.
+
+
+## Further Information {#shinytab4}
+
+* For this app, the underlying function running the simulation is called `simulate_idpatterns.R`. You can call this function directly, without going through the shiny app. Check the help file for the function for more information. 
+* If you call the function directly, you need to process the results returned from this function and produce useful output (such as a plot) yourself. 
+* You could also modify this R function for your own purposes, though that requires experience writing R code. To find out how to do that, type `?DSAIDE` at the R console.
+* For some papers discussing ID patterns and seasonality, see e.g. [@dowell01, @altizer06].
+
+### References
+
+
+
