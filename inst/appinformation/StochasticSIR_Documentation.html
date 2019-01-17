@@ -148,7 +148,7 @@
 <div id="task-4" class="section level3">
 <h3>Task 4</h3>
 <ul>
-<li>One can mathematically derive an equation linking the probability that an outbreak occurs, <em>p</em>, to the reproductive number (see e.g. <span class="citation">(Keeling and Rohani 2008)</span>). We won’t try to do the math here but instead see if we can use the simulation to figure it out.</li>
+<li>One can mathematically derive an equation linking the probability that an outbreak occurs, <em>p</em>, to the reproductive number (see e.g. <span class="citation">(Keeling and Rohani 2008)</span>). We won’t try to do the math here but instead see if we can use the simulation to figure it out.</li>
 <li>Start with the settings in task 1. Run the stochastic model for b = 0.0002, 0.0003, 0.0004, 0.0005, 0.0006, 0.001, 0.002. For each value, compute R<sub>0</sub>, run the model 100 times, with max time 300 and record the number of times you get an outbreak.</li>
 <li>Plot (either by hand or using the computer) a relation between the probability of getting an outbreak and <em>R<sub>0</sub></em>.</li>
 </ul>
@@ -165,10 +165,11 @@
 <div id="shinytab4" class="section level2">
 <h2>Further Information</h2>
 <ul>
-<li>This app (and all others) are structured such that the Shiny part (the graphical interface you are currently using and the server-side function that goes with it) calls an underlying R script which runs the simulation for the model of interest and returns the results.</li>
-<li>For this app, the underlying function running the stochastic simulation is called <code>simulate_stochastic_SIR.R</code>, the deterministic model is implemented in <code>simulate_introduction.R</code>. Check the help files for those functions to see how you can call them directly.</li>
-<li>To get a quick start explaining how to interact with the simulator functions directly, read the vignette for the package (type <code>vignette(&#39;DSAIDE&#39;)</code> into the R console).</li>
-<li>For some further reading concerning stochastic dynamics of ID, see e.g. <span class="citation">(Lloyd-Smith et al. 2005, <span class="citation">@black66</span>, <span class="citation">@keeling97</span>)</span>.</li>
+<li>This app (and all others) are structured such that the Shiny part (the graphical interface you see and the server-side function that goes with it) calls an underlying R script (or several) which runs the simulation for the model of interest and returns the results.</li>
+<li>For this app, the underlying function running the simulation is called <code>simulate_basicvirus_ode, simulate_basicvirus_stochastic</code>. You can call them directly, without going through the shiny app. Use the <code>help()</code> command for more information on how to use the functions directly. If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself.</li>
+<li>You could also modify the simulator functions and adopt them for your own purposes. All simulator functions can be found in a sub-folder of the package called <code>simulatorfunctions</code>. Of course to modify these functions, you’ll need to do some coding.</li>
+<li>For examples on using the simulators directly and how to modify them, read the package vignette by typing <code>vignette(&#39;DSAIDE&#39;)</code> into the R console.</li>
+<li>For some further reading concerning stochastic dynamics of ID, see e.g. <span class="citation">(Lloyd-Smith et al. 2005, @black66, @keeling97)</span>.</li>
 </ul>
 <div id="references" class="section level3 unnumbered">
 <h3>References</h3>

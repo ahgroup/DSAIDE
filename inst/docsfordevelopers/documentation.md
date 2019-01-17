@@ -1,4 +1,4 @@
-# Documentation for working on the DSAIDE package
+# Documentation for working on the DSAIDE package 
 
 ## Package structure 
 
@@ -9,8 +9,8 @@
 ### App materials
 * The /inst folder contains several subfolders: 
   * The /mainmenu subfolder contains the main app.R Shiny app
-  * The /allapps subfolder contains folders with documentation for each simulator/app. Each App has an NNN_settings.R file and Rmd+HTML files containing the documentation. Those files contain the documentation displayed at the bottom of each app, and app-specific settings that are needed for proper display and running through the UI. Names of folder, files and buttons in the main app.R need to agree.
-  * The /media sub-folder contains figures and a bib file used as part of the documentation (i.e. the Rmd files). It also includes a css file for styling. Note that this is not part of the CRAN R package for size reasons, but if you fork the project from github it will be included.
+  * The /appinformation subfolder contains files with documentation and settings for each simulator/app. Each App has an NNN_settings.R file and Rmd+HTML files containing the documentation. Those files contain the documentation displayed at the bottom of each app, and app-specific settings that are needed for proper display and running through the UI. Names of files and buttons in the main app.R need to agree.
+  * The /media sub-folder contains figures and a bib file used as part of the documentation (i.e. the Rmd files). It also includes a css file for styling. 
   * The /docsfordevelopers contains this file. 
   * /simulatorfunctions subfolder contains the R code for all simulator functions for easy access and editing by users.
   * The /doc folder contains the vignettes, this folder should not be edited, see below.
@@ -39,7 +39,7 @@ The best approach is to contact me by email (ahandel@uga.edu) or through the Git
 ## Information for package development
 
 ### To work on package through RStudio: 
-* Load .Rproj file in RStudio. Edit files as needed.
+* Load DSAIDE.Rproj in RStudio. Edit files as needed.
 * Optionally, use RStudio tie-in with github to sync project to github (the 'git' tab).
 
 ### Dependency packages for development
@@ -59,12 +59,11 @@ The best approach is to contact me by email (ahandel@uga.edu) or through the Git
 * Edit vignette inside the /vignettes folder.
 * To build new vignette, run devtools::build_vignettes()
 * To update the pkgdown website, run pkgdown::build_site()
-* To spell-check all Rmd documentation files, use these commands:
-files = list.files(path = "C:/data/git/DSAIRM/inst/allapps/", recursive=TRUE, pattern = "\\.(Rnw|Rmd)$", full.names = TRUE)
+* To spell-check all Rmd documentation files, use these commands (adjust paths as needed):
+files = list.files(path = "C:/data/git/DSAIRM/inst/appinformation/", recursive=TRUE, pattern = "\\.Rmd$", full.names = TRUE)
 spelling::spell_check_files(files)
-* To re-build all html documentation files from the rmd files at once, use these commands (adjust paths as needed):
-files = list.files(path = "C:/data/git/DSAIDE/inst/allapps/", recursive=TRUE, pattern = "\\.(Rnw|Rmd)$", full.names = TRUE)
-for (n in 1: length(files)) {rmarkdown::render(files[n])}
+* To re-build all html documentation files from the rmd files at once, use these above command and:
+for (n in 1: length(files)) {rmarkdown::render(files[n]); Sys.sleep(2)}
 
 
 
@@ -81,4 +80,5 @@ for (n in 1: length(files)) {rmarkdown::render(files[n])}
 * Re-create package site with pkgdown::build_site()
 * Sync everything to github
 * Check vignette and function references on website, fix errors
+* Run check_rhub() and check_win_devel()
 * Do a test run of devtools::release()

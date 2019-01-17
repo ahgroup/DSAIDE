@@ -1,7 +1,7 @@
 #This is the Shiny App for the main menu of DSAIDE
 
 #get names of all existing apps
-packagename = "DSAIRM"
+packagename = "DSAIDE"
 appdir = system.file("appinformation", package = packagename) #find path to apps
 fullappNames = list.files(path = appdir, pattern = "+.settings", full.names = FALSE)
 appNames = gsub("_settings.R" ,"",fullappNames)
@@ -27,8 +27,8 @@ server <- function(input, output, session)
     {
       currentapp <<- appName #assign currently chosen app to global app variable
       #file name for documentation
-      currentdocfilename <<- paste0(appdir,'/',currentapp,'/',currentapp,'_documentation.html')
-      settingfilename = paste0(appdir,'/',currentapp,'/',currentapp,'_settings.R')
+      currentdocfilename <<- paste0(appdir,'/',currentapp,'_documentation.html')
+      settingfilename = paste0(appdir,'/',currentapp,'_settings.R')
       
       output$plot <- NULL
       output$text <- NULL
@@ -151,7 +151,7 @@ server <- function(input, output, session)
 #######################################################
 
 ui <- fluidPage(
-  includeCSS("../media/dsaide.css"), #use custom styling
+  includeCSS("../media/packagestyle.css"), #use custom styling
   tags$div(id = "shinyheadertitle", "DSAIDE - Dynamical Systems Approach to Infectious Disease Epidemiology"),
   tags$div(id = "shinyheadertext",
     "A collection of Shiny/R Apps to explore and simulate infectious disease models.",

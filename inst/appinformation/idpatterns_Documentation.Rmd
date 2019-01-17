@@ -7,8 +7,21 @@ output:
     fig_caption: true
     mathjax: default 
     keep_md: false
-bibliography: ../../media/references.bib
+bibliography: ../media/references.bib
 ---
+
+
+
+```{r, echo = FALSE}
+#this code loads the settings file for the current app so we can automatically 
+#list the functions in the further information section
+currentrmdfile = knitr::current_input() 
+currentappinfo = gsub("_documentation.Rmd" ,"_settings.R",currentrmdfile)
+source(currentappinfo)
+```
+
+
+
 
 ## Overview {#shinytab1}
 This app allows you to explore a model that tracks the same compartments as the _Characteristics of ID_  model. If you haven't yet explored the _Characteristics of ID_ model, I suggest you try out that one first. The model for this app adds a few more processes. It includes natural births and deaths of hosts, seasonal variation in transmission, and waning immunity.
@@ -44,7 +57,7 @@ Note that we only track people that die due to the disease in our $D$ compartmen
 ### Model Implementation
 The flow diagram and equations describe the model implemented in this app:
 
-![Flow diagram for this model.](../../media/idpatternsmodel.png)
+![Flow diagram for this model.](../media/idpatternsmodel.png)
 
 $$b_P^s = b_P(1+s \sin(2\pi t / T))$$
 $$b_A^s = b_A(1+s \sin(2\pi t /T))$$
@@ -158,10 +171,11 @@ Let's compare the model simulations with the equations you found. Substitute the
 
 ## Further Information {#shinytab4}
 
-* For this app, the underlying function running the simulation is called `simulate_idpatterns.R`. You can call this function directly, without going through the shiny app. Check the help file for the function for more information. 
-* If you call the function directly, you need to process the results returned from this function and produce useful output (such as a plot) yourself. 
-* You could also modify this R function for your own purposes, though that requires experience writing R code. To find out how to do that, type `?DSAIDE` at the R console.
-* For some papers discussing ID patterns and seasonality, see e.g. [@dowell01, @altizer06].
+* This app (and all others) are structured such that the Shiny part (the graphical interface you see and the server-side function that goes with it) calls an underlying R script (or several) which runs the simulation for the model of interest and returns the results.
+* For this app, the underlying function(s) running the simulation are called ``r simfunction``. You can call them directly, without going through the shiny app. Use the `help()` command for more information on how to use the functions directly. If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself. 
+* You could also modify the simulator functions and adopt them for your own purposes. All simulator functions can be found in a sub-folder of the package called `simulatorfunctions`. Of course to modify these functions, you'll need to do some coding.
+* For examples on using the simulators directly and how to modify them, read the package vignette by typing `vignette('DSAIDE')` into the R console.
+* For some papers discussing ID patterns and seasonality, see e.g. [@dowell01; @altizer06].
 
 ### References
 

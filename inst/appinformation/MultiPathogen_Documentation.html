@@ -31,18 +31,6 @@
 
 
 
-<pre class="r"><code>################
-# This R chunk only exists as an easy way to add comments - a bit trickier in Markdown itself
-################
-# You can adjust settings in the YAML header for styling 
-#first make sure your simulator function is in the \R folder 
-#and your App is in an appropriately named folder inside \shinyapps
-#use this template and fill it with information for your App
-#turn this into an HTML file using RMarkdown (knitr/pandoc)
-#make sure the HTML file is in the directory with all the App documentation
-#run the processing script (processAllFiles.R), which processes all documentation
-#if everything works, the information described below should automatically be displayed in tabs at the bottom of the App UI
-#note that the processing script changes some of the styling as specified in the shinystyle.css file</code></pre>
 <div id="shinytab1" class="section level2">
 <h2>Overview</h2>
 <p>This app allows you to explore a model with 2 pathogens. Read about the model in the “Model” tab. Then do the tasks described in the “What to do” tab.</p>
@@ -142,10 +130,10 @@
 <div id="shinytab4" class="section level2">
 <h2>Further Information</h2>
 <ul>
-<li>This app (and all others) are structured such that the Shiny part (the graphical interface you are currently using and the server-side function that goes with it) calls an underlying R script which runs the simulation for the model of interest and returns the results.</li>
-<li>For this app, the underlying function running the simulation is called <code>simulate_multipathogen.R</code>. You can call this function directly, without going through the shiny app. Type <code>?simulate_multipathogen</code> into the R console for more information (you need to exit the graphical interface first or start a new R session). If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself.</li>
-<li>You can also modify this R function for your own purposes. That requires some more R coding knowledge.</li>
-<li>To get a quick start explaining how to interact with the simulator functions directly, read the vignette for the package (type <code>vignette(&#39;DSAIDE&#39;)</code> into the R console).</li>
+<li>This app (and all others) are structured such that the Shiny part (the graphical interface you see and the server-side function that goes with it) calls an underlying R script (or several) which runs the simulation for the model of interest and returns the results.</li>
+<li>For this app, the underlying function(s) running the simulation are called <code>simulate_multipathogen_ode</code>. You can call them directly, without going through the shiny app. Use the <code>help()</code> command for more information on how to use the functions directly. If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself.</li>
+<li>You could also modify the simulator functions and adopt them for your own purposes. All simulator functions can be found in a sub-folder of the package called <code>simulatorfunctions</code>. Of course to modify these functions, you’ll need to do some coding.</li>
+<li>For examples on using the simulators directly and how to modify them, read the package vignette by typing <code>vignette(&#39;DSAIDE&#39;)</code> into the R console.</li>
 </ul>
 <div id="references" class="section level3">
 <h3>References</h3>

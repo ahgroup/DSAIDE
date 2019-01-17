@@ -133,7 +133,7 @@
 <p><span class="math display">\[\dot S = m -   b_I IS - n S \]</span> <span class="math display">\[\dot I = b_I SI - g_I I - n I \]</span> <span class="math display">\[\dot R =  g_I I  - n R\]</span></p>
 <ul>
 <li>Following the procedure above for computing the steady state for <em>S</em> in the absence of a pathogen, now compute the endemic steady state by setting the left side of the equations to 0 and solving for the variables <em>S</em>, <em>I</em> and <em>R</em> as functions of model parameters only. You should get <em>S=(g<sub>I</sub> + n)/b<sub>I</sub> </em> and similar equations for <em>I</em> and <em>R</em>.</li>
-<li>For more on steady state calculations, see e.g. <span class="citation">(Vynnycky and White 2010)</span> or <span class="citation">(Keeling and Rohani 2008)</span> (but note that each of those references uses their own notation which is not the same as used here.)</li>
+<li>For more on steady state calculations, see e.g. <span class="citation">(Vynnycky and White 2010)</span> or <span class="citation">(Keeling and Rohani 2008)</span> (but note that each of those references uses their own notation which is not the same as used here.)</li>
 </ul>
 </div>
 <div id="task-7" class="section level3">
@@ -195,10 +195,11 @@
 <div id="shinytab4" class="section level2">
 <h2>Further Information</h2>
 <ul>
-<li>For this app, the underlying function running the simulation is called <code>simulate_idpatterns.R</code>. You can call this function directly, without going through the shiny app. Check the help file for the function for more information.</li>
-<li>If you call the function directly, you need to process the results returned from this function and produce useful output (such as a plot) yourself.</li>
-<li>You could also modify this R function for your own purposes, though that requires experience writing R code. To find out how to do that, type <code>?DSAIDE</code> at the R console.</li>
-<li>For some papers discussing ID patterns and seasonality, see e.g. <span class="citation">(Dowell 2001, <span class="citation">@altizer06</span>)</span>.</li>
+<li>This app (and all others) are structured such that the Shiny part (the graphical interface you see and the server-side function that goes with it) calls an underlying R script (or several) which runs the simulation for the model of interest and returns the results.</li>
+<li>For this app, the underlying function(s) running the simulation are called <code>simulate_idpatterns_ode</code>. You can call them directly, without going through the shiny app. Use the <code>help()</code> command for more information on how to use the functions directly. If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself.</li>
+<li>You could also modify the simulator functions and adopt them for your own purposes. All simulator functions can be found in a sub-folder of the package called <code>simulatorfunctions</code>. Of course to modify these functions, you’ll need to do some coding.</li>
+<li>For examples on using the simulators directly and how to modify them, read the package vignette by typing <code>vignette(&#39;DSAIDE&#39;)</code> into the R console.</li>
+<li>For some papers discussing ID patterns and seasonality, see e.g. <span class="citation">(Dowell 2001; Altizer et al. 2006)</span>.</li>
 </ul>
 <div id="references" class="section level3 unnumbered">
 <h3>References</h3>

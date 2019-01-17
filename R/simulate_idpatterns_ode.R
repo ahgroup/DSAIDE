@@ -87,6 +87,7 @@ simulate_idpatterns_ode <- function(S = 1000, P = 1, timeunit = 1, tmax = 300, b
   tunitvec=c(365,52,12,1) #depending on choice of units (days/weeks/months/years), pick divisor for annual variation in transmission in the ODEs
   tunit=tunitvec[timeunit]
   
+  browser()
   
   #combining parameters into a parameter vector
   pars = c(bP = bP, bA = bA, bI = bI, gP = gP , gA = gA, gI = gI, f = f, d = d, w = w, m = m, n = n, s = s , tunit = tunit);

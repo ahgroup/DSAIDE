@@ -182,10 +182,11 @@
 <div id="shinytab4" class="section level2">
 <h2>Further Information</h2>
 <ul>
-<li>For this app, the underlying function running the simulation is called <code>simulate_heterogeneity.R</code>. You can call this function directly, without going through the shiny app. Check the help file for the function for more information.</li>
-<li>If you call the function directly, you need to process the results returned from this function and produce useful output (such as a plot) yourself.</li>
-<li>You can also modify this R function for your own purposes. To find out how to do that, type <code>?DSAIDE</code> at the R console.</li>
-<li>For some more information dealing with host heterogeneity, see e.g. <span class="citation">(Beldomenico and Begon 2010, <span class="citation">@yorke78</span>, <span class="citation">@lloyd-smith05</span>)</span>.</li>
+<li>This app (and all others) are structured such that the Shiny part (the graphical interface you see and the server-side function that goes with it) calls an underlying R script (or several) which runs the simulation for the model of interest and returns the results.</li>
+<li>For this app, the underlying function(s) running the simulation are called <code>simulate_heterogeneity_ode</code>. You can call them directly, without going through the shiny app. Use the <code>help()</code> command for more information on how to use the functions directly. If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself.</li>
+<li>You could also modify the simulator functions and adopt them for your own purposes. All simulator functions can be found in a sub-folder of the package called <code>simulatorfunctions</code>. Of course to modify these functions, you’ll need to do some coding.</li>
+<li>For examples on using the simulators directly and how to modify them, read the package vignette by typing <code>vignette(&#39;DSAIDE&#39;)</code> into the R console.</li>
+<li>For some more information dealing with host heterogeneity, see e.g. <span class="citation">(Beldomenico and Begon 2010, @yorke78, @lloyd–smith05)</span>.</li>
 </ul>
 <div id="references" class="section level3 unnumbered">
 <h3>References</h3>
@@ -194,10 +195,10 @@
 <p>Beldomenico, Pablo M, and Michael Begon. 2010. “Disease Spread, Susceptibility and Infection Intensity: Vicious Circles?” <em>Trends in Ecology &amp; Evolution</em> 25 (1): 21–27. <a href="https://doi.org/10.1016/j.tree.2009.06.015">https://doi.org/10.1016/j.tree.2009.06.015</a>.</p>
 </div>
 <div id="ref-lloyd-smith05">
-<p>Lloyd-Smith, J. O., S. J. Schreiber, P. E. Kopp, and W. M. Getz. 2005. “Superspreading and the Effect of Individual Variation on Disease Emergence.” <em>Nature</em> 438 (7066). Department of Environmental Science, Policy; Management, 140 Mulford Hall, University of California, Berkeley, California 94720-3114, USA. jls@nature.berkeley.edu: 355–59. <a href="https://doi.org/10.1038/nature04153">https://doi.org/10.1038/nature04153</a>.</p>
+<p>Lloyd-Smith, J. O., S. J. Schreiber, P. E. Kopp, and W. M. Getz. 2005. “Superspreading and the Effect of Individual Variation on Disease Emergence.” <em>Nature</em> 438 (7066): 355–59. <a href="https://doi.org/10.1038/nature04153">https://doi.org/10.1038/nature04153</a>.</p>
 </div>
 <div id="ref-yorke78">
-<p>Yorke, J. A., H. W. Hethcote, and A. Nold. 1978. “Dynamics and Control of the Transmission of Gonorrhea.” <em>Sex Transm Dis</em> 5 (2). Institute for Physical Science; Technology, University of Maryland, College Park, USA.: 51–56.</p>
+<p>Yorke, J. A., H. W. Hethcote, and A. Nold. 1978. “Dynamics and Control of the Transmission of Gonorrhea.” <em>Sex Transm Dis</em> 5 (2): 51–56.</p>
 </div>
 </div>
 </div>

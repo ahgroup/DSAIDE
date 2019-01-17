@@ -7,8 +7,18 @@ output:
     fig_caption: true
     mathjax: default 
     keep_md: false
-bibliography: ../../media/references.bib
+bibliography: ../media/references.bib
 ---
+
+
+```{r, echo = FALSE}
+#this code loads the settings file for the current app so we can automatically 
+#list the functions in the further information section
+currentrmdfile = knitr::current_input() 
+currentappinfo = gsub("_documentation.Rmd" ,"_settings.R",currentrmdfile)
+source(currentappinfo)
+```
+
 
 ## Overview {#shinytab1}
 This app allows you to explore a model which allows for both direct transmission and transmission through an environmental stage. Read about the model in the "Model" tab. Then do the tasks described in the "What to do" tab.
@@ -40,7 +50,10 @@ The processes being modeled are:
 ### Model Implementation
 The flow diagram and the set of ordinary differential equations (ODE) which are used to implement this model are as follows:
 
-![Flow diagram for the model with environmental transmission.](../../media/environmentaltransmissionmodel.png)
+
+```{r BIdiagram,  fig.cap='Flow diagram for the model with environmental transmission.',  echo=FALSE}
+knitr::include_graphics("../media/environmentaltransmissionmodel.png")
+```
 
 
 $$\dot S =b - b_d S I - b_e S E - nS$$ 
@@ -99,14 +112,11 @@ Often the letter _E_ is used for the _exposed_ stage, which would then be called
 
 
 ## Further Information {#shinytab4}
-```{r, echo = FALSE}
-source(list.files( pattern = "settings.R" ))
-```
 
 * This app (and all others) are structured such that the Shiny part (the graphical interface you see and the server-side function that goes with it) calls an underlying R script (or several) which runs the simulation for the model of interest and returns the results.
-* For this app, the underlying function running the simulation is called ``r simfunction``. You can call it directly, without going through the shiny app. Use the `help()` command for more information on how to use the functions directly. If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself. 
+* For this app, the underlying function(s) running the simulation are called ``r simfunction``. You can call them directly, without going through the shiny app. Use the `help()` command for more information on how to use the functions directly. If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself. 
 * You could also modify the simulator functions and adopt them for your own purposes. All simulator functions can be found in a sub-folder of the package called `simulatorfunctions`. Of course to modify these functions, you'll need to do some coding.
-* For examples on using the simulators directly and how to modify them, check out the package tutorial on the package website.
+* For examples on using the simulators directly and how to modify them, read the package vignette by typing `vignette('DSAIDE')` into the R console.
 * Some more information on environmentally transmitted ID and modeling can be found in [@codeco01].
 
 

@@ -7,8 +7,18 @@ output:
     fig_caption: true
     mathjax: default 
     keep_md: false
-bibliography: ../../media/references.bib
+bibliography: ../media/references.bib
 ---
+
+
+```{r, echo = FALSE}
+#this code loads the settings file for the current app so we can automatically 
+#list the functions in the further information section
+currentrmdfile = knitr::current_input() 
+currentappinfo = gsub("_documentation.Rmd" ,"_settings.R",currentrmdfile)
+source(currentappinfo)
+```
+
 
 ## Overview {#shinytab1}
 For this module, we will explore a stochastic SIR-type model with 2 different pathogen strains, wild-type and a drug resistant mutant in the presence of drug treatment. Read about the model in the "Model" tab. Then do the tasks described in the "What to do" tab.
@@ -39,7 +49,12 @@ The included processes/mechanisms are the following:
 ### Model Implementation
 The flow diagram for the model implemented in this app is:
 
-![Flow diagram for this model.](../../media/evolutionmodel.png)
+
+
+```{r BIdiagram,  fig.cap='Flow diagram for this model. ',  echo=FALSE}
+knitr::include_graphics("../media/evolutionmodel.png")
+```
+
 
 
 Note that this model is _not_ an ordinary differential equation model. It is instead its stochastic equivalent.
@@ -113,10 +128,12 @@ Keep exploring. For instance, try the following:
 
 ## Further Information {#shinytab4}
 
+
+* This app (and all others) are structured such that the Shiny part (the graphical interface you see and the server-side function that goes with it) calls an underlying R script (or several) which runs the simulation for the model of interest and returns the results.
+* For this app, the underlying function(s) running the simulation are called ``r simfunction``. You can call them directly, without going through the shiny app. Use the `help()` command for more information on how to use the functions directly. If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself. 
+* You could also modify the simulator functions and adopt them for your own purposes. All simulator functions can be found in a sub-folder of the package called `simulatorfunctions`. Of course to modify these functions, you'll need to do some coding.
+* For examples on using the simulators directly and how to modify them, read the package vignette by typing `vignette('DSAIDE')` into the R console.
 * The model is a simpler version of a previously published model in [@handel09a]. 
-* For this app, the underlying function running the simulation is called `simulate_evolution.R`. You can call this function directly, without going through the shiny app. Check the help file for the function for more information. 
-* If you call the function directly, you need to process the results returned from this function and produce useful output (such as a plot) yourself. 
-* You can also modify this R function for your own purposes. To find out how to do that, type `?DSAIDE` at the R console.
 
 ### References
 
