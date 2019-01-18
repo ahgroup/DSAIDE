@@ -5,8 +5,8 @@
 \title{Simulation of a compartmental infectious disease transmission model with 2 types of hosts}
 \usage{
 simulate_heterogeneity_ode(S1 = 1000, I1 = 1, S2 = 1000, I2 = 0,
-  tmax = 120, b11 = 0.01, b12 = 0, b21 = 0, b22 = 0, g1 = 1,
-  g2 = 1, w1 = 0, w2 = 0)
+  b11 = 0.01, b12 = 0, b21 = 0, b22 = 0, g1 = 1, g2 = 1,
+  w1 = 0, w2 = 0, tmax = 120)
 }
 \arguments{
 \item{S1}{: initial number of susceptible type 1 hosts : numeric}
@@ -16,8 +16,6 @@ simulate_heterogeneity_ode(S1 = 1000, I1 = 1, S2 = 1000, I2 = 0,
 \item{S2}{:  initial number of susceptible type 2 hosts : numeric}
 
 \item{I2}{:  initial number of infected type 2 hosts : numeric}
-
-\item{tmax}{:  maximum simulation time, units of months : numeric}
 
 \item{b11}{:  rate of transmission from infected type 1 host to susceptible type 1 host : numeric}
 
@@ -34,6 +32,8 @@ simulate_heterogeneity_ode(S1 = 1000, I1 = 1, S2 = 1000, I2 = 0,
 \item{w1}{:  the rate at which type 1 host immunity wanes : numeric}
 
 \item{w2}{:  the rate at which type 2 host immunity wanes : numeric}
+
+\item{tmax}{:  maximum simulation time, units of months : numeric}
 }
 \value{
 This function returns the simulation result as obtained from a call

@@ -4,15 +4,13 @@
 \alias{simulate_sir_stochastic}
 \title{Stochastic simulation of an SIR-type model}
 \usage{
-simulate_sir_stochastic(S = 1000, I = 10, tmax = 100, b = 0.001,
-  g = 0.5, m = 0, n = 0, rngseed = 100)
+simulate_sir_stochastic(S = 1000, I = 10, b = 0.001, g = 0.5,
+  m = 0, n = 0, tmax = 100, rngseed = 100)
 }
 \arguments{
 \item{S}{: initial number of susceptible hosts : numeric}
 
 \item{I}{:  initial number of infected, symptomatic hosts : numeric}
-
-\item{tmax}{: maximum simulation time : numeric}
 
 \item{b}{: level/rate of infectiousness for hosts in the I compartment : numeric}
 
@@ -21,6 +19,8 @@ simulate_sir_stochastic(S = 1000, I = 10, tmax = 100, b = 0.001,
 \item{m}{: the rate at which new individuals enter the model (are born) : numeric}
 
 \item{n}{: the rate of natural death (the inverse is the average lifespan) : numeric}
+
+\item{tmax}{: maximum simulation time : numeric}
 
 \item{rngseed}{: seed for random number generator to allow reproducibility : numeric}
 }

@@ -4,15 +4,15 @@
 #'
 #' @param S : initial number of susceptibles : numeric
 #' @param I : initial number of infected hosts : numeric
-#' @param tmax : maximum simulation time, units of months : numeric
 #' @param bd : rate of transmission for density-dependent transmission : numeric
 #' @param bf : rate of transmission for frequency-dependent transmission : numeric
-#' @param scenario : choice between density dependent (=1) and frequency dependent (=2) transmission : numeric
 #' @param A : the size of the area in which the hosts are assumed to reside/interact : numeric
 #' @param m : the rate of births : numeric
 #' @param n : the rate of natural deaths : numeric
 #' @param g : the rate at which infected hosts recover : numeric
 #' @param w : the rate of waning immunity : numeric
+#' @param scenario : choice between density dependent (=1) and frequency dependent (=2) transmission : numeric
+#' @param tmax : maximum simulation time, units of months : numeric
 #' @return This function returns the simulation result as obtained from a call
 #'   to the deSolve ode solver.
 #' @details A compartmental ID model with several states/compartments
@@ -40,7 +40,7 @@
 
 
 
-simulate_directtransmission_ode <- function(S = 1e3, I = 1, tmax = 120, scenario = 1, bd = 0.01, bf = 0, A = 1, m = 0, n = 0, g = 0.1, w = 0)
+simulate_directtransmission_ode <- function(S = 1e3, I = 1, bd = 0.01, bf = 0, A = 1, m = 0, n = 0, g = 0.1, w = 0, scenario = 1, tmax = 120)
 {
 
   

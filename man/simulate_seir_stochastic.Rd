@@ -4,16 +4,14 @@
 \alias{simulate_seir_stochastic}
 \title{Stochastic simulation of an SEIR-type model}
 \usage{
-simulate_seir_stochastic(S = 1000, I = 10, tmax = 100, bE = 0,
-  bI = 0.001, gE = 0.5, gI = 0.5, w = 0, m = 0, n = 0,
+simulate_seir_stochastic(S = 1000, I = 10, bE = 0, bI = 0.001,
+  gE = 0.5, gI = 0.5, w = 0, m = 0, n = 0, tmax = 100,
   rngseed = 100)
 }
 \arguments{
 \item{S}{: initial number of susceptible hosts : numeric}
 
 \item{I}{: initial number of infected, symptomatic hosts : numeric}
-
-\item{tmax}{: maximum simulation time : numeric}
 
 \item{bE}{: level/rate of infectiousness for hosts in the E compartment : numeric}
 
@@ -29,6 +27,8 @@ susceptible state : numeric}
 \item{m}{: the rate at which new individuals enter the model (are born) : numeric}
 
 \item{n}{: the rate of natural death (the inverse is the average lifespan) : numeric}
+
+\item{tmax}{: maximum simulation time : numeric}
 
 \item{rngseed}{: seed for random number generator to allow reproducibility : numeric}
 }

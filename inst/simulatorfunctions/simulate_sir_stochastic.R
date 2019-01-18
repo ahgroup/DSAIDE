@@ -10,8 +10,8 @@
 #' @param g : rate at which a person leaves the I compartment : numeric
 #' @param m : the rate at which new individuals enter the model (are born) : numeric
 #' @param n : the rate of natural death (the inverse is the average lifespan) : numeric
-#' @param rngseed : seed for random number generator to allow reproducibility : numeric
 #' @param tmax : maximum simulation time : numeric
+#' @param rngseed : seed for random number generator to allow reproducibility : numeric
 #' @return The function returns a list. The list has one element, a data frame ts
 #' which contains the time series of the simulated model, 
 #' with one column per compartment/variable. The first column is time.
@@ -42,7 +42,7 @@
 #' @export
 
 
-simulate_sir_stochastic <- function(S = 1000, I = 10, tmax = 100,  b = 1e-3,  g = 0.5,  m = 0, n = 0, rngseed  = 100)
+simulate_sir_stochastic <- function(S = 1000, I = 10,  b = 1e-3,  g = 0.5,  m = 0, n = 0, tmax = 100, rngseed  = 100)
 {
     #this specifies the rates used by the adapativetau routine
     stochasticSIRfunc <- function(y, parms, t)

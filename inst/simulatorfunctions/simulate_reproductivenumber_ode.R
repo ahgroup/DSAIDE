@@ -14,9 +14,9 @@
 #' @param e : efficacy of vaccine, given as fraction between 0 and 1 : numeric
 #' @param b : level/rate of infectiousness for hosts in the I compartment : numeric
 #' @param g : rate at which a person leaves the I compartment : numeric
-#' @param w : rate at which recovered persons lose immunity and return to susceptible state : numeric
 #' @param m : the rate at which new individuals enter the model (are born) : numeric
 #' @param n : the rate of natural death (the inverse it the average lifespan) : numeric
+#' @param w : rate at which recovered persons lose immunity and return to susceptible state : numeric
 #' @param tmax : maximum simulation time : numeric
 #' @return This function returns the simulation result as obtained from a call
 #'   to the deSolve ode solver.
@@ -31,10 +31,11 @@
 #' @examples
 #'   # To run the simulation with default parameters just call the function:
 #'   result <- simulate_reproductivenumber_ode()
-#'   # To choose parameter values other than the standard one, specify the parameters you want to change, e.g. like such:
-#'   result <- simulate_reproductivenumber(S = 2000, I = 10, tmax = 100, g = 0.5, n = 0.1)
+#'   # To choose parameter values other than the standard one, 
+#'   # specify the parameters you want to change, e.g. like such:
+#'   result <- simulate_reproductivenumber_ode(S = 2000, I = 10, tmax = 100, g = 0.5, n = 0.1)
 #'   # You should then use the simulation result returned from the function, like this:
-#'   plot(result$ts[ , "rime"],result$ts[ , "S"],xlab='Time',ylab='Number Susceptible',type='l')
+#'   plot(result$ts[ , "time"],result$ts[ , "S"],xlab='Time',ylab='Number Susceptible',type='l')
 #' @seealso The UI of the app 'ReproductiveNumber 2', which is part of this package, contains more details on the model.
 #' @references See e.g. Keeling and Rohani 2008 for SIR models and the
 #'   documentation for the deSolve package for details on ODE solvers
@@ -42,7 +43,7 @@
 #' @export
 
 
-simulate_reproductivenumber_ode <- function(S = 1000, I = 1, f = 0.0, e = 0.0, tmax = 300, g = 10, b = 1e-2, m = 0, n = 0, w = 0){
+simulate_reproductivenumber_ode <- function(S = 1000, I = 1, f = 0.0, e = 0.0, b = 1e-2, g = 10, m = 0, n = 0, w = 0, tmax = 300){
 
   
   ############################################################

@@ -1,19 +1,18 @@
 #' Simulation of a compartmental infectious disease transmission model illustrating different types of direct transmission
 #'
 #' @description  This model allows for the simulation of different direct transmission modes
-#' 
 #'
 #' @param S : initial number of susceptibles : numeric
 #' @param I : initial number of infected hosts : numeric
-#' @param tmax : maximum simulation time, units of months : numeric
 #' @param bd : rate of transmission for density-dependent transmission : numeric
 #' @param bf : rate of transmission for frequency-dependent transmission : numeric
-#' @param scenario : choice between density dependent (=1) and frequency dependent (=2) transmission : numeric
 #' @param A : the size of the area in which the hosts are assumed to reside/interact : numeric
 #' @param m : the rate of births : numeric
 #' @param n : the rate of natural deaths : numeric
 #' @param g : the rate at which infected hosts recover : numeric
 #' @param w : the rate of waning immunity : numeric
+#' @param scenario : choice between density dependent (=1) and frequency dependent (=2) transmission : numeric
+#' @param tmax : maximum simulation time, units of months : numeric
 #' @return This function returns the simulation result as obtained from a call
 #'   to the deSolve ode solver.
 #' @details A compartmental ID model with several states/compartments
@@ -32,7 +31,7 @@
 #'   # To choose parameter values other than the standard one, specify them like such:
 #'   result <- simulate_directtransmission_ode(S = 100, tmax = 100, A=10)
 #'   # You should then use the simulation result returned from the function, like this:
-#'   plot(result$ts[,"Time"],result$ts[,"S"],xlab='Time',ylab='Number Susceptible',type='l')
+#'   plot(result$ts[,"time"],result$ts[,"S"],xlab='Time',ylab='Number Susceptible',type='l')
 #' @seealso The UI of the Shiny app 'DirectTransmission', which is part of this package, contains more details on the model.
 #' @author Andreas Handel
 #' @references See e.g. Keeling and Rohani 2008 for SIR models and the
@@ -41,7 +40,7 @@
 
 
 
-simulate_directtransmission_ode <- function(S = 1e3, I = 1, tmax = 120, scenario = 1, bd = 0.01, bf = 0, A = 1, m = 0, n = 0, g = 0.1, w = 0)
+simulate_directtransmission_ode <- function(S = 1e3, I = 1, bd = 0.01, bf = 0, A = 1, m = 0, n = 0, g = 0.1, w = 0, scenario = 1, tmax = 120)
 {
 
   

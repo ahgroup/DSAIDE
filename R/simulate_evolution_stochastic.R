@@ -4,7 +4,9 @@
 #' Susceptibles (S), Infected with wild-type/sensitive and untreated (Iu),
 #' Infected with wild-type and treated (It), infected with resistant (Ir), 
 #' Recovered and Immune (R). allows exploration of evolutionary dynamics
-#'
+#' @details A compartmental ID model with several states/compartments
+#' is simulated as a stochastic model using the adaptive tau algorithm as implemented by ssa.adaptivetau()
+#' in the adaptivetau package. See the manual of this package for more details. 
 #' @param S : initial number of susceptible hosts : numeric
 #' @param Iu : initial number of wild-type infected untreated hosts : numeric
 #' @param It : initial number of wild-type infected treated hosts : numeric
@@ -18,19 +20,11 @@
 #' @param gu : rate at which a host leaves the Iu compartment : numeric
 #' @param gt : rate at which a person leaves the It compartment : numeric
 #' @param gr : rate at which a person leaves the Ir compartment : numeric
-#' @param rngseed : seed for random number generator to allow reproducibility : numeric
 #' @param tmax : maximum simulation time : numeric
+#' @param rngseed : seed for random number generator to allow reproducibility : numeric
 #' @return This function returns the simulation result as obtained from a call
 #'   to the adaptivetau integrator in list form. The list element ts is a
-#'   dataframe where the first column is "Time," and the remaining columns
-#'   represent the evolution of the model parameters: the number of susceptibles,
-#'   the number infected by the drug-sensitive strain and not on treatment, the number
-#'   infected by the drug-sensitive strain and being treated, the number infected by
-#'   the drug-resistant strain (treatment does not affect these), and the recovered
-#'   (and therefore immune) individuals. 
-#' @details A compartmental ID model with several states/compartments
-#' is simulated as a stochastic model using the adaptive tau algorithm as implemented by ssa.adaptivetau()
-#' in the adaptivetau package. See the manual of this package for more details. 
+#'   dataframe where the first column is "time," and the remaining columns are the variables
 #' @section Warning:
 #' This function does not perform any error checking. So if you try to do
 #' something nonsensical (e.g. have negative values or fractions > 1),
@@ -50,9 +44,7 @@
 #' @export
 
 
-
-
-simulate_evolution_stochastic <- function(S = 1000, Iu = 1, It = 1, Ir = 1, tmax = 100, bu = 1e-3, bt = 1e-3, br = 1e-3, cu = 1e-3, ct = 1e-2, f = 0, gu = 1, gt = 1, gr = 1 ,rngseed = 100)
+simulate_evolution_stochastic <- function(S = 1000, Iu = 1, It = 1, Ir = 1, bu = 1e-3, bt = 1e-3, br = 1e-3, cu = 1e-3, ct = 1e-2, f = 0, gu = 1, gt = 1, gr = 1, tmax = 100 ,rngseed = 100)
 {
     
     #this specifies the rates used by the adapativetau routine

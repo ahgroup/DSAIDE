@@ -4,24 +4,22 @@
 \alias{simulate_idpatterns_ode}
 \title{Simulation of a compartmental infectious disease transmission model including seasonality}
 \usage{
-simulate_idpatterns_ode(S = 1000, P = 1, timeunit = 1, tmax = 300,
-  bP = 0, bA = 0, bI = 0.001, gP = 0.5, gA = 0.5, gI = 0.5,
-  f = 0, d = 0, w = 0, m = 0, n = 0, s = 0)
+simulate_idpatterns_ode(S = 1000, P = 1, bP = 0, bA = 0,
+  bI = 0.001, s = 0, gP = 0.5, gA = 0.5, gI = 0.5, f = 0,
+  d = 0, w = 0, m = 0, n = 0, timeunit = 1, tmax = 300)
 }
 \arguments{
 \item{S}{: initial number of susceptible hosts : numeric}
 
 \item{P}{: initial number of infected, pre-symptomatic hosts : numeric}
 
-\item{timeunit}{: units of time in which the model should run (1=day, 2=week, 3=month, 4=year) : numeric}
-
-\item{tmax}{: maximum simulation time, in units of months : numeric}
-
 \item{bP}{: level/rate of infectiousness for hosts in the P compartment : numeric}
 
 \item{bA}{: level/rate of infectiousness for hosts in the A compartment : numeric}
 
 \item{bI}{: level/rate of infectiousness for hosts in the I compartment : numeric}
+
+\item{s}{: strength of seasonal/annual sigmoidal variation of transmission rate : numeric}
 
 \item{gP}{rate at which a person leaves the P compartment : numeric}
 
@@ -39,7 +37,9 @@ simulate_idpatterns_ode(S = 1000, P = 1, timeunit = 1, tmax = 300,
 
 \item{n}{: the rate of natural death (the inverse it the average lifespan) : numeric}
 
-\item{s}{: strength of seasonal/annual sigmoidal variation of transmission rate : numeric}
+\item{timeunit}{: units of time in which the model should run (1=day, 2=week, 3=month, 4=year) : numeric}
+
+\item{tmax}{: maximum simulation time, in units of months : numeric}
 }
 \value{
 This function returns the simulation result as obtained from a call

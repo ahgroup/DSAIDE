@@ -6,7 +6,6 @@
 #' @param I1 : initial number of hosts infected with type 1 : numeric
 #' @param I2 : initial number of hosts infected with type 2 : numeric
 #' @param I12 : initial number of double infected hosts : numeric
-#' @param tmax : maximum simulation time, units of months : numeric
 #' @param b1 : rate at which type 1 infected hosts transmit : numeric
 #' @param b2 : rate at which type 2 infected hosts transmit : numeric
 #' @param b12 : rate at which double infected hosts transmit : numeric
@@ -14,6 +13,7 @@
 #' @param g2 : the rate at which infected type 2 hosts recover : numeric
 #' @param g12 : the rate at which double infected hosts recover : numeric
 #' @param a : fraction of type 1 infections produced by double infected hosts : numeric
+#' @param tmax : maximum simulation time, units of months : numeric
 #' @return This function returns the simulation result as obtained from a call
 #'   to the deSolve ode solver.
 #' @details A compartmental ID model with several states/compartments
@@ -38,7 +38,7 @@
 #' @export
 
 
-simulate_multipathogen_ode <- function(S = 1e3, I1 = 1, I2 = 0, I12 = 0, tmax = 120, b1 = 1e-3, b2 = 0, b12 = 0, g1 = 1, g2 = 1, g12 = 1, a = 0)
+simulate_multipathogen_ode <- function(S = 1e3, I1 = 1, I2 = 0, I12 = 0, b1 = 1e-3, b2 = 0, b12 = 0, g1 = 1, g2 = 1, g12 = 1, a = 0, tmax = 120)
 {
 
     ############################################################

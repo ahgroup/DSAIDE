@@ -5,8 +5,8 @@
 \title{Stochastic simulation of a compartmental SIR-type model with wild-type and mutant strains and treatment}
 \usage{
 simulate_evolution_stochastic(S = 1000, Iu = 1, It = 1, Ir = 1,
-  tmax = 100, bu = 0.001, bt = 0.001, br = 0.001, cu = 0.001,
-  ct = 0.01, f = 0, gu = 1, gt = 1, gr = 1, rngseed = 100)
+  bu = 0.001, bt = 0.001, br = 0.001, cu = 0.001, ct = 0.01,
+  f = 0, gu = 1, gt = 1, gr = 1, tmax = 100, rngseed = 100)
 }
 \arguments{
 \item{S}{: initial number of susceptible hosts : numeric}
@@ -16,8 +16,6 @@ simulate_evolution_stochastic(S = 1000, Iu = 1, It = 1, Ir = 1,
 \item{It}{: initial number of wild-type infected treated hosts : numeric}
 
 \item{Ir}{: initial number of resistant infected hosts : numeric}
-
-\item{tmax}{: maximum simulation time : numeric}
 
 \item{bu}{: level/rate of infectiousness for hosts in the Iu compartment : numeric}
 
@@ -37,17 +35,14 @@ simulate_evolution_stochastic(S = 1000, Iu = 1, It = 1, Ir = 1,
 
 \item{gr}{: rate at which a person leaves the Ir compartment : numeric}
 
+\item{tmax}{: maximum simulation time : numeric}
+
 \item{rngseed}{: seed for random number generator to allow reproducibility : numeric}
 }
 \value{
 This function returns the simulation result as obtained from a call
   to the adaptivetau integrator in list form. The list element ts is a
-  dataframe where the first column is "Time," and the remaining columns
-  represent the evolution of the model parameters: the number of susceptibles,
-  the number infected by the drug-sensitive strain and not on treatment, the number
-  infected by the drug-sensitive strain and being treated, the number infected by
-  the drug-resistant strain (treatment does not affect these), and the recovered
-  (and therefore immune) individuals.
+  dataframe where the first column is "time," and the remaining columns are the variables
 }
 \description{
 Simulation of a stochastic 2-strain SIR model with the following compartments:

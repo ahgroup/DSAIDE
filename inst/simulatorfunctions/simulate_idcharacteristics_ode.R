@@ -49,7 +49,7 @@
 #' @author Andreas Handel
 #' @export
 
-simulate_idcharacteristics_ode <- function(S = 1000, P = 1, tmax = 300, bP = 0, bA = 0, bI = 0.001, gP = 0.5, gA = 0.5, gI = 0.5, f = 0, d = 0)
+simulate_idcharacteristics_ode <- function(S = 1000, P = 1, bP = 0, bA = 0, bI = 0.001, gP = 0.5, gA = 0.5, gI = 0.5, f = 0, d = 0, tmax = 300)
 {
   
   ############################################################

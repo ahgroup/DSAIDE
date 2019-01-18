@@ -11,9 +11,8 @@
 #'   This assumption is hard-coded into the sinusoidally varying
 #'   transmission coefficient, which is assumed to have a period of a year.
 #'   
-#'
 #' @param S : initial number of susceptible hosts : numeric
-#' @param P0 : initial number of infected, pre-symptomatic hosts : numeric
+#' @param P : initial number of infected, pre-symptomatic hosts : numeric
 #' @param bP : level/rate of infectiousness for hosts in the P compartment : numeric
 #' @param bA : level/rate of infectiousness for hosts in the A compartment : numeric
 #' @param bI : level/rate of infectiousness for hosts in the I compartment : numeric
@@ -51,7 +50,7 @@
 #' @author Andreas Handel
 #' @export
 
-simulate_idpatterns_ode <- function(S = 1000, P = 1, timeunit = 1, tmax = 300, bP = 0, bA = 0, bI = 0.001, gP = 0.5, gA = 0.5, gI = 0.5, f = 0, d = 0, w = 0, m = 0, n = 0, s = 0)
+simulate_idpatterns_ode <- function(S = 1000, P = 1, bP = 0, bA = 0, bI = 0.001, s = 0, gP = 0.5, gA = 0.5, gI = 0.5, f = 0, d = 0, w = 0, m = 0, n = 0,  timeunit = 1, tmax = 300)
 {
   
   ############################################################
@@ -87,8 +86,8 @@ simulate_idpatterns_ode <- function(S = 1000, P = 1, timeunit = 1, tmax = 300, b
 
   tunitvec=c(365,52,12,1) #depending on choice of units (days/weeks/months/years), pick divisor for annual variation in transmission in the ODEs
   tunit=tunitvec[timeunit]
-  
-  
+ 
+ 
   #combining parameters into a parameter vector
   pars = c(bP = bP, bA = bA, bI = bI, gP = gP , gA = gA, gI = gI, f = f, d = d, w = w, m = m, n = n, s = s , tunit = tunit);
 

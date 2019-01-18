@@ -56,7 +56,7 @@
 #' @author Andreas Handel
 #' @export
 
-simulate_idcontrol_ode <- function(S = 1000, I = 1, E = 0, Sv = 1000, Iv = 0, tmax = 300, bP = 0, bA = 0, bI = 1e-3, bE = 0, bv = 1e-3, bh = 1e-3, gP = 0.5, gA = 0.5, gI = 0.5, pA = 1, pI = 10, c = 1,  f = 0, d = 0, w = 0, mh = 0, nh = 0, mv = 0, nv = 0)
+simulate_idcontrol_ode <- function(S = 1000, I = 1, E = 0, Sv = 1000, Iv = 0, bP = 0, bA = 0, bI = 1e-3, bE = 0, bv = 1e-3, bh = 1e-3, gP = 0.5, gA = 0.5, gI = 0.5, pA = 1, pI = 10, c = 1,  f = 0, d = 0, w = 0, mh = 0, nh = 0, mv = 0, nv = 0, tmax = 300)
 {
 
   # This function is used in the ode solver function and has no independent usages

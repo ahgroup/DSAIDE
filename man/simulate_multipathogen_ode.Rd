@@ -5,8 +5,8 @@
 \title{Simulation of a compartmental infectious disease transmission model with 2 types of pathogens}
 \usage{
 simulate_multipathogen_ode(S = 1000, I1 = 1, I2 = 0, I12 = 0,
-  tmax = 120, b1 = 0.001, b2 = 0, b12 = 0, g1 = 1, g2 = 1,
-  g12 = 1, a = 0)
+  b1 = 0.001, b2 = 0, b12 = 0, g1 = 1, g2 = 1, g12 = 1,
+  a = 0, tmax = 120)
 }
 \arguments{
 \item{S}{: initial number of susceptible hosts  : numeric}
@@ -16,8 +16,6 @@ simulate_multipathogen_ode(S = 1000, I1 = 1, I2 = 0, I12 = 0,
 \item{I2}{: initial number of hosts infected with type 2 : numeric}
 
 \item{I12}{: initial number of double infected hosts : numeric}
-
-\item{tmax}{: maximum simulation time, units of months : numeric}
 
 \item{b1}{: rate at which type 1 infected hosts transmit : numeric}
 
@@ -32,6 +30,8 @@ simulate_multipathogen_ode(S = 1000, I1 = 1, I2 = 0, I12 = 0,
 \item{g12}{: the rate at which double infected hosts recover : numeric}
 
 \item{a}{: fraction of type 1 infections produced by double infected hosts : numeric}
+
+\item{tmax}{: maximum simulation time, units of months : numeric}
 }
 \value{
 This function returns the simulation result as obtained from a call

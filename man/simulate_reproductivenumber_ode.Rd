@@ -5,7 +5,7 @@
 \title{Simulation of a compartmental infectious disease transmission model to study the reproductive number}
 \usage{
 simulate_reproductivenumber_ode(S = 1000, I = 1, f = 0, e = 0,
-  tmax = 300, g = 10, b = 0.01, m = 0, n = 0, w = 0)
+  b = 0.01, g = 10, m = 0, n = 0, w = 0, tmax = 300)
 }
 \arguments{
 \item{S}{: initial number of susceptible hosts : numeric}
@@ -16,17 +16,17 @@ simulate_reproductivenumber_ode(S = 1000, I = 1, f = 0, e = 0,
 
 \item{e}{: efficacy of vaccine, given as fraction between 0 and 1 : numeric}
 
-\item{tmax}{: maximum simulation time : numeric}
+\item{b}{: level/rate of infectiousness for hosts in the I compartment : numeric}
 
 \item{g}{: rate at which a person leaves the I compartment : numeric}
-
-\item{b}{: level/rate of infectiousness for hosts in the I compartment : numeric}
 
 \item{m}{: the rate at which new individuals enter the model (are born) : numeric}
 
 \item{n}{: the rate of natural death (the inverse it the average lifespan) : numeric}
 
 \item{w}{: rate at which recovered persons lose immunity and return to susceptible state : numeric}
+
+\item{tmax}{: maximum simulation time : numeric}
 }
 \value{
 This function returns the simulation result as obtained from a call

@@ -5,10 +5,10 @@
 \title{Simulation of a compartmental infectious disease transmission model including different control mechanisms}
 \usage{
 simulate_idcontrol_ode(S = 1000, I = 1, E = 0, Sv = 1000, Iv = 0,
-  tmax = 300, bP = 0, bA = 0, bI = 0.001, bE = 0, bv = 0.001,
-  bh = 0.001, gP = 0.5, gA = 0.5, gI = 0.5, pA = 1, pI = 10,
-  c = 1, f = 0, d = 0, w = 0, mh = 0, nh = 0, mv = 0,
-  nv = 0)
+  bP = 0, bA = 0, bI = 0.001, bE = 0, bv = 0.001, bh = 0.001,
+  gP = 0.5, gA = 0.5, gI = 0.5, pA = 1, pI = 10, c = 1,
+  f = 0, d = 0, w = 0, mh = 0, nh = 0, mv = 0, nv = 0,
+  tmax = 300)
 }
 \arguments{
 \item{S}{: initial number of susceptible hosts : numeric}
@@ -20,8 +20,6 @@ simulate_idcontrol_ode(S = 1000, I = 1, E = 0, Sv = 1000, Iv = 0,
 \item{Sv}{: initial number of susceptible vectors : numeric}
 
 \item{Iv}{: initial number of infected vectors : numeric}
-
-\item{tmax}{: maximum simulation time, in units of months : numeric}
 
 \item{bP}{: rate of transmission from pre-symptomatic to susceptible hosts : numeric}
 
@@ -60,6 +58,8 @@ simulate_idcontrol_ode(S = 1000, I = 1, E = 0, Sv = 1000, Iv = 0,
 \item{mv}{: the rate at which new vectors enter the model (are born) : numeric}
 
 \item{nv}{: the rate of natural death of vectors (the inverse it the average lifespan) : numeric}
+
+\item{tmax}{: maximum simulation time, in units of months : numeric}
 }
 \value{
 This function returns the simulation result as obtained from a call

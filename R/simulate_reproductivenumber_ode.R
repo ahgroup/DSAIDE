@@ -14,9 +14,9 @@
 #' @param e : efficacy of vaccine, given as fraction between 0 and 1 : numeric
 #' @param b : level/rate of infectiousness for hosts in the I compartment : numeric
 #' @param g : rate at which a person leaves the I compartment : numeric
-#' @param w : rate at which recovered persons lose immunity and return to susceptible state : numeric
 #' @param m : the rate at which new individuals enter the model (are born) : numeric
 #' @param n : the rate of natural death (the inverse it the average lifespan) : numeric
+#' @param w : rate at which recovered persons lose immunity and return to susceptible state : numeric
 #' @param tmax : maximum simulation time : numeric
 #' @return This function returns the simulation result as obtained from a call
 #'   to the deSolve ode solver.
@@ -43,7 +43,7 @@
 #' @export
 
 
-simulate_reproductivenumber_ode <- function(S = 1000, I = 1, f = 0.0, e = 0.0, tmax = 300, g = 10, b = 1e-2, m = 0, n = 0, w = 0){
+simulate_reproductivenumber_ode <- function(S = 1000, I = 1, f = 0.0, e = 0.0, b = 1e-2, g = 10, m = 0, n = 0, w = 0, tmax = 300){
 
   
   ############################################################

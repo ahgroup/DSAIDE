@@ -7,7 +7,6 @@
 #' @param I1 :  initial number of infected type 1 hosts : numeric
 #' @param S2 :  initial number of susceptible type 2 hosts : numeric
 #' @param I2 :  initial number of infected type 2 hosts : numeric
-#' @param tmax :  maximum simulation time, units of months : numeric
 #' @param b11 :  rate of transmission from infected type 1 host to susceptible type 1 host : numeric
 #' @param b22 :  rate of transmission from infected type 2 host to susceptible type 2 host : numeric
 #' @param b12 :  rate of transmission from infected type 1 host to susceptible type 2 host : numeric
@@ -16,6 +15,7 @@
 #' @param g2 :  the rate at which infected type 2 hosts recover : numeric
 #' @param w1 :  the rate at which type 1 host immunity wanes : numeric
 #' @param w2 :  the rate at which type 2 host immunity wanes : numeric
+#' @param tmax :  maximum simulation time, units of months : numeric
 #' @return This function returns the simulation result as obtained from a call
 #'   to the deSolve ode solver.
 #' @details A compartmental ID model with several states/compartments
@@ -40,7 +40,7 @@
 #' @export
 
 
-simulate_heterogeneity_ode <- function(S1 = 1e3, I1 = 1, S2 = 1e3, I2 = 0, tmax = 120, b11 = 0.01, b12 = 0, b21 = 0, b22 = 0, g1 = 1, g2 = 1, w1 = 0, w2 = 0)
+simulate_heterogeneity_ode <- function(S1 = 1e3, I1 = 1, S2 = 1e3, I2 = 0, b11 = 0.01, b12 = 0, b21 = 0, b22 = 0, g1 = 1, g2 = 1, w1 = 0, w2 = 0, tmax = 120)
 {
   
   # This function is used in the solver function and has no independent usages
