@@ -79,7 +79,7 @@ $$\dot I_v = b_2 S_v I_h  - n I_v$$
 ### Task 1
 * Set the model parameters such that it corresponds to the following setting: 
     * 1000 initially susceptible for both hosts and vectors, 1 initially infected host, no infected vector, simulation duration approximately 10 years.
-    * Set host -> vector transmission rate, _b~2~_=0.003. Keep _b~1~_ = 0.
+    * Set host -> vector transmission rate, _b~2~_=0.003, and _b~1~_ = 0.
     * Assume that the duration of the infectious period in hosts is half a month (about 2 weeks) long. 
     * Assume that vectors live for half a month (about 2 weeks). Set the birth rate such that in the absence of the ID, you get a steady population of 1000 vectors.  
     * Turn off waning immunity for now.
