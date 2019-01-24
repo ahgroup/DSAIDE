@@ -8,7 +8,7 @@ apptitle = "Stochastic SIR Model"
 
 #name of underlying simulation function(s) to be used in the app
 #must be provided
-simfunction = c('simulate_basicvirus_ode', 'simulate_basicvirus_stochastic')
+simfunction = c('simulate_sir_ode', 'simulate_sir_stochastic')
 
 #name of underlying mbmodel - if exists
 #if it exists, it will be used to build UI input elements
@@ -21,7 +21,7 @@ nplots = 1
 #specify the type of model that will be run
 #if model type is provided as UI input, it should be set to NULL here
 #otherwise it needs to be provided
-modeltype = "_stochastic_"
+modeltype = NULL
 
 #additional input elements for app that are shown on UI
 otherinputs =   list(

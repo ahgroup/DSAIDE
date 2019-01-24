@@ -151,7 +151,7 @@ server <- function(input, output, session)
 #######################################################
 
 ui <- fluidPage(
-  includeCSS("../media/packagestyle.css"), #use custom styling
+  includeCSS("packagestyle.css"), #use custom styling
   tags$div(id = "shinyheadertitle", "DSAIDE - Dynamical Systems Approach to Infectious Disease Epidemiology"),
   tags$div(id = "shinyheadertext",
     "A collection of Shiny/R Apps to explore and simulate infectious disease models.",

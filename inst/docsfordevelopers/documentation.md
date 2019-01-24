@@ -60,7 +60,7 @@ The best approach is to contact me by email (ahandel@uga.edu) or through the Git
 * To build new vignette, run devtools::build_vignettes()
 * To update the pkgdown website, run pkgdown::build_site()
 * To spell-check all Rmd documentation files, use these commands (adjust paths as needed):
-files = list.files(path = "C:/data/git/DSAIRM/inst/appinformation/", recursive=TRUE, pattern = "\\.Rmd$", full.names = TRUE)
+files = list.files(path = "C:/data/git/DSAIDE/inst/appinformation/", recursive=TRUE, pattern = "\\.Rmd$", full.names = TRUE)
 spelling::spell_check_files(files)
 * To re-build all html documentation files from the rmd files at once, use these above command and:
 for (n in 1: length(files)) {rmarkdown::render(files[n]); Sys.sleep(2)}
