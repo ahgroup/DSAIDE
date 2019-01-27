@@ -49,7 +49,7 @@
 </ul>
 <p>The included processes/mechanisms are the following:</p>
 <ul>
-<li>Susceptible individuals (S) can become infected by untreated or treated hosts infected with the wild-type strain at rates <em>b<sub>u</sub></em> and <em>b<sub>t</sub></em>. A fraction <em>f</em> of those hosts are assumed to receive treatment, while the remainder does not. Small fractions (<em>c<sub>u</sub></em> and <em>c<sub>t</sub></em>) of wild-type infected untreated or treated hosts can generate resistant mutants and transmit those, leading to resistant infections.<br />
+<li>Susceptible individuals (S) can become infected by untreated or treated hosts infected with the wild-type strain at rates <em>b<sub>u</sub></em> and <em>b<sub>t</sub></em>. A fraction <em>f</em> of those hosts are assumed to receive treatment, while the remainder does not. Small fractions (low values for <em>c<sub>u</sub></em> and <em>c<sub>t</sub></em>) of wild-type infected untreated or treated hosts can generate resistant mutants and transmit those, leading to resistant infections.<br />
 </li>
 <li>Susceptible individuals (S) can become infected by hosts infected with the resistant strain at rate <em>b<sub>r</sub></em>.</li>
 <li>All infected hosts recover at some rate <em>g<sub>i</sub></em>, with <em>i=u,t,r</em>.</li>
@@ -117,8 +117,7 @@
 <p><strong>The tasks below are described in a way that assumes everything is in units of DAYS (rate parameters, therefore, have units of inverse days). If any quantity is not given in those units, you need to convert it first (e.g. if it says a week, you need to convert it to 7 days).</strong></p>
 <div id="task-1" class="section level3">
 <h3>Task 1:</h3>
-<ul>
-<li>Set the model parameters such that it corresponds to the following setting:
+<p>Set the model parameters such that it corresponds to the following setting:</p>
 <ul>
 <li>Susceptible <em>S<sub>0</sub></em> = 500, and initially untreated infected host <em>I<sub>u0</sub></em> = 1. No other infected hosts <em>I<sub>t0</sub></em> = 0 and <em>I<sub>r0</sub></em> = 0.</li>
 <li>Set simulation duration, <em>tmax</em>, to approximately half a year.</li>
@@ -127,10 +126,8 @@
 <li>Assume that the duration of the infectious period is 5 days for untreated, 4 days for treated and 5 days for resistant (for those individuals, treatment has no effect). Set the rates <em>g<sub>i</sub></em> accordingly.</li>
 <li>Set the number of simulations to 20.</li>
 <li>Assume nobody receives treatment and no resistance is generated (<em>f = c<sub>u</sub> = c<sub>t</sub> = 0</em>).</li>
-</ul></li>
-<li>With parameters set to correspond to the scenario just described, run the simulation.</li>
-<li>You should see some simulations with outbreaks and some without. For those <em>with outbreaks</em>, you should have around 10-100 susceptible left at the end.</li>
 </ul>
+<p>With parameters set to correspond to the scenario just described, run the simulation. You should see some simulations with outbreaks and some without. For those <em>with outbreaks</em>, you should have around 10-100 susceptible left at the end.</p>
 </div>
 <div id="task-2" class="section level3">
 <h3>Task 2:</h3>
@@ -186,15 +183,9 @@
 <li>For this app, the underlying function(s) running the simulation are called <code>simulate_evolution_stochastic</code>. You can call them directly, without going through the shiny app. Use the <code>help()</code> command for more information on how to use the functions directly. If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself.</li>
 <li>You could also modify the simulator functions and adopt them for your own purposes. All simulator functions can be found in a sub-folder of the package called <code>simulatorfunctions</code>. Of course to modify these functions, you’ll need to do some coding.</li>
 <li>For examples on using the simulators directly and how to modify them, read the package vignette by typing <code>vignette(&#39;DSAIDE&#39;)</code> into the R console.</li>
-<li>The model is a simpler version of a previously published model in <span class="citation">(Handel, Longini, and Antia 2009)</span>.</li>
 </ul>
-<div id="references" class="section level3 unnumbered">
+<div id="references" class="section level3">
 <h3>References</h3>
-<div id="refs" class="references">
-<div id="ref-handel09a">
-<p>Handel, Andreas, Ira M Longini Jr, and Rustom Antia. 2009. “Antiviral Resistance and the Control of Pandemic Influenza: The Roles of Stochasticity, Evolution and Model Details.” <em>J Theor Biol</em> 256 (1): 117–25. <a href="https://doi.org/10.1016/j.jtbi.2008.09.021">https://doi.org/10.1016/j.jtbi.2008.09.021</a>.</p>
-</div>
-</div>
 </div>
 </div>
 

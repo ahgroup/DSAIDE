@@ -21,11 +21,10 @@ nplots = 1
 #specify the type of model that will be run
 #if model type is provided as UI input, it should be set to NULL here
 #otherwise it needs to be provided
-modeltype = NULL
+modeltype = '_stochastic_'
 
 #additional input elements for app that are shown on UI
 otherinputs =   list(
   shiny::numericInput("nreps", "Number of simulations", min = 1, max = 50, value = 1, step = 1),
-  shiny::selectInput("modeltype", "Models to run ",c("ODE" = '_ode_', 'stochastic' = '_stochastic_', 'both' = '_ode_and_stochastic_'), selected = '_ode_'),
   shiny::selectInput("plotscale", "Log-scale for plot",c("none" = "none", 'x-axis' = "x", 'y-axis' = "y", 'both axes' = "both"))
 ) #end list
