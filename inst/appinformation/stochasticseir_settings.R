@@ -1,14 +1,14 @@
 ############################################################
-#This is a file for the stochastic sir App
+#This is a file for the stochastic seir App
 #it contains additional information that helps properly process it
 ############################################################
 
 #Title of app, to be displayed on top of analyze tab
-apptitle = "Stochastic SIR Model"
+apptitle = "Stochastic SEIR Model"
 
 #name of underlying simulation function(s) to be used in the app
 #must be provided
-simfunction = c('simulate_sirdemographic_ode', 'simulate_sirdemographic_stochastic')
+simfunction = c('simulate_seir_stochastic')
 
 #name of underlying mbmodel - if exists
 #if it exists, it will be used to build UI input elements

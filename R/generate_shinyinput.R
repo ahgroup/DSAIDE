@@ -7,14 +7,13 @@
 #' @param packagename name of package using this function
 #' @return A renderUI object that can be added to the shiny output object for display in a Shiny UI
 #' @details This function is called by the Shiny app to produce the Shiny input UI elements.
-#' If mbmodel is an object, it is assumed to be a mbmodel type and will be parsed to create the UI elements.
-#' If mbmodel is a character, it is assumed to be the name of a function which will be parsed to create UI elements.
+#' mbmodel is assumed to be the name of a function which will be parsed to create UI elements.
 #' Non-numeric arguments of functions are removed.
 #' @author Andreas Handel
 #' @export
 
 #not used in DSAIRM, might need to turn on again for modelbuilder
-generate_shinyinput <- function(mbmodel, otherinputs, packagename)
+generate_shinyinput <- function(mbmodel, otherinputs = NULL, packagename)
 {
 
     #function to wrap input elements in specified class
@@ -38,8 +37,6 @@ generate_shinyinput <- function(mbmodel, otherinputs, packagename)
     ip = formals(mbmodel) #get model inputs
     #remove function arguments that are not numeric
     ip = ip[unlist(lapply(ip,is.numeric))]
-    #browser()
-    
     modelargs = lapply(1:length(ip), function(n)
     {
         iplabel = paste0(names(ip[n]),', ', x3[n]) #text label for input
@@ -61,8 +58,8 @@ generate_shinyinput <- function(mbmodel, otherinputs, packagename)
             modelargs,
             otherargs
         ) #end tagList
-    
+
     return(modelinputs)
-    
+
 } #end overall function
 

@@ -1,4 +1,4 @@
-#' Stochastic simulation of an SIR-type model
+#' Stochastic simulation of an SIR-type model with births and deaths
 #' 
 #' @description  Simulation of a stochastic SIR type model with the following
 #'   compartments: Susceptibles (S), 
@@ -6,6 +6,7 @@
 #'   
 #' @param S : initial number of susceptible hosts : numeric
 #' @param I :  initial number of infected, symptomatic hosts : numeric
+#' @param R :  initial number of recovered hosts : numeric
 #' @param b : level/rate of infectiousness for hosts in the I compartment : numeric
 #' @param g : rate at which a person leaves the I compartment : numeric
 #' @param m : the rate at which new individuals enter the model (are born) : numeric
@@ -16,7 +17,7 @@
 #' which contains the time series of the simulated model, 
 #' with one column per compartment/variable. The first column is time.
 #' @details A compartmental SIR model is
-#'   simulated. Initial conditions for the R variable is 0. Units of
+#'   simulated. Units of
 #'   time depend on the time units chosen for model parameters. The simulation
 #'   runs as a stochastic model using the adaptive-tau algorithm as implemented
 #'   by ssa.adaptivetau in the adpativetau package. See the manual of this
@@ -29,9 +30,9 @@
 #'   or fractions > 1), the code will likely abort with an error message.
 #' @examples
 #' # To run the simulation with default parameters, just call the function:
-#' result <- simulate_sir_stochastic()
+#' result <- simulate_sirdemographic_stochastic()
 #' # To choose parameter values other than the standard one, specify them like this:
-#' result <- simulate_sir_stochastic(S = 2000,  tmax = 200, b = 0.01)
+#' result <- simulate_sirdemographic_stochastic(S = 2000,  tmax = 200, b = 0.01)
 #' # You can display or further process the result, like this:
 #' plot(result$ts[,'time'],result$ts[,'S'],xlab='Time',ylab='Number Susceptible',type='l')
 #' print(paste('Max number of infected: ',max(result$ts[,'I']))) 
@@ -42,7 +43,7 @@
 #' @export
 
 
-simulate_sir_stochastic <- function(S = 1000, I = 10,  b = 1e-3,  g = 0.5,  m = 0, n = 0, tmax = 100, rngseed  = 100)
+simulate_sirdemographic_stochastic <- function(S = 1000, I = 10, R = 0,  b = 1e-3,  g = 0.5,  m = 0, n = 0, tmax = 100, rngseed  = 100)
 {
     #this specifies the rates used by the adapativetau routine
     stochasticSIRfunc <- function(y, parms, t)
@@ -61,11 +62,7 @@ simulate_sir_stochastic <- function(S = 1000, I = 10,  b = 1e-3,  g = 0.5,  m = 
              })
     } #end function specifying rates used by adaptivetau
     
-    
-    Y0 = c(S = S,  I = I, R = 0);  #combine initial conditions into a vector
-    dt = tmax / 1000; #time step for which to get results back
-    timevec = seq(0, tmax, dt); #vector of times for which solution is returned (not that internal timestep of the integrator is different)
-
+    Y0 = c(S = S,  I = I, R = R);  #combine initial conditions into a vector
     #combining parameters into a parameter vector
     pars = c(b = b,  g = g,  m = m, n = n);
 
@@ -78,7 +75,6 @@ simulate_sir_stochastic <- function(S = 1000, I = 10,  b = 1e-3,  g = 0.5,  m = 
                        c(S = -1, I = +1), #infection of S by I
                        c(I = -1, R = +1) #move of I to R (recovery)
     ) #end list of transitions
-
 
     #this line runs the simulation using the SSA algorithm in the adaptivetau package
     set.seed(rngseed) # to allow reproducibility

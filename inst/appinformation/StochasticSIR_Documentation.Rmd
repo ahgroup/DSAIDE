@@ -52,13 +52,20 @@ The included processes/mechanisms are the following:
 ### Model Implementation
 The flow diagram for the model implemented in this app is:
 
-
 ```{r BIdiagram,  fig.cap='Flow diagram for this model. ',  echo=FALSE}
 knitr::include_graphics("../media/stochasticSIRmodel.png")
 ```
 
 
-Note that this model is _not_ an ordinary differential equation model. It is instead its stochastic equivalent.
+The deterministic model implemented as set of differential equations is given by the following equations:
+
+$$\dot S = m - bSI - nS$$
+$$\dot I = bSI - gI - nI$$
+$$\dot R = gI - nR$$
+
+This is almost the same model as the basic SIR model from the introductory app, with the only difference that this model also allows natural births and deaths. In this app, you can run the basic SIR model together with the stochastic one.
+
+The main model we are focused on here is a stochastic implementation of the variables and processes described aboe. This model is _not_ an ordinary differential equation model. It is instead its stochastic equivalent.
 We can specify the model by writing down every possible transition/event/reaction that can occur and their propensities (the propensity multiplied with the
 time step gives the probability that a given event/transition occurs). For our model these are the following:
 
@@ -72,13 +79,6 @@ Death of infected       |  I => I-1           |   nI          |
 Death of recovered      |  R => R-1           |   nR          |
 
 
-The differential equations - if we wanted to implement the model as an ODE - would look like this:
-
-$$\dot S = m - bSI - nS$$
-$$\dot I = bSI - gI - nI$$
-$$\dot R = gI - nR$$
-
-This is almost the same model as the basic SIR model from the introductory app, with the only difference that this model also allows natural births and deaths. In this app, you can run the basic SIR model together with the stochastic one and for m=n=0 you can compare the 2 models.
 
 ### A note on randomness in computer simulations
 This simulation (as well as some of the others) involves using random numbers to introduce stochasticity/uncertainty/noise into the model. This leads to a model that usually more closely reflects the underlying real system. However, in science, we want to be as reproducible as possible. Fortunately, random numbers on a computer are not completely random, but can be reproduced. In practice, this is done by specifying a random number seed, in essence a starting position for the algorithm to produce pseudo-random numbers. As long as the seed is the same, the code should produce the same pseudo-random numbers each time, thus ensuring reproducibility.

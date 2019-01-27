@@ -5,6 +5,7 @@ packagename = "DSAIDE"
 appdir = system.file("appinformation", package = packagename) #find path to apps
 fullappNames = list.files(path = appdir, pattern = "+.settings", full.names = FALSE)
 appNames = gsub("_settings.R" ,"",fullappNames)
+simfctfile = paste0(system.file("simulatorfunctions", package = packagename),"/simulatorfunctions.zip")
 
 currentapp = NULL #global server variable for currently loaded app
 currentapptitle = NULL #global server variable for currently loaded app
@@ -134,6 +135,16 @@ server <- function(input, output, session)
     #######################################################
 
   #######################################################
+  #code that allows download of all files
+  output$modeldownload <- downloadHandler(
+    filename <- function() {
+      "simulatorfunctions.zip"
+    },
+    content <- function(file) {
+      file.copy(simfctfile, file)
+    },
+    contentType = "application/zip"
+  )
   #end code blocks that contain the analyze functionality
   #######################################################
 
@@ -214,6 +225,7 @@ ui <- fluidPage(
                       }), #close withTags function
                       p('Have fun exploring the models!', class='maintext'),
                       fluidRow(
+           				downloadButton("modeldownload", "download all simulations", class="mainbutton"),
                         actionButton("Exit", "Exit", class="exitbutton"),
                         class = "mainmenurow"
                       ) #close fluidRow structure for input

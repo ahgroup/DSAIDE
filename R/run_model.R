@@ -7,13 +7,14 @@
 #' @param modelfunction The name of a simulation function to be run with the indicated settings.
 #' @return A vectored list named "result" with each main list element containing the simulation results in a dataframe called dat and associated metadata required for generate_plot and generate_text functions. Most often there is only one main list entry (result[[1]]) for a single plot/text.
 #' @details This function runs a model for specific settings. It is similar to analyze_model in the modelbuilder package.
-#' @author Andreas Handel
+#' @importFrom utils head tail
 #' @export
 
 run_model <- function(modelsettings, modelfunction) {
 
   datall = NULL #will hold data for all different models and replicates
-  
+  finaltext = NULL
+    
   ##################################
   #stochastic dynamical model execution
   ##################################
@@ -21,9 +22,14 @@ run_model <- function(modelsettings, modelfunction) {
   {
     modelsettings$currentmodel = 'stochastic'
     currentmodel = modelfunction[grep('_stochastic',modelfunction)] #list of model functions, get the ode function
+    noutbreaks = 0
     for (nn in 1:modelsettings$nreps)
     {
       #extract modesettings inputs needed for simulator function
+      if (is.null(modelsettings$tmax) & !is.null(modelsettings$tfinal) ) 
+      { 
+        modelsettings$tmax = modelsettings$tfinal
+      }
       currentargs = modelsettings[match(names(unlist(formals(currentmodel))), names(unlist(modelsettings)))]
       simresult <- do.call(currentmodel, args = currentargs)
       #data for plots and text
@@ -37,7 +43,12 @@ run_model <- function(modelsettings, modelfunction) {
       dat$nreps = nn
       datall = rbind(datall,dat)
       modelsettings$rngseed = modelsettings$rngseed + 1 #need to update RNG seed each time to get different runs
+      #keep track of outbreaks occurence among stochastic simulations
+      S0=head(simresult[,'S'],1)
+      Sfinal=tail(simresult[,'S'],1)
+      if ( (S0-Sfinal)/S0>0.2 ) {noutbreaks = noutbreaks + 1} 
     }
+    finaltext = paste('For stochastic simulation scenarios, values shown are the mean over all simulations.', noutbreaks,' simulations produced an outbreak (susceptibles dropped by at least 20%)')
   }
 
   ##################################
@@ -102,8 +113,9 @@ run_model <- function(modelsettings, modelfunction) {
 
   result[[1]]$maketext = TRUE #indicate if we want the generate_text function to process data and generate text
   result[[1]]$showtext = NULL #text can be added here which will be passed through to generate_text and displayed for EACH plot
-  result[[1]]$finaltext = 'Numbers are rounded to 2 significant digits.' #text can be added here which will be passed through to generate_text and displayed once
-
+  result[[1]]$finaltext = paste0('Numbers are rounded to 2 significant digits. ',finaltext) #text can be added here which will be passed through to generate_text and displayed once
+  
+  
   ##################################
   #additional settings for all types of simulators
   ##################################
