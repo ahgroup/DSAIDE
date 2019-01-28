@@ -36,7 +36,7 @@ Imports:
     stringr,
     tidyr (>= 0.7),
     utils (>= 3.4),
-    XML
+    XML (>=3.98)
 Depends:
     R (>= 3.4),
     shiny (>= 1.0)
