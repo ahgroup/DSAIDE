@@ -8,6 +8,7 @@
 #' @return A vectored list named "result" with each main list element containing the simulation results in a dataframe called dat and associated metadata required for generate_plot and generate_text functions. Most often there is only one main list entry (result[[1]]) for a single plot/text.
 #' @details This function runs a model for specific settings. It is similar to analyze_model in the modelbuilder package.
 #' @importFrom utils head tail
+#' @importFrom stats reshape
 #' @export
 
 run_model <- function(modelsettings, modelfunction) {
@@ -38,7 +39,11 @@ run_model <- function(modelsettings, modelfunction) {
       simresult <- simresult$ts
       colnames(simresult)[1] = 'xvals' #rename time to xvals for consistent plotting
       #reformat data to be in the right format for plotting
-      dat = tidyr::gather(as.data.frame(simresult), -xvals, value = "yvals", key = "varnames")
+      rawdat = as.data.frame(simresult)
+      #using tidyr to reshape
+      #dat = tidyr::gather(rawdat, -xvals, value = "yvals", key = "varnames")
+      #using basic reshape function to reformat data
+      dat = stats::reshape(rawdat, varying = colnames(rawdat)[-1], v.names = 'yvals', timevar = "varnames", times = colnames(rawdat)[-1], direction = 'long', new.row.names = NULL); dat$id <- NULL
       dat$IDvar = paste(dat$varnames,nn,sep='') #make a variable for plotting same color lines for each run in ggplot2
       dat$nreps = nn
       datall = rbind(datall,dat)
@@ -68,7 +73,12 @@ run_model <- function(modelsettings, modelfunction) {
     }
     colnames(simresult)[1] = 'xvals' #rename time to xvals for consistent plotting
     #reformat data to be in the right format for plotting
-    dat = tidyr::gather(as.data.frame(simresult), -xvals, value = "yvals", key = "varnames")
+    rawdat = as.data.frame(simresult)
+    #using tidyr to reshape
+    #dat = tidyr::gather(rawdat, -xvals, value = "yvals", key = "varnames")
+    #using basic reshape function to reformat data
+    dat = stats::reshape(rawdat, varying = colnames(rawdat)[-1], v.names = 'yvals', timevar = "varnames", times = colnames(rawdat)[-1], direction = 'long', new.row.names = NULL); dat$id <- NULL
+    
     dat$IDvar = dat$varnames #make variables in case data is combined with stochastic runs. not used for ode.
     dat$nreps = 1
     datall = rbind(datall,dat)
@@ -87,7 +97,11 @@ run_model <- function(modelsettings, modelfunction) {
     simresult <- simresult$ts
     colnames(simresult)[1] = 'xvals' #rename time to xvals for consistent plotting
     #reformat data to be in the right format for plotting
-    dat = tidyr::gather(as.data.frame(simresult), -xvals, value = "yvals", key = "varnames")
+    rawdat = as.data.frame(simresult)
+    #using tidyr to reshape
+    #dat = tidyr::gather(rawdat, -xvals, value = "yvals", key = "varnames")
+    #using basic reshape function to reformat data
+    dat = stats::reshape(rawdat, varying = colnames(rawdat)[-1], v.names = 'yvals', timevar = "varnames", times = colnames(rawdat)[-1], direction = 'long', new.row.names = NULL); dat$id <- NULL
     dat$IDvar = dat$varnames #make variables in case data is combined with stochastic runs. not used for discrete.
     dat$nreps = 1
     datall = rbind(datall,dat)
@@ -229,8 +243,13 @@ run_model <- function(modelsettings, modelfunction) {
     colnames(simresult$timeseries)[1] = 'xvals' #rename time to xvals for consistent plotting
     #reformat data to be in the right format for plotting
     #each plot/text output is a list entry with a data frame in form xvals, yvals, extra variables for stratifications for each plot
-    dat = tidyr::gather(as.data.frame(simresult$timeseries), -xvals, value = "yvals", key = "varnames")
-    dat$style = 'line'
+    rawdat = as.data.frame(simresult$timeseries)
+    #using tidyr to reshape
+    #dat = tidyr::gather(rawdat, -xvals, value = "yvals", key = "varnames")
+    #using basic reshape function to reformat data
+    dat = stats::reshape(rawdat, varying = colnames(rawdat)[-1], v.names = 'yvals', timevar = "varnames", times = colnames(rawdat)[-1], direction = 'long', new.row.names = NULL); dat$id <- NULL
+    
+        dat$style = 'line'
 
     #next, add data that's being fit to data frame
     fitdata  = simresult$data
