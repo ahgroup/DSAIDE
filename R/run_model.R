@@ -49,12 +49,12 @@ run_model <- function(modelsettings, modelfunction) {
       datall = rbind(datall,dat)
       modelsettings$rngseed = modelsettings$rngseed + 1 #need to update RNG seed each time to get different runs
       #keep track of outbreaks occurence among stochastic simulations
-      S0=head(simresult[,'S'],1)
-      Sfinal=tail(simresult[,'S'],1)
+      S0=head(simresult[,2],1)
+      Sfinal=tail(simresult[,2],1)
       if ( (S0-Sfinal)/S0>0.2 ) {noutbreaks = noutbreaks + 1} 
     }
-    finaltext = paste('For stochastic simulation scenarios, values shown are the mean over all simulations.', noutbreaks,' simulations produced an outbreak (susceptibles dropped by at least 20%)')
-  }
+    finaltext = paste('For stochastic simulation scenarios, values shown are the mean over all simulations.', noutbreaks,' simulations produced an outbreak (susceptible/uninfected dropped by at least 20%)')
+    }
 
   ##################################
   #ode dynamical model execution
