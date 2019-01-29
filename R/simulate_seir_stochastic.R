@@ -10,8 +10,7 @@
 #' @param bI : level/rate of infectiousness for hosts in the I compartment : numeric
 #' @param gE : rate at which a person leaves the E compartment : numeric
 #' @param gI : rate at which a person leaves the I compartment : numeric
-#' @param w : rate at which recovered persons lose immunity and return to
-#'   susceptible state : numeric
+#' @param w : rate at which recovered lose immunity and return to susceptible : numeric
 #' @param m : the rate at which new individuals enter the model (are born) : numeric
 #' @param n : the rate of natural death (the inverse is the average lifespan) : numeric
 #' @param tmax : maximum simulation time : numeric

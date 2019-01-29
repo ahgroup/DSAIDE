@@ -2,8 +2,6 @@
 title: Evolutionary Dynamics - Practice
 output:
   html_document:
-    theme: null
-    highlight: null
     fig_caption: true
     mathjax: default 
     keep_md: false

@@ -21,7 +21,7 @@ simulate_idpatterns_ode(S = 1000, P = 1, bP = 0, bA = 0,
 
 \item{s}{: strength of seasonal/annual sigmoidal variation of transmission rate : numeric}
 
-\item{gP}{rate at which a person leaves the P compartment : numeric}
+\item{gP}{: rate at which a person leaves the P compartment : numeric}
 
 \item{gA}{: rate at which a person leaves the A compartment : numeric}
 

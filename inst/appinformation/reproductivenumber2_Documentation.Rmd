@@ -2,8 +2,6 @@
 title: Reproductive Number 2 - Practice
 output:
   html_document:
-    theme: null
-    highlight: null
     fig_caption: true
     mathjax: default 
     keep_md: false

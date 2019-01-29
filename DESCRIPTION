@@ -33,7 +33,6 @@ Imports:
     knitr (>= 1.15),
     rmarkdown (>= 1.10),
     stats (>= 3.4),
-    stringr,
     utils (>= 3.4),
     XML (>= 3.98)
 Depends:

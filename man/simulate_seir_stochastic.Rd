@@ -21,8 +21,7 @@ simulate_seir_stochastic(S = 1000, I = 10, bE = 0, bI = 0.001,
 
 \item{gI}{: rate at which a person leaves the I compartment : numeric}
 
-\item{w}{: rate at which recovered persons lose immunity and return to
-susceptible state : numeric}
+\item{w}{: rate at which recovered lose immunity and return to susceptible : numeric}
 
 \item{m}{: the rate at which new individuals enter the model (are born) : numeric}
 
