@@ -2,7 +2,6 @@
 [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/ahgroup/DSAIDE?branch=master&svg=true)](https://ci.appveyor.com/project/ahgroup/DSAIDE)
 [![Coverage status](https://codecov.io/gh/ahgroup/DSAIDE/branch/master/graph/badge.svg)](https://codecov.io/github/ahgroup/DSAIDE?branch=master)
 [![CRAN status](https://www.r-pkg.org/badges/version/DSAIDE)](https://cran.r-project.org/package=DSAIDE)
-[![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/2059/badge)](https://bestpractices.coreinfrastructure.org/projects/2059)
 
 # DSAIDE
 Dynamical Systems Approach to Infectious Disease Epidemiology
@@ -25,13 +24,7 @@ devtools::install_github('ahgroup/DSAIDE')
 After install (which you need to do only once), load the package by runing `library('DSAIDE')`. You should receive a short greeting. Now you can open the main menu by running `dsaidemenu()`. From the main menu, choose the different apps corresponding to different modeling topics and scenarios. Each app contains information on the model and topic that are covered. Each app also contains a list of recommeded tasks to work through in order to learn about a specific topic. Once done exploring, close the main menu to exit back to the `R` console.
 
 ## Advanced Use
-You can call the underlying simulation functions directly from the `R` console. You can also access all functions and modify them to your own needs. To find the folder on your computer where the simulator functions are stored, use the following command:
-
-```r
-system.file("simulatorfunctions", package = "DSAIDE")
-```
-
-See [the package vignette](https://ahgroup.github.io/DSAIDE/articles/DSAIDE.html) for more details on the different ways to use the package. Also see [the DSAIDE publication in PLoS Comp Bio](https://doi.org/10.1371/journal.pcbi.1005642).
+You can call the underlying simulation functions directly from the `R` console. You can also download the code for all functions from the main menu and modify them to your own needs. See [the package vignette](https://ahgroup.github.io/DSAIDE/articles/DSAIDE.html) for more details on the different ways to use the package. Also see [the DSAIDE publication in PLoS Comp Bio](https://doi.org/10.1371/journal.pcbi.1005642).
 
 ## Contributing to the package
 The package is on GitHub and you can use the usual GitHub process to contribute updated, bug fixes, etc. If you don't know how to do that or don't have the time, you can also file an issue on GitHub and let me know what should be changed. 
@@ -46,6 +39,7 @@ The package is built in a way that makes it (hopefully) easy for others to contr
 * The [documentation.md](https://github.com/ahgroup/DSAIDE/blob/master/inst/docsfordevelopers/documentation.md) file described above contains more information about the package structure.
 * For feedback, bug reports, feature requests, etc., file a [GitHub issue](https://github.com/ahgroup/DSAIDE/issues).
 * A 'companion' package to this one, called Dynamical Systems Approaches for Immune Respone Modeling (DSAIRM), focuses on models for analyzing with-host infection dynamics. It has the same structure as DSAIDE. [See the DSAIRM site for more information.](https://ahgroup.github.io/DSAIRM)
+* I have solutions (as R Markdown files) to most of the 'What to do' tasks for the different apps. If you are an instructor using this package as part of a class, email me if you are interested in having access to these solutions.
 
 ## Contributors
 This R package is developed and maintained by [Andreas Handel](http://handelgroup.uga.edu/). The following individuals have made contributions to this package: Isaac Fung, Spencer Hall, Ben Listyg, Brian McKay, John Rossow, Sina Solaimanpour, Henok Woldu.
