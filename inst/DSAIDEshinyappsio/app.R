@@ -1,7 +1,7 @@
 #This is the Shiny App for the main menu of DSAIDE
 
 #library('devtools')
-#install_github('ahgroup/DSAIDE')
+#devtools::install_github('ahgroup/DSAIDE')
 library(DSAIDE)
 #get names of all existing apps
 packagename = "DSAIDE"
