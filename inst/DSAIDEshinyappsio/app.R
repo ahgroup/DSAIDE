@@ -1,4 +1,8 @@
 #This is the Shiny App for the main menu of DSAIDE
+#This is a copy of app.R for shinyappsio deployment
+#to do so, go into the folder where this file resides
+#install this pacakge through github if we want to use the github version
+#run rsconnect::deployApp()
 
 #library('devtools')
 #devtools::install_github('ahgroup/DSAIDE')
