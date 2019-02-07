@@ -43,7 +43,7 @@ simulate_vectortransmission_ode <- function(Sh = 1000, Ih = 1, Rh = 0, Sv = 1000
     #Recovered hosts : recovery of infected hosts : waning immunity :
     dRh = +g*Ih -w*Rh
     #Susceptible Vectors : vector births : infection of susceptible vectors : death of susceptible vectors :
-    dSv = +m -b2*Sv*Ih +n*Sv
+    dSv = +m -b2*Sv*Ih -n*Sv
     #Infected Vectors : infection of susceptible vectors : death of infected vectors :
     dIv = +b2*Sv*Ih -n*Iv
     #EndODES
