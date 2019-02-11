@@ -41,6 +41,7 @@ generate_shinyinput <- function(mbmodel, otherinputs = NULL, packagename)
     ip = formals(mbmodel) #get model inputs
     #remove function arguments that are not numeric
     ip = ip[unlist(lapply(ip,is.numeric))]
+    browser()
     modelargs = lapply(1:length(ip), function(n)
     {
         iplabel = paste0(names(ip[n]),', ', x3[n]) #text label for input
