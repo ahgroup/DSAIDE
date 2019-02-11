@@ -65,8 +65,6 @@ server <- function(input, output, session)
               column(6,
                 h2('Simulation Settings'),
                 wellPanel(
-                  tags$p(actionButton(inputId = "reset", label = "Reset",
-                               class = "submitbutton"), align = "center"),
                   uiOutput("modelinputs")
                 )
               ), #end sidebar column for inputs
@@ -101,7 +99,6 @@ server <- function(input, output, session)
       modelinputs <- generate_shinyinput(mbmodel = currentsimfct[1], otherinputs = currentotherinputs, packagename = packagename)
       output$modelinputs <- renderUI({modelinputs})
     })
-
 
     #######################################################
     #start code that listens to the 'run simulation' button and runs a model for the specified settings
