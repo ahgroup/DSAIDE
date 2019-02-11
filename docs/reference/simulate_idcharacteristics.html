@@ -196,14 +196,27 @@ with one column per compartment/variable. The first column is time.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>A compartmental ID model with several states/compartments
-is simulated as a set of ordinary differential equations.</p>
+is simulated as a set of ordinary differential equations. The states
+are:
+**S**: Susceptible, uninfected individuals
+**P**: Presymptomatic individuals who are infected and possibly infectious
+**A**: Asymptomatic individuals who are infected and possibly infectious
+**I**: Sympomatic infected individuals, most likely infectious
+**R**: Removed / recovered individuals, no longer infectious or susceptible
+**D**: Individuals who have died from the disease
+The model app contains detailed information on the processes, but briefly,
+susceptible (S) individuals can become infected by presymptomatic (P), asymptomatic (A),
+or infected (I) hosts. All infected individuals enter the presymptomatic stage first,
+from which they can become symptomatic or asymptomatic. Asymptomatic hosts recover
+within some specified duration of time, while infected hosts either recover or die,
+thus entering either R or D. Recovered individuals are immune to reinfection.</p>
     
     <h2 class="hasAnchor" id="warning"><a class="anchor" href="#warning"></a>Warning</h2>
 
     
     <p>This function does not perform any error checking. So if you try to do
 something nonsensical (e.g. have I0 &gt; PopSize or any negative values or fractions &gt; 1),
-the code will likely abort with an error message</p>
+the code will likely abort with an error message.</p>
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
@@ -212,11 +225,11 @@ the code will likely abort with an error message</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># To run the simulation with default parameters just call this function</span>
+    <pre class="examples"><div class='input'><span class='co'># To run the simulation with default parameters just call the function:</span>
 <span class='no'>result</span> <span class='kw'>&lt;-</span> <span class='fu'>simulate_idcharacteristics</span>()
-<span class='co'># To choose parameter values other than the standard one, specify them e.g. like such</span>
+<span class='co'># To choose parameter values other than the standard one, specify them like such:</span>
 <span class='no'>result</span> <span class='kw'>&lt;-</span> <span class='fu'>simulate_idcharacteristics</span>(<span class='kw'>S0</span> <span class='kw'>=</span> <span class='fl'>2000</span>, <span class='kw'>P0</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>tmax</span> <span class='kw'>=</span> <span class='fl'>100</span>, <span class='kw'>f</span> <span class='kw'>=</span> <span class='fl'>0.1</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>0.2</span>)
-<span class='co'># You should then use the simulation result returned from the function, e.g. like this:</span>
+<span class='co'># You should then use the simulation result returned from the function, like this:</span>
 <span class='fu'>plot</span>(<span class='no'>result</span>$<span class='no'>ts</span>[,<span class='st'>"Time"</span>],<span class='no'>result</span>$<span class='no'>ts</span>[,<span class='st'>"S"</span>],<span class='kw'>xlab</span><span class='kw'>=</span><span class='st'>'Time'</span>,<span class='kw'>ylab</span><span class='kw'>=</span><span class='st'>'Number Susceptible'</span>,<span class='kw'>type</span><span class='kw'>=</span><span class='st'>'l'</span>)</div><div class='img'><img src='simulate_idcharacteristics-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

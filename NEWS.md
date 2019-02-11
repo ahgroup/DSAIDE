@@ -1,3 +1,11 @@
+# DSAIDE 0.8.0
+
+## User facing changes
+
+## Other changes
+
+* All simulator functions are re-written to the new format used in the modelbuilder package
+
 # DSAIDE 0.7.0
 
 ## User facing changes

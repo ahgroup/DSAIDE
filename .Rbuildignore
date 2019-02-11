@@ -1,7 +1,9 @@
+^Meta$
+^doc$
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^\.travis\.yml$
-^auxilliary$
+^auxiliary$
 ^README\.md$
 ^cran-comments\.md$
 ^to-do\.md$

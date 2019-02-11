@@ -40,7 +40,7 @@ This model includes natural births and deaths and waning immunity.
   It also allows for seasonal variation in transmission.
   The model is assumed to run in units of months.
   This assumption is hard-coded into the sinusoidally varying
-  transmission coefficient, which is assumed to have a period of a year" />
+  transmission coefficient, which is assumed to have a period of a year." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -139,7 +139,7 @@ This model includes natural births and deaths and waning immunity.
   It also allows for seasonal variation in transmission.
   The model is assumed to run in units of months.
   This assumption is hard-coded into the sinusoidally varying
-  transmission coefficient, which is assumed to have a period of a year</p>
+  transmission coefficient, which is assumed to have a period of a year.</p>
     
     </div>
 
@@ -156,7 +156,7 @@ This model includes natural births and deaths and waning immunity.
     </tr>
     <tr>
       <th>P0</th>
-      <td><p>initial number of infected, pre-symptomatic hosts,</p></td>
+      <td><p>initial number of infected, pre-symptomatic hosts</p></td>
     </tr>
     <tr>
       <th>timeunit</th>
@@ -201,7 +201,7 @@ is the inverse of the average time spent in that compartment</p></td>
     </tr>
     <tr>
       <th>w</th>
-      <td><p>rate at which recovered persons loose immunity and return to susceptible state</p></td>
+      <td><p>rate at which recovered persons lose immunity and return to susceptible state</p></td>
     </tr>
     <tr>
       <th>m</th>
@@ -220,7 +220,7 @@ is the inverse of the average time spent in that compartment</p></td>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>This function returns the simulation result as obtained from a call
-  to the deSolve ode solver</p>
+  to the deSolve ode solver.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
@@ -234,7 +234,7 @@ is the inverse of the average time spent in that compartment</p></td>
     
     <p>This function does not perform any error checking. So if you try to do
   something nonsensical (e.g. have I0 &gt; PopSize or any negative values or fractions &gt; 1),
-  the code will likely abort with an error message</p>
+  the code will likely abort with an error message.</p>
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
@@ -243,15 +243,15 @@ is the inverse of the average time spent in that compartment</p></td>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>The UI of the shiny app 'IDPatterns', which is part of this package, contains more details on the model</p></div>
+    <div class='dont-index'><p>The UI of the Shiny app 'IDPatterns', which is part of this package, contains more details on the model.</p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>  <span class='co'># To run the simulation with default parameters just call this function</span>
+    <pre class="examples"><div class='input'>  <span class='co'># To run the simulation with default parameters just call the function:</span>
   <span class='no'>result</span> <span class='kw'>&lt;-</span> <span class='fu'>simulate_idpatterns</span>()
-  <span class='co'># To choose parameter values other than the standard one, specify them e.g. like such</span>
+  <span class='co'># To choose parameter values other than the standard one, specify them like such:</span>
   <span class='no'>result</span> <span class='kw'>&lt;-</span> <span class='fu'>simulate_idpatterns</span>(<span class='kw'>S0</span> <span class='kw'>=</span> <span class='fl'>2000</span>, <span class='kw'>P0</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>tmax</span> <span class='kw'>=</span> <span class='fl'>100</span>, <span class='kw'>f</span> <span class='kw'>=</span> <span class='fl'>0.1</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>0.2</span>, <span class='kw'>s</span> <span class='kw'>=</span> <span class='fl'>0.1</span>)
-  <span class='co'># You should then use the simulation result returned from the function, e.g. like this:</span>
+  <span class='co'># You should then use the simulation result returned from the function, like this:</span>
   <span class='fu'>plot</span>(<span class='no'>result</span>$<span class='no'>ts</span>[ , <span class='st'>"Time"</span>],<span class='no'>result</span>$<span class='no'>ts</span>[ , <span class='st'>"S"</span>],<span class='kw'>xlab</span><span class='kw'>=</span><span class='st'>'Time'</span>,<span class='kw'>ylab</span><span class='kw'>=</span><span class='st'>'Number Susceptible'</span>,<span class='kw'>type</span><span class='kw'>=</span><span class='st'>'l'</span>)</div><div class='img'><img src='simulate_idpatterns-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

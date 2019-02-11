@@ -1,18 +1,18 @@
 Package: DSAIDE
 Type: Package
 Title: Dynamical Systems Approach to Infectious Disease Epidemiology
-Description: A collection of Shiny apps that allow for the simulation and
+Description: A collection of 'shiny' apps that allow for the simulation and
     exploration of various infectious disease transmission dynamics scenarios.
     The purpose of the package is to help individuals learn 
     about infectious disease epidemiology from a dynamical systems perspective.
     All apps include explanations of the underlying models and instructions on
     what to do with the models. 
-Version: 0.7.0
-Date: 2018-8-1
+Version: 0.8.0
+Date: 2019-1-15
 Authors@R: c(
     person("Andreas", "Handel", email = "ahandel@uga.edu", 
     role = c("aut", "cre"), comment = c(ORCID = "0000-0002-4622-1146") ),
-	  person("Isaac", "Fung",  role = "ctb"), 
+	  person("Isaac Chun-Hai", "Fung",  role = "ctb"), 
 	  person("Spencer", "Hall",  role = "ctb"), 
 	  person("Ben", "Listyg",  role = "ctb"), 
     person("Brian", "McKay",  role = "ctb"),
@@ -30,19 +30,19 @@ Imports:
     dplyr (>= 0.7.4),
     ggplot2 (>= 2.2),
     gridExtra (>= 2.3),
-    knitr (>= 1.15),
-    rmarkdown (>= 1.10),
     stats (>= 3.4),
-    tidyr (>= 0.7),
     utils (>= 3.4),
-    XML
+    XML (>= 3.98)
 Depends:
     R (>= 3.4),
     shiny (>= 1.0)
 Suggests: 
     covr,
+    knitr (>= 1.15),
+    pkgdown,
+    rmarkdown (>= 1.10),
     testthat
-RoxygenNote: 6.1.0
+RoxygenNote: 6.1.1
 VignetteBuilder: knitr
 URL: https://ahgroup.github.io/DSAIDE, https://github.com/ahgroup/DSAIDE/
 BugReports: https://github.com/ahgroup/DSAIDE/issues

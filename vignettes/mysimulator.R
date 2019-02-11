@@ -1,77 +1,41 @@
-############################################################
-##code to simulate a basic SIR model as set of ODEs
-##written by Andreas Handel (ahandel@uga.edu)
-##last modified: 10/13/16
-############################################################
-
-# reproductive_number_ode_eq function
-# This function is used in the solver function and has no independent usages
-introductionode <- function(t, y, parms)
-{
-   with(
-    as.list(c(y,parms)), #lets us access variables and parameters stored in y and parms by name
-    {
-  
-      #the ordinary differential equations
-  	  dS =  - b * S * I + w * R; #susceptibles
-	  	dI = b * S * I - g * I; #infected/infectious
-	 	  dR = g * I - w * R; #recovered
-
-	 	  list(c(dS, dI, dR))
-    }
-   ) #close with statement
-} #end function specifying the ODEs
-	 	  
-
-#' Simulation of a basic SIR model illustrating a single infectious disease outbreak
-#'
-#' @description This function runs a simulation of a basic SIR model
-#' using a set of 3 ordinary differential equations.
-#' The user provides initial conditions and parameter values for the system.
-#' The function simulates the ODE using an ODE solver from the deSolve package.
-#' The function returns a matrix containing time-series of each variable and time.
-#'
-#' @param S0 initial number of suceptibles individuals
-#' @param I0 initial number of infected hosts
-#' @param b level of infectiousness, i.e. rate of transmission of pathogen
-#'   from infected to susceptible host
-#' @param g rate at which a person leaves the infectious compartment, which
-#'   is the inverse of the average duration of the infections period
-#' @param tmax maximum simulation time, units depend on choice of units for your
-#'   parameters
-#' @return The function returns the output from the odesolver as a matrix,
-#' with one column per compartment/variable. The first column is time.
-#' @details A simple SIR model is simulated as a set of ordinary differential
-#' equations, using an ode solver from the deSolve package.#'
-#' @section Warning: This function does not perform any error checking. So if
-#'   you try to do something nonsensical (e.g. specify negative parameter values
-#'   or fractions > 1), the code will likely abort with an error message
-#' @examples
-#' # To run the simulation with default parameters just call this function
-#' result <- simulate_introduction()
-#' # To choose parameter values other than the standard one, specify them e.g. like such
-#' result <- simulate_introduction(S0 = 2000, I0 = 10, tmax = 100, g = 1, b = 1/100)
-#' # You should then use the simulation result returned from the function, e.g. like this:
-#' plot(result[,1],result[,2],xlab='Time',ylab='Number Susceptible',type='l')
-#' @seealso See the shiny app documentation corresponding to this simulator
-#' function for more details on this model. See the manual for the deSolve
-#' package for details on the underlying ODE simulator algorithm.
-#' @author Andreas Handel
-#' @export
-
-mysimulator <- function(S0 = 1000, I0 = 1, tmax = 300, g = 0.5, b = 1/1000, w = 0)
-{
-  Y0 = c(S = S0, I = I0, R = 0);  #combine initial conditions into a vector
-  dt = min(0.1, tmax / 1000); #time step for which to get results back
-  timevec = seq(0, tmax, dt); #vector of times for which solution is returned (not that internal timestep of the integrator is different)
-
-  #combining parameters into a parameter vector
-  pars = c(b = b, g = g, w = w);
-
-  #this line runs the simulation, i.e. integrates the differential equations describing the infection process
-  #the result is saved in the odeoutput matrix, with the 1st column the time, the 2nd, 3rd, 4th column the variables S, I, R
-  odeoutput = deSolve::ode(y = Y0, times = timevec, func = introductionode, parms=pars, atol=1e-12, rtol=1e-12);
-
-  #The output produced by a call to the odesolver is odeoutput matrix is returned by the function
-  return(odeoutput)
-}
+#' Basic SIR model
+#' 
+#' @description A basic SIR model with 3 compartments and infection and recovery processes
+#' 
+#' @details The model includes susceptible, infected, and recovered compartments. The two processes that are modeled are infection and recovery.
+#' @param S : starting value for Susceptible : numeric
+#' @param I : starting value for Infected : numeric
+#' @param R : starting value for Recovered : numeric
+#' @param b : infection rate : numeric
+#' @param g : recovery rate : numeric
+#' @param w : waning immunity rate : numeric
+#' @param tstart : Start time of simulation : numeric
+#' @param tfinal : Final time of simulation : numeric
+#' @param dt : Time step : numeric
+#' @return The function returns the output as a list. 
+#' The time-series from the simulation is returned as a dataframe saved as list element \code{ts}. 
+#' The \code{ts} dataframe has one column per compartment/variable. The first column is time.   
+#' @section Warning: This function does not perform any error checking. So if you try to do something nonsensical (e.g. have negative values for parameters), the code will likely abort with an error message.
+#' @export 
+ 
+mysimulator <- function( S = 1000, I = 1, R = 0, b = 0.002, g = 1, w = 0, tstart = 0, tfinal = 100, dt = 0.1 ) 
+{ 
+  #Block of ODE equations for deSolve 
+  SIR_model_ode <- function(t, y, parms) 
+  {
+    with( as.list(c(y,parms)), { #lets us access variables and parameters stored in y and parms by name 
+      dS = -b*S*I +w*R
+      dI = +b*S*I -g*I
+      dR = +g*I -w*R
+      list(c(dS,dI,dR)) 
+  } ) } #close with statement, end ODE code block 
+ 
+  #Main function code block 
+  vars = c(S = S, I = I, R = R)
+  pars = c(b = b, g = g)
+  timevec=seq(tstart,tfinal,by=dt) 
+  odeout = deSolve::ode(y = vars, parms = pars, times = timevec,  func = SIR_model_ode) 
+  result <- list() 
+  result$ts <- as.data.frame(odeout) 
+  return(result) 
+} 

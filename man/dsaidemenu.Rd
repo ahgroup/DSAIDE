@@ -7,10 +7,10 @@
 dsaidemenu()
 }
 \description{
-This function opens a Shiny App menu that will allow the user to run the different simulation apps
+This function opens a Shiny app with a menu that will allow the user to run the different simulations.
 }
 \details{
-Run this function with no arguments to start the main menu (a shiny App) for DSAIDE
+Run this function with no arguments to start the main menu (a Shiny app) for DSAIDE
 }
 \examples{
 \dontrun{dsaidemenu()}
