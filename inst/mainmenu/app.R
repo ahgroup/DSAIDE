@@ -64,7 +64,11 @@ server <- function(input, output, session)
             fluidRow(
               column(6,
                 h2('Simulation Settings'),
-                wellPanel(uiOutput("modelinputs"))
+                wellPanel(
+                  tags$p(actionButton(inputId = "reset", label = "Reset",
+                               class = "submitbutton"), align = "center"),
+                  uiOutput("modelinputs")
+                )
               ), #end sidebar column for inputs
               column(6,
                 h2('Simulation Results'),
@@ -88,6 +92,15 @@ server <- function(input, output, session)
     #######################################################
     #end code that listens to model selection buttons and creates UI for a chosen model
     #######################################################
+  
+    ###############
+    # Tentative code to reset the model settings
+    ###############
+  
+    observeEvent(input$reset, {
+      modelinputs <- generate_shinyinput(mbmodel = currentsimfct[1], otherinputs = currentotherinputs, packagename = packagename)
+      output$modelinputs <- renderUI({modelinputs})
+    })
 
 
     #######################################################
