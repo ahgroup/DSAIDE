@@ -92,9 +92,8 @@ server <- function(input, output, session)
     #######################################################
   
     ###############
-    # Tentative code to reset the model settings
+    #Code to reset the model settings
     ###############
-  
     observeEvent(input$reset, {
       modelinputs <- generate_shinyinput(mbmodel = currentsimfct[1], otherinputs = currentotherinputs, packagename = packagename)
       output$modelinputs <- renderUI({modelinputs})
