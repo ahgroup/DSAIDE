@@ -12,6 +12,8 @@
 #' @export
 
 run_model <- function(modelsettings, modelfunction) {
+  
+  browser()
 
   datall = NULL #will hold data for all different models and replicates
   finaltext = NULL
