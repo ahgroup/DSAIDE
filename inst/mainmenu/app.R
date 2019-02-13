@@ -114,6 +114,7 @@ server <- function(input, output, session)
       withProgress(message = 'Running Simulation',
                    detail = "This may take a while", value = 0,
                    {
+                     browser()
                      #extract current model settings from UI input elements
                      x1=isolate(reactiveValuesToList(input)) #get all shiny inputs
                      #x1=as.list( c(g = 1, U = 100)) #get all shiny inputs

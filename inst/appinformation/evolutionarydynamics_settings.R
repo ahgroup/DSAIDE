@@ -23,6 +23,11 @@ nplots = 1
 #otherwise it needs to be provided
 modeltype = "_stochastic_"
 
+# Model argument names in order
+ordered_args <- c("S", "Iu", "It", "Ir", "bu", "bt",
+                  "br", "cu", "ct", "f", "gu", "gt",
+                  "gr", "tmax", "rngseed")
+
 #additional input elements for app that are shown on UI
 otherinputs =   list(
   shiny::numericInput("nreps", "Number of simulations", min = 1, max = 50, value = 1, step = 1),

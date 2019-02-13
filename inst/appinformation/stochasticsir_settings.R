@@ -23,6 +23,10 @@ nplots = 1
 #otherwise it needs to be provided
 modeltype = NULL
 
+# Model argument names in order
+ordered_args <- c("S", "I", "R", "b", "g", "m", "n",
+                  "tstart", "tfinal", "dt")
+
 #additional input elements for app that are shown on UI
 otherinputs =   list(
   shiny::numericInput("nreps", "Number of simulations", min = 1, max = 50, value = 1, step = 1),

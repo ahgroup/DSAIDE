@@ -23,6 +23,10 @@ nplots = 1
 #otherwise it needs to be provided
 modeltype = "_ode_"
 
+# Model argument names in order
+ordered_args <- c("S", "I1", "I2", "I12", "b1", "b2", "b12",
+                  "g1", "g2", "g12", "a", "tmax")
+
 #additional input elements for app that are shown on UI
 otherinputs =   list(
   shiny::selectInput("plotscale", "Log-scale for plot",c("none" = "none", 'x-axis' = "x", 'y-axis' = "y", 'both axes' = "both"))
