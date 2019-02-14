@@ -32,7 +32,16 @@ run_model <- function(modelsettings, modelfunction) {
         modelsettings$tmax = modelsettings$tfinal
       }
       currentargs = modelsettings[match(names(unlist(formals(currentmodel))), names(unlist(modelsettings)))]
-      simresult <- do.call(currentmodel, args = currentargs)
+
+      simresult <- try( do.call(currentmodel, args = currentargs) )
+      #try command catches error from running code. 
+      #If error occurs we exit 
+      if (class(simresult)!="list") 
+      {
+        result <- 'Model run failed. Maybe unreasonable parameter values?' 
+        return(result) 
+      }
+      
       #data for plots and text
       #needs to be in the right format to be passed to generate_plots and generate_text
       #see documentation for those functions for details
@@ -64,8 +73,16 @@ run_model <- function(modelsettings, modelfunction) {
     modelsettings$currentmodel = 'ode'
     currentmodel = modelfunction[grep('_ode',modelfunction)] #list of model functions, get the ode function
     currentargs = modelsettings[match(names(unlist(formals(currentmodel))), names(unlist(modelsettings)))] #extract modesettings inputs needed for simulator function
-    simresult <- do.call(currentmodel, args = currentargs)
 
+    simresult <- try( do.call(currentmodel, args = currentargs) )
+    #try command catches error from running code. 
+    #If error occurs we exit 
+    if (class(simresult)!="list") 
+    {
+      result <- 'Model run failed. Maybe unreasonable parameter values?' 
+      return(result) 
+    }
+    
     simresult <- simresult$ts
     if (grepl('_and_',modelsettings$modeltype)) #this means ODE model is run with another one, relabel variables to indicate ODE
     {
@@ -93,7 +110,16 @@ run_model <- function(modelsettings, modelfunction) {
     modelsettings$currentmodel = 'discrete'
     currentmodel = modelfunction[grep('_discrete',modelfunction)] #list of model functions, get the ode function
     currentargs = modelsettings[match(names(unlist(formals(currentmodel))), names(unlist(modelsettings)))]
-    simresult <- do.call(currentmodel, args = currentargs)
+    
+    simresult <- try( do.call(currentmodel, args = currentargs) )
+    #try command catches error from running code. 
+    #If error occurs we exit 
+    if (class(simresult)!="list") 
+    {
+      result <- 'Model run failed. Maybe unreasonable parameter values?' 
+      return(result) 
+    }
+    
     simresult <- simresult$ts
     colnames(simresult)[1] = 'xvals' #rename time to xvals for consistent plotting
     #reformat data to be in the right format for plotting
@@ -174,7 +200,15 @@ run_model <- function(modelsettings, modelfunction) {
     modelsettings$currentmodel = 'other'
     currentmodel = modelfunction
     currentargs = modelsettings[match(names(unlist(formals(currentmodel))), names(unlist(modelsettings)))]
-    simresult <- do.call(currentmodel, args = currentargs)
+    
+    simresult <- try( do.call(currentmodel, args = currentargs) )
+    #try command catches error from running code. 
+    #If error occurs we exit 
+    if (class(simresult)!="list") 
+    {
+      result <- 'Model run failed. Maybe unreasonable parameter values?' 
+      return(result) 
+    }
 
     #pull the indicator for non-steady state out of the dataframe, process separately
     steady = simresult$dat$steady
@@ -239,7 +273,16 @@ run_model <- function(modelsettings, modelfunction) {
     modelsettings$currentmodel = 'fit'
     currentmodel = modelfunction
     currentargs = modelsettings[match(names(unlist(formals(currentmodel))), names(unlist(modelsettings)))] #extract modesettings inputs needed for simulator function
-    simresult <- do.call(currentmodel, args = currentargs)
+
+    simresult <- try( do.call(currentmodel, args = currentargs) )
+    #try command catches error from running code. 
+    #If error occurs we exit 
+    if (class(simresult)!="list") 
+    {
+      result <- 'Model run failed. Maybe unreasonable parameter values?' 
+      return(result) 
+    }
+
     colnames(simresult$timeseries)[1] = 'xvals' #rename time to xvals for consistent plotting
     #reformat data to be in the right format for plotting
     #each plot/text output is a list entry with a data frame in form xvals, yvals, extra variables for stratifications for each plot
@@ -362,8 +405,15 @@ run_model <- function(modelsettings, modelfunction) {
   {
     currentmodel = modelfunction
     currentargs = modelsettings[match(names(unlist(formals(currentmodel))), names(unlist(modelsettings)))] #extract modesettings inputs needed for simulator function
-    simresult <- do.call(currentmodel, args = currentargs)
-
+    simresult <- try( do.call(currentmodel, args = currentargs) )
+    #try command catches error from running code. 
+    #If error occurs we exit 
+    if (class(simresult)!="list") 
+    {
+      result <- 'Model run failed. Maybe unreasonable parameter values?' 
+      return(result) 
+    }
+      
     steady = simresult$dat$steady
 
     #these 3 settings are only needed for the shiny UI presentation

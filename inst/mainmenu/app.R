@@ -125,15 +125,20 @@ server <- function(input, output, session)
                      if (!is.null(currentmodeltype)) { modelsettings$modeltype <- currentmodeltype}
                      modelsettings$nplots <- currentmodelnplots
                      result <- run_model(modelsettings = modelsettings, modelfunction  = currentsimfct)
-
-                     #create plot from results
-                     output$plot  <- renderPlot({
-                       generate_plots(result)
-                     }, width = 'auto', height = 'auto')
-                     #create text from results
-                     output$text <- renderText({
-                       generate_text(result) })
-
+                     #if things worked, result contains a list structure for processing with the plot and text functions  
+                     #if things failed, result contains a string with an error message
+                     if (is.character(result))
+                     {
+                       output$plot <- NULL
+                       output$text <- renderText({ paste("<font color=\"#FF0000\"><b>", result, "</b></font>") })
+                     }
+                     else
+                     {
+                      #create plot from results
+                      output$plot  <- renderPlot({ generate_plots(result) }, width = 'auto', height = 'auto')
+                      #create text from results
+                      output$text <- renderText({ generate_text(result) })
+                     }
                    }) #end with-progress wrapper
     }, #end the expression being evaluated by observeevent
     #ignoreNULL = TRUE, ignoreInit = TRUE
@@ -217,11 +222,15 @@ ui <- fluidPage(
                          actionButton("evolutionarydynamics", "Evolutionary Dynamics", class="mainbutton"),
                         class = "mainmenurow"
                       ),
-                      
-                      tags$div(class='mainsectionheader', 'Further topics'),
+                      tags$div(class='mainsectionheader', 'Further ID topics'),
                       fluidRow(
                         actionButton("hostheterogeneity", "Host Heterogeneity", class="mainbutton"),  
                        actionButton("multipathogen", "Multi-Pathogen Dynamics", class="mainbutton"),
+                        class = "mainmenurow"
+                      ), #close fluidRow structure for input
+                      tags$div(class='mainsectionheader', 'Further modeling topics'),
+                      fluidRow(
+                        actionButton("modelexploration", "Model Exploration", class="mainbutton"),  
                         class = "mainmenurow"
                       ), #close fluidRow structure for input
                       withTags({
