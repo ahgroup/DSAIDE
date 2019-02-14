@@ -45,7 +45,7 @@ server <- function(input, output, session)
       currentsimfct <<- simfunction
       currentmodelnplots <<- nplots
       currentmodeltype <<- modeltype
-      currentotherinputs <<-  otherinputs
+      currentotherinputs <<- otherinputs
       currentapptitle <<- apptitle
 
       #extract function and other inputs and turn them into a taglist
@@ -67,7 +67,11 @@ server <- function(input, output, session)
                 wellPanel(
                   tags$p(actionButton(inputId = "reset", label = "Reset",
                                class = "submitbutton"), align = "center"),
-                  uiOutput("modelinputs")
+                  uiOutput("modelinputs"),
+                  tags$p(actionButton(inputId = "download_code", 
+                                      label = "Download Code",
+                                      class = "submitbutton"),
+                         align = "center")
                 )
               ), #end sidebar column for inputs
               column(6,
@@ -114,7 +118,6 @@ server <- function(input, output, session)
       withProgress(message = 'Running Simulation',
                    detail = "This may take a while", value = 0,
                    {
-                     browser()
                      #extract current model settings from UI input elements
                      x1=isolate(reactiveValuesToList(input)) #get all shiny inputs
                      #x1=as.list( c(g = 1, U = 100)) #get all shiny inputs
