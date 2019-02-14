@@ -52,6 +52,9 @@ run_model <- function(modelsettings, modelfunction) {
       Sfinal=tail(simresult[,2],1)
       if ( (S0-Sfinal)/S0>0.2 ) {noutbreaks = noutbreaks + 1} 
     }
+    
+    browser()
+    
     finaltext = paste('For stochastic simulation scenarios, values shown are the mean over all simulations.', noutbreaks,' simulations produced an outbreak (susceptible/uninfected dropped by at least 20%)')
     }
 
