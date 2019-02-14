@@ -53,8 +53,6 @@ run_model <- function(modelsettings, modelfunction) {
       if ( (S0-Sfinal)/S0>0.2 ) {noutbreaks = noutbreaks + 1} 
     }
     
-    browser()
-    
     finaltext = paste('For stochastic simulation scenarios, values shown are the mean over all simulations.', noutbreaks,' simulations produced an outbreak (susceptible/uninfected dropped by at least 20%)')
     }
 
@@ -84,6 +82,8 @@ run_model <- function(modelsettings, modelfunction) {
     dat$IDvar = dat$varnames #make variables in case data is combined with stochastic runs. not used for ode.
     dat$nreps = 1
     datall = rbind(datall,dat)
+    
+    browser()
   }
 
 
