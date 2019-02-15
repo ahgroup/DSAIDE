@@ -231,6 +231,7 @@ ui <- fluidPage(
                       tags$div(class='mainsectionheader', 'Further modeling topics'),
                       fluidRow(
                         actionButton("modelexploration", "Model Exploration", class="mainbutton"),  
+                        actionButton("usanalysis", "Uncertainty and Sensitivity Analysis", class="mainbutton"),  
                         class = "mainmenurow"
                       ), #close fluidRow structure for input
                       withTags({
