@@ -38,9 +38,9 @@
 #'   or fractions > 1), the code will likely abort with an error message.
 #' @examples
 #' # To run the simulation with default parameters just call the function:
-#' \dontrun{res <- simulate_modelexploration()}
+#' \dontrun{res <- simulate_modelexploration_sir()}
 #' # To choose parameter values other than the standard one, specify them, like such:
-#' res <- simulate_modelexploration(tfinal=100, samples=5, samplepar='g', parmin=0.1, parmax=1)
+#' res <- simulate_modelexploration_sir(tfinal=100, samples=5, samplepar='g', parmin=0.1, parmax=1)
 #' # You should then use the simulation result returned from the function, like this:
 #' plot(res$dat[,"xvals"],res$data[,"Imax"],xlab='Parameter values',ylab='Max Infected',type='l')
 #' @seealso See the shiny app documentation corresponding to this simulator
@@ -49,7 +49,7 @@
 #' @export
 
 
-simulate_modelexploration <- function(S = 1000, I = 1, R = 0, b = 0.002, g = 1,  m = 0, n = 0, tstart = 0, tfinal = 100, dt = 0.1, samples = 10, parmin=0.0005, parmax=0.005, samplepar='b',  pardist = 'lin')
+simulate_modelexploration_sir <- function(S = 1000, I = 1, R = 0, b = 0.002, g = 1,  m = 0, n = 0, tstart = 0, tfinal = 100, dt = 0.1, samples = 10, parmin=0.0005, parmax=0.005, samplepar='b',  pardist = 'lin')
   {
 
 

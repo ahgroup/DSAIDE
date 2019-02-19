@@ -1,20 +1,29 @@
 #' @title A function that runs a DSAIRM/DSAIDE app
 #'
-#' @description This function takes a model and model settings and runs it.
-#' It runs the simulation determined by the model settings and returns simulation results.
+#' @description This function runs a model based on information 
+#' provided in the modelsettings list passed into it.
 #'
-#' @param modelsettings a list with model settings. needs to contain list elements with names and values for all inputs expected by simulation function. Also needs to contain an element plotscale to indicate which axis should be on a log scale (x, y or both), a list element nplots to indicate number of plots that should be produced when calling the generate_plot function with the result, and a list element modeltype which specifies what kind of model should be run. Currently one of (_ode_, _discrete_, _stochastic_, _usanalysis_, _modelexploration_, _fit_ ). Stochastic models also need an nreps list entry to indicate numer of repeat simulations.
-#' @param modelfunction The name of a simulation function to be run with the indicated settings.
+#' @param modelsettings a list with model settings. 
+#' Needs to contain list elements with names and values for all inputs expected 
+#' by simulation function. Required are:
+#' Name of simulation function in variable modelsettings$simfunction
+#' Also needs to contain an element plotscale 
+#' to indicate which axis should be on a log scale (x, y or both), 
+#' a list element nplots to indicate number of plots that should be produced
+#' when calling the generate_plot function with the result, 
+#' and a list element modeltype which specifies what kind of model should be run. 
+#' Currently one of (_ode_, _discrete_, _stochastic_, _usanalysis_, _modelexploration_, _fit_ ). Stochastic models also need an nreps list entry to indicate numer of repeat simulations.
 #' @return A vectored list named "result" with each main list element containing the simulation results in a dataframe called dat and associated metadata required for generate_plot and generate_text functions. Most often there is only one main list entry (result[[1]]) for a single plot/text.
-#' @details This function runs a model for specific settings. It is similar to analyze_model in the modelbuilder package.
+#' @details This function runs a model for specific settings. 
 #' @importFrom utils head tail
 #' @importFrom stats reshape
 #' @export
 
-run_model <- function(modelsettings, modelfunction) {
+run_model <- function(modelsettings) {
 
   datall = NULL #will hold data for all different models and replicates
   finaltext = NULL
+  modelfunction = modelsettings$simfunction #name(s) for model function(s) to run
     
   ##################################
   #stochastic dynamical model execution
@@ -22,7 +31,7 @@ run_model <- function(modelsettings, modelfunction) {
   if (grepl('_stochastic_',modelsettings$modeltype))
   {
     modelsettings$currentmodel = 'stochastic'
-    currentmodel = modelfunction[grep('_stochastic',modelfunction)] #list of model functions, get the ode function
+    currentmodel = modelfunction[grep('_stochastic',modelfunction)] # get the ode function
     noutbreaks = 0
     for (nn in 1:modelsettings$nreps)
     {
@@ -31,8 +40,10 @@ run_model <- function(modelsettings, modelfunction) {
       { 
         modelsettings$tmax = modelsettings$tfinal
       }
+      #FIGURE OUT HOW TO MATCH LISTS
+      #THE MATCH AFTER UNLISTING IS ERROR PRONE IF LIST CONTAINS SUBLIST
       currentargs = modelsettings[match(names(unlist(formals(currentmodel))), names(unlist(modelsettings)))]
-
+      browser()
       simresult <- try( do.call(currentmodel, args = currentargs) )
       #try command catches error from running code. 
       #If error occurs we exit 
@@ -191,6 +202,7 @@ run_model <- function(modelsettings, modelfunction) {
   #these simulators might overwrite some of the default settings above
   ##################################
 
+  
 
   ##################################
   #Code block for US analysis
@@ -213,16 +225,15 @@ run_model <- function(modelsettings, modelfunction) {
     #pull the indicator for non-steady state out of the dataframe, process separately
     steady = simresult$dat$steady
     simresult$dat$steady <- NULL
-
     simdat = simresult$dat
 
-    result <- vector("list", 24) #set up a list structure with as many elements as plots
+    result <- vector("list", 18) #set up a list structure with as many elements as plots
     #loop over each outer list element corresponding to a plot and fill it with another list
     #of meta-data and data needed to create each plot
     #each parameter-output pair is its own plot, therefore its own list entry
     ct=1; #some counter
     result[[ct]]$ncol = 3 #number of columns for plot, needs to be stored in 1st sub-list element
-    for (n in 1:8) #first loop over each parameter
+    for (n in 1:6) #first loop over each parameter
     {
       for (nn in 1:3) #for each parameter, loop over outcomes
       {
@@ -238,8 +249,8 @@ run_model <- function(modelsettings, modelfunction) {
         result[[ct]]$plottype = modelsettings$plottype
         result[[ct]]$xlab = xvalname
         result[[ct]]$ylab = yvalname
-        result[[ct]]$legend = NULL #set to either false or provide the label for legends
-
+        result[[ct]]$makelegend = FALSE #no legend for these plots
+        
         result[[ct]]$xscale = 'identity'
         result[[ct]]$yscale = 'identity'
         if (plotscale == 'x' | plotscale == 'both') { result[[ct]]$xscale = 'log10'}
@@ -259,6 +270,7 @@ run_model <- function(modelsettings, modelfunction) {
     {
       result <- result[c(1:3)]
     }
+
   }
   ##################################
   #end US analysis model code block
@@ -401,7 +413,7 @@ run_model <- function(modelsettings, modelfunction) {
   ##################################
   #model exploration code block
   ##################################
-  if (grepl('modelexploration',modelsettings$modeltype))
+  if (grepl('_modelexploration_',modelsettings$modeltype))
   {
     currentmodel = modelfunction
     currentargs = modelsettings[match(names(unlist(formals(currentmodel))), names(unlist(modelsettings)))] #extract modesettings inputs needed for simulator function

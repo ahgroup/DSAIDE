@@ -17,7 +17,7 @@
 #' @param bA : level/rate of infectiousness for hosts in the A compartment : numeric
 #' @param bI : level/rate of infectiousness for hosts in the I compartment : numeric
 #' @param s : strength of seasonal/annual sigmoidal variation of transmission rate : numeric
-#' @param gP rate at which a person leaves the P compartment : numeric
+#' @param gP : rate at which a person leaves the P compartment : numeric
 #' @param gA : rate at which a person leaves the A compartment : numeric
 #' @param gI : rate at which a person leaves the I compartment : numeric
 #' @param f : fraction of pre-symptomatic individuals that have an asymptomatic infection : numeric

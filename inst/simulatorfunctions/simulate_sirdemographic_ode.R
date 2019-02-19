@@ -29,11 +29,11 @@ simulate_sirdemographic_ode <- function(S = 1000, I = 1, R = 0, b = 0.002, g = 1
   {
     with( as.list(c(y,parms)), { #lets us access variables and parameters stored in y and parms by name 
     #Susceptible : infection of susceptibles :
-    dS = m-b*S*I-n*S
+    dS = m - b*S*I - n*S
     #Infected : infection of susceptibles : recovery of infected :
-    dI = +b*S*I -g*I-n*I
+    dI = b*S*I - g*I - n*I
     #Recovered : recovery of infected :
-    dR = +g*I-n*R
+    dR = g*I - n*R
     list(c(dS,dI,dR)) 
   } ) } #close with statement, end ODE code block 
  
@@ -41,7 +41,7 @@ simulate_sirdemographic_ode <- function(S = 1000, I = 1, R = 0, b = 0.002, g = 1
   vars = c(S = S, I = I, R = R)
   pars = c(b = b, g = g, m = m, n = n)
   timevec=seq(tstart,tfinal,by=dt) 
-  odeout = deSolve::ode(y = vars, parms = pars, times = timevec,  func = SIR_model_ode) 
+  odeout = deSolve::ode(y = vars, parms = pars, times = timevec,  func = SIR_model_ode, atol = 1e-12, rtol = 1e-12) 
   result <- list() 
   result$ts <- as.data.frame(odeout) 
   return(result) 

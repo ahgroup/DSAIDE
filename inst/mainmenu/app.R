@@ -5,16 +5,8 @@ packagename = "DSAIDE"
 appdir = system.file("appinformation", package = packagename) #find path to apps
 fullappNames = list.files(path = appdir, pattern = "+.settings", full.names = FALSE)
 appNames = gsub("_settings.R" ,"",fullappNames)
-simfctfile = paste0(system.file("simulatorfunctions", package = packagename),"/simulatorfunctions.zip")
-
+allsimfctfile = paste0(system.file("simulatorfunctions", package = packagename),"/simulatorfunctions.zip")
 currentapp = NULL #global server variable for currently loaded app
-currentapptitle = NULL #global server variable for currently loaded app
-currentsimfct <<- NULL #global server variable for current simulation function
-currentmodelnplots <<- NULL #global server variable for number of plots
-currentmodeltype <<- NULL #global server variable for model type to run
-currentotherinputs <<-  NULL
-currentdocfilename <<- NULL
-
 
 #this function is the server part of the app
 server <- function(input, output, session)
@@ -28,37 +20,36 @@ server <- function(input, output, session)
     {
       currentapp <<- appName #assign currently chosen app to global app variable
       #file name for documentation
-      currentdocfilename <<- paste0(appdir,'/',currentapp,'_documentation.html')
+      currentdocfilename <- paste0(appdir,'/',currentapp,'_documentation.html')
       settingfilename = paste0(appdir,'/',currentapp,'_settings.R')
       
       output$plot <- NULL
       output$text <- NULL
 
       #load/source an R settings file that contains additional information for a given app
-      #variable simfilename in the settings file is the name of the simulation function or NULL
-      #variable modeltype in the settings file is the type of the model to be run or NULL
-      #variable mbmoddelfile is the name of the mbmodel Rdata file or NULL
-      #variable otherinputs contains additional shiny UI elements
-      #one wants to display that are not generated automaticall by functions above
-      #for instance all non-numeric inputs need to be provided separately. If not needed, it is NULL
+      #the information is stored in a list called 'appsettings'
+      #different models can have different variables
+      #all models need the following:
+      #variable apptitle - the name of the app
+      #variable simfilename - the name of the simulation function(s)
+      #variable modeltype - the type of the model to be run or NULL if set by UI
+      #additional elements that can be provided: 
+      #variable otherinputs - contains additional shiny UI elements that are not generated automaticall by functions above
+      #for instance all non-numeric inputs need to be provided separately. 
+      
       source(settingfilename) #source the file with additional settings to load them
-      currentsimfct <<- simfunction
-      currentmodelnplots <<- nplots
-      currentmodeltype <<- modeltype
-      currentotherinputs <<-  otherinputs
-      currentapptitle <<- apptitle
-
+    
       #extract function and other inputs and turn them into a taglist
       #this uses the 1st function provided by the settings file and stored in currentsimfct
       #indexing sim function in case there are multiple
-      modelinputs <- generate_shinyinput(mbmodel = currentsimfct[1], otherinputs = currentotherinputs, packagename = packagename)
+      modelinputs <- generate_shinyinput(mbmodel = appsettings$simfunction[1], otherinputs = appsettings$otherinputs, packagename = packagename)
 
       output$modelinputs <- renderUI({modelinputs})
             
       #display all extracted inputs on the analyze tab
       output$analyzemodel <- renderUI({
           tagList(
-            tags$div(id = "shinyapptitle", currentapptitle),
+            tags$div(id = "shinyapptitle", appsettings$apptitle),
             tags$hr(),
             #Split screen with input on left, output on right
             fluidRow(
@@ -95,8 +86,10 @@ server <- function(input, output, session)
     #Code to reset the model settings
     ###############
     observeEvent(input$reset, {
-      modelinputs <- generate_shinyinput(mbmodel = currentsimfct[1], otherinputs = currentotherinputs, packagename = packagename)
+      modelinputs <- generate_shinyinput(mbmodel = appsettings$simfunction[1], otherinputs = appsettings$otherinputs, packagename = packagename)
       output$modelinputs <- renderUI({modelinputs})
+      output$plot <- NULL
+      output$text <- NULL
     })
 
     #######################################################
@@ -116,15 +109,15 @@ server <- function(input, output, session)
                      x2 = x1[! (names(x1) %in% appNames)] #remove inputs that are action buttons for apps
                      x3 = (x2[! (names(x2) %in% c('submitBtn','Exit') ) ]) #remove further inputs
                      modelsettings = x3[!grepl("*selectized$", names(x3))] #remove any input with selectized
+                     #add settings information from appsettings list
+                     modelsettings = c(modelsettings, appsettings)
+                     #remove nested list of shiny input tags
+                     modelsettings$otherinputs <- NULL
                      if (is.null(modelsettings$nreps)) {modelsettings$nreps <- 1} #if there is no UI input for replicates, assume reps is 1
                      #if no random seed is set in UI, set it to 123.
                      if (is.null(modelsettings$rngseed)) {modelsettings$rngseed <- 123}
-                     #if there is a supplied model type from the settings file, use that one
-                     #note that input for model type might be still 'floating around' if a previous model was loaded
-                     #not clear how to get rid of old shiny input variables from previously loaded models
-                     if (!is.null(currentmodeltype)) { modelsettings$modeltype <- currentmodeltype}
-                     modelsettings$nplots <- currentmodelnplots
-                     result <- run_model(modelsettings = modelsettings, modelfunction  = currentsimfct)
+                     #run model, process inside run_model function based on settings
+                     result <- run_model(modelsettings)
                      #if things worked, result contains a list structure for processing with the plot and text functions  
                      #if things failed, result contains a string with an error message
                      if (is.character(result))
@@ -140,8 +133,7 @@ server <- function(input, output, session)
                       output$text <- renderText({ generate_text(result) })
                      }
                    }) #end with-progress wrapper
-    }, #end the expression being evaluated by observeevent
-    #ignoreNULL = TRUE, ignoreInit = TRUE
+    } #end the expression being evaluated by observeevent
     ) #end observe-event for analyze model submit button
 
     #######################################################
@@ -155,7 +147,7 @@ server <- function(input, output, session)
       "simulatorfunctions.zip"
     },
     content <- function(file) {
-      file.copy(simfctfile, file)
+      file.copy(allsimfctfile, file)
     },
     contentType = "application/zip"
   )

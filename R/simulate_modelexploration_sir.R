@@ -38,9 +38,9 @@
 #'   or fractions > 1), the code will likely abort with an error message.
 #' @examples
 #' # To run the simulation with default parameters just call the function:
-#' \dontrun{res <- simulate_modelexploration()}
+#' \dontrun{res <- simulate_modelexploration_sir()}
 #' # To choose parameter values other than the standard one, specify them, like such:
-#' res <- simulate_modelexploration(tfinal=100, samples=5, samplepar='g', parmin=0.1, parmax=1)
+#' res <- simulate_modelexploration_sir(tfinal=100, samples=5, samplepar='g', parmin=0.1, parmax=1)
 #' # You should then use the simulation result returned from the function, like this:
 #' plot(res$dat[,"xvals"],res$data[,"Imax"],xlab='Parameter values',ylab='Max Infected',type='l')
 #' @seealso See the shiny app documentation corresponding to this simulator
@@ -49,7 +49,7 @@
 #' @export
 
 
-simulate_modelexploration <- function(S = 1000, I = 1, R = 0, b = 0.002, g = 1,  m = 0, n = 0, tstart = 0, tfinal = 100, dt = 0.1, samples = 10, parmin=1e-8, parmax=1e-5, samplepar='k',  pardist = 'lin')
+simulate_modelexploration_sir <- function(S = 1000, I = 1, R = 0, b = 0.002, g = 1,  m = 0, n = 0, tstart = 0, tfinal = 100, dt = 0.1, samples = 10, parmin=0.0005, parmax=0.005, samplepar='b',  pardist = 'lin')
   {
 
 
@@ -68,35 +68,36 @@ simulate_modelexploration <- function(S = 1000, I = 1, R = 0, b = 0.002, g = 1, 
 
 
     steady = rep(TRUE,samples) #indicates if steady state has not been reached
-    for (n in 1:samples)
+    for (ct in 1:samples)
     {
         #replace value of parameter we want to vary
-        if (samplepar == 'b') {b = parvec[n]}
-        if (samplepar == 'g') {g = parvec[n]}
-        if (samplepar == 'm') {m = parvec[n]}
-        if (samplepar == 'n') {n = parvec[n]}
+        if (samplepar == 'b') {b = parvec[ct]}
+        if (samplepar == 'g') {g = parvec[ct]}
+        if (samplepar == 'm') {m = parvec[ct]}
+        if (samplepar == 'n') {n = parvec[ct]}
 
 
         #this runs the bacteria ODE model for each parameter sample
         #all other parameters remain fixed
         odeout <- simulate_sirdemographic_ode(S = S, I = I, R = R, b = b, g = g, m = m, n = n, tstart = tstart, tfinal = tfinal, dt = dt) 
-
+        
         timeseries = odeout$ts
 
-        Smax = max(timeseries[,"S"])
-        Imax = max(timeseries[,"I"])
-        Rmax = max(timeseries[,"R"])
-        Sfinal = utils::tail(timeseries[,"S"],1)
-        Ifinal = utils::tail(timeseries[,"I"],1)
-        Rfinal = utils::tail(timeseries[,"R"],1)
+        Smax[ct] = max(timeseries[,"S"])
+        Imax[ct] = max(timeseries[,"I"])
+        Rmax[ct] = max(timeseries[,"R"])
+        Sfinal[ct] = utils::tail(timeseries[,"S"],1)
+        Ifinal[ct] = utils::tail(timeseries[,"I"],1)
+        Rfinal[ct] = utils::tail(timeseries[,"R"],1)
 
+     
         #a quick check to make sure the system is at steady state,
         #i.e. the value for I at the final time is not more than
         #1% different than I several time steps earlier
         vl=nrow(timeseries);
         if ((abs(timeseries[vl,"I"]-timeseries[vl-10,"I"])/timeseries[vl,"I"])>1e-2)
         {
-          steady[n] = FALSE
+          steady[ct] = FALSE
         }
     }
 
