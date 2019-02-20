@@ -82,8 +82,7 @@ run_model <- function(modelsettings, modelfunction) {
     dat$IDvar = dat$varnames #make variables in case data is combined with stochastic runs. not used for ode.
     dat$nreps = 1
     datall = rbind(datall,dat)
-    
-    browser()
+
   }
 
 
