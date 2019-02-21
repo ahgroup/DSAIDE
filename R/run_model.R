@@ -21,6 +21,24 @@
 
 run_model <- function(modelsettings) {
 
+  #short function to call/run model
+  runsimulation <- function(modelsettings, currentmodel)
+  {
+    #match values provided from UI with those expected by function 
+    settingsvec = unlist(modelsettings)
+    currentargs = settingsvec[match(names(unlist(formals(currentmodel))), names(settingsvec))]
+    #make a list
+    arglist = as.list(currentargs)
+    #convert arguments for function call to numeric if possible
+    #preserve those that can't be converted
+    numind = suppressWarnings(!is.na(as.numeric(arglist))) #find numeric values
+    arglist[numind] = as.numeric(currentargs[numind])
+    #run simulation, try command catches error from running code. 
+    simresult <- try( do.call(currentmodel, args = arglist ) )
+    return(simresult)    
+  }
+  
+    
   datall = NULL #will hold data for all different models and replicates
   finaltext = NULL
   modelfunction = modelsettings$simfunction #name(s) for model function(s) to run
@@ -40,13 +58,9 @@ run_model <- function(modelsettings) {
       { 
         modelsettings$tmax = modelsettings$tfinal
       }
-      #FIGURE OUT HOW TO MATCH LISTS
-      #THE MATCH AFTER UNLISTING IS ERROR PRONE IF LIST CONTAINS SUBLIST
-      currentargs = modelsettings[match(names(unlist(formals(currentmodel))), names(unlist(modelsettings)))]
-      browser()
-      simresult <- try( do.call(currentmodel, args = currentargs) )
-      #try command catches error from running code. 
-      #If error occurs we exit 
+      #run model
+      simresult = runsimulation(modelsettings, currentmodel)
+      #if error occurs we exit 
       if (class(simresult)!="list") 
       {
         result <- 'Model run failed. Maybe unreasonable parameter values?' 
@@ -83,11 +97,9 @@ run_model <- function(modelsettings) {
   {
     modelsettings$currentmodel = 'ode'
     currentmodel = modelfunction[grep('_ode',modelfunction)] #list of model functions, get the ode function
-    currentargs = modelsettings[match(names(unlist(formals(currentmodel))), names(unlist(modelsettings)))] #extract modesettings inputs needed for simulator function
-
-    simresult <- try( do.call(currentmodel, args = currentargs) )
-    #try command catches error from running code. 
-    #If error occurs we exit 
+    #run model
+    simresult = runsimulation(modelsettings, currentmodel)
+    #if error occurs we exit 
     if (class(simresult)!="list") 
     {
       result <- 'Model run failed. Maybe unreasonable parameter values?' 
@@ -120,11 +132,9 @@ run_model <- function(modelsettings) {
   {
     modelsettings$currentmodel = 'discrete'
     currentmodel = modelfunction[grep('_discrete',modelfunction)] #list of model functions, get the ode function
-    currentargs = modelsettings[match(names(unlist(formals(currentmodel))), names(unlist(modelsettings)))]
-    
-    simresult <- try( do.call(currentmodel, args = currentargs) )
-    #try command catches error from running code. 
-    #If error occurs we exit 
+    #run model
+    simresult = runsimulation(modelsettings, currentmodel)
+    #if error occurs we exit 
     if (class(simresult)!="list") 
     {
       result <- 'Model run failed. Maybe unreasonable parameter values?' 
@@ -211,11 +221,9 @@ run_model <- function(modelsettings) {
   {
     modelsettings$currentmodel = 'other'
     currentmodel = modelfunction
-    currentargs = modelsettings[match(names(unlist(formals(currentmodel))), names(unlist(modelsettings)))]
-    
-    simresult <- try( do.call(currentmodel, args = currentargs) )
-    #try command catches error from running code. 
-    #If error occurs we exit 
+    #run model
+    simresult = runsimulation(modelsettings, currentmodel)
+    #if error occurs we exit 
     if (class(simresult)!="list") 
     {
       result <- 'Model run failed. Maybe unreasonable parameter values?' 
@@ -284,11 +292,9 @@ run_model <- function(modelsettings) {
   {
     modelsettings$currentmodel = 'fit'
     currentmodel = modelfunction
-    currentargs = modelsettings[match(names(unlist(formals(currentmodel))), names(unlist(modelsettings)))] #extract modesettings inputs needed for simulator function
-
-    simresult <- try( do.call(currentmodel, args = currentargs) )
-    #try command catches error from running code. 
-    #If error occurs we exit 
+    #run model
+    simresult = runsimulation(modelsettings, currentmodel)
+    #if error occurs we exit 
     if (class(simresult)!="list") 
     {
       result <- 'Model run failed. Maybe unreasonable parameter values?' 
@@ -416,10 +422,9 @@ run_model <- function(modelsettings) {
   if (grepl('_modelexploration_',modelsettings$modeltype))
   {
     currentmodel = modelfunction
-    currentargs = modelsettings[match(names(unlist(formals(currentmodel))), names(unlist(modelsettings)))] #extract modesettings inputs needed for simulator function
-    simresult <- try( do.call(currentmodel, args = currentargs) )
-    #try command catches error from running code. 
-    #If error occurs we exit 
+    #run model
+    simresult = runsimulation(modelsettings, currentmodel)
+    #if error occurs we exit 
     if (class(simresult)!="list") 
     {
       result <- 'Model run failed. Maybe unreasonable parameter values?' 
