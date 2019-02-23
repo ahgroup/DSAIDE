@@ -38,16 +38,12 @@ server <- function(input, output, session)
       #for instance all non-numeric inputs need to be provided separately. 
       
       source(settingfilename) #source the file with additional settings to load them
-<<<<<<< HEAD
       currentsimfct <<- simfunction
       currentmodelnplots <<- nplots
       currentmodeltype <<- modeltype
       currentotherinputs <<- otherinputs
       currentapptitle <<- apptitle
-
-=======
     
->>>>>>> upstream/master
       #extract function and other inputs and turn them into a taglist
       #this uses the 1st function provided by the settings file and stored in currentsimfct
       #indexing sim function in case there are multiple
@@ -65,17 +61,14 @@ server <- function(input, output, session)
               column(6,
                 h2('Simulation Settings'),
                 wellPanel(
-<<<<<<< HEAD
                   tags$p(actionButton(inputId = "reset", label = "Reset",
                                class = "submitbutton"), align = "center"),
                   uiOutput("modelinputs"),
                   tags$p(actionButton(inputId = "download_code", 
                                       label = "Download Code",
                                       class = "submitbutton"),
-                         align = "center")
-=======
+                         align = "center"),
                   uiOutput("modelinputs")
->>>>>>> upstream/master
                 )
               ), #end sidebar column for inputs
               column(6,
