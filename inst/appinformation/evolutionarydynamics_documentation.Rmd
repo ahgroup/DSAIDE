@@ -2,6 +2,9 @@
 title: Evolutionary Dynamics - Practice
 output:
   html_document:
+    theme: null
+    highlight: null
+    fig_retina: null
     fig_caption: true
     mathjax: default 
     keep_md: false
@@ -131,7 +134,6 @@ Keep exploring. For instance, try the following:
 * For this app, the underlying function(s) running the simulation are called ``r simfunction``. You can call them directly, without going through the shiny app. Use the `help()` command for more information on how to use the functions directly. If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself. 
 * You can also download all simulator functions and modify them for your own purposes.  Of course to modify these functions, you'll need to do some coding.
 * For examples on using the simulators directly and how to modify them, read the package vignette by typing `vignette('DSAIDE')` into the R console.
-* The model is a simpler version of a previously published model in [@handel09a]. 
-
+* The model is a simpler version of a previously published model in [@handel09a].
 
 ### References

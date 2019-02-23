@@ -3,34 +3,24 @@
 #it contains additional information that helps properly process it
 ############################################################
 
+appsettings = list()
+
 #Title of app, to be displayed on top of analyze tab
-apptitle = "ID Control 2"
+appsettings$apptitle = "ID Control 2"
 
 #name of underlying simulation function(s) to be used in the app
 #must be provided
-simfunction = 'simulate_idcontrol_ode'
-
-#name of underlying mbmodel - if exists
-#if it exists, it will be used to build UI input elements
-#if not exists, set to NULL
-mbmodelfile = NULL
+appsettings$simfunction = 'simulate_idcontrol_ode'
 
 #number of plots to produce for output
-nplots = 1
+appsettings$nplots = 1
 
 #specify the type of model that will be run
 #if model type is provided as UI input, it should be set to NULL here
 #otherwise it needs to be provided
-modeltype = "_ode_"
-
-# Model argument names in order
-ordered_args <- c("S", "I", "E", "Sv", "Iv", "bP", 
-                  "bA", "bI", "bE", "bv", "bh",
-                  "gP", "gA", "gI", "pA", "pI",
-                  "c", "f", "d", "w", "mh",
-                  "nh", "mv", "nv", "tmax")
+appsettings$modeltype = "_ode_"
 
 #additional input elements for app that are shown on UI
-otherinputs =   list(
+appsettings$otherinputs =   list(
   shiny::selectInput("plotscale", "Log-scale for plot",c("none" = "none", 'x-axis' = "x", 'y-axis' = "y", 'both axes' = "both"))
 ) #end list

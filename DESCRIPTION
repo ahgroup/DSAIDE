@@ -30,6 +30,7 @@ Imports:
     dplyr (>= 0.7.4),
     ggplot2 (>= 2.2),
     gridExtra (>= 2.3),
+    lhs (>= 0.15),
     stats (>= 3.4),
     utils (>= 3.4),
     XML (>= 3.98)

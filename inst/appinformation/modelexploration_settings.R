@@ -1,16 +1,16 @@
 ############################################################
-#This is a file for the reproductive number 1 App
+#This is a file for the Model Exploration App
 #it contains additional information that helps properly process it
 ############################################################
 
 appsettings = list()
 
 #Title of app, to be displayed on top of analyze tab
-appsettings$apptitle = "Reproductive Number 1"
+appsettings$apptitle = "Model Exploration"
 
 #name of underlying simulation function(s) to be used in the app
 #must be provided
-appsettings$simfunction = 'simulate_sir_ode'
+appsettings$simfunction = 'simulate_modelexploration_sir'
 
 #number of plots to produce for output
 appsettings$nplots = 1
@@ -18,9 +18,11 @@ appsettings$nplots = 1
 #specify the type of model that will be run
 #if model type is provided as UI input, it should be set to NULL here
 #otherwise it needs to be provided
-appsettings$modeltype = "_ode_"
+appsettings$modeltype = '_modelexploration_'
 
 #additional input elements for app that are shown on UI
-appsettings$otherinputs =   list(
-  shiny::selectInput("plotscale", "Log-scale for plot",c("none" = "none", 'x-axis' = "x", 'y-axis' = "y", 'both axes' = "both"))
-) #end list
+appsettings$otherinputs =   shiny::tagList(
+  shiny::selectInput("samplepar", "Parameter to vary",c('b' = 'b', "g" = "g", 'm'='m','n'='n')),
+  shiny::selectInput("pardist", "Spacing of parameter values", c('linear' = 'lin', 'logarithmic' = 'log')),
+  shiny::selectInput("plotscale", "log-scale for plot",c("none" = "none", 'x-axis' = "x", 'y-axis' = "y", 'both axes' = "both"))
+) #end taglist

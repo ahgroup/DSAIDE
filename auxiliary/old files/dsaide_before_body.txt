@@ -1,6 +1,0 @@
-<div id="shinyheader" class="container">
-	<p id="shinyheadertitle">DSAIDE - Dynamical Systems Approach to Infectious Disease Epidemiology</p>
-	<p id="shinyheadertext">A collection of Shiny/R Apps to explore and simulate the population dynamics of infectious diseases. 
-	<br> Written and maintained by <a href="http://handelgroup.uga.edu">Andreas Handel</a>,  with contributions from <a href="https://github.com/ahgroup/DSAIDE#contributors">others</a>.</p>
-	<p id="shinyheadertext">If you want to cite this package, please use <a href="https://doi.org/10.1371/journal.pcbi.1005642">this PLoS Computational Biology paper</a> as reference.</p>
-</div>
