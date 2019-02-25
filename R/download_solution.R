@@ -31,11 +31,11 @@ download_code <- function(modelsettings, modelfunction) {
   if (grepl("_ode_", modelsettings$modeltype)) {
     currentmodel <- modelfunction[grep('_ode',modelfunction)] #list of model functions, get the ode function
     currentargs <- modelsettings[match(names(unlist(formals(currentmodel))), names(unlist(modelsettings)))] #extract modesettings inputs needed for simulator function
-    # args_in_order <- lapply(1:length(currentargs),
-    #                         function(i) paste(names(currentargs[i]), "=", 
-    #                                           currentargs[[i]])) %>%
-    #   unlist(.) %>%
-    #   paste(., collapse = ", ")
+    args_in_order <- lapply(1:length(currentargs),
+                            function(i) paste(names(currentargs[i]), "=",
+                                              currentargs[[i]])) %>%
+      unlist(.) %>%
+      paste(., collapse = ", ")
   
     model_lines <- paste("datall = NULL",
                          "finaltext = NULL",
