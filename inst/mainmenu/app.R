@@ -59,9 +59,8 @@ server <- function(input, output, session)
                                   tags$p(actionButton(inputId = "reset", label = "Reset",
                                                       class = "submitbutton"), align = "center"),
                                   uiOutput("modelinputs"),
-                                  tags$p(actionButton(inputId = "download_code", 
-                                                      label = "Download Code",
-                                                      class = "submitbutton"),
+                                  tags$p(downloadButton(inputId = "download_code", 
+                                                      label = "Download Code"),
                                          align = "center")
                                 )
                          ), #end sidebar column for inputs
