@@ -56,7 +56,13 @@ server <- function(input, output, session)
                          column(6,
                                 h2('Simulation Settings'),
                                 wellPanel(
-                                  uiOutput("modelinputs")
+                                  tags$p(actionButton(inputId = "reset", label = "Reset",
+                                                      class = "submitbutton"), align = "center"),
+                                  uiOutput("modelinputs"),
+                                  tags$p(actionButton(inputId = "download_code", 
+                                                      label = "Download Code",
+                                                      class = "submitbutton"),
+                                         align = "center")
                                 )
                          ), #end sidebar column for inputs
                          column(6,
@@ -82,15 +88,20 @@ server <- function(input, output, session)
   #end code that listens to model selection buttons and creates UI for a chosen model
   #######################################################
   
-  ###############
-  #Code to reset the model settings
-  ###############
+  ##########################################
+  #begin code to reset the model settings
+  ##########################################
+  
   observeEvent(input$reset, {
     modelinputs <- generate_shinyinput(mbmodel = appsettings$simfunction[1], otherinputs = appsettings$otherinputs, packagename = packagename)
     output$modelinputs <- renderUI({modelinputs})
     output$plot <- NULL
     output$text <- NULL
   })
+  
+  ##########################################
+  #end code to reset the model settings
+  ##########################################
   
   #######################################################
   #start code that listens to the 'run simulation' button and runs a model for the specified settings
@@ -138,6 +149,35 @@ server <- function(input, output, session)
   
   #######################################################
   #end code that listens to the 'run simulation' button and runs a model for the specified settings
+  #######################################################
+  
+  #######################################################
+  #start code that listens to the "download code" button
+  #######################################################
+  
+  observeEvent(input$download_code, {
+    
+    #extract current model settings from UI input elements
+    x1=isolate(reactiveValuesToList(input)) #get all shiny inputs
+    #x1=as.list( c(g = 1, U = 100)) #get all shiny inputs
+    x2 = x1[! (names(x1) %in% appNames)] #remove inputs that are action buttons for apps
+    x3 = (x2[! (names(x2) %in% c('submitBtn','Exit') ) ]) #remove further inputs
+    modelsettings = x3[!grepl("*selectized$", names(x3))] #remove any input with selectized
+    if (is.null(modelsettings$nreps)) {modelsettings$nreps <- 1} #if there is no UI input for replicates, assume reps is 1
+    #if no random seed is set in UI, set it to 123.
+    if (is.null(modelsettings$rngseed)) {modelsettings$rngseed <- 123}
+    #if there is a supplied model type from the settings file, use that one
+    #note that input for model type might be still 'floating around' if a previous model was loaded
+    #not clear how to get rid of old shiny input variables from previously loaded models
+    if (!is.null(currentmodeltype)) { modelsettings$modeltype <- currentmodeltype}
+    modelsettings$nplots <- currentmodelnplots
+    download_code(modelsettings = modelsettings,
+                  modelfunction = modelfunction)
+    
+  })
+  
+  #######################################################
+  #end code that listens to the "download code" button
   #######################################################
   
   #######################################################
