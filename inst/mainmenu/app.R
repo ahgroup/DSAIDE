@@ -169,8 +169,8 @@ server <- function(input, output, session)
     #if there is a supplied model type from the settings file, use that one
     #note that input for model type might be still 'floating around' if a previous model was loaded
     #not clear how to get rid of old shiny input variables from previously loaded models
-    if (!is.null(currentmodeltype)) { modelsettings$modeltype <- currentmodeltype}
-    modelsettings$nplots <- currentmodelnplots
+    # if (!is.null(currentmodeltype)) { modelsettings$modeltype <- currentmodeltype}
+    # modelsettings$nplots <- currentmodelnplots
     download_code(modelsettings = modelsettings,
                   modelfunction = modelfunction)
     
