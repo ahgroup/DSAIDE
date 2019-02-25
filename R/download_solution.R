@@ -1,3 +1,31 @@
+#' @title A function that downloads simulator code
+#'
+#' @description This function is called when the
+#' user clicks the "Download Code" button in
+#' the simulator app. It creates an R file which
+#' will run the simulation specified in the
+#' app from which the button is clicked, and
+#' after running the simulation, returns the
+#' plot and text created by generate_plots()
+#' and generate_text().
+#'
+#' @param modelsettings A list with model settings.
+#' #' Needs to contain list elements with names and values for all inputs expected 
+#' by simulation function. Required are:
+#' Name of simulation function in variable modelsettings$simfunction
+#' Also needs to contain an element plotscale 
+#' to indicate which axis should be on a log scale (x, y or both), 
+#' a list element nplots to indicate number of plots that should be produced
+#' when calling the generate_plot function with the result, 
+#' and a list element modeltype which specifies what kind of model should be run. 
+#' Currently one of (_ode_, _discrete_, _stochastic_, _usanalysis_, _modelexploration_, _fit_ ). Stochastic models also need an nreps list entry to indicate numer of repeat simulations.
+#' @param modelfunction The name of the simulator function being called. The name
+#' must be one of the simulator functions in the DSAIDE package.
+#' 
+#' @return Creates an R script that runs the simulation specified in the app
+#' and returns the text and plots created by the simulation.
+#' @export
+
 download_code <- function(modelsettings, modelfunction) {
   # Option if model is ODE
   if (grepl("_ode_", modelsettings$modeltype)) {
