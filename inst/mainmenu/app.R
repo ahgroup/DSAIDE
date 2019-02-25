@@ -181,7 +181,7 @@ server <- function(input, output, session)
   output$download_code <- downloadHandler(
     filename = function() {
       # paste0(gsub(" ","_",mbmodel$title),".Rdata")
-      "output.Rdata"
+      "output_allie.Rdata"
     },
     content = function(file) {
       #extract current model settings from UI input elements
