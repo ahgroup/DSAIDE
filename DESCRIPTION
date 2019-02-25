@@ -33,7 +33,8 @@ Imports:
     lhs (>= 0.15),
     stats (>= 3.4),
     utils (>= 3.4),
-    XML (>= 3.98)
+    XML (>= 3.98),
+    magrittr (>= 1.5)
 Depends:
     R (>= 3.4),
     shiny (>= 1.0)
