@@ -197,8 +197,8 @@ server <- function(input, output, session)
       
       output <- download_code(modelsettings, modelfunction)
       save(output, file = file)
-    },
-    contentType = "text/plain"
+    }# ,
+    # contentType = "text/plain"
   )
   
   #######################################################
