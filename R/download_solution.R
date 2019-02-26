@@ -27,6 +27,28 @@
 #' @export
 
 download_code <- function(modelsettings, modelfunction) {
+  # Opening lines
+  opening_lines <- paste("datall = NULL",
+                         "finaltext = NULL",
+                         "library(DSAIDE)",
+                         paste0("modeltype <- ",
+                                modelsettings$modeltype),
+                         paste0("plotscale <- ",
+                                modelsettings$plotscale),
+                         paste0("nplots <- ",
+                                modelsettings$nplots),
+                         paste0("plottype <- ",
+                                modelsettings$plottype),
+                         paste0("rngseed <- ",
+                                modelsettings$rngseed),
+                         paste0("nreps <- ",
+                                modelsettings$nreps),
+                         paste0("tmax <- ",
+                                modelsettings$tmax),
+                         paste0("tfinal <- ",
+                                modelsettings$tfinal),
+                         sep = "\n")
+  
   # Option if model is ODE
   if (grepl("_ode_", modelsettings$modeltype)) {
     currentmodel <- modelfunction[grep('_ode',modelfunction)] #list of model functions, get the ode function
@@ -37,13 +59,10 @@ download_code <- function(modelsettings, modelfunction) {
       unlist(.) %>%
       paste(., collapse = ", ")
   
-    model_lines <- paste("datall = NULL",
-                         "finaltext = NULL",
-                        "library(DSAIDE)",
-                        paste0("simresult <- ",
+    model_lines <- paste(paste0("simresult <- ",
                               modelfunction, "(", args_in_order, ")"),
                         "simresult <- simresult$ts",
-                        "if (grepl('_and_',modelsettings$modeltype))",
+                        "if (grepl('_and_',modeltype))",
                         "{",
                         "colnames(simresult) = paste0(colnames(simresult),'_ode')",
                         "}",
@@ -63,14 +82,11 @@ download_code <- function(modelsettings, modelfunction) {
     noutbreaks <- 0
     
     model_lines <- paste(
-      "datall = NULL",
-      "finaltext = NULL",
-      "library(DSAIDE)",
-      "for (nn in 1:modelsettings$nreps)",
+      "for (nn in 1:nreps)",
       "{",
-      "if (is.null(modelsettings$tmax) & !is.null(modelsettings$tfinal) ) ",
+      "if (is.null(tmax) & !is.null(tfinal) ) ",
       "{",
-      "modelsettings$tmax = modelsettings$tfinal",
+      "tmax = tfinal",
       "}",
       "currentargs = modelsettings[match(names(unlist(formals(currentmodel))), names(unlist(modelsettings)))]",
       paste0("simresult <- ",
@@ -82,7 +98,7 @@ download_code <- function(modelsettings, modelfunction) {
       "dat$IDvar = paste(dat$varnames,nn,sep='')",
       "dat$nreps = nn",
       "datall = rbind(datall, dat)",
-      "modelsettings$rngseed = modelsettings$rngseed + 1",
+      "rngseed = rngseed + 1",
       "S0=head(simresult[,2],1)",
       "Sfinal=tail(simresult[,2],1)",
       "if ( (S0-Sfinal)/S0>0.2 ) {noutbreaks = noutbreaks + 1}",
@@ -94,7 +110,7 @@ download_code <- function(modelsettings, modelfunction) {
   
   # Final plotting stuff
   closing_lines <- paste(
-    "listlength = modelsettings$nplots",
+    "listlength = nplots",
     "result = vector('list', listlength)",
     "result[[1]]$maketext = TRUE",
     "result[[1]]$showtext = NULL",
@@ -111,7 +127,6 @@ download_code <- function(modelsettings, modelfunction) {
     "result[[1]]$xlab = 'Time'",
     "result[[1]]$ylab = 'Numbers'",
     "result[[1]]$legend = 'Compartments'",
-    "plotscale = modelsettings$plotscale",
     "result[[1]]$xscale = 'identity'",
     "result[[1]]$yscale = 'identity'",
     "if (plotscale == 'x' | plotscale == 'both') { result[[1]]$xscale = 'log10'}",
@@ -119,7 +134,7 @@ download_code <- function(modelsettings, modelfunction) {
   sep = "\n")
   
   # Writing to file
-  output_text <- paste(model_lines, closing_lines, sep = "\n")
+  output_text <- paste(opening_lines, model_lines, closing_lines, sep = "\n")
   return(output_text)
   # fileConn <- file(paste0(getwd(), "/output.R"))
   # writeLines(output_text, fileConn)
