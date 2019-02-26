@@ -74,31 +74,31 @@
 <h2>What to do</h2>
 <p><em>The tasks below are described in a way that assumes everything is in units of days (rate parameters, therefore, have units of inverse days).</em></p>
 <div id="task-1" class="section level3">
-<h3>Task 1:</h3>
+<h3>Task 1</h3>
 <ul>
-<li>Set initial bacteria and immune response to 100 and 10.</li>
-<li>Set bacteria growth and death rate to 2 and 1. The former value does not matter since we’ll be exploring the simulation for different values of <em>g</em>.</li>
-<li>Set carrying capacity to 10<sup>5</sup>, IR kill rate and activation rate to 10<sup>-4</sup> and immune response death rate to 2.</li>
-<li>Choose <em>g</em> as the parameter to vary, go from 2 to 10, do 10 different parameter values, linear spacing, and no log scales for plotting.</li>
-<li>Set maximum simulation time to 100. Run simulation, check to ensure all simulations reach steady state (see output message below plot). Then reduce simulation time to 20 days, note how some simulations did not reach steady state and how that affects results.</li>
+<li>Set initial number of susceptible/infected/recovered to 1000/1/0.</li>
+<li>Set infection rate to 0.002, and recovery rate to 1. The former value does not matter since we’ll be exploring the simulation for different values of <em>b</em>.</li>
+<li>Set natural births and deaths to 0.</li>
+<li>Choose <em>b</em> as the parameter to vary, go from 0.0005 to 0.005, do 10 different parameter values, linear spacing, and no log scales for plotting.</li>
+<li>Set maximum simulation time to 100. Run simulation. You will notice that you get a message saying the system did not reach steady state 10 times, i.e. for each simulation (see output message below plot). Increase simulation time to 1000 days, now you should reach steady state for 5 of the runs.</li>
 </ul>
 </div>
 <div id="task-2" class="section level3">
-<h3>Task 2:</h3>
+<h3>Task 2</h3>
 <ul>
-<li>Play around with the number of different parameter values (the higher the number, the more often the simulation runs and the longer it takes), the minimum and maximum, and linear or logarithmic spacing and plotting.</li>
-<li>Think a bit about the results you see in the plot for the different outcomes. Would you have expected that as the bacteria growth rate increases, the peak bacteria load increases? What about the fact that the peak and steady state immune response increases? And what about the steady state bacteria not increasing?</li>
+<li><p>Play around with the number of different parameter values (the higher the number, the more often the simulation runs and the longer it takes), the minimum and maximum, and linear or logarithmic spacing and plotting.</p></li>
+<li><p>In this app, you don’t see the model dynamics, i.e. the time-series for the variables. It is being run in the background, but only parts of it, i.e. maximum and final states of variables are recorded. Try to visualize what the S/I/R curves look like, based on your exploration of the simple SIR model app. Then check these ‘virtual’ curves with the results reported in the plot and make sure you understand how each of them comes about. For instance do you understand why <em>Smax</em> is always 1000? Or why <em>Rfinal</em> increases from 0 to 1000 as you increase <em>b</em>? If you have a hard time with this, I suggest you (re)visit the basic SIR model and explore it some more.</p></li>
 </ul>
 </div>
 <div id="task-3" class="section level3">
-<h3>Task 3:</h3>
+<h3>Task 3</h3>
 <ul>
-<li>Take a look at the model equations and diagram and see if by ‘staring’ at them, you can understand why you got the results you saw in the last task.</li>
+<li>Another way to build intuition about a given system is by taking a look at the model equations and diagram and see if by ‘staring’ at them, you can understand why you got the results you saw in the last task.</li>
 </ul>
 <p>With enough practice, it is often possible to intuit specific results based on the underlying equations - but that requires a good bit of modeling practice. As models get more complicated, even experienced modelers can often not intuit what model behavior one should expect as specific parameters vary. Often the only way to find out is by actually running the simulations.</p>
 </div>
 <div id="task-4" class="section level3">
-<h3>Task 4:</h3>
+<h3>Task 4</h3>
 <p>The model we have here is so simple that we can in fact figure out some of the outcomes shown in the plot without having to run simulations but instead by doing some math. Specifically, we can compute the steady states for the different variables. This was one of the tasks in the <em>Patterns of ID</em> app. We repeat it here.</p>
 <p>Once the system has settled down, there are no more changes in the numbers for each compartment. Mathematically, that means that the left side of the differential equations becomes 0, and they turn into the following algebraic equations: <span class="math inline">\(0 = m - bSI - nS\)</span>, <span class="math inline">\(0 = bSI - gI - nI\)</span> and <span class="math inline">\(0 = gI - nR\)</span>. One can solve those equations for each of the compartments to get a mathematical expression of what <em>S</em>/<em>I</em>/<em>R</em> are at steady state. Try to do this. You should find that <span class="math inline">\(S~steady~ = (g+n) / b\)</span> and a similar equations for the other variables.</p>
 </div>
@@ -110,37 +110,35 @@
 <p>We cannot compute similar mathematical expressions for the maxmimum values of the variables. In general, as soon as our model reaches a certain level of complexity (maybe around 5 equations and more), getting analytic/mathematical equations for most outcomes of interest is not possible and the numerical approach of running the simulations and looking at the results is the only option we have.</p>
 </div>
 <div id="task-6" class="section level3">
-<h3>Task 6:</h3>
+<h3>Task 6</h3>
 <ul>
 <li>Let’s explore the impact of a different parameter. Set all variables as in task 1.</li>
-<li>Choose <em>d<sub>I</sub></em> as the parameter to vary and set lower and upper limit to 1 and 10.</li>
-<li>Before you run the model, look at your equations for <em>B<sub>steady</sub></em> and <em>I<sub>steady</sub></em> and based on these, predict what you should see in the plot.</li>
-<li>Similarly, look at the model equations and try to intuit what you might expect <em>B<sub>peak</sub></em> and <em>I<sub>peak</sub></em> to do as you increase <em>d<sub>I</sub></em>.</li>
+<li>Choose <em>g</em> as the parameter to vary and set lower and upper limit to 0.4 and 4.</li>
+<li>Before you run the model, try to predict what you should see in the plot for the different outcomes.</li>
 <li>Now run the model, compare the results with your expectations. How do they agree or disagree?</li>
 </ul>
 </div>
 <div id="task-7" class="section level3">
-<h3>Task 7:</h3>
+<h3>Task 7</h3>
 <ul>
-<li>In the previous task, you should have noticed 2 different patterns of the outcomes for <em>d<sub>I</sub></em> less than 5 and greater than 5. Try to understand what happens (qualitatively) with your model in those 2 regimes and how that leads to the results you are seeing.</li>
+<li>In the previous task, you should have noticed that above <em>g=2</em> the final number of recovered (which is also the max) goes to 0. Try to understand what happens (qualitatively) with your model around that value and how that leads to the results you are seeing. (Hint: It has to do with the reproductive number.)</li>
 </ul>
 </div>
 <div id="task-8" class="section level3">
-<h3>Task 8:</h3>
+<h3>Task 8</h3>
 <ul>
 <li>Do the same explorations you did above for any other parameter you want to investigate.</li>
 </ul>
-<p>Note that here we focus on a single parameter at a time. With some coding effort, we could change the underlying simulation to loop over say 2 parameters and produce outcomes for sets of parameter values, e.g. <em>B<sub>peak</sub></em> as a function of <em>g</em> and <em>r</em>. The results could be plotted as a 2-dimensional heatmap. While this could be extended to more than 2 parameters, it will become hard to visualize and long to run. If there are many parameters that could change, a different approach is useful, which you’ll learn about in the Uncertainty and Sensitivity App.</p>
+<p>Note that here we focus on a single parameter at a time. With some coding effort, we could change the underlying simulation to loop over say 2 parameters and produce outcomes for sets of parameter values. The results could be plotted as a 2-dimensional heatmap for each outcome. While this could be extended to more than 2 parameters, it will become hard to visualize and long to run. If there are many parameters that could change, a different approach is useful, which you’ll learn about in the Uncertainty and Sensitivity App.</p>
 </div>
 </div>
 <div id="shinytab4" class="section level2">
 <h2>Further Information</h2>
 <ul>
 <li>This app (and all others) are structured such that the Shiny part (the graphical interface you see and the server-side function that goes with it) calls an underlying R script (or several) which runs the simulation for the model of interest and returns the results.</li>
-<li>For this app, the underlying function running the simulation is called <code>simulate_modelexploration</code>. You can call them directly, without going through the shiny app. Use the <code>help()</code> command for more information on how to use the functions directly. If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself.</li>
+<li>For this app, the underlying function running the simulation is called <code>simulate_modelexploration_sir</code>. You can call them directly, without going through the shiny app. Use the <code>help()</code> command for more information on how to use the functions directly. If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself.</li>
 <li>You can also download all simulator functions and modify them for your own purposes. Of course to modify these functions, you’ll need to do some coding.</li>
-<li>For examples on using the simulators directly and how to modify them, read the package vignette by typing <code>vignette(&#39;DSAIRM&#39;)</code> into the R console.</li>
-<li>Some ‘real world’ examples where models have been used to explore outcomes of interest as function of parameters for simple models applied to TB, see e.g. <span class="citation">(<span class="citeproc-not-found" data-reference-id="antia96"><strong>???</strong></span>)</span> (specifically Figure 2B) or Malaria, see e.g. <span class="citation">(<span class="citeproc-not-found" data-reference-id="kochin10"><strong>???</strong></span>)</span>.</li>
+<li>For examples on using the simulators directly and how to modify them, read the package vignette by typing <code>vignette(&#39;DSAIDE&#39;)</code> into the R console.</li>
 </ul>
 <div id="references" class="section level3">
 <h3>References</h3>

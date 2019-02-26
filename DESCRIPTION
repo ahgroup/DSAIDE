@@ -45,5 +45,5 @@ Suggests:
     testthat
 RoxygenNote: 6.1.1
 VignetteBuilder: knitr
-URL: https://ahgroup.github.io/DSAIDE, https://github.com/ahgroup/DSAIDE/
+URL: https://ahgroup.github.io/DSAIDE, https://github.com/ahgroup/DSAIDE
 BugReports: https://github.com/ahgroup/DSAIDE/issues
