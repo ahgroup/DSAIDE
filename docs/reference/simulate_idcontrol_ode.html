@@ -140,10 +140,10 @@ Any initial conditions not specified below start at 0." />
     </div>
 
     <pre class="usage"><span class='fu'>simulate_idcontrol_ode</span>(<span class='kw'>S</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>I</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>E</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>Sv</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>Iv</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>tmax</span> <span class='kw'>=</span> <span class='fl'>300</span>, <span class='kw'>bP</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>bA</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>bI</span> <span class='kw'>=</span> <span class='fl'>0.001</span>, <span class='kw'>bE</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>bv</span> <span class='kw'>=</span> <span class='fl'>0.001</span>,
-  <span class='kw'>bh</span> <span class='kw'>=</span> <span class='fl'>0.001</span>, <span class='kw'>gP</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>gA</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>gI</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>pA</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>pI</span> <span class='kw'>=</span> <span class='fl'>10</span>,
-  <span class='kw'>c</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>f</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>w</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>mh</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>nh</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>mv</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>nv</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
+  <span class='kw'>bP</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>bA</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>bI</span> <span class='kw'>=</span> <span class='fl'>0.001</span>, <span class='kw'>bE</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>bv</span> <span class='kw'>=</span> <span class='fl'>0.001</span>, <span class='kw'>bh</span> <span class='kw'>=</span> <span class='fl'>0.001</span>,
+  <span class='kw'>gP</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>gA</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>gI</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>pA</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>pI</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>c</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>f</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>w</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>mh</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>nh</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>mv</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>nv</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>tmax</span> <span class='kw'>=</span> <span class='fl'>300</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -167,10 +167,6 @@ Any initial conditions not specified below start at 0." />
     <tr>
       <th>Iv</th>
       <td><p>: initial number of infected vectors : numeric</p></td>
-    </tr>
-    <tr>
-      <th>tmax</th>
-      <td><p>: maximum simulation time, in units of months : numeric</p></td>
     </tr>
     <tr>
       <th>bP</th>
@@ -247,6 +243,10 @@ Any initial conditions not specified below start at 0." />
     <tr>
       <th>nv</th>
       <td><p>: the rate of natural death of vectors (the inverse it the average lifespan) : numeric</p></td>
+    </tr>
+    <tr>
+      <th>tmax</th>
+      <td><p>: maximum simulation time, in units of months : numeric</p></td>
     </tr>
     </table>
     

@@ -46,6 +46,9 @@
     <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_idpatterns_ode.html</loc>
   </url>
   <url>
+    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_modelexploration_sir.html</loc>
+  </url>
+  <url>
     <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_multipathogen_ode.html</loc>
   </url>
   <url>
@@ -55,10 +58,16 @@
     <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_seir_stochastic.html</loc>
   </url>
   <url>
+    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_sirdemographic_ode.html</loc>
+  </url>
+  <url>
+    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_sirdemographic_stochastic.html</loc>
+  </url>
+  <url>
     <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_sir_ode.html</loc>
   </url>
   <url>
-    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_sir_stochastic.html</loc>
+    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_usanalysis_sir.html</loc>
   </url>
   <url>
     <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_vectortransmission_ode.html</loc>

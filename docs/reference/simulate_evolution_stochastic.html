@@ -136,8 +136,8 @@ Recovered and Immune (R). allows exploration of evolutionary dynamics</p>
     </div>
 
     <pre class="usage"><span class='fu'>simulate_evolution_stochastic</span>(<span class='kw'>S</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>Iu</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>It</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>Ir</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>tmax</span> <span class='kw'>=</span> <span class='fl'>100</span>, <span class='kw'>bu</span> <span class='kw'>=</span> <span class='fl'>0.001</span>, <span class='kw'>bt</span> <span class='kw'>=</span> <span class='fl'>0.001</span>, <span class='kw'>br</span> <span class='kw'>=</span> <span class='fl'>0.001</span>, <span class='kw'>cu</span> <span class='kw'>=</span> <span class='fl'>0.001</span>,
-  <span class='kw'>ct</span> <span class='kw'>=</span> <span class='fl'>0.01</span>, <span class='kw'>f</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>gu</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>gt</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>gr</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>rngseed</span> <span class='kw'>=</span> <span class='fl'>100</span>)</pre>
+  <span class='kw'>bu</span> <span class='kw'>=</span> <span class='fl'>0.001</span>, <span class='kw'>bt</span> <span class='kw'>=</span> <span class='fl'>0.001</span>, <span class='kw'>br</span> <span class='kw'>=</span> <span class='fl'>0.001</span>, <span class='kw'>cu</span> <span class='kw'>=</span> <span class='fl'>0.001</span>, <span class='kw'>ct</span> <span class='kw'>=</span> <span class='fl'>0.01</span>,
+  <span class='kw'>f</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>gu</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>gt</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>gr</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>tmax</span> <span class='kw'>=</span> <span class='fl'>100</span>, <span class='kw'>rngseed</span> <span class='kw'>=</span> <span class='fl'>100</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -157,10 +157,6 @@ Recovered and Immune (R). allows exploration of evolutionary dynamics</p>
     <tr>
       <th>Ir</th>
       <td><p>: initial number of resistant infected hosts : numeric</p></td>
-    </tr>
-    <tr>
-      <th>tmax</th>
-      <td><p>: maximum simulation time : numeric</p></td>
     </tr>
     <tr>
       <th>bu</th>
@@ -199,6 +195,10 @@ Recovered and Immune (R). allows exploration of evolutionary dynamics</p>
       <td><p>: rate at which a person leaves the Ir compartment : numeric</p></td>
     </tr>
     <tr>
+      <th>tmax</th>
+      <td><p>: maximum simulation time : numeric</p></td>
+    </tr>
+    <tr>
       <th>rngseed</th>
       <td><p>: seed for random number generator to allow reproducibility : numeric</p></td>
     </tr>
@@ -208,12 +208,7 @@ Recovered and Immune (R). allows exploration of evolutionary dynamics</p>
 
     <p>This function returns the simulation result as obtained from a call
   to the adaptivetau integrator in list form. The list element ts is a
-  dataframe where the first column is "Time," and the remaining columns
-  represent the evolution of the model parameters: the number of susceptibles,
-  the number infected by the drug-sensitive strain and not on treatment, the number
-  infected by the drug-sensitive strain and being treated, the number infected by
-  the drug-resistant strain (treatment does not affect these), and the recovered
-  (and therefore immune) individuals.</p>
+  dataframe where the first column is "time," and the remaining columns are the variables</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 

@@ -133,8 +133,8 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>simulate_seir_stochastic</span>(<span class='kw'>S</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>I</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>tmax</span> <span class='kw'>=</span> <span class='fl'>100</span>, <span class='kw'>bE</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>bI</span> <span class='kw'>=</span> <span class='fl'>0.001</span>, <span class='kw'>gE</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>gI</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>w</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>m</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+    <pre class="usage"><span class='fu'>simulate_seir_stochastic</span>(<span class='kw'>S</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>I</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>bE</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>bI</span> <span class='kw'>=</span> <span class='fl'>0.001</span>,
+  <span class='kw'>gE</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>gI</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>w</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>m</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>tmax</span> <span class='kw'>=</span> <span class='fl'>100</span>,
   <span class='kw'>rngseed</span> <span class='kw'>=</span> <span class='fl'>100</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -147,10 +147,6 @@
     <tr>
       <th>I</th>
       <td><p>: initial number of infected, symptomatic hosts : numeric</p></td>
-    </tr>
-    <tr>
-      <th>tmax</th>
-      <td><p>: maximum simulation time : numeric</p></td>
     </tr>
     <tr>
       <th>bE</th>
@@ -170,8 +166,7 @@
     </tr>
     <tr>
       <th>w</th>
-      <td><p>: rate at which recovered persons lose immunity and return to
-susceptible state : numeric</p></td>
+      <td><p>: rate at which recovered lose immunity and return to susceptible : numeric</p></td>
     </tr>
     <tr>
       <th>m</th>
@@ -180,6 +175,10 @@ susceptible state : numeric</p></td>
     <tr>
       <th>n</th>
       <td><p>: the rate of natural death (the inverse is the average lifespan) : numeric</p></td>
+    </tr>
+    <tr>
+      <th>tmax</th>
+      <td><p>: maximum simulation time : numeric</p></td>
     </tr>
     <tr>
       <th>rngseed</th>

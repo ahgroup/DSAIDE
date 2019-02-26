@@ -145,9 +145,9 @@ This model includes natural births and deaths and waning immunity.
     
     </div>
 
-    <pre class="usage"><span class='fu'>simulate_idpatterns_ode</span>(<span class='kw'>S</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>P</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>timeunit</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>tmax</span> <span class='kw'>=</span> <span class='fl'>300</span>,
-  <span class='kw'>bP</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>bA</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>bI</span> <span class='kw'>=</span> <span class='fl'>0.001</span>, <span class='kw'>gP</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>gA</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>gI</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
-  <span class='kw'>f</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>w</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>m</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>s</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
+    <pre class="usage"><span class='fu'>simulate_idpatterns_ode</span>(<span class='kw'>S</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>P</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>bP</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>bA</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>bI</span> <span class='kw'>=</span> <span class='fl'>0.001</span>, <span class='kw'>s</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>gP</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>gA</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>gI</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>f</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>w</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>m</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>timeunit</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>tmax</span> <span class='kw'>=</span> <span class='fl'>300</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -159,14 +159,6 @@ This model includes natural births and deaths and waning immunity.
     <tr>
       <th>P</th>
       <td><p>: initial number of infected, pre-symptomatic hosts : numeric</p></td>
-    </tr>
-    <tr>
-      <th>timeunit</th>
-      <td><p>: units of time in which the model should run (1=day, 2=week, 3=month, 4=year) : numeric</p></td>
-    </tr>
-    <tr>
-      <th>tmax</th>
-      <td><p>: maximum simulation time, in units of months : numeric</p></td>
     </tr>
     <tr>
       <th>bP</th>
@@ -181,8 +173,12 @@ This model includes natural births and deaths and waning immunity.
       <td><p>: level/rate of infectiousness for hosts in the I compartment : numeric</p></td>
     </tr>
     <tr>
+      <th>s</th>
+      <td><p>: strength of seasonal/annual sigmoidal variation of transmission rate : numeric</p></td>
+    </tr>
+    <tr>
       <th>gP</th>
-      <td><p>rate at which a person leaves the P compartment : numeric</p></td>
+      <td><p>: rate at which a person leaves the P compartment : numeric</p></td>
     </tr>
     <tr>
       <th>gA</th>
@@ -213,8 +209,12 @@ This model includes natural births and deaths and waning immunity.
       <td><p>: the rate of natural death (the inverse it the average lifespan) : numeric</p></td>
     </tr>
     <tr>
-      <th>s</th>
-      <td><p>: strength of seasonal/annual sigmoidal variation of transmission rate : numeric</p></td>
+      <th>timeunit</th>
+      <td><p>: units of time in which the model should run (1=day, 2=week, 3=month, 4=year) : numeric</p></td>
+    </tr>
+    <tr>
+      <th>tmax</th>
+      <td><p>: maximum simulation time, in units of months : numeric</p></td>
     </tr>
     </table>
     

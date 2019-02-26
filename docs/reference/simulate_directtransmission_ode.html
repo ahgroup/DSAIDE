@@ -129,9 +129,9 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>simulate_directtransmission_ode</span>(<span class='kw'>S</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>I</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>tmax</span> <span class='kw'>=</span> <span class='fl'>120</span>,
-  <span class='kw'>scenario</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>bd</span> <span class='kw'>=</span> <span class='fl'>0.01</span>, <span class='kw'>bf</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>A</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>m</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>g</span> <span class='kw'>=</span> <span class='fl'>0.1</span>, <span class='kw'>w</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
+    <pre class="usage"><span class='fu'>simulate_directtransmission_ode</span>(<span class='kw'>S</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>I</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>bd</span> <span class='kw'>=</span> <span class='fl'>0.01</span>, <span class='kw'>bf</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>A</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>m</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>g</span> <span class='kw'>=</span> <span class='fl'>0.1</span>, <span class='kw'>w</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>scenario</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>tmax</span> <span class='kw'>=</span> <span class='fl'>120</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -143,14 +143,6 @@
     <tr>
       <th>I</th>
       <td><p>: initial number of infected hosts : numeric</p></td>
-    </tr>
-    <tr>
-      <th>tmax</th>
-      <td><p>: maximum simulation time, units of months : numeric</p></td>
-    </tr>
-    <tr>
-      <th>scenario</th>
-      <td><p>: choice between density dependent (=1) and frequency dependent (=2) transmission : numeric</p></td>
     </tr>
     <tr>
       <th>bd</th>
@@ -179,6 +171,14 @@
     <tr>
       <th>w</th>
       <td><p>: the rate of waning immunity : numeric</p></td>
+    </tr>
+    <tr>
+      <th>scenario</th>
+      <td><p>: choice between density dependent (=1) and frequency dependent (=2) transmission : numeric</p></td>
+    </tr>
+    <tr>
+      <th>tmax</th>
+      <td><p>: maximum simulation time, units of months : numeric</p></td>
     </tr>
     </table>
     

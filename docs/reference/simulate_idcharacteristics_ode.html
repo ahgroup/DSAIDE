@@ -135,9 +135,9 @@ Recovered and Immune (R) and Dead (D)</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>simulate_idcharacteristics_ode</span>(<span class='kw'>S</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>P</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>tmax</span> <span class='kw'>=</span> <span class='fl'>300</span>, <span class='kw'>bP</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>bA</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>bI</span> <span class='kw'>=</span> <span class='fl'>0.001</span>, <span class='kw'>gP</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>gA</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>gI</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>f</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
+    <pre class="usage"><span class='fu'>simulate_idcharacteristics_ode</span>(<span class='kw'>S</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>P</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>bP</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>bA</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>bI</span> <span class='kw'>=</span> <span class='fl'>0.001</span>, <span class='kw'>gP</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>gA</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>gI</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>f</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>tmax</span> <span class='kw'>=</span> <span class='fl'>300</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -149,10 +149,6 @@ Recovered and Immune (R) and Dead (D)</p>
     <tr>
       <th>P</th>
       <td><p>: initial number of infected, pre-symptomatic hosts : numeric</p></td>
-    </tr>
-    <tr>
-      <th>tmax</th>
-      <td><p>: maximum simulation time : numeric</p></td>
     </tr>
     <tr>
       <th>bP</th>
@@ -185,6 +181,10 @@ Recovered and Immune (R) and Dead (D)</p>
     <tr>
       <th>d</th>
       <td><p>: fraction of symptomatic infected hosts that die due to disease : numeric</p></td>
+    </tr>
+    <tr>
+      <th>tmax</th>
+      <td><p>: maximum simulation time : numeric</p></td>
     </tr>
     </table>
     
