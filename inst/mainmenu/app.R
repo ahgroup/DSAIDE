@@ -59,7 +59,7 @@ server <- function(input, output, session)
                                   tags$p(actionButton(inputId = "reset", label = "Reset",
                                                       class = "submitbutton"), align = "center"),
                                   uiOutput("modelinputs"),
-                                  tags$p(downloadButton(inputId = "download_code", 
+                                  tags$p(downloadButton(outputId = "download_code", 
                                                       label = "Download Code"),
                                          align = "center")
                                 )
