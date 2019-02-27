@@ -76,7 +76,7 @@ download_code <- function(modelsettings, modelfunction) {
       paste(., collapse = ", ")
   
     model_lines <- paste(paste0("simresult <- ",
-                              modelfunction, "(", args_in_order, ")"),
+                              currentmodel, "(", args_in_order, ")"),
                         "simresult <- simresult$ts",
                         "if (grepl('_and_',modeltype))",
                         "{",
@@ -89,8 +89,6 @@ download_code <- function(modelsettings, modelfunction) {
                         "dat$nreps = 1",
                         "datall = rbind(datall,dat)",
                         sep = "\n")
-    
-    browser()
   }
   
   # Option if the model is stochastic
@@ -114,7 +112,7 @@ download_code <- function(modelsettings, modelfunction) {
       "}",
       "currentargs = modelsettings[match(names(unlist(formals(currentmodel))), names(unlist(modelsettings)))]",
       paste0("simresult <- ",
-             modelfunction, "(", args_in_order, ")"),
+             currentmodel, "(", args_in_order, ")"),
       "simresult <- simresult$ts",
       "colnames(simresult)[1] = 'xvals'",
       "rawdat = as.data.frame(simresult)",
@@ -158,8 +156,6 @@ download_code <- function(modelsettings, modelfunction) {
     "generate_plots(result)",
     "generate_text(result)",
   sep = "\n")
-  
-  browser()
   
   # Writing to file
   output_text <- paste(opening_lines, model_lines, closing_lines, sep = "\n")
