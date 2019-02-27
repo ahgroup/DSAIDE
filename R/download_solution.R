@@ -153,6 +153,8 @@ download_code <- function(modelsettings, modelfunction) {
     "result[[1]]$yscale = 'identity'",
     "if (plotscale == 'x' | plotscale == 'both') { result[[1]]$xscale = 'log10'}",
     "if (plotscale == 'y' | plotscale == 'both') { result[[1]]$yscale = 'log10'}",
+    "generate_plots(result)",
+    "generate_text(result)",
   sep = "\n")
   
   # Writing to file
