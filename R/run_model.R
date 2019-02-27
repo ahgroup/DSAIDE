@@ -3,16 +3,15 @@
 #' @description This function runs a model based on information 
 #' provided in the modelsettings list passed into it.
 #'
-#' @param modelsettings a list with model settings. 
-#' Needs to contain list elements with names and values for all inputs expected 
-#' by simulation function. Required are:
-#' Name of simulation function in variable modelsettings$simfunction
-#' Also needs to contain an element plotscale 
-#' to indicate which axis should be on a log scale (x, y or both), 
-#' a list element nplots to indicate number of plots that should be produced
-#' when calling the generate_plot function with the result, 
-#' and a list element modeltype which specifies what kind of model should be run. 
-#' Currently one of (_ode_, _discrete_, _stochastic_, _usanalysis_, _modelexploration_, _fit_ ). Stochastic models also need an nreps list entry to indicate numer of repeat simulations.
+#' @param modelsettings a list with model settings. Required list elements are: \cr
+#' List elements with names and values for all inputs expected by simulation function. \cr
+#' modelsettings$simfunction - name of simulation function in variable  \cr
+#' modelsettings$plotscale - indicate which axis should be on a log scale (x, y or both), \cr
+#' modelsettings$nplots -  indicate number of plots that should be produced (number of top list elements in result) \cr
+#' modelsettings$modeltype - specify what kind of model should be run. 
+#' Currently one of (_ode_, _discrete_, _stochastic_, _usanalysis_, _modelexploration_, _fit_ ). \cr
+#' modelsettings$nreps - needed for stochastic models to indicate numer of repeat simulations. \cr
+#' modelsettings$plottype - 'Boxplot' or 'Scatterplot' needed for US app \cr
 #' @return A vectored list named "result" with each main list element containing the simulation results in a dataframe called dat and associated metadata required for generate_plot and generate_text functions. Most often there is only one main list entry (result[[1]]) for a single plot/text.
 #' @details This function runs a model for specific settings. 
 #' @importFrom utils head tail
@@ -235,19 +234,16 @@ run_model <- function(modelsettings) {
     simresult$dat$steady <- NULL
     simdat = simresult$dat
 
-    result <- vector("list", 18) #set up a list structure with as many elements as plots
     #loop over each outer list element corresponding to a plot and fill it with another list
     #of meta-data and data needed to create each plot
     #each parameter-output pair is its own plot, therefore its own list entry
     ct=1; #some counter
-    result[[ct]]$ncol = 3 #number of columns for plot, needs to be stored in 1st sub-list element
-    for (n in 1:6) #first loop over each parameter
-    {
-      for (nn in 1:3) #for each parameter, loop over outcomes
+    for (nn in 1:modelsettings$nplots) #for specified parameter, loop over outcomes
       {
         #data frame for each plot
-        xvals = simdat[,3+n] #elements 4 to end end are parameters
-        xvalname = colnames(simdat)[3+n]
+        #browser()
+        xvals = simdat[,modelsettings$samplepar] #get parameter under consideration
+        xvalname = modelsettings$samplepar
         yvals = simdat[,nn] #first 3 elements are outcomes
         yvalname = colnames(simdat)[nn]
         dat = data.frame(xvals = xvals, yvals = yvals, varnames = yvalname)
@@ -269,16 +265,7 @@ run_model <- function(modelsettings) {
         result[[ct]]$finaltext = paste("System might not have reached steady state", length(steady) - sum(steady), "times")
 
         ct = ct + 1
-      } #inner loop
-    } #outer loop
-
-    #if we look at uncertainty/boxplots, we don't need results stratified by parameter
-    #since all the plots and printout contain repeated information, we'll just retain the first 3 ones
-    if (modelsettings$plottype == "Boxplot")
-    {
-      result <- result[c(1:3)]
-    }
-
+    } #loop over plots
   }
   ##################################
   #end US analysis model code block

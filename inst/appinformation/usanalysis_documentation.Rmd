@@ -116,25 +116,20 @@ The above approach of exploring the impact of a parameter on results by varying 
 
 * Set values back as in task 1.
 * Switch the plot type from boxplot to scatterplot, run the simulation.
-* Take a close look at the scatterplots to investigate the relation between different parameters and the various outcomes.
+* Take a close look at the scatterplots to investigate the relation between different parameters and the various outcomes. To investigate specific parameters, chose them as the output for the scatterplot.
 * Look at the text below the plots. For each parameter-output pair, the code computes a rank correlation coefficient. Numbers close to 0 mean there is essentially no correlation, close to 1 or -1 means a large positive or negative correlation. (One could compute p-values for these correlations, but they are somewhat meaningless since the values will get smaller the more samples you use, so you can basically produce any p-value you want.)
 * Increase sample size to 100+ or whatever number runs within a reasonable amount of time. With more samples, the patterns of correlation are clearer in the plots.
 
 ### Task 6 
 Since our model is rather simple, we can actually determine relations between parameters and some of the outcomes analytically. Specifically, it is possible to compute the steady state values for _S_ and _I_. If you don't know what steady states are and how to compute them, go through the "patterns of ID" and/or "model exploration" apps, where this is explained. 
 
-* Get the equations for _S_ and _I_ at steady state as determined in those apps. Compare the scatterplots and correlation coefficients with the results from these equations. For instance based on the equation, you should see a linear correlation between _S~steady~ and death rate _n_.  You might find that there is a lot of scatter in the data, too much to see clear patterns. One could always increase sample size which should help detect patterns, but it takes longer to run. Another option is to restrict the variability to a subset of parameters, which we'll do next. 
+* Get the equations for _S_ and _I_ at steady state as determined in those apps. Compare the scatterplots and correlation coefficients with the results from these equations. For instance based on the equation, you should see a linear correlation between _S~steady~_ and death rate _n_.  You might find that there is a lot of scatter in the data, too much to see clear patterns. One could always increase sample size which should help detect patterns, but it takes longer to run. Another option is to restrict the variability to a subset of parameters, which we'll do next. 
 
 ### Task 7
-* Let's explore in more detail how different parameters impact results by making the system less 'noisy'. To do so, we can impose no variability for some parameters. For the following parameters, set **both** their lower and upper bound to the specified value: S = 1000, I = 1, g = 1, b = 0.01.
-* Let _d~I~_ vary between 1 and 2 and give _g_ a mean of 5 and variance of 1. Run the simulation. You'll get a bunch of warning messages from the function that computes the correlations, ignore them.
-* You should now see nice patterns of correlation between _g_ and _d~I~_ and the different outcomes. Confirm that - as expected from the steady state equations - that _B~steady~_ depends linearly on _d~I~_ and that it has no correlation with _g_. Both the scatterplots and the correlation coefficient should give you that information.
-* Also note the distribution for _g_ and _d~I~_. The former has more points around its mean and less for lower/higher values, while _d~I~_ values are uniformly distributed along the x-axis. This comes from the underlying assumption about how the parameters are distributed, gamma-distribution versus uniform distribution.
-
-### Task 8
-* Above, you should have found for the _I~steady~_ equation that $I_{steady} = g(1-d_I/(r*B_{max})-d_B)/k$. Let's compare the results from the equation with the simulation. Run the simulations several times, once with _d~I~_ ranging 0.1 to 2, then from 1.5 to 2, and then from 0.1 to 0.6. Investigate the plot and correlation coefficient for _d~I~_ and _I~steady~_ for both settings. What differences do you note based on the values? How could those be explained?
-
-The important take-home message from this task is that the influence of a parameter on some outcome can be different over different ranges. For instance in range A-B, the parameter might have a major influence, but once the parameter value goes above B, the parameter does not further influence the result. If you have large uncertainty in your parameters, it might be worth considering both the full range, and dividing the range into smaller areas to see how the parameter behaves.
+* Let's explore in more detail how different parameters impact results by making the system less 'noisy'. To do so, we can impose no variability for some parameters. For the following parameters, set **both** their lower and upper bound to the specified value: S = 1000, I = 1, b = 0.01, n = 10, m = 0.1.
+* Give _g_ a mean of 1 and variance of 0.1. Run the simulation with 50 samples and produce a scatterplot for _g_. You will see very smooth curves since no other parameters vary. Note the correlation coefficients being essentially -1 or 1.
+* Now increase the 'noise' by also allowing _n_ to vary, choose a range between 0.1 and 0.5. You will see much 'noisier' plots and the correlation coefficients change. 
+* Look at both scatterplots for _g_ and _n_. Note the different distributions for _g_ and _n_. The former has more points around its mean and less for lower/higher values, while values for _n_ are uniformly distributed along the x-axis. This comes from the underlying assumption about how the parameters are distributed, gamma-distribution versus uniform distribution.
 
 
 ## Further Information {#shinytab4}

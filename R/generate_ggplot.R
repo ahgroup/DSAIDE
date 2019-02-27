@@ -22,21 +22,22 @@
 #'    optional: xmin, xmax, ymin, ymax - Manual min and max for axes. \cr
 #'    optional: makelegend - TRUE/FALSE, if legend should be added to plot. Assume true if not provided. \cr
 #'    optional: legendtitle - Legend title, if NULL/not supplied, default is used \cr
-#'    optional: legendlocation - if "right" is specified, top right. anythbing else or nothing will place it top left. \cr
+#'    optional: legendlocation - if "left" is specified, top left. Otherwise top left. \cr
 #'    optional: linesize - Width of line, numeric, i.e. 1.5, 2, etc. set to 1.5 if not supplied. \cr
 #'    optional: title - A title for each plot. \cr
 #'
-#' @return A plot structure for display in a Shiny UI.
+#' @return A ggplot plot structure for display in a Shiny UI.
 #' @details This function is called by the Shiny server to produce plots returned to the Shiny UI.
 #' Create plots run the simulation with default parameters just call the function:
 #' result <- simulate_basicbacteria()
+#' plot <- generate_ggplot(result)
 #' @author Andreas Handel
 #' @importFrom stats reshape
-#' @import ggplot2
 #' @importFrom gridExtra grid.arrange
+#' @rawNamespace import(ggplot2, except = last_plot)
 #' @export
 
-generate_plots <- function(res)
+generate_ggplot <- function(res)
 {
 
     #nplots contains the number of plots to be produced.
@@ -67,8 +68,6 @@ generate_plots <- function(res)
 
       plottype <- if(is.null(resnow$plottype)) {'Lineplot'} else  {resnow$plottype} #if nothing is provided, we assume a line plot. That could lead to silly plots.
 
-
-
       #if the first column is called 'Time' (as returned from several of the simulators)
       #rename to xvals for consistency and so the code below will work
       if ( colnames(rawdat)[1] == 'Time' | colnames(rawdat)[1] == 'time' ) {colnames(rawdat)[1] <- 'xvals'}
@@ -92,9 +91,6 @@ generate_plots <- function(res)
       #code variable names as factor and level them so they show up right in plot - factor is needed for plotting and text
       mylevels = unique(dat$varnames)
       dat$varnames = factor(dat$varnames, levels = mylevels)
-
-      #browser()
-
 
       #see if user/calling function supplied x- and y-axis transformation information
       xscaletrans <- ifelse(is.null(resnow$xscale), 'identity',resnow$xscale)
@@ -174,18 +170,19 @@ generate_plots <- function(res)
       #do legend if TRUE or not provided
       if (is.null(resnow$makelegend) || resnow$makelegend)
       {
-        if (!is.null(resnow$legendlocation) && resnow$legendlocation == "right")
+        if (!is.null(resnow$legendlocation) && resnow$legendlocation == "left")
         {
-             legendlocation = c(0.7,1)
+             legendlocation = c(0,1)
         }
-        else #default placement on left
+        else #default placement on right
         {
-           legendlocation = c(0,1)
+           legendlocation = c(0.8,1)
         }
 
         legendtitle = ifelse(is.null(resnow$legendtitle), "Variables", resnow$legendtitle)
 
-        p6 = p5 + ggplot2::theme(legend.key.width = grid::unit(3,"line")) + ggplot2::scale_colour_discrete(name  = legendtitle)      + ggplot2::scale_linetype_discrete(name = legendtitle)+ ggplot2::scale_shape_discrete(name = legendtitle)    + ggplot2::theme(legend.position = legendlocation, legend.justification=c(0,1), legend.key.width = unit(4,"line"), legend.background = element_rect(size=0.5, linetype="solid", colour ="black"))
+        p6 = p5 + ggplot2::theme(legend.key.width = grid::unit(3, "line")) + ggplot2::scale_colour_discrete(name  = legendtitle) + ggplot2::scale_linetype_discrete(name = legendtitle) + ggplot2::scale_shape_discrete(name = legendtitle)
+        p6 = p6 + ggplot2::theme(legend.position = legendlocation, legend.justification=c(0,1), legend.key.width = unit(4,"line"), legend.background = element_rect(size=0.5, linetype="solid", colour ="black"))
       }
       else
       {
@@ -209,12 +206,14 @@ generate_plots <- function(res)
     if (n>1)
     {
       #number of columns needs to be stored in 1st list element
-      gridExtra::grid.arrange(grobs = allplots, ncol = res[[1]]$ncol)
+      resultplot <- gridExtra::grid.arrange(grobs = allplots, ncol = res[[1]]$ncol)
+      #resultplot <- gridExtra::arrangeGrob(grobs = allplots, ncol = res[[1]]$ncol)
       #cowplot::plot_grid(plotlist = allplots, ncol = res[[1]]$ncol)
 
     }
     if (n==1)
     {
-      graphics::plot(pfinal)
+      resultplot <- pfinal
     }
+    return(resultplot)
 }

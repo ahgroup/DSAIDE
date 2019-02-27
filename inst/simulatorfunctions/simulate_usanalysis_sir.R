@@ -17,8 +17,6 @@
 #' @param Smax : upper bound for initial susceptible : numeric
 #' @param Imin : lower bound for initial infected : numeric
 #' @param Imax : upper bound for initial infected : numeric
-#' @param Rmin : lower bound for initial recovered : numeric
-#' @param Rmax : upper bound for initial recovered : numeric
 #' @param bmin : lower bound for infection rate : numeric
 #' @param bmax : upper bound for infection rate : numeric
 #' @param gmean : mean for recovery rate : numeric
@@ -55,26 +53,25 @@
 #' @export
 
 
-simulate_usanalysis_sir <- function(Smin = 1000, Smax = 1500, Imin = 1, Imax = 10, Rmin = 0, Rmax = 10, bmin=1e-4, bmax=1e-2, gmean=1, gvar=0.1, mmin = 0, mmax = 10, nmin = 0, nmax = 0.1, samples = 10, rngseed = 100, tstart = 0, tfinal = 200, dt = 0.1)
+simulate_usanalysis_sir <- function(Smin = 1000, Smax = 1500, Imin = 1, Imax = 10, bmin=1e-4, bmax=1e-2, gmean=1, gvar=0.1, mmin = 0, mmax = 10, nmin = 0, nmax = 0.1, samples = 10, rngseed = 100, tstart = 0, tfinal = 200, dt = 0.1)
   {
 
     #this creates a LHS with the specified number of samples for all parameters
     #drawn from a uniform distribution between zero and one
     #if a parameter should be kept fixed, simply set min and max to the same value
     set.seed(rngseed)
-    lhssample=lhs::randomLHS(samples,7);
+    lhssample=lhs::randomLHS(samples,6);
 
     #transforming parameters to be  uniform between their low and high values
     Svec = stats::qunif(lhssample[,1],min = Smin, max = Smax)
     Ivec = stats::qunif(lhssample[,2],min = Imin, max= Imax)
-    Rvec = stats::qunif(lhssample[,3],min = Rmin, max= Rmax)
-    bvec = stats::qunif(lhssample[,4],min = bmin, max = bmax)
-    mvec = stats::qunif(lhssample[,5],min = mmin, max = mmax)
-    nvec = stats::qunif(lhssample[,6],min = nmin, max = nmax)
+    bvec = stats::qunif(lhssample[,3],min = bmin, max = bmax)
+    mvec = stats::qunif(lhssample[,4],min = mmin, max = mmax)
+    nvec = stats::qunif(lhssample[,5],min = nmin, max = nmax)
     
     #transforming parameter g to a gamma distribution with mean gmean and variance gvar
     #this is just to illustrate how different assumptions of parameter distributions can be implemented
-    gvec = stats::qgamma(lhssample[,7], shape = gmean^2/gvar, scale = gvar/gmean);
+    gvec = stats::qgamma(lhssample[,6], shape = gmean^2/gvar, scale = gvar/gmean);
 
     Ipeak=rep(0,samples) #initialize vectors that will contain the solution
     Ifinal=rep(0,samples)
@@ -86,7 +83,6 @@ simulate_usanalysis_sir <- function(Smin = 1000, Smax = 1500, Imin = 1, Imax = 1
         #values for sampled parameters
         S=Svec[ct]
         I=Ivec[ct]
-        R=Rvec[ct]
         b=bvec[ct]
         g=gvec[ct]
         m=mvec[ct]
@@ -94,7 +90,7 @@ simulate_usanalysis_sir <- function(Smin = 1000, Smax = 1500, Imin = 1, Imax = 1
         
         #this runs the bacteria ODE model for each parameter sample
         #all other parameters remain fixed
-        odeout <- simulate_sirdemographic_ode(S = S, I = I, R = R, b = b, g = g, m = m, n = n, tstart = tstart, tfinal = tfinal, dt = dt) 
+        odeout <- simulate_sirdemographic_ode(S = S, I = I, R = 0, b = b, g = g, m = m, n = n, tstart = tstart, tfinal = tfinal, dt = dt) 
         
         timeseries = odeout$ts
 
@@ -113,7 +109,7 @@ simulate_usanalysis_sir <- function(Smin = 1000, Smax = 1500, Imin = 1, Imax = 1
         }
     }
 
-    simresults = data.frame(Ipeak = Ipeak, Ifinal = Ifinal, Sfinal = Sfinal, S = Svec, I = Ivec, R = Rvec, b = bvec, g = gvec, m = mvec, n = nvec, steady = steady)
+    simresults = data.frame(Ipeak = Ipeak, Ifinal = Ifinal, Sfinal = Sfinal, S = Svec, I = Ivec, b = bvec, g = gvec, m = mvec, n = nvec, steady = steady)
 
     result = list()
     result$dat = simresults    

@@ -128,7 +128,7 @@ server <- function(input, output, session)
                      else
                      {
                       #create plot from results
-                      output$plot  <- renderPlot({ generate_plots(result) }, width = 'auto', height = 'auto')
+                      output$plot  <- renderPlot({ generate_ggplot(result) }, width = 'auto', height = 'auto')
                       #create text from results
                       output$text <- renderText({ generate_text(result) })
                      }

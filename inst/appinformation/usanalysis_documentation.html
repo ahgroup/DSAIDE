@@ -121,7 +121,7 @@
 <ul>
 <li>Set values back as in task 1.</li>
 <li>Switch the plot type from boxplot to scatterplot, run the simulation.</li>
-<li>Take a close look at the scatterplots to investigate the relation between different parameters and the various outcomes.</li>
+<li>Take a close look at the scatterplots to investigate the relation between different parameters and the various outcomes. To investigate specific parameters, chose them as the output for the scatterplot.</li>
 <li>Look at the text below the plots. For each parameter-output pair, the code computes a rank correlation coefficient. Numbers close to 0 mean there is essentially no correlation, close to 1 or -1 means a large positive or negative correlation. (One could compute p-values for these correlations, but they are somewhat meaningless since the values will get smaller the more samples you use, so you can basically produce any p-value you want.)</li>
 <li>Increase sample size to 100+ or whatever number runs within a reasonable amount of time. With more samples, the patterns of correlation are clearer in the plots.</li>
 </ul>
@@ -130,24 +130,17 @@
 <h3>Task 6</h3>
 <p>Since our model is rather simple, we can actually determine relations between parameters and some of the outcomes analytically. Specifically, it is possible to compute the steady state values for <em>S</em> and <em>I</em>. If you don’t know what steady states are and how to compute them, go through the “patterns of ID” and/or “model exploration” apps, where this is explained.</p>
 <ul>
-<li>Get the equations for <em>S</em> and <em>I</em> at steady state as determined in those apps. Compare the scatterplots and correlation coefficients with the results from these equations. For instance based on the equation, you should see a linear correlation between _S<sub>steady</sub> and death rate <em>n</em>. You might find that there is a lot of scatter in the data, too much to see clear patterns. One could always increase sample size which should help detect patterns, but it takes longer to run. Another option is to restrict the variability to a subset of parameters, which we’ll do next.</li>
+<li>Get the equations for <em>S</em> and <em>I</em> at steady state as determined in those apps. Compare the scatterplots and correlation coefficients with the results from these equations. For instance based on the equation, you should see a linear correlation between <em>S<sub>steady</sub></em> and death rate <em>n</em>. You might find that there is a lot of scatter in the data, too much to see clear patterns. One could always increase sample size which should help detect patterns, but it takes longer to run. Another option is to restrict the variability to a subset of parameters, which we’ll do next.</li>
 </ul>
 </div>
 <div id="task-7" class="section level3">
 <h3>Task 7</h3>
 <ul>
-<li>Let’s explore in more detail how different parameters impact results by making the system less ‘noisy’. To do so, we can impose no variability for some parameters. For the following parameters, set <strong>both</strong> their lower and upper bound to the specified value: S = 1000, I = 1, g = 1, b = 0.01.</li>
-<li>Let <em>d<sub>I</sub></em> vary between 1 and 2 and give <em>g</em> a mean of 5 and variance of 1. Run the simulation. You’ll get a bunch of warning messages from the function that computes the correlations, ignore them.</li>
-<li>You should now see nice patterns of correlation between <em>g</em> and <em>d<sub>I</sub></em> and the different outcomes. Confirm that - as expected from the steady state equations - that <em>B<sub>steady</sub></em> depends linearly on <em>d<sub>I</sub></em> and that it has no correlation with <em>g</em>. Both the scatterplots and the correlation coefficient should give you that information.</li>
-<li>Also note the distribution for <em>g</em> and <em>d<sub>I</sub></em>. The former has more points around its mean and less for lower/higher values, while <em>d<sub>I</sub></em> values are uniformly distributed along the x-axis. This comes from the underlying assumption about how the parameters are distributed, gamma-distribution versus uniform distribution.</li>
+<li>Let’s explore in more detail how different parameters impact results by making the system less ‘noisy’. To do so, we can impose no variability for some parameters. For the following parameters, set <strong>both</strong> their lower and upper bound to the specified value: S = 1000, I = 1, b = 0.01, n = 10, m = 0.1.</li>
+<li>Give <em>g</em> a mean of 1 and variance of 0.1. Run the simulation with 50 samples and produce a scatterplot for <em>g</em>. You will see very smooth curves since no other parameters vary. Note the correlation coefficients being essentially -1 or 1.</li>
+<li>Now increase the ‘noise’ by also allowing <em>n</em> to vary, choose a range between 0.1 and 0.5. You will see much ‘noisier’ plots and the correlation coefficients change.</li>
+<li>Look at both scatterplots for <em>g</em> and <em>n</em>. Note the different distributions for <em>g</em> and <em>n</em>. The former has more points around its mean and less for lower/higher values, while values for <em>n</em> are uniformly distributed along the x-axis. This comes from the underlying assumption about how the parameters are distributed, gamma-distribution versus uniform distribution.</li>
 </ul>
-</div>
-<div id="task-8" class="section level3">
-<h3>Task 8</h3>
-<ul>
-<li>Above, you should have found for the <em>I<sub>steady</sub></em> equation that <span class="math inline">\(I_{steady} = g(1-d_I/(r*B_{max})-d_B)/k\)</span>. Let’s compare the results from the equation with the simulation. Run the simulations several times, once with <em>d<sub>I</sub></em> ranging 0.1 to 2, then from 1.5 to 2, and then from 0.1 to 0.6. Investigate the plot and correlation coefficient for <em>d<sub>I</sub></em> and <em>I<sub>steady</sub></em> for both settings. What differences do you note based on the values? How could those be explained?</li>
-</ul>
-<p>The important take-home message from this task is that the influence of a parameter on some outcome can be different over different ranges. For instance in range A-B, the parameter might have a major influence, but once the parameter value goes above B, the parameter does not further influence the result. If you have large uncertainty in your parameters, it might be worth considering both the full range, and dividing the range into smaller areas to see how the parameter behaves.</p>
 </div>
 </div>
 <div id="shinytab4" class="section level2">
