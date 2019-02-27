@@ -112,7 +112,6 @@ download_code <- function(modelsettings, modelfunction) {
       "{",
       "tmax = tfinal",
       "}",
-      "currentargs = modelsettings[match(names(unlist(formals(currentmodel))), names(unlist(modelsettings)))]",
       paste0("simresult <- ",
              currentmodel, "(", args_in_order, ")"),
       "simresult <- simresult$ts",
