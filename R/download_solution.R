@@ -160,7 +160,4 @@ download_code <- function(modelsettings, modelfunction) {
   # Writing to file
   output_text <- paste(opening_lines, model_lines, closing_lines, sep = "\n")
   return(output_text)
-  # fileConn <- file(paste0(getwd(), "/output.R"))
-  # writeLines(output_text, fileConn)
-  # close(fileConn)
 }
