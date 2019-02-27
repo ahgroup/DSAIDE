@@ -161,6 +161,8 @@ download_code <- function(modelsettings, modelfunction) {
     "generate_text(result)",
   sep = "\n")
   
+  browser()
+  
   # Writing to file
   output_text <- paste(opening_lines, model_lines, closing_lines, sep = "\n")
   return(output_text)
