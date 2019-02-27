@@ -74,6 +74,8 @@ download_code <- function(modelsettings, modelfunction) {
                                               currentargs[[i]])) %>%
       unlist(.) %>%
       paste(., collapse = ", ")
+    
+    browser()
   
     model_lines <- paste(paste0("simresult <- ",
                               modelfunction, "(", args_in_order, ")"),
@@ -102,6 +104,8 @@ download_code <- function(modelsettings, modelfunction) {
       unlist(.) %>%
       paste(., collapse = ", ")
     noutbreaks <- 0
+    
+    browser()
     
     model_lines <- paste(
       "for (nn in 1:nreps)",
