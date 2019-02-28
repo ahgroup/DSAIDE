@@ -24,5 +24,6 @@ appsettings$modeltype = '_usanalysis_'
 appsettings$otherinputs =   shiny::tagList(
   shiny::selectInput("plottype", "Plot type for output", c("Boxplot", "Scatterplot"), selected = "Boxplot" ),
   shiny::selectInput("samplepar", "Parameter for scatterplot",c('S' = 'S', "I" = "I", "b" = "b", "g" = "g", 'm'='m','n'='n')),
-  shiny::selectInput("plotscale", "log-scale for plot",c("none" = "none", 'x-axis' = "x", 'y-axis' = "y", 'both axes' = "both"))
+  shiny::selectInput("plotscale", "log-scale for plot",c("none" = "none", 'x-axis' = "x", 'y-axis' = "y", 'both axes' = "both")),
+  shiny::selectInput("plotengine", "plot engine",c("ggplot" = "ggplot", "plotly" = "plotly"))
 ) #end taglist
