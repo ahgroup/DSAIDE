@@ -22,23 +22,22 @@
 #'    optional: xmin, xmax, ymin, ymax - Manual min and max for axes. \cr
 #'    optional: makelegend - TRUE/FALSE, if legend should be added to plot. Assume true if not provided. \cr
 #'    optional: legendtitle - Legend title, if NULL/not supplied, default is used \cr
-#'    optional: legendlocation - if "left" is specified, top left. Otherwise top left. \cr
+#'    optional: legendlocation - if "right" is specified, top right. anythbing else or nothing will place it top left. \cr
 #'    optional: linesize - Width of line, numeric, i.e. 1.5, 2, etc. set to 1.5 if not supplied. \cr
 #'    optional: title - A title for each plot. \cr
-#'    optional: for multiple plots, specify res[[1]]$ncols to define number of columns \cr
 #'
-#' @return A ggplot plot structure for display in a Shiny UI.
+#' @return A plotly plot structure for display in a Shiny UI.
 #' @details This function is called by the Shiny server to produce plots returned to the Shiny UI.
 #' Create plots run the simulation with default parameters just call the function:
 #' result <- simulate_basicbacteria()
-#' plot <- generate_ggplot(result)
-#' @author Andreas Handel
-#' @importFrom stats reshape
+#' plot <- generate_plotly(result)
+#' @import plotly
 #' @importFrom gridExtra grid.arrange
-#' @rawNamespace import(ggplot2, except = last_plot)
+#' @author Yang Ge
 #' @export
 
-generate_ggplot <- function(res)
+
+generate_plotly <- function(res)
 {
 
     #nplots contains the number of plots to be produced.
@@ -67,7 +66,7 @@ generate_ggplot <- function(res)
         rawdat = resnow$dat
       }
 
-      plottype <- if(is.null(resnow$plottype)) {'Lineplot'} else  {resnow$plottype} #if nothing is provided, we assume a line plot. That could lead to silly plots.
+      plottype <- if( is.null(resnow$plottype) ){'Lineplot'} else { resnow$plottype } #if nothing is provided, we assume a line plot. That could lead to silly plots.
 
       #if the first column is called 'Time' (as returned from several of the simulators)
       #rename to xvals for consistency and so the code below will work
@@ -86,21 +85,28 @@ generate_ggplot <- function(res)
         #using tidyr to reshape
         #dat = tidyr::gather(rawdat, -xvals, value = "yvals", key = "varnames")
         #using basic reshape function to reformat data
-        dat = stats::reshape(rawdat, varying = colnames(rawdat)[-1], v.names = 'yvals', timevar = "varnames", times = colnames(rawdat)[-1], direction = 'long', new.row.names = NULL); dat$id <- NULL
+        dat = stats::reshape(rawdat, varying = colnames(rawdat)[-1],
+                             v.names = 'yvals',
+                             timevar = "varnames",
+                             times = colnames(rawdat)[-1],
+                             direction = 'long',
+                             new.row.names = NULL);
+        dat$id <- NULL
       }
-
+      #########
       #code variable names as factor and level them so they show up right in plot - factor is needed for plotting and text
       mylevels = unique(dat$varnames)
       dat$varnames = factor(dat$varnames, levels = mylevels)
-
+      #########
       #see if user/calling function supplied x- and y-axis transformation information
       xscaletrans <- ifelse(is.null(resnow$xscale), 'identity',resnow$xscale)
       yscaletrans <- ifelse(is.null(resnow$yscale), 'identity',resnow$yscale)
 
+      #########
       #if we want a plot on log scale, set any value in the data at or below 0 to some small number
       if (xscaletrans !='identity') {dat$xvals[dat$xvals<=0]=lb}
       if (yscaletrans !='identity') {dat$yvals[dat$yvals<=0]=lb}
-
+      #########
       #if exist, apply user-supplied x- and y-axis limits
       #if min/max axes values are not supplied
       #we'll set them here to make sure they are not crazy high or low
@@ -108,93 +114,101 @@ generate_ggplot <- function(res)
       ymin <- if(is.null(resnow$ymin)) {max(lb,min(dat$yvals))} else  {resnow$ymin}
       xmax <- if(is.null(resnow$xmax)) {min(ub,max(dat$xvals))} else  {resnow$xmax}
       ymax <- if(is.null(resnow$ymax)) {min(ub,max(dat$yvals))} else  {resnow$ymax}
-
+      #########
       #set line size as given by app or to 1.5 by default
-      linesize = ifelse(is.null(resnow$linesize), 1.5, resnow$linesize)
+      linesize = ifelse(is.null(resnow$linesize), 2, resnow$linesize)
 
+      ###
       #if the IDvar variable exists, use it for further stratification, otherwise just stratify on varnames
-      if (is.null(dat$IDvar))
+      if ( is.null(dat$IDvar) )
       {
-        p1 = ggplot2::ggplot(dat, ggplot2::aes(x = xvals, y = yvals, color = varnames, linetype = varnames, shape = varnames) )
+        py1 <- plotly::plot_ly(dat)
       }
       else
       {
-        p1 = ggplot2::ggplot(dat, ggplot2::aes(x = xvals, y = yvals, color = varnames, linetype = varnames, group = IDvar) )
+        py1 <-  plotly::plot_ly(dplyr::group_by(dat, IDvar), x = ~xvals)
       }
 
+      ###
       if (plottype == 'Scatterplot')
       {
-        p2 = p1 + ggplot2::geom_point( size = linesize, na.rm=TRUE)
+        py2 <- plotly::add_markers(py1, x = ~xvals , y = ~yvals, color = ~varnames, symbol = ~varnames)
       }
       if (plottype == 'Boxplot')
       {
-        p2 = p1 + ggplot2::geom_boxplot()
+        py2 <- plotly::add_boxplot(py1, y = ~yvals, name = ~varnames)
       }
+
+      ###
       if (plottype == 'Lineplot') #if nothing is provided for plottype, we assume a lineplot is wanted
       {
-        p2 = p1 + ggplot2::geom_line(size = linesize, na.rm=TRUE)
+        py2 <- plotly::add_trace(py1, x = ~xvals ,y = ~yvals,
+                            type = 'scatter', mode = 'lines+markers', linetype = ~varnames,symbol=~varnames,
+                            line = list(color = ~varnames, width = linesize),
+                            marker = list(size = linesize*3))
       }
+
+      ###
       if (plottype == 'Mixedplot')
       {
-        #a mix of lines and points. for this, the dataframe needs to contain an extra column indicating line or point
-        p1a = p1 + ggplot2::geom_line(data = dplyr::filter(dat,style == 'line'), size = linesize)
-        p2 = p1a + ggplot2::geom_point(data = dplyr::filter(dat,style == 'point'), size = 2.5*linesize)
+        py1a <- plotly::add_trace(py1, data = dplyr::filter(dat,style == 'line'),
+                            x = ~xvals, y = ~yvals,
+                            type = 'scatter', mode = 'lines+markers', linetype = ~varnames,symbol=~varnames,
+                            line = list(color = ~varnames, width = linesize, symbols = ~varnames),
+                            marker = list(size = linesize*3))
+
+        py2 <- plotly::add_markers(py1a, data = dplyr::filter(dat,style == 'point'),
+                      x = ~xvals, y = ~yvals, color = ~varnames,
+                      marker = list(size = linesize*3))
       }
-
-
-
+      # browser()
+      ###
       #no numbering/labels on x-axis for boxplots
       if (plottype == 'Boxplot')
       {
-        p3 = p2 + ggplot2::scale_x_continuous(trans = xscaletrans, limits=c(xmin,xmax), breaks = NULL, labels = NULL)
+        py3 <- plotly::layout(py2, xaxis = list(showticklabels = F))
       }
       else
       {
-        p3 = p2 + ggplot2::scale_x_continuous(trans = xscaletrans, limits=c(xmin,xmax))
-        if (!is.null(resnow$xlab)) { p3 = p3 + ggplot2::xlab(resnow$xlab) }
+        # x scale
+        if (xscaletrans == "log10") { # scale of x xscaletrans
+          py3 <- plotly::layout(py2, xaxis = list(range = c(log(xmin),log(xmax)), type = substr(xscaletrans,1,3)) )
+        }
+        else{
+          py3 <- plotly::layout(py2, xaxis = list(range = c(xmin,xmax), type = xscaletrans ))
+        }
+        # x label
+        if (!is.null(resnow$xlab)) {
+          py3 <- plotly::layout(py3, xaxis = list(title=resnow$xlab, size = 18))
+        }
+      }
+      # Boxplot better need y label
+      # y label
+      if (!is.null(resnow$ylab)) {
+        py3 <- plotly::layout(py3, yaxis = list(title=resnow$ylab, type = yscaletrans))
+      }
+      # y scale
+      if (yscaletrans == "log10") { # scale of y yscaletrans
+        py4 = plotly::layout(py3, yaxis = list(range = c(log(ymin),log(ymax)), type = substr(yscaletrans,1,3)) )
+      }
+      else{
+        py4 = plotly::layout(py3, yaxis = list(range = c(ymin,ymax), type = yscaletrans) )
       }
 
-      #apply y-axis and if provided, label
-      p4 = p3 + ggplot2::scale_y_continuous(trans = yscaletrans, limits=c(ymin,ymax))
-      if (!is.null(resnow$ylab)) { p4 = p4 + ggplot2::ylab(resnow$ylab) }
-
+      ###
       #apply title if provided
       if (!is.null(resnow$title))
       {
-        p4 = p4 + ggplot2::ggtitle(resnow$title)
+        py4 = plotly::layout(py4, title = resnow$title)
       }
 
-      #modify overall theme
-      p5 = p4 + ggplot2::theme_bw(base_size = 18)
-
-
-      #do legend if TRUE or not provided
-      if (is.null(resnow$makelegend) || resnow$makelegend)
-      {
-        if (!is.null(resnow$legendlocation) && resnow$legendlocation == "left")
-        {
-             legendlocation = c(0,1)
-        }
-        else #default placement on right
-        {
-           legendlocation = c(0.8,1)
-        }
-
-        legendtitle = ifelse(is.null(resnow$legendtitle), "Variables", resnow$legendtitle)
-
-        p6 = p5 + ggplot2::theme(legend.key.width = grid::unit(3, "line")) + ggplot2::scale_colour_discrete(name  = legendtitle) + ggplot2::scale_linetype_discrete(name = legendtitle) + ggplot2::scale_shape_discrete(name = legendtitle)
-        p6 = p6 + ggplot2::theme(legend.position = legendlocation, legend.justification=c(0,1), legend.key.width = unit(4,"line"), legend.background = element_rect(size=0.5, linetype="solid", colour ="black"))
-      }
-      else
-      {
-          p6 = p5 + ggplot2::theme(legend.position="none")
-      }
-
-      #modify overall theme
-      pfinal = p6
-
+      ###
+      py4 = plotly::layout(py4,
+                           legend = list(font = list(size = 14)),
+                           yaxis = list(titlefont = list(size = 18)),
+                           xaxis = list(titlefont = list(size = 18)))
+      pfinal = py4
       allplots[[n]] = pfinal
-
     } #end loop over individual plots
 
     #using gridExtra pacakge for multiple plots, ggplot for a single one
@@ -203,19 +217,14 @@ generate_ggplot <- function(res)
     #currently not implemented
     #cowplot is an alternative to arrange plots.
     #There's a reason I ended up using grid.arrange() instead of cowplot but I can't recall
-
-    if (nplots>1)
+    if (n>1)
     {
-      #number of columns needs to be stored in 1st list element
-      #browser()
-      resultplot <- gridExtra::grid.arrange(grobs = allplots, ncol = res[[1]]$ncols)
-      #resultplot <- gridExtra::arrangeGrob(grobs = allplots, ncol = res[[1]]$ncol)
-      #cowplot::plot_grid(plotlist = allplots, ncol = res[[1]]$ncol)
-
+      resultplot <-  plotly::subplot(allplots, titleY = TRUE, titleX = TRUE)
     }
-    if (nplots==1)
+    if (n==1)
     {
       resultplot <- pfinal
     }
+    # browser()
     return(resultplot)
 }

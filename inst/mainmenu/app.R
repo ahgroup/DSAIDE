@@ -6,11 +6,14 @@ appdir = system.file("appinformation", package = packagename) #find path to apps
 fullappNames = list.files(path = appdir, pattern = "+.settings", full.names = FALSE)
 appNames = gsub("_settings.R" ,"",fullappNames)
 allsimfctfile = paste0(system.file("simulatorfunctions", package = packagename),"/simulatorfunctions.zip")
-currentapp = NULL #global server variable for currently loaded app
 
 #this function is the server part of the app
 server <- function(input, output, session)
 {
+  #to get plot engine be object to always be processed
+  output$plotengine <- renderText('ggplot')
+  outputOptions(output, "plotengine", suspendWhenHidden = FALSE)
+  
   #######################################################
   #start code that listens to model selection buttons and creates UI for a chosen model
   #######################################################
@@ -23,7 +26,8 @@ server <- function(input, output, session)
       currentdocfilename <- paste0(appdir,'/',currentapp,'_documentation.html')
       settingfilename = paste0(appdir,'/',currentapp,'_settings.R')
       
-      output$plot <- NULL
+      output$ggplot <- NULL
+      output$plotly <- NULL
       output$text <- NULL
 
       #load/source an R settings file that contains additional information for a given app
@@ -46,7 +50,7 @@ server <- function(input, output, session)
 
       output$modelinputs <- renderUI({modelinputs})
             
-      #display all extracted inputs on the analyze tab
+      #display all inputs and outputs on the analyze tab
       output$analyzemodel <- renderUI({
           tagList(
             tags$div(id = "shinyapptitle", appsettings$apptitle),
@@ -55,13 +59,12 @@ server <- function(input, output, session)
             fluidRow(
               column(6,
                 h2('Simulation Settings'),
-                wellPanel(
-                  uiOutput("modelinputs")
-                )
+                wellPanel(uiOutput("modelinputs"))
               ), #end sidebar column for inputs
               column(6,
                 h2('Simulation Results'),
-                plotOutput(outputId = "plot"),
+                conditionalPanel("output.plotengine == 'ggplot'", shiny::plotOutput(outputId = "ggplot") ),
+                conditionalPanel("output.plotengine == 'plotly'", plotly::plotlyOutput(outputId = "plotly") ),
                 htmlOutput(outputId = "text")
               ) #end column with outcomes
             ), #end fluidrow containing input and output
@@ -88,7 +91,8 @@ server <- function(input, output, session)
     observeEvent(input$reset, {
       modelinputs <- generate_shinyinput(mbmodel = appsettings$simfunction[1], otherinputs = appsettings$otherinputs, packagename = packagename)
       output$modelinputs <- renderUI({modelinputs})
-      output$plot <- NULL
+      output$plotly <- NULL
+      output$ggplot <- NULL
       output$text <- NULL
     })
 
@@ -105,14 +109,13 @@ server <- function(input, output, session)
                    {
                      #extract current model settings from UI input elements
                      x1=isolate(reactiveValuesToList(input)) #get all shiny inputs
-                     #x1=as.list( c(g = 1, U = 100)) #get all shiny inputs
                      x2 = x1[! (names(x1) %in% appNames)] #remove inputs that are action buttons for apps
                      x3 = (x2[! (names(x2) %in% c('submitBtn','Exit') ) ]) #remove further inputs
                      modelsettings = x3[!grepl("*selectized$", names(x3))] #remove any input with selectized
-                     #add settings information from appsettings list
-                     modelsettings = c(modelsettings, appsettings)
                      #remove nested list of shiny input tags
-                     modelsettings$otherinputs <- NULL
+                     appsettings$otherinputs <- NULL
+                     #add settings information from appsettings list
+                     modelsettings = c(appsettings, modelsettings)
                      if (is.null(modelsettings$nreps)) {modelsettings$nreps <- 1} #if there is no UI input for replicates, assume reps is 1
                      #if no random seed is set in UI, set it to 123.
                      if (is.null(modelsettings$rngseed)) {modelsettings$rngseed <- 123}
@@ -122,15 +125,24 @@ server <- function(input, output, session)
                      #if things failed, result contains a string with an error message
                      if (is.character(result))
                      {
-                       output$plot <- NULL
+                       output$ggplot <- NULL
+                       output$plotly <- NULL
                        output$text <- renderText({ paste("<font color=\"#FF0000\"><b>", result, "</b></font>") })
                      }
-                     else
+                     else #create plots and text, for plots, do either ggplot or plotly
                      {
-                      #create plot from results
-                      output$plot  <- renderPlot({ generate_ggplot(result) }, width = 'auto', height = 'auto')
-                      #create text from results
-                      output$text <- renderText({ generate_text(result) })
+                       if (modelsettings$plotengine == 'ggplot')
+                       {
+                         output$plotengine <- renderText('ggplot')
+                         output$ggplot  <- shiny::renderPlot({ generate_ggplot(result) })
+                       }
+                       if (modelsettings$plotengine == 'plotly')
+                       {
+                         output$plotengine <- renderText('plotly')
+                         output$plotly  <- plotly::renderPlotly({ generate_plotly(result) })
+                       }
+                       #create text from results
+                       output$text <- renderText({ generate_text(result) })
                      }
                    }) #end with-progress wrapper
     } #end the expression being evaluated by observeevent
@@ -151,10 +163,10 @@ server <- function(input, output, session)
     },
     contentType = "application/zip"
   )
-  #end code blocks that contain the analyze functionality
+  
+
   #######################################################
-
-
+  #Exit main menu
   observeEvent(input$Exit, {
     stopApp('Exit')
   })
@@ -173,9 +185,10 @@ ui <- fluidPage(
   tags$div(id = "shinyheadertext",
     "A collection of Shiny/R Apps to explore and simulate infectious disease models.",
     br()),
-  tags$div(id = "infotext", paste0('This is ', packagename,  'version ',utils::packageVersion(packagename),' last updated ', utils::packageDescription(packagename)$Date,'.')),
+  tags$div(id = "infotext", paste0('This is ', packagename,  ' version ',utils::packageVersion(packagename),' last updated ', utils::packageDescription(packagename)$Date,'.')),
   tags$div(id = "infotext", "Written and maintained by", a("Andreas Handel", href="http://handelgroup.uga.edu", target="_blank"), "with contributions from", a("others.",  href="https://github.com/ahgroup/DSAIDE#contributors", target="_blank")),
-  navbarPage(title = "DSAIDE", id = "DSAIDE", selected = 'Menu',
+  tags$div(id = "infotext", "More information can be found", a("on the package website.",  href="https://ahgroup.github.io/DSAIDE/", target="_blank")),
+  navbarPage(title = packagename, id = packagename, selected = 'Menu',
              tabPanel(title = "Menu",
                       tags$div(class='mainsectionheader', 'The Basics'),
                       fluidRow(
@@ -227,11 +240,10 @@ ui <- fluidPage(
                         class = "mainmenurow"
                       ), #close fluidRow structure for input
                       withTags({
-                        div(style = "text-align:left", class="infotext",
-
-                            p('This collection of model simulations/apps provides covers various aspects of infectious disease epidemiology from a dynamical systems model perspective. The software is meant to provide you with a "learning by doing" approach. You will likely learn best and fastest by using this software as part of a course on the topic, taught by a knowledgable instructor who can provide any needed background information and help if you get stuck. Alternatively, you should be able to self-learn and obtain the needed background information by going through the materials listed in the "Further Information" section of the apps.'),
-                            p('The main way of using the simulations is through this graphical interface. You can also access the simulations directly. This requires a bit of R coding but gives you many more options of things you can try. See the package vignette or the "Further Information" section of the apps for more on that.'),
-                            p('You should start with the Basic SIR app and read all its instruction tabs since they contain information relevant for all apps. The remaining simulations are ordered in a sequence that makes sense for learning the material, so it is best to go in order (each section top to bottom, within each section left to right). Some simulations also build on earlier ones. But you can possibly also jump around and still be ok.')
+                        div(style = "text-align:left", class="bottomtext",
+                            tags$div(id = "bottomtext", 'This collection of model simulations/apps provides covers various aspects of infectious disease epidemiology from a dynamical systems model perspective. The software is meant to provide you with a "learning by doing" approach. You will likely learn best and fastest by using this software as part of a course on the topic, taught by a knowledgable instructor who can provide any needed background information and help if you get stuck. Alternatively, you should be able to self-learn and obtain the needed background information by going through the materials listed in the "Further Information" section of the apps.'),
+                            tags$div(id = "bottomtext", 'The main way of using the simulations is through this graphical interface. You can also access the simulations directly. This requires a bit of R coding but gives you many more options of things you can try. See the package vignette or the "Further Information" section of the apps for more on that.'),
+                            tags$div(id = "bottomtext", 'You should start with the Basic SIR app and read all its instruction tabs since they contain information relevant for all apps. The remaining simulations are ordered in a sequence that makes sense for learning the material, so it is best to go in order (each section top to bottom, within each section left to right). Some simulations also build on earlier ones. But you can possibly also jump around and still be ok.')
                         )
                       }), #close withTags function
                       p('Have fun exploring the models!', class='maintext'),

@@ -221,11 +221,12 @@ iframe {
 
 }
 
-
-.warningtext {
-	font-weight: bold;
-	font-size: 1.5em;
-	color: #ff0000;
-
+#bottomtext {
+	text-align: center;
+	color: black;
 }
 
+.bottomtext {
+	text-align: center;
+
+}
