@@ -103,8 +103,6 @@ download_code <- function(modelsettings, modelfunction) {
       paste(., collapse = ", ")
     noutbreaks <- 0
     
-    browser()
-    
     model_lines <- paste(
       "for (nn in 1:nreps)",
       "{",
