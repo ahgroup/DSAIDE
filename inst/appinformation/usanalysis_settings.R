@@ -15,6 +15,10 @@ appsettings$simfunction = 'simulate_usanalysis_sir'
 #number of plots to produce for output
 appsettings$nplots = 3
 
+#number of columns for a multi-panel plot
+appsettings$ncols = 3
+
+
 #specify the type of model that will be run
 #if model type is provided as UI input, it should be set to NULL here
 #otherwise it needs to be provided

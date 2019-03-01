@@ -26,5 +26,6 @@
 * Maybe submit for Ropensci review: https://github.com/ropensci/onboarding
 * Add/cite/connect to Ottar's book and package: https://github.com/objornstad/epimdr
 * Hashtags on twitter when promoting app: #rstats, #dynamicalsystems #infectiousdisease #epidemiology #EpiTwitter
+* Contribute code to Epirecipes? http://epirecip.es/
 
 
