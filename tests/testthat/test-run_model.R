@@ -16,4 +16,7 @@ test_that("run_model correctly runs different models",
             #check that simulation returned specific value of susceptible at end
             Sfinal = min(dplyr::filter(result[[1]]$dat, varnames == "S")$yvals)
             expect_equal(Sfinal, 153)
+            
+            
+            
 })

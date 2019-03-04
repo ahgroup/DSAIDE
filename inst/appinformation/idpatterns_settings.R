@@ -22,5 +22,6 @@ appsettings$modeltype = "_ode_"
 
 #additional input elements for app that are shown on UI
 appsettings$otherinputs =   list(
-  shiny::selectInput("plotscale", "Log-scale for plot",c("none" = "none", 'x-axis' = "x", 'y-axis' = "y", 'both axes' = "both"))
+  shiny::selectInput("plotscale", "Log-scale for plot",c("none" = "none", 'x-axis' = "x", 'y-axis' = "y", 'both axes' = "both")),
+  shiny::selectInput("plotengine", "plot engine",c("ggplot" = "ggplot", "plotly" = "plotly"))
 ) #end list
