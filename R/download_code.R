@@ -65,6 +65,8 @@ download_code <- function(modelsettings, modelfunction) {
                                 "\""),
                          sep = "\n")
   
+  browser()
+  
   # Option if model is ODE
   if (grepl("_ode_", modelsettings$modeltype)) {
     currentmodel <- modelfunction[grep('_ode',modelfunction)] #list of model functions, get the ode function
