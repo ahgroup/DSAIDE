@@ -59,7 +59,10 @@ server <- function(input, output, session)
             fluidRow(
               column(6,
                 h2('Simulation Settings'),
-                wellPanel(uiOutput("modelinputs"))
+                wellPanel(uiOutput("modelinputs"),
+                          tags$p(downloadButton(outputId = "download_code", 
+                                                label = "Download Code"),
+                                 align = "center"))
               ), #end sidebar column for inputs
               column(6,
                 h2('Simulation Results'),
@@ -151,6 +154,36 @@ server <- function(input, output, session)
     #######################################################
     #end code that listens to the 'run simulation' button and runs a model for the specified settings
     #######################################################
+  
+  #######################################################
+  #start code that listens to the "download code" button
+  #######################################################
+  
+  output$download_code <- downloadHandler(
+    filename = function() {
+      "output.R"
+    },
+    content = function(file) {
+      #extract current model settings from UI input elements
+      x1=isolate(reactiveValuesToList(input)) #get all shiny inputs
+      #x1=as.list( c(g = 1, U = 100)) #get all shiny inputs
+      x2 = x1[! (names(x1) %in% appNames)] #remove inputs that are action buttons for apps
+      x3 = (x2[! (names(x2) %in% c('submitBtn','Exit') ) ]) #remove further inputs
+      modelsettings <- x3[!grepl("*selectized$", names(x3))] #remove any input with selectized
+      modelsettings <- c(modelsettings, appsettings)
+      modelfunction = modelsettings$simfunction
+      if (is.null(modelsettings$nreps)) {modelsettings$nreps <- 1} #if there is no UI input for replicates, assume reps is 1
+      #if no random seed is set in UI, set it to 123.
+      if (is.null(modelsettings$rngseed)) {modelsettings$rngseed <- 123}
+      
+      output <- download_code(modelsettings, modelfunction)
+      writeLines(output, file)
+    }
+  )
+  
+  #######################################################
+  #end code that listens to the "download code" button
+  #######################################################
 
   #######################################################
   #code that allows download of all files
