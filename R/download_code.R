@@ -27,7 +27,6 @@
 #' @export
 
 download_code <- function(modelsettings, modelfunction) {
-  browser()
   # Opening lines
   opening_lines <- paste("datall = NULL",
                          "finaltext = NULL",
@@ -120,8 +119,6 @@ download_code <- function(modelsettings, modelfunction) {
     
     noutbreaks <- 0
     
-    # browser()
-    
     model_lines <- paste(
       "for (nn in 1:nreps)",
       "{",
@@ -153,8 +150,6 @@ download_code <- function(modelsettings, modelfunction) {
                                    function(i) paste(names(currentargs[i]), "=",
                                                      currentargs[[i]])))
     args_in_order <- paste(args_in_order, collapse = ", ")
-    
-    browser()
     
     model_lines <- paste(
       paste0("modelsettings <- ", modelsettings),
@@ -247,8 +242,6 @@ download_code <- function(modelsettings, modelfunction) {
     "if (plotengine == \"plotly\") {generate_plotly(result)}",
     "generate_text(result)",
     sep = "\n")
-  
-  browser()
   
   # Writing to file
   output_text <- paste(opening_lines, model_lines, closing_lines, sep = "\n")
