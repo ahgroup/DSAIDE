@@ -144,6 +144,57 @@ download_code <- function(modelsettings, modelfunction) {
       sep = "\n")
   }
   
+  # Option if the model is uncertainty and sensitivity analysis
+  else if (grepl('_usanalysis_',modelsettings$modeltype)) {
+    modelsettings$currentmodel = 'other'
+    currentmodel = modelfunction
+    
+    model_lines <- paste(
+      paste0("simresult <- runsimulation(", modelsettings, ", ",
+             currentmodel, ")"),
+      "# if error occurs we exit",
+      "if (class(simresult)!=\"list\")", 
+      "{",
+      "result <- 'Model run failed. Maybe unreasonable parameter values?'",
+      "return(result)",
+      "}",
+      "#pull the indicator for non-steady state out of the dataframe, process separately",
+      "steady = simresult$dat$steady",
+      "simresult$dat$steady <- NULL", 
+      "simdat = simresult$dat",
+      "#number of columns - each outcome gets a column",
+      "result[[1]]$ncols = modelsettings$ncols",
+      "#loop over each outer list element corresponding to a plot and fill it with another list",
+      "#of meta-data and data needed to create each plot",
+      "#each parameter-output pair is its own plot, therefore its own list entry",
+      "ct=1; #some counter",
+      "for (nn in 1:modelsettings$nplots) #for specified parameter, loop over outcomes",
+      "{",
+      "#data frame for each plot",
+      "xvals = simdat[,modelsettings$samplepar] #get parameter under consideration",
+      "xvalname = modelsettings$samplepar",
+      "yvals = simdat[,nn] #first 3 elements are outcomes",
+      "yvalname = colnames(simdat)[nn]",
+      "dat = data.frame(xvals = xvals, yvals = yvals, varnames = yvalname)",
+      "result[[ct]]$dat = dat",
+      "#meta-data for each plot",
+      "result[[ct]]$plottype = modelsettings$plottype",
+      "result[[ct]]$xlab = xvalname",
+      "result[[ct]]$ylab = yvalname",
+      "result[[ct]]$makelegend = FALSE #no legend for these plots",
+      "result[[ct]]$xscale = 'identity'",
+      "result[[ct]]$yscale = 'identity'",
+      "if (plotscale == 'x' | plotscale == 'both') { result[[ct]]$xscale = 'log10'}",
+      "if (plotscale == 'y' | plotscale == 'both') { result[[ct]]$yscale = 'log10'}",
+      "#the following are for text display for each plot",
+      "result[[ct]]$maketext = TRUE #if true we want the generate_text function to process data and generate text, if 0 no result processing will occur insinde generate_text",
+      "result[[ct]]$finaltext = paste(\"System might not have reached steady state\", length(steady) - sum(steady), \"times\")",
+      "ct = ct + 1",
+      "} #loop over plots",
+      sep = "\n"
+    )
+  }
+  
   # Final plotting stuff
   closing_lines <- paste(
     "listlength = nplots",
