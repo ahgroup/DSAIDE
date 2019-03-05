@@ -55,22 +55,13 @@ download_code <- function(modelsettings, modelfunction) {
                                 "\"",
                                 modelsettings$nreps,
                                 "\""),
-                         paste0("tmax <- ",
-                                "\"",
-                                modelsettings$tmax,
-                                "\""),
-                         paste0("tfinal <- ",
-                                "\"",
-                                modelsettings$tfinal,
-                                "\""),
                          sep = "\n")
-  
-  browser()
   
   # Option if model is ODE
   if (grepl("_ode_", modelsettings$modeltype)) {
     currentmodel <- modelfunction[grep('_ode',modelfunction)] #list of model functions, get the ode function
-    currentargs <- modelsettings[match(names(unlist(formals(currentmodel))), names(unlist(modelsettings)))] #extract modesettings inputs needed for simulator function
+    currentargs <- modelsettings[match(names(unlist(formals(currentmodel))), names(modelsettings))]
+    # currentargs <- modelsettings[match(names(unlist(formals(currentmodel))), names(unlist(modelsettings)))] #extract modesettings inputs needed for simulator function
     # args_in_order <- lapply(1:length(currentargs),
     #                         function(i) paste(names(currentargs[i]), "=",
     #                                           currentargs[[i]])) %>%
@@ -82,9 +73,11 @@ download_code <- function(modelsettings, modelfunction) {
                                               currentargs[[i]])))
     args_in_order <- paste(args_in_order, collapse = ", ")
     
-    browser()
-    
-    model_lines <- paste(paste0("simresult <- ",
+    model_lines <- paste(paste0("tfinal <- ",
+                                "\"",
+                                modelsettings$tfinal,
+                                "\""),
+                          paste0("simresult <- ",
                                 currentmodel, "(", args_in_order, ")"),
                          "simresult <- simresult$ts",
                          "if (grepl('_and_',modeltype))",
@@ -104,7 +97,8 @@ download_code <- function(modelsettings, modelfunction) {
   else if (grepl('_stochastic_',modelsettings$modeltype)) {
     modelsettings$currentmodel <- 'stochastic'
     currentmodel <- modelfunction[grep('_stochastic',modelfunction)]
-    currentargs <- modelsettings[match(names(unlist(formals(currentmodel))), names(unlist(modelsettings)))] #extract modesettings inputs needed for simulator function
+    currentargs <- modelsettings[match(names(unlist(formals(currentmodel))), names(modelsettings))] #extract modesettings inputs needed for simulator function
+    # currentargs <- modelsettings[match(names(unlist(formals(currentmodel))), names(unlist(modelsettings)))] #extract modesettings inputs needed for simulator function
     # args_in_order <- lapply(1:length(currentargs),
     #                         function(i) paste(names(currentargs[i]), "=",
     #                                           currentargs[[i]])) %>%
@@ -121,12 +115,12 @@ download_code <- function(modelsettings, modelfunction) {
     browser()
     
     model_lines <- paste(
+      paste0("tmax <- ",
+             "\"",
+             modelsettings$tfinal,
+             "\""),
       "for (nn in 1:nreps)",
       "{",
-      "if (is.null(tmax) & !is.null(tfinal) ) ",
-      "{",
-      "tmax = tfinal",
-      "}",
       paste0("simresult <- ",
              currentmodel, "(", args_in_order, ")"),
       "simresult <- simresult$ts",
