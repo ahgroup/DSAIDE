@@ -157,6 +157,7 @@ download_code <- function(modelsettings, modelfunction) {
     browser()
     
     model_lines <- paste(
+      paste0("modelsettings <- ", modelsettings),
       "#short function to call/run model",
       "runsimulation <- function(modelsettings, currentmodel)",
       "{",
@@ -174,8 +175,8 @@ download_code <- function(modelsettings, modelfunction) {
       "return(simresult)",
       "}",
       "\n",
-      paste0("simresult <- runsimulation(", args_in_order, ", ",
-             currentmodel, ")"),
+      paste0("simresult <- runsimulation(modelsettings, \"",
+             currentmodel, "\")"),
       "# if error occurs we exit",
       "if (class(simresult)!=\"list\")", 
       "{",
