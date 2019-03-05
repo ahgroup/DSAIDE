@@ -21,36 +21,6 @@ generate_shinyinput <- function(mbmodel, otherinputs = NULL, packagename)
     myclassfct = function (x) {
         tags$div(class="myinput", x)
     }
-    
-    #####
-    # experimental block of code (3/5/2019)
-    #####
-    
-    if (length(mbmodel) == 2) {
-      fcfile_list <- lapply(mbmodel, 
-                            function(m) paste0(
-                              system.file("simulatorfunctions", 
-                                          package = packagename), "/",
-                              m, ".R"
-                            ))
-      x <- unlist(lapply(fcfile_list, function(f) readLines(f)))
-      x2 = grep('@param', x, value = TRUE)
-      pattern = ".*[:](.+)[:].*" #regex for capturing text between colons
-      x3 = gsub(pattern, "\\1",x2)
-      x3 = substr(x3,2,nchar(x3)-1); #remove blanks in front and back
-      #using stringr
-      #pattern = ":.+:" #regex for capturing text between colons
-      #x3 = stringr::str_extract_all(x2, pattern, simplify = TRUE)
-      #x3=substr(x3,3,nchar(x3)-2); #remove : and blanks in front and back
-      ip = unique(formals(mbmodel)) #get model inputs
-      
-      browser()
-    }
-    
-    
-    #####
-    # end experimental block
-    #####
 
     ###########################################
     #create UI elements as input/output for shiny by parsing a function/R code
