@@ -148,6 +148,11 @@ download_code <- function(modelsettings, modelfunction) {
   else if (grepl('_usanalysis_',modelsettings$modeltype)) {
     modelsettings$currentmodel <- 'other'
     currentmodel <- modelfunction
+    currentargs <- modelsettings[match(names(unlist(formals(currentmodel))), names(modelsettings))] #extract modesettings inputs needed for simulator function
+    args_in_order <- unlist(lapply(1:length(currentargs),
+                                   function(i) paste(names(currentargs[i]), "=",
+                                                     currentargs[[i]])))
+    args_in_order <- paste(args_in_order, collapse = ", ")
     
     browser()
     
@@ -169,7 +174,7 @@ download_code <- function(modelsettings, modelfunction) {
       "return(simresult)",
       "}",
       "\n",
-      paste0("simresult <- runsimulation(", modelsettings, ", ",
+      paste0("simresult <- runsimulation(", args_in_order, ", ",
              currentmodel, ")"),
       "# if error occurs we exit",
       "if (class(simresult)!=\"list\")", 
