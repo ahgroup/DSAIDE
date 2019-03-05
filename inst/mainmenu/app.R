@@ -54,8 +54,9 @@ server <- function(input, output, session)
       # }
       
       modelinputs <- generate_shinyinput(mbmodel = appsettings$simfunction[1], otherinputs = appsettings$otherinputs, packagename = packagename)
-
       output$modelinputs <- renderUI({modelinputs})
+      
+      # Stochastic SEIR, Evolutionary Dynamics, Model Exploration, Uncertainty Analysis
             
       #display all inputs and outputs on the analyze tab
       output$analyzemodel <- renderUI({
