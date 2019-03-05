@@ -152,6 +152,23 @@ download_code <- function(modelsettings, modelfunction) {
     browser()
     
     model_lines <- paste(
+      "#short function to call/run model",
+      "runsimulation <- function(modelsettings, currentmodel)",
+      "{",
+      "#match values provided from UI with those expected by function",
+      "settingsvec = unlist(modelsettings)",
+      "currentargs = settingsvec[match(names(unlist(formals(currentmodel))), names(settingsvec))]",
+      "#make a list",
+      "arglist = as.list(currentargs)",
+      "#convert arguments for function call to numeric if possible",
+      "#preserve those that can't be converted",
+      "numind = suppressWarnings(!is.na(as.numeric(arglist))) #find numeric values",
+      "arglist[numind] = as.numeric(currentargs[numind])",
+      "#run simulation, try command catches error from running code.",
+      "simresult <- try( do.call(currentmodel, args = arglist ) )",
+      "return(simresult)",
+      "}",
+      "\n",
       paste0("simresult <- runsimulation(", modelsettings, ", ",
              currentmodel, ")"),
       "# if error occurs we exit",
