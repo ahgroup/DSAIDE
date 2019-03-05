@@ -46,7 +46,14 @@ server <- function(input, output, session)
       #extract function and other inputs and turn them into a taglist
       #this uses the 1st function provided by the settings file and stored in currentsimfct
       #indexing sim function in case there are multiple
-      modelinputs <- generate_shinyinput(mbmodel = appsettings$simfunction[1], otherinputs = appsettings$otherinputs, packagename = packagename)
+      
+      if (length(appsettings$simfunction) == 1) {
+        modelinputs <- generate_shinyinput(mbmodel = appsettings$simfunction[1], otherinputs = appsettings$otherinputs, packagename = packagename)
+      } else {
+        modelinputs <- generate_shinyinput(mbmodel = list(appsettings$simfunction[1], appsettings$simfunction[2]), otherinputs = appsettings$otherinputs, packagename = packagename)
+      }
+      
+      # modelinputs <- generate_shinyinput(mbmodel = appsettings$simfunction[1], otherinputs = appsettings$otherinputs, packagename = packagename)
 
       output$modelinputs <- renderUI({modelinputs})
             
