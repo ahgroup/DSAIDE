@@ -101,7 +101,9 @@ download_code <- function(modelsettings, modelfunction) {
   # Option if the model is stochastic
   else if (grepl('_stochastic_',modelsettings$modeltype)) {
     modelsettings$currentmodel <- 'stochastic'
-    modelsettings$tmax <- modelsettings$tfinal
+    if (is.null(modelsettings$tmax) & !is.null(modelsettings$tfinal)) {
+      modelsettings$tmax <- modelsettings$tfinal
+    }
     currentmodel <- modelfunction[grep('_stochastic',modelfunction)]
     currentargs <- modelsettings[match(names(unlist(formals(currentmodel))), names(modelsettings))] #extract modesettings inputs needed for simulator function
     # currentargs <- modelsettings[match(names(unlist(formals(currentmodel))), names(unlist(modelsettings)))] #extract modesettings inputs needed for simulator function
