@@ -146,8 +146,10 @@ download_code <- function(modelsettings, modelfunction) {
   
   # Option if the model is uncertainty and sensitivity analysis
   else if (grepl('_usanalysis_',modelsettings$modeltype)) {
-    modelsettings$currentmodel = 'other'
-    currentmodel = modelfunction
+    modelsettings$currentmodel <- 'other'
+    currentmodel <- modelfunction
+    
+    browser()
     
     model_lines <- paste(
       paste0("simresult <- runsimulation(", modelsettings, ", ",
