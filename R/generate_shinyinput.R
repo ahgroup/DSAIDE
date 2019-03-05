@@ -55,6 +55,8 @@ generate_shinyinput <- function(mbmodel, otherinputs = NULL, packagename)
     {
         otherargs = lapply(otherinputs,myclassfct)
     }
+    
+    browser()
 
     #return structure
     modelinputs <- tagList(
