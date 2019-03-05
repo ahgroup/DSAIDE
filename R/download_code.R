@@ -55,6 +55,10 @@ download_code <- function(modelsettings, modelfunction) {
                                 "\"",
                                 modelsettings$nreps,
                                 "\""),
+                         paste0("plotengine <- ",
+                                "\"",
+                                modelsettings$plotengine,
+                                "\""),
                          sep = "\n")
   
   # Option if model is ODE
@@ -160,7 +164,8 @@ download_code <- function(modelsettings, modelfunction) {
     "result[[1]]$yscale = 'identity'",
     "if (plotscale == 'x' | plotscale == 'both') { result[[1]]$xscale = 'log10'}",
     "if (plotscale == 'y' | plotscale == 'both') { result[[1]]$yscale = 'log10'}",
-    "generate_plots(result)",
+    "if (plotengine == \"ggplot\") {generate_ggplot(result)}",
+    "if (plotengine == \"plotly\") {generate_plotly(result)}",
     "generate_text(result)",
     sep = "\n")
   
