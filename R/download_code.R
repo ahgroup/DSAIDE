@@ -77,6 +77,8 @@ download_code <- function(modelsettings, modelfunction) {
       unlist(.) %>%
       paste(., collapse = ", ")
     
+    browser()
+    
     model_lines <- paste(paste0("simresult <- ",
                                 currentmodel, "(", args_in_order, ")"),
                          "simresult <- simresult$ts",
