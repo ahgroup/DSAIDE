@@ -27,6 +27,7 @@
 #' @export
 
 download_code <- function(modelsettings, modelfunction) {
+  browser()
   # Opening lines
   opening_lines <- paste("datall = NULL",
                          "finaltext = NULL",
