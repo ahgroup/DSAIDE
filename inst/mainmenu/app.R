@@ -6,6 +6,7 @@ appdir = system.file("appinformation", package = packagename) #find path to apps
 fullappNames = list.files(path = appdir, pattern = "+.settings", full.names = FALSE)
 appNames = gsub("_settings.R" ,"",fullappNames)
 allsimfctfile = paste0(system.file("simulatorfunctions", package = packagename),"/simulatorfunctions.zip")
+currentdocfilename <<- NULL
 
 #this function is the server part of the app
 server <- function(input, output, session)
@@ -23,7 +24,7 @@ server <- function(input, output, session)
     {
       currentapp <<- appName #assign currently chosen app to global app variable
       #file name for documentation
-      currentdocfilename <- paste0(appdir,'/',currentapp,'_documentation.html')
+      currentdocfilename <<- paste0(appdir,'/',currentapp,'_documentation.html')
       settingfilename = paste0(appdir,'/',currentapp,'_settings.R')
       
       output$ggplot <- NULL
@@ -35,11 +36,13 @@ server <- function(input, output, session)
       #different models can have different variables
       #all models need the following:
       #variable apptitle - the name of the app
-      #variable simfilename - the name of the simulation function(s)
+      #variable simfunction - the name of the simulation function(s)
       #variable modeltype - the type of the model to be run or NULL if set by UI
-      #additional elements that can be provided: 
+      #additional elements that can be provided:
       #variable otherinputs - contains additional shiny UI elements that are not generated automaticall by functions above
-      #for instance all non-numeric inputs need to be provided separately. 
+      #for instance all non-numeric inputs need to be provided separately.
+      #If not needed, it is NULL
+      source(settingfilename) #source the file with additional settings to load them
       
       source(settingfilename) #source the file with additional settings to load them
     
@@ -47,16 +50,8 @@ server <- function(input, output, session)
       #this uses the 1st function provided by the settings file and stored in currentsimfct
       #indexing sim function in case there are multiple
       
-      # if (length(appsettings$simfunction) == 1) {
-      #   modelinputs <- generate_shinyinput(mbmodel = appsettings$simfunction[1], otherinputs = appsettings$otherinputs, packagename = packagename)
-      # } else {
-      #   modelinputs <- generate_shinyinput(mbmodel = list(appsettings$simfunction[1], appsettings$simfunction[2]), otherinputs = appsettings$otherinputs, packagename = packagename)
-      # }
-      
       modelinputs <- generate_shinyinput(mbmodel = appsettings$simfunction[1], otherinputs = appsettings$otherinputs, packagename = packagename)
       output$modelinputs <- renderUI({modelinputs})
-      
-      # Stochastic SEIR, Evolutionary Dynamics, Model Exploration, Uncertainty Analysis
             
       #display all inputs and outputs on the analyze tab
       output$analyzemodel <- renderUI({
@@ -67,10 +62,9 @@ server <- function(input, output, session)
             fluidRow(
               column(6,
                 h2('Simulation Settings'),
-                wellPanel(uiOutput("modelinputs"),
-                          tags$p(downloadButton(outputId = "download_code", 
-                                                label = "Download Code"),
-                                 align = "center"))
+                wellPanel(uiOutput("modelinputs")
+                          #tags$p(downloadButton(outputId = "download_code", label = "Download Code"), align = "center")  #don't show for now until all works
+                          ) #end wellPanel
               ), #end sidebar column for inputs
               column(6,
                 h2('Simulation Results'),
@@ -118,6 +112,10 @@ server <- function(input, output, session)
       withProgress(message = 'Running Simulation',
                    detail = "This may take a while", value = 0,
                    {
+                     #remove previous plots and text
+                     output$ggplot <- NULL
+                     output$plotly <- NULL
+                     output$text <- NULL
                      #extract current model settings from UI input elements
                      x1=isolate(reactiveValuesToList(input)) #get all shiny inputs
                      x2 = x1[! (names(x1) %in% appNames)] #remove inputs that are action buttons for apps
@@ -205,6 +203,27 @@ server <- function(input, output, session)
     contentType = "application/zip"
   )
   
+  #######################################################
+  #Button to create floating task list
+  observeEvent(input$detachtasks, {
+    x = withMathJax(generate_documentation(currentdocfilename))
+    #browser()
+    x1 = x[[2]][[3]] #task tab
+    x2 = x1[[3]]
+    x3 = x2[[1]][[3]] #pull out task list without buttons
+    output$floattask <- renderUI({
+      absolutePanel(x3, id = "taskfloat", class = "panel panel-default", fixed = TRUE,
+                    draggable = TRUE, top = 100, left = "auto", right = 20, bottom = "auto",
+                    width = "30%", height = "auto")
+    })
+  })
+  
+  #######################################################
+  #Button to remove floating task list
+  observeEvent(input$destroytasks, {
+    output$floattask <- NULL
+  })
+  
 
   #######################################################
   #Exit main menu
@@ -289,7 +308,7 @@ ui <- fluidPage(
                       }), #close withTags function
                       p('Have fun exploring the models!', class='maintext'),
                       fluidRow(
-           				downloadButton("modeldownload", "download all simulations", class="mainbutton"),
+           				      downloadButton("modeldownload", "download all simulations", class="mainbutton"),
                         actionButton("Exit", "Exit", class="exitbutton"),
                         class = "mainmenurow"
                       ) #close fluidRow structure for input
@@ -299,7 +318,8 @@ ui <- fluidPage(
              tabPanel("Analyze",
                       fluidRow(
                         column(12,
-                               uiOutput('analyzemodel')
+                               uiOutput('analyzemodel'),
+                               uiOutput('floattask')
                         )
                         #class = "mainmenurow"
                       ) #close fluidRow structure for input
