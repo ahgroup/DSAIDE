@@ -2,9 +2,17 @@
 
 ## User facing changes
 
+* Easy download of all simulator functions from main menu
+* User can switch between ggplot and plotly for figures
+* The list of "what to do" tasks can be floated
+* Added new apps
+* Additional UI improvement
+
 ## Other changes
 
-* All simulator functions are re-written to the new format used in the modelbuilder package
+* More unit tests
+* Allow for easy deployment to shinyappsio
+* package restructured
 
 # DSAIDE 0.7.0
 
