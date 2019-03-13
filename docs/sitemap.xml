@@ -4,6 +4,9 @@
     <loc>https://ahgroup.github.io/DSAIDE/index.html/index.html</loc>
   </url>
   <url>
+    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/download_code.html</loc>
+  </url>
+  <url>
     <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/DSAIDE.html</loc>
   </url>
   <url>
@@ -13,7 +16,10 @@
     <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/generate_documentation.html</loc>
   </url>
   <url>
-    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/generate_plots.html</loc>
+    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/generate_ggplot.html</loc>
+  </url>
+  <url>
+    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/generate_plotly.html</loc>
   </url>
   <url>
     <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/generate_shinyinput.html</loc>
