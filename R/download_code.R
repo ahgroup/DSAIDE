@@ -30,36 +30,7 @@ download_code <- function(modelsettings, modelfunction) {
   # Opening lines
   opening_lines <- paste("datall = NULL",
                          "finaltext = NULL",
-                         "library(DSAIDE)",
-                         paste0("modeltype <- ",
-                                "\"",
-                                modelsettings$modeltype,
-                                "\""),
-                         paste0("plotscale <- ",
-                                "\"",
-                                modelsettings$plotscale,
-                                "\""),
-                         paste0("nplots <- ",
-                                "\"",
-                                modelsettings$nplots,
-                                "\""),
-                         paste0("plottype <- ",
-                                "\"",
-                                modelsettings$plottype,
-                                "\""),
-                         paste0("rngseed <- ",
-                                "\"",
-                                modelsettings$rngseed,
-                                "\""),
-                         paste0("nreps <- ",
-                                "\"",
-                                modelsettings$nreps,
-                                "\""),
-                         paste0("plotengine <- ",
-                                "\"",
-                                modelsettings$plotengine,
-                                "\""),
-                         sep = "\n")
+                         "library(DSAIDE)")
   
   # Option if model is ODE
   if (grepl("_ode_", modelsettings$modeltype)) {

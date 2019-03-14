@@ -63,7 +63,7 @@ server <- function(input, output, session)
               column(6,
                 h2('Simulation Settings'),
                 wellPanel(uiOutput("modelinputs")
-                          #tags$p(downloadButton(outputId = "download_code", label = "Download Code"), align = "center")  #don't show for now until all works
+                #tags$p(downloadButton(outputId = "download_code", label = "Download Code"), align = "center")  #don't show for now until all works
                           ) #end wellPanel
               ), #end sidebar column for inputs
               column(6,
