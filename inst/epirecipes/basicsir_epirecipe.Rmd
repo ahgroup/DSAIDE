@@ -1,0 +1,142 @@
+---
+title: Basic SIR Model 
+output:
+  html_document:
+    theme: null
+    highlight: null
+    fig_retina: null   
+    fig_caption: true
+    mathjax: default 
+    keep_md: false
+knit: markdowntemplates::to_jupyter
+---
+
+
+## Overview 
+This app implements the basic SIR (susceptible-infected-recovered) model and allows you to explore a very basic infectious disease simulation. 
+
+This is part of the DSAIDE R package, which allows you to interact with different types of models through a graphical interface, or directly access and modify the code. See [the DSAIDE package website](https://ahgroup.github.io/DSAIDE/) for more information.
+
+
+
+## The Model 
+
+### Model Description
+This model is a compartmental SIR (susceptible-infected-recovered) model. Compartmental means that we place individuals into distinct compartments, according to some characteristics. We then only track the total number of individuals in each of these compartments. In the simplest model, the only characteristic we track is a person's infection status. We allow for 3 different stages/compartments: 
+
+* **S** - uninfected and susceptible individuals. 
+* **I** - infected and infectious individuals (note that these terms are often used interchangeably, but technically we are talking about someone who is infected **and** is infectious, i.e. can infect others).
+* **R** - recovered/removed individuals. Those are individuals that do not further participate, either because they are now immune or because they died.
+
+The SIR model is very basic. It could be extended by introducing further compartments. For instance, we could stratify according to gender, which would give us 2 sets of SIR compartments, one for males and one for females. Some of these extensions are implemented in other apps.
+
+In addition to specifying the **compartments** of a model, we need to specify the **processes/mechanisms** determining the changes for each compartment. Broadly speaking, there are processes that increase the number of individuals in a given compartment/stage, and processes that lead to a reduction. Those processes are sometimes called inflows and outflows. 
+
+For our system, we specify only 2 processes/flows: 
+
+* A susceptible individual (S) can become infected by an infectious individual (I) at some rate (for which we use the parameter _b_). This leads to the susceptible individual leaving the S compartment and entering the I compartment.   
+* An infected individual dies or recovers and enters the recovered/removed (R) compartment at some. This is described by the parameter _g_ in our model.
+
+As with the compartments, we could extend the model and allow other processes to occur. For instance, we could allow for natural births and deaths, waning immunity, deaths due to disease, etc. Some of that will be included in other apps. 
+
+### Model Representation
+For compartmental models (and also often other types of models), it is useful to show a graphical schematic representation of the compartments and processes included in the model. For compartmental models, such a diagram/figure is usually called a flow diagram. Such a diagram consists of a box for each compartment, and arrows pointing in and out of boxes to describe flows and interactions. For the simple SIR model, the flow diagram looks as follows:
+
+
+```{r diagram, fig.cap='Flow diagram for simple SIR model.',  echo=FALSE}
+knitr::include_graphics("basicSIRmodelfigure.png")
+```
+
+
+### Model Implementation
+To allow us to simulate this model, we need to implement it on the computer. For that purpose, it is often useful to write the model as mathematical equations (this is not strictly needed, some computer simulation models are never formulated as mathematical models). A very common way (but not the only one) to implement compartmental models such as the simple SIR model is a set of ordinary differential equations. Each compartment/variable gets an equation. The right side of each equation specifies the processes going on in the system and how they change the numbers in each compartment via inflows and outflows. For the model described above, the equations look like this: 
+
+$$
+\begin{aligned}
+\dot S & = -bSI \\
+\dot I & = bSI - gI \\
+\dot R & = gI
+\end{aligned}
+$$
+
+
+*Note: If you don't see equations but instead gibberish, try opening the app with a different browser. I have found that occasionally, on some computers/browsers, the math is not shown properly.* 
+
+
+### Some general notes
+* Throughout DSAIDE, I will use _ID_ to abbreviate _infectious disease_
+* You will see both the term *host(s)* and *individual(s)* used interchangeably. While we most often think of human hosts, the hosts can be any animal (or plants or bacteria infected by phages or...).
+* In general, the entities that change in our model (here the number of individuals in compartments S, I and R) are called variables: They are variable and change during the simulation. 
+* In contrast, the quantities that are usually fixed for a given scenario/simulation are called parameters. For this model, those are the infection rate _b_ and the recovery rate _g_.
+* Sometimes, parameters can vary during the simulation, but most often they do not.
+* If you want to study a specific ID, you choose parameters such that they match the specific disease you want to study. For now, just play around with the model without trying to relate it to some specific ID.
+* There are no fixed rules concerning the naming of variables and parameters. Compartments (e.g. SIR) tend to be labeled very similarly by different researchers, while parameter labels are much more variable. Always check carefully for a given paper/model what the meaning of each parameter is.
+* Some people prefer diagrams, others equations. In my opinion, it is best to show both. 
+
+
+
+## Model Code
+
+The best approach is to take the model code and save it into an R file of the same name as the function. You can then load the code/function using the `source` command.
+
+```{r}
+#' Basic SIR model
+#' 
+#' @description A basic SIR model with 3 compartments and infection and recovery processes
+#' 
+#' @details The model includes susceptible, infected, and recovered compartments. The two processes that are modeled are infection and recovery.
+#' @param S : starting value for Susceptible : numeric
+#' @param I : starting value for Infected : numeric
+#' @param R : starting value for Recovered : numeric
+#' @param b : infection rate : numeric
+#' @param g : recovery rate : numeric
+#' @param tstart : Start time of simulation : numeric
+#' @param tfinal : Final time of simulation : numeric
+#' @param dt : Time step : numeric
+#' @return The function returns the output as a list. 
+#' The time-series from the simulation is returned as a dataframe saved as list element \code{ts}. 
+#' The \code{ts} dataframe has one column per compartment/variable. The first column is time.   
+#' @examples  
+#' # To run the simulation with default parameters:  
+#' result <- simulate_sir_ode() 
+#' @section Warning: This function does not perform any error checking. So if you try to do something nonsensical (e.g. have negative values for parameters), the code will likely abort with an error message.
+#' @export 
+ 
+simulate_sir_ode <- function(S = 1000, I = 1, R = 0, b = 0.002, g = 1, tstart = 0, tfinal = 100, dt = 0.1) 
+{ 
+  #Block of ODE equations for deSolve 
+  SIR_model_ode <- function(t, y, parms) 
+  {
+    with( as.list(c(y,parms)), { #lets us access variables and parameters stored in y and parms by name 
+    #Susceptible : infection of susceptibles :
+    dS = -b*S*I
+    #Infected : infection of susceptibles : recovery of infected :
+    dI = +b*S*I -g*I
+    #Recovered : recovery of infected :
+    dR = +g*I
+    list(c(dS,dI,dR)) 
+  } ) } #close with statement, end ODE code block 
+ 
+  #Main function code block 
+  vars = c(S = S, I = I, R = R)
+  pars = c(b = b, g = g)
+  timevec=seq(tstart,tfinal,by=dt) 
+  odeout = deSolve::ode(y = vars, parms = pars, times = timevec,  func = SIR_model_ode) 
+  result <- list() 
+  result$ts <- as.data.frame(odeout) 
+  return(result) 
+} 
+
+```
+
+## Code use example
+
+
+``` {r}
+#source(simulate_sir_ode)
+result <- simulate_sir_ode(S = 1000, I = 1, R = 0, b = 0.001, g = 0.5, tstart = 0, tfinal = 50, dt = 0.1)
+plot(result$ts[,'time'],result$ts[,'I'])
+```
+
+
+
