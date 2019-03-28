@@ -383,19 +383,8 @@ run_model <- function(modelsettings) {
       #store values for each variable
       aicc = format(simresult$AICc, digits =2, nsmall = 2)
       ssr = format(simresult$SSR, digits =2, nsmall = 2)
-      afinal = format(log10(simresult$bestpars[1]), digits =2, nsmall = 2)
-      bfinal = format(log10(simresult$bestpars[3]), digits =2, nsmall = 2)
-      r_or_dXfinal = format(simresult$bestpars[2], digits =2, nsmall = 2)
 
-      if (modelsettings$fitmodel == 1)
-      {
-        txt1 <- paste('Best fit values for model 1 parameters 10^a / 10^b / r  are ',afinal,'/',bfinal,'/',r_or_dXfinal)
-      }
-      if (modelsettings$fitmodel == 2)
-      {
-        txt1 <- paste('Best fit values for model 2 parameters 10^a / 10^b / dX are ',afinal,'/',bfinal,'/',r_or_dXfinal)
-      }
-
+      txt1 <- paste('Best fit values for model', modelsettings$fitmodel, 'parameters',paste(names(result[[1]]$simres$bestpars), collapse = '/'), ' are ', paste(format(result[[1]]$simres$bestpars,  digits =2, nsmall = 2), collapse = '/' ))
       txt2 <- paste('SSR and AICc are ',ssr,' and ',aicc)
 
       result[[1]]$finaltext = paste(txt1,txt2, sep = "<br/>")
