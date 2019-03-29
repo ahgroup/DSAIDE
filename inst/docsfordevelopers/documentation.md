@@ -80,5 +80,5 @@ for (n in 1: length(files)) {rmarkdown::render(files[n]); Sys.sleep(5)}
 * Re-create package site with pkgdown::build_site()
 * Sync everything to github
 * Check vignette and function references on website, fix errors
-* Run check_rhub() and check_win_devel()
+* Run devtools::check_rhub() and devtools::check_win_devel()
 * Do a test run of devtools::release()

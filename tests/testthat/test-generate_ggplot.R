@@ -7,5 +7,28 @@ test_that("generate_ggplot returns a ggplot",
             result[[1]]$dat = simresult$ts
             outplot = generate_ggplot(result)
             expect_is(outplot, "ggplot" )
+            
+            simresult = simulate_idcontrol_ode()
+            result = vector("list", 1)
+            result[[1]]=simresult
+            outplot = generate_ggplot(result)
+            expect_is(outplot, "ggplot" )
+            
+            simresult = simulate_multipathogen_ode()
+            result = vector("list", 1)
+            result[[1]]=simresult
+            result[[1]]$title = "Hello"
+            result[[1]]$legendlocation = "left"
+            outplot = generate_ggplot(result)
+            expect_is(outplot, "ggplot" )
+            
+            modelsettings =  list(modeltype = "_ode_", plotscale = 'y', nplots = 1)
+            modelsettings$simfunction = 'simulate_reproductivenumber_ode'
+            result = run_model(modelsettings)
+            
+            expect_is(generate_ggplot(result), "ggplot" )
+            expect_is(generate_plotly(result), "plotly" )
+            
+            
           })
 
