@@ -20,6 +20,29 @@
 
 run_model <- function(modelsettings) {
 
+  #check if a simresult function ran ok
+  #if error occurs we exit run_model function
+  check_results <- function(simresult)
+  {
+    checkres = NULL
+    if (class(simresult)!="list") #if the return from the simulator function is not a list, something went wrong
+    {
+      checkres <- 'Model run failed. Maybe unreasonable parameter values?'
+      return(checkres)
+    }
+    #if simeresult is a list, check that no values in time-series are NaN or NA or Inf
+    if (!is.null(simresult$ts))
+    {
+      if (   (sum(is.nan(unlist(simresult$ts)))>0) || (sum(is.na(unlist(simresult$ts)))>0) || (sum(is.infinite(unlist(simresult$ts)))>0) )
+      {
+        checkres <- 'Model run failed. Maybe unreasonable parameter values?'
+        return(checkres)
+      }
+    }
+    return(checkres)
+  }
+  
+  
   datall = NULL #will hold data for all different models and replicates
   finaltext = NULL
   modelfunction = modelsettings$simfunction #name(s) for model function(s) to run
@@ -40,14 +63,11 @@ run_model <- function(modelsettings) {
       }
       #create function call, then evaluate it to run model
       #wrap in try command to catch errors
+      #send result from simulator to a check function. If that function does not return null, exit run_model with error message
       simresult = try(eval(generate_fctcall(modelsettings)))
-      #if error occurs we exit
-      if (class(simresult)!="list")
-      {
-        result <- 'Model run failed. Maybe unreasonable parameter values?'
-        return(result)
-      }
-
+      checkres <- check_results(simresult)
+      if (!is.null(checkres)) {return(checkres)} 
+      
       #data for plots and text
       #needs to be in the right format to be passed to generate_plots and generate_text
       #see documentation for those functions for details
@@ -79,12 +99,8 @@ run_model <- function(modelsettings) {
     modelsettings$currentmodel = modelfunction[grep('_ode',modelfunction)] #list of model functions, get the ode function
     #run model
     simresult = try(eval(generate_fctcall(modelsettings)))
-    #if error occurs we exit
-    if (class(simresult)!="list")
-    {
-      result <- 'Model run failed. Maybe unreasonable parameter values?'
-      return(result)
-    }
+    checkres <- check_results(simresult)
+    if (!is.null(checkres)) {return(checkres)} 
 
     simresult <- simresult$ts
     if (grepl('_and_',modelsettings$modeltype)) #this means ODE model is run with another one, relabel variables to indicate ODE
@@ -113,13 +129,9 @@ run_model <- function(modelsettings) {
     modelsettings$currentmodel = modelfunction[grep('_discrete',modelfunction)] #list of model functions, get the ode function
     #run model
     simresult = try(eval(generate_fctcall(modelsettings)))
-    #if error occurs we exit
-    if (class(simresult)!="list")
-    {
-      result <- 'Model run failed. Maybe unreasonable parameter values?'
-      return(result)
-    }
-
+    checkres <- check_results(simresult)
+    if (!is.null(checkres)) {return(checkres)} 
+    
     simresult <- simresult$ts
     colnames(simresult)[1] = 'xvals' #rename time to xvals for consistent plotting
     #reformat data to be in the right format for plotting
@@ -200,13 +212,9 @@ run_model <- function(modelsettings) {
   {
     modelsettings$currentmodel = modelfunction
     simresult = try(eval(generate_fctcall(modelsettings)))
-    #if error occurs we exit
-    if (class(simresult)!="list")
-    {
-      result <- 'Model run failed. Maybe unreasonable parameter values?'
-      return(result)
-    }
-
+    checkres <- check_results(simresult)
+    if (!is.null(checkres)) {return(checkres)} 
+    
     #pull the indicator for non-steady state out of the dataframe, process separately
     steady = simresult$dat$steady
     simresult$dat$steady <- NULL
@@ -222,7 +230,6 @@ run_model <- function(modelsettings) {
     for (nn in 1:modelsettings$nplots) #for specified parameter, loop over outcomes
       {
         #data frame for each plot
-        #browser()
         xvals = simdat[,modelsettings$samplepar] #get parameter under consideration
         xvalname = modelsettings$samplepar
         yvals = simdat[,nn] #first 3 elements are outcomes
@@ -260,11 +267,9 @@ run_model <- function(modelsettings) {
   {
     modelsettings$currentmodel = modelfunction
     simresult = try(eval(generate_fctcall(modelsettings)))
-    if (class(simresult)!="list")
-    {
-      result <- 'Model run failed. Maybe unreasonable parameter values?'
-      return(result)
-    }
+    checkres <- check_results(simresult)
+    if (!is.null(checkres)) {return(checkres)} 
+    
 
     colnames(simresult$timeseries)[1] = 'xvals' #rename time to xvals for consistent plotting
     #reformat data to be in the right format for plotting
@@ -351,12 +356,9 @@ run_model <- function(modelsettings) {
   {
     modelsettings$currentmodel = modelfunction
     simresult = try(eval(generate_fctcall(modelsettings)))
-    if (class(simresult)!="list")
-    {
-      result <- 'Model run failed. Maybe unreasonable parameter values?'
-      return(result)
-    }
-
+    checkres <- check_results(simresult)
+    if (!is.null(checkres)) {return(checkres)} 
+    
     steady = simresult$dat$steady
 
     #these 3 settings are only needed for the shiny UI presentation
