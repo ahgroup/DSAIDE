@@ -17,7 +17,7 @@ I assume you have `R` installed. I also highly recommend `RStudio`, though it's 
 2. The latest development version (more features but potentially buggy) can be installed from github, using the `devtools` package. If you don't have it, install it first. The following commands will get you up and running:
 
 ```r
-install.packages('devtools') #if not already isntalled
+install.packages('devtools') #if not already installed
 devtools::install_github('ahgroup/DSAIDE')
 ```
 
