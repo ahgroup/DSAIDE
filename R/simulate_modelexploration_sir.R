@@ -91,11 +91,13 @@ simulate_modelexploration_sir <- function(S = 1000, I = 1, R = 0, b = 0.002, g =
         Rfinal[ct] = utils::tail(timeseries[,"R"],1)
 
      
-        #a quick check to make sure the system is at steady state,
-        #i.e. the value for I at the final time is not more than
-        #1% different than I several time steps earlier
+        #a quick check to make sure the system is at steady state.
+        #If number infected are not negligible
+        #and the value for R at the final time is more than
+        #0.1% different than R several time steps earlier
+        #we assume steady state was not reached
         vl=nrow(timeseries);
-        if ((abs(timeseries[vl,"I"]-timeseries[vl-10,"I"])/timeseries[vl,"I"])>1e-2)
+        if ( (abs(timeseries[vl,"I"]-timeseries[vl-10,"I"])/abs(timeseries[vl,"I"]) )>1e-3 && abs(timeseries[vl,"I"])>1e-10)
         {
           steady[ct] = FALSE
         }

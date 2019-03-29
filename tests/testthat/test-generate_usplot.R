@@ -25,13 +25,33 @@ test_that("running US analysis app returns the proper plot",
             
             modelsettings$modeltype = '_usanalysis_'
             modelsettings$nplots = 3
+            modelsettings$ncols = 3
             modelsettings$simfunction = 'simulate_usanalysis_sir'
             modelsettings$plotscale = 'y'
-            modelsettings$plottype = 'Scatterplot'
             modelsettings$samplepar = 'g'
-              
+            
+            #test boxplots
+            modelsettings$plottype = 'Boxplot'
             result = run_model(modelsettings)
-            usplot = DSAIDE::generate_ggplot(result)
-            expect_is( usplot, "gtable" )
+            
+            usplot = generate_ggplot(result)
+            testthat::expect_is( usplot, "gtable" )
+            
+            usplot = generate_plotly(result)
+            testthat::expect_is( usplot, "plotly" )
+            
+            ustext = generate_text(result)
+            testthat::expect_is( generate_text(result), "html" )
+            testthat::expect_is( generate_text(result), "character" )
+            
+            #test scatterplots
+            modelsettings$plottype = 'Scatterplot'
+            result = run_model(modelsettings)
+            
+            testthat::expect_is( generate_ggplot(result), "gtable" )
+            testthat::expect_is( generate_plotly(result), "plotly" )
+            testthat::expect_is( generate_text(result), "html" )
+            testthat::expect_is( generate_text(result), "character" )
+            
           })
 

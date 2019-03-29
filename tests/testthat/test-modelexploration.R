@@ -23,8 +23,6 @@ test_that("test that modelexploration app returns the proper plots",
             modelsettings$samplepar = "b"
             modelsettings$pardist = "lin"
 
-
-            modelsettings$rngseed = 100
             modelsettings$tstart = 0
             modelsettings$tfinal = 200
             modelsettings$dt = 0.1
