@@ -12,7 +12,7 @@
 dsaidemenu <- function() {
 
 
-    appDir <- system.file( "mainmenu", package = "DSAIDE") #get directory for main menu app
+    appDir <- system.file( "DSAIDE", package = "DSAIDE") #get directory for main menu app
     shiny::runApp(appDir = appDir, launch.browser = TRUE) #run main menu app
 
     print('*************************************************')
@@ -24,7 +24,7 @@ dsaidemenu <- function() {
 #needed to prevent NOTE messages on CRAN checks
 #most of those are from the ggplot commands in the generate_ functions,
 #the last one is from the subset function in the fit functions
-utils::globalVariables(c("xvals", "yvals", "varnames","IDvar","style","Condition"))
+utils::globalVariables(c("xvals", "yvals", "varnames","IDvar","style","Condition", "simfunction"))
 
 
 .onAttach <- function(libname, pkgname){

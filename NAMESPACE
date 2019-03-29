@@ -3,6 +3,7 @@
 export(download_code)
 export(dsaidemenu)
 export(generate_documentation)
+export(generate_fctcall)
 export(generate_ggplot)
 export(generate_plotly)
 export(generate_shinyinput)

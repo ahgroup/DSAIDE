@@ -20,24 +20,6 @@
 
 run_model <- function(modelsettings) {
 
-  #short function to call/run model
-  runsimulation <- function(modelsettings, currentmodel)
-  {
-    #match values provided from UI with those expected by function
-    settingsvec = unlist(modelsettings)
-    currentargs = settingsvec[match(names(unlist(formals(currentmodel))), names(settingsvec))]
-    #make a list
-    arglist = as.list(currentargs)
-    #convert arguments for function call to numeric if possible
-    #preserve those that can't be converted
-    numind = suppressWarnings(!is.na(as.numeric(arglist))) #find numeric values
-    arglist[numind] = as.numeric(currentargs[numind])
-    #run simulation, try command catches error from running code.
-    simresult <- try( do.call(currentmodel, args = arglist ) )
-    return(simresult)
-  }
-
-
   datall = NULL #will hold data for all different models and replicates
   finaltext = NULL
   modelfunction = modelsettings$simfunction #name(s) for model function(s) to run
@@ -47,8 +29,7 @@ run_model <- function(modelsettings) {
   ##################################
   if (grepl('_stochastic_',modelsettings$modeltype))
   {
-    modelsettings$currentmodel = 'stochastic'
-    currentmodel = modelfunction[grep('_stochastic',modelfunction)] # get the ode function
+    modelsettings$currentmodel = modelfunction[grep('_stochastic',modelfunction)] # get the ode function
     noutbreaks = 0
     for (nn in 1:modelsettings$nreps)
     {
@@ -57,8 +38,9 @@ run_model <- function(modelsettings) {
       {
         modelsettings$tmax = modelsettings$tfinal
       }
-      #run model
-      simresult = runsimulation(modelsettings, currentmodel)
+      #create function call, then evaluate it to run model
+      #wrap in try command to catch errors
+      simresult = try(eval(generate_fctcall(modelsettings)))
       #if error occurs we exit
       if (class(simresult)!="list")
       {
@@ -94,10 +76,9 @@ run_model <- function(modelsettings) {
   ##################################
   if (grepl('_ode_',modelsettings$modeltype)) #need to always start with ode_ in model specification
   {
-    modelsettings$currentmodel = 'ode'
-    currentmodel = modelfunction[grep('_ode',modelfunction)] #list of model functions, get the ode function
+    modelsettings$currentmodel = modelfunction[grep('_ode',modelfunction)] #list of model functions, get the ode function
     #run model
-    simresult = runsimulation(modelsettings, currentmodel)
+    simresult = try(eval(generate_fctcall(modelsettings)))
     #if error occurs we exit
     if (class(simresult)!="list")
     {
@@ -129,10 +110,9 @@ run_model <- function(modelsettings) {
   ##################################
   if (grepl('_discrete_',modelsettings$modeltype))
   {
-    modelsettings$currentmodel = 'discrete'
-    currentmodel = modelfunction[grep('_discrete',modelfunction)] #list of model functions, get the ode function
+    modelsettings$currentmodel = modelfunction[grep('_discrete',modelfunction)] #list of model functions, get the ode function
     #run model
-    simresult = runsimulation(modelsettings, currentmodel)
+    simresult = try(eval(generate_fctcall(modelsettings)))
     #if error occurs we exit
     if (class(simresult)!="list")
     {
@@ -218,10 +198,8 @@ run_model <- function(modelsettings) {
   ##################################
   if (grepl('_usanalysis_',modelsettings$modeltype))
   {
-    modelsettings$currentmodel = 'other'
-    currentmodel = modelfunction
-    #run model
-    simresult = runsimulation(modelsettings, currentmodel)
+    modelsettings$currentmodel = modelfunction
+    simresult = try(eval(generate_fctcall(modelsettings)))
     #if error occurs we exit
     if (class(simresult)!="list")
     {
@@ -280,12 +258,8 @@ run_model <- function(modelsettings) {
   ##################################
   if (grepl('_fit_',modelsettings$modeltype))
   {
-    modelsettings$currentmodel = 'fit'
-    currentmodel = modelfunction
-    #run model
-
-    simresult = runsimulation(modelsettings, currentmodel)
-    #if error occurs we exit
+    modelsettings$currentmodel = modelfunction
+    simresult = try(eval(generate_fctcall(modelsettings)))
     if (class(simresult)!="list")
     {
       result <- 'Model run failed. Maybe unreasonable parameter values?'
@@ -338,58 +312,32 @@ run_model <- function(modelsettings) {
     result[[1]]$maketext = FALSE
     result[[1]]$showtext = NULL
 
+    
     ####################################################
-    #different choices for slightly different fit models
-    #best fit results to be displayed as text
-    #this is for basic fitting routine
-    if (grepl('basicmodel_fit',modelfunction))
+    #different choices for text display for different fit models
+    if (grepl('basicmodel_fit',simfunction))
     {
-      ssr = format(simresult$SSR, digits =2, nsmall = 2)
-      pfinal = format(log10(simresult$bestpars[1]), digits =2, nsmall = 2)
-      bfinal = format(log10(simresult$bestpars[2]), digits =2, nsmall = 2)
-      dVfinal = format(simresult$bestpars[3], digits =2, nsmall = 2)
-
-      txt1 <- paste('Best fit values for parameters 10^p / 10^b / dV are ', pfinal, ' / ' ,bfinal,  ' / ' , dVfinal)
-      txt2 <- paste('Final SSR is ',ssr)
+      txt1 <- paste('Best fit values for parameters',paste(names(result[[1]]$simres$bestpars), collapse = '/'), ' are ', paste(format(result[[1]]$simres$bestpars,  digits =2, nsmall = 2), collapse = '/' ))
+      txt2 <- paste('Final SSR is ', format(simresult$SSR, digits =2, nsmall = 2))
       result[[1]]$finaltext = paste(txt1,txt2, sep = "<br/>")
     }
-
-    #best fit results to be displayed as text
-    #this is for confidence interval routine
-    if (grepl('confint_fit',modelfunction))
+    if (grepl('confint_fit',simfunction))
     {
-      ssr = format(simresult$SSR, digits =2, nsmall = 2)
-      bfinal = format(log10(simresult$bestpars[1]), digits =2, nsmall = 2)
-      blowfit = format(log10(simresult$confint[1]), digits =2, nsmall = 2)
-      bhighfit = format(log10(simresult$confint[2]), digits =2, nsmall = 2)
-      dVfinal = format(simresult$bestpars[2], digits =2, nsmall = 2)
-      dVlowfit = format(simresult$confint[3], digits =2, nsmall = 2)
-      dVhighfit = format(simresult$confint[4], digits =2, nsmall = 2)
-
-      txt1 <- paste('Best fit values for parameters 10^b and dV are ',bfinal,' and ',dVfinal)
-      txt2 <- paste('Lower and upper bounds for 10^b are ',blowfit,' and ',bhighfit)
-      txt3 <- paste('Lower and upper bounds for dV are ',dVlowfit,' and ',dVhighfit)
-      txt4 <- paste('SSR is ',ssr)
-
+      txt1 <- paste('Best fit values for parameters', paste(names(simresult$bestpars), collapse = '/'), ' are ', paste(format(simresult$bestpars,  digits =2, nsmall = 2), collapse = '/' ))
+      txt2 <- paste('Lower and upper bounds for parameter', paste(names(simresult$bestpars[1]), collapse = '/'), ' are ', paste(format(simresult$confint[1:2],  digits =2, nsmall = 2), collapse = '/' ))
+      txt3 <- paste('Lower and upper bounds for parameter', paste(names(simresult$bestpars[2]), collapse = '/'), ' are ', paste(format(simresult$confint[3:4],  digits =2, nsmall = 2), collapse = '/' ))
+      txt4 <- paste('SSR is ', format(simresult$SSR, digits =2, nsmall = 2))
       result[[1]]$finaltext = paste(txt1,txt2,txt3,txt4, sep = "<br/>")
     }
-
-
     #best fit results to be displayed as text
     #this is for model comparison fit  routine
-    if (grepl('modelcomparison_fit',modelfunction))
+    if (grepl('modelcomparison_fit',simfunction))
     {
-
-      #store values for each variable
-      aicc = format(simresult$AICc, digits =2, nsmall = 2)
-      ssr = format(simresult$SSR, digits =2, nsmall = 2)
-
       txt1 <- paste('Best fit values for model', modelsettings$fitmodel, 'parameters',paste(names(result[[1]]$simres$bestpars), collapse = '/'), ' are ', paste(format(result[[1]]$simres$bestpars,  digits =2, nsmall = 2), collapse = '/' ))
-      txt2 <- paste('SSR and AICc are ',ssr,' and ',aicc)
-
+      txt2 <- paste('SSR and AICc are ',format(simresult$SSR, digits =2, nsmall = 2),' and ',format(simresult$AICc, digits =2, nsmall = 2))
       result[[1]]$finaltext = paste(txt1,txt2, sep = "<br/>")
     }
-
+    
   }
   ##################################
   #end model fitting code block
@@ -401,10 +349,8 @@ run_model <- function(modelsettings) {
   ##################################
   if (grepl('_modelexploration_',modelsettings$modeltype))
   {
-    currentmodel = modelfunction
-    #run model
-    simresult = runsimulation(modelsettings, currentmodel)
-    #if error occurs we exit
+    modelsettings$currentmodel = modelfunction
+    simresult = try(eval(generate_fctcall(modelsettings)))
     if (class(simresult)!="list")
     {
       result <- 'Model run failed. Maybe unreasonable parameter values?'
