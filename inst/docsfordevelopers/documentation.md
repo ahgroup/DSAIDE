@@ -67,16 +67,17 @@ files = list.files(path = "C:/data/git/DSAIDE/inst/appinformation/", recursive=T
 spelling::spell_check_files(files)
 * To re-build all html documentation files from the rmd files at once, use these above command and:
 for (n in 1: length(files)) {rmarkdown::render(files[n]); Sys.sleep(5)}
-
-
+* To copy simulator functions into the /inst/simulator folder:
+files = list.files(path = "C:/data/git/DSAIDE/R/", recursive=TRUE, pattern = "^simulate", full.names = TRUE)
+file.copy(files, "C:/data/git/DSAIDE/inst/simulatorfunctions/", overwrite = TRUE)
 
 ### To build the package
-* "by hand" edit the DESCRIPTION file to make sure it's up to date
 * in RStudio, use the functions in the 'build' tab to test and build the package.
 * Run clean and rebuild, then build and reload using menu, or devtools::load_all()
 * Run the check, fix any errors 
 
 ### To-do at release time 
+* "by hand" edit the DESCRIPTION file to make sure it's up to date
 * Re-build documentation, re-build package
 * Re-build vignettes with devtools::build_vignettes()
 * Run check and make sure no problems occur
