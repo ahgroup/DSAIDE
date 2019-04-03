@@ -1,6 +1,6 @@
 
 .figure {
-  	width: 80%;
+  	width: 100%;
 	text-align: center;
 	font-style: italic;
   	border: thin silver solid;
@@ -8,10 +8,11 @@
 	display: block;
  	margin-left: auto;
   	margin-right: auto;
+	margin-bottom: 1em;
 }
 
 .img {
-  	width: 80%;
+  	width: 100%;
 	text-align: center;
 	font-style: italic;
   	border: thin silver solid;
@@ -19,5 +20,6 @@
 	display: block;
  	margin-left: auto;
   	margin-right: auto;
+	margin-bottom: 1em;
 }
 
