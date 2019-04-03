@@ -5,7 +5,6 @@ date: "`r Sys.Date()`"
 output:
   rmarkdown::html_vignette:
     fig_caption: yes
-    css: dsaidevignettestyle.css
 vignette: >
   %\VignetteIndexEntry{DSAIDE}
   %\VignetteEngine{knitr::rmarkdown}

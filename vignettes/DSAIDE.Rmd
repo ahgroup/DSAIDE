@@ -5,7 +5,6 @@ date: "`r Sys.Date()`"
 output:
   rmarkdown::html_vignette:
     fig_caption: yes
-    css: dsaidevignettestyle.css
 vignette: >
   %\VignetteIndexEntry{DSAIDE}
   %\VignetteEngine{knitr::rmarkdown}
@@ -86,7 +85,7 @@ dsaidemenu()
 ```
 
 
-If successfull, you should see a graphical menu open in your browser that looks like this:
+If successful, you should see a graphical menu open in your browser that looks like this:
 
 ```{r dsaidemenu,  fig.cap='Main menu of the DSAIDE package.', echo=FALSE}
 knitr::include_graphics("mainmenu.png")

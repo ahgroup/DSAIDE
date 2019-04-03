@@ -11,7 +11,7 @@ DSAIDE is an R package containing a set of simulations (apps) that teach infecti
 
 ## Getting Started
 
-For a quick introduction to the package and step-by-step instructions on getting started, [see this package tutorial (vignette)](https://ahgroup.github.io/DSAIDE/articles/DSAIDE.html).
+For a quick introduction to the package and step-by-step instructions on getting started, [see the package tutorial (vignette)](https://ahgroup.github.io/DSAIDE/articles/DSAIDE.html).
 
 
 ## Further information
