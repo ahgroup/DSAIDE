@@ -1,4 +1,4 @@
-#' @title A function that runs a DSAIRM/DSAIDE app
+#' @title A function that runs an app for specific settings and processes results for plot and text generation 
 #'
 #' @description This function runs a model based on information
 #' provided in the modelsettings list passed into it.
