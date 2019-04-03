@@ -1,3 +1,8 @@
+# DSAIDE 0.8.1
+
+* Fixed bug in environmental transmission app 
+* Updated readme.md and package vignette/tutorial
+
 # DSAIDE 0.8.0
 
 ## User facing changes

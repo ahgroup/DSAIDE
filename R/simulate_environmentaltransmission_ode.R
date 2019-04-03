@@ -38,9 +38,9 @@ simulate_environmentaltransmission_ode <- function(S = 10000, I = 1, R = 0, E = 
     #Infected : direct infection : environmental infection : natural death : recovery of infected :
     dI = +bd*I*S +be*E*S -n*I -g*I
     #Recovered : natural death : recovery of infected :
-    dR = -n*I +g*I
+    dR =  g*I - n*I
     #Environmental Pathogen : shedding by infected : decay :
-    dE = +p*I +c*E
+    dE = +p*I - c*E
     #EndODES
     list(c(dS,dI,dR,dE)) 
   } ) } #close with statement, end ODE code block 
