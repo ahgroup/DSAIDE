@@ -1,9 +1,8 @@
 ## Test environments
-* local Windows 10.1 x86_64, R 3.5.2
-* Ubuntu  (on travis-ci)
-* MacOS (on travis-ci)
-* Windows (on appveyor)
-* Rhub (on Rhub)
+* local Windows 10.1 x86_64, R 3.5.3
+* Travis-ci (Ubuntu, MacOS) 
+* Appveyor (Windows)
+* Rhub 
 * Win-devel
 
 ## R CMD check results
