@@ -147,7 +147,8 @@ generate_ggplot <- function(res)
 	 if (plottype == 'Boxplot')
       {
         p3 = p2 + ggplot2::scale_x_continuous(trans = xscaletrans, limits=c(xmin,xmax), breaks = NULL, labels = NULL)
-      }
+        p3 = p3 + ggplot2::labs(x = NULL)
+        }
       else
       {
         p3 = p2 + ggplot2::scale_x_continuous(trans = xscaletrans, limits=c(xmin,xmax))
@@ -185,7 +186,7 @@ generate_ggplot <- function(res)
         p5b = p5a + ggplot2::theme(legend.position = legendlocation)
         p5c = p5b + ggplot2::scale_linetype_discrete(name = legendtitle) + ggplot2::scale_shape_discrete(name = legendtitle)
         p5d = p5c + ggplot2::scale_colour_discrete(name = legendtitle)
-        p6 = p5d + guides(fill=guide_legend(title.position="top", nrow=3, byrow=TRUE))
+        p6 = p5d + ggplot2::guides(fill=guide_legend(title.position="top", nrow=3, byrow=TRUE))
       }
       else
       {
@@ -194,7 +195,7 @@ generate_ggplot <- function(res)
 
       #modify overall theme
       pfinal = p6
-
+      
       allplots[[n]] = pfinal
 
     } #end loop over individual plots

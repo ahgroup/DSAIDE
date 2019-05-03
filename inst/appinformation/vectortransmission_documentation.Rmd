@@ -75,20 +75,20 @@ $$\dot I_v = b_2 S_v I_h  - n I_v$$
 
 ## What to do {#shinytab3}
 
-**The tasks below are described in a way that assumes everything is in units of MONTHS (rate parameters, therefore, have units of inverse months). If any quantity is not given in those units, you need to convert it first (e.g. if it says a year, you need to convert it to 12 months).**
+**The tasks below are described in a way that assumes everything is in units of months (rate parameters, therefore, have units of inverse months). If any quantity is not given in those units, you need to convert it first (e.g. if it says a year, you need to convert it to 12 months).**
 
 ### Task 1
 * Set the model parameters such that it corresponds to the following setting: 
     * 1000 initially susceptible for both hosts and vectors, 1 initially infected host, no infected vector, simulation duration approximately 10 years.
     * Set host -> vector transmission rate, _b~2~_=0.003, and _b~1~_ = 0.
     * Assume that the duration of the infectious period in hosts is half a month (about 2 weeks) long. 
-    * Assume that vectors live for half a month (about 2 weeks). Set the birth rate such that in the absence of the ID, you get a steady population of 1000 vectors.  
+    * Assume that vectors live for half a month (about 2 weeks). Set the birth rate such that in the absence of the ID, you get a steady population of 1000 vectors. You should have learned the relation between births, deaths and steady state susceptibles in the _Patterns of ID_ app. If you don't remember, you can figure it out by trying different values for the birth rate (with no infected hosts or vectors present).  
     * Turn off waning immunity for now.
 * Run the simulation, observe what you get. 
 * You should not see any outbreak happening. Make sure you know why.
 
 ### Task 2 
-* Set _b~1~_ = _b~2~_, rerun. 
+* Set _b~1~_ = _b~2~_ = 0.003, rerun. 
 * You should see an outbreak with around 183 susceptible hosts left.
 * Record the numbers/fractions of susceptible/infected/recovered hosts and vectors. 
 

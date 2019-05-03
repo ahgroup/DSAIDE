@@ -44,7 +44,7 @@ generate_shinyinput <- function(mbmodel, otherinputs = NULL, packagename)
         iplabel = paste0(names(ip[n]),', ', x3[n]) #text label for input
         myclassfct(
 
-            numericInput(names(ip[n]), label = iplabel, value = ip[n][[1]])
+            numericInput(names(ip[n]), label = iplabel, value = ip[n][[1]], step = 0.01*ip[n][[1]])
         ) #close myclassfct
     }) #close lapply
 
