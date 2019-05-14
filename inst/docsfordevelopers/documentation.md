@@ -66,8 +66,8 @@ The best approach is to contact me by email (ahandel@uga.edu) or through the Git
 * To spell-check all Rmd documentation files, use these commands (adjust paths as needed):
 files = list.files(path = "C:/data/git/DSAIDE/inst/appinformation/", recursive=TRUE, pattern = "\\.Rmd$", full.names = TRUE)
 spelling::spell_check_files(files)
-* To re-build all html documentation files from the rmd files at once, use these above command and:
-for (n in 1: length(files)) {rmarkdown::render(files[n]); Sys.sleep(5)}
+* To re-build all html documentation files from the rmd files at once, use the above command to get all files, then:
+for (n in 1: length(files)) {rmarkdown::render(files[n]); Sys.sleep(2)}
 * To copy simulator functions into the /inst/simulator folder:
 files = list.files(path = "C:/data/git/DSAIDE/R/", recursive=TRUE, pattern = "^simulate", full.names = TRUE)
 file.copy(files, "C:/data/git/DSAIDE/inst/simulatorfunctions/", overwrite = TRUE)

@@ -1,0 +1,120 @@
+---
+title: ID Control 1 - Practice
+output:
+  html_document:
+    theme: null
+    highlight: null
+    fig_retina: null
+    fig_caption: true
+    mathjax: default 
+    keep_md: false
+bibliography: references.bib
+---
+
+
+```{r, echo = FALSE}
+#this code loads the settings file for the current app so we can automatically 
+#list the functions in the further information section
+currentrmdfile = knitr::current_input() 
+currentappinfo = gsub("_documentation.Rmd" ,"_settings.R",currentrmdfile)
+source(currentappinfo)
+```
+
+
+
+## Overview {#shinytab1}
+This app links the reproductive number and ID control. Read about the model in the "Model" tab. Then do the tasks described in the "What to do" tab. Before going through this app, you should go through the 'Reproductive Number' apps first.
+
+### Learning Objectives
+* Know how to the reproductive number informs control. 
+* Know how different control measures impact the reproductive number.
+
+
+## The Model {#shinytab2}
+
+### Model Overview
+For this app, we'll use the same basic compartmental SIR model as for the 'Reproductive Number 2' app. We allow for 3 different stages/compartments: 
+
+* **S** - uninfected and susceptible individuals 
+* **I** - infected and infectious individuals (note that these terms are often used interchangeably, but technically we are talking about someone who is infected **and** is infectious, i.e. can infect others)
+* **R** - recovered/removed individuals. Those are individuals that do not further participate, either because they are now immune or because they died.
+
+
+In addition to specifying the *compartments* of a model, we need to specify the dynamics determining the changes for each compartment. Broadly speaking, some processes increase the number of individuals in a given compartment/stage and other processes that lead to a reduction. Those processes are sometimes called inflows and outflows. 
+
+For our system, we specify the following processes/flows: 
+
+* Susceptible individuals (S) can become infected by infectious individuals (I) at some rate, _b_. This leads to the susceptible individual leaving the S compartment and entering the I compartment.   
+* Infected individuals recover and enter the recovered (R) compartment at some rate, _g_.
+* Recovered individuals can lose immunity at rate _w_ and return to the susceptible compartment. 
+* Natural births (into the S compartment at rate _m_) and deaths (from all compartments at rate _n_) are possible.
+* The model allows a fraction of individuals to be vaccinated before the outbreak. Those individuals are moved into the R compartment before the start of the outbreak.
+
+
+
+### Model Implementation
+The flow diagram and the set of equations which are used to implement this model are as follows:
+
+
+
+```{r BIdiagram,  fig.cap='Flow diagram for this model. ',  echo=FALSE}
+knitr::include_graphics("../media/R0modelfigure.png")
+```
+
+
+
+$$\dot S =m - b SI - nS + wR$$ 
+$$\dot I = b S I - g I - nI$$
+$$\dot R = g I - nR - wR$$
+$$S_{v} = (1-ef)S(0)$$
+$$R(0) = efS_{v}$$
+
+
+
+
+Here, _S(0)_ is the initial population of susceptibles, and _S~v~_ is the susceptible population left after vaccinating a fraction _f_. Vaccinated individuals are moved to the _R_ compartment before the start of the outbreak, _R(0)_. Note the unfortunate fact that the recovered compartment uses the same letter as the reproductive number, and the starting value for the _R_ compartment, _R(0)_ looks similar to the basic reproductive number. This is common notation and I therefore use it here too. Just be careful to make sure you know which quantity is discussed.
+
+
+
+## What to do {#shinytab3}
+
+
+**The tasks below are described in a way that assumes everything is in units of MONTHS (rate parameters, therefore, have units of inverse months). If any quantity is not given in those units, you need to convert it first (e.g. if it says a year, you need to convert it to 12 months).**
+
+
+### Task 1 
+* Knowing the reproductive number, _R_, is important for control strategies, e.g. for vaccine campaigns. You learned in the reproductive number apps that for _R=1_ an outbreak switches from growth to decline (often called the threshold value). Let's say you have an ID that enters a new population where everyone is susceptible. That ID has R~0~=4. Would you expect to see an outbreak? Why? Now let's assume that we protected half the population through a (100% effective) vaccine. What is the new value for R, i.e. how many people are being infected on average by an infected person after we vaccinated? Is that new value of R low enough to prevent the outbreak? How low does R need to be to prevent an outbreak? What fraction of the population would you need to protect/vaccinate to achieve such an R? 
+
+
+
+### Task 2 
+* Let's test the vaccination idea with the computer simulation. 
+* Set the simulation with 1000 susceptibles and 1 infected, simulation time 24 months, _g_=5, no births, deaths or waning immunity. Choose the value for _b_ such that _R~0~=4_.
+* Run the simulation for 0% vaccination coverage to confirm things happen as you expect. Check if the final size of the susceptible/infected population is what it should be and returns (approximately) an R~0~=4 when you use the final size equation to compute it. 
+* Now repeat for 50% vaccination coverage at 100% vaccine efficacy (_f=0.5_ and _e=1_). What is the value of the effective _R_ after vaccination? Run a simulation and check to make sure that is what you get. 
+* Finally, run the simulation at the vaccination level you determined above to be enough to prevent an outbreak. Make sure your expectations and simulation results agree.
+
+
+### Task 3 
+* Most vaccines are not perfect. What fraction of the population would you need to vaccinate for the scenario above if the vaccine efficacy/effectiveness was 75%? What if it was 60%? Confirm with the simulations.
+
+
+### Task 4
+* Another useful intervention is quarantine, these days more commonly referred to as social distancing. By either forcibly or voluntarily reducing contacts between susceptibles and infected, this can reduce the transmission rate and thus the reproductive number.
+* Consider the scenario as in task 2, but now we have a _b=0.015_. If we were able to reduce contacts and thus transmission by half, would that be enough to prevent an outbreak? By what fraction do we need to reduce the transmission to prevent an outbreak? To answer this, first compute the corresponding _R~0~_. Then confirm with the model. 
+
+Note that in this model, we can't distinguish between interventions that target susceptibles or infected, both could reduce the transmission rate. Targeting susceptibles before they become infected is of course preferable, but there are usually many more of those, so targeting infected is often easier. Interventions that reduce contact and transmission/infection risk for both groups is of course best.
+
+
+## Further Information {#shinytab4}
+* This app (and all others) are structured such that the Shiny part (the graphical interface you see and the server-side function that goes with it) calls an underlying R script (or several) which runs the simulation for the model of interest and returns the results.
+* For this app, the underlying function(s) running the simulation are called ``r appsettings$simfunction``. You can call them directly, without going through the shiny app. Use the `help()` command for more information on how to use the functions directly. If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself. 
+* You can also download all simulator functions and modify them for your own purposes.  Of course to modify these functions, you'll need to do some coding.
+* For examples on using the simulators directly and how to modify them, read the package vignette by typing `vignette('DSAIDE')` into the R console.
+* For the equations mentioned in the tasks, see e.g. [@heffernan05a; @keeling08; @vynnycky10].
+* For some information on the reproductive number, see e.g. [@fine11; @heffernan05a; @roberts07; @wallinga07].
+
+### References
+
+
+
