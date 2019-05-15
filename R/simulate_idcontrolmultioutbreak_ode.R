@@ -40,8 +40,7 @@
 #' @author Andreas Handel
 #' @export
 
-
-simulate_idcontrolmultioutbreak_ode <- function(S = 1000, I = 1, R = 0, b = 1e-2, g = 5, f = 0.3, tstart = 10, tend = 50, tmax = 100){
+simulate_idcontrolmultioutbreak_ode <- function(S = 1000, I = 1, R = 0, b = 1e-2, g = 5, f = 0.3, tstart = 10, tend = 50, tnew = 50, tmax = 100){
 
   
   ############################################################
@@ -63,7 +62,17 @@ simulate_idcontrolmultioutbreak_ode <- function(S = 1000, I = 1, R = 0, b = 1e-2
     ) #close with statement
   } #end function specifying the ODEs
   ############################################################
+
+  ############################################################
+  # start function that adds an infected at the given times
+  addinfected <- function(t, y, parms)  
+  {
+      y["I"]=y["I"]+1
+      return(y)
+  }    
   
+  
+    
   Y0 = c(S = S, I = I, R = R);  #combine initial conditions into a vector
   dt = min(0.1, tmax / 1000); #time step for which to get results back
   timevec = seq(0, tmax, dt); #vector of times for which solution is returned (not that internal timestep of the integrator is different)
@@ -71,10 +80,14 @@ simulate_idcontrolmultioutbreak_ode <- function(S = 1000, I = 1, R = 0, b = 1e-2
   #combining parameters into a parameter vector
   pars = c(b = b, g = g, f = f, tstart = tstart, tend = tend);
 
+  #if times of immigration is set larger than max simulation time, set them to simulation time max
+  if (tnew>tend) {tnew=tmax}
+  newinftimes = seq(tnew,tmax,by=tnew) #times at which a new infected enters the population
+    
   #this line runs the simulation, i.e. integrates the differential equations describing the infection process
   #the result is saved in the odeoutput matrix, with the 1st column the time, the 2nd, 3rd, 4th column the variables S, I, R
   #This odeoutput matrix will be re-created every time you run the code, so any previous results will be overwritten
-  odeoutput = deSolve::ode(y = Y0, times = timevec, func = idcontrolmultioutbreak_ode, parms=pars, method = "vode", atol=1e-8, rtol=1e-8);
+  odeoutput = deSolve::ode(y = Y0, times = timevec, func = idcontrolmultioutbreak_ode, parms=pars, method = "vode", events = list(func = addinfected, time = newinftimes), atol=1e-8, rtol=1e-8);
   
   result <- list()
   result$ts <- as.data.frame(odeoutput)

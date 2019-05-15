@@ -60,7 +60,7 @@ $$\dot S = -(1-f) b SI$$
 $$\dot I = (1-f)b S I$$
 $$\dot R = g I$$
 
-where _f_ is zero outside of the treatment interval given by _tstart_ and _tend_. Furhter, at intervals _tnew_, the number of infected increases by 1.
+where _f_ is zero outside of the treatment interval given by _tstart_ and _tend_. Further, at intervals _tnew_, the number of infected increases by 1.
 
 
 
@@ -75,7 +75,8 @@ where _f_ is zero outside of the treatment interval given by _tstart_ and _tend_
 * Set the recovery rate, _g_, such that it corresponds to a infectiousness duration of 5 days.  
 * Set the infectiousness rate _b_ such that the model has an R~0~ of 4.
 * Keep the intervention level, _f_, at 0 for now.
-* Run the simulation for 200 days. You should get an outbreak with around 20 susceptibles left at the end.
+* Set _tmax_ and _tnew_ to 200. Values for _tstart_ and _tend_ do not matter since _f_ is 0.
+* Run the simulation. You should get an outbreak with around 20 susceptibles left at the end.
 
 
 ### Task 2 

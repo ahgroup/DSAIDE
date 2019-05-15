@@ -5,7 +5,8 @@
 \title{Simulation of a compartmental infectious disease transmission model to study the reproductive number}
 \usage{
 simulate_idcontrolmultioutbreak_ode(S = 1000, I = 1, R = 0,
-  b = 0.01, g = 5, f = 0.3, tstart = 10, tend = 50, tmax = 100)
+  b = 0.01, g = 5, f = 0.3, tstart = 10, tend = 50, tnew = 50,
+  tmax = 100)
 }
 \arguments{
 \item{S}{: initial number of susceptible hosts : numeric}
@@ -14,15 +15,17 @@ simulate_idcontrolmultioutbreak_ode(S = 1000, I = 1, R = 0,
 
 \item{R}{: initial number of recovered hosts : numeric}
 
-\item{b}{: level/rate of infectiousness for hosts in the I compartment : numeric}
+\item{b}{: rate of new infections : numeric}
 
-\item{g}{: rate at which a person leaves the I compartment : numeric}
+\item{g}{: rate of recovery : numeric}
 
-\item{f}{: strength of intervention effort between 0 and 1 : numeric}
+\item{f}{: strength of intervention effort : numeric}
 
 \item{tstart}{: time at which intervention effort starts : numeric}
 
 \item{tend}{: time at which intervention effort ends : numeric}
+
+\item{tnew}{: time at which new infected enter : numeric}
 
 \item{tmax}{: maximum simulation time : numeric}
 }

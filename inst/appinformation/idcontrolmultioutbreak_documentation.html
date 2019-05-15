@@ -62,6 +62,7 @@
 </li>
 <li>Infected individuals recover and enter the recovered (R) compartment at some rate, <em>g</em>.</li>
 <li>Control measures are applied at some level <em>f</em> (between 0 and 1) which reduces the rate at which new infections occur. Control measures start at time <em>tstart</em> and end at time <em>tend</em>.</li>
+<li>A new infected person enters the population at fixed time intervals given by <em>tnew</em>.</li>
 </ul>
 </div>
 <div id="model-implementation" class="section level3">
@@ -72,16 +73,52 @@
 <p class="caption">Flow diagram for this model.</p>
 </div>
 <p><span class="math display">\[\dot S = -(1-f) b SI\]</span> <span class="math display">\[\dot I = (1-f)b S I\]</span> <span class="math display">\[\dot R = g I\]</span></p>
-<p>where <em>f</em> is zero outside of the treatment interval given by <em>tstart</em> and <em>tend</em>.</p>
+<p>where <em>f</em> is zero outside of the treatment interval given by <em>tstart</em> and <em>tend</em>. Further, at intervals <em>tnew</em>, the number of infected increases by 1.</p>
 </div>
 </div>
 <div id="shinytab3" class="section level2">
 <h2>What to do</h2>
-<p><strong>The tasks below are described in a way that assumes everything is in units of MONTHS (rate parameters, therefore, have units of inverse months). If any quantity is not given in those units, you need to convert it first (e.g. if it says a year, you need to convert it to 12 months).</strong></p>
+<p><strong>The tasks below are described in a way that assumes everything is in units of days (rate parameters, therefore, have units of inverse days). If any quantity is not given in those units, you need to convert it first.</strong></p>
 <div id="task-1" class="section level3">
 <h3>Task 1</h3>
 <ul>
-<li></li>
+<li>Set the model to 1000 initial susceptible, 1 infected, no recovered.</li>
+<li>Set the recovery rate, <em>g</em>, such that it corresponds to a infectiousness duration of 5 days.<br />
+</li>
+<li>Set the infectiousness rate <em>b</em> such that the model has an R<sub>0</sub> of 4.</li>
+<li>Keep the intervention level, <em>f</em>, at 0 for now.</li>
+<li>Set <em>tmax</em> and <em>tnew</em> to 200. Values for <em>tstart</em> and <em>tend</em> do not matter since <em>f</em> is 0.</li>
+<li>Run the simulation. You should get an outbreak with around 20 susceptibles left at the end.</li>
+</ul>
+</div>
+<div id="task-2" class="section level3">
+<h3>Task 2</h3>
+<ul>
+<li>First without running the simulation and using what you know about R<sub>0</sub> and how it relates to the susceptible population size, figure out what the number of susceptibles is - assuming every other parameter stays the same - at which you don’t get an outbreak anymore.</li>
+<li>Now test your expectation by trying different values for <em>S</em>. You might have to adjust the simulation time to see this better.</li>
+</ul>
+<p>This value for <em>S</em> provides a threshold below which we don’t get an outbreak. This of course directly corresponds to the threshold value for R<sub>0</sub> which you learned about previously.</p>
+</div>
+<div id="task-3" class="section level3">
+<h3>Task 3</h3>
+<p>The threshold value below which you do not get an outbreak is around 250 for the parameter settings here. However, in the first task the number of susceptibles left at the end of the outbreak was much less, around 20. The outbreak ‘overshoots’ by depleting more susceptibles than the threshold value. Why is that? Think about what happens at the peak of the outbreak when R<sub>0</sub> switches from being larger than 1 to smaller than 1. Does the outbreak stop immediately? Why not?</p>
+</div>
+<div id="task-4" class="section level3">
+<h3>Task 4</h3>
+<p>For a single outbreak, more control is better. We can test that.</p>
+<ul>
+<li>Set everything back to task 1, but increase simulation time to 500.</li>
+<li>Set control start at 0 and end at 500.</li>
+<li>Slowly increase control, <em>f</em>. Run the simulation for each. As <em>f</em> increases, you should see smaller outbreaks until you hit a value of <em>f</em> for which you don’t see outbreaks anymore. Understand how this value of <em>f</em> relates to the reproductive number.</li>
+</ul>
+</div>
+<div id="task-5" class="section level3">
+<h3>Task 5</h3>
+<p>For multiple outbreaks, more control is not better. Let’s explore that.</p>
+<ul>
+<li>Set everything as in the previous task, but set control end to 200.</li>
+<li>Slowly increase control, <em>f</em>. Run the simulation for each. Initially, things look as before. But once you reach a certain level of control, you will see that a second outbreak occurs and the total number of susceptibles drops again.</li>
+<li>To see explore this in more detail, set f=0.55 and f=0.6 and try to understand why in one case you only get a single outbreak and in the other you get 2.</li>
 </ul>
 </div>
 </div>
