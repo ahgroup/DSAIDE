@@ -24,6 +24,10 @@
 #'   is simulated as a set of ordinary differential
 #'   equations. The function returns the output from the odesolver as a matrix,
 #'   with one column per compartment/variable. The first column is time.
+#'   The model implement basic processes of infection at rate b and recovery at rate g.
+#'   Treatment is applied, which reduces b by the indicated proportion, during times tstart and tend.
+#'   At time intervals given by tnew, a new infected individual enters the population.
+#'   The simulation also monitors the number of infected and when they drop below 1, they are set to 0.
 #' @section Warning:
 #'   This function does not perform any error checking. So if you try to do
 #'   something nonsensical (e.g. negative values or fractions > 1),
@@ -40,7 +44,7 @@
 #' @author Andreas Handel
 #' @export
 
-simulate_idcontrolmultioutbreak_ode <- function(S = 1000, I = 1, R = 0, b = 1e-2, g = 5, f = 0.3, tstart = 10, tend = 50, tnew = 50, tmax = 100){
+simulate_idcontrolmultioutbreak_ode <- function(S = 1000, I = 1, R = 0, b = 1e-3, g = 1, f = 0.3, tstart = 10, tend = 50, tnew = 50, tmax = 100){
 
   
   ############################################################
@@ -56,38 +60,62 @@ simulate_idcontrolmultioutbreak_ode <- function(S = 1000, I = 1, R = 0, b = 1e-2
         dS = - b*(1-f)*S*I #susceptibles
         dI = b*(1-f)*S*I - g*I #infected/infectious
         dR = g*I #recovered
-        
+
         list(c(dS, dI, dR))
       }
     ) #close with statement
   } #end function specifying the ODEs
   ############################################################
 
+  
   ############################################################
-  # start function that adds an infected at the given times
-  addinfected <- function(t, y, parms)  
+  # functions that monitor I and sets it to 0 if it crosses the 1 threshold 
+  checkinfected <- function(t,y,parms)
   {
-      y["I"]=y["I"]+1
-      return(y)
-  }    
-  
-  
-    
+    y["I"]-0.99
+  }
+  zeroinfected <- function(t,y,parms)
+  {
+    y["I"] = 0
+    return(y)
+  }
+      
   Y0 = c(S = S, I = I, R = R);  #combine initial conditions into a vector
   dt = min(0.1, tmax / 1000); #time step for which to get results back
-  timevec = seq(0, tmax, dt); #vector of times for which solution is returned (not that internal timestep of the integrator is different)
 
   #combining parameters into a parameter vector
-  pars = c(b = b, g = g, f = f, tstart = tstart, tend = tend);
+  pars = c(b = b, g = g, f = f, tstart = tstart, tend = tend, tnew = tnew);
 
   #if times of immigration is set larger than max simulation time, set them to simulation time max
-  if (tnew>tend) {tnew=tmax}
+  if (tnew>tmax) {tnew=tmax}
   newinftimes = seq(tnew,tmax,by=tnew) #times at which a new infected enters the population
-    
+  
+  #since the desolve/ode do not handle multiple events/roots (as far as I know)
+  #we need to do the entry of new infected at times tnew 'by hand' and integrate piecewise
+  #easiest to do with a loop
+  odeoutput = NULL
+  ts = 0; #start pieces of integration at 0  
+  for (n in 1:length(newinftimes))
+  {
+    tf = newinftimes[n] #simulate to time of first new infected entering
+    timevec = seq(ts,tf,dt)
+    odetmp = deSolve::ode(y = Y0, times = timevec, func = idcontrolmultioutbreak_ode, parms=pars, method = "lsoda", events = list(func = zeroinfected, root = TRUE), rootfun = checkinfected, atol=1e-8, rtol=1e-8);
+    odeoutput = rbind(odeoutput,odetmp) #not very efficient but ok for here way to save all results
+    ts = tf #new starting time is last ending time
+    Y0 = odetmp[nrow(odetmp),-1] #values of variables at last step of simulation
+    Y0["I"] = Y0["I"] + 1 #add one infected
+  }
+  #one more simulation bit to the end
+  if (ts<tmax)
+  {
+    timevec = seq(ts,tmax,dt)
+    odetmp = deSolve::ode(y = Y0, times = timevec, func = idcontrolmultioutbreak_ode, parms=pars, method = "lsoda", events = list(func = zeroinfected, root = TRUE), rootfun = checkinfected, atol=1e-8, rtol=1e-8);
+    odeoutput = rbind(odeoutput,odetmp) #not very efficient but ok for here way to save all results
+  }
+  #browser()
   #this line runs the simulation, i.e. integrates the differential equations describing the infection process
   #the result is saved in the odeoutput matrix, with the 1st column the time, the 2nd, 3rd, 4th column the variables S, I, R
   #This odeoutput matrix will be re-created every time you run the code, so any previous results will be overwritten
-  odeoutput = deSolve::ode(y = Y0, times = timevec, func = idcontrolmultioutbreak_ode, parms=pars, method = "vode", events = list(func = addinfected, time = newinftimes), atol=1e-8, rtol=1e-8);
   
   result <- list()
   result$ts <- as.data.frame(odeoutput)

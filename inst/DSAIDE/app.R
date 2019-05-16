@@ -309,6 +309,14 @@ ui <- fluidPage(
                       fluidRow(
                         actionButton("hostheterogeneity", "Host heterogeneity", class="mainbutton"),  
                        actionButton("multipathogen", "Multi-Pathogen dynamics", class="mainbutton"),
+                       actionButton("parasitemodel", "Parasite models", class="mainbutton"),
+                       actionButton("idsurveillance", "ID surveillance", class="mainbutton"),
+                       actionButton("maternalimmunity", "Maternal immunity", class="mainbutton"),
+                       class = "mainmenurow"
+                      ), #close fluidRow structure for input
+                      tags$div(class='mainsectionheader', 'Fitting models to data'),
+                      fluidRow(
+                        actionButton("basicfit", "Basic model fit", class="mainbutton"),  
                         class = "mainmenurow"
                       ), #close fluidRow structure for input
                       tags$div(class='mainsectionheader', 'Further modeling topics'),

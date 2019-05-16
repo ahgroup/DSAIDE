@@ -65,6 +65,9 @@ $$\dot S = - b SI $$
 $$\dot I = b S I - g I $$
 $$\dot R = g I $$
 
+The underlying model implements one other process. In previous apps, you learned that an unrealistic feature of models implemented by ordinary differential equations (ODE) is that the number of individuals can drop below 1, i.e. there could be fraction of infected. For this app, the underlying code is such that if the number of infected drops below 1, it is set to 0. This is in some way a bit of a "hack" to deal with this issue. When you work through the stochastic apps, you will learn better ways of treating this. The advantage of doing it the way it's done here is that we can keep using the ODE model formulation, without stochasticity, which makes things easy.
+
+
 ### Reproductive number
 
 _The app and tasks deal with the reproductive number concept. The following section provides a very brief introduction. I recommend reading a bit more about it. I'm following the terminology of [my own write-up](https://ahgroup.github.io/DSAIDEbook/reproductive-number.html). You can also check the books listed in the ID introduction app or some of the papers listed in the _Further Resources_ section of this app._
@@ -72,7 +75,8 @@ _The app and tasks deal with the reproductive number concept. The following sect
 The reproductive number is defined as the average number of new infected (and infectious) individuals caused by one infectious individual. The _basic_ reproductive number is the reproductive number in a scenario where everyone is susceptible. For the SIR model shown above, this quantity is 
 $$R_0=\frac{bS_0}{g}$$ 
 where _S~0~_ is the initial number of susceptibles.
-For a single outbreak (no births, natural death or waning immunity) and a basic SIR model, an equation linking the number of susceptibles left at the end and the basic reproductive number is 
+
+For a single outbreak (no births, natural death or waning immunity) and a basic SIR model, an equation linking the final number of susceptibles left at the end and the basic reproductive number is 
 $$R_0=\frac{\ln(S_f)}{(S_f - 1)}$$
 where $\ln()$ is the natural logarithm and _S~f~_ is the __fraction__ of susceptibles still left.
 
@@ -87,7 +91,7 @@ Note the unfortunate fact that the letter _R_ is used both for the recovered com
 ### Task 1
 * Set the simulation with 1000 susceptibles and 1 infected.
 * Simulation time 12 months, _g_=5, _b_=0.01. 
-* Run the simulation, you should get an outbreak. Use the final size equation linking R~0~ and the fraction of susceptible hosts left at the end of the outbreak to compute the reproductive number. 
+* Run the simulation, you should get an outbreak. Use the final size equation linking R~0~ and the fraction of susceptible hosts left at the end of the outbreak to compute the reproductive number (see the information in the _Model_ tab). 
 
 ### Task 2
 * Use the equation that expresses R~0~ as a function of model parameters for the simple SIR model. Using the values of the model parameters, compute R~0~ that way. Check that it agrees with what you found in the previous task.

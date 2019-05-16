@@ -12,13 +12,7 @@ bibliography: references.bib
 ---
 
 
-```{r, echo = FALSE}
-#this code loads the settings file for the current app so we can automatically 
-#list the functions in the further information section
-currentrmdfile = knitr::current_input() 
-currentappinfo = gsub("_documentation.Rmd" ,"_settings.R",currentrmdfile)
-source(currentappinfo)
-```
+
 
 
 
@@ -50,9 +44,7 @@ For this app, we specify the following processes/flows:
 ### Model Implementation
 The flow diagram and the set of equations which are used to implement this model are as follows:
 
-```{r multioutbreakdiagram,  fig.cap='Flow diagram for this model. ',  echo=FALSE}
-knitr::include_graphics("../media/multioutbreakmodelfigure.png")
-```
+![Flow diagram for this model. ](../media/multioutbreakmodelfigure.png)
 
 
 
@@ -120,7 +112,7 @@ In the previous task, control ends while there are still a few infected around, 
 
 ## Further Information {#shinytab4}
 * This app (and all others) are structured such that the Shiny part (the graphical interface you see and the server-side function that goes with it) calls an underlying R script (or several) which runs the simulation for the model of interest and returns the results.
-* For this app, the underlying function(s) running the simulation are called ``r appsettings$simfunction``. You can call them directly, without going through the shiny app. Use the `help()` command for more information on how to use the functions directly. If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself. 
+* For this app, the underlying function(s) running the simulation are called `simulate_idcontrolmultioutbreak_ode`. You can call them directly, without going through the shiny app. Use the `help()` command for more information on how to use the functions directly. If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself. 
 * You can also download all simulator functions and modify them for your own purposes.  Of course to modify these functions, you'll need to do some coding.
 * For examples on using the simulators directly and how to modify them, read the package vignette by typing `vignette('DSAIDE')` into the R console.
 * This app closely follows a model and analysis described in [@handel07a]. Similar ideas applied to drug sensitive and drug resistant influenza strains are discussed in [@lipsitch07; @alexander07; @handel09a].

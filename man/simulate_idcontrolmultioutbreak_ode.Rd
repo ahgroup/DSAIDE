@@ -5,7 +5,7 @@
 \title{Simulation of a compartmental infectious disease transmission model to study the reproductive number}
 \usage{
 simulate_idcontrolmultioutbreak_ode(S = 1000, I = 1, R = 0,
-  b = 0.01, g = 5, f = 0.3, tstart = 10, tend = 50, tnew = 50,
+  b = 0.001, g = 1, f = 0.3, tstart = 10, tend = 50, tnew = 50,
   tmax = 100)
 }
 \arguments{
@@ -47,6 +47,10 @@ A compartmental ID model with several states/compartments
   is simulated as a set of ordinary differential
   equations. The function returns the output from the odesolver as a matrix,
   with one column per compartment/variable. The first column is time.
+  The model implement basic processes of infection at rate b and recovery at rate g.
+  Treatment is applied, which reduces b by the indicated proportion, during times tstart and tend.
+  At time intervals given by tnew, a new infected individual enters the population.
+  The simulation also monitors the number of infected and when they drop below 1, they are set to 0.
 }
 \section{Warning}{
 

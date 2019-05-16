@@ -36,7 +36,7 @@
 
 <div id="shinytab1" class="section level2">
 <h2>Overview</h2>
-<p>This app explores how one should implement ID control measures for an scenario with multiple consecutive outbreaks. Read about the model in the “Model” tab. Then do the tasks described in the “What to do” tab. Before going through this app, you should go through the ‘Reproductive Number’ apps first.</p>
+<p>This app explores how one should implement ID control measures for an scenario with multiple consecutive outbreaks. Read about the model in the “Model” tab. Then do the tasks described in the “What to do” tab. Before going through this app, you should go through the ‘Reproductive Number’ apps first. This app closely follows a model and analysis described in <span class="citation">(Handel, Longini, and Antia 2007)</span>, see the “Further Information” tab for this and other related references.</p>
 <div id="learning-objectives" class="section level3">
 <h3>Learning Objectives</h3>
 <ul>
@@ -73,7 +73,7 @@
 <p class="caption">Flow diagram for this model.</p>
 </div>
 <p><span class="math display">\[\dot S = -(1-f) b SI\]</span> <span class="math display">\[\dot I = (1-f)b S I\]</span> <span class="math display">\[\dot R = g I\]</span></p>
-<p>where <em>f</em> is zero outside of the treatment interval given by <em>tstart</em> and <em>tend</em>. Further, at intervals <em>tnew</em>, the number of infected increases by 1.</p>
+<p>The parameter <em>f</em> can be non-zero outside of the treatment interval given by <em>tstart</em> and <em>tend</em>. At intervals <em>tnew</em>, the number of infected increases by 1. The simulation for this app also has one more feature. In previous apps, you learned that an unrealistic feature of models implemented by ordinary differential equations (ODE) is that the number of individuals can drop below 1, i.e. there could be fraction of infected. For this app, the underlying code is such that if the number of infected drops below 1, it is set to 0. This is in some way a bit of a “hack” to deal with this issue. When you work through the stochastic apps, you will learn better ways of treating this. The advantage of doing it the way it’s done here is that we can keep using the ODE model formulation, without stochasticity, which makes things easy.</p>
 </div>
 </div>
 <div id="shinytab3" class="section level2">
@@ -85,7 +85,7 @@
 <li>Set the model to 1000 initial susceptible, 1 infected, no recovered.</li>
 <li>Set the recovery rate, <em>g</em>, such that it corresponds to a infectiousness duration of 5 days.<br />
 </li>
-<li>Set the infectiousness rate <em>b</em> such that the model has an R<sub>0</sub> of 4.</li>
+<li>Set the infectiousness rate <em>b</em> such that the model has a reproductive number, R<sub>0</sub>, of 4. If you don’t know how to do that, please work through the <em>Reproductive Number</em> apps first and then come back.</li>
 <li>Keep the intervention level, <em>f</em>, at 0 for now.</li>
 <li>Set <em>tmax</em> and <em>tnew</em> to 200. Values for <em>tstart</em> and <em>tend</em> do not matter since <em>f</em> is 0.</li>
 <li>Run the simulation. You should get an outbreak with around 20 susceptibles left at the end.</li>
@@ -107,18 +107,34 @@
 <h3>Task 4</h3>
 <p>For a single outbreak, more control is better. We can test that.</p>
 <ul>
-<li>Set everything back to task 1, but increase simulation time to 500.</li>
-<li>Set control start at 0 and end at 500.</li>
-<li>Slowly increase control, <em>f</em>. Run the simulation for each. As <em>f</em> increases, you should see smaller outbreaks until you hit a value of <em>f</em> for which you don’t see outbreaks anymore. Understand how this value of <em>f</em> relates to the reproductive number.</li>
+<li>Set everything back to task 1.</li>
+<li>Set control to start at time 0 and end at 200.</li>
+<li>Set simulation time and <em>tnew</em> both to 200.</li>
+<li>Slowly increase control, <em>f</em> (e.g. in steps of 0.1). Run the simulation for each value of <em>f</em>. As <em>f</em> increases, you should see smaller outbreaks until you hit a value of <em>f</em> for which you don’t see outbreaks anymore. Understand how this value of <em>f</em> relates to the reproductive number.</li>
 </ul>
 </div>
 <div id="task-5" class="section level3">
 <h3>Task 5</h3>
-<p>For multiple outbreaks, more control is not better. Let’s explore that.</p>
+<p>For multiple outbreaks, more control is not necessarily better. Let’s explore that.</p>
 <ul>
-<li>Set everything as in the previous task, but set control end to 200.</li>
-<li>Slowly increase control, <em>f</em>. Run the simulation for each. Initially, things look as before. But once you reach a certain level of control, you will see that a second outbreak occurs and the total number of susceptibles drops again.</li>
+<li>Set everything as in the previous task, but set control end to 100.</li>
+<li>Slowly increase control, <em>f</em> and run the simulation for the different values of <em>f</em>. Initially, things look as before. But once you reach a certain level of control, you will see that a second outbreak occurs and the total number of susceptibles drops again.</li>
 <li>To see explore this in more detail, set f=0.55 and f=0.6 and try to understand why in one case you only get a single outbreak and in the other you get 2.</li>
+<li>Run the simulation for <em>f=0.2-0.7</em> (in steps of 0.1) and record the number of susceptibles left at the end of the simulation. Based on that, what do you conclude about the impact of different levels of control on the outcome? What seems to be the best level of control and why?</li>
+</ul>
+</div>
+<div id="task-6" class="section level3">
+<h3>Task 6</h3>
+<p>In the previous task, control ends while there are still a few infected around, which can lead to a second outbreak. An alternative scenario is one where control ends after infected are gone, but then a new infected person enters the population. We can explore this scenario as well.</p>
+<ul>
+<li>Set everything as in the previous task.</li>
+<li>Set control to start at time 0 and end at 250, control strength to <em>f=0.7</em>.</li>
+<li>Set simulation time and <em>tnew</em> to 500.</li>
+<li>Run the simulation, you should see a single outbreak with around 686 susceptibles left.</li>
+<li>Now set <em>tnew=300</em>. That means at time 300, a new infected individual enters the population. You’ll see another outbreak. Make sure you understand why.</li>
+<li>Try the above again with <em>f=0.6</em>. You should see a bigger first and smaller second outbreak.</li>
+<li>Try the above again with <em>f=0.5</em>. This time you will only get one initial outbreak.</li>
+<li>Compare the number of susceptibles left at the end of the simulation for <em>f=0.3, 0.5</em> and <em>f=0.7</em>. Think about why it is again that for some levels of control you get a single outbreak and for some you get more than one, and what that means for optimal intervention strength. You should come to the same concusions as in the previous task.</li>
 </ul>
 </div>
 </div>
