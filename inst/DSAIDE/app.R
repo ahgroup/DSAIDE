@@ -312,6 +312,8 @@ ui <- fluidPage(
                        actionButton("parasitemodel", "Parasite models", class="mainbutton"),
                        actionButton("idsurveillance", "ID surveillance", class="mainbutton"),
                        actionButton("maternalimmunity", "Maternal immunity", class="mainbutton"),
+                       #actionButton("globalwarming", "Global Warming", class="mainbutton"),
+                       #actionButton("metapopulation", "Metapopulation Dynamics", class="mainbutton"),
                        class = "mainmenurow"
                       ), #close fluidRow structure for input
                       tags$div(class='mainsectionheader', 'Fitting models to data'),
