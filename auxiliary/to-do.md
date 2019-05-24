@@ -10,6 +10,7 @@
 * Add learning objectives to each overview tab
 * Implement further apps, see below
 * Clean up and make all model diagrams as nice as possible
+* Re-create diagrams for ID surveillance, Parasites, global warming, maternal immunity
 
 ## Apps to be implemented
 * Fitting apps from DSAIRM
