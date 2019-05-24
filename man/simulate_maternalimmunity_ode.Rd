@@ -20,7 +20,7 @@ simulate_maternalimmunity_ode(S = 1000, I = 1, tmax = 1000,
 
 \item{n}{: the rate at which individuals die : numeric}
 
-\item{p}{: the rate at which individuals lose passive immunity}
+\item{p}{: the rate at which individuals lose passive immunity : numeric}
 
 \item{b}{: rate of new infections : numeric}
 

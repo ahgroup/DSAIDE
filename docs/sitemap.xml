@@ -46,10 +46,19 @@
     <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_idcharacteristics_ode.html</loc>
   </url>
   <url>
+    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_idcontrolmultioutbreak_ode.html</loc>
+  </url>
+  <url>
     <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_idcontrol_ode.html</loc>
   </url>
   <url>
     <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_idpatterns_ode.html</loc>
+  </url>
+  <url>
+    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_idsurveillance_ode.html</loc>
+  </url>
+  <url>
+    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_maternalimmunity_ode.html</loc>
   </url>
   <url>
     <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_modelexploration_sir.html</loc>
@@ -58,7 +67,13 @@
     <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_multipathogen_ode.html</loc>
   </url>
   <url>
-    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_reproductivenumber_ode.html</loc>
+    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_parasites_ode.html</loc>
+  </url>
+  <url>
+    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_reproductivenumber1_ode.html</loc>
+  </url>
+  <url>
+    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_reproductivenumber2_ode.html</loc>
   </url>
   <url>
     <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_seir_stochastic.html</loc>

@@ -317,10 +317,10 @@ ui <- fluidPage(
                        class = "mainmenurow"
                       ), #close fluidRow structure for input
                       tags$div(class='mainsectionheader', 'Fitting models to data'),
-                      fluidRow(
-                        actionButton("basicfit", "Basic model fit", class="mainbutton"),  
-                        class = "mainmenurow"
-                      ), #close fluidRow structure for input
+                      #fluidRow(
+                      #  actionButton("basicfit", "Basic model fit", class="mainbutton"),  
+                      #  class = "mainmenurow"
+                      #), #close fluidRow structure for input
                       tags$div(class='mainsectionheader', 'Further modeling topics'),
                       fluidRow(
                         actionButton("modelexploration", "Model exploration", class="mainbutton"),  
