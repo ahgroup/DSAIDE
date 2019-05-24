@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+<title>VectorTemp</title>
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">VectorTemp</h1>
+
+
+
+<div id="shinytab1" class="section level2">
+<h2>Overview</h2>
+<p>This model explores the effects of global warming on a vector-borne disease.</p>
+<div id="learning-objectives" class="section level3">
+<h3>Learning Objectives</h3>
+<ul>
+<li>Understand the ways changes in temperature can affect disease dynamics</li>
+</ul>
+</div>
+</div>
+<div id="shinytab2" class="section level2">
+<h2>The Model</h2>
+<div id="model-overview" class="section level3">
+<h3>Model Overview</h3>
+<p>The main model is similar to the one discussed in the <em>Vector Transmission</em> app. Two species, hosts and vectors, are tracked, using the basic SIR framework. The model has the following compartments:</p>
+<ul>
+<li><strong>Sh</strong> - uninfected and susceptible host</li>
+<li><strong>Ih</strong> - infected/infectious hosts</li>
+<li><strong>Rh</strong> - recovered/removed hosts</li>
+<li><strong>Sv</strong> - susceptible vectors</li>
+<li><strong>Iv</strong> - infected/infectious vectors</li>
+</ul>
+<p>We assume that once vectors are infected, they stays infected until death. Therefore, recovered vectors are not included in the model.</p>
+<p>The processes being modeled are:</p>
+<ul>
+<li>Susceptible hosts can become infected by contact with infected vectors at rate <em>b<sub>1</sub></em>.</li>
+<li>Susceptible vectors can become infected by contact with infected hosts at rate <em>b<sub>2</sub></em>.</li>
+<li>Infected hosts recover after some time at rate <em>g</em>.</li>
+<li>Recovered hosts lose their immunity at rate <em>w</em>.</li>
+<li>New susceptible vectors are born at a rate <em>m</em>. Births are reduced as the vectors reach carrying capacity <em>V<sub>m</sub></em>.</li>
+<li>Susceptible and infected vectors die at rate <em>n</em>. The inverse of this rate is the average lifespan.</li>
+</ul>
+<p>We envision hosts to be humans and vectors to be e.g. mosquitoes. We further assume the time scale for the model is short enough that we can ignore births and deaths for human hosts but not vectors. This is likely a decent approximation as long as our simulation time is only a few years.</p>
+</div>
+<div id="model-diagram" class="section level3">
+<h3>Model Diagram</h3>
+<p>The flow diagram for the model is</p>
+</div>
+<div id="model-equations" class="section level3">
+<h3>Model Equations</h3>
+<p>The equations for the model are:</p>
+<p><span class="math display">\[\dot S_h = - b_1 S_h I_v + w R_h\]</span> <span class="math display">\[\dot I_h = b_1 S_h I_v  - g I_h\]</span> <span class="math display">\[\dot R_h = g I_h - w R_h\]</span> <span class="math display">\[\dot S_v =m(1-\frac{S_v + I_v}{V_m})(S_v+I_v) - b_2 S_v I_h - n S_v\]</span> <span class="math display">\[\dot I_v = b_2 S_v I_h  - n I_v\]</span></p>
+</div>
+<div id="temperature" class="section level3">
+<h3>Temperature</h3>
+<p>The main focus of this model is to study the impact of temperature on disease dynamics. To do so, we expliclity model temperature. We designate temperature by <strong>W</strong>. Temperature is not modeled as a differential equation, instead it is directly a time-dependent variable. Specifically, we model temperature with this equation:</p>
+<p><span class="math display">\[W =  w_0 + (1 + w_3t/T)w_1 sin(2 \pi t/T) + w_2 t/T\]</span></p>
+<ul>
+<li><em>w0</em> is some base average temperature.</li>
+<li>The seasonal variation in temperature is designated <em>w1</em>.</li>
+<li>A linear increase with time in average base temperature caused by global warming is designated <em>w2</em>.</li>
+<li>An increase in extreme temperature events with time (stronger seasonal variation) caused by global warming is designated <em>w3</em>.</li>
+<li>The parameter T is set depending on the time units chosen for the model. For example if you want to run the model in units of days, the underlying simulation code will set T=365, similarly, for weeks it will be T=52. This ensures that the seasonal variation always has a period of a year.</li>
+</ul>
+<p>The impact of temperature on the dynamics is modeled as follows: * As temperature increases, the birth rate of vectors increases linearly, i.e. we set m=m_w*W</p>
+<p>resulting in an increasing number of susceptible vectors up to a certain temperature. At a defined temperature, the birth rate equals the death rate. Above this temperature death rate exceeds birth rate causing the vector population to decline.</p>
+</div>
+</div>
+<div id="shinytab3" class="section level2">
+<h2>What to do</h2>
+<p>Keep in mind all time units are in months. If tmax is set to 1000 it is 1000 months and therefore approximately 83.33 years.</p>
+<p>MODEL IS DIFFERENT THAN ORIGINAL, NONE OF TASKS WORK JUST NOW.</p>
+<div id="task-1" class="section level3">
+<h3>Task 1</h3>
+<ul>
+<li>Set the model parameters accordingly
+<ul>
+<li>1000 initially susceptible for both hosts and vectors with 1 infected host and no infected vectors.</li>
+<li>Set b2 = 0.003 and b1 = 0</li>
+<li>Set w = 0.5 and g = 0.1</li>
+<li>Set m0 = 0.1 = n</li>
+<li>Set tmax = 100</li>
+</ul></li>
+<li>Run the simulation. Is there an outbreak?</li>
+<li>Now change b1 = b2. Run the simulation. Is there an outbreak? Is the disease eliminated from the population? You should see the disease become endemic</li>
+<li>Now change infected hosts to 0 and begin with 1 infected vector. Is there an outbreak? Does anything change? Why or why not? Over the past 2 simulations, what have you noticed about the susceptible host population? Does it reach 0? Why or why not? What about the vector poulation?</li>
+<li>Play with b1 and b2 and explore the vector transmission dynamics.</li>
+</ul>
+</div>
+<div id="task-2" class="section level3">
+<h3>Task 2</h3>
+<ul>
+<li>Focus on the weather graph and the vector population. Set infected vectors to 0, the starting temperature (W0) to 25, seasonal variation(W1) to 2,and tmax to 1000. What does this varriation mean for temperature in words? What do you expect the graph of the temperature to look like? What is happening to the vector population?</li>
+<li>Change the W0 to 23.5, W1 to 5 and global warming: linear (W2) to 1 and run the simulation. How do you expect the temperature to change over time? What effect does this have on the vector and host populations? What is happening to the vector population?</li>
+<li>Change the global warming: extremes (W3) to 0.5 and tmax to 2000 and run the simulation. How do you expect the temperature to change over time given values in W0, W1, W2 and W3? What do you expect to happen to the vector population?</li>
+<li>Look at the equations for the vector populations. What do you notice about the birth rates? With this in mind, what do you expect the vector population graph to look like when p = 10, what about when p = 40?</li>
+<li>At the end of this task you should have come to the conclusion that W1 acts as a linear temperature multiplier. It can be thought of as a slope. W2 acts to model the seasonal changes in temperature creating a sinusoidal model that increases and decreases with changing time. W3 acts to create more extreme temperature events. Global warming is expected to create higher highs and lower lows. W3 acts to mimic (very simply) this effect. The other thing that should have been noticed is that the vectors grow better at lower temperatures. The vector population continues to grow until temperature p where the death rate becomes larger than the birth rate.</li>
+</ul>
+</div>
+<div id="task-3" class="section level3">
+<h3>Task 3</h3>
+<ul>
+<li>Change infected hosts and vectors to 0, w = 0.01, b1 = 0.0001, b2 = 0.0001, g = 0.01, m0 = 0.01, m1 = 0, n = 0.01 and tmax to be 2000. Leave all other parameters similar to task 1. Now change the starting temperature (W0) to 23.5. W1 to 2 and W3 to 0.1 and run the simulation. At what temperature does the vector population peak? What do we know about the birth and death rate at this temperature? At what temperarure does the population growth rate = 0?</li>
+<li>Now change the number of infected vectors to 1. Does this change the population dynamics? Is there an outbreak?</li>
+<li>Play arround with the starting temperature as well as teperature variations to see how it affects the population dynamics of vectors.</li>
+</ul>
+</div>
+<div id="task-4" class="section level3">
+<h3>Task 4</h3>
+<ul>
+<li>Now change the settings to be similar to the end of task 2. 1000 sussceptible hosts and vectors with one infected vector, tmax = 2000, b1 = 0.001, b2 = 0.001, w = 0.5, g = 0.1, W0 = 22, W1 = 5, W2 = 1, W3 = 0.5. Does an outbreak occur? What do you notice about the begining of the graph?</li>
+<li>Now change the starting temperature (W0) to 23.5 and run the model. Do you notice any pattern between the 3 graphs? Is there a relationship between W and Sv or Iv? What about W and SH?</li>
+<li>Change W0 back to 22 and then change W2 to 2. How do you expect this to differ from the initial outbreak seen the first step of task 4?</li>
+<li>Play arround with p, W0, W1, W2, W3 to see how they affect the outbreak.</li>
+</ul>
+</div>
+<div id="task-5" class="section level3">
+<h3>Task 5</h3>
+<ul>
+<li>Look at the vector graphs generatied in the last task. Why are all the vectors not infected? Under what scenario would Sv go to 0?</li>
+<li>Now lets assume that there is transovarial transmission. Change the m0 to 0 and m1 to 0.01 and run the simulation. What would you expect the graph to look like? What is happening in words? Why does Sv go down to zero?</li>
+<li>What assumptions are made in the expression of trans-ovarial transmission above?</li>
+</ul>
+</div>
+</div>
+<div id="shinytab4" class="section level2">
+<h2>Further Information</h2>
+<p>For this app, the underlying function running the simulation is called simulate_vectortemptest2.R. You can call this function directly, without going through the shiny app.</p>
+<p>A key limitation of this model is the lack of births and deaths in the host population. This was left out for simplicity but it has the added benefit of allowing users to more easily identify outbreaks caused by vectors as well as the effects of waning immunity over the long term</p>
+<div id="references" class="section level3">
+<h3>References</h3>
+</div>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

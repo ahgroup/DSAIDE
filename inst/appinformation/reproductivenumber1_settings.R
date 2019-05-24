@@ -10,7 +10,7 @@ appsettings$apptitle = "Reproductive Number 1"
 
 #name of underlying simulation function(s) to be used in the app
 #must be provided
-appsettings$simfunction = 'simulate_sir_ode'
+appsettings$simfunction = 'simulate_reproductivenumber1_ode'
 
 #number of plots to produce for output
 appsettings$nplots = 1
