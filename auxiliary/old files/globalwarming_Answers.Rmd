@@ -1,0 +1,293 @@
+---
+title: "Solutions to Exercises for Vectortemp App"
+author: "Kevin Spiegel"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+## Task 1
+_ * Set the model parameters accordingly_
+_    * 1000 initially susceptible for both hosts and vectors with 1 infected host and no infected vectors._
+_    * Set b2 = 0.003 and b1 = 0_
+_    * Set w = 0.5 and g = 0.1_
+_    * Set m0 = 0.01 and n = 0.01_
+_    * Set tmax = 100_
+_  * Run the simulation. Is there an outbreak?_
+
+The figure below shows the resulting graph and text display you should get. It also shows how you can call the function without the graphical interface to get these results. This (and all answer code below) uses the built-in `generate_plots` and `generate_text` functions. Alternatively, you could use the result returned from the `simulate_` function and make plots and text using your own R code.
+
+Load package. Only needed once:
+
+```{r, echo=TRUE, message=FALSE}
+library(DSAIDE)
+```
+
+Run the simulation and produce plot and text output:
+
+```{r, echo=TRUE}
+simres = simulate_vectortemptest2(Sh0=1000,Sv0=1000,Ih=1,tmax=100,b2=0.003,b1=0,w=0.5,g=0.1, m0=0.01, n=0.01)
+result = vector("list", 3) #create a list to feed to the generate functions
+dat1 <- simres$ts[ , c(1, 2:4)]
+dat2 <- simres$ts[ , c(1, 5:6)]
+dat3 <- simres$ts[ , c(1, 7)]
+
+result[[1]]$dat = dat1
+result[[2]]$dat = dat2
+result[[3]]$dat = dat3
+
+result[[1]]$maketext = TRUE
+result[[2]]$maketext = TRUE
+result[[3]]$maketext = TRUE
+generate_text(result)
+generate_plots(result)
+```
+
+
+_  * Now change b1 = b2. Run the simulation. Is there an outbreak? Is the disease eliminated from the population? You should see the disease become endemic_
+```{r, echo=TRUE}
+simres = simulate_vectortemptest2(Sh0=1000,Sv0=1000,Ih=1,tmax=100,b2=0.003,b1=0.003,w=0.5,g=0.1, m0=0.01, n=0.01)
+result = vector("list", 3) #create a list to feed to the generate functions
+dat1 <- simres$ts[ , c(1, 2:4)]
+dat2 <- simres$ts[ , c(1, 5:6)]
+dat3 <- simres$ts[ , c(1, 7)]
+
+result[[1]]$dat = dat1
+result[[2]]$dat = dat2
+result[[3]]$dat = dat3
+
+result[[1]]$maketext = TRUE
+result[[2]]$maketext = TRUE
+result[[3]]$maketext = TRUE
+generate_text(result)
+generate_plots(result)
+```
+Yes there is an outbreak but the disease becomes endemic.
+
+_  * Now change infected hosts to 0 and begin with 1 infected vector. Is there an outbreak? Does anything change? Why or why not? Over the past 2 simulations, what have you noticed about the susceptible host population? Does it reach 0? Why or why not? What about the vector poulation?._
+```{r, echo=TRUE}
+simres = simulate_vectortemptest2(Sh0=1000,Sv0=1000,Ih=0,Iv=1,tmax=100,b2=0.003,b1=0.003,w=0.5,g=0.1, m0=0.01, n=0.01)
+result = vector("list", 3) #create a list to feed to the generate functions
+dat1 <- simres$ts[ , c(1, 2:4)]
+dat2 <- simres$ts[ , c(1, 5:6)]
+dat3 <- simres$ts[ , c(1, 7)]
+
+result[[1]]$dat = dat1
+result[[2]]$dat = dat2
+result[[3]]$dat = dat3
+
+result[[1]]$maketext = TRUE
+result[[2]]$maketext = TRUE
+result[[3]]$maketext = TRUE
+generate_text(result)
+generate_plots(result)
+```
+Nothing changes. You get exactly the same results because b1=b2. The susceptible  host populations does not reach 0 because of the waning immunity. The susceptivle vector population does not reach 0 because both infected and un-infected vectors give birth to un-infected vectors.
+
+_* Play with b1 and b2 and explore the vector transmission dynamics._
+
+
+## Task 2
+_* Focus on the weather graph. Set infected vectors to 0, the starting temperature (W0) to 25, seasonal variation(W1) to 2,and tmax to 1000.What does this mean for temperature in words? What do you expect the graph of the temperature to look like? What is happening to the vector population?_
+
+
+```{r, echo=TRUE}
+simres = simulate_vectortemptest2(Sh0=1000,Sv0=1000,Ih=0,Iv=0,tmax=1000,b2=0.003,b1=0.003,w=0.5,g=0.1,W0=25, W1=2)
+result = vector("list", 3) #create a list to feed to the generate functions
+dat1 <- simres$ts[ , c(1, 2:4)]
+dat2 <- simres$ts[ , c(1, 5:6)]
+dat3 <- simres$ts[ , c(1, 7)]
+
+result[[1]]$dat = dat1
+result[[2]]$dat = dat2
+result[[3]]$dat = dat3
+
+result[[1]]$maketext = TRUE
+result[[2]]$maketext = TRUE
+result[[3]]$maketext = TRUE
+generate_text(result)
+generate_plots(result)
+```
+Temperature has seasonal variations. You may notice that the vector population varries with temperature. They are directly related to teh temerature.
+
+_* Change the W0 to 23.5, W1 to 5 and global warming: linear (W2) to 1 and run the simulation. How do you expect the temperature to change over time? What effect does this have on the vector and host populations? What is happening to the vector population?_
+```{r, echo=TRUE}
+simres = simulate_vectortemptest2(Sh0=1000,Sv0=1000,Ih=0,Iv=0,tmax=1000,b2=0.003,b1=0.003,w=0.5,g=0.1,W0=23.5, W1=5, W2= 1)
+result = vector("list", 3) #create a list to feed to the generate functions
+dat1 <- simres$ts[ , c(1, 2:4)]
+dat2 <- simres$ts[ , c(1, 5:6)]
+dat3 <- simres$ts[ , c(1, 7)]
+
+result[[1]]$dat = dat1
+result[[2]]$dat = dat2
+result[[3]]$dat = dat3
+
+result[[1]]$maketext = TRUE
+result[[2]]$maketext = TRUE
+result[[3]]$maketext = TRUE
+generate_text(result)
+generate_plots(result)
+```
+W2 has caused the temperature to rise at a steady state of 0.5 per month including seasonal variation (obviously unrealistic). If a linear regression line was plotted on the weather graph, it would have a slope of 1 indicating an increasing temperature. THis has lead to decreased growth periods for the vectors reducing the population and theoretically reducing the transmission of disease. During the hottest months the vector population drops dramatically.
+
+_* Change the global warming: extremes (W3) to 0.5 and tmax to 2000. How do you expect the temperature to change over time given values in W0, W1, W2 and W3? What do you expect to happen to the vector population?_
+```{r, echo=TRUE}
+simres = simulate_vectortemptest2(Sh0=1000,Sv0=1000,Ih=0,Iv=0,tmax=2000,b2=0.003,b1=0.003,w=0.5,g=0.1,W0=23.5, W1=5, W2=1, W3=0.5)
+result = vector("list", 3) #create a list to feed to the generate functions
+dat1 <- simres$ts[ , c(1, 2:4)]
+dat2 <- simres$ts[ , c(1, 5:6)]
+dat3 <- simres$ts[ , c(1, 7)]
+
+result[[1]]$dat = dat1
+result[[2]]$dat = dat2
+result[[3]]$dat = dat3
+
+result[[1]]$maketext = TRUE
+result[[2]]$maketext = TRUE
+result[[3]]$maketext = TRUE
+generate_text(result)
+generate_plots(result)
+```
+The vector population nearly goes to zero when the temperature is above 25 (p) for extended times such as between 1500 and 2000 on the graph. THere is still seasonal variation but since the temperature is staying above 25 (p) for longer periods of time, the population stays lower longer. That being said, the increased extremes has lead to more rapid growth and death periods. THe spikes in temperature correspond to a spike in population.
+
+_* Look at the equations for the vector populations. What do you notice about the birth rates? With this in mind, what do you expect the vector population graph to look like when p = 10, what about when p = 40?_
+As temperatures go above 25 (p) the population declines. If p were 10 and all of the other settings remained the same i would expect the vector population to go to 0 quickly. If p was 40 i would expect the population to grow to its maximum capacity (3000).
+
+## Task 3
+_ * Change infected hosts and vectors to 0, w = 0.01, b1 = 0.0001, b2 = 0.0001, g = 0.01, m0 = 0.01, m1 = 0, n = 0.01 and tmax to be 2000. Now change the starting temperature (W0) to 23.5. W1 to 2 and W3 to 0.1 and run the simulation. At what temperature does the vector population peak? What do we know about the birth and death rate at this temperature? At what temperarure does the population growth rate = 0?_
+
+```{r, echo=TRUE}
+simres = simulate_vectortemptest2(Sh0=1000,Sv0=1000,Ih=0,Iv=0,tmax=2000,b2=0.001,b1=0.001,w=0.01,g=0.01,W0=23.5, W1=2, W2=0.5, W3=0.1, m0=0.01, n=0.01)
+result = vector("list", 3) #create a list to feed to the generate functions
+dat1 <- simres$ts[ , c(1, 2:4)]
+dat2 <- simres$ts[ , c(1, 5:6)]
+dat3 <- simres$ts[ , c(1, 7)]
+
+result[[1]]$dat = dat1
+result[[2]]$dat = dat2
+result[[3]]$dat = dat3
+
+result[[1]]$maketext = TRUE
+result[[2]]$maketext = TRUE
+result[[3]]$maketext = TRUE
+generate_text(result)
+generate_plots(result)
+```
+
+
+the population peaks around 25 degrees. At this temperature the population growth rate = 0 and the birth rate = death rate.
+
+_* Now change the number of infected vectors to 1. Does this change the population dynamics? Is there an outbreak? What would happen if we extended the duration of the model to infinity? _
+```{r, echo=TRUE}
+simres = simulate_vectortemptest2(Sh0=1000,Sv0=1000,Ih=0,Iv=1,tmax=2000,b2=0.001,b1=0.001,w=0.01,g=0.01,W0=23.5, W1=2, W2=0.5, W3=0.1, m0=0.01, n=0.01)
+result = vector("list", 3) #create a list to feed to the generate functions
+dat1 <- simres$ts[ , c(1, 2:4)]
+dat2 <- simres$ts[ , c(1, 5:6)]
+dat3 <- simres$ts[ , c(1, 7)]
+
+result[[1]]$dat = dat1
+result[[2]]$dat = dat2
+result[[3]]$dat = dat3
+
+result[[1]]$maketext = TRUE
+result[[2]]$maketext = TRUE
+result[[3]]$maketext = TRUE
+generate_text(result)
+generate_plots(result)
+```
+yes there is an outbreak and the disease becomes endemic. If it was extended to infinity, the vectors would eventually decline to 0 and there would be no more disease transmission.
+
+_* Play arround with the starting temperature as well as teperature variations to see how it affects the population dynamics of vectors._
+
+## Task 4
+_* Now change the settings to be similar to the end of task 2. 1000 sussceptible hosts and vectors with one infected vector, m0 = 0.1, n = 0.1 tmax = 2000, b1 = 0.001, b2 = 0.001, w = 0.5, g = 0.1, W0 = 22, W1 = 5, W2 = 1, W3 = 0.5. Does an outbreak occur? What do you notice about the begining of the graph?_
+
+
+```{r, echo=TRUE}
+simres = simulate_vectortemptest2(Sh0=1000,Sv0=1000,Ih=0,Iv=1,tmax=2000,b2=0.001,b1=0.001,w=0.5,g=0.1,W0=22, W1=5, W2=1, W3=0.5)
+result = vector("list", 3) #create a list to feed to the generate functions
+dat1 <- simres$ts[ , c(1, 2:4)]
+dat2 <- simres$ts[ , c(1, 5:6)]
+dat3 <- simres$ts[ , c(1, 7)]
+
+result[[1]]$dat = dat1
+result[[2]]$dat = dat2
+result[[3]]$dat = dat3
+
+result[[1]]$maketext = TRUE
+result[[2]]$maketext = TRUE
+result[[3]]$maketext = TRUE
+generate_text(result)
+generate_plots(result)
+```
+
+Yes there is an outbreakThe initial increase in temperature caused a decrease in vector population, specifically infected vecors leading to a decrease in infected hosts and an increase in susceptible hosts.
+
+_Now change the starting temperature (W0) to 23.5 and run the model. Do you notice any pattern between the 3 graphs? Is there a relationship between W and Sv or Iv? What about W and SH?_
+```{r, echo=TRUE}
+simres = simulate_vectortemptest2(Sh0=1000,Sv0=1000,Ih=0,Iv=1,tmax=2000,b2=0.001,b1=0.001,w=0.5,g=0.1,W0=23.5, W1=5, W2=1, W3=0.5)
+result = vector("list", 3) #create a list to feed to the generate functions
+dat1 <- simres$ts[ , c(1, 2:4)]
+dat2 <- simres$ts[ , c(1, 5:6)]
+dat3 <- simres$ts[ , c(1, 7)]
+
+result[[1]]$dat = dat1
+result[[2]]$dat = dat2
+result[[3]]$dat = dat3
+
+result[[1]]$maketext = TRUE
+result[[2]]$maketext = TRUE
+result[[3]]$maketext = TRUE
+generate_text(result)
+generate_plots(result)
+```
+Every year the temperature was above 25 for longer periods leading to increased death of the vector population. This increased death, along with more rapid death leads to a tipping point seen just before 1725. At this point the number of infected people becomes less than the number of susceptible.The rising temperatures has lead to a vastly reduced vector population during the hottest months decreasing the circulating disease.
+
+_*Change W0 back to 22 and then change W2 to 2. How do you expect this to differ from the initial outbreak seen the first step of task 4?_
+```{r, echo=TRUE}
+simres = simulate_vectortemptest2(Sh0=1000,Sv0=1000,Ih=0,Iv=1,tmax=2000,b2=0.001,b1=0.001,w=0.5,g=0.1,W0=22, W1=5, W2=2, W3=0.5)
+result = vector("list", 3) #create a list to feed to the generate functions
+dat1 <- simres$ts[ , c(1, 2:4)]
+dat2 <- simres$ts[ , c(1, 5:6)]
+dat3 <- simres$ts[ , c(1, 7)]
+
+result[[1]]$dat = dat1
+result[[2]]$dat = dat2
+result[[3]]$dat = dat3
+
+result[[1]]$maketext = TRUE
+result[[2]]$maketext = TRUE
+result[[3]]$maketext = TRUE
+generate_text(result)
+generate_plots(result)
+```
+Because the temperature is rising at a faster rate, the vector poulation eventually reaches negligable numbers leading to transmission halting.
+
+_* Play arround with p, W0, W1, W2, W3 to see how they affect the outbreak._
+
+## Task 5
+_* Look at the vector graphs generatied in the last task. Why are all the vectors not infected? Under what scenario would Sv go to 0?_
+If infected vectors gave birth to other infected vectors the susceptible population would go to 0.
+
+_* Now lets assume that there is transovarial transmission. Change the m0 to 0 and m1 to 0.01 and run the simulation. What would you expect the graph to look like? What is happening in words? Why does Sv go down to zero?_
+
+```{r, echo=TRUE}
+simres = simulate_vectortemptest2(Sh0=1000,Sv0=1000,Ih=0,Iv=1,tmax=2000,b2=0.001,b1=0.001,w=0.5,g=0.1,W0=22, W1=5, W2=2, W3=0.5, m0 = 0, m1 = 0.1)
+result = vector("list", 3) #create a list to feed to the generate functions
+dat1 <- simres$ts[ , c(1, 2:4)]
+dat2 <- simres$ts[ , c(1, 5:6)]
+dat3 <- simres$ts[ , c(1, 7)]
+
+result[[1]]$dat = dat1
+result[[2]]$dat = dat2
+result[[3]]$dat = dat3
+
+result[[1]]$maketext = TRUE
+result[[2]]$maketext = TRUE
+result[[3]]$maketext = TRUE
+generate_text(result)
+generate_plots(result)
+```
+With the rapid infection of the vector population along with the temperature rising above 25 (p) leads to teh loss of all susceptible vectors.
+
+_ What assumptions are made in the expression of trans-ovarial transmission above?_
+we assume 100% efficiency in trans-ovarial transmission. All infected vectors give birth to infected vectors. 
