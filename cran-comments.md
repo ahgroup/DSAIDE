@@ -1,14 +1,14 @@
 ## Test environments
-* local Windows 10.1 x86_64, R 3.5.3
+
+* local Windows 10.1 x86_64, R 3.6
 * Travis-ci (Ubuntu, MacOS) 
 * Appveyor (Windows)
-* Rhub 
-* Win-devel
+* Rhub (Windows, Ubuntu, Fedora)
+* Win-builder 
 
 ## R CMD check results
 
-There were no errors or  warnings or notes.
-
+0 errors v | 0 warnings v | 0 notes v
 
 
 ## Submission History

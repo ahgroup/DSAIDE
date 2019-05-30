@@ -4,3 +4,6 @@ doc
 .Rhistory
 .RData
 .Ruserdata
+DSAIDE.Rcheck/
+DSAIDE*.tar.gz
+DSAIDE*.tgz
