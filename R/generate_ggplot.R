@@ -46,9 +46,6 @@ generate_ggplot <- function(res)
 
     allplots=list() #will hold all plots
 
-    #lower and upper bounds for plots, these are used if none are provided by calling function
-    lb = 1e-10;
-    ub = 1e20;
 
     for (n in 1:nplots) #loop to create each plot
     {
@@ -95,7 +92,11 @@ generate_ggplot <- function(res)
       #see if user/calling function supplied x- and y-axis transformation information
       xscaletrans <- ifelse(is.null(resnow$xscale), 'identity',resnow$xscale)
       yscaletrans <- ifelse(is.null(resnow$yscale), 'identity',resnow$yscale)
-
+      
+      #lower and upper bounds for plots, these are used if none are provided by calling function
+      lb = 1e-10;
+      ub = 1e20;
+      
       #if we want a plot on log scale, set any value in the data at or below 0 to some small number
       if (xscaletrans !='identity') {dat$xvals[dat$xvals<=0]=lb}
       if (yscaletrans !='identity') {dat$yvals[dat$yvals<=0]=lb}
