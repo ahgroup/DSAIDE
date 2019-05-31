@@ -1,18 +1,15 @@
 #This is a bit of code and instructions for deployment of the package to shinyappsio
 #to deploy, follow these steps:
-#1. go into the folder where this file resides
-#2. copy the regular app.R file into this folder, add this bit of code on top of it
-#3. install the package through CRAN or github if we want to use the github version
+#1. go into the folder where this file (app.R) resides
+#2. install the package through CRAN or github if we want to use the github version
 #devtools::install_github('ahgroup/DSAIDE')
-#4. to deploy, run the following
-#run rsconnect::deployApp()
-
-#this line of code needs to be here for shinyappsio deployment
-#should not be present for regular package use
+#3. #uncomment this line of code  
 #library('DSAIDE')
+#4. with the above 'library' statement active, deploy with:
+#run rsconnect::deployApp()
+#5. comment out the library command again
 
-#copy this code on top of the regular app.R file
-#app.R file of package starts below
+
 ##############################################
 #This is the Shiny App for the main menu of DSAIDE
 
