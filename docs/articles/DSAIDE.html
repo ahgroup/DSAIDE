@@ -88,7 +88,7 @@
       <h1>DSAIDE Package Tutorial</h1>
                         <h4 class="author"><a href="http://handelgroup.uga.edu">Andreas Handel</a></h4>
             
-            <h4 class="date">2019-05-24</h4>
+            <h4 class="date">2019-06-04</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ahgroup/DSAIDE/blob/master/vignettes/DSAIDE.Rmd"><code>vignettes/DSAIDE.Rmd</code></a></small>
       <div class="hidden name"><code>DSAIDE.Rmd</code></div>
@@ -100,7 +100,7 @@
 <div id="summary" class="section level2">
 <h2 class="hasAnchor">
 <a href="#summary" class="anchor"></a>Summary</h2>
-<p><em>Dynamical Systems Approaches to Infectious Disease Epidemiology (DSAIDE)</em> is an R package that allows you to explore and study concepts of infectious disease epidemiology using dynamical systems models. It is not necessary - though possible - to read or write computer code.</p>
+<p><em>Dynamical Systems Approaches to Infectious Disease Epidemiology (DSAIDE)</em> is an R package that allows you to explore and study concepts of infectious disease epidemiology using dynamical systems models. The main way of interactin with the models is through a graphical user interface. It is not necessary - though possible - to read or write computer code.</p>
 <p>The package also provides a path toward using and building your own models by relatively seamlessly moving from the graphical user interface to direct interaction with pre-written simulations all the way to modifying the underlying simulations to fit your needs.</p>
 <p>The different use cases for the package are described below.</p>
 </div>
@@ -176,7 +176,7 @@
 ##   c.quosures     rlang
 ##   print.quosures rlang</code></pre>
 <pre><code>## Welcome to the DSAIDE package. Type dsaidemenu() to get started.</code></pre>
-<p>you can learn about the inputs and outputs of the function by looking at its documentation</p>
+<p>you can learn about the inputs and outputs of the model/function by looking at its documentation</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/help">help</a></span>(<span class="st">'simulate_sir_ode'</span>)</a></code></pre></div>
 <p>The help file explains that you can run the simulation by specifying initial number of susceptibles and infected, the duration for which the simulation should be run, and the infection and recovery parameters. Each parameter has some default, listed in the help file. Running a simulation model without any specifications runs it with the defaults:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1">result &lt;-<span class="st"> </span><span class="kw"><a href="../reference/simulate_sir_ode.html">simulate_sir_ode</a></span>()</a></code></pre></div>
@@ -255,9 +255,7 @@
 <a href="#further-information" class="anchor"></a>Further information</h2>
 <ul>
 <li>
-<a href="https://doi.org/10.1371/journal.pcbi.1005642">I published a paper describing the package and how to use it</a>. The package structure has changed since the paper was published, but it still describes the overall idea and context well, if you are interested in that.<br>
-</li>
-<li>A ‘companion’ package to this one, called Dynamical Systems Approaches for Immune Respone Modeling (DSAIRM), focuses on models for analyzing with-host infection dynamics. It has the same structure as DSAIDE. <a href="https://ahgroup.github.io/DSAIRM">See the DSAIRM site for more information.</a>
+<a href="https://doi.org/10.1371/journal.pcbi.1005642">I published a paper describing the package and how to use it</a>. The package structure has changed since the paper was published, but it still describes the overall idea and context well, if you are interested in that. * A ‘companion’ package to this one, called Dynamical Systems Approaches for Immune Respone Modeling (DSAIRM), focuses on models for analyzing with-host infection dynamics. It has the same structure as DSAIDE. <a href="https://ahgroup.github.io/DSAIRM">See the DSAIRM site for more information.</a>
 </li>
 <li>I have solutions (as R Markdown files) to most of the ‘What to do’ tasks for the different apps. If you are an instructor using this package as part of a class, email me if you are interested in having access to these solutions.</li>
 </ul>

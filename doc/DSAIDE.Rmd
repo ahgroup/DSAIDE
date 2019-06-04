@@ -15,7 +15,8 @@ bibliography: vignetterefs.bib
 
 
 ## Summary
-_Dynamical Systems Approaches to Infectious Disease Epidemiology (DSAIDE)_ is an R package that allows you to explore and study concepts of infectious disease epidemiology using dynamical systems models. It is not necessary - though possible - to read or write computer code.
+_Dynamical Systems Approaches to Infectious Disease Epidemiology (DSAIDE)_ is an R package that allows you to explore and study concepts of infectious disease epidemiology using dynamical systems models. 
+The main way of interactin with the models is through a graphical user interface. It is not necessary - though possible - to read or write computer code.
 
 The package also provides a path toward using and building your own models by relatively seamlessly moving from the graphical user interface to direct interaction with pre-written simulations all the way to modifying the underlying simulations to fit your needs. 
 
@@ -131,7 +132,7 @@ Consider as example the first app, called "ID Dynamics Intro". The simulator fun
 library('DSAIDE') 
 ```
 
-you can learn about the inputs and outputs of the function by looking at its documentation 
+you can learn about the inputs and outputs of the model/function by looking at its documentation 
 
 ```{r eval=FALSE, echo=TRUE}
 help('simulate_sir_ode')
@@ -256,8 +257,7 @@ The package is on GitHub and you can use the usual GitHub process to file bug re
 The package is built in a way that makes it (hopefully) easy for others to contribute new simulations/apps. To that end, the package contains [this Markdown file](https://github.com/ahgroup/DSAIDE/blob/master/inst/docsfordevelopers/documentation.md) which provides further information on the details of the package structure. If you plan to develop new apps, or make other substantial contributions, it's best to get in touch with me first via email or GitHub.
 
 ## Further information
-* [I published a paper describing the package and how to use it](https://doi.org/10.1371/journal.pcbi.1005642). The package structure has changed since the paper was published, but it still describes the overall idea and context well, if you are interested in that.  
-* A 'companion' package to this one, called Dynamical Systems Approaches for Immune Respone Modeling (DSAIRM), focuses on models for analyzing with-host infection dynamics. It has the same structure as DSAIDE. [See the DSAIRM site for more information.](https://ahgroup.github.io/DSAIRM)
+* [I published a paper describing the package and how to use it](https://doi.org/10.1371/journal.pcbi.1005642). The package structure has changed since the paper was published, but it still describes the overall idea and context well, if you are interested in that. * A 'companion' package to this one, called Dynamical Systems Approaches for Immune Respone Modeling (DSAIRM), focuses on models for analyzing with-host infection dynamics. It has the same structure as DSAIDE. [See the DSAIRM site for more information.](https://ahgroup.github.io/DSAIRM)
 * I have solutions (as R Markdown files) to most of the 'What to do' tasks for the different apps. If you are an instructor using this package as part of a class, email me if you are interested in having access to these solutions.
 
 ## Contributors

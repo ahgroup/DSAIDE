@@ -333,7 +333,7 @@ ui <- fluidPage(
                       }), #close withTags function
                       p('Have fun exploring the models!', class='maintext'),
                       fluidRow(
-           				      downloadButton("modeldownload", "download all simulations", class="mainbutton"),
+                        downloadButton("modeldownload", "Download R code for all simulations", class="mainbutton"),
                         actionButton("Exit", "Exit", class="exitbutton"),
                         class = "mainmenurow"
                       ) #close fluidRow structure for input
