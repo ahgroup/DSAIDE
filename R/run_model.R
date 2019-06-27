@@ -299,7 +299,6 @@ run_model <- function(modelsettings) {
     fitdata  = simresult$data
     colnames(fitdata) = c('xvals','yvals')
     fitdata$varnames = 'Data'
-    fitdata$yvals = 10^fitdata$yvals #data is in log units, for plotting transform it
     fitdata$style = 'point'
     datall = rbind(dat,fitdata)
 
