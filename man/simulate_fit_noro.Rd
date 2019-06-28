@@ -6,7 +6,7 @@
 \usage{
 simulate_fit_noro(S = 100, I = 1, R = 0, b = 0.001, blow = 1e-10,
   bhigh = 0.1, g = 0.5, glow = 0.001, ghigh = 100, n = 0,
-  nlow = 0, nhigh = 1000, t1 = 1, t2 = 20, fitmodel = 1,
+  nlow = 0, nhigh = 1000, t1 = 8, t2 = 15, fitmodel = 1,
   iter = 100, solvertype = 1)
 }
 \arguments{
