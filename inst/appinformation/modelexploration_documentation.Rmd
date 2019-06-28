@@ -99,7 +99,7 @@ Once the system has settled down, there are no more changes in the numbers for e
 ### Task 5 
 * Compare the mathematical equations you found in the previous task with what you find in the plots. Things should be consistent, e.g. since the mathematical equation says that _S~steady~_ should increase linearly with _g_, you should find that when you run the simulation and look at the plot.
 
-We cannot compute similar mathematical expressions for the maxmimum values of the variables. In general, as soon as our model reaches a certain level of complexity (maybe around 5 equations and more), getting analytic/mathematical equations for most outcomes of interest is not possible and the numerical approach of running the simulations and looking at the results is the only option we have.
+We cannot compute similar mathematical expressions for the maximum values of the variables. In general, as soon as our model reaches a certain level of complexity (maybe around 5 equations and more), getting analytic/mathematical equations for most outcomes of interest is not possible and the numerical approach of running the simulations and looking at the results is the only option we have.
 
 ### Task 6 
 * Let's explore the impact of a different parameter. Set all variables as in task 1.

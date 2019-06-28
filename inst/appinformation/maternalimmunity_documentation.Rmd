@@ -74,7 +74,7 @@ Here, N is dependent on $m$ and $n$. This means that population size is subject 
 
 ## What to do {#shinytab3}
 
-In most traditional types of models (and models in this package), total population size remains constant. However, this is not always the case when the natural birth and death rates are not balanced. This also occurs when disease-related death is high. Some examples of diseases like this are the plague, measles, smallpox, malaria, and tuberculosis. This app will show the dynamic of a MSEIR model with examples shown of constant population size and dynamic population size. It is important to consider the fact that when considering an exponentially increasing/decreasing population size, parameters need to be carefully selected so that the model retains biological relavence.
+In most traditional types of models (and models in this package), total population size remains constant. However, this is not always the case when the natural birth and death rates are not balanced. This also occurs when disease-related death is high. Some examples of diseases like this are the plague, measles, smallpox, malaria, and tuberculosis. This app will show the dynamic of a MSEIR model with examples shown of constant population size and dynamic population size. It is important to consider the fact that when considering an exponentially increasing/decreasing population size, parameters need to be carefully selected so that the model retains biological relevance.
 
 **The tasks below are described in a way that assumes everything is in units of days (rate parameters, therefore, have units of inverse days). If any quantity is not given in those units, you need to convert it first (e.g. if it says a week, you need to convert it to 7 days).**
 
@@ -88,7 +88,7 @@ First we will observe the dynamics of the MSEIR model with a constant population
 * Set the birth rate, *m*, so that it is equal to the calculated death rate.
 * Set the passive immunity rate, *p*, so that maternal antibodies wear off on average in 6 months. 
 * Set the contact rate, $b_E$, to 0.3 and the latent period rate, $b_I$, so that it corresponds to an average latent period of 14 days.
-* Set the rate of revovery, *g*, so that it corresponds to an average recovery period of 25 days.
+* Set the rate of recovery, *g*, so that it corresponds to an average recovery period of 25 days.
 * Set the waning immunity rate to 0. This would be applicable for an infection that confers permanent immunity, like measles or rumps.
 
 Now run the simulation. Make sure that an outbreak occurs. What can you observe from the results? Make sure to take note of the relationship between the M population and the S population. Also make note of the final number of infecteds.
@@ -125,7 +125,7 @@ Now we are going to observe what disease dynamics are like with a short latent p
 * Set the simulation to run for 2000 days. 
 * Start with an initial susceptible population, $S_0$, of 1000, and 1 initial infected and symptomatic host.
 * Set the death rate, *n*, and birth rate, *m*, to 0.02.
-* Set *p* to 0.0041, $b_I$ to 0.17, and *g* to 0.238. Think about what these rates mean about the biology that is occuring here.
+* Set *p* to 0.0041, $b_I$ to 0.17, and *g* to 0.238. Think about what these rates mean about the biology that is occurring here.
 * Keep *w* at 0 for now.
 Play around with the $b_E$ parameter. Find a level for $b_E$ where there are multiple peaks in the I compartment over the 2000 days. What is occurring in the other compartments to allow for these peaks?
 

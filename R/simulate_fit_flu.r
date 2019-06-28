@@ -1,7 +1,7 @@
 #' Fitting a SIR-type model to flu data
 #' 
 #' @description Fitting fitting mortality data from the 1918 influenza pandemic 
-#' to an SIR-type model to estimate R0
+#' to an SIR-type model to estimate R0. For the data, see 'flu1918data'.
 #' 
 #' @param S : starting value for Susceptible : numeric
 #' @param I : starting value for Infected : numeric
@@ -45,12 +45,11 @@
 #' @seealso See the Shiny app documentation corresponding to this
 #' function for more details on this model.
 #' @author Andreas Handel
-#' @importFrom utils read.csv
 #' @importFrom nloptr nloptr
 #' @export
 
 
-simulate_fit_flu <- function(S = 1e4, I = 1, D = 0, b = 1e-4, blow = 1e-10, bhigh = 1e-1,  bsim = 1e-4,  g = 10, glow = 1e-3, ghigh = 1e2,  gsim = 1, f = 1e-3, flow = 1e-5, fhigh = 0.5,  fsim = 0.01, noise = 0, iter = 100, solvertype = 1, usesimdata = 0, logfit = 0)
+simulate_fit_flu <- function(S = 5e6, I = 1, D = 0, b = 1e-6, blow = 1e-10, bhigh = 1e-1,  bsim = 1e-4,  g = 1, glow = 1e-3, ghigh = 1e2,  gsim = 1, f = 1e-2, flow = 1e-5, fhigh = 0.5,  fsim = 0.01, noise = 0, iter = 100, solvertype = 1, usesimdata = 0, logfit = 0)
 {
   
   ###################################################################
@@ -86,6 +85,9 @@ simulate_fit_flu <- function(S = 1e4, I = 1, D = 0, b = 1e-4, blow = 1e-10, bhig
     {
       SSR=sum((log10(modelpred)-log10(fitdata$outcome))^2) #fit is done on a log scale
     }
+    
+    #browser()
+    
     return(SSR) 
   } #end function that fits the ODE model to the data
   
@@ -99,13 +101,14 @@ simulate_fit_flu <- function(S = 1e4, I = 1, D = 0, b = 1e-4, blow = 1e-10, bhig
   
   #load data
   #experimental data values from Mills et al. 2004 Nature 
-  filename = system.file("extdata", "flu1918data.csv", package = "DSAIDE")
-  alldata = utils::read.csv(filename)
   #data is weekly new cases of death
   #We fit cumulative cases 
   #The data are deaths per 100,000. This needs to be converted to total deaths by rescaling with the population size, S. 
-  deathdata=cumsum(alldata[,'WeeklyDeaths'])/100000*S; 
-  fitdata =  data.frame(xvals = alldata[,'Week'], outcome = deathdata) 
+  deathdata=cumsum(flu1918data$Deaths/100000*S) 
+  #data is reported as dates, for simplicity in fitting, 
+  #we just label each week as 1-15
+  timedata = seq(1,length(deathdata))
+  fitdata =  data.frame(xvals = timedata, outcome = deathdata) 
   
   Y0 = c(S = S, I = I, D = D);  #combine initial conditions into a vector
   timevec = seq(0, max(fitdata$xvals), 0.1); #vector of times for which solution is returned (not the internal timestep of the integrator is different)

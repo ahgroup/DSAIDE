@@ -56,7 +56,7 @@ The processes being modeled are:
 * Susceptible intermediate hosts can only become infected through contact with parasites in the environment at rate _b~e~_ 
 * Infected definitive hosts recover after some time (specified by the rate _g_) and recovered definitive hosts lose their immunity at rate _w_. 
 * New susceptible intermediate hosts are born at a rate _m_. Susceptible and infected intermediate hosts die at rate _n_. The inverse of this rate is the average lifespan. 
-* Infected hosts shed parasites in the enviroment at a rate _p_ and they decay in the environment at a rate _c_.
+* Infected hosts shed parasites in the environment at a rate _p_ and they decay in the environment at a rate _c_.
 
 We envision this model being flexible allowing hosts to represent a wide range of definitive and intermediate hosts with the one caveat that intermediate hosts are not intended to represent vectors, like mosquitoes, which can act as intermediate hosts for parasites.
 
@@ -105,14 +105,14 @@ In the scenario above the death rate of the intermediate host was set at 0.083, 
 
 
 ### Task 3
-For the following tasks we will be using _Taenia multiceps_ as an example. _T. multiceps_ is a type of tapeworm that infects dogs and requires a rabbitat or ruminant intermediate host. This not to be confused with _Dipylidium caninum_, the flea tapeworm, which is commonly associated with domestic dogs and requires a flea as intermediate host and is transmitted to the dog via ingestion of the infected flea. Anthelmintics, or dewormers, are commonly used to control worm burdens and shedding in pets and livestock. In this scenario we will explore how host shedding impacts transmission dynamics.
+For the following tasks we will be using _Taenia multiceps_ as an example. _T. multiceps_ is a type of tapeworm that infects dogs and requires a rabbit or ruminant intermediate host. This not to be confused with _Dipylidium caninum_, the flea tapeworm, which is commonly associated with domestic dogs and requires a flea as intermediate host and is transmitted to the dog via ingestion of the infected flea. Anthelmintics, or dewormers, are commonly used to control worm burdens and shedding in pets and livestock. In this scenario we will explore how host shedding impacts transmission dynamics.
 You can read more about _T. multiceps_ and see a diagram of its life cycle [on this CDC website](https://www.cdc.gov/dpdx/coenurosis/index.html).
 
 
 * Repeat the simulation with the parameters above but set the intermediate host to definitive host transmission rate, _b~i~_ = 0.1 environmental transmission rate, _b~e~_=0.1
   * Did anything change? Nothing should change because there are still no parasites in the environment.
   * Now set the rate at which an infected host sheds parasites into the environment _p_ = 1. 
-  * Try different values for _p_ (0.5 and 0.1) and observe the maxium numbers for _E_ and _I~h~_.
+  * Try different values for _p_ (0.5 and 0.1) and observe the maximum numbers for _E_ and _I~h~_.
   *	What value do you need to set _p_ to prevent 50% of the susceptible intermediate hosts from getting infected?
   * Does it make biologic senses why you are seeing a decrease in the number of infected intermediate hosts and infected hosts as parasite shedding decreases? 
 

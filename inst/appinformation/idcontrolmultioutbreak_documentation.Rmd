@@ -115,7 +115,7 @@ In the previous task, control ends while there are still a few infected around, 
 * Now set _tnew=300_. That means at time 300, a new infected individual enters the population. You'll see another outbreak. Make sure you understand why.
 * Try the above again with _f=0.6_. You should see a bigger first and smaller second outbreak.
 * Try the above again with _f=0.5_. This time you will only get one initial outbreak.
-* Compare the number of susceptibles left at the end of the simulation for _f=0.3, 0.5_ and _f=0.7_. Think about why it is again that for some levels of control you get a single outbreak and for some you get more than one, and what that means for optimal intervention strength. You should come to the same concusions as in the previous task.
+* Compare the number of susceptibles left at the end of the simulation for _f=0.3, 0.5_ and _f=0.7_. Think about why it is again that for some levels of control you get a single outbreak and for some you get more than one, and what that means for optimal intervention strength. You should come to the same conclusions as in the previous task.
 
 
 ## Further Information {#shinytab4}

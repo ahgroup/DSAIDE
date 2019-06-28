@@ -84,7 +84,7 @@ This simulation (as well as some of the others) involves sampling. This leads to
 
 First, familiarize yourself with the setup of the app, it looks different from most others. Parameters are not set to specific values. Instead, most parameters have a lower and upper bound. For each simulation that is run, random values for the parameter are chosen  uniformly between those bounds. The parameter _g_ does not have a uniform but instead a gamma distribution, you can specify its mean and variance to determine the distribution from which values are sampled. 
 
-For the purpose of uncertainty and sensitivity analysis, starting values for variables can be treated like parameters. For this app you can vary the starting values for susceptibles and infected, the inital number of recovered are fixed at 0.
+For the purpose of uncertainty and sensitivity analysis, starting values for variables can be treated like parameters. For this app you can vary the starting values for susceptibles and infected, the initial number of recovered are fixed at 0.
 
 The default outcome plots are boxplots, which show the distribution of the 3 outcomes of interest for the different parameter samples. You can set the number of samples you want to run. Samples are constructed using the latin hypercube method to efficiently span the space of possible parameter values. In general, more samples are better, but of course take longer to run.
 

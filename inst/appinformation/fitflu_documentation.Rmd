@@ -27,7 +27,9 @@ This app illustrates how to fit a mechanistic dynamical model to data and how to
 ## The Model {#shinytab2}
 
 ### Data
-For this app, weekly mortality data from the 1918 influenza pandemic in New York City is used. The data comes from [@mills04]. Alternatively, the model itself can be used to generate artificial data.
+For this app, weekly mortality data from the 1918 influenza pandemic in New York City is used. The data comes from [@mills04]. You can read a bit more about the data by looking at its help file with `help('flu1918data')`. 
+
+Alternatively, the model itself can be used to generate artificial data and fit to this generated data.
 
 ### Simulation Model 
 The underlying model that is being fit is a version of the basic SIR model. Since the available data is mortality, we need to keep track of dead individuals in the model, too. This can be achieved by including an additional compartment and let a fraction of infected individuals move into the dead instead of the recovered compartment.
@@ -95,72 +97,91 @@ Since the data is in weeks, we also run the model in units of weeks.
 ### Task 1 
 * Find out roughly how many people lived in New York City in 1918. Use that number as your initial starting value for the susceptibles.
 * Set infected individuals to 1, no initial dead.
-* The model parameters are being fit. We still need to provide starting values for the fitting routine.
+* The model parameters, _b_, _g_, and _f_, are being fit. We still need to provide starting values for the fitting routine.
 * Set the starting value for the infection rate  to _b=1e-6_.
 * Assume the duration of the infectious period is a week, set the initial recovery rate accordingly. 
 * Assume that one percent of individuals died.
-* Ignore the values for simulated data for now, set usesimdata to 0. 
+* For each fitted parameter, choose some lower and upper bounds. Note that if the lower bound is not lower/equal and the upper not higher/equal than the parameter, you will get an error message when you try to run the model.
+* We ignore the parameter values for simulated data for now, they can be any value. The noise parameter also does not matter for now. Set usesimdata to 0. 
+* We'll fit the data 'as is' (not the log transformed data), so set logfit to 0.
+* Start with a 1 fitting step/iteration and solver type 1. Run the simulation. Since you only do a single iteration, nothing is really optimized. We are just doing this so you can see the time-series produced with these starting conditions. The 'best fit' parameter values are the same you started with. 
+* Also record the SSR so you can compare it with the value after the fit. To that end, we assume that the NYC population was 5E6. With that choice, your SSR should be 7.3E12.
 
-* Set all "fitted" switches to YES to make sure the parameters are being fit. For each parameter, choose some lower and upper bounds. Note that if the lower bound is not lower/equal and the upper not higher/equal than the parameter, you will get an error message when you try to run the model.
-
-* Start with a 1 fitting step/iteration and solver type 1. Run the simulation. Since you only do a single iteration, nothing is really optimized. We are just doing this so you can see the time-series produced with these starting conditions. Notice that the virus load predicted by the model and the data are already fairly close. Also record the SSR so you can compare it with the value after the fit (value should be 3.09).
-* Now fit for 50 iterations. Look at the results. The plot shows the final fit. The model-predicted virus curve will be closer to the data. Also, the SSR value should have gone down, indicating a better fit. Also printed below the figure are the values of the fitted parameters at the end of the fitting process.
+### Task 1 
+* Now fit for 50 iterations, everything else remains the same. Look at the results. The plot shows the final fit. The model-predicted virus curve will be closer to the data. Also, the SSR value should have gone down, indicating a better fit. Also printed below the figure are the values of the fitted parameters at the end of the fitting process.
 * Repeat the same process, now fitting for 100 iterations. You should see some further improvement in SSR. That indicates the previous fit was not the 'best' fit. (The best fit is the one with the lowest possible SSR).
 
+
 ### Task 2 
-* Repeat the fit, now using the solvers/optimizers "2" and "3" for fitting. Also change the number of iterations. If you computer is fast enough, keep increasing them.
-* See what the lowest SSR is you can get and record the best parameter values.
+* Repeat the fits with 1/50/100 iterations with solvers/optimizers "2" and "3" for fitting. You will notice that they do not give the same results. The reason for that is that different solvers are improving fits at different rates. Unfortunately, there is not always a single best optimizer, it depends on the problem/system. Thus it's usually good to try multiple optimizers.
+* Depending on the speed of your computer, you can try to increase the number of iterations and see what best fit (smallest SSR) you can achieve.
 
 Generally, with increasing iterations, the fits get better. A fitting step or iteration is essentially a 'try' of the underlying code to find the best possible model. Increasing the tries usually improves the fit. In practice, one should not specify a fixed number of iterations, that is just done here so things run reasonably fast. Instead, one should ask the solver to run as long as it takes until it can't find a way to further improve the fit (don't further reduce the SSR). The technical expression for this is that the solver has converged to the solution. This can be done with the solver used here (`nloptr` R package), but it would take too long, so we implement a "hard stop" after the specified number of iterations.
 
 ### Task 3 
 Ideally, with enough iterations, all solvers should reach the best fit with the lowest possible SSR. In practice, that does not always happen, often it depends on the starting conditions. Let's explore this idea that starting values matter.
 
-* Set everything as in task 1. Now change the starting values for virus production rate and infection rate (_p_ and _b_) to 10^-2^, and virus decay rate of 5. 
-* Run simulation for 1 fitting step. You should see a virus load curve that has the up and down seen in the real data, but it's shifted and the SSR is higher (around 15.58) than in the previous starting condition.
-* By trying different solvers and number of iterations and comparing it to the previous tasks, get an idea of the influence of starting conditions on fitting performance and results.
+* Set everything as in task 1 with 200 iterations and solver 3. Run the simulation, you should get SSR=4.3E10. The SSR at the start should still be 7.3E12 as in task 1. Also note the best fit parameters.
+* Now change the starting values to a 5 percent mortality fraction and half a week of infectiousness duration. Re-run the simulation at 1 and 200 iterations. You should find before/after SSR values of 4.7E12 and 1.8E11. This means the starting values were somewhat better, but it didn't help much for the fitting, at least not for 200 steps. 
+* By trying different starting values, solvers and number of iterations, get an idea of the influence of starting conditions on fitting performance and results.
 
-Optimizers can 'get stuck' and even running them for a long time, they might not find the best fit. What can happen is that a solver found a local optimum. It found a good fit, and now as it varies parameters, each new fit is worse, so the solver "thinks" it found the best fit, even though there are better ones further away in parameter space. Many solvers - even so-called 'global' solvers - can get stuck. Unfortunately, we never know if the solution is real or if the solver is stuck in a local optimum. One way to figure this out is to try different solvers and different starting conditions, and let each one run for a long time. If all return the same answer, no matter what type of solver you use and where you start, it's quite likely (though not guaranteed) that we found the overall best fit (lowest SSR).
+In general, picking good starting values is important. One can get them by trying an initial visual match or by doing a number of short fits, and use the best fit values at the end as starting values for a new fit.
+Especially if you want to fit multiple parameters, optimizers can 'get stuck' and even with running them for a long time, they might not find the best fit. What can happen is that a solver found a local optimum. It found a good fit, and now as it varies parameters, each new fit is worse, so the solver "thinks" it found the best fit, even though there are better ones further away in parameter space. Many solvers - even so-called 'global' solvers - can get stuck. Unfortunately, we never know if the solution is real or if the solver is stuck in a local optimum. One way to figure this out is to try different solvers and different starting conditions, and let each one run for a long time. If all return the same answer, no matter what type of solver you use and where you start, it's quite likely (though not guaranteed) that we found the overall best fit (lowest SSR).
+
+This problem of 'getting stuck' is something that frequently happens when trying to fit ODE models, which is in contrast to fitting with more standard models (e.g. a linear regression model), where this is not a problem. The technical term for this is that a simple regression optimization is _convex_ while fitting an ODE model is usually not. That's why you don't really have to worry if you found the right solution if you use say the `lm` or `glm` functions for fitting in `R`, but you do need to be careful about that if you fit more complicated models such as ODE or similar models.
 
 ### Task 4 
-* Without much comment, I asked you to set the unit conversion factor to 0 above. That essentially means that we think this process of virions being lost due to entering infected cells is negligible compared to the other removal process, clearance of virus due to other mechanisms at rate _d~V~_. Let's change this assumption and turn that term back on by setting _g=1_.
-* Try the above settings, running a single iteration. You'll find a very poor fit. 
-* Play around with the starting values for the fitted parameters to see if you can get an ok looking starting simulation. 
-* Once you have a decent starting simulation, try the different solvers for different iterations and see how good you can get. A 'trick' for fitting is to run for some iterations and use the reported best-fit values as new starting conditions, then do another fit with the same or a different solver. 
-* The best fit I was able to find was an SSR of 4.21. You might be able to find something better. It might depend on the bounds for the parameters. If the best-fit value reported from the optimizer is the same as the lower or upper bound for that parameter, it likely means if you broaden the bounds the fits will get better. However, the parameters have biological meanings and certain values do not make sense. For instance a lower bound for the virus decay rate of 0.001/day would mean an average virus lifespan of 1000 days or around 3 years, which is not reasonable for flu in vivo.  
-
-While that unit conversion factor shows up in most apps, it is arguably not that important if we explore our model without trying to fit it to data. But here, for fitting purposes, this is important. The experimental units are TCID50/mL, so in our model, virus load needs to have the same units. Then, to make all units work, _g_ needs to have those units, i.e. convert from infectious virions at the site of infection to experimental units. Unfortunately, how one relates to the other is not quite clear. See e.g. [@handel07] for a discussion of that. If you plan to fit models to data you collected, you need to pay attention to units and make sure what you simulate and the data you have are in agreement.
-
+* You might have noticed that the model is especially far away from the data during the first several weeks. One reason for that could be that we started with 1 infected person, but in reality there were already a lot infected so the deaths started to accumulate faster. I could have chosen to write the model such that you could fit the initial infected. I didn't for simplicity reasons and because we don't have much data and thus if we fit too many parameters, we likely overfit (more on that below). Instead, let's try if we can get a better fit by manually adjusting the initial number of infected.
+* Set values back to those of task 1 (the 'Reset Inputs' button should do the trick). Do a quick run with a single iteration to make sure you get the SSR from task 1.
+* Now set the initial number of infected to 1000, run again a single iteration. You'll notice in the plot that the model predicted deaths moves closer to the data in the first few weeks. 
+* Maybe surprisingly, the SSR does not shrink. Can you figure out why? Take another look at the SSR equation and think about the impact of the later (higher value) data points compared to the earlier ones for the total SSR.
 
 ### Task 5 
+In the previous task, you learned that for the SSR computation, discrepancies between large data and model values - which themselves tend to be larger in magnitude - often dominate the SSR expression. As an extreme example, if you have 2 data points you fit, one at 1E10 and the model predicts 1.1E10, that's a difference of 1E9. The second data point is 1E7 and the model predicts 1E6. This is in some sense a larger discrepancy, but the difference is only 9E6, much lower than the 1E9 for the first data point.
+
+One way to give data of different magnitude more comparable weights is by fitting the log of the data. Note that fitting the data or the log of the data are different problems and the choice should be made based on scientific/biological rationale.
+
+* Let's take a look at fitting the log. Set everything as in task 1, set fitlog to 1 and do a single iteration. The plot should look the same as in task 1, but the SSR is now computed on the log of the data and the model and should be 40.72. 
+* Now increase number of initial infected to 1000 again. You'll see the model predictions go closer to the initial data again, and the SSR now becomes lower.
+* Repeat some of the task 1-3 exercises, now fitting the log of the data. Compare and contrast how results do and do not change.
+
+Again, both fitting on the linear or log scale are reasonable approaches and the choice should be made based on underlying biology/science. A good rule of thumb is that if the data spans several orders of magnitude, fitting on the log scale is probably the better option. You probably already realized that you can of course not compare the SSR between the two fitting approaches. SSR values only make sense to compare once you determined the scale for fitting.
+
+### Task 6
 One major consideration when fitting these kind of mechanistic models to data is the balance between data availability and model complexity. The more and "richer" data one has available the more parameters one can estimate and therefore the more detailed a model can be. If one tries to 'ask too much' from the data, it leads to the problem of overfitting - trying to estimate more parameters than can be robustly estimated for a given dataset. One way to safeguard against overfitting is by probing if the model can in principle recover estimates in a scenario where parameter values are known. To do so, we can use our model with specific parameter values and simulate data. We can then fit the model to this simulated data. If everything works, we expect that - ideally independent of the starting values for our solver - we end up with estimated best-fit parameter values that agree with the ones we used to simulate the artificial data. We'll try this now with the app.
 
-* Set everything as in task 1. Now set the parameter values _psim_, _bsim_ and _dVsim_ to the same values as the values used for starting the fitting routine.
-* Set 'fit to simulated data' to YES. Run for 1 fitting step. You should now see that the data has changed. Instead of the real data, we now use simulated data. Since the parameter values for the simulated data and the starting values for the fitting routine are the same, the time-series is on top of the data and the SSR is (up to rounding errors) 0. 
+* Set everything as in task 1. Now set the parameter values _bsim_, _gsim_ and _fsim_ to the same values as the values used for starting the fitting routine.
+* Set _usesimdata_ to 1. 
+* Run for 1 fitting step. You should now see that the data has changed. Instead of the real data, we now use simulated data. Since the parameter values for the simulated data and the starting values for the fitting routine are the same, the time-series is on top of the data and the SSR is (up to rounding errors) 0. 
 
-### Task 6 
+### Task 7 
 Let's see if the fitting routine can recover parameters from a simulation if we start with different initial guesses.
 
-* Set value for simulated data parameters to 10^-2^ for _psim_ and _bsim_ and 2 for _dVsim_. 
-* Everything else should be as before. Importantly, the starting values for the parameters we fit should now be different than the values used for the simulation.
-* Keep fitting to the simulated data, run for 1 fitting step. You'll see the data change compared to before. The SSR should increase to 3.26.
-* If you now run the fitting for many steps, what do you expect the final fit values for the parameters and the SSR to be?
+* Choose as values for simulated data parameters _bsim=5E-7_, _gsim=0.5_ and _fsim = 0.05_.
+* Everything else should be as before. Importantly, the starting values for the parameters _b_ and _g_ are now be different than the values used for the simulation.
+* Fit to the simulated data, run for 1 fitting step. You'll see the (simulated) data change again. The SSR should be 7.6E11 (assuming we fit on a linear scale).
+* If you now run the fitting for many iterations/steps, what do you expect the final fit values for the parameters and the SSR to be?
 * Test your expectation by running for 100+ fitting steps with the different solvers. 
 
 
-### Task 7 
-If you ran things long enough in the previous task you should have obtained best fit values that were the same as the ones you used to produce the simulated data, and the SSR should have been close to 0. That indicates that you can estimate these parameters with that kind of data. Once you've done this test, you can be somewhat confident that fitting your model to the real data will allow you to get robust parameter estimates.
-
-* Play around with different values for the simulated parameters and different values for the starting conditions and see if you find scenarios where you might not be able to get the solver to converge to a solution that agrees with the one you started with.
-
-
 ### Task 8 
-* To make things a bit more realistic and harder, one can also add noise on top of the simulated data. Try that by playing with the 'noise added' parameter and see how well you can recover the parameter values for the simulation.
+Theory suggests that if we run enough iterations, we should obtain a best fit with an SSR close to 0 and best fit values that agree with those used to generate the artificial data. You might find that this does not happen for all 3 solvers within reasonable number of iterations. But for instance solver 2 and 1000 iterations should get you pretty close to what you started with.
+
+That indicates that you can potentially estimate these parameters with that kind of data, at least if there is no noise. This is the most basic test. If you can't get the best fit values to be the same as the ones you used to make the data, it means you are trying to fit more parameters than your data allows, i.e. you engage in overfitting. At that point you will have to either get more data or reduce your fitted parameters, either by fixing some parameters based on biological a priori knowledge or by reducing the number of parameters through model simplification.
+
+
+### Task 9 
+* Play around with different values for the parameters used to generate artificial data, and different values for the starting conditions and see if you find scenarios where you might not be able to get the solver to converge to a solution that agrees with the one you started with.
+* Also explore what if any impact fitting the data on a linear versus log scale has. 
+
+### Task 10 
+* To make things a bit more realistic and harder, one can also add noise on top of the simulated data. Try that by playing with the 'noise added' parameter and see how well you can recover the parameter values for the simulation. Start with a small amount (e.g. 0.01) and increase.
 
 Note that since you now change your data after you simulated it, you don't expect the parameter values for the simulation and those you obtain from your best fit to be the same. However, if the noise is not too large, you expect them to be similar.
 
+You will likely find that for certain combinations of simulated data, noise added and specific starting conditions, you might not get estimates that are close to those you used. This suggests that even for this simple model with 3 parameters, estimating those 3 parameters based on the available data is not straightforward.
 
-### Task 9
+### Task 11
 * Keep exploring. Fitting these kind of models can be tricky at times, and you might find strange behavior in this app that you don't expect. Try to get to the bottom of what might be going on. This is an open-ended exploration, so I can't really give you a "hint". Just try different things, try to understand as much as possible of what you observe.
 
 
@@ -175,6 +196,7 @@ Note that since you now change your data after you simulated it, you don't expec
 * Lot's of good online material exists on fitting/inference. Most of the material is explained in the context of static, non-mechanistic, statistical or machine learning models, but a lot of the principles apply equally to ODEs.
 * A discussion of overfitting (also called 'identifiability problem') for ODEs is [@miao11a].
 * Advanced functionality to fit stochastic models can be found in the `pomp` package in R. (If you don't know what stochastic models are, check out the stochastic apps in DSAIDE.)
+* The data for this study is saved in the data variable `flu1918data`, you can read more about it by looking at its help file entry `help(flu1918data)`. The publication from which the data comes is [@mills04].
 
 
 ### References

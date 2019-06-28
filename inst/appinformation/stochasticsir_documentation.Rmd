@@ -66,7 +66,7 @@ $$\dot R = gI - nR$$
 
 This is almost the same model as the basic SIR model from the introductory app, with the only difference that this model also allows natural births and deaths. In this app, you can run the basic SIR model together with the stochastic one.
 
-The main model we are focused on here is a stochastic implementation of the variables and processes described aboe. This model is _not_ an ordinary differential equation model. It is instead its stochastic equivalent.
+The main model we are focused on here is a stochastic implementation of the variables and processes described above. This model is _not_ an ordinary differential equation model. It is instead its stochastic equivalent.
 We can specify the model by writing down every possible transition/event/reaction that can occur and their propensities (the propensity multiplied with the
 time step gives the probability that a given event/transition occurs). For our model these are the following:
 

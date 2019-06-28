@@ -30,7 +30,7 @@ timedata=times;
 ydata.new=counts1+counts2+counts3+counts4; #for our purpose we combine cases from all 4 schools and don't discriminate between schools
 ydata.all=cumsum(ydata.new); #we can either fit incidence or cumulative incidence. The latter sometimes leads to more robust results, we'll try both here
 tmax=timedata[length(timedata)];
-
+norodata = data.frame(Date = timedata, Cases = ydata.new)
 
 ###################################################################
 #function specifying the ode model. This is called by the ode solver inside the fit function

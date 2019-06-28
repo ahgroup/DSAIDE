@@ -10,6 +10,9 @@
     <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/dsaidemenu.html</loc>
   </url>
   <url>
+    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/flu1918data.html</loc>
+  </url>
+  <url>
     <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/generate_documentation.html</loc>
   </url>
   <url>
@@ -28,6 +31,9 @@
     <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/generate_text.html</loc>
   </url>
   <url>
+    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/norodata.html</loc>
+  </url>
+  <url>
     <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/run_model.html</loc>
   </url>
   <url>
@@ -38,6 +44,12 @@
   </url>
   <url>
     <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_evolution_stochastic.html</loc>
+  </url>
+  <url>
+    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_fit_flu.html</loc>
+  </url>
+  <url>
+    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_fit_noro.html</loc>
   </url>
   <url>
     <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_heterogeneity_ode.html</loc>

@@ -28,7 +28,7 @@ This app teaches the topic of _Infectious disease surveillance_ and demonstrates
 
 * Understand the influence of infectious disease surveillance on the dynamics of an infectious disease in a population by comparing disease dynamics with and without surveillance.
 
-* Understand the effect of the extent of surveillance and underreporting/incomplete surveillance [@brabazon15; @kazerooni18; @jelastopulu10]on the course and outcome of the epidemic. The effect of the extent of surveillance on the number of susceptibles left at the end of the simulation and the total number of deaths that occured will be explored. In addition, users will explore which surveillance parameters prevent the occurrence of an outbreak.
+* Understand the effect of the extent of surveillance and underreporting/incomplete surveillance [@brabazon15; @kazerooni18; @jelastopulu10]on the course and outcome of the epidemic. The effect of the extent of surveillance on the number of susceptibles left at the end of the simulation and the total number of deaths that occurred will be explored. In addition, users will explore which surveillance parameters prevent the occurrence of an outbreak.
 
 * Understand influence of the type of surveillance (e.g., one that detects presymptomatic, asymptomatic or symptomatic infections or pairwise combinations of the three or all) on disease dynamics. The effect of the type of surveillance will be explored in the case where individuals in the different stages of infection (presymptomatic, asymptomatic or symptomatic) transmit or don't.
 
@@ -105,7 +105,7 @@ $$\dot D = dD$$
 ### Task 3: 
 * Now run the model with increasing surveillance by setting _r~i~_ = 0.5, 1, 1.5, and 2. Record _S~f~_ and _D~f~_ for each simulation.
 * Part 1: Plot (either by hand or using the computer) a graph of _r~I~_ versus _S~f~_ to determine the effect of the extent of surveillance on the number of susceptibles left at the end of the simulation.
-* Part 2: Also plot (either by hand or using the computer) a graph of _r~I~_ versus _D~f~_ to determine the effect of the extent of surveillance on the total number of deaths that occured.
+* Part 2: Also plot (either by hand or using the computer) a graph of _r~I~_ versus _D~f~_ to determine the effect of the extent of surveillance on the total number of deaths that occurred.
 
 
 ### Task 4: 

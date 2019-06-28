@@ -15,7 +15,7 @@
    id="svg8179"
    version="1.1"
    inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
-   sodipodi:docname="basicSIRmodelfigure.svg">
+   sodipodi:docname="fitnoromodel.svg">
   <defs
      id="defs8181">
     <marker
@@ -189,7 +189,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.4254587"
-     inkscape:cx="120.68883"
+     inkscape:cx="55.284871"
      inkscape:cy="290.48197"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
@@ -303,22 +303,17 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="89.316788"
-       y="768.62463"
+       x="40.072403"
+       y="779.87463"
        id="text8294"
        inkscape:export-xdpi="300.207"
        inkscape:export-ydpi="300.207"
        inkscape:export-filename="C:\data\Dropbox\2016-3-fall-epid8510\media\SIRdiagram.png"><tspan
          sodipodi:role="line"
          id="tspan8296"
-         x="89.316788"
-         y="768.62463"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.5px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:center;writing-mode:lr-tb;text-anchor:middle">Susceptible</tspan><tspan
-         sodipodi:role="line"
-         x="89.316788"
-         y="790.49963"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.5px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:center;writing-mode:lr-tb;text-anchor:middle"
-         id="tspan974">S</tspan></text>
+         x="40.072403"
+         y="779.87463"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.5px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start">Susceptible</tspan></text>
     <path
        style="fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:#5b9bd5;stroke-width:0.01876553px;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:"
        d="m 363.58958,772.06715 56.70207,-0.50399 0.0291,2.55188 -56.70207,0.50399 z m 48.69912,-4.71106 10.88834,5.45749 -10.76129,5.66893 c -0.67709,0.36304 -1.57255,0.16501 -1.98291,-0.43239 -0.41166,-0.61538 -0.18693,-1.38741 0.51163,-1.74964 l 8.62621,-4.5429 0.0252,2.19489 -8.7282,-4.38864 c -0.70675,-0.34974 -0.94901,-1.11763 -0.55149,-1.74019 0.39663,-0.60455 1.28739,-0.81849 1.97263,-0.46756 z"
@@ -381,13 +376,18 @@
        inkscape:export-ydpi="300.207"
        inkscape:export-filename="C:\data\Dropbox\2016-3-fall-epid8510\media\SIRdiagram.png"><tspan
          sodipodi:role="line"
-         x="488.16089"
+         id="tspan8296-8-5-6"
+         x="490.94653"
          y="762.38306"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.5px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:center;writing-mode:lr-tb;text-anchor:middle"
-         id="tspan8348-5-0">Recovered</tspan><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.5px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:center;writing-mode:lr-tb;text-anchor:middle">Recovered, </tspan><tspan
          sodipodi:role="line"
          x="488.16089"
          y="784.25806"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.5px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:center;writing-mode:lr-tb;text-anchor:middle"
+         id="tspan8348-5-0">Immune</tspan><tspan
+         sodipodi:role="line"
+         x="488.16089"
+         y="806.13306"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.5px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:center;writing-mode:lr-tb;text-anchor:middle"
          id="tspan8972">R</tspan></text>
     <text
@@ -418,5 +418,19 @@
          x="375.78214"
          y="761.81976"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.5px;line-height:125%;font-family:'Palatino Linotype';-inkscape-font-specification:'Palatino Linotype, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start">gI</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:12px;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="171.61385"
+       y="793.09851"
+       id="text13516-4"
+       inkscape:export-filename="C:\data\Dropbox\2016-3-fall-epid8510\media\SIRdiagram.png"
+       inkscape:export-xdpi="300.207"
+       inkscape:export-ydpi="300.207"><tspan
+         sodipodi:role="line"
+         id="tspan13522-1"
+         x="171.61385"
+         y="793.09851"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.50000191px;line-height:125%;font-family:'Palatino Linotype';-inkscape-font-specification:'Palatino Linotype, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:1px">nS</tspan></text>
   </g>
 </svg>

@@ -146,7 +146,7 @@ _Some of the simulations might take a few seconds to run. Be patient._
 * Assume we sprayed against mosquitoes and it reduced the population size by 90%. Set the initial vector population to that value, run the outbreak, observe.
 
 ### Task 8: 
-* Instead of killing vector populations, we now consider a reduction in transmission, e.g. due to the use of bednets.
+* Instead of killing vector populations, we now consider a reduction in transmission, e.g. due to the use of bed nets.
 * Set everything as in task 7 (minus the intervention). Assume that an intervention reduces transmission _to_ vectors by half. Run the simulation, observe.
 * Now assume that an intervention reduces transmission _from_ vectors by half. Run the simulation, observe.
 * Finally, assume that the intervention reduces transmission both to and from vectors by half. Run the simulation, observe.
