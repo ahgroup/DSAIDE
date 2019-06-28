@@ -35,6 +35,7 @@ Imports:
     ggplot2 (>= 2.2),
     gridExtra (>= 2.3),
     lhs (>= 0.15),
+    nloptr,
     plotly,
     stats (>= 3.4),
     utils (>= 3.4),

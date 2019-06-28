@@ -306,7 +306,7 @@ ui <- fluidPage(
                       fluidRow(
                         actionButton("hostheterogeneity", "Host heterogeneity", class="mainbutton"),  
                        actionButton("multipathogen", "Multi-Pathogen dynamics", class="mainbutton"),
-                       actionButton("parasitemodel", "Parasite models", class="mainbutton"),
+                       actionButton("parasitemodel", "Parasite model", class="mainbutton"),
                        actionButton("idsurveillance", "ID surveillance", class="mainbutton"),
                        actionButton("maternalimmunity", "Maternal immunity", class="mainbutton"),
                        #actionButton("globalwarming", "Global Warming", class="mainbutton"),

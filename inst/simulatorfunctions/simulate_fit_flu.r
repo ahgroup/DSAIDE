@@ -1,11 +1,11 @@
-#' Fitting a SIR model to flu data
+#' Fitting a SIR-type model to flu data
 #' 
 #' @description Fitting fitting mortality data from the 1918 influenza pandemic 
-#' to an SIR model to estimate R0
+#' to an SIR-type model to estimate R0
 #' 
 #' @param S : starting value for Susceptible : numeric
 #' @param I : starting value for Infected : numeric
-#' @param R : starting value for Recovered : numeric
+#' @param D : starting value for Dead : numeric
 #' @param b : infection rate : numeric
 #' @param blow : lower bound for infection rate : numeric
 #' @param bhigh : upper bound for infection rate : numeric
@@ -25,8 +25,7 @@
 #' @param logfit : set to 1 if the log of the data should be fitted, 0 otherwise : numeric
 #' @return The function returns a list containing as elements the best fit time series data frame, the best fit parameters,
 #' the data and the final SSR
-#' @details A simple compartmental SIR ODE model 
-#' is fitted to data.
+#' @details A simple compartmental ODE model is fitted to data.
 #' The model includes susceptible, infected, and dead compartments. 
 #' The two processes that are modeled are infection and recovery. A fraction of recovered can die.
 #' Data can either be real or created by running the model with known parameters and using the simulated data to
@@ -42,12 +41,11 @@
 #' # To run the code with default parameters just call the function:
 #' \dontrun{result <- simulate_fit_flu()}
 #' # To apply different settings, provide them to the simulator function, like such:
-#' result <- simulate_fit_flu(iter = 5, fitlog = 1, solvertype = 2, usesimdata = 1)
+#' result <- simulate_fit_flu(iter = 5, logfit = 1, solvertype = 2, usesimdata = 1)
 #' @seealso See the Shiny app documentation corresponding to this
 #' function for more details on this model.
 #' @author Andreas Handel
 #' @importFrom utils read.csv
-#' @importFrom dplyr filter rename select
 #' @importFrom nloptr nloptr
 #' @export
 
@@ -77,7 +75,7 @@ simulate_fit_flu <- function(S = 1e4, I = 1, D = 0, b = 1e-4, blow = 1e-10, bhig
     timevec=seq(0,max(fitdata$xvals),by = 0.1)
     
     #call ode-solver lsoda to integrate ODEs 
-    odeout=try(lsoda(Y0,timevec,flufit_model_ode,params,atol=1e-10,rtol=1e-10))
+    odeout=try(deSolve::lsoda(Y0,timevec,flufit_model_ode,params,atol=1e-10,rtol=1e-10))
 
     #extract values for dead at time points corresponding to data values, i.e. every week  
     modelpred = odeout[match(fitdata$xvals,odeout[,"time"]),"D"];
@@ -118,12 +116,11 @@ simulate_fit_flu <- function(S = 1e4, I = 1, D = 0, b = 1e-4, blow = 1e-10, bhig
     #combining fixed parameters and to be estimated parameters into a vector
     modelpars = c(b = bsim, g=gsim, f=fsim)
     #simulate model with known parameters to get artifitial data
-    simres = try(lsoda(Y0,timevec,flufit_model_ode,modelpars,atol=1e-10))
+    simres = try(deSolve::lsoda(Y0,timevec,flufit_model_ode,modelpars,atol=1e-10))
     
     #extract values for virus load at time points where data is available
     simdata = data.frame(simres[match(fitdata$xvals,simres[,"time"]),])
-    simdata$simres = simdata$D
-    simdata = subset(simdata, select=c('time', 'simres'))
+    simdata = simdata[,c('time', 'D')]
     colnames(simdata) = c('xvals','outcome')
     fitdata$outcome = simdata$outcome + noise*stats::runif(length(simdata$outcome),-1,1)*simdata$outcome
   }
@@ -150,7 +147,7 @@ simulate_fit_flu <- function(S = 1e4, I = 1, D = 0, b = 1e-4, blow = 1e-10, bhig
   names(params) = fitparnames #for some reason nloptr strips names from parameters
   
   #doe one final run of the ODE to get a time-series to report back
-  simres = try(lsoda(Y0,timevec,flufit_model_ode,params,atol=1e-10))
+  simres = try(deSolve::lsoda(Y0,timevec,flufit_model_ode,params,atol=1e-10))
 
   #extract values for dead at time points corresponding to data values, i.e. every week  
   modelpred = simres[match(fitdata$xvals,simres[,"time"]),"D"];

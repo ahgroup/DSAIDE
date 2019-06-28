@@ -69,7 +69,7 @@ The flow diagram and the set of ordinary differential equations (ODE) which are 
 knitr::include_graphics("../media/parasitemodelfigure.png")
 ```
 
-###Model Equations
+### Model Equations
 
 $$\dot S_h = - S_h b_i I_i + w R_h$$ 
 $$\dot I_h = S_h b_i Ii  - g I_h$$ 

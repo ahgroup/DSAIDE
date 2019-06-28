@@ -10,9 +10,9 @@
 #' @param S : initial number of susceptible individuals : numeric
 #' @param I : initial number of infected hosts : numeric
 #' @param tmax : maximum simulation time : numeric
-#' @param m : the rate at which individuals are born : numeric
-#' @param n : the rate at which individuals die : numeric
-#' @param p : the rate at which individuals lose passive immunity
+#' @param m : rate at which individuals are born : numeric
+#' @param n : rate at which individuals die : numeric
+#' @param p : rate at which individuals lose passive immunity : numeric
 #' @param b : rate of new infections : numeric
 #' @param gE : rate of leaving latent stage : numeric
 #' @param gI : rate of recovery : numeric
