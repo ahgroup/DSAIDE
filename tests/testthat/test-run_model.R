@@ -13,6 +13,7 @@ test_that("run_model correctly runs different models",
             expect_equal(max(result[[1]]$dat$xvals), tfinal)
             expect_is(generate_ggplot(result), "ggplot" )
             expect_is(generate_plotly(result), "plotly" )
+            testthat::  expect_is(generate_text(result), "html" )
             
             tfinal = 120
             modelsettings =  list(S = 1000, I = 10, R = 0 , b = 1e-3, g = 0.5, tstart = 0, tfinal = tfinal, dt = 0.1, modeltype = "_discrete_", plotscale = 'y', nplots = 1)
@@ -24,6 +25,7 @@ test_that("run_model correctly runs different models",
             expect_equal(max(result[[1]]$dat$xvals), tfinal)
             expect_is(generate_ggplot(result), "ggplot" )
             expect_is(generate_plotly(result), "plotly" )
+            testthat::  expect_is(generate_text(result), "html" )
             
             #for this dt, the simulation produces NaN and an error message as string should be returned
             modelsettings =  list( dt = 3, modeltype = "_discrete_", plotscale = 'y', nplots = 1)
@@ -44,6 +46,7 @@ test_that("run_model correctly runs different models",
             expect_equal(max(result[[1]]$dat$xvals), tfinal)
             expect_is(generate_ggplot(result), "ggplot" )
             expect_is(generate_plotly(result), "plotly" )
+            testthat::  expect_is(generate_text(result), "html" )
             
             
             
@@ -55,6 +58,7 @@ test_that("run_model correctly runs different models",
             expect_equal(Sfinal, 153)
             expect_is(generate_ggplot(result), "ggplot" )
             expect_is(generate_plotly(result), "plotly" )
+            testthat::  expect_is(generate_text(result), "html" )
             
             modelsettings =  list(S = 1000, I = 10, R = 0 , b = 1e-3, g = 0.5, m = 0, n = 0, tmax = 100, rngseed = 123, modeltype = "_stochastic_", plotscale = 'y', nplots = 1,  nreps = 3)
             modelsettings$simfunction = 'simulate_sirdemographic_stochastic'
@@ -64,8 +68,24 @@ test_that("run_model correctly runs different models",
             expect_equal(Sfinal, 143)
             expect_is(generate_ggplot(result), "ggplot" )
             expect_is(generate_plotly(result), "plotly" )
+            testthat::  expect_is(generate_text(result), "html" )
             
 
+            modelsettings =  list(tnew = 150, tmax = 100)
+            modelsettings$modeltype =  "_ode_"
+            modelsettings$simfunction = 'simulate_idcontrolmultioutbreak_ode'
+            result = run_model(modelsettings)
+            expect_is(generate_ggplot(result), "ggplot" )
+            expect_is(generate_plotly(result), "plotly" )
+            testthat::  expect_is(generate_text(result), "html" )
+            
+            modelsettings =  list(tnew = 80, tmax = 100)
+            modelsettings$modeltype =  "_ode_"
+            modelsettings$simfunction = 'simulate_idcontrolmultioutbreak_ode'
+            result = run_model(modelsettings)
+            expect_is(generate_ggplot(result), "ggplot" )
+            expect_is(generate_plotly(result), "plotly" )
+            testthat::  expect_is(generate_text(result), "html" )
             
             
                         
