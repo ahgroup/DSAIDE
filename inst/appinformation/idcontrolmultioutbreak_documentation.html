@@ -107,9 +107,9 @@
 <h3>Task 4</h3>
 <p>For a single outbreak, more control is better. We can test that.</p>
 <ul>
-<li>Set everything back to task 1.</li>
-<li>Set control to start at time 0 and end at 200.</li>
-<li>Set simulation time and <em>tnew</em> both to 200.</li>
+<li>Using the same number of susceptibles, infected and recovered from <strong>Task 1</strong>.</li>
+<li>Set control to start at time 0 (<em>tstart</em>) and end at 200 (<em>tend</em>).</li>
+<li>Set <em>tmax</em> and <em>tnew</em> both to 200.</li>
 <li>Slowly increase control, <em>f</em> (e.g. in steps of 0.1). Run the simulation for each value of <em>f</em>. As <em>f</em> increases, you should see smaller outbreaks until you hit a value of <em>f</em> for which you don’t see outbreaks anymore. Understand how this value of <em>f</em> relates to the reproductive number.</li>
 </ul>
 </div>
@@ -117,7 +117,7 @@
 <h3>Task 5</h3>
 <p>For multiple outbreaks, more control is not necessarily better. Let’s explore that.</p>
 <ul>
-<li>Set everything as in the previous task, but set control end to 100.</li>
+<li>Set control end to 100 (<em>tend</em>). All of the other settings should be the same as the previous task.</li>
 <li>Slowly increase control, <em>f</em> and run the simulation for the different values of <em>f</em>. Initially, things look as before. But once you reach a certain level of control, you will see that a second outbreak occurs and the total number of susceptibles drops again.</li>
 <li>To explore this in more detail, set f=0.55 and f=0.6 and try to understand why in one case you only get a single outbreak and in the other you get 2.</li>
 <li>Run the simulation for <em>f=0.2-0.7</em> (in steps of 0.1) and record the number of susceptibles left at the end of the simulation. Based on that, what do you conclude about the impact of different levels of control on the outcome? What seems to be the best level of control, and why?</li>
@@ -127,9 +127,9 @@
 <h3>Task 6</h3>
 <p>In the previous task, control ends while there are still a few infected around, which can lead to a second outbreak. An alternative scenario is one where control ends after infected are gone, but then a newly infected person enters the population. We can explore this scenario, as well.</p>
 <ul>
-<li>Set everything as in the previous task.</li>
-<li>Set control to start at time 0 and end at 250, control strength to <em>f=0.7</em>.</li>
-<li>Set simulation time and <em>tnew</em> to 500.</li>
+<li>Using the same number of susceptibles, infected and recovered from <strong>Task 5</strong>.</li>
+<li>Set control to start at time 0 (<em>tstart</em>) and end at 250 (<em>tend</em>), control strength to <em>f=0.7</em>.</li>
+<li>Set <em>tmax</em> and <em>tnew</em> to 500.</li>
 <li>Run the simulation, you should see a single outbreak with around 686 susceptibles left.</li>
 <li>Now set <em>tnew=300</em>. That means at time 300 a newly infected individual enters the population. You’ll see another outbreak. Make sure you understand why.</li>
 <li>Try the above again with <em>f=0.6</em>. You should see a bigger first and smaller second outbreak.</li>
