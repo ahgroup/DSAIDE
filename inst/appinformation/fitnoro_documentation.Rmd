@@ -20,13 +20,13 @@ source(currentappinfo)
 ```
 
 ## Overview {#shinytab1}
-This app shows some basic fitting of data to 2 simple infection models. This shows the concept of model/hypothesis testing. Read about the model in the "Model" tab. Then do the tasks described in the "What to do" tab.
+This app demonstrates basic fitting of data to 2 simple infection models. This shows the concept of model/hypothesis testing. Read about the model in the "Model" tab. Then do the tasks described in the "What to do" tab.
 
 
 ## The Model {#shinytab2}
 
 ### Model Overview
-This app fits 2 different SIR type models to norovirus infection data.
+This app fits 2 different SIR models to norovirus infection data.
 
 
 #### Models
@@ -64,7 +64,7 @@ The data being used in this app is daily new cases of norovirus for an outbreak 
 
 
 ### Model comparison 
-There are different ways to evaluate how well a model fits to data, and to compare between different models. This app shows the approach of using Akaike's "An Information Criterion" (AIC), or more precisely, we'll use the one corrected for small sample size, AICc . If we fit by minimizing the sum of squares (SSR), as we do here, the formula for the AICC is:
+There are different ways to evaluate how well a model fits to data, and to compare between different models. This app shows the approach of using Akaike's "An Information Criterion" (AIC), or more precisely, we'll use the one corrected for small sample size, AICc . If we fit by minimizing the sum of squares (SSR), as we do here, the formula for the AICc is:
 $$
 AICc = N \log(\frac{SSR}{N})+2(K+1)+\frac{2(K+1)(K+2)}{N-K}
 $$
@@ -81,30 +81,30 @@ Note that the absolute value of the AIC is unimportant and varies from dataset t
 
 
 ### Task 1 
-* Take a look at the inputs and outputs for the app. It's similar to the "Basic Fitting" app (which you should do before this one).
-* Each model variant fits parameters _b_ and _g_. Model variant 2 also fits a common source infection rate _n_. Model variant 3 additionally fits times _t~1~_ and _t~2~_ at which infection from the common source starts and stops (i.e. is larger than 0). The best fit estimates are shown under the figure, together with the SSR and AICc. 
-* For simplicity, lower and upper bounds are set inside the simulator function to beginning and end of the data, they therefore can't be adjusted through the user interface.
+* Take a look at the inputs and outputs for the app. It's similar to the "Fitting influenza data" app (which you should do before this one).
+* Each model variant fits parameters _b_ and _g_. Model variant 2 also fits a common source infection rate _n_. Model variant 3 additionally fits times _t~1~_ and _t~2~_ at which infection from the common source starts and stops (i.e., is larger than 0). The best fit estimates are shown under the figure, together with the SSR and AICc. 
+* For simplicity, lower and upper bounds are set inside the simulator function to the beginning and end of the data. As a result, they can't be adjusted through the user interface.
 * To find out more about the data, see _Further Resources_ or `help(norodata)`. 
 
 ### Task 2 
 * There were a total of 288 susceptible individuals. Use that as starting value for the susceptibles. Assume 1 infected, no recovered.
-* Try fit model variant 1, which fits parameters  _b_ and _g_. There are two general approaches. You can set _b_ and _g_ to pretty much any starting value and try to run many iterations with the 3 different solvers until you get a good fit.
-* Alternatively, you can try to manually find good starting values for _b_ and _g_ by trying different ones and running a single iteration. Once you have values for which the model is somewhat close to the data, increase iteration and do the formal fit.
+* Try fit model variant 1, which fits parameters  _b_ and _g_. There are two general approaches. You can set _b_ and _g_ to pretty much any starting value and try to run a large number of iterations with the 3 different solvers until you get a good fit.
+* Alternatively, you can try to manually find good starting values for _b_ and _g_ by trying different ones and running a single iteration. Once you have values for which the model is somewhat close to the data, increase iteration, and do the formal fit.
 * In theory, you should always end up with the same best fit. However, as discussed in the flu fitting app, optimizers can sometimes get stuck, so it might be for certain settings you don't end up with a good fit.
 * The best fit I was able to find for model variant 1 was an SSR=1218.81, AIC = 57.03 and best fit parameter values _b = 0.01_ and _g = 1.21_.  
 
 ### Task 3
 * Now switch to model variant 2, which also fits parameter _n_.
-* Play around with different starting values for the parameters, different optimizers and different number of iterations and see what the best fit is you can find.
-* The best fit I was able to find is identical to model 1, i.e. the optimizer sets the rate of infection from an external source to _n=0_. This of course gives the same SSR. The AIC is now larger at 61.74 since the model has more parameters and gets penalized for this. Based on these 2 models so far, we would conclude that an external source did not improve model fit and only direct transmission (model variant 1) was more likely.
+* Play around with different starting values for the parameters, different optimizers and different numbers of iterations and see what the best fit is you can find.
+* The best fit I was able to find is identical to model 1, i.e., the optimizer sets the rate of infection from an external source to _n=0_. This, of course, gives the same SSR. The AIC is now larger at 61.74 since the model has more parameters and gets penalized for this. Based on these 2 models so far, we would conclude that an external source did not improve model fit and only direct transmission (model variant 1) was more likely.
 
 ### Task 4
-* Now switch to model variant 3, which also fits parameters _t~1~_ and _t~2~_. See what best fit you can find.
+* Now switch to model variant 3, which also fits parameters _t~1~_ and _t~2~_. See what best fit you can find. The value for _t~1~_ must be 8 or greater.    
 * I was able, with 5000 iterations of solver 3 and good starting conditions, to get an SSR=17.50 and AIC=34.40  with best fit parameter values _b_/_g_/_n_/_t~1~_/_t~2~_ of 0.0079/1.6357/0.9960/10.7444/12.0000. You might be able to find an even better fit (lower SSR).
 
-The SSR is clearly lower than that for model 1 and 2, and the AIC value suggests that the extra model parameters are 'worth it' and overall this model should be favored.
+The SSR is clearly lower than that for model 1 and 2, and the AIC value suggests that the extra model parameters are 'worth it', and overall, this model should be favored.
 
-You might have noticed that getting a good fit is tricky and often you don't reach a good one. This comes back to the 'optimizer getting stuck' concept discussed in the 'flu fitting' app. 
+You might have noticed that getting a good fit is tricky and often you don't reach a good one. This comes back to the 'optimizer getting stuck' concept discussed in the 'flu fitting' app.
 
 
 
