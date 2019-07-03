@@ -66,8 +66,9 @@ The parameter _f_ can be non-zero outside of the treatment interval given by _ts
 
 ## What to do {#shinytab3}
 
+__This app assumes knowledge of the reproductive number concept. If you are not familiar with it, please go through the 'Reproductive Number' apps first.__
 
-**The tasks below are described in a way that assumes everything is in units of days (rate parameters, therefore, have units of inverse days). If any quantity is not given in those units, you need to convert it first.**
+_The tasks below are described in a way that assumes everything is in units of days (rate parameters, therefore, have units of inverse days). If any quantity is not given in those units, you need to convert it first._
 
 
 ### Task 1 
