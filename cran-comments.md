@@ -8,10 +8,19 @@
 
 ## R CMD check results
 
-0 errors v | 0 warnings v | 0 notes v
+0 errors | 0 warnings | 1 note
+
+* checking installed package size ... NOTE
+  installed size is  5.4Mb
+  sub-directories of 1Mb or more:
+    appinformation   3.6Mb
+
+The documentation for the apps in this package contains diagrams, which overall take up this much space.
 
 
 ## Submission History
+
+version 0.82: several new apps, general minor improvements.
 
 version 0.8: major upgrades to UI, several new apps, improvement on backend.
 
