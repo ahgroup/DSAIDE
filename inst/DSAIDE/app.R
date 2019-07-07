@@ -4,9 +4,14 @@
 #2. install the package through CRAN or github if we want to use the github version
 #devtools::install_github('ahgroup/DSAIDE')
 #3. #uncomment this line of code  
-#library('DSAIDE')
+library('DSAIDE')
 #4. with the above 'library' statement active, deploy with:
-#run rsconnect::deployApp()
+# run rsconnect::deployApp(account = 'epibiouga')
+# as suitable, change the account to another one, e.g. handelgroup
+# tokens need to be set up for the connection to work
+# to set up an account, run setAccountInfo. 
+# Best way to do is to log into shinyappsio, go to 
+# 'tokens' and copy the command into the console
 #5. comment out the library command again
 
 

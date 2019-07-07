@@ -84,11 +84,18 @@ file.copy(files, "C:/data/git/DSAIDE/inst/simulatorfunctions/", overwrite = TRUE
 * Run the check, fix any errors 
 
 ### To deploy package to shinyappsio
-* open app.R, set its folder as working directory
-* make sure latest version is on Github and passes tests
-* install the package through CRAN or github if we want to use the github version, e.g. devtools::install_github('ahgroup/DSAIDE')
-* uncomment the library(DSAIDE) statement in app.R 
-* to deploy, run the following rsconnect::deployApp()
+to deploy, follow these steps :
+1. go into the folder where this file (app.R) resides
+2. install the package through CRAN or github if we want to use the github version
+devtools::install_github('ahgroup/DSAIDE')
+3. #uncomment this line of code
+library('DSAIDE')
+4. with the above 'library' statement active, deploy with:
+ run rsconnect::deployApp(account = 'epibiouga')
+ as suitable, change the account to another one, e.g. handelgroup
+ tokens need to be set up for the connection to work
+5. comment out the library command again
+
 
 ### To-do at release time 
 * "by hand" edit the DESCRIPTION file to make sure it's up to date
