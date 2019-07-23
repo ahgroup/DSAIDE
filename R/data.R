@@ -11,10 +11,10 @@
 #' For a proper re-analysis of these data, use the source mentioned above or 
 #' check out data available through project Tycho: https://www.tycho.pitt.edu/
 #'
-#' @format A data frame with these variables:
+#' @format A data frame/tibble with these variables:
 #' \describe{
-#' \item{Date}{Week of reporting}
-#' \item{Deaths}{New deaths per week per 100,000}
+#' \item{Date}{Week of reporting, date format}
+#' \item{Deaths}{New deaths in NYC per week per 100,000, numeric}
 #' }
 #'
 "flu1918data"
@@ -35,8 +35,8 @@
 #' 
 #' @format A data frame with these variables:
 #' \describe{
-#' \item{Date}{Day of outbreak, all in December 2007}
-#' \item{Cases}{New cases for the specified date}
+#' \item{Date}{Day of outbreak, all in December 2007, numeric}
+#' \item{Cases}{New cases for the specified date, numeric}
 #' }
 #'
 "norodata"
