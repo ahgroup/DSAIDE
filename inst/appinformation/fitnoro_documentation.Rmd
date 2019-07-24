@@ -20,7 +20,9 @@ source(currentappinfo)
 ```
 
 ## Overview {#shinytab1}
-This app demonstrates basic fitting of data to 2 simple infection models. This shows the concept of model/hypothesis testing. Read about the model in the "Model" tab. Then do the tasks described in the "What to do" tab.
+This app demonstrates basic fitting of data to 2 simple infection models. This shows the concept of model/hypothesis testing. Read about the model in the "Model" tab. Then do the tasks described in the "What to do" tab. 
+
+__Note:__ You should complete the "Fitting influenza data" app before starting this app. 
 
 
 ## The Model {#shinytab2}
