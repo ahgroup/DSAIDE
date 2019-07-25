@@ -95,7 +95,9 @@ In the first task we are going to use _Dracunculus medinensis_ as an example. Th
     * Set the birth rate such that in the absence of the disease, you get a steady population of 1000 intermediate host. (Hint: Birth rate needs to be significantly larger than death rate to achieve a steady state. You can leave the transmission rates at zero to see the effect of changing birth rates.)
     * Set waning immunity, the rate the parasite is shed into the environment, and the decay of the parasite in the environment to zero.
     * Run the simulation, observe what you get.
-  * You should get a 91 as the final number of susceptibles and maximum number of infected hosts of 123 but the number of infected intermediate hosts does not exceed 1. Make sure you know why. (Hint: Look at the number of parasites in the environment. You should notice that there are no parasites being shed into the environment and no environmental transmission so the number of infected intermediate hosts can not exceed the initial value, _I~i0~_.
+  * You should get a 91 as the final number of susceptibles and maximum number of infected hosts of 123 but the number of infected intermediate hosts does not exceed 1.
+  * Make sure you know why. 
+    + Hint: Look at the number of parasites in the environment. You should notice that there are no parasites being shed into the environment and no environmental transmission so the number of infected intermediate hosts cannot exceed the initial value, _I~i~_.
 
 ### Task 2
 In the scenario above the death rate of the intermediate host was set at 0.083, which is equivalent to a year lifespan. Copepods typically lifespan can be anywhere from 150 days to a year [@kurtz07].
