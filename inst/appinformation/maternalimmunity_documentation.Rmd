@@ -1,5 +1,5 @@
 ---
-title: Maternal Immunity
+title: Maternal immunity
 output:
   html_document:
     theme: null
@@ -23,7 +23,7 @@ source(currentappinfo)
 
 
 ## Overview {#shinytab1}
-This app will teach you about the concept of passive immunity through the utilization of an MSEIR type model. It will also show you how variable population size can affect disease dynamics. You can read more in-depth information about the model in the "Model tab". Tasks that will help you understand the model and concept are present in the "What to do" tab".
+This app will teach you about the concept of passive immunity through the utilization of an MSEIR type model. It will also show you how variable population size can affect disease dynamics. You can read more in-depth information about the model in the "Model tab". Tasks that will help you understand the model and concept are present in the "What to do" tab.
 
 ## The Model {#shinytab2}
 
@@ -42,8 +42,8 @@ The following processes define the dynamics of the model:
 
 * Newborns either enter the maternally protected (M) compartment or the susceptible (S) compartment based on the status of the mother. Newborns of susceptible mothers enter the S compartment at a flow of $mS$, where $m$ is the birth rate. All other newborns enter the M compartment at a flow of $mR$, where R represents the recovered individuals.  Note that the total population size is dependent on the birth rate ($m$) and death rate ($n$). 
 * Individuals that are protected by maternal antibodies move into the S compartment at a flow determined by the length of maternal protection. In this model, this rate is represented by $p$.
-* Susceptible individuals move from the S compartment to the exposed (E) compartment at a flow dependent on the contact rate of the population, $b_E$. Individuals in the E compartment are infected with the disease, but not yet infectious to other individuals.
-* Exposed individuals stay in the E compartment during the latent period ($b_I) of the disease and are moved out of the E compartment at a flow of $b_I E$.
+* Susceptible individuals move from the S compartment to the exposed (E) compartment at a flow dependent on the contact rate of the population, *b*. Individuals in the E compartment are infected with the disease, but not yet infectious to other individuals.
+* Exposed individuals stay in the E compartment during the latent period ($b_I$) of the disease and are moved out of the E compartment at a flow of *gE* .
 * After individuals enter the infected/infectious (I) compartment, the rate at which they move out of this compartment is dependent on the recovery rate of the disease ($g$). Individuals move into the recovered (R) compartment at a flow of $g R$. The waning immunity rate is defined by $w$. If $w > 0$ then the model turns into an MSEIRS model where recovered individuals flow into the S compartment at a rate of $w$.
 * Individuals who have died move out of each compartment at a rate $n$.
 
@@ -87,36 +87,36 @@ First we will observe the dynamics of the MSEIR model with a constant population
 * Set the death rate, *n*, so that it corresponds with an average lifespan of 50 years.
 * Set the birth rate, *m*, so that it is equal to the calculated death rate.
 * Set the passive immunity rate, *p*, so that maternal antibodies wear off on average in 6 months. 
-* Set the contact rate, $b_E$, to 0.3 and the latent period rate, $b_I$, so that it corresponds to an average latent period of 14 days.
-* Set the rate of recovery, *g*, so that it corresponds to an average recovery period of 25 days.
-* Set the waning immunity rate to 0. This would be applicable for an infection that confers permanent immunity, like measles or rumps.
+* Set the contact rate, *b*, to 0.3 and the latent period rate, *gE*, so that it corresponds to an average latent period of 14 days.
+* Set the rate of recovery, *gI*, so that it corresponds to an average recovery period of 25 days.
+* Set the waning immunity rate to 0. This would be applicable for an infection that confers permanent immunity, like measles or mumps.
 
-Now run the simulation. Make sure that an outbreak occurs. What can you observe from the results? Make sure to take note of the relationship between the M population and the S population. Also make note of the final number of infecteds.
+Now run the simulation. Make sure that an outbreak occurs. What can you observe from the results? Make sure to take note of the relationship between the M population and the S population. Also make note of the final number of infected.
 
 ### Task 2
 
-Run the simulation with the same parameters as in Task 1, except this time run it for 1200 days to observe the long term dynamics at place. What do you notice? Does the population reach steady state? What does this say about the dynamics at place?
+Run the simulation with the same parameters as in Task 1, except this time run it for 1200 days to observe the long term dynamics of the model. What do you notice? Does the population reach steady state? What does this say about the dynamics at place?
 
 
 ### Task 3
 
 Sometimes it is not appropriate to assume that a population will be constant over a period of time. Here, we will observe what kind of effect an exponentially increasing population would have on the dynamics of the MSEIR model. 
 
-* Set the parameters equal to the values that they were in Task 1.
-* Change the birth rate, m, to 0.025.
-* Change the contact rate, $b_E$, to 0.75.
+* Set the parameters equal to the values that they were in Task 1, set *tmax*=350.
+* Change the birth rate, *m*, to 0.025.
+* Change the contact rate, *b*, to 0.75.
 
-Compare the effects of an increasing population to what you saw in Task 1. How does the increasing population affect the M population and the S population. Does it appear that this is an endemic disease?
+Compare the effects of an increasing population to what you saw in Task 1. How does the increasing population affect the __M__ population and the __S__ population? Does the disease still appear to be endemic?
 
 ### Task 4 
 
 Now we will compare the effects of a decreasing population on disease dynamics with an MSEIR model.
 
-* Set the parameters equal to the the values that they were in Task 1.
-* Change the death rate to 0.0209.
-* Change the contact rate, $b_E$, to 0.75.
+* Set the parameters equal to the the values that they were in Task 1, set *tmax*=350.
+* Change the death rate, *n*, to 0.0209.
+* Change the contact rate, *b*, to 0.75.
 
-How do these results compare to those in Task 3. What compartments are most affected by the decreasing population?
+How do these results compare to those in Task 3? Which compartments are most affected by the decreasing population?
 
 ### Task 5
 
@@ -125,13 +125,19 @@ Now we are going to observe what disease dynamics are like with a short latent p
 * Set the simulation to run for 2000 days. 
 * Start with an initial susceptible population, $S_0$, of 1000, and 1 initial infected and symptomatic host.
 * Set the death rate, *n*, and birth rate, *m*, to 0.02.
-* Set *p* to 0.0041, $b_I$ to 0.17, and *g* to 0.238. Think about what these rates mean about the biology that is occurring here.
+* Set *p* to 0.0041, *gE* to 0.17, and *gI* to 0.238. Think about what these rates mean about the biology that is occurring here.
 * Keep *w* at 0 for now.
-Play around with the $b_E$ parameter. Find a level for $b_E$ where there are multiple peaks in the I compartment over the 2000 days. What is occurring in the other compartments to allow for these peaks?
+Play around with the *b* parameter. Find a level for *b* where there are multiple peaks in the I compartment over the 2000 days. What is occurring in the other compartments to allow for these peaks?
 
 ### Task 6
 
-Set the simulation to run with the same parameters used in Task 5, including the $b_E$ values that was used. Adjust the value for the waning immunity parameter, *w*. What do you observe? What compartments are especially affected by increasing this parameter to > 0? Hint: you will likely need to decrease the *tmax* parameter.
+Set *tmax* = 450, then run the simulation with the same parameters used in Task 5, including the *b* value that lead to secondary outbreaks. If the seconday outbreaks not still occuring adjust the *b* value until they do.
+
+* Set the waning immunity parameter, *w* = 0.001, then run the simulation.
+* Set the waning immunity parameter, *w* = 0.01, then run the simulation.
+* Set the waning immunity parameter, *w* = 0.02, then run the simulation.
+
+What do you observe as the rate of waning immunity increases? 
 
 ## Further Information {#shinytab4}
 * This app (and all others) are structured such that the Shiny part (the graphical interface you see and the server-side function that goes with it) calls an underlying R script (or several) which runs the simulation for the model of interest and returns the results.
