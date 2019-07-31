@@ -10,7 +10,7 @@ appsettings$apptitle = "ID Control 1"
 
 #name of underlying simulation function(s) to be used in the app
 #must be provided
-appsettings$simfunction = 'simulate_reproductivenumber_ode'
+appsettings$simfunction = 'simulate_reproductivenumber2_ode'
 
 #name of underlying mbmodel - if exists
 #if it exists, it will be used to build UI input elements
