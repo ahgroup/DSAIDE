@@ -3,6 +3,11 @@
 [![Coverage status](https://codecov.io/gh/ahgroup/DSAIDE/branch/master/graph/badge.svg)](https://codecov.io/github/ahgroup/DSAIDE?branch=master)
 [![CRAN status](https://www.r-pkg.org/badges/version/DSAIDE)](https://cran.r-project.org/package=DSAIDE)
 [![CRAN checks](https://cranchecks.info/badges/summary/DSAIDE)](https://cran.r-project.org/web/checks/check_results_DSAIDE.html)
+[![develVersion](https://img.shields.io/badge/devel%20version-0.3.1-blue.svg?style=flat)](https://github.com/ahgroup/DSAIDE)
+[![metacran monthly downloads](http://cranlogs.r-pkg.org/badges/DSAIDE)](https://cran.r-project.org/package=DSAIDE)
+[![metacran downloads](http://cranlogs.r-pkg.org/badges/grand-total/DSAIDE?color=ff69b4)](https://cran.r-project.org/package=DSAIDE)
+
+
 
 # DSAIDE
 Dynamical Systems Approach to Infectious Disease Epidemiology
@@ -27,6 +32,7 @@ You can also give the package [a quick try online, without having to install it]
 
 For a quick introduction to the package, step-by-step instructions on getting started, and more information on the different ways you can use the package [see the tutorial (vignette)](https://ahgroup.github.io/DSAIDE/articles/DSAIDE.html).
 
+(Also note that DSAIDE doesn't seem to work quite right using Docker. This is likely irrelevant for almost all users.) 
 
 ## Further information
 * [I published a paper describing the package](https://doi.org/10.1371/journal.pcbi.1005642). The paper is by now already somewhat outdated whith regards to the details of the package, but it describes the overall idea and context well.  
