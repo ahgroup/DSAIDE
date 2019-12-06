@@ -10,12 +10,12 @@
 
 
 # DSAIDE
-Dynamical Systems Approach to Infectious Disease Epidemiology
+Dynamical Systems Approach to Infectious Disease Epidemiology/Ecology/Evolution
 
 ## Description
 DSAIDE is an R package containing a set of simulation models (apps) that teach infectious disease epidemiology from a dynamical system perspective. 
 
-You can explore the apps through a graphical user interface, implemented in Shiny. By going through the documentation and instructions of each app, you will learn important concepts of infectious disease epidemiology. You will also learn how simulation model can be used to study such concepts.
+You can explore the apps through a graphical user interface, implemented in Shiny. By going through the documentation and instructions of each app, you will learn important concepts of infectious disease epidemiology and related areas (e.g. ecology and evolution). You will also learn how simulation model can be used to study such concepts.
 
 You can also directly access and modify all simulations to adapt them to your research needs.
 
@@ -42,4 +42,4 @@ For a quick introduction to the package, step-by-step instructions on getting st
 ## Citation and Contributors
 If the package does in any way help you with your work such that it warrants citing in one of your papers, please cite [the DSAIDE publication in PLoS Comp Bio](https://doi.org/10.1371/journal.pcbi.1005642). 
 
-This R package is developed and maintained by [Andreas Handel](http://handelgroup.uga.edu/). A full list of contributors and a Bibtex entry for the citation [can be found here](https://ahgroup.github.io/DSAIDE/authors.html).
+This R package is developed and maintained by [Andreas Handel](https://www.andreashandel.com/). A full list of contributors and a Bibtex entry for the citation [can be found here](https://ahgroup.github.io/DSAIDE/authors.html).
