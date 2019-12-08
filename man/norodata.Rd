@@ -6,8 +6,8 @@
 \title{Cases of norovirus during an outbreak}
 \format{A data frame with these variables:
 \describe{
-\item{Date}{Day of outbreak, all in December 2007}
-\item{Cases}{New cases for the specified date}
+\item{Date}{Day of outbreak, all in December 2007, numeric}
+\item{Cases}{New cases for the specified date, numeric}
 }}
 \usage{
 norodata

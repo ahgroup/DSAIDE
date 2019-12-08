@@ -4,9 +4,21 @@
 \alias{simulate_heterogeneity_ode}
 \title{Simulation of a compartmental infectious disease transmission model with 2 types of hosts}
 \usage{
-simulate_heterogeneity_ode(S1 = 1000, I1 = 1, S2 = 1000, I2 = 0,
-  b11 = 0.01, b12 = 0, b21 = 0, b22 = 0, g1 = 1, g2 = 1,
-  w1 = 0, w2 = 0, tmax = 120)
+simulate_heterogeneity_ode(
+  S1 = 1000,
+  I1 = 1,
+  S2 = 1000,
+  I2 = 0,
+  b11 = 0.01,
+  b12 = 0,
+  b21 = 0,
+  b22 = 0,
+  g1 = 1,
+  g2 = 1,
+  w1 = 0,
+  w2 = 0,
+  tmax = 120
+)
 }
 \arguments{
 \item{S1}{: initial number of susceptible type 1 hosts : numeric}

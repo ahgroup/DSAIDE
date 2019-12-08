@@ -10,23 +10,28 @@ navbar:
     - home
     - intro
     - reference
-    - articles
-    - tutorials
     - news
-    right: github
+    - related
+    right: 
+    - github
   components:
     home:
       icon: fa-home fa-lg
       href: index.html
-    reference:
-      text: Reference
-      href: reference/index.html
     intro:
       text: Get started
       href: articles/DSAIDE.html
+    reference:
+      text: Reference
+      href: reference/index.html
     news:
       text: Changelog
       href: news/index.html
+    related: 
+      text: Related Packages
+      menu:
+      - text: DSAIRM
+      - href: https://ahgroup.github.io/DSAIRM/index.html    
     github:
       icon: fa-github fa-lg
       href: https://github.com/ahgroup/DSAIDE

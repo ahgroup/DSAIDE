@@ -4,10 +4,25 @@
 \alias{simulate_usanalysis_sir}
 \title{Simulation to illustrate uncertainty and sensitivity analysis}
 \usage{
-simulate_usanalysis_sir(Smin = 1000, Smax = 1500, Imin = 1,
-  Imax = 10, bmin = 1e-04, bmax = 0.01, gmean = 1, gvar = 0.1,
-  mmin = 0, mmax = 10, nmin = 0, nmax = 0.1, samples = 10,
-  rngseed = 100, tstart = 0, tfinal = 200, dt = 0.1)
+simulate_usanalysis_sir(
+  Smin = 1000,
+  Smax = 1500,
+  Imin = 1,
+  Imax = 10,
+  bmin = 1e-04,
+  bmax = 0.01,
+  gmean = 1,
+  gvar = 0.1,
+  mmin = 0,
+  mmax = 10,
+  nmin = 0,
+  nmax = 0.1,
+  samples = 10,
+  rngseed = 100,
+  tstart = 0,
+  tfinal = 200,
+  dt = 0.1
+)
 }
 \arguments{
 \item{Smin}{: lower bound for initial susceptible : numeric}

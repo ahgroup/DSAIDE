@@ -4,8 +4,17 @@
 \alias{simulate_sirdemographic_stochastic}
 \title{Stochastic simulation of an SIR-type model with births and deaths}
 \usage{
-simulate_sirdemographic_stochastic(S = 1000, I = 10, R = 0,
-  b = 0.001, g = 0.5, m = 0, n = 0, tmax = 100, rngseed = 100)
+simulate_sirdemographic_stochastic(
+  S = 1000,
+  I = 10,
+  R = 0,
+  b = 0.001,
+  g = 0.5,
+  m = 0,
+  n = 0,
+  tmax = 100,
+  rngseed = 100
+)
 }
 \arguments{
 \item{S}{: initial number of susceptible hosts : numeric}

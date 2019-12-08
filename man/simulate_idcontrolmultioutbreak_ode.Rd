@@ -4,9 +4,18 @@
 \alias{simulate_idcontrolmultioutbreak_ode}
 \title{Simulation of a compartmental infectious disease transmission model to study the reproductive number}
 \usage{
-simulate_idcontrolmultioutbreak_ode(S = 1000, I = 1, R = 0,
-  b = 0.001, g = 1, f = 0.3, tstart = 10, tend = 50, tnew = 50,
-  tmax = 100)
+simulate_idcontrolmultioutbreak_ode(
+  S = 1000,
+  I = 1,
+  R = 0,
+  b = 0.001,
+  g = 1,
+  f = 0.3,
+  tstart = 10,
+  tend = 50,
+  tnew = 50,
+  tmax = 100
+)
 }
 \arguments{
 \item{S}{: initial number of susceptible hosts : numeric}

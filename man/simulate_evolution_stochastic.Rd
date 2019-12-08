@@ -4,9 +4,23 @@
 \alias{simulate_evolution_stochastic}
 \title{Stochastic simulation of a compartmental SIR-type model with wild-type and mutant strains and treatment}
 \usage{
-simulate_evolution_stochastic(S = 1000, Iu = 1, It = 1, Ir = 1,
-  bu = 0.001, bt = 0.001, br = 0.001, cu = 0.001, ct = 0.01,
-  f = 0, gu = 1, gt = 1, gr = 1, tmax = 100, rngseed = 100)
+simulate_evolution_stochastic(
+  S = 1000,
+  Iu = 1,
+  It = 1,
+  Ir = 1,
+  bu = 0.001,
+  bt = 0.001,
+  br = 0.001,
+  cu = 0.001,
+  ct = 0.01,
+  f = 0,
+  gu = 1,
+  gt = 1,
+  gr = 1,
+  tmax = 100,
+  rngseed = 100
+)
 }
 \arguments{
 \item{S}{: initial number of susceptible hosts : numeric}

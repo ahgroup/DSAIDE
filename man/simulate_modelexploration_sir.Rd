@@ -5,10 +5,23 @@
 \title{Simulation to illustrate parameter scan of the basic SIR model with births and deaths
 #'}
 \usage{
-simulate_modelexploration_sir(S = 1000, I = 1, R = 0, b = 0.002,
-  g = 1, m = 0, n = 0, tstart = 0, tfinal = 100, dt = 0.1,
-  samples = 10, parmin = 5e-04, parmax = 0.005, samplepar = "b",
-  pardist = "lin")
+simulate_modelexploration_sir(
+  S = 1000,
+  I = 1,
+  R = 0,
+  b = 0.002,
+  g = 1,
+  m = 0,
+  n = 0,
+  tstart = 0,
+  tfinal = 100,
+  dt = 0.1,
+  samples = 10,
+  parmin = 5e-04,
+  parmax = 0.005,
+  samplepar = "b",
+  pardist = "lin"
+)
 }
 \arguments{
 \item{S}{: starting value for Susceptible : numeric}

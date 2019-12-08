@@ -7,11 +7,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dynamical Systems Approach to Infectious Disease Epidemiology • DSAIDE</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><link href="extra.css" rel="stylesheet">
 <meta property="og:title" content="Dynamical Systems Approach to Infectious Disease Epidemiology">
-<meta property="og:description" content="A collection of 'shiny' apps that allow for the simulation and
+<meta property="og:description" content="A collection of shiny apps that allow for the simulation and
     exploration of various infectious disease transmission dynamics scenarios.
     The purpose of the package is to help individuals learn 
     about infectious disease epidemiology from a dynamical systems perspective.
@@ -64,9 +65,9 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-<li class="dropdown-header">DSAIDE</li>
+<li class="dropdown-header">DSAIRM</li>
     <li>
-      <a href="https://ahgroup.github.io/DSAIDE/index.html"></a>
+      <a href="https://ahgroup.github.io/DSAIRM/index.html"></a>
     </li>
   </ul>
 </li>
@@ -87,6 +88,7 @@
 <!--/.navbar -->
 
       
+
       </header><div class="row">
   <div class="contents col-md-9">
 
@@ -94,12 +96,12 @@
 <div id="dsaide" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#dsaide" class="anchor"></a>DSAIDE</h1></div>
-<p>Dynamical Systems Approach to Infectious Disease Epidemiology</p>
+<p>Dynamical Systems Approach to Infectious Disease Epidemiology/Ecology/Evolution</p>
 <div id="description" class="section level2">
 <h2 class="hasAnchor">
 <a href="#description" class="anchor"></a>Description</h2>
 <p>DSAIDE is an R package containing a set of simulation models (apps) that teach infectious disease epidemiology from a dynamical system perspective.</p>
-<p>You can explore the apps through a graphical user interface, implemented in Shiny. By going through the documentation and instructions of each app, you will learn important concepts of infectious disease epidemiology. You will also learn how simulation model can be used to study such concepts.</p>
+<p>You can explore the apps through a graphical user interface, implemented in Shiny. By going through the documentation and instructions of each app, you will learn important concepts of infectious disease epidemiology and related areas (e.g. ecology and evolution). You will also learn how simulation model can be used to study such concepts.</p>
 <p>You can also directly access and modify all simulations to adapt them to your research needs.</p>
 </div>
 <div id="getting-started" class="section level2">
@@ -111,6 +113,7 @@ library('DSAIDE')
 dsaidemenu()</code></pre>
 <p>You can also give the package <a href="https://handelgroup.shinyapps.io/dsaide/">a quick try online, without having to install it</a>. I still recommend you install it like any regular <code>R</code> package should you decide that you want to use it. Note that I only have a free plan for shinyapps.io, where the online version is hosted. If the link fails to work it likely means I reached my maximum monthly allowed capacity. In that case, just go ahead and install the package. It’s only 3 commands!</p>
 <p>For a quick introduction to the package, step-by-step instructions on getting started, and more information on the different ways you can use the package <a href="https://ahgroup.github.io/DSAIDE/articles/DSAIDE.html">see the tutorial (vignette)</a>.</p>
+<p>(Also note that DSAIDE doesn’t seem to work quite right using Docker. This is likely irrelevant for almost all users.)</p>
 </div>
 <div id="further-information" class="section level2">
 <h2 class="hasAnchor">
@@ -128,7 +131,7 @@ dsaidemenu()</code></pre>
 <h2 class="hasAnchor">
 <a href="#citation-and-contributors" class="anchor"></a>Citation and Contributors</h2>
 <p>If the package does in any way help you with your work such that it warrants citing in one of your papers, please cite <a href="https://doi.org/10.1371/journal.pcbi.1005642">the DSAIDE publication in PLoS Comp Bio</a>.</p>
-<p>This R package is developed and maintained by <a href="http://handelgroup.uga.edu/">Andreas Handel</a>. A full list of contributors and a Bibtex entry for the citation <a href="https://ahgroup.github.io/DSAIDE/authors.html">can be found here</a>.</p>
+<p>This R package is developed and maintained by <a href="https://www.andreashandel.com/">Andreas Handel</a>. A full list of contributors and a Bibtex entry for the citation <a href="https://ahgroup.github.io/DSAIDE/authors.html">can be found here</a>.</p>
 </div>
 </div>
 
@@ -162,7 +165,7 @@ dsaidemenu()</code></pre>
 <h2>Developers</h2>
 <ul class="list-unstyled">
 <li>
-<a href="http://handelgroup.uga.edu/">Andreas Handel</a> <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-4622-1146" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" alt="ORCID" height="16"></a> </li>
+<a href="http://handelgroup.uga.edu/">Andreas Handel</a> <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-4622-1146" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" alt="ORCID"></a> </li>
 <li><a href="authors.html">All authors...</a></li>
 </ul>
 </div>
@@ -175,22 +178,28 @@ dsaidemenu()</code></pre>
 <li><a href="https://codecov.io/github/ahgroup/DSAIDE?branch=master"><img src="https://codecov.io/gh/ahgroup/DSAIDE/branch/master/graph/badge.svg" alt="Coverage status"></a></li>
 <li><a href="https://cran.r-project.org/package=DSAIDE"><img src="https://www.r-pkg.org/badges/version/DSAIDE" alt="CRAN status"></a></li>
 <li><a href="https://cran.r-project.org/web/checks/check_results_DSAIDE.html"><img src="https://cranchecks.info/badges/summary/DSAIDE" alt="CRAN checks"></a></li>
+<li><a href="https://github.com/ahgroup/DSAIDE"><img src="https://img.shields.io/badge/devel%20version-0.3.1-blue.svg?style=flat" alt="develVersion"></a></li>
+<li><a href="https://cran.r-project.org/package=DSAIDE"><img src="http://cranlogs.r-pkg.org/badges/DSAIDE" alt="metacran monthly downloads"></a></li>
+<li><a href="https://cran.r-project.org/package=DSAIDE"><img src="http://cranlogs.r-pkg.org/badges/grand-total/DSAIDE?color=ff69b4" alt="metacran downloads"></a></li>
 </ul>
 </div>
 </div>
 </div>
+
 
       <footer><div class="copyright">
   <p>Developed by <a href="http://handelgroup.uga.edu/">Andreas Handel</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
 </div>
 
   
+
 
   </body>
 </html>

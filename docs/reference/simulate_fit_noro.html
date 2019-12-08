@@ -8,21 +8,25 @@
 
 <title>Fitting a simple SIR type model to norovirus outbreak data — simulate_fit_noro • DSAIDE</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -32,8 +36,8 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="Fitting a simple SIR type model to norovirus outbreak data — simulate_fit_noro" />
 
+<meta property="og:title" content="Fitting a simple SIR type model to norovirus outbreak data — simulate_fit_noro" />
 <meta property="og:description" content="This function runs a simulation of a compartment model
 using a set of ordinary differential equations.
 The model describes a simple SIR model with an additional
@@ -41,6 +45,7 @@ environmental source of infection
 The user provides initial conditions and parameter values for the system.
 The function simulates the ODE using an ODE solver from the deSolve package." />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -52,6 +57,7 @@ The function simulates the ODE using an ODE solver from the deSolve package." />
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
 
 
   </head>
@@ -98,14 +104,13 @@ The function simulates the ODE using an ODE solver from the deSolve package." />
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-    <li class="dropdown-header">DSAIDE</li>
+    <li class="dropdown-header">DSAIRM</li>
     <li>
-      <a href="https://ahgroup.github.io/DSAIDE/index.html"></a>
+      <a href="https://ahgroup.github.io/DSAIRM/index.html"></a>
     </li>
   </ul>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/ahgroup/DSAIDE">
@@ -120,6 +125,7 @@ The function simulates the ODE using an ODE solver from the deSolve package." />
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -131,21 +137,34 @@ The function simulates the ODE using an ODE solver from the deSolve package." />
     </div>
 
     <div class="ref-description">
-    
     <p>This function runs a simulation of a compartment model
 using a set of ordinary differential equations.
 The model describes a simple SIR model with an additional
 environmental source of infection
 The user provides initial conditions and parameter values for the system.
 The function simulates the ODE using an ODE solver from the deSolve package.</p>
-    
     </div>
 
-    <pre class="usage"><span class='fu'>simulate_fit_noro</span>(<span class='kw'>S</span> <span class='kw'>=</span> <span class='fl'>100</span>, <span class='kw'>I</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>R</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>0.001</span>, <span class='kw'>blow</span> <span class='kw'>=</span> <span class='fl'>1e-10</span>,
-  <span class='kw'>bhigh</span> <span class='kw'>=</span> <span class='fl'>0.1</span>, <span class='kw'>g</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>glow</span> <span class='kw'>=</span> <span class='fl'>0.001</span>, <span class='kw'>ghigh</span> <span class='kw'>=</span> <span class='fl'>100</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>nlow</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>nhigh</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>t1</span> <span class='kw'>=</span> <span class='fl'>8</span>, <span class='kw'>t2</span> <span class='kw'>=</span> <span class='fl'>15</span>, <span class='kw'>fitmodel</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>iter</span> <span class='kw'>=</span> <span class='fl'>100</span>, <span class='kw'>solvertype</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
-    
+    <pre class="usage"><span class='fu'>simulate_fit_noro</span>(
+  <span class='kw'>S</span> <span class='kw'>=</span> <span class='fl'>100</span>,
+  <span class='kw'>I</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>R</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>0.001</span>,
+  <span class='kw'>blow</span> <span class='kw'>=</span> <span class='fl'>1e-10</span>,
+  <span class='kw'>bhigh</span> <span class='kw'>=</span> <span class='fl'>0.1</span>,
+  <span class='kw'>g</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
+  <span class='kw'>glow</span> <span class='kw'>=</span> <span class='fl'>0.001</span>,
+  <span class='kw'>ghigh</span> <span class='kw'>=</span> <span class='fl'>100</span>,
+  <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>nlow</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>nhigh</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
+  <span class='kw'>t1</span> <span class='kw'>=</span> <span class='fl'>8</span>,
+  <span class='kw'>t2</span> <span class='kw'>=</span> <span class='fl'>15</span>,
+  <span class='kw'>fitmodel</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>iter</span> <span class='kw'>=</span> <span class='fl'>100</span>,
+  <span class='kw'>solvertype</span> <span class='kw'>=</span> <span class='fl'>1</span>
+)</pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -218,12 +237,11 @@ The function simulates the ODE using an ODE solver from the deSolve package.</p>
       <td><p>: the type of solver/optimizer to use (1-3) : numeric</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>The function returns a list containing the best fit timeseries,
 the best fit parameters, the data and the AICc for the model.</p>
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Three versions of a simple SIR type compartmental ODE model
@@ -231,31 +249,24 @@ are fit to cases of norovirus during an outbreak.
 #' @section Warning: This function does not perform any error checking. So if
   you try to do something nonsensical (e.g. specify negative parameter or starting values),
   the code will likely abort with an error message.</p>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>See the Shiny app documentation corresponding to this
 function for more details on this model.</p></div>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'># To run the code with default parameters just call the function:
-</div><span class='co'># NOT RUN {</span>
-<span class='no'>result</span> <span class='kw'>&lt;-</span> <span class='fu'>simulate_fit_noro</span>()
-<span class='co'># }</span><div class='input'><span class='co'># To apply different settings, provide them to the simulator function, like such:</span>
+    <pre class="examples"><div class='input'><span class='co'># To run the code with default parameters just call the function:</span>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) <span class='no'>result</span> <span class='kw'>&lt;-</span> <span class='fu'>simulate_fit_noro</span>()
+<span class='co'># To apply different settings, provide them to the simulator function, like such:</span>
 <span class='no'>result</span> <span class='kw'>&lt;-</span> <span class='fu'>simulate_fit_noro</span>(<span class='kw'>iter</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>fitmodel</span> <span class='kw'>=</span> <span class='fl'>2</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-
       <li><a href="#details">Details</a></li>
-
       <li><a href="#see-also">See also</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
@@ -264,19 +275,23 @@ function for more details on this model.</p></div>
   </div>
 </div>
 
+
       <footer>
       <div class="copyright">
   <p>Developed by <a href='http://handelgroup.uga.edu/'>Andreas Handel</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

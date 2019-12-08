@@ -5,9 +5,18 @@
 \title{Simulation of a MSEIR model that represents a group of the population that is protected by disease through
 maternal antibodies}
 \usage{
-simulate_maternalimmunity_ode(S = 1000, I = 1, tmax = 1000,
-  m = 0.02, n = 0.02, p = 0.005, b = 0.3, gE = 0.1, gI = 0.02,
-  w = 0)
+simulate_maternalimmunity_ode(
+  S = 1000,
+  I = 1,
+  tmax = 1000,
+  m = 0.02,
+  n = 0.02,
+  p = 0.005,
+  b = 0.3,
+  gE = 0.1,
+  gI = 0.02,
+  w = 0
+)
 }
 \arguments{
 \item{S}{: initial number of susceptible individuals : numeric}

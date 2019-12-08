@@ -4,8 +4,16 @@
 \alias{simulate_sir_ode}
 \title{Basic SIR model}
 \usage{
-simulate_sir_ode(S = 1000, I = 1, R = 0, b = 0.002, g = 1,
-  tstart = 0, tfinal = 100, dt = 0.1)
+simulate_sir_ode(
+  S = 1000,
+  I = 1,
+  R = 0,
+  b = 0.002,
+  g = 1,
+  tstart = 0,
+  tfinal = 100,
+  dt = 0.1
+)
 }
 \arguments{
 \item{S}{: starting value for Susceptible : numeric}

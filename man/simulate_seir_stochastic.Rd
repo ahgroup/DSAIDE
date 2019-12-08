@@ -4,9 +4,19 @@
 \alias{simulate_seir_stochastic}
 \title{Stochastic simulation of an SEIR-type model}
 \usage{
-simulate_seir_stochastic(S = 1000, I = 10, bE = 0, bI = 0.001,
-  gE = 0.5, gI = 0.5, w = 0, m = 0, n = 0, tmax = 100,
-  rngseed = 100)
+simulate_seir_stochastic(
+  S = 1000,
+  I = 10,
+  bE = 0,
+  bI = 0.001,
+  gE = 0.5,
+  gI = 0.5,
+  w = 0,
+  m = 0,
+  n = 0,
+  tmax = 100,
+  rngseed = 100
+)
 }
 \arguments{
 \item{S}{: initial number of susceptible hosts : numeric}

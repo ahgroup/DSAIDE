@@ -5,9 +5,23 @@
 \title{Simulation of a compartmental infectious disease transmission model illustrating 
 the impact of ID surveillance}
 \usage{
-simulate_idsurveillance_ode(S = 1000, P = 1, tmax = 200, bP = 0,
-  bA = 0, bI = 0.001, gP = 0.5, f = 0, d = 0, w = 0, m = 0,
-  n = 0, rP = 0, rA = 0, rI = 0.5)
+simulate_idsurveillance_ode(
+  S = 1000,
+  P = 1,
+  tmax = 200,
+  bP = 0,
+  bA = 0,
+  bI = 0.001,
+  gP = 0.5,
+  f = 0,
+  d = 0,
+  w = 0,
+  m = 0,
+  n = 0,
+  rP = 0,
+  rA = 0,
+  rI = 0.5
+)
 }
 \arguments{
 \item{S}{: initial number of susceptible hosts : numeric}

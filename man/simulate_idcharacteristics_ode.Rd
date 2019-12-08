@@ -4,9 +4,19 @@
 \alias{simulate_idcharacteristics_ode}
 \title{Simulation of an infectious disease transmission model with multiple compartments}
 \usage{
-simulate_idcharacteristics_ode(S = 1000, P = 1, bP = 0, bA = 0,
-  bI = 0.001, gP = 0.5, gA = 0.5, gI = 0.5, f = 0, d = 0,
-  tmax = 300)
+simulate_idcharacteristics_ode(
+  S = 1000,
+  P = 1,
+  bP = 0,
+  bA = 0,
+  bI = 0.001,
+  gP = 0.5,
+  gA = 0.5,
+  gI = 0.5,
+  f = 0,
+  d = 0,
+  tmax = 300
+)
 }
 \arguments{
 \item{S}{: initial number of susceptible hosts : numeric}

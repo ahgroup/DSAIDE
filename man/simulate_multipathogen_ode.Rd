@@ -4,9 +4,20 @@
 \alias{simulate_multipathogen_ode}
 \title{Simulation of a compartmental infectious disease transmission model with 2 types of pathogens}
 \usage{
-simulate_multipathogen_ode(S = 1000, I1 = 1, I2 = 0, I12 = 0,
-  b1 = 0.001, b2 = 0, b12 = 0, g1 = 1, g2 = 1, g12 = 1,
-  a = 0, tmax = 120)
+simulate_multipathogen_ode(
+  S = 1000,
+  I1 = 1,
+  I2 = 0,
+  I12 = 0,
+  b1 = 0.001,
+  b2 = 0,
+  b12 = 0,
+  g1 = 1,
+  g2 = 1,
+  g12 = 1,
+  a = 0,
+  tmax = 120
+)
 }
 \arguments{
 \item{S}{: initial number of susceptible hosts  : numeric}

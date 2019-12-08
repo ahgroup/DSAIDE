@@ -4,9 +4,22 @@
 \alias{simulate_vectortransmission_ode}
 \title{Vector transmission model}
 \usage{
-simulate_vectortransmission_ode(Sh = 1000, Ih = 1, Rh = 0,
-  Sv = 1000, Iv = 1, b1 = 0.002, b2 = 0.002, g = 1, w = 0.1,
-  m = 100, n = 0.1, tstart = 0, tfinal = 100, dt = 0.1)
+simulate_vectortransmission_ode(
+  Sh = 1000,
+  Ih = 1,
+  Rh = 0,
+  Sv = 1000,
+  Iv = 1,
+  b1 = 0.002,
+  b2 = 0.002,
+  g = 1,
+  w = 0.1,
+  m = 100,
+  n = 0.1,
+  tstart = 0,
+  tfinal = 100,
+  dt = 0.1
+)
 }
 \arguments{
 \item{Sh}{: starting value for Susceptible hosts : numeric}

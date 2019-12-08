@@ -5,9 +5,22 @@
 \title{Simulation of a compartmental infectious disease transmission model illustrating 
 parasite infection dynamics with intermediate hosts}
 \usage{
-simulate_parasites_ode(Sh = 1000, Ih = 1, E = 1, Si = 0, Ii = 0,
-  tmax = 120, bi = 0.01, be = 0.01, m = 0, n = 0, g = 0,
-  w = 0, p = 0.01, c = 0.001)
+simulate_parasites_ode(
+  Sh = 1000,
+  Ih = 1,
+  E = 1,
+  Si = 0,
+  Ii = 0,
+  tmax = 120,
+  bi = 0.01,
+  be = 0.01,
+  m = 0,
+  n = 0,
+  g = 0,
+  w = 0,
+  p = 0.01,
+  c = 0.001
+)
 }
 \arguments{
 \item{Sh}{: initial number of susceptible definitive hosts : numeric}

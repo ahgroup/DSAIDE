@@ -4,11 +4,28 @@
 \alias{simulate_fit_flu}
 \title{Fitting a SIR-type model to flu data}
 \usage{
-simulate_fit_flu(S = 5e+06, I = 1, D = 0, b = 1e-06,
-  blow = 1e-10, bhigh = 0.1, bsim = 1e-04, g = 1, glow = 0.001,
-  ghigh = 100, gsim = 1, f = 0.01, flow = 1e-05, fhigh = 0.5,
-  fsim = 0.01, noise = 0, iter = 100, solvertype = 1,
-  usesimdata = 0, logfit = 0)
+simulate_fit_flu(
+  S = 5e+06,
+  I = 1,
+  D = 0,
+  b = 1e-06,
+  blow = 1e-10,
+  bhigh = 0.1,
+  bsim = 1e-04,
+  g = 1,
+  glow = 0.001,
+  ghigh = 100,
+  gsim = 1,
+  f = 0.01,
+  flow = 1e-05,
+  fhigh = 0.5,
+  fsim = 0.01,
+  noise = 0,
+  iter = 100,
+  solvertype = 1,
+  usesimdata = 0,
+  logfit = 0
+)
 }
 \arguments{
 \item{S}{: starting value for Susceptible : numeric}

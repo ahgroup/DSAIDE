@@ -4,9 +4,22 @@
 \alias{simulate_environmentaltransmission_ode}
 \title{Environmental Transmission model}
 \usage{
-simulate_environmentaltransmission_ode(S = 10000, I = 1, R = 0,
-  E = 0, bd = 1e-04, be = 0, m = 0, n = 0, g = 0.2, p = 0,
-  c = 10, tstart = 0, tfinal = 100, dt = 0.1)
+simulate_environmentaltransmission_ode(
+  S = 10000,
+  I = 1,
+  R = 0,
+  E = 0,
+  bd = 1e-04,
+  be = 0,
+  m = 0,
+  n = 0,
+  g = 0.2,
+  p = 0,
+  c = 10,
+  tstart = 0,
+  tfinal = 100,
+  dt = 0.1
+)
 }
 \arguments{
 \item{S}{: starting value for Susceptible : numeric}

@@ -4,10 +4,10 @@
 \name{flu1918data}
 \alias{flu1918data}
 \title{1918 Influenza mortality data}
-\format{A data frame with these variables:
+\format{A data frame/tibble with these variables:
 \describe{
-\item{Date}{Week of reporting}
-\item{Deaths}{New deaths per week per 100,000}
+\item{Date}{Week of reporting, date format}
+\item{Deaths}{New deaths in NYC per week per 100,000, numeric}
 }}
 \usage{
 flu1918data
@@ -17,7 +17,7 @@ Weekly influenza deaths per 100,000 during the 1918 pandemic for New York City.
 }
 \details{
 Data is from Supplementary Table 1 of Mills et al 2004 Nature:
-https://www.nature.com/articles/nature03063
+https://www.nature.com/articles/nature03063 
 
 See this article and citations therein for more details on the data.
 Note that only a subset of the data is present here and the data 
