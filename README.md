@@ -7,7 +7,6 @@
 [![metacran downloads](http://cranlogs.r-pkg.org/badges/grand-total/DSAIDE?color=ff69b4)](https://cran.r-project.org/package=DSAIDE)
 
 
-
 # DSAIDE
 Dynamical Systems Approach to Infectious Disease Epidemiology (Ecology/Evolution)
 

@@ -2,7 +2,7 @@ url: https://ahgroup.github.io/DSAIDE/index.html
 
 authors:
   Andreas Handel:
-    href: http://handelgroup.uga.edu/
+    href: https://www.andreashandel.com
 
 navbar:
   structure:
@@ -32,6 +32,8 @@ navbar:
       menu:
       - text: DSAIRM
       - href: https://ahgroup.github.io/DSAIRM/index.html    
+      - text: modelbuilder
+      - href: https://ahgroup.github.io/modelbuilder/index.html    
     github:
       icon: fa-github fa-lg
       href: https://github.com/ahgroup/DSAIDE
