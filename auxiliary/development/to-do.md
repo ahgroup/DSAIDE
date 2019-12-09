@@ -4,6 +4,7 @@
 * Continue implementing unit tests using the testthat package
 * Provide a 'download scenario' button, which downloads code that reproduces a given scenario.
 * Continue streamlining code base to make it more general/modular/flexible
+* Fix/finish plot function edits (see code in generate_ggplot)
 
 ## Content Improvement
 * Write/update all solutions
@@ -11,6 +12,7 @@
 * Implement further apps, see below
 * Clean up and make all model diagrams as nice as possible
 * Re-create diagrams for ID surveillance, Parasites, global warming, maternal immunity
+
 
 ## Apps to be implemented
 * More Fitting apps (e.g. those from DSAIRM)

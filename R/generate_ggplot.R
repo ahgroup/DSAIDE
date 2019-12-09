@@ -95,15 +95,15 @@ generate_ggplot <- function(res)
 
       #code variable names as factor and level them so they show up right in plot - factor is needed for plotting and text
       mylevels = unique(dat$varnames)
-      dat$varnames = factor(dat$varnames, levels = mylevels)
-
+      dat$varnames = factor(dat$varnames, levels = mylevels, ordered = TRUE)
+      
       #see if user/calling function supplied x- and y-axis transformation information
       xscaletrans <- ifelse(is.null(resnow$xscale), 'identity',resnow$xscale)
       yscaletrans <- ifelse(is.null(resnow$yscale), 'identity',resnow$yscale)
       
       #lower and upper bounds for plots, these are used if none are provided by calling function
-      lb = 1e-10;
-      ub = 1e20;
+      lb = 1e-10
+      ub = 1e20
       
       #if we want a plot on log scale, set any value in the data at or below 0 to some small number
       if (xscaletrans !='identity') {dat$xvals[dat$xvals<=0]=lb}
@@ -122,37 +122,36 @@ generate_ggplot <- function(res)
 
     
       #if the IDvar variable exists, use it for further stratification, otherwise just stratify on varnames
-	    if (is.null(dat$IDvar))
+      if (is.null(dat$IDvar))
       {
-        p1 = ggplot2::ggplot(dat, ggplot2::aes(x = xvals, y = yvals, color = varnames, linetype = varnames, shape = varnames) )   
+        p1 = ggplot2::ggplot(dat, ggplot2::aes(x = xvals) )
       }
       else
       {
-        p1 = ggplot2::ggplot(dat, ggplot2::aes(x = xvals, y = yvals, color = varnames, linetype = varnames, group = IDvar) )
+        p1 = ggplot2::ggplot(dat, ggplot2::aes(x = xvals, group = IDvar) )
       }
-
+      
       ###choose between different types of plots
       if (plottype == 'Scatterplot')
       {
-        p2 = p1 + ggplot2::geom_point( size = linesize, na.rm=TRUE) 
+        p2 = p1 + ggplot2::geom_point(data = dat, aes( y = yvals, color = varnames, shape = varnames), size = linesize, na.rm=TRUE)
       }
       if (plottype == 'Boxplot')
       {
-        p2 = p1 + ggplot2::geom_boxplot(size = linesize, na.rm=TRUE) 
+        p2 = p1 + ggplot2::geom_boxplot(data = dat, aes( y = yvals, color = varnames), size = linesize, na.rm=TRUE)
       }
       if (plottype == 'Lineplot')
       {
-        p2 = p1 + ggplot2::geom_line(size = linesize, na.rm=TRUE) 
+        p2 = p1 + ggplot2::geom_line(data = dat, aes( y = yvals, color = varnames, linetype = varnames), size = linesize, na.rm=TRUE)
       }
       if (plottype == 'Mixedplot')
       {
         #a mix of lines and points. for this, the dataframe needs to contain an extra column indicating line or point
-        p1a = p1 + ggplot2::geom_line(data = dplyr::filter(dat,style == 'line'), size = linesize) 
-        p2 = p1a + ggplot2::geom_point(data = dplyr::filter(dat,style == 'point'), size = 2.5*linesize) 
+        p1a = p1 + ggplot2::geom_line(data = dplyr::filter(dat,style == 'line'), aes( y = yvals, color = varnames, linetype = varnames), size = linesize)
+        p2 = p1a + ggplot2::geom_point(data = dplyr::filter(dat,style == 'point'), aes( y = yvals, color = varnames, shape = varnames), size = 2.5*linesize)
       }
-
-
-
+      
+      
 	 #set x-axis. no numbering/labels on x-axis for boxplots
 	 if (plottype == 'Boxplot')
       {
@@ -205,7 +204,6 @@ generate_ggplot <- function(res)
       else
       {
           p6 = p5 + ggplot2::theme(legend.position="none") + ggplot2::scale_colour_manual(values=plotpalette) 
-          
       }
 
       #modify overall theme
