@@ -13,8 +13,8 @@
 * Re-create diagrams for ID surveillance, Parasites, global warming, maternal immunity
 
 ## Apps to be implemented
-* Fitting apps from DSAIRM
-* Apps from 8515 students: ??
+* More Fitting apps (e.g. those from DSAIRM)
+* global warming app
 
 ## Advertisement
 * Make list of ID Epi and related courses, email instructors

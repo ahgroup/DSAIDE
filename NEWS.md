@@ -1,3 +1,7 @@
+# DSAIDE 0.8.3
+
+* Small improvements and bug fixes
+
 # DSAIDE 0.8.2
 
 * Added new apps, updated a few others
