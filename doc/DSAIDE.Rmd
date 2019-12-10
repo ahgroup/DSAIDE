@@ -15,8 +15,8 @@ bibliography: vignetterefs.bib
 
 
 ## Summary
-_Dynamical Systems Approaches to Infectious Disease Epidemiology (DSAIDE)_ is an R package that allows you to explore and study concepts of infectious disease epidemiology using dynamical systems models. 
-The main way of interactin with the models is through a graphical user interface. It is not necessary - though possible - to read or write computer code.
+_Dynamical Systems Approaches to Infectious Disease Epidemiology/Ecology/Evolution (DSAIDE)_ is an R package that allows you to explore and study concepts of infectious disease epidemiology (ecology/evolution) using dynamical systems models. 
+The main way of interaction with the models is through a graphical user interface. It is not necessary - though possible - to read or write computer code.
 
 The package also provides a path toward using and building your own models by relatively seamlessly moving from the graphical user interface to direct interaction with pre-written simulations all the way to modifying the underlying simulations to fit your needs. 
 
@@ -24,9 +24,7 @@ The different use cases for the package are described below.
 
 
 ## Package description
-The package consists of several simulations/apps that allow for the simulation and exploration of different topics in infectious disease epidemiology. 
-
-The underlying models are written as compartmental dynamical models, either deterministic using differential equations (deSolve package) or stochastic using a Gillespie-type approach (adaptivetau package). A graphical user interface is wrapped around each simulation/app. The graphical user interface is written using the functionality of the R Shiny package. This allows exploration of models and concepts without the need to write any code. At the same time, the package is structured in a way that should allow those interested in the actual models and learning R coding to easily move from one stage to another.
+The package consists of several simulations/apps that allow for the simulation and exploration of different topics related to infectious disease dynamics. The underlying models are written as compartmental dynamical models, either deterministic using differential equations (deSolve package) or stochastic using a Gillespie-type approach (adaptivetau package). A graphical user interface is wrapped around each simulation/app. The graphical user interface is written using the functionality of the R Shiny package. This allows exploration of models and concepts without the need to write any code. At the same time, the package is structured in a way that should allow those interested in the actual models and learning R coding to easily move from one stage to another.
 
 Each app is meant to be fully self-explanatory and contains a description of the model, a list of tasks the user could try, and further information on background reading and other resources. 
 

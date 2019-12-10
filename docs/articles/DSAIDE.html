@@ -94,7 +94,7 @@
       <h1>DSAIDE Package Tutorial</h1>
                         <h4 class="author"><a href="http://handelgroup.uga.edu">Andreas Handel</a></h4>
             
-            <h4 class="date">2019-12-09</h4>
+            <h4 class="date">2019-12-10</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ahgroup/DSAIDE/blob/master/vignettes/DSAIDE.Rmd"><code>vignettes/DSAIDE.Rmd</code></a></small>
       <div class="hidden name"><code>DSAIDE.Rmd</code></div>
@@ -106,15 +106,14 @@
 <div id="summary" class="section level2">
 <h2 class="hasAnchor">
 <a href="#summary" class="anchor"></a>Summary</h2>
-<p><em>Dynamical Systems Approaches to Infectious Disease Epidemiology (DSAIDE)</em> is an R package that allows you to explore and study concepts of infectious disease epidemiology using dynamical systems models. The main way of interactin with the models is through a graphical user interface. It is not necessary - though possible - to read or write computer code.</p>
+<p><em>Dynamical Systems Approaches to Infectious Disease Epidemiology/Ecology/Evolution (DSAIDE)</em> is an R package that allows you to explore and study concepts of infectious disease epidemiology (ecology/evolution) using dynamical systems models. The main way of interaction with the models is through a graphical user interface. It is not necessary - though possible - to read or write computer code.</p>
 <p>The package also provides a path toward using and building your own models by relatively seamlessly moving from the graphical user interface to direct interaction with pre-written simulations all the way to modifying the underlying simulations to fit your needs.</p>
 <p>The different use cases for the package are described below.</p>
 </div>
 <div id="package-description" class="section level2">
 <h2 class="hasAnchor">
 <a href="#package-description" class="anchor"></a>Package description</h2>
-<p>The package consists of several simulations/apps that allow for the simulation and exploration of different topics in infectious disease epidemiology.</p>
-<p>The underlying models are written as compartmental dynamical models, either deterministic using differential equations (deSolve package) or stochastic using a Gillespie-type approach (adaptivetau package). A graphical user interface is wrapped around each simulation/app. The graphical user interface is written using the functionality of the R Shiny package. This allows exploration of models and concepts without the need to write any code. At the same time, the package is structured in a way that should allow those interested in the actual models and learning R coding to easily move from one stage to another.</p>
+<p>The package consists of several simulations/apps that allow for the simulation and exploration of different topics related to infectious disease dynamics. The underlying models are written as compartmental dynamical models, either deterministic using differential equations (deSolve package) or stochastic using a Gillespie-type approach (adaptivetau package). A graphical user interface is wrapped around each simulation/app. The graphical user interface is written using the functionality of the R Shiny package. This allows exploration of models and concepts without the need to write any code. At the same time, the package is structured in a way that should allow those interested in the actual models and learning R coding to easily move from one stage to another.</p>
 <p>Each app is meant to be fully self-explanatory and contains a description of the model, a list of tasks the user could try, and further information on background reading and other resources.</p>
 </div>
 <div id="intended-audience-and-goal-of-the-package" class="section level2">
@@ -151,28 +150,20 @@
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw"><a href="../reference/dsaidemenu.html">dsaidemenu</a></span>()</a></code></pre></div>
 <p>If successful, you should see a graphical menu open in your browser that looks like this:</p>
 <div class="figure">
-<img src="mainmenu.png" alt="Main menu of the DSAIDE package." width="421"><p class="caption">
-Main menu of the DSAIDE package.
-</p>
+<img src="mainmenu.png" alt="Main menu of the DSAIDE package."><p class="caption">Main menu of the DSAIDE package.</p>
 </div>
 <p>From the main menu, you can choose the different apps corresponding to different modeling topics and scenarios. Each app has the inputs you can set on the left and the outputs (figures and text) on the right. This is an example of one of the apps:</p>
 <div class="figure">
-<img src="appexample.png" alt="Screenshot of the input-output elements of one of the apps." width="671"><p class="caption">
-Screenshot of the input-output elements of one of the apps.
-</p>
+<img src="appexample.png" alt="Screenshot of the input-output elements of one of the apps."><p class="caption">Screenshot of the input-output elements of one of the apps.</p>
 </div>
 <p>As seen in the figure above, below each app are four tabs with different sections providing information and instruction. The <em>Overview</em> and <em>Further Information</em> tabs provide a brief introduction and pointers to further exploration options, respectively.</p>
 <p>The two most important tabs are the <em>Model</em> and <em>What to do</em> tabs. The <em>Model</em> tab gives a detailed description of the model underlying the app, shows the model diagram and equations, and provides any other further information needed to understand what is going on. The following figure shows an example of this for one of the apps.</p>
 <div class="figure">
-<img src="modelexample.png" alt="Screenshot of the _Model_ section of one of the apps." width="783"><p class="caption">
-Screenshot of the <em>Model</em> section of one of the apps.
-</p>
+<img src="modelexample.png" alt="Screenshot of the Model section of one of the apps."><p class="caption">Screenshot of the <em>Model</em> section of one of the apps.</p>
 </div>
 <p>The <em>What to do</em> tab contains a list of suggested tasks you might want to go through. By doing those tasks, you will learn the topic a specific app is meant to teach. The following figure shows an example for part of one of those <em>What to do</em> sections for one of the apps.</p>
 <div class="figure">
-<img src="whattodoexample.png" alt="Screenshot of the _What to do_ section of one of the apps." width="773"><p class="caption">
-Screenshot of the <em>What to do</em> section of one of the apps.
-</p>
+<img src="whattodoexample.png" alt="Screenshot of the What to do section of one of the apps."><p class="caption">Screenshot of the <em>What to do</em> section of one of the apps.</p>
 </div>
 <p>Once you finished exploring a specific app, you can return to the main menu. Eventually, you can exit back to the <code>R</code> console by clicking the <em>Exit</em> button. You will not need to read or write any code at this level of exploration and learning. If an when you want to learn more, you can proceed to level 2.</p>
 </div>

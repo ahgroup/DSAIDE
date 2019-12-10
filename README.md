@@ -32,6 +32,8 @@ For a quick introduction to the package, step-by-step instructions on getting st
 
 ## Further information
 * [I published a paper describing the package](https://doi.org/10.1371/journal.pcbi.1005642). The paper is by now somewhat outdated whith regards to the details of the package, but it describes the overall idea and context well.  
+* The [package tutorial (vignette)](https://ahgroup.github.io/DSAIDE/articles/DSAIDE.html) contains up-to-date and detailed instructions on the different ways the package can be used.
+* If you want to take a deeper look at the package, see [this Markdown file](https://github.com/ahgroup/DSAIDE/blob/master/inst/docsfordevelopers/documentation.md) which provides further information on the details of the package structure. (If you plan to develop new apps, or make other substantial contributions, it is best to get in touch with me first.)
 * A 'companion' package to this one, called Dynamical Systems Approaches for Immune Respone Modeling (DSAIRM), focuses on models for analyzing with-host infection dynamics. It has the same structure as DSAIDE. [See the DSAIRM site for more information.](https://ahgroup.github.io/DSAIRM)
 * I have solutions (in progress) to most of the 'What to do' tasks for the different apps. If you are an instructor using this package as part of a class, email me if you are interested in having access to these solutions.
 * I heard that DSAIDE doesn't seem to work quite right using Docker. This is likely irrelevant for almost all users.

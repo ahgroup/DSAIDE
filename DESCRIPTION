@@ -51,7 +51,7 @@ Suggests:
     rmarkdown (>= 1.10),
     roxygen2,
     testthat
-RoxygenNote: 7.0.0
+RoxygenNote: 7.0.2
 VignetteBuilder: knitr
 URL: https://ahgroup.github.io/DSAIDE, https://github.com/ahgroup/DSAIDE
 BugReports: https://github.com/ahgroup/DSAIDE/issues
