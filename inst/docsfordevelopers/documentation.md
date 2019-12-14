@@ -1,13 +1,21 @@
-# Documentation for working on the DSAIDE package 
+# Documentation for working on the DSAIDE/DSAIRM packages
 
-## Package structure 
+**The DSAIDE and DSAIRM packages are very similar in structure, so the text below applies to both. Sometimes I write DSAIDE, sometimes DSAIRM. Just substitute with whichever package you work on.**
+
+## Package structure/use 
+* The main use case is the user calling the dsaidemenu() function. This function calls a Shiny app (in the /inst/DSAIDE folder), which is the main user interface. The Shiny app in turn uses the various generate_ functions to build the UI. Users can select models/apps, which are each encoded by one or more simulate_ function. 
+* An alternative use case is for users to write code that directly calls the simulate_ functions.
+* The simulate_ functions can also be downloaded and modified by the user.
+* The package documentation contains more information.
+
+## Package organization
 
 ### Main functions
 * Folder /R contains the main R functions, i.e. the simulattors and various helper functions. 
-* All simulators, which are meant to be called by advanced users start with simulate_. 
-* The functions/files generate_text, generate_ggplot and generate_plotly can take results returned from the simulator functions and generate plots. 
-* All other functions/files are only needed for the package/UI to work and are not meant to be directly accessed by users.
-* While some of the functions are meant to be used as part of a shiny app, none deal with reactive content, all inputs and outputs are non-reactive objects.
+* All simulators, which can be called directly by advanced users start with simulate_. 
+* The functions/files generate_text, generate_ggplot and generate_plotly can take results returned from the simulator functions and generate plots. Users might want to use those combined with running the simulate_ functions. 
+* All other functions/files are only needed for the package/UI to work. They are public/exported, but are generally not meant to be directly accessed by users.
+* While some of the functions are meant to be used as part of a shiny app, none directly handle reactive onjects, all inputs and outputs are non-reactive objects/variables.
 
 ### App materials
 * The /inst folder contains several subfolders: 
@@ -15,12 +23,12 @@
  * /docsfordevelopers sub-folder contains this file
   * /DSAIDE subfolder contains the main app.R Shiny app. It also includes a css file for styling. A subfolder created by rsconnect during package upload to shinyapps.io might also be present. 
   * /media sub-folder contains figures and a bib file used as part of the documentation (i.e. the Rmd files). 
-  * /simulatorfunctions subfolder contains the R code for all simulator functions. The functions in this folder are copies of the simulatorfunctions in the /R folder. They are used by the package to create the shiny UI (see the generate_shinyinput function). They are also contained in a zip folder which can be downloaded by users for easy access and editing.
+  * /simulatorfunctions subfolder contains the R code for all simulator functions. The functions in this folder are copies of the simulatorfunctions in the /R folder. They are used by the package to create the shiny UI (see the generate_shinyinput function). They are also contained in a zip folder which can be downloaded by users for easy access and editing. Before a new version of the package is released, it is important to ensure that the simulator_ functions in this subfolder and the zip file are up-to-date and correspond to the files in the /R folder.
 
 
 ### Other folders
 
-* /auxiliary contains related resources that are not used/needed for package use or build
+* /auxiliary contains subfoldes with related resources that are not used/needed for the package use/build but are useful (to the package authors) for maintenance/development/advertising/tracking of the package
 * /data contains data used as part of the R package. The data files are documented in data.R in the /R folder.
 * /doc contains the vignettes, this folder should not be edited, see below.
 * /docs contains the package website created by the pkgdown package. Rebuild with pkgdown::build_site(). Don't edit manually.
