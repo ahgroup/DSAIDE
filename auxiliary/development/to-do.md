@@ -33,4 +33,3 @@
 * Contribute code to Epirecipes? http://epirecip.es/
 * Find all classes/instructors who could use package.
 * Make videos for levels 1/2/3 for packages (get camera back from OOL)
-* Use REU student to help with package development and dissemination
