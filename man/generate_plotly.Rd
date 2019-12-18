@@ -2,7 +2,7 @@
 % Please edit documentation in R/generate_plotly.R
 \name{generate_plotly}
 \alias{generate_plotly}
-\title{A helper function that takes result from the simulators and produces plots}
+\title{A helper function that takes simulation results and produces plotly plots}
 \usage{
 generate_plotly(res)
 }

@@ -1,4 +1,4 @@
-#' @title A helper function that takes result from the simulators and produces plots
+#' @title A helper function that takes simulation results and produces plotly plots
 #'
 #' @description This function generates plots to be displayed in the Shiny UI.
 #' This is a helper function. This function processes results returned from the simulation, supplied as a list.
@@ -152,7 +152,7 @@ generate_plotly <- function(res)
         }
         else
         {
-          
+
           py2 <- plotly::add_trace(py1, x = ~xvals ,y = ~yvals, type = 'scatter', mode = 'lines', color = ~varnames, colors = "Set1", line = list( width = linesize))
         }
       }

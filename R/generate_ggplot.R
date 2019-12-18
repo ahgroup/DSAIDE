@@ -1,4 +1,4 @@
-#' @title A helper function that takes result from the simulators and produces plots
+#' @title A helper function that takes simulation results and produces ggplot plots
 #'
 #' @description This function generates plots to be displayed in the Shiny UI.
 #' This is a helper function. This function processes results returned from the simulation, supplied as a list.
@@ -46,9 +46,9 @@ generate_ggplot <- function(res)
     # http://www.cookbook-r.com/Graphs/Colors_(ggplot2)/#a-colorblind-friendly-palette
     # I added 3 more colors at the end to have 12, enough for all simulations
     # the ones I added are likely not color-blind friendly but rarely used in the app
-    #cbfpalette <- c("#000000", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")  
+    #cbfpalette <- c("#000000", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
     cbfpalette <- c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7", "#00523B","#D5C711","#0019B2")
-    
+
     #nplots contains the number of plots to be produced.
     nplots = length(res) #length of list
 
@@ -96,15 +96,15 @@ generate_ggplot <- function(res)
       #code variable names as factor and level them so they show up right in plot - factor is needed for plotting and text
       mylevels = unique(dat$varnames)
       dat$varnames = factor(dat$varnames, levels = mylevels, ordered = TRUE)
-      
+
       #see if user/calling function supplied x- and y-axis transformation information
       xscaletrans <- ifelse(is.null(resnow$xscale), 'identity',resnow$xscale)
       yscaletrans <- ifelse(is.null(resnow$yscale), 'identity',resnow$yscale)
-      
+
       #lower and upper bounds for plots, these are used if none are provided by calling function
       lb = 1e-10
       ub = 1e20
-      
+
       #if we want a plot on log scale, set any value in the data at or below 0 to some small number
       if (xscaletrans !='identity') {dat$xvals[dat$xvals<=0]=lb}
       if (yscaletrans !='identity') {dat$yvals[dat$yvals<=0]=lb}
@@ -120,7 +120,7 @@ generate_ggplot <- function(res)
       #set line size as given by app or to 1.5 by default
       linesize = ifelse(is.null(resnow$linesize), 1.5, resnow$linesize)
 
-    
+
       #if the IDvar variable exists, use it for further stratification, otherwise just stratify on varnames
       if (is.null(dat$IDvar))
       {
@@ -130,7 +130,7 @@ generate_ggplot <- function(res)
       {
         p1 = ggplot2::ggplot(dat, ggplot2::aes(x = xvals, group = IDvar) )
       }
-      
+
       ###choose between different types of plots
       if (plottype == 'Scatterplot')
       {
@@ -150,8 +150,8 @@ generate_ggplot <- function(res)
         p1a = p1 + ggplot2::geom_line(data = dplyr::filter(dat,style == 'line'), aes( y = yvals, color = varnames, linetype = varnames), size = linesize)
         p2 = p1a + ggplot2::geom_point(data = dplyr::filter(dat,style == 'point'), aes( y = yvals, color = varnames, shape = varnames), size = 2.5*linesize)
       }
-      
-      
+
+
 	 #set x-axis. no numbering/labels on x-axis for boxplots
 	 if (plottype == 'Boxplot')
       {
@@ -175,13 +175,13 @@ generate_ggplot <- function(res)
       }
 
       #modify overall theme
-      p5 = p4 + ggplot2::theme_bw(base_size = 18) 
+      p5 = p4 + ggplot2::theme_bw(base_size = 18)
 
       #default palette is set, overwritten if user provided
       plotpalette = cbfpalette
       if (!is.null(resnow$palette)) {plotpalette = resnow$palette }
-      
-            
+
+
       #do legend if TRUE or not provided
       if (is.null(resnow$makelegend) || resnow$makelegend)
       {
@@ -198,17 +198,17 @@ generate_ggplot <- function(res)
         p5a = p5 + ggplot2::theme(legend.key.width = grid::unit(3, "line"))
         p5b = p5a + ggplot2::theme(legend.position = legendlocation)
         p5c = p5b + ggplot2::scale_linetype_discrete(name = legendtitle) + ggplot2::scale_shape_discrete(name = legendtitle)
-        p5d = p5c + ggplot2::scale_colour_manual(values=plotpalette, name = legendtitle) 
+        p5d = p5c + ggplot2::scale_colour_manual(values=plotpalette, name = legendtitle)
         p6 = p5d + ggplot2::guides(fill=ggplot2::guide_legend(title.position="top", nrow=3, byrow=TRUE))
       }
       else
       {
-          p6 = p5 + ggplot2::theme(legend.position="none") + ggplot2::scale_colour_manual(values=plotpalette) 
+          p6 = p5 + ggplot2::theme(legend.position="none") + ggplot2::scale_colour_manual(values=plotpalette)
       }
 
       #modify overall theme
       pfinal = p6
-      
+
       allplots[[n]] = pfinal
 
     } #end loop over individual plots
