@@ -18,10 +18,13 @@
 * More Fitting apps (e.g. those from DSAIRM)
 * global warming app
 
-## Advertisement
+## Documentation / Outreach / Advertisement
 * Make list of ID Epi and related courses, email instructors
 * Send annoucements at suitable times
 * Create more docs
+* Find all classes/instructors who could use package.
+* Make videos for levels 1/2/3 for packages 
+* Write/update all solutions
 
 
 ## General thoughts and comments
@@ -29,7 +32,7 @@
 * Get best practices badge: https://bestpractices.coreinfrastructure.org/en
 * Maybe submit for Ropensci review: https://github.com/ropensci/onboarding
 * Add/cite/connect to Ottar's book and package: https://github.com/objornstad/epimdr
-* Hashtags on twitter when promoting app: #rstats, #dynamicalsystems #infectiousdisease #epidemiology #EpiTwitter
+* Hashtags on twitter when promoting DSAIDE app: #rstats, #dynamicalsystems #infectiousdisease #epidemiology #EpiTwitter
 * Contribute code to Epirecipes? http://epirecip.es/
 * Find all classes/instructors who could use package.
 * Make videos for levels 1/2/3 for packages (get camera back from OOL)
