@@ -90,7 +90,7 @@ generate_ggplot <- function(res)
       {
         #using basic reshape function to reformat data
         dat = stats::reshape(rawdat, varying = colnames(rawdat)[-1], v.names = 'yvals', timevar = "varnames", times = colnames(rawdat)[-1], direction = 'long', new.row.names = NULL)
-		dat$id <- NULL
+		    dat$id <- NULL
       }
 
       #code variable names as factor and level them so they show up right in plot - factor is needed for plotting and text
@@ -152,16 +152,16 @@ generate_ggplot <- function(res)
       }
 
 
-	 #set x-axis. no numbering/labels on x-axis for boxplots
-	 if (plottype == 'Boxplot')
-      {
-        p3 = p2 + ggplot2::scale_x_continuous(trans = xscaletrans, limits=c(xmin,xmax), breaks = NULL, labels = NULL)
-        p3 = p3 + ggplot2::labs(x = NULL)
-        }
+  	 #set x-axis. no numbering/labels on x-axis for boxplots
+  	 if (plottype == 'Boxplot')
+     {
+          p3 = p2 + ggplot2::scale_x_continuous(trans = xscaletrans, limits=c(xmin,xmax), breaks = NULL, labels = NULL)
+          p3 = p3 + ggplot2::labs(x = NULL)
+      }
       else
       {
-        p3 = p2 + ggplot2::scale_x_continuous(trans = xscaletrans, limits=c(xmin,xmax))
-        if (!is.null(resnow$xlab)) { p3 = p3 + ggplot2::xlab(resnow$xlab) }
+          p3 = p2 + ggplot2::scale_x_continuous(trans = xscaletrans, limits=c(xmin,xmax))
+          if (!is.null(resnow$xlab)) { p3 = p3 + ggplot2::xlab(resnow$xlab) }
       }
 
       #apply y-axis and if provided, label
@@ -195,17 +195,21 @@ generate_ggplot <- function(res)
         legendtitle = ifelse(is.null(resnow$legendtitle), "Variables", resnow$legendtitle)
 
         p5a = p5 + ggplot2::guides(col = ggplot2::guide_legend(nrow=2, byrow=TRUE,title.position = 'left'))
-        #p6 = p5d + ggplot2::guides(fill=ggplot2::guide_legend(title.position="top", nrow=3, byrow=TRUE))
+        #p5a = p5 + ggplot2::guides(fill=ggplot2::guide_legend(title.position="top", nrow=3, byrow=TRUE))
         p5b = p5a + ggplot2::theme(legend.position = legendlocation) #default is top
         p5c = p5b + ggplot2::theme(legend.key.width = grid::unit(3, "line")) #line thickness
-        if (plottype != 'Mixedplotx')
+
+        if (plottype != 'Mixedplot')
         {
           nvars = length(unique(dat$varnames))
           p5d = p5c + ggplot2::scale_colour_manual(name = legendtitle, values=plotpalette[1:nvars]) #color for each variable
-          p5e = p5d + ggplot2::scale_linetype_manual(values = c(1:nvars) ) #line type for each variable
-          p5f = p5e + ggplot2::scale_shape_manual(values = 15 + c(1:nvars)) #symbol type for symbols
+          #p5e = p5d + ggplot2::scale_linetype_manual(name = legendtitle, values = c(1:nvars) ) #line type for each variable
+          #p5f = p5e + ggplot2::scale_shape_manual(name = legendtitle, values = 15 + c(1:nvars)) #symbol type for symbols
+          #p5d = p5c + ggplot2::scale_colour_discrete(name = legendtitle) #color for each variable
+          p5e = p5d + ggplot2::scale_linetype_discrete(name = legendtitle) #line type for each variable
+          p5f = p5e + ggplot2::scale_shape_discrete(name = legendtitle) #symbol type for symbols
         }
-        if (plottype == 'Mixedplotx')
+        if (plottype == 'Mixedplot')
         {
           #some trickery to set legend right for combined line and symbol
           #adapted from here:
@@ -213,10 +217,12 @@ generate_ggplot <- function(res)
           # Compute the number of types and methods
           npoints = length(unique(dplyr::filter(dat,style == 'point')$varnames))
           nlines = length(unique(dplyr::filter(dat,style == 'line')$varnames))
-          p5f = p5c + ggplot2::scale_colour_manual(name = legendtitle, values=plotpalette[1:(nlines+npoints)]) #color for each variable
-          p5e = p5d + ggplot2::scale_linetype_manual(name = legendtitle, values = c(1:nlines, rep(NA,npoints)) )
-          p5f = p5e + ggplot2::scale_shape_manual(name = legendtitle, values = c(rep(NA,nlines), 15 + c(1:npoints)) )
-          browser()
+          #p5f=p5c
+          p5d = p5c + ggplot2::scale_colour_manual(name = legendtitle, values=plotpalette[1:(nlines+npoints)]) #color for each variable
+          p5e = p5d + ggplot2::scale_linetype_discrete(name = legendtitle) #line type for each variable
+          p5f = p5e + ggplot2::scale_shape_discrete(name = legendtitle) #symbol type for symbols
+          #p5e = p5d + ggplot2::scale_linetype_manual(name = legendtitle, values = c(1:nlines, rep(NA,npoints)) )
+          #p5f = p5e + ggplot2::scale_shape_manual(name = legendtitle, values = c(rep(NA,nlines), 15 + c(1:npoints)) )
         }
         p6 = p5f
 
