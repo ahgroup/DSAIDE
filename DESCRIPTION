@@ -1,7 +1,7 @@
 Package: DSAIDE
 Type: Package
 Title: Dynamical Systems Approach to Infectious Disease Epidemiology (Ecology/Evolution)
-Description: A package for exploring simulation models (apps) of various infectious disease transmission dynamics scenarios.
+Description: Exploration of simulation models (apps) of various infectious disease transmission dynamics scenarios.
     The purpose of the package is to help individuals learn 
     about infectious disease epidemiology (ecology/evolution) from a dynamical systems perspective.
     All apps include explanations of the underlying models and instructions on what to do with the models. 
