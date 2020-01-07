@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
 
-<title>Maternal Immunity</title>
+<title>Maternal immunity</title>
 
 
 
@@ -30,13 +30,13 @@
 
 
 
-<h1 class="title toc-ignore">Maternal Immunity</h1>
+<h1 class="title toc-ignore">Maternal immunity</h1>
 
 
 
 <div id="shinytab1" class="section level2">
 <h2>Overview</h2>
-<p>This app will teach you about the concept of passive immunity through the utilization of an MSEIR type model. It will also show you how variable population size can affect disease dynamics. You can read more in-depth information about the model in the “Model tab”. Tasks that will help you understand the model and concept are present in the “What to do” tab&quot;.</p>
+<p>This app will teach you about the concept of passive immunity through the utilization of an MSEIR type model. It will also show you how variable population size can affect disease dynamics. You can read more in-depth information about the model in the “Model tab”. Tasks that will help you understand the model and concept are present in the “What to do” tab.</p>
 </div>
 <div id="shinytab2" class="section level2">
 <h2>The Model</h2>
@@ -55,8 +55,8 @@
 <ul>
 <li>Newborns either enter the maternally protected (M) compartment or the susceptible (S) compartment based on the status of the mother. Newborns of susceptible mothers enter the S compartment at a flow of <span class="math inline">\(mS\)</span>, where <span class="math inline">\(m\)</span> is the birth rate. All other newborns enter the M compartment at a flow of <span class="math inline">\(mR\)</span>, where R represents the recovered individuals. Note that the total population size is dependent on the birth rate (<span class="math inline">\(m\)</span>) and death rate (<span class="math inline">\(n\)</span>).</li>
 <li>Individuals that are protected by maternal antibodies move into the S compartment at a flow determined by the length of maternal protection. In this model, this rate is represented by <span class="math inline">\(p\)</span>.</li>
-<li>Susceptible individuals move from the S compartment to the exposed (E) compartment at a flow dependent on the contact rate of the population, <span class="math inline">\(b_E\)</span>. Individuals in the E compartment are infected with the disease, but not yet infectious to other individuals.</li>
-<li>Exposed individuals stay in the E compartment during the latent period ($b_I) of the disease and are moved out of the E compartment at a flow of <span class="math inline">\(b_I E\)</span>.</li>
+<li>Susceptible individuals move from the S compartment to the exposed (E) compartment at a flow dependent on the contact rate of the population, <em>b</em>. Individuals in the E compartment are infected with the disease, but not yet infectious to other individuals.</li>
+<li>Exposed individuals stay in the E compartment during the latent period (<span class="math inline">\(b_I\)</span>) of the disease and are moved out of the E compartment at a flow of <em>gE</em> .</li>
 <li>After individuals enter the infected/infectious (I) compartment, the rate at which they move out of this compartment is dependent on the recovery rate of the disease (<span class="math inline">\(g\)</span>). Individuals move into the recovered (R) compartment at a flow of <span class="math inline">\(g R\)</span>. The waning immunity rate is defined by <span class="math inline">\(w\)</span>. If <span class="math inline">\(w &gt; 0\)</span> then the model turns into an MSEIRS model where recovered individuals flow into the S compartment at a rate of <span class="math inline">\(w\)</span>.</li>
 <li>Individuals who have died move out of each compartment at a rate <span class="math inline">\(n\)</span>.</li>
 </ul>
@@ -90,35 +90,35 @@ Flow diagram for this model.
 <li>Set the death rate, <em>n</em>, so that it corresponds with an average lifespan of 50 years.</li>
 <li>Set the birth rate, <em>m</em>, so that it is equal to the calculated death rate.</li>
 <li>Set the passive immunity rate, <em>p</em>, so that maternal antibodies wear off on average in 6 months.</li>
-<li>Set the contact rate, <span class="math inline">\(b_E\)</span>, to 0.3 and the latent period rate, <span class="math inline">\(b_I\)</span>, so that it corresponds to an average latent period of 14 days.</li>
-<li>Set the rate of recovery, <em>g</em>, so that it corresponds to an average recovery period of 25 days.</li>
-<li>Set the waning immunity rate to 0. This would be applicable for an infection that confers permanent immunity, like measles or rumps.</li>
+<li>Set the contact rate, <em>b</em>, to 0.3 and the latent period rate, <em>gE</em>, so that it corresponds to an average latent period of 14 days.</li>
+<li>Set the rate of recovery, <em>gI</em>, so that it corresponds to an average recovery period of 25 days.</li>
+<li>Set the waning immunity rate to 0. This would be applicable for an infection that confers permanent immunity, like measles or mumps.</li>
 </ul>
-<p>Now run the simulation. Make sure that an outbreak occurs. What can you observe from the results? Make sure to take note of the relationship between the M population and the S population. Also make note of the final number of infecteds.</p>
+<p>Now run the simulation. Make sure that an outbreak occurs. What can you observe from the results? Make sure to take note of the relationship between the M population and the S population. Also make note of the final number of infected.</p>
 </div>
 <div id="task-2" class="section level3">
 <h3>Task 2</h3>
-<p>Run the simulation with the same parameters as in Task 1, except this time run it for 1200 days to observe the long term dynamics at place. What do you notice? Does the population reach steady state? What does this say about the dynamics at place?</p>
+<p>Run the simulation with the same parameters as in Task 1, except this time run it for 1200 days to observe the long term dynamics of the model. What do you notice? Does the population reach steady state? What does this say about the dynamics at place?</p>
 </div>
 <div id="task-3" class="section level3">
 <h3>Task 3</h3>
 <p>Sometimes it is not appropriate to assume that a population will be constant over a period of time. Here, we will observe what kind of effect an exponentially increasing population would have on the dynamics of the MSEIR model.</p>
 <ul>
-<li>Set the parameters equal to the values that they were in Task 1.</li>
-<li>Change the birth rate, m, to 0.025.</li>
-<li>Change the contact rate, <span class="math inline">\(b_E\)</span>, to 0.75.</li>
+<li>Set the parameters equal to the values that they were in Task 1, set <em>tmax</em>=350.</li>
+<li>Change the birth rate, <em>m</em>, to 0.025.</li>
+<li>Change the contact rate, <em>b</em>, to 0.75.</li>
 </ul>
-<p>Compare the effects of an increasing population to what you saw in Task 1. How does the increasing population affect the M population and the S population. Does it appear that this is an endemic disease?</p>
+<p>Compare the effects of an increasing population to what you saw in Task 1. How does the increasing population affect the <strong>M</strong> population and the <strong>S</strong> population? Does the disease still appear to be endemic?</p>
 </div>
 <div id="task-4" class="section level3">
 <h3>Task 4</h3>
 <p>Now we will compare the effects of a decreasing population on disease dynamics with an MSEIR model.</p>
 <ul>
-<li>Set the parameters equal to the the values that they were in Task 1.</li>
-<li>Change the death rate to 0.0209.</li>
-<li>Change the contact rate, <span class="math inline">\(b_E\)</span>, to 0.75.</li>
+<li>Set the parameters equal to the the values that they were in Task 1, set <em>tmax</em>=350.</li>
+<li>Change the death rate, <em>n</em>, to 0.0209.</li>
+<li>Change the contact rate, <em>b</em>, to 0.75.</li>
 </ul>
-<p>How do these results compare to those in Task 3. What compartments are most affected by the decreasing population?</p>
+<p>How do these results compare to those in Task 3? Which compartments are most affected by the decreasing population?</p>
 </div>
 <div id="task-5" class="section level3">
 <h3>Task 5</h3>
@@ -127,13 +127,19 @@ Flow diagram for this model.
 <li>Set the simulation to run for 2000 days.</li>
 <li>Start with an initial susceptible population, <span class="math inline">\(S_0\)</span>, of 1000, and 1 initial infected and symptomatic host.</li>
 <li>Set the death rate, <em>n</em>, and birth rate, <em>m</em>, to 0.02.</li>
-<li>Set <em>p</em> to 0.0041, <span class="math inline">\(b_I\)</span> to 0.17, and <em>g</em> to 0.238. Think about what these rates mean about the biology that is occurring here.</li>
-<li>Keep <em>w</em> at 0 for now. Play around with the <span class="math inline">\(b_E\)</span> parameter. Find a level for <span class="math inline">\(b_E\)</span> where there are multiple peaks in the I compartment over the 2000 days. What is occurring in the other compartments to allow for these peaks?</li>
+<li>Set <em>p</em> to 0.0041, <em>gE</em> to 0.17, and <em>gI</em> to 0.238. Think about what these rates mean about the biology that is occurring here.</li>
+<li>Keep <em>w</em> at 0 for now. Play around with the <em>b</em> parameter. Find a level for <em>b</em> where there are multiple peaks in the I compartment over the 2000 days. What is occurring in the other compartments to allow for these peaks?</li>
 </ul>
 </div>
 <div id="task-6" class="section level3">
 <h3>Task 6</h3>
-<p>Set the simulation to run with the same parameters used in Task 5, including the <span class="math inline">\(b_E\)</span> values that was used. Adjust the value for the waning immunity parameter, <em>w</em>. What do you observe? What compartments are especially affected by increasing this parameter to &gt; 0? Hint: you will likely need to decrease the <em>tmax</em> parameter.</p>
+<p>Set <em>tmax</em> = 450, then run the simulation with the same parameters used in Task 5, including the <em>b</em> value that lead to secondary outbreaks. If the seconday outbreaks not still occuring adjust the <em>b</em> value until they do.</p>
+<ul>
+<li>Set the waning immunity parameter, <em>w</em> = 0.001, then run the simulation.</li>
+<li>Set the waning immunity parameter, <em>w</em> = 0.01, then run the simulation.</li>
+<li>Set the waning immunity parameter, <em>w</em> = 0.02, then run the simulation.</li>
+</ul>
+<p>What do you observe as the rate of waning immunity increases?</p>
 </div>
 </div>
 <div id="shinytab4" class="section level2">
@@ -155,6 +161,9 @@ Flow diagram for this model.
 </div>
 </div>
 
+
+
+<!-- code folding -->
 
 
 <!-- dynamically load mathjax for compatibility with self-contained -->

@@ -20,6 +20,8 @@ The documentation for the apps in this package contains diagrams, which overall 
 
 ## Submission History
 
+version 0.83: minor bug fixes and improvements.
+
 version 0.82: several new apps, general minor improvements.
 
 version 0.8: major upgrades to UI, several new apps, improvement on backend.
