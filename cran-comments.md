@@ -1,6 +1,6 @@
 ## Test environments
 
-* local Windows 10.1 x86_64, R 3.6
+* local Windows 10.1 x86_64, R 3.6.1
 * Travis-ci (Ubuntu, MacOS) 
 * Appveyor (Windows)
 * Rhub (Windows, Ubuntu, Fedora)
@@ -8,14 +8,16 @@
 
 ## R CMD check results
 
-0 errors | 0 warnings | 1 note
+0 errors | 0 warnings 
 
-* checking installed package size ... NOTE
-  installed size is  5.4Mb
+1 note:
+
+checking installed package size ... NOTE
+  installed size is 5.4Mb
   sub-directories of 1Mb or more:
-    appinformation   3.6Mb
+    appinformation 3.6Mb
 
-The documentation for the apps in this package contains diagrams, which overall take up this much space.
+The documentation for the apps in this package contains diagrams/figures, which is responsible for the directory size.
 
 
 ## Submission History

@@ -60,8 +60,8 @@ Also needed (which could be done by you or me):
 
 ## Information for package development
 
-### To work on package through RStudio: 
-* Fork and clone package from Rstudio.
+### To work on package (through RStudio): 
+* Fork and clone package.
 * Load DSAIDE.Rproj in RStudio. Edit files as needed.
 * Use devtools/roxygen to build and document the package. Either use RStudio's functionality (or command line) to test/build packages using devtools. The package follows Hadley's recommendations and workflow described here: http://r-pkgs.had.co.nz/
 * Optionally, use RStudio tie-in with github to sync project to github (the 'git' tab). Alternativley, use your favorite git client.
@@ -81,18 +81,24 @@ Additional packages are needed for development (but not use) of the package. Tho
 * To update the pkgdown website, run pkgdown::build_site()
 * To spell-check all Rmd documentation files, use these commands:
 
+```r
 basepath = here::here()
 files = list.files(path = paste0(basepath, "/inst/appinformation/"), recursive=TRUE, pattern = "\\.Rmd$", full.names = TRUE)
 spelling::spell_check_files(files)
+```
 
 * To re-build all html documentation files from the rmd files at once, use the above command to get all files, then:
 
+```r
 for (n in 1: length(files)) {rmarkdown::render(files[n]); Sys.sleep(2)}
+```
 
 * To copy simulator functions into the /inst/simulator folder:
 
+```r
 files = list.files(path = paste0(basepath,"/R/"), recursive=TRUE, pattern = "^simulate", full.names = TRUE)
 file.copy(files, paste0(basepath,"/inst/simulatorfunctions/"), overwrite = TRUE)
+```
 
 ### To build the package
 * in RStudio, use the functions in the 'build' tab to test and build the package.
