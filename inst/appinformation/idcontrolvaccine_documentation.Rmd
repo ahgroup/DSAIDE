@@ -67,12 +67,12 @@ $$\dot S =m - b SI - nS + wR$$
 $$\dot I = b S I - g I - nI$$
 $$\dot R = g I - nR - wR$$
 $$S_{v} = (1-ef)S(0)$$
-$$R(0) = efS_{v}$$
+$$R(0) = efS(0)$$
 
 
 
 
-Here, _S(0)_ is the initial population of susceptibles, and _S~v~_ is the susceptible population left after vaccinating a fraction _f_. Vaccinated individuals are moved to the _R_ compartment before the start of the outbreak, _R(0)_. Note the unfortunate fact that the recovered compartment uses the same letter as the reproductive number, and the starting value for the _R_ compartment, _R(0)_ looks similar to the basic reproductive number. This is common notation and I therefore use it here too. Just be careful to make sure you know which quantity is discussed.
+Here, _S(0)_ is the initial population of susceptibles, and _S~v~_ is the susceptible population left after vaccinating a fraction _f_ (at vaccine efficacy _e_). Vaccinated and protected individuals are moved to the _R_ compartment before the start of the outbreak, _R(0)_. Note the unfortunate fact that the recovered compartment uses the same letter as the reproductive number, and the starting value for the _R_ compartment, _R(0)_ looks similar to the basic reproductive number. This is common notation and I therefore use it here too. Just be careful to make sure you know which quantity is discussed.
 
 
 

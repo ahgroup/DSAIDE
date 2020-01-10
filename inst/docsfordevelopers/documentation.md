@@ -82,8 +82,13 @@ Additional packages are needed for development (but not use) of the package. Tho
 * To spell-check all Rmd documentation files, use these commands:
 
 ```r
+#get path to Rmd files containing documentation
 basepath = here::here()
 files = list.files(path = paste0(basepath, "/inst/appinformation/"), recursive=TRUE, pattern = "\\.Rmd$", full.names = TRUE)
+```
+
+```r
+#run spell check
 spelling::spell_check_files(files)
 ```
 
