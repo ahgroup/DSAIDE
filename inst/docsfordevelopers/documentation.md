@@ -72,43 +72,18 @@ All libraries/packages needed to allow the package to run should be loaded via t
 
 Additional packages are needed for development (but not use) of the package. Those are listed in the suggests section of the DESCRIPTION file. 
 
-
 ### To update R documentation and vignette
 * Edit documentation inside R functions. 
 * Build documentation with More/Document or devtools::document()
 * Edit vignette inside the /vignettes folder.
 * To build new vignette, run devtools::build_vignettes()
 * To update the pkgdown website, run pkgdown::build_site()
-* To spell-check all Rmd documentation files, use these commands:
-
-```r
-#get path to Rmd files containing documentation
-basepath = here::here()
-files = list.files(path = paste0(basepath, "/inst/appinformation/"), recursive=TRUE, pattern = "\\.Rmd$", full.names = TRUE)
-```
-
-```r
-#run spell check
-spelling::spell_check_files(files)
-```
-
-* To re-build all html documentation files from the rmd files at once, use the above command to get all files, then:
-
-```r
-for (n in 1: length(files)) {rmarkdown::render(files[n]); Sys.sleep(2)}
-```
-
-* To copy simulator functions into the /inst/simulator folder:
-
-```r
-files = list.files(path = paste0(basepath,"/R/"), recursive=TRUE, pattern = "^simulate", full.names = TRUE)
-file.copy(files, paste0(basepath,"/inst/simulatorfunctions/"), overwrite = TRUE)
-```
 
 ### To build the package
 * in RStudio, use the functions in the 'build' tab to test and build the package.
 * Run clean and rebuild, then build and reload using menu, or devtools::load_all()
 * Run the check, fix any errors 
+* Run the processing-script.R file
 
 ### To deploy package to shinyappsio
 to deploy, follow these steps (also listed in the main app.R file):
@@ -125,11 +100,9 @@ library('DSAIDE')
 
 ### To-do for CRAN release  
 * "by hand" edit the DESCRIPTION file to make sure it's up to date
-* Re-build vignettes with devtools::build_vignettes()
-* Create clean versions of documentation, copy latest versions of simulator functions - see above
+* Run the processing-script.R file
 * Run check and make sure no problems occur
 * update news.md and cran-comments.md
-* Re-create package site with pkgdown::build_site()
 * Sync everything to github
 * Check vignette and function references on website, fix errors
 * Run devtools::check_rhub() and devtools::check_win_devel()
