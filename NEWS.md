@@ -1,3 +1,8 @@
+# DSAIDE 0.8.4
+
+* Small improvements and bug fixes
+* Updates to the docs/website
+
 # DSAIDE 0.8.3
 
 * Small improvements and bug fixes
