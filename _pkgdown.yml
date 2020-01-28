@@ -12,7 +12,7 @@ navbar:
     - reference
     - news
     - related
-    right:
+    right: 
     - github
   components:
     home:
@@ -35,4 +35,4 @@ navbar:
     github:
       icon: fa-github fa-lg
       href: https://github.com/ahgroup/DSAIDE
-
+      
