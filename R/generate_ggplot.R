@@ -29,10 +29,9 @@
 #'    optional: for multiple plots, specify res[[1]]$ncols to define number of columns \cr
 #'
 #' @return A ggplot plot structure for display in a Shiny UI.
-#' @details This function is called by the Shiny server to produce plots returned to the Shiny UI.
-#' Create plots run the simulation with default parameters just call the function:
-#' result <- simulate_basicbacteria()
-#' plot <- generate_ggplot(result)
+#' @details This function can be called to produce plots, i.e. those displayed for each app.
+#' The input needed by this function is produced by either calling the run_model() function (as done when going through the UI)
+#' or manually transforming the output from a simulate_ function into the correct list structure explained below.
 #' @rawNamespace import(ggplot2, except = last_plot)
 #' @importFrom stats reshape
 #' @importFrom gridExtra grid.arrange
