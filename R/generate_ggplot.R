@@ -147,7 +147,7 @@ generate_ggplot <- function(res)
       {
         #a mix of lines and points. for this, the dataframe needs to contain an extra column indicating line or point
         p1a = p1 + ggplot2::geom_line(data = dplyr::filter(dat,style == 'line'), aes( y = yvals, color = varnames, linetype = varnames), size = linesize)
-        p2 = p1a + ggplot2::geom_point(data = dplyr::filter(dat,style == 'point'), aes( y = yvals, color = varnames, shape = varnames), size = 2.5*linesize)
+        p2 = p1a + ggplot2::geom_point(data = dplyr::filter(dat,style == 'point'), aes( y = yvals, shape = varnames), size = 2.5*linesize) #no longer uses color as an aes; this was causing 3 legends to appear.
       }
 
 
@@ -219,7 +219,7 @@ generate_ggplot <- function(res)
           #p5f=p5c
           p5d = p5c + ggplot2::scale_colour_manual(name = legendtitle, values=plotpalette[1:(nlines+npoints)]) #color for each variable
           p5e = p5d + ggplot2::scale_linetype_discrete(name = legendtitle) #line type for each variable
-          p5f = p5e + ggplot2::scale_shape_discrete(name = legendtitle) #symbol type for symbols
+          p5f = p5e + ggplot2::scale_shape_discrete(name = "") #symbol type for symbols; here is some trickery to make the legend look combined (turn off legend title/name)
           #p5e = p5d + ggplot2::scale_linetype_manual(name = legendtitle, values = c(1:nlines, rep(NA,npoints)) )
           #p5f = p5e + ggplot2::scale_shape_manual(name = legendtitle, values = c(rep(NA,nlines), 15 + c(1:npoints)) )
         }
