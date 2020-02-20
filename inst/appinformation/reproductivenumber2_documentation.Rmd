@@ -62,7 +62,7 @@ knitr::include_graphics("../media/R0modelfigure.png")
 
 
 $$\dot S =m - b SI - nS + wR$$ 
-$$\dot I = \ S I - g I - nI$$
+$$\dot I = b S I - g I - nI$$
 $$\dot R = g I - nR - wR$$
 
 
