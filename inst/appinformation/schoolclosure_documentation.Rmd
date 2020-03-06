@@ -1,0 +1,46 @@
+---
+title: School Closure Intervention 
+output:
+  html_document:
+    theme: null
+    highlight: null
+    fig_retina: null
+    fig_caption: true
+    mathjax: default 
+    keep_md: false
+bibliography: references.bib
+---
+
+
+```{r, echo = FALSE}
+#this code loads the settings file for the current app so we can automatically 
+#list the functions in the further information section
+currentrmdfile = knitr::current_input() 
+currentappinfo = gsub("_documentation.Rmd" ,"_settings.R",currentrmdfile)
+source(currentappinfo)
+```
+
+
+
+## Overview {#shinytab1}
+This app explores impact of school closure.
+
+## The Model {#shinytab2}
+
+To come
+
+
+## What to do {#shinytab3}
+
+To come
+
+
+
+## Further Information {#shinytab4}
+
+To come
+
+### References
+
+
+

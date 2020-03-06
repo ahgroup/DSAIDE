@@ -52,7 +52,7 @@ Also needed (which could be done by you or me):
 
 * The NNN_settings.R file. 
 * A test script for your new app in the testthat folder.
-* Editing of app.R to include your new app.
+* Editing of app.R to include your new app. The actionButton name in app.R must be the NNN part of the NNN_settings and NNN_documentation names.
 * Adding any figures your app documentation includes to the /media folder.
 * Copying of your new simulator_NNN function into the simulatorfunctions folder and the zip file.
 * Adding any cited references to the .bib file in the appinformation folder.
