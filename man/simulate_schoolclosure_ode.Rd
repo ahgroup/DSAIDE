@@ -14,8 +14,8 @@ simulate_schoolclosure_ode(
   bcc = 0.001,
   bca = 0.001,
   bcs = 0.001,
-  baa = 0.001,
   bac = 0.001,
+  baa = 0.001,
   bas = 0.001,
   bsc = 0.001,
   bsa = 0.001,
@@ -53,9 +53,9 @@ simulate_schoolclosure_ode(
 
 \item{bcs}{:  rate of transmission from infected child to susceptible senior : numeric}
 
-\item{baa}{:  rate of transmission from infected adult to susceptible adult : numeric}
-
 \item{bac}{:  rate of transmission from infected adult to susceptible child : numeric}
+
+\item{baa}{:  rate of transmission from infected adult to susceptible adult : numeric}
 
 \item{bas}{:  rate of transmission from infected adult to susceptible senior : numeric}
 

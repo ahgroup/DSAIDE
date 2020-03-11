@@ -1,16 +1,16 @@
 ############################################################
-#This is a file for the multi outbreak id control App
+#This is a file for the multigroup id control App
 #it contains additional information that helps properly process it
 ############################################################
 
 appsettings = list()
 
 #Title of app, to be displayed on top of analyze tab
-appsettings$apptitle = "School closure intervention"
+appsettings$apptitle = "Control of different populations"
 
 #name of underlying simulation function(s) to be used in the app
 #must be provided
-appsettings$simfunction = 'simulate_schoolclosure_ode'
+appsettings$simfunction = 'simulate_idcontrolmultigroup_ode'
 
 #name of underlying mbmodel - if exists
 #if it exists, it will be used to build UI input elements

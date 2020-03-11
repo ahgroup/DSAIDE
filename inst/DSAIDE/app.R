@@ -296,7 +296,7 @@ ui <- fluidPage(
                         actionButton("idcontrolvaccine", "Basics of ID control", class="mainbutton"),
                         actionButton("idcontrolmultioutbreak", "ID control for multiple outbreaks", class="mainbutton"),
                         actionButton("idcontrolcomplex", "Complex ID control scenarios", class="mainbutton"),
-                        actionButton("schoolclosure", "School Closure Intervention", class="mainbutton"),
+                        actionButton("idcontrolmultigroup", "ID control of different populations", class="mainbutton"),
                         class = "mainmenurow"
                       ), #close fluidRow structure for input
 
