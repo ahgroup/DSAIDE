@@ -62,17 +62,19 @@ knitr::include_graphics("../media/multigroupcontrolmodel.png")
 
 $$
 \begin{aligned}
-\dot{S}_c &= - k(b_{cc} I_c + b_{ac} I_a + b_{ec} I_e) S_c\\
-\dot{I}_c &=   k(b_{cc} I_c + b_{ac} I_a + b_{ec} I_e) S_c - g_c I_c\\
-\dot{R}_c &= (1-m_c) g_c I_c\\
+\dot{S}_c &= - (1 - f_1)(b_{cc} I_c + b_{ac} I_a + b_{ec} I_e) S_c + w_c R_c\\
+\dot{I}_c &=   (1 - f_1)(b_{cc} I_c + b_{ac} I_a + b_{ec} I_e) S_c - g_c I_c\\
+\dot{R}_c &= (1-m_c) g_c I_c - w_c R_c\\
 \dot{D}_c &= m_c g_c I_c\\
-\dot{S}_a &= - k(b_{ca} I_c + b_{aa} I_a + b_{ea} I_e) S_a\\
-\dot{I}_a &=   k(b_{ca} I_c + b_{aa} I_a + b_{ea} I_e) S_a - g_a I_a\\
-\dot{R}_a &= (1-m_a) g_a I_a\\
+
+\dot{S}_a &= - (1 - f_2)(b_{ca} I_c + b_{aa} I_a + b_{ea} I_e) S_a + w_a R_a\\
+\dot{I}_a &=   (1 - f_1)(b_{ca} I_c + b_{aa} I_a + b_{ea} I_e) S_a - g_a I_a\\
+\dot{R}_a &= (1-m_a) g_a I_a - w_a R_a\\
 \dot{D}_a &= m_a g_a I_a\\
-\dot{S}_e &= - k(b_{ce} I_c + b_{ae} I_a + b_{ee} I_e) S_e\\
-\dot{I}_e &=   k(b_{ce} I_c + b_{ae} I_a + b_{ee} I_e) S_e - g_e I_e\\
-\dot{R}_e &= (1-m_e) g_e I_e\\
+
+\dot{S}_e &= - (1 - f_3)(b_{ce} I_c + b_{ae} I_a + b_{ee} I_e) S_e + w_e R_e\\
+\dot{I}_e &=   (1 - f_3)(b_{ce} I_c + b_{ae} I_a + b_{ee} I_e) S_e - g_e I_e\\
+\dot{R}_e &= (1-m_e) g_e I_e - w_e R_e\\
 \dot{D}_e &= m_e g_e I_e
 \end{aligned}
 $$
@@ -103,8 +105,12 @@ The following parameters can be set for the model.
 | $b_{ce}$    | relative transmission coefficient from children to elderly   | 
 | $b_{ae}$    | relative transmission coefficient from adults to elderly     | 
 | $b_{ee}$    | relative transmission coefficient from elderly to elderly    | 
-| $k$         | scaling factor to adjust relative transmission rates to achieve desired $R_0$  | 
-
+| $f1$        | strength of intervention applied to children, between 0 and 1 | 
+| $f2$        | strength of intervention applied to adults, between 0 and 1   | 
+| $f3$        | strength of intervention applied to elderly, between 0 and 1  | 
+| $w_c$        | rate at which immunity in children wanes | 
+| $w_a$        | rate at which immunity in adults wanes   | 
+| $w_e$        | rate at which immunity in elderly wanes  | 
 
 
 ## What to do {#shinytab3}
@@ -121,15 +127,14 @@ In the following, we explore a few simple hypothetical interventions for differe
 
 * To obtain age-related mortality similar to COVID, we assume mortality risks of 0.1%, 1% and 10% for children, adults and elderly respectively. Set the parameters $m_i$ accordingly.
 
-* Run the simulation without any control applied, i.e. $f_1 = f_2 = f_3 = 0$. You should see an outbreak with susceptibles at the end of the outbreak at $S_c = XX$, ... and deaths of $D_c = XX$....
+* Run the simulation without any control applied, i.e. $f_1 = f_2 = f_3 = 0$. You should see an outbreak with susceptibles at the end of the outbreak at $S_c = 56799$, $S_a = 84498$, $S_e = 75413$ and deaths of $D_c = 143$, $D_a = 4655$, $D_e = 17459$.
 
 
 ### Task 2
 * Now lets implement strong control for each age group by setting $f_1 = f_2 = f_3 = 0.9$.
 * Assume that each control starts 90 days after outbreak start and lasts for 90 days.
 * Keep all other values as previously.
-* Run the simulation. You should see that the strong control initially pushes infected down, but once control is stopped, the outbreak rebounds and the overall size of the outbreak is similar to that without control, with 
-susceptibles at the end of the outbreak at $S_c = XX$, ... and deaths of $D_c = XX$....
+* Run the simulation. You should see that the strong control initially pushes infected down, but once control is stopped, the outbreak rebounds and the overall size of the outbreak is similar to that without control, with susceptibles at the end of the outbreak at $S_c = 63247$, $S_a = 99107$, $S_e = 83557$ and deaths of $D_c = 137$, $D_a = 4509$, $D_e = 16644$.
 
 ### Task 3
 
