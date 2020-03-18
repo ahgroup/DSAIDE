@@ -4,11 +4,13 @@
 \name{flu1918data}
 \alias{flu1918data}
 \title{1918 Influenza mortality data}
-\format{A data frame/tibble with these variables:
+\format{
+A data frame/tibble with these variables:
 \describe{
 \item{Date}{Week of reporting, date format}
 \item{Deaths}{New deaths in NYC per week per 100,000, numeric}
-}}
+}
+}
 \usage{
 flu1918data
 }

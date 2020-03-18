@@ -23,7 +23,7 @@ source(currentappinfo)
 
 
 ## Overview {#shinytab1}  
-This app lets you explore interventions applied to different population subgroups with potentially different infectiousness and mortality patterns. Read about the model in the "Model" tab. Then do the tasks described in the "What to do" tab. Before going through this app, it might be useful to go through the 'Reproductive Number' and `Multi Outbreak ID Control` apps first. This app closely follows a model and analysis described in REF, see the "Further Information" tab for this and other related references.
+This app lets you explore interventions applied to different population subgroups with potentially different infectiousness and mortality patterns. Read about the model in the "Model" tab. Then do the tasks described in the "What to do" tab. Before going through this app, it might be useful to go through the 'Reproductive Number' and `Multi Outbreak ID Control` apps first. This app closely follows a model and analysis described in [@Handel2020], see the "Further Information" tab for this and other related references.
 
 
 ### Learning Objectives  
@@ -37,16 +37,16 @@ This app lets you explore interventions applied to different population subgroup
 ### Model Overview
 For this app, we use a version of the basic compartmental SIR-type model. We track the following stages:
 
-* **S_i** - uninfected and susceptible individuals 
-* **I_i** - infected and infectious individuals
-* **R_i** - recovered individuals
-* **D_i** - dead individuals
+* **$S_i$** - uninfected and susceptible individuals 
+* **$I_i$** - infected and infectious individuals
+* **$R_i$** - recovered individuals
+* **$D_i$** - dead individuals
 
 Individuals are divided into 3 populations, namely children, adults and elderly ($i=c,a,e$). Thus, our model with 3 age groups and 4 compartments per age group leads to a 12-compartment model.
 
 For this app, we specify the following processes/flows: 
 
-* Infected individuals ($I_i$) transmit the infection to susceptible individuals ($S_j$) at rate, $b_ij$. This leads to the susceptible individual leaving the S compartment and entering the I compartment. Transmission among and between groups can occur at different rates.   
+* Infected individuals ($I_i$) transmit the infection to susceptible individuals ($S_j$) at rate, $b_{ij}$. This leads to the susceptible individual leaving the S compartment and entering the I compartment. Transmission among and between groups can occur at different rates.   
 * Infected individuals stay infectious for some time, and leave the infected/infectious compartment at rate $g_i$. A fraction $m_i$ of those individuals will die and enter the dead compartment, the remaining fraction $1-m_i$ will enter the recovered compartment. 
 * Recovered individuals are initially immune to re-infection, but can lose immunity at rate $w_i$.
 * Control measures can applied to each group at some strength $f_i$ (between 0 and 1) which reduces the rate at which infections in that group occur. Control measures for each group start at time $f^i_{start}$ and end at time $f^i_{end}$.
@@ -60,51 +60,24 @@ knitr::include_graphics("../media/multigroupcontrolmodel.png")
 ```
 
 
+Model equations:
+
 $$
 \begin{aligned}
-\dot{S}_c &= - k(b_{cc} I_c + b_{ac} I_a + b_{ec} I_e) S_c\\
-\dot{I}_c &=   k(b_{cc} I_c + b_{ac} I_a + b_{ec} I_e) S_c - g_c I_c\\
-\dot{R}_c &= (1-m_c) g_c I_c\\
+\dot{S}_c &= - (1 - f_1)(b_{cc} I_c + b_{ac} I_a + b_{ec} I_e) S_c + w_c R_c\\
+\dot{I}_c &=   (1 - f_1)(b_{cc} I_c + b_{ac} I_a + b_{ec} I_e) S_c - g_c I_c\\
+\dot{R}_c &= (1-m_c) g_c I_c - w_c R_c\\
 \dot{D}_c &= m_c g_c I_c\\
-\dot{S}_a &= - k(b_{ca} I_c + b_{aa} I_a + b_{ea} I_e) S_a\\
-\dot{I}_a &=   k(b_{ca} I_c + b_{aa} I_a + b_{ea} I_e) S_a - g_a I_a\\
-\dot{R}_a &= (1-m_a) g_a I_a\\
+\dot{S}_a &= - (1 - f_2)(b_{ca} I_c + b_{aa} I_a + b_{ea} I_e) S_a + w_a R_a\\
+\dot{I}_a &=   (1 - f_2)(b_{ca} I_c + b_{aa} I_a + b_{ea} I_e) S_a - g_a I_a\\
+\dot{R}_a &= (1-m_a) g_a I_a - w_a R_a\\
 \dot{D}_a &= m_a g_a I_a\\
-\dot{S}_e &= - k(b_{ce} I_c + b_{ae} I_a + b_{ee} I_e) S_e\\
-\dot{I}_e &=   k(b_{ce} I_c + b_{ae} I_a + b_{ee} I_e) S_e - g_e I_e\\
-\dot{R}_e &= (1-m_e) g_e I_e\\
+\dot{S}_e &= - (1 - f_3)(b_{ce} I_c + b_{ae} I_a + b_{ee} I_e) S_e + w_e R_e\\
+\dot{I}_e &=   (1 - f_3)(b_{ce} I_c + b_{ae} I_a + b_{ee} I_e) S_e - g_e I_e\\
+\dot{R}_e &= (1-m_e) g_e I_e - w_e R_e\\
 \dot{D}_e &= m_e g_e I_e
 \end{aligned}
 $$
-
-### Parameter Table
-
-The following parameters can be set for the model.
-
-
-| Parameter	  | Meaning	                    |  
-|-------------|-----------------------------|
-| $S_c$       | Population size of children | 
-| $S_a$       | Population size of adults   |
-| $S_e$       | Population size of elderly  |  
-| $m_c$       | Death rate of children      | 
-| $m_a$       | Death rate of adults        |  
-| $m_e$       | Death rate of elderly       | 
-| $g_c$       | Recover rate of children    | 
-| $g_a$       | Recover rate of adults      | 
-| $g_e$       | Recover rate of elderly     | 
-| $R_0$       | Basic reproductive number   | 
-| $b_{cc}$    | relative transmission coefficient from children to children  | 
-| $b_{ac}$    | relative transmission coefficient from adults to children    | 
-| $b_{ec}$    | relative transmission coefficient from elderly to children   | 
-| $b_{ca}$    | relative transmission coefficient from children to adults    | 
-| $b_{aa}$    | relative transmission coefficient from adults to adults      | 
-| $b_{ea}$    | relative transmission coefficient from elderly to adults     | 
-| $b_{ce}$    | relative transmission coefficient from children to elderly   | 
-| $b_{ae}$    | relative transmission coefficient from adults to elderly     | 
-| $b_{ee}$    | relative transmission coefficient from elderly to elderly    | 
-| $k$         | scaling factor to adjust relative transmission rates to achieve desired $R_0$  | 
-
 
 
 ## What to do {#shinytab3}
@@ -113,36 +86,53 @@ In the following, we explore a few simple hypothetical interventions for differe
 
 ### Task 1 
 
-* We start by considering an outbreak of something like COVID-19. We assume some population of 1 million individuals, with 20% children, 25% elderly and the remainder middle-aged adults. Set the values for $S_c$, $S_a$ and $S_e$ to reflect these assumptions.
+* We start by considering an outbreak of something like COVID-19. We assume a population of 1 million individuals, with 20% children, 25% elderly and the remainder middle-aged adults. Set the values for $S_c$, $S_a$ and $S_e$ to reflect these assumptions.
 
-* We consider rates of transmission to be larger within groups than between groups. We also choose values to have an overall reproductive number of 2. This can be achieved by setting $b_{cc}$ = 3e-7, bca = bac = 0.5bcc = 1.5e-7, bce = bec = 0.25bcc = 7.5e-8, baa = 3e-7, bae = bea = 0.5baa = 1.5e-7, bee = 2.25e-7
+* We consider rates of transmission to be larger within groups than between groups. We also choose values to have an overall reproductive number of 2. This can be achieved by setting $b_{cc} = 3\times10^{-7}$, $b_{ca} = b_{ac} = 1.5\times10^{-7}$, $b_{ce} = b_{ec} = 7.5\times10^{-8}$, $b_{aa} = 3\times10{-7}$, $b_{ae} = b_{ea} = 1.5\times10{-7}$, $b_{ee} = 2.25\times10{-7}.$
 
 * We make the assumption that infection lasts around 10 days in each age group. This means setting the rates $g_i=0.1$.
 
 * To obtain age-related mortality similar to COVID, we assume mortality risks of 0.1%, 1% and 10% for children, adults and elderly respectively. Set the parameters $m_i$ accordingly.
 
-* Run the simulation without any control applied, i.e. $f_1 = f_2 = f_3 = 0$. You should see an outbreak with susceptibles at the end of the outbreak at $S_c = XX$, ... and deaths of $D_c = XX$....
+* Run the simulation without any control applied, i.e. $f_1 = f_2 = f_3 = 0$. You should see an outbreak with susceptibles at the end of the outbreak at $S_c = 56799$, $S_a = 84498$, $S_e = 75413$ and deaths of $D_c = 143$, $D_a = 4655$, $D_e = 17459$.
 
 
 ### Task 2
+
 * Now lets implement strong control for each age group by setting $f_1 = f_2 = f_3 = 0.9$.
 * Assume that each control starts 90 days after outbreak start and lasts for 90 days.
 * Keep all other values as previously.
-* Run the simulation. You should see that the strong control initially pushes infected down, but once control is stopped, the outbreak rebounds and the overall size of the outbreak is similar to that without control, with 
-susceptibles at the end of the outbreak at $S_c = XX$, ... and deaths of $D_c = XX$....
+* Run the simulation. You should see that the strong control initially pushes infected down, but once control is stopped, the outbreak rebounds and the overall size of the outbreak is similar to that without control, with susceptibles at the end of the outbreak at $S_c = 63247$, $S_a = 99107$, $S_e = 83557$ and deaths of $D_c = 137$, $D_a = 4509$, $D_e = 16644$.
 
 ### Task 3
 
+* Now lets implement control that targets mainly children. We also need to apply some control to adults, the largest group, to make the effective reproductive number values comparable. This can be achieved by setting $f_1=1; f_2=0.339; f_3=0$.
+* Assume that each control starts 90 days after outbreak start and lasts for 90 days.
+* Keep all other values as previously.
+* Run the simulation. You should see susceptibles at the end of the outbreak at $S_c = 120683$, $S_a = 159146$, $S_e = 91818$ and deaths of $D_c = 79$, $D_a = 3908$, $D_e = 15817$.
+
+### Task 4
+
+* Now lets implement control applied to adults only, in such a way that the effective reproductive number is the same as for the previous task. This can be achieved by setting $f_1=0; f_2=0.475; f_3=0$.
+* Keep all other values as previously.
+* Run the simulation. You should see susceptibles at the end of the outbreak at $S_c = 69000$, $S_a = 181882$, $S_e = 91279$ and deaths of $D_c = 131$, $D_a = 3681$, $D_e = 15871$.
+
+### Task 5
+
+* Now lets implement control that targets mainly the elderly group, again keeping the overall efective reproductive number the same. This can be achieved by setting $f_1=0; f_2=0.318; f_3=1$.
+* Keep all other values as previously.
+* Run the simulation. You should see susceptibles at the end of the outbreak at $S_c = 69988$, $S_a = 157328$, $S_e = 155342$ and deaths of $D_c = 130$, $D_a = 3927$, $D_e = 9465$.
 
 
+Overall, you will find that control applied to the elderly is best in terms of mortality, and beats the strategy of strong control for each group, since still enough get infected to prevent a rebound of the outbreak.
+  
 ## Further Information {#shinytab4}
+
 * This app (and all others) are structured such that the Shiny part (the graphical interface you see and the server-side function that goes with it) calls an underlying R script (or several) which runs the simulation for the model of interest and returns the results.
 * For this app, the underlying function(s) running the simulation are called ``r appsettings$simfunction``. You can call them directly, without going through the shiny app. Use the `help()` command for more information on how to use the functions directly. If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself. 
 * You can also download all simulator functions and modify them for your own purposes.  Of course, to modify these functions, you'll need to do some coding.
 * For examples on using the simulators directly and how to modify them, read the package vignette by typing `vignette('DSAIDE')` into the R console.
-* This app closely follows a model and analysis described in REF. 
+* This app closely follows a model and analysis described in [@Handel2020]. 
 
 ### References
-
-
 
