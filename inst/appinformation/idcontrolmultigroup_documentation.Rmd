@@ -131,6 +131,7 @@ In the following, we explore a few simple hypothetical interventions for differe
 
 
 ### Task 2
+
 * Now lets implement strong control for each age group by setting $f_1 = f_2 = f_3 = 0.9$.
 * Assume that each control starts 90 days after outbreak start and lasts for 90 days.
 * Keep all other values as previously.
@@ -138,8 +139,26 @@ In the following, we explore a few simple hypothetical interventions for differe
 
 ### Task 3
 
+* Now lets implement strong control for children age group by setting $f1=1; f2=0.339; f3=0$.
+* Assume that each control starts 90 days after outbreak start and lasts for 90 days.
+* Keep all other values as previously.
+* Run the simulation. You should see susceptibles at the end of the outbreak at $S_c = 120683$, $S_a = 159146$, $S_e = 91818$ and deaths of $D_c = 79$, $D_a = 3908$, $D_e = 15817$.
 
+### Task 4
 
+* Now lets implement strong control for adult age group by setting $f1=0; f2=0.475; f3=0$.
+* Assume that each control starts 90 days after outbreak start and lasts for 90 days.
+* Keep all other values as previously.
+* Run the simulation. You should see susceptibles at the end of the outbreak at $S_c = 69000$, $S_a = 181882$, $S_e = 91279$ and deaths of $D_c = 131$, $D_a = 3681$, $D_e = 15871$.
+
+### Task 5
+
+* Now lets implement strong control for adult elderly group by setting $f1=0; f2=0.318; f3=1$.
+* Assume that each control starts 90 days after outbreak start and lasts for 90 days.
+* Keep all other values as previously.
+* Run the simulation. You should see susceptibles at the end of the outbreak at $S_c = 69988$, $S_a = 157328$, $S_e = 155342$ and deaths of $D_c = 130$, $D_a = 3927$, $D_e = 9465$.
+
+  
 ## Further Information {#shinytab4}
 * This app (and all others) are structured such that the Shiny part (the graphical interface you see and the server-side function that goes with it) calls an underlying R script (or several) which runs the simulation for the model of interest and returns the results.
 * For this app, the underlying function(s) running the simulation are called ``r appsettings$simfunction``. You can call them directly, without going through the shiny app. Use the `help()` command for more information on how to use the functions directly. If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself. 
