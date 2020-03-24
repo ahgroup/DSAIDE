@@ -3,8 +3,7 @@
 #1. go into the folder where this file (app.R) resides
 #2. install the package through CRAN or github if we want to use the github version
 #devtools::install_github('ahgroup/DSAIDE')
-#3. #uncomment this line of code
-# library('DSAIDE')
+#3. #uncomment the library('DSAIDE') commant below
 #4. with the above 'library' statement active, deploy with:
 # run rsconnect::deployApp(account = 'epibiouga')
 # as suitable, change the account to another one, e.g. handelgroup
@@ -14,6 +13,13 @@
 # 'tokens' and copy the command into the console
 #5. comment out the library command again
 
+#for deployment to a shiny server, steps are similar
+#1. install DSAIDE on server, either CRAN or Github version
+#2. uncomment the library('DSAIDE') command below
+#3. save app.R, copy it and packagestyle.css to the server app folder
+#4. comment out the library command again
+
+#library('DSAIDE')
 
 ##############################################
 #This is the Shiny App for the main menu of DSAIDE

@@ -1,6 +1,7 @@
 # To-do list for DSAIDE package
 
 ## Code Improvements
+* Fix/finish download button for each app (currently disabled)
 * Continue implementing unit tests using the testthat package
 * Provide a 'download scenario' button, which downloads code that reproduces a given scenario.
 * Add checks to parameter settings, don't allow unreasonable (e.g. negative) ones

@@ -66,7 +66,7 @@ generate_shinyinput <- function(mbmodel, otherinputs = NULL, packagename)
             p(
                 shiny::actionButton("submitBtn", "Run Simulation", class = "submitbutton"),
                 shiny::actionButton(inputId = "reset", label = "Reset Inputs", class = "submitbutton"),
-                shiny::downloadButton(outputId = "download_code", label = "Download Code", class = "submitbutton"),
+                #shiny::downloadButton(outputId = "download_code", label = "Download Code", class = "submitbutton"),
                 align = 'center'),
             modelargs,
             otherargs

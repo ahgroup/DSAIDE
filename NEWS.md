@@ -2,6 +2,7 @@
 
 * Small improvements and bug fixes
 * Updates to the docs/website
+* Added new app
 
 # DSAIDE 0.8.3
 
