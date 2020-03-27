@@ -33,6 +33,7 @@ Imports:
     gridExtra (>= 2.3),
     lhs (>= 0.15),
     nloptr,
+	pomp (>= 2.7),
     plotly,
     stats (>= 3.4),
     utils (>= 3.4),

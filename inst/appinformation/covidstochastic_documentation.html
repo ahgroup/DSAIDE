@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>Stochastic COVID Model</title>
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Stochastic COVID Model</h1>
+
+
+
+<div id="shinytab1" class="section level2">
+<h2>Overview</h2>
+<p>This app lets you explore a stochastic SEIR type model applied to COVID-19. Read about the model in the “Model” tab. Then do the tasks described in the “What to do” tab.</p>
+<div id="learning-objectives" class="section level3">
+<h3>Learning Objectives</h3>
+<ul>
+<li>TBD</li>
+</ul>
+</div>
+</div>
+<div id="shinytab2" class="section level2">
+<h2>The Model</h2>
+<p>EVERYTHING BELOW NEEDS UPDATING</p>
+<div id="model-overview" class="section level3">
+<h3>Model Overview</h3>
+<p>This model tracks susceptibles, exposed/pre-symptomatic, infected/symptomatic and recovered hosts. The following compartments are included:</p>
+<ul>
+<li><strong>S</strong> - uninfected and susceptible individuals</li>
+<li><strong>E</strong> - individuals who are infected and do not yet show symptoms. Those individuals can be infectious.</li>
+<li><strong>I</strong> - individuals who are infected and show symptoms. Those individuals are likely infectious, but the model allows to adjust this, including no infectiousness.</li>
+<li><strong>I</strong> - individuals who are infected and show symptoms. Those individuals are likely infectious, but the model allows to adjust this, including no infectiousness.</li>
+<li><strong>R</strong> - recovered/removed individuals. Those individuals have recovered and are immune. They can lose their immunity.</li>
+</ul>
+</div>
+<div id="model-implementation" class="section level3">
+<h3>Model Implementation</h3>
+<p>The flow diagram for the model implemented in this app is:</p>
+<p>Note that this model is <em>not</em> an ordinary differential equation model. It is instead its stochastic equivalent. We can specify the model by writing down every possible transition/event/reaction that can occur and their propensities (the propensity multiplied with the time step gives the probability that a given event/transition occurs). For our model these are the following:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Event type</th>
+<th>Transitions</th>
+<th>Propensity</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Infection</td>
+<td>S =&gt; S-1, E =&gt; E+1</td>
+<td>S(b<sub>E</sub>E+b<sub>I</sub>I)</td>
+</tr>
+<tr class="even">
+<td>Progression to Symptoms</td>
+<td>E =&gt; E-1, I =&gt; I+1</td>
+<td>g<sub>E</sub>E</td>
+</tr>
+<tr class="odd">
+<td>Recovery</td>
+<td>I =&gt; I-1, R =&gt; R+1</td>
+<td>g<sub>I</sub>I</td>
+</tr>
+<tr class="even">
+<td>Waning of Immunity</td>
+<td>R =&gt; R-1, S =&gt; S+1</td>
+<td>wR</td>
+</tr>
+<tr class="odd">
+<td>Births</td>
+<td>S =&gt; S+1</td>
+<td>m</td>
+</tr>
+<tr class="even">
+<td>Death of susceptible</td>
+<td>S =&gt; S-1</td>
+<td>nS</td>
+</tr>
+<tr class="odd">
+<td>Death of exposed</td>
+<td>E =&gt; E-1</td>
+<td>nE</td>
+</tr>
+<tr class="even">
+<td>Death of symptomatic</td>
+<td>I =&gt; I-1</td>
+<td>nI</td>
+</tr>
+<tr class="odd">
+<td>Death of recovered</td>
+<td>R =&gt; R-1</td>
+<td>nR</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="shinytab3" class="section level2">
+<h2>What to do</h2>
+<p><strong>The tasks below are described in a way that assumes everything is in units of MONTHS (rate parameters, therefore, have units of inverse months). If any quantity is not given in those units, you need to convert it first (e.g. if it says a year, you need to convert it to 12 months).</strong></p>
+<p><em>Some of the simulations might take a few seconds to run. Be patient.</em></p>
+<div id="task-1" class="section level3">
+<h3>Task 1:</h3>
+<p>TASKS TO COME</p>
+</div>
+</div>
+<div id="shinytab4" class="section level2">
+<h2>Further Information</h2>
+<ul>
+<li>This app (and all others) are structured such that the Shiny part (the graphical interface you see and the server-side function that goes with it) calls an underlying R script (or several) which runs the simulation for the model of interest and returns the results.</li>
+<li>For this app, the underlying function(s) running the simulation are called <code>simulate_covid_stochastic</code>. You can call them directly, without going through the shiny app. Use the <code>help()</code> command for more information on how to use the functions directly. If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself.</li>
+<li>You can also download all simulator functions and modify them for your own purposes. Of course to modify these functions, you’ll need to do some coding.</li>
+<li>For examples on using the simulators directly and how to modify them, read the package vignette by typing <code>vignette(&#39;DSAIDE&#39;)</code> into the R console.</li>
+</ul>
+<div id="references" class="section level3">
+<h3>References</h3>
+</div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

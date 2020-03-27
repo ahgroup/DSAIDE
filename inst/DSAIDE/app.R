@@ -1,3 +1,11 @@
+#The main use for DSAIDE is as R package
+#since it is a shiny app, it can also deployed to a shiny server
+#The comments below explain how one can deploy DSAIDE to shinyappsio or a shiny server
+
+#note that the UI loads the google analytics bit, which currently is for the UGA server.
+#Shouldn't affect deployment as R package.
+#Will not apply to loading to shinyappsio (would need to create a new google analytics property)
+
 #This is a bit of code and instructions for deployment of the package to shinyappsio
 #to deploy, follow these steps:
 #1. go into the folder where this file (app.R) resides
@@ -18,6 +26,7 @@
 #2. uncomment the library('DSAIDE') command below
 #3. save app.R, copy it and packagestyle.css to the server app folder
 #4. comment out the library command again
+#5. as needed, update DSAIDE on server by running:
 
 #library('DSAIDE')
 
@@ -273,6 +282,7 @@ server <- function(input, output, session)
 #######################################################
 
 ui <- fluidPage(
+  tags$head(includeHTML(("google-analytics.html"))), #this is only needed for Google analytics when deployed as app to the UGA server. Should not affect R package use.
   includeCSS("packagestyle.css"), #use custom styling
   tags$div(id = "shinyheadertitle", "DSAIDE - Dynamical Systems Approach to Infectious Disease Epidemiology"),
   tags$div(id = "shinyheadertext",
@@ -283,6 +293,13 @@ ui <- fluidPage(
   tags$div(id = "infotext", "More information can be found", a("on the package website.",  href="https://ahgroup.github.io/DSAIDE/", target="_blank")),
   navbarPage(title = packagename, id = packagename, selected = 'Menu',
              tabPanel(title = "Menu",
+                      tags$div(class='mainsectionheader', 'COVID-19 related'),
+                      fluidRow(
+                        actionButton("covidstochastic", "Stochastic SEIR model for COVID", class="mainbutton"),
+                        actionButton("idcontrolmultigroup", "COVID control of different populations", class="mainbutton"),
+                        class = "mainmenurow"
+                      ), #close fluidRow structure for input
+
                       tags$div(class='mainsectionheader', 'The Basics'),
                       fluidRow(
                                actionButton("basicsir", "Basic SIR model", class="mainbutton"),
@@ -303,7 +320,6 @@ ui <- fluidPage(
                         actionButton("idcontrolvaccine", "Basics of ID control", class="mainbutton"),
                         actionButton("idcontrolmultioutbreak", "ID control for multiple outbreaks", class="mainbutton"),
                         actionButton("idcontrolcomplex", "Complex ID control scenarios", class="mainbutton"),
-                        actionButton("idcontrolmultigroup", "ID control of different populations", class="mainbutton"),
                         class = "mainmenurow"
                       ), #close fluidRow structure for input
 
