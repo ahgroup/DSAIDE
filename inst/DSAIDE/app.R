@@ -294,7 +294,8 @@ ui <- fluidPage(
   navbarPage(title = packagename, id = packagename, selected = 'Menu',
              tabPanel(title = "Menu",
                       tags$div(class='mainsectionheader', 'COVID-19 related'),
-                      fluidRow(
+                      p('Not yet well tested and documented!', class='maintext'),
+                        fluidRow(
                         actionButton("covidstochastic", "Stochastic SEIR model for COVID", class="mainbutton"),
                         actionButton("idcontrolmultigroup", "COVID control of different populations", class="mainbutton"),
                         class = "mainmenurow"
