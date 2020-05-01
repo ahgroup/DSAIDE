@@ -293,13 +293,6 @@ ui <- fluidPage(
   tags$div(id = "infotext", "More information can be found", a("on the package website.",  href="https://ahgroup.github.io/DSAIDE/", target="_blank")),
   navbarPage(title = packagename, id = packagename, selected = 'Menu',
              tabPanel(title = "Menu",
-                      tags$div(class='mainsectionheader', 'COVID-19 related'),
-                      p('Not yet well tested and documented!', class='maintext'),
-                        fluidRow(
-                        actionButton("covidstochastic", "Stochastic SEIR model for COVID", class="mainbutton"),
-                        actionButton("idcontrolmultigroup", "COVID control of different populations", class="mainbutton"),
-                        class = "mainmenurow"
-                      ), #close fluidRow structure for input
 
                       tags$div(class='mainsectionheader', 'The Basics'),
                       fluidRow(
@@ -320,6 +313,7 @@ ui <- fluidPage(
                       fluidRow(
                         actionButton("idcontrolvaccine", "Basics of ID control", class="mainbutton"),
                         actionButton("idcontrolmultioutbreak", "ID control for multiple outbreaks", class="mainbutton"),
+                        actionButton("idcontrolmultigroup", "ID control of different populations", class="mainbutton"),
                         actionButton("idcontrolcomplex", "Complex ID control scenarios", class="mainbutton"),
                         class = "mainmenurow"
                       ), #close fluidRow structure for input
