@@ -95,24 +95,47 @@ Set the model parameters such that it corresponds to the following setting:
     
 With parameters set to correspond to the scenario just described, run the simulation. You should see some simulations with outbreaks and some without. For those _with outbreaks_, you should have around 10-100 susceptible left at the end.
 
+**Record**
+
+* Nothing
+
 ### Task 2 
 * With everything as before, set the initial number of untreated infected hosts to 10. 
-* Run simulations. You should pretty much always get outbreaks. Record the average number of susceptibles left.
-* Why do you see almost always outbreaks for this setting and fewer outbreaks/more extinctions for task 1?
+* Run simulations. You should pretty much always get outbreaks. 
+* Why do you almost always have outbreaks for this setting and fewer outbreaks/more extinctions for task 1?
 
+**Record**
+
+* The average number of susceptibles left at the end.
 
 ### Task 3 
 * With the same settings as _Task 2_ turn on treatment ( _f_ > 0 ). 
 * Set number of simulations to 50 (the simulations might take a few seconds to run).
 * Run the simulation with fraction receiving treatment, _f_, at 0, 0.25, 0.5, 0.75 and 1.
-* Observe what happens to the number susceptibles left at the end of the outbreak as you change treatment levels. Draw conclusions about the usefulness of treatment.
+* Draw conclusions about the usefulness of treatment.
+
+**Record**
+
+* The average number of susceptibles left at the end when _f_ = 0
+* The average number of susceptibles left at the end when _f_ = 0.25
+* The average number of susceptibles left at the end when _f_ = 0.5
+* The average number of susceptibles left at the end when _f_ = 0.75
+* The average number of susceptibles left at the end when _f_ = 1
+
 
 ### Task 4 
 * Now allow resistance to be generated during treatment (_c~t~_ > 0). Set _c~t~ = 0.2_ for the fraction of resistant generation from treatment.
 * Run the simulation for the treatment levels specified in the previous task.
-* Observe what happens to the number susceptibles left at the end of the outbreak as you change treatment levels. Draw conclusions about the usefulness of treatment.
+* Draw conclusions about the usefulness of treatment.
 * In your head or on a piece of paper, sketch out the relationship between treatment level and the number of susceptibles left at the end in the absence and presence of resistance generation (_c~t~_ = 0 and _c~t~_ > 0). What do you conclude from that?
 
+**Record**
+
+* The average number of susceptibles left at the end _f_ = 0
+* The average number of susceptibles left at the end _f_ = 0.25
+* The average number of susceptibles left at the end _f_ = 0.5
+* The average number of susceptibles left at the end _f_ = 0.75
+* The average number of susceptibles left at the end _f_ = 1
 
 ### Task 5 
 * Set the rate of transmission for resistant hosts to _b~r~ = 0.001_. Keep untreated hosts and treated host values as before.
@@ -122,6 +145,13 @@ With parameters set to correspond to the scenario just described, run the simula
 * Run the model for each of the 5 treatment levels specified above and record the average number of susceptibles left at the end. 
 * Again, sketch out the relationship between treatment level and the number of susceptibles left at the end and compare to what you found in tasks 3 and 4. What do you conclude from that?
 
+**Record**
+
+* The average number of susceptibles left at the end _f_ = 0
+* The average number of susceptibles left at the end _f_ = 0.25
+* The average number of susceptibles left at the end _f_ = 0.5
+* The average number of susceptibles left at the end _f_ = 0.75
+* The average number of susceptibles left at the end _f_ = 1
 
 ### Task 6 
 Keep exploring. For instance, try the following:
@@ -129,6 +159,10 @@ Keep exploring. For instance, try the following:
 * Turn on resistance generation for both treated, _c~t~_, and untreated, _c~u~_. 
 * Explore how population size, _S~0~_, the fraction of resistance generation ( _c~t~_ or _c~u~_ ) and fitness of the different strains ( _b~t~_ or _b~u~_ or _b~r~_ ) affect outcomes.
 * If you want to explore the relation between treatment level and outbreak size (tasks 3-5) in more detail, you could access the underlying simulation directly and write a bit of R code to loop over treatment values following the "Level 2" example described in the DSAIDE tutorial.
+
+**Record**
+
+* Nothing
 
 ## Further Information {#shinytab4}
 

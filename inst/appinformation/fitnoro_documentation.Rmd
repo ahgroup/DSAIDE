@@ -88,6 +88,10 @@ Note that the absolute value of the AIC is unimportant and varies from dataset t
 * For simplicity, lower and upper bounds are set inside the simulator function to the beginning and end of the data. As a result, they can't be adjusted through the user interface.
 * To find out more about the data, see _Further Resources_ or `help(norodata)`. 
 
+**Record**
+
+* Nothing
+
 ### Task 2 
 * There were a total of 288 susceptible individuals. Use that as starting value for the susceptibles. Assume 1 infected, no recovered.
 * Try fit model variant 1, which fits parameters  _b_ and _g_. There are two general approaches. You can set _b_ and _g_ to pretty much any starting value and try to run a large number of iterations with the 3 different solvers until you get a good fit.
@@ -95,10 +99,18 @@ Note that the absolute value of the AIC is unimportant and varies from dataset t
 * In theory, you should always end up with the same best fit. However, as discussed in the flu fitting app, optimizers can sometimes get stuck, so it might be for certain settings you don't end up with a good fit.
 * The best fit I was able to find for model variant 1 was an SSR=1218.81, AIC = 57.03 and best fit parameter values _b = 0.01_ and _g = 1.21_.  
 
+**Record**
+
+* Nothing
+
 ### Task 3
 * Now switch to model variant 2, which also fits parameter _n_.
 * Play around with different starting values for the parameters, different optimizers and different numbers of iterations and see what the best fit is you can find.
 * The best fit I was able to find is identical to model 1, i.e., the optimizer sets the rate of infection from an external source to _n=0_. This, of course, gives the same SSR. The AIC is now larger at 61.74 since the model has more parameters and gets penalized for this. Based on these 2 models so far, we would conclude that an external source did not improve model fit and only direct transmission (model variant 1) was more likely.
+
+**Record**
+
+* Nothing
 
 ### Task 4
 * Now switch to model variant 3, which also fits parameters _t~1~_ and _t~2~_. See what best fit you can find. The value for _t~1~_ must be 8 or greater.    
@@ -108,7 +120,9 @@ The SSR is clearly lower than that for model 1 and 2, and the AIC value suggests
 
 You might have noticed that getting a good fit is tricky and often you don't reach a good one. This comes back to the 'optimizer getting stuck' concept discussed in the 'flu fitting' app.
 
+**Record**
 
+* Nothing
 
 ## Further Information {#shinytab4}
 * This app (and all others) are structured such that the Shiny part (the graphical interface you see and the server-side function that goes with it) calls an underlying R script (or several) which runs the simulation for the model of interest and returns the results.

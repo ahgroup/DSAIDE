@@ -1,5 +1,5 @@
 ---
-title: ID Control 2 - Practice
+title: Complex ID control Scenarios - Practice
 output:
   html_document:
     theme: null
@@ -102,40 +102,62 @@ _Some of the simulations might take a few seconds to run. Be patient._
     * Assume that there are no asymptomatic infections. You can, therefore, set the rate of recovery of asymptomatics to anything, it doesn't matter because nobody will be asymptomatic.
     * Assume that no environmental shedding and decay occurs.
     * Assume nobody dies due to disease, and immunity does not wane.
-    * Assume that there are no births and non-disease deaths occurring.
+    * Assume that there are no births or natural deaths occurring.
     
 * With parameters set to correspond to the scenario just described, run the simulation and ensure you get a single outbreak with 20% susceptibles left at the end.
 
+**Record**
+
+* Nothing
+
 ### Task 2: 
-* Let's now assume that 50% of infected hosts are asymptomatic and that the duration of the asymptomatic stage is the same as the symptomatic stage.
+* Let's now assume that 50% of infected hosts are asymptomatic (_f_) and that the duration of the asymptomatic stage (_gA_) is the same as the symptomatic stage (_gI_).
 * Also, assume that asymptomatic infected are half as infectious as symptomatic infected, and that pre-symptomatic are as infectious as symptomatic.
 * Run the simulation, you should get an outbreak with around 11% susceptibles left.
-* Assume that we quarantine hosts, and that quarantining reduces infectiousness by half. 
-  * First, we envision a scenario where we can only detect and quarantine individuals that show symptoms. Implement such a scenario, run the simulation and record the number of susceptibles left at the end.
+* Assume that quarantining reduces infectiousness by half. 
+  * First, we envision a scenario where we can only detect and quarantine individuals that show symptoms. Implement such a scenario, run the simulation.
   * Next, we envision a scenario where we can quarantine everyone who has become infected, independent of symptom status. Implement such a scenario, again run the simulation and record the number of susceptibles left at the end.
-  
+
+**Record**
+* The number of susceptibles left at the end when only symptomatic patients are quarantined 
+* The number of susceptibles left at the end when all infected patients are quarantined 
+ 
 ### Task 3: 
 * Change settings back as they were before you implemented quarantine. 
 * Now assume that we can administer a drug. It will likely only be given to symptomatic individuals. 
-   * First assume that the drug reduces the infectiousness of symptomatic individuals by half. Run the simulation, record the number of susceptibles at the end of the outbreak. 
-   * Now assume that the drug _also_ reduces the duration of the symptomatic period from a month (30 days) to 20 days. Run the simulation, record the number of susceptibles at the end of the outbreak. 
+   * First assume that the drug reduces the infectiousness of symptomatic individuals by half. Run the simulation. 
+   * Now assume that the drug _also_ reduces the duration of the symptomatic period from a month (30 days) to 20 days. Run the simulation. 
+
+**Record**
+* The number of susceptibles left at the end when symptomatic patients are treated and infectiousness is reduced 
+* The number of susceptibles left at the end when symptomatic patients are treated and infectiousness and duration are reduced 
 
 ### Task 4: 
 * Of course, intervention strategies are best if they reach all that transmit. Let's assume now that we still have a drug that targets symptomatic individuals, but that asymptomatic and presymptomatic individuals don't transmit.
 * Set the model such that only symptomatic individuals transmit, at rate 0.004 and duration of the symptomatic period to 1 month. Nobody else transmits. Everything else should be as in task 2. You should get an outbreak of the same size as in task 1.
-* Now assume that the drug reduces the duration of the symptomatic period from a month (30 days) to 20 days. Run the simulation, record the number of susceptibles at the end of the outbreak. 
-* Now assume that the drug also cuts infectiousness by half. Run the simulation, record the number of susceptibles at the end of the outbreak. 
+* Now assume that the drug reduces the duration of the symptomatic period from a month (30 days) to 20 days. Run the simulation. 
+* Now assume that the drug also cuts infectiousness by half. Run the simulation. 
 
+**Record**
+* The number of susceptibles left at the end when symptomatic patients are treated and duration is reduced
+* The number of susceptibles left at the end when symptomatic patients are treated and duration and infectiousness are reduced
 
 ### Task 5: 
-* Set everything as in task 1. Then turn on environmental shedding by symptomatic individuals and decay both at rates of 1 per month. Run an outbreak, record the number of susceptibles at the end.
+* Set everything as in task 1. Then turn on environmental shedding by symptomatic individuals and decay both at rates of 1 per month. Run the simulation. 
+
+**Record**
+Number of susceptibles at the end
 
 ### Task 6: 
 * Set rate of transmission from the environment to susceptible hosts to 0.002. Run the simulation.
 * Turn off the rate of direct transmission between hosts. Make sure you still get an outbreak. 
 * Let's assume different interventions that affect the environmental transmission.
-  * First, we consider an intervention that leads to a 50% increased pathogen clearance from the environment. Implement that and run the simulation.
-  * Instead of faster clearance, assume a 50% reduced rate of infection from the environment. Implement that and run the simulation.
+  * First, we consider an intervention that leads to a 50% increased pathogen clearance from the environment. Run the simulation.
+  * Instead of faster clearance, assume a 50% reduced rate of infection from the environment. Run the simulation.
+
+**Record**
+* The number of susceptibles left at the end when treatment increases pathogen clearance from the environment
+* The number of susceptibles left at the end when treatment decreases infectiousness of pathogen in the environment.
 
 ### Task 7: 
 * We'll now switch to vector-borne transmission. Set everything as in task 1, introduce 1 infected vector.   
@@ -143,17 +165,28 @@ _Some of the simulations might take a few seconds to run. Be patient._
 * Run the simulation. Observe the dynamics of the vectors.
 * Now allow for vector births and deaths. Assume that vectors (say mosquitoes) live for half a month. Set birth rate such that vector population balances at 1000. Run the simulation.
 * Double host-vector and vector-host transmission rates. Now consider some vector control measures.
-* Assume we sprayed against mosquitoes and it reduced the population size by 90%. Set the initial vector population to that value, run the outbreak, observe.
+* Assume we sprayed against mosquitoes and it reduced the population size by 90%. Set the initial vector population to that value. Run the simulation.
+
+**Record**
+The total number infected when vector population is reduced by 90% 
 
 ### Task 8: 
 * Instead of killing vector populations, we now consider a reduction in transmission, e.g. due to the use of bed nets.
-* Set everything as in task 7 (minus the intervention). Assume that an intervention reduces transmission _to_ vectors by half. Run the simulation, observe.
-* Now assume that an intervention reduces transmission _from_ vectors by half. Run the simulation, observe.
+* Set everything as in task 7 (minus the intervention). 
+* Assume that an intervention only reduces transmission _to_ vectors by half. Run the simulation, observe.
+* Now assume that an intervention only reduces transmission _from_ vectors by half. Run the simulation, observe.
 * Finally, assume that the intervention reduces transmission both to and from vectors by half. Run the simulation, observe.
-  
+
+**Record**
+
+* Nothing
+
 ### Task 9: 
 * Keep exploring. The model has many more parameters that you can change, e.g. allowing births and deaths and waning immunity for hosts, or ID that transmit through multiple routes at the same time (e.g. Zika virus). Investigate how different control strategies work under different scenarios.
-  
+
+**Record**
+
+* Nothing
 
 ## Further Information {#shinytab4}
 

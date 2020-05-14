@@ -80,7 +80,12 @@ Often the letter _E_ is used for the _exposed_ stage, which would then be called
     * Assume that the duration of the infectious period is about 2 months long. 
     * Turn off births, _m_, and deaths, _n_, for now.
 * Run the simulation. You should get the usual direct transmission dynamics and a single outbreak.
-* Record the number and fraction of susceptible/infected/recovered remaining at the end of the outbreak. You should be left with around 202 susceptibles at the end of the simulation. Remember that in a model like this, where the only flow from the susceptible class is outflow through becoming infected, everyone who is not in the susceptible compartment at the end has been infected. Thus the total number of infected during the outbreak is the different between susceptibles at the beginning and at the end.    
+* You should be left with around 202 susceptibles at the end of the simulation. Remember that in a model like this, where the only flow from the susceptible class is outflow through becoming infected, everyone who is not in the susceptible compartment at the end has been infected. Thus the total number of infected during the outbreak is the different between susceptibles at the beginning and at the end.    
+
+**Record**
+
+* Number of susceptible/infected/recovered remaining at the end of the outbreak.
+* Fraction of susceptible/infected/recovered remaining at the end of the outbreak
 
 ### Task 2: 
 * Now try various values for the rate of shedding into the environment, _p_, and environmental clearance _c_. Leave everything else unchanged.
@@ -88,29 +93,52 @@ Often the letter _E_ is used for the _exposed_ stage, which would then be called
 * Think about your expectations, run the simulation and compare your expectations with the results.
 * Anything surprising happening? Do you understand why you see what you see?
 
+**Record**
+
+* Nothing
 
 ### Task 3: 
 * Now set _p = 10_ and _c = 10_ . Turn off direct transmission. Run to make sure you don't get an outbreak.
 * Turn on environmental transmission, set it to _b~E~ = 0.001_. Leave everything else unchanged.
 * What do you expect to see? Run simulations and compare with the direct transmission results.
 
+**Record**
+
+* Number of susceptible/infected/recovered remaining at the end of the outbreak.
+* Fraction of susceptible/infected/recovered remaining at the end of the outbreak
+
 ### Task 4: 
 * Now also turn on direct transmission by setting _b~D~ = b~E~ = 0.001_. Leave everything else unchanged.
 * What do you expect to see? Run simulations and see how your expectations hold up.
+
+**Record**
+
+* Nothing
 
 ### Task 5: 
 * Now set the initial number of infected to 0 and initial pathogen in the environment to 1. Leave everything else unchanged.
 * What do you expect to see? Run simulations and see how your expectations hold up.
 
+**Record**
+
+* Nothing
+
 ### Task 6: 
 * Try different combinations of direct and environmental transmission only and having only infected hosts or only pathogen in the environment at the start. 
 * What do you expect to see? Run simulations and see how your expectations hold up.
+
+**Record**
+
+* Nothing
 
 ### Task 7: 
 * Keep exploring by trying different parameters and transmission settings and see how they influence results.
 * You can also turn on births/deaths and see what you get.
 * As you continue your exploration, think about potential real infectious diseases that might be approximated by either one of the transmission types, and what settings for other model parameters would be for those ID.
 
+**Record**
+
+* Nothing
 
 ## Further Information {#shinytab4}
 

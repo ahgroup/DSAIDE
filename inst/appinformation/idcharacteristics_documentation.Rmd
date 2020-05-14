@@ -88,15 +88,27 @@ $$\dot D = d g_I I$$
 * From the graph, contemplate how you would estimate the day at which the outbreak peaks. What's the problem? How would you solve it?
 * Rerun the simulation, with the same values you just had. Does anything change? Why (not)?
 
+**Record**
+
+* Number recovered at the end
+
 ### Task 2: 
 * Assume now that half of the infected are asymptomatic. Don't change any other assumption.
 * What do you expect to get for the number/fraction of S/I/R at the end of the outbreak and the time at which the outbreak peaks?
 * Run another simulation, record the same values as above.
 * Compare your expectations with the results. How do they agree/disagree? Does it make sense? Anything surprising happening?
 
+**Record**
+
+* Number recovered at the end
+
 ### Task 3: 
 * Now assume that the asymptomatics transmit at the same rate as the symptomatic. Change _b~A~_ accordingly. Leave everything else as before. How do you expect the results to change? (Try to make as precise/quantitative a prediction as you can).
 * Run another simulation, compare your expectations with the results. How do they agree/disagree? Does it make sense? Anything surprising happening?
+
+**Record**
+
+* Number susceptible at the end
 
 ### Task 4: 
 * Next, let's assume that half the symptomatic infected die. Change the corresponding parameter in the model to reflect this new assumption. Leave everything as in #3.
@@ -104,16 +116,33 @@ $$\dot D = d g_I I$$
 * Run another simulation, record the same values as above.
 * Compare your expectations with the results. How do they agree/disagree? Does it make sense? Anything surprising happening?
 
+**Record**
+
+* Max number of pre-symptomatic
+* Max number of infected
+* Total fraction infected
+
 ### Task 5: 
-* Set all transmission parameters to 0.0005, leave everything else as before. What do you expect will happen to the peak of _P_ and _I_ as well as the total fraction of population ever infected (i.e., _R_ + _D_ at the end of simulation), compared to the previous task?_
+* Set all transmission parameters to 0.0005, leave everything else as before. What do you expect will happen to the peak of _P_ and _I_ as well as the total fraction of population ever infected (i.e., _R_ + _D_ at the end of simulation), compared to the previous task?
 * Further explore how changes in the infectiousness of the different groups (_b~P~_, _b~A~_, _b~I~_) and the average time a person spends in each of those states (_g~P~_, _g~A~_, _g~I~_) affects the infection dynamics.
 * Every time, think about what you expect to get, then run the simulation, compare your expectations with the results. Then make sense of it.
+
+**Record**
+
+* Max number of pre-symptomatic
+* Max number of infected
+* Total fraction infected
 
 ### Task 6: 
 * Now assume that 90% of infections are asymptomatic. How do things change?  
 * Further explore how changes in the fraction becoming asymptomatic and fraction dying does (or does not) affect the infection dynamics.
 * Every time, think about what you expect to get, then run the simulation, compare your expectations with the results. Then make sense of it.
 
+**Record**
+
+* Max number of pre-symptomatic
+* Max number of infected
+* Total fraction infected
 
 
 ## Further Information {#shinytab4}
