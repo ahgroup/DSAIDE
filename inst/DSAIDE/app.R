@@ -79,8 +79,6 @@ server <- function(input, output, session)
       #If not needed, it is NULL
       source(settingfilename) #source the file with additional settings to load them
 
-      source(settingfilename) #source the file with additional settings to load them
-
       #extract function and other inputs and turn them into a taglist
       #this uses the 1st function provided by the settings file and stored in currentsimfct
       #indexing sim function in case there are multiple
