@@ -181,11 +181,7 @@ alltasks[9,"Record"] = "* Minimum number of outbreaks you can get \n * Maximum n
 
 xlsx::write.xlsx(alltasks, file = "basicsir_alltasks.xlsx")
 
-saveRDS(alltasks, file = "basicsir_alltasks.Rda")
-
-test<-readRDS("basicsir_alltasks.Rda")
-
-test2<-xlsx::read.xlsx("basicsir_alltasks.xlsx",1)
+#saveRDS(alltasks, file = "basicsir_alltasks.Rda")
 
 
 ```
@@ -195,14 +191,8 @@ test2<-xlsx::read.xlsx("basicsir_alltasks.xlsx",1)
 
 for (n in 1:ntasks)
 {
-  writeLines(c(paste('### Task ',n), '\n', paste(test2[n,"TaskText"]), '\n',  '**Record**', '\n', paste(test2[n,"Record"]), '\n\n'))
+  writeLines(c(paste('### Task ',n), '\n', paste(alltasks[n,"TaskText"]), '\n',  '**Record**', '\n', paste(alltasks[n,"Record"]), '\n\n'))
 }
-
-
-# for (n in 1:ntasks)
-# {
-#   writeLines(c(paste('### Task ',n), '\n', paste(alltasks[n,"TaskText"]), '\n',  '**Record**', '\n', paste(alltasks[n,"Record"]), '\n\n'))
-# }
 
 
 ```
