@@ -121,7 +121,7 @@ alltasks = data.frame(TaskID = 1:ntasks, TaskText = rep("",ntasks), Record = rep
 
 # Task 1
 alltasks[1,"TaskText"] = "A) Run the simulation with 1000 susceptible individuals and 1 initially infected host, no recovered. Set simulation duration to 100 days, start time and time step can remain at 0 and 0.1. Set recovery rate _g_=0.5 per day, and infectiousness _b_=0.001. You will get an outbreak of some - currently unspecified - infectious disease. If you did it correctly, your outbreak should end with around 203 uninfected individuals still remaining.
-B) Also take a look at the final number of infected. You'll see that it is at _3E-9_, i.e. much less than 1 but not 0. That's the issue discussed above in the notes, that for ODE models, numbers can drop below 1, and then can slowly go to 0 but not fully reach 0. Often, this biologically unreasonable feature of these kinds of models can be ignored, but sometimes it matters. You will learn more about this in the apps under the “Stochastic models” section."
+B) Also take a look at the final number of infected. You'll see that it is at _3E-9_, i.e. much less than 1 but not 0. That's the issue discussed above in the notes, that for ODE models, numbers can drop below 1, and then can slowly go to 0 but not fully reach 0. Often, this biologically unreasonable feature of these kinds of models can be ignored, but sometimes it matters. You will learn more about this in the apps under the \"Stochastic models\" section."
 
 alltasks[1,"Record"] = "* Total number of recovered at end of outbreak"
 
@@ -193,16 +193,16 @@ test2<-xlsx::read.xlsx("basicsir_alltasks.xlsx",1)
 
 ```{r, echo=FALSE, results='asis'}
 
-# for (n in 1:ntasks)
-# {
-#   writeLines(c(paste('### Task ',n), '\n', paste(test2[n,"TaskText"]), '\n',  '**Record**', '\n', paste(test2[n,"Record"]), '\n\n'))
-# }
-
-
 for (n in 1:ntasks)
 {
-  writeLines(c(paste('### Task ',n), '\n', paste(alltasks[n,"TaskText"]), '\n',  '**Record**', '\n', paste(alltasks[n,"Record"]), '\n\n'))
+  writeLines(c(paste('### Task ',n), '\n', paste(test2[n,"TaskText"]), '\n',  '**Record**', '\n', paste(test2[n,"Record"]), '\n\n'))
 }
+
+
+# for (n in 1:ntasks)
+# {
+#   writeLines(c(paste('### Task ',n), '\n', paste(alltasks[n,"TaskText"]), '\n',  '**Record**', '\n', paste(alltasks[n,"Record"]), '\n\n'))
+# }
 
 
 ```
