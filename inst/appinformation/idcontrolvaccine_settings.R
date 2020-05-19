@@ -1,12 +1,12 @@
 ############################################################
-#This is a file for the id control 1 App
+#This is a file for the basic ID control App (idcontrolvaccine)
 #it contains additional information that helps properly process it
 ############################################################
 
 appsettings = list()
 
 #Title of app, to be displayed on top of analyze tab
-appsettings$apptitle = "ID Control 1"
+appsettings$apptitle = "6: Basics of ID Control"
 
 #name of underlying simulation function(s) to be used in the app
 #must be provided
