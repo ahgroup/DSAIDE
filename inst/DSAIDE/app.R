@@ -294,64 +294,64 @@ ui <- fluidPage(
 
                       tags$div(class='mainsectionheader', 'The Basics'),
                       fluidRow(
-                               actionButton("basicsir", "Basic SIR model", class="mainbutton"),
-                               actionButton("idcharacteristics", "Characteristics of ID", class="mainbutton"),
-                               actionButton("idpatterns", "ID Patterns", class="mainbutton"),
+                               actionButton("basicsir", "1: Basic SIR model", class="mainbutton"),
+                               actionButton("idcharacteristics", "2: Characteristics of ID", class="mainbutton"),
+                               actionButton("idpatterns", "3: ID Patterns", class="mainbutton"),
                         class = "mainmenurow"
                       ), #close fluidRow structure for input
 
                       tags$div(class='mainsectionheader', 'The Reproductive Number'),
                       fluidRow(
-                        actionButton("reproductivenumber1", "Reproductive Number 1", class="mainbutton"),
-                        actionButton("reproductivenumber2", "Reproductive Number 2", class="mainbutton"),
+                        actionButton("reproductivenumber1", "4: Reproductive Number 1", class="mainbutton"),
+                        actionButton("reproductivenumber2", "5: Reproductive Number 2", class="mainbutton"),
                         class = "mainmenurow"
                       ), #close fluidRow structure for input
 
                       tags$div(class='mainsectionheader', 'Controlling Infectious Diseases'),
                       fluidRow(
-                        actionButton("idcontrolvaccine", "Basics of ID control", class="mainbutton"),
-                        actionButton("idcontrolmultioutbreak", "ID control for multiple outbreaks", class="mainbutton"),
-                        actionButton("idcontrolmultigroup", "ID control of different populations", class="mainbutton"),
-                        actionButton("idcontrolcomplex", "Complex ID control scenarios", class="mainbutton"),
+                        actionButton("idcontrolvaccine", "6: Basics of ID control", class="mainbutton"),
+                        actionButton("idcontrolmultioutbreak", "7: ID control for multiple outbreaks", class="mainbutton"),
+                        actionButton("idcontrolmultigroup", "8: ID control of different populations", class="mainbutton"),
+                        actionButton("idcontrolcomplex", "9: Complex ID control scenarios", class="mainbutton"),
                         class = "mainmenurow"
                       ), #close fluidRow structure for input
 
-                      tags$div(class='mainsectionheader', 'Types of transmission'),
+                      tags$div(class='mainsectionheader', 'Types of Transmission'),
                       fluidRow(
-                        actionButton("directtransmission", "Direct transmission", class="mainbutton"),
-                      actionButton("environmentaltransmission", "Environmental transmission", class="mainbutton"),
-                        actionButton("vectortransmission", "Vector transmission", class="mainbutton"),
+                        actionButton("directtransmission", "10: Direct transmission", class="mainbutton"),
+                      actionButton("environmentaltransmission", "11: Environmental transmission", class="mainbutton"),
+                        actionButton("vectortransmission", "12: Vector transmission", class="mainbutton"),
                         class = "mainmenurow"
                       ), #close fluidRow structure for input
 
-                      tags$div(class='mainsectionheader', 'Stochastic models'),
+                      tags$div(class='mainsectionheader', 'Stochastic Models'),
                       fluidRow(
-                        actionButton("stochasticsir", "Stochastic SIR model", class="mainbutton"),
-                         actionButton("stochasticseir", "Stochastic SEIR model", class="mainbutton"),
-                         actionButton("evolutionarydynamics", "Evolutionary dynamics", class="mainbutton"),
+                        actionButton("stochasticsir", "13: Stochastic SIR model", class="mainbutton"),
+                         actionButton("stochasticseir", "14: Stochastic SEIR model", class="mainbutton"),
+                         actionButton("evolutionarydynamics", "15: Evolutionary dynamics", class="mainbutton"),
                         class = "mainmenurow"
                       ),
-                      tags$div(class='mainsectionheader', 'Further ID topics'),
+                      tags$div(class='mainsectionheader', 'Further ID Topics'),
                       fluidRow(
-                        actionButton("hostheterogeneity", "Host heterogeneity", class="mainbutton"),
-                       actionButton("multipathogen", "Multi-Pathogen dynamics", class="mainbutton"),
-                       actionButton("parasitemodel", "Parasite model", class="mainbutton"),
-                       actionButton("idsurveillance", "ID surveillance", class="mainbutton"),
-                       actionButton("maternalimmunity", "Maternal immunity", class="mainbutton"),
+                        actionButton("hostheterogeneity", "16: Host heterogeneity", class="mainbutton"),
+                       actionButton("multipathogen", "17: Multi-Pathogen dynamics", class="mainbutton"),
+                       actionButton("parasitemodel", "18: Parasite model", class="mainbutton"),
+                       actionButton("idsurveillance", "19: ID surveillance", class="mainbutton"),
+                       actionButton("maternalimmunity", "20: Maternal immunity", class="mainbutton"),
                        #actionButton("globalwarming", "Global Warming", class="mainbutton"),
                        #actionButton("metapopulation", "Metapopulation Dynamics", class="mainbutton"),
                        class = "mainmenurow"
                       ), #close fluidRow structure for input
-                      tags$div(class='mainsectionheader', 'Fitting models to data'),
+                      tags$div(class='mainsectionheader', 'Fitting Models to Data'),
                       fluidRow(
-                        actionButton("fitflu", "Fitting influenza data", class="mainbutton"),
-                        actionButton("fitnoro", "Fitting norovirus data", class="mainbutton"),
+                        actionButton("fitflu", "21: Fitting influenza data", class="mainbutton"),
+                        actionButton("fitnoro", "22: Fitting norovirus data", class="mainbutton"),
                         class = "mainmenurow"
                       ), #close fluidRow structure for input
-                      tags$div(class='mainsectionheader', 'Further modeling topics'),
+                      tags$div(class='mainsectionheader', 'Further Modeling Topics'),
                       fluidRow(
-                        actionButton("modelexploration", "Model exploration", class="mainbutton"),
-                        actionButton("usanalysis", "Uncertainty and sensitivity analysis", class="mainbutton"),
+                        actionButton("modelexploration", "23: Model exploration", class="mainbutton"),
+                        actionButton("usanalysis", "24: Uncertainty and sensitivity analysis", class="mainbutton"),
                         class = "mainmenurow"
                       ), #close fluidRow structure for input
                       withTags({
