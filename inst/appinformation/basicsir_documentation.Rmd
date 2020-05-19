@@ -179,7 +179,7 @@ alltasks[9,"TaskText"] = "A) Keep playing around with changing any of the parame
 
 alltasks[9,"Record"] = "* Minimum number of outbreaks you can get \n * Maximum number of outbreaks you can get"
 
-saveRDS(alltasks, file = "alltasks_basicsir.rds")
+saveRDS(alltasks, file = "alltasks_basicsir.Rda")
 
 ```
 
