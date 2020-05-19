@@ -179,12 +179,25 @@ alltasks[9,"TaskText"] = "A) Keep playing around with changing any of the parame
 
 alltasks[9,"Record"] = "* Minimum number of outbreaks you can get \n * Maximum number of outbreaks you can get"
 
-saveRDS(alltasks, file = "alltasks_basicsir.Rda")
+xlsx::write.xlsx(alltasks, file = "basicsir_alltasks.xlsx")
+
+saveRDS(alltasks, file = "basicsir_alltasks.Rda")
+
+test<-readRDS("basicsir_alltasks.Rda")
+
+test2<-xlsx::read.xlsx("basicsir_alltasks.xlsx",1)
+
 
 ```
 
 
 ```{r, echo=FALSE, results='asis'}
+
+# for (n in 1:ntasks)
+# {
+#   writeLines(c(paste('### Task ',n), '\n', paste(test2[n,"TaskText"]), '\n',  '**Record**', '\n', paste(test2[n,"Record"]), '\n\n'))
+# }
+
 
 for (n in 1:ntasks)
 {
