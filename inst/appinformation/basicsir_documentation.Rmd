@@ -179,10 +179,8 @@ alltasks[9,"TaskText"] = "A) Keep playing around with changing any of the parame
 
 alltasks[9,"Record"] = "* Minimum number of outbreaks you can get \n * Maximum number of outbreaks you can get"
 
-xlsx::write.xlsx(alltasks, file = "basicsir_alltasks.xlsx")
 
-#saveRDS(alltasks, file = "basicsir_alltasks.Rda")
-
+writexl::write_xlsx(alltasks,"basicsir_alltasks.xlsx")
 
 ```
 
