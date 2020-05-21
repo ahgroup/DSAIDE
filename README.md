@@ -18,16 +18,17 @@ All models can be explored through a graphical user interface, no reading or wri
 It is also possible to go beyond the graphical interface and directly access and modify all simulations to adapt them to your needs.
 
 ## Getting Started
-The best approach to use this package is to install it, load it, and start the main menu, then you are ready to go. These lines of code typed into the `R` console will get you there:
+For a quick introduction to the package, step-by-step instructions on getting started, and more information on the different ways you can use the package [see the "Get Started" tutorial (vignette)](https://ahgroup.github.io/DSAIDE/articles/DSAIDE.html).
+
+If you are very keen to get started quickly and don't want to read the "Get Started" guide right now, here are the commands to get the package installed, loaded and the main menu started:
 
 ``` 
 install.packages('DSAIDE')
 library('DSAIDE')
 dsaidemenu()
 ```
-You can also give the package [a quick try online, without having to install it](https://handelgroup.shinyapps.io/dsaide/). I still recommend you install it like any regular `R` package should you decide that you want to use it. Note that I only have a free plan for shinyapps.io, where the online version is hosted. If the link fails to work it likely means I reached my maximum monthly allowed capacity. In that case, just go ahead and install the package. It's only 3 commands to get it up and running! 
 
-For a quick introduction to the package, step-by-step instructions on getting started, and more information on the different ways you can use the package [see the "Get Started" tutorial (vignette)](https://ahgroup.github.io/DSAIDE/articles/DSAIDE.html).
+You can also give the package [a quick try online, without having to install it](https://shiny.ovpr.uga.edu/DSAIDE/). I still recommend you install it like any regular `R` package should you decide that you want to use it. The online version is likely not quite as robust as the local. So just go ahead and install the package, it's only 3 commands to get it up and running! 
 
 
 ## Further information
