@@ -4,6 +4,9 @@
     <loc>https://ahgroup.github.io/DSAIDE/index.html/index.html</loc>
   </url>
   <url>
+    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/download_code.html</loc>
+  </url>
+  <url>
     <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/DSAIDE.html</loc>
   </url>
   <url>
@@ -58,6 +61,9 @@
     <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_idcharacteristics_ode.html</loc>
   </url>
   <url>
+    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_idcontrolmultigroup_ode.html</loc>
+  </url>
+  <url>
     <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_idcontrolmultioutbreak_ode.html</loc>
   </url>
   <url>
@@ -86,6 +92,9 @@
   </url>
   <url>
     <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_reproductivenumber2_ode.html</loc>
+  </url>
+  <url>
+    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_schoolclosure_ode.html</loc>
   </url>
   <url>
     <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_seir_stochastic.html</loc>

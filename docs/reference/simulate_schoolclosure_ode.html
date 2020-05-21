@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Simulation of a compartmental infectious disease transmission model to study the reproductive number — simulate_idcontrolmultioutbreak_ode • DSAIDE</title>
+<title>Simulation of a compartmental infectious disease transmission model with 3 types of hosts and intervention — simulate_schoolclosure_ode • DSAIDE</title>
 
 
 <!-- jquery -->
@@ -41,13 +41,10 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Simulation of a compartmental infectious disease transmission model to study the reproductive number — simulate_idcontrolmultioutbreak_ode" />
-<meta property="og:description" content="Simulation of a basic SIR compartmental model with these compartments:
-  Susceptibles (S), Infected/Infectious (I),
-  Recovered and Immune (R).  
-The model is assumed to be in units of months when run through the Shiny App.
-  However as long as all parameters are chosen in the same units, 
-  one can directly call the simulator assuming any time unit." />
+<meta property="og:title" content="Simulation of a compartmental infectious disease transmission model with 3 types of hosts and intervention — simulate_schoolclosure_ode" />
+<meta property="og:description" content="This model allows for the simulation of an ID with 3 types of hosts.
+Groups are assumed to be children, adults and seniors.
+Intervention can be applied to any of the groups for a certain duration." />
 
 
 
@@ -133,75 +130,157 @@ The model is assumed to be in units of months when run through the Shiny App.
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Simulation of a compartmental infectious disease transmission model to study the reproductive number</h1>
-    <small class="dont-index">Source: <a href='https://github.com/ahgroup/DSAIDE/blob/master/R/simulate_idcontrolmultioutbreak_ode.R'><code>R/simulate_idcontrolmultioutbreak_ode.R</code></a></small>
-    <div class="hidden name"><code>simulate_idcontrolmultioutbreak_ode.Rd</code></div>
+    <h1>Simulation of a compartmental infectious disease transmission model with 3 types of hosts and intervention</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ahgroup/DSAIDE/blob/master/R/simulate_schoolclosure_ode.R'><code>R/simulate_schoolclosure_ode.R</code></a></small>
+    <div class="hidden name"><code>simulate_schoolclosure_ode.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Simulation of a basic SIR compartmental model with these compartments:
-  Susceptibles (S), Infected/Infectious (I),
-  Recovered and Immune (R).</p>  
-<p>The model is assumed to be in units of months when run through the Shiny App.
-  However as long as all parameters are chosen in the same units, 
-  one can directly call the simulator assuming any time unit.</p>
+    <p>This model allows for the simulation of an ID with 3 types of hosts.
+Groups are assumed to be children, adults and seniors.
+Intervention can be applied to any of the groups for a certain duration.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>simulate_idcontrolmultioutbreak_ode</span>(
-  <span class='kw'>S</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
-  <span class='kw'>I</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>R</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>0.001</span>,
-  <span class='kw'>g</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>f</span> <span class='kw'>=</span> <span class='fl'>0.3</span>,
-  <span class='kw'>tstart</span> <span class='kw'>=</span> <span class='fl'>10</span>,
-  <span class='kw'>tend</span> <span class='kw'>=</span> <span class='fl'>50</span>,
-  <span class='kw'>tnew</span> <span class='kw'>=</span> <span class='fl'>50</span>,
-  <span class='kw'>tmax</span> <span class='kw'>=</span> <span class='fl'>100</span>
+    <pre class="usage"><span class='fu'>simulate_schoolclosure_ode</span>(
+  <span class='kw'>Sc</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
+  <span class='kw'>Ic</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>Sa</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
+  <span class='kw'>Ia</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>Ss</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
+  <span class='kw'>Is</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>bcc</span> <span class='kw'>=</span> <span class='fl'>0.001</span>,
+  <span class='kw'>bca</span> <span class='kw'>=</span> <span class='fl'>0.001</span>,
+  <span class='kw'>bcs</span> <span class='kw'>=</span> <span class='fl'>0.001</span>,
+  <span class='kw'>bac</span> <span class='kw'>=</span> <span class='fl'>0.001</span>,
+  <span class='kw'>baa</span> <span class='kw'>=</span> <span class='fl'>0.001</span>,
+  <span class='kw'>bas</span> <span class='kw'>=</span> <span class='fl'>0.001</span>,
+  <span class='kw'>bsc</span> <span class='kw'>=</span> <span class='fl'>0.001</span>,
+  <span class='kw'>bsa</span> <span class='kw'>=</span> <span class='fl'>0.001</span>,
+  <span class='kw'>bss</span> <span class='kw'>=</span> <span class='fl'>0.001</span>,
+  <span class='kw'>gc</span> <span class='kw'>=</span> <span class='fl'>0.1</span>,
+  <span class='kw'>ga</span> <span class='kw'>=</span> <span class='fl'>0.1</span>,
+  <span class='kw'>gs</span> <span class='kw'>=</span> <span class='fl'>0.1</span>,
+  <span class='kw'>dc</span> <span class='kw'>=</span> <span class='fl'>0.001</span>,
+  <span class='kw'>da</span> <span class='kw'>=</span> <span class='fl'>0.01</span>,
+  <span class='kw'>ds</span> <span class='kw'>=</span> <span class='fl'>0.1</span>,
+  <span class='kw'>c_start</span> <span class='kw'>=</span> <span class='fl'>30</span>,
+  <span class='kw'>c_end</span> <span class='kw'>=</span> <span class='fl'>60</span>,
+  <span class='kw'>c_strength</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
+  <span class='kw'>c_group</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>tnew</span> <span class='kw'>=</span> <span class='fl'>30</span>,
+  <span class='kw'>tmax</span> <span class='kw'>=</span> <span class='fl'>365</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>S</th>
-      <td><p>: initial number of susceptible hosts : numeric</p></td>
+      <th>Sc</th>
+      <td><p>: initial number of susceptible children : numeric</p></td>
     </tr>
     <tr>
-      <th>I</th>
-      <td><p>: initial number of infected hosts : numeric</p></td>
+      <th>Ic</th>
+      <td><p>:  initial number of infected children : numeric</p></td>
     </tr>
     <tr>
-      <th>R</th>
-      <td><p>: initial number of recovered hosts : numeric</p></td>
+      <th>Sa</th>
+      <td><p>:  initial number of susceptible adults : numeric</p></td>
     </tr>
     <tr>
-      <th>b</th>
-      <td><p>: rate of new infections : numeric</p></td>
+      <th>Ia</th>
+      <td><p>:  initial number of infected adults : numeric</p></td>
     </tr>
     <tr>
-      <th>g</th>
-      <td><p>: rate of recovery : numeric</p></td>
+      <th>Ss</th>
+      <td><p>:  initial number of susceptible seniors : numeric</p></td>
     </tr>
     <tr>
-      <th>f</th>
-      <td><p>: strength of intervention effort : numeric</p></td>
+      <th>Is</th>
+      <td><p>:  initial number of infected seniors : numeric</p></td>
     </tr>
     <tr>
-      <th>tstart</th>
-      <td><p>: time at which intervention effort starts : numeric</p></td>
+      <th>bcc</th>
+      <td><p>:  rate of transmission from infected child to susceptible child : numeric</p></td>
     </tr>
     <tr>
-      <th>tend</th>
-      <td><p>: time at which intervention effort ends : numeric</p></td>
+      <th>bca</th>
+      <td><p>:  rate of transmission from infected child to susceptible adult : numeric</p></td>
+    </tr>
+    <tr>
+      <th>bcs</th>
+      <td><p>:  rate of transmission from infected child to susceptible senior : numeric</p></td>
+    </tr>
+    <tr>
+      <th>bac</th>
+      <td><p>:  rate of transmission from infected adult to susceptible child : numeric</p></td>
+    </tr>
+    <tr>
+      <th>baa</th>
+      <td><p>:  rate of transmission from infected adult to susceptible adult : numeric</p></td>
+    </tr>
+    <tr>
+      <th>bas</th>
+      <td><p>:  rate of transmission from infected adult to susceptible senior : numeric</p></td>
+    </tr>
+    <tr>
+      <th>bsc</th>
+      <td><p>:  rate of transmission from infected senior to susceptible child : numeric</p></td>
+    </tr>
+    <tr>
+      <th>bsa</th>
+      <td><p>:  rate of transmission from infected senior to susceptible adult : numeric</p></td>
+    </tr>
+    <tr>
+      <th>bss</th>
+      <td><p>:  rate of transmission from infected senior to susceptible senior : numeric</p></td>
+    </tr>
+    <tr>
+      <th>gc</th>
+      <td><p>:  rate at which infected children recover or die : numeric</p></td>
+    </tr>
+    <tr>
+      <th>ga</th>
+      <td><p>:  rate at which infected adults recover or die : numeric</p></td>
+    </tr>
+    <tr>
+      <th>gs</th>
+      <td><p>:  rate at which infected seniors recover or die : numeric</p></td>
+    </tr>
+    <tr>
+      <th>dc</th>
+      <td><p>:  fraction of infected children who die : numeric</p></td>
+    </tr>
+    <tr>
+      <th>da</th>
+      <td><p>:  fraction of infected adults who die : numeric</p></td>
+    </tr>
+    <tr>
+      <th>ds</th>
+      <td><p>:  fraction of infected seniors who die : numeric</p></td>
+    </tr>
+    <tr>
+      <th>c_start</th>
+      <td><p>: start of intervention : numeric</p></td>
+    </tr>
+    <tr>
+      <th>c_end</th>
+      <td><p>: end of intervention : numeric</p></td>
+    </tr>
+    <tr>
+      <th>c_strength</th>
+      <td><p>: strength of intervention, between 0 and 1 : numeric</p></td>
+    </tr>
+    <tr>
+      <th>c_group</th>
+      <td><p>: target group for intervention (1 = children, 2 = adults, 3 = seniors) : numeric</p></td>
     </tr>
     <tr>
       <th>tnew</th>
-      <td><p>: time at which new infected enter : numeric</p></td>
+      <td><p>: time at which new infected adults enter : numeric</p></td>
     </tr>
     <tr>
       <th>tmax</th>
-      <td><p>: maximum simulation time : numeric</p></td>
+      <td><p>:  maximum simulation time, units of months : numeric</p></td>
     </tr>
     </table>
 
@@ -215,7 +294,7 @@ The model is assumed to be in units of months when run through the Shiny App.
   is simulated as a set of ordinary differential
   equations. The function returns the output from the odesolver as a matrix,
   with one column per compartment/variable. The first column is time.
-  The model implement basic processes of infection at rate b and recovery at rate g.
+  The model implement basic processes of infection, recovery and death.
   Treatment is applied, which reduces b by the indicated proportion, during times tstart and tend.
   At time intervals given by tnew, a new infected individual enters the population.
   The simulation also monitors the number of infected and when they drop below 1, they are set to 0.</p>
@@ -224,20 +303,12 @@ The model is assumed to be in units of months when run through the Shiny App.
     
 
 <p>This function does not perform any error checking. So if you try to do
-  something nonsensical (e.g. negative values or fractions &gt; 1),
+  something nonsensical (e.g. any negative values or fractions &gt; 1),
   the code will likely abort with an error message.</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p>The UI of the app 'Multi Outbreak ID Control', which is part of the DSAIDE package, contains more details.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>  <span class='co'># To run the simulation with default parameters just call the function:</span>
-  <span class='no'>result</span> <span class='kw'>&lt;-</span> <span class='fu'>simulate_idcontrolmultioutbreak_ode</span>()
-  <span class='co'># To choose parameter values other than the standard one, </span>
-  <span class='co'># specify the parameters you want to change, e.g. like such:</span>
-  <span class='no'>result</span> <span class='kw'>&lt;-</span> <span class='fu'>simulate_idcontrolmultioutbreak_ode</span>(<span class='kw'>S</span> <span class='kw'>=</span> <span class='fl'>2000</span>, <span class='kw'>I</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>tmax</span> <span class='kw'>=</span> <span class='fl'>100</span>, <span class='kw'>g</span> <span class='kw'>=</span> <span class='fl'>0.5</span>)
-  <span class='co'># You should then use the simulation result returned from the function, like this:</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>result</span>$<span class='no'>ts</span>[ , <span class='st'>"time"</span>],<span class='no'>result</span>$<span class='no'>ts</span>[ , <span class='st'>"S"</span>],<span class='kw'>xlab</span><span class='kw'>=</span><span class='st'>'Time'</span>,<span class='kw'>ylab</span><span class='kw'>=</span><span class='st'>'Number Susceptible'</span>,<span class='kw'>type</span><span class='kw'>=</span><span class='st'>'l'</span>)</div><div class='img'><img src='simulate_idcontrolmultioutbreak_ode-1.png' alt='' width='700' height='433' /></div></pre>
+  <span class='no'>result</span> <span class='kw'>&lt;-</span> <span class='fu'>simulate_schoolclosure_ode</span>()</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
