@@ -117,11 +117,14 @@ In words, the number of susceptible/infected/recovered at a time step _dt_ in th
 # is more useable later
 ntasks = 9 #number of tasks
 
-alltasks = data.frame(TaskID = 1:ntasks,  TaskText =  rep("",ntasks))
+alltasks = data.frame(AppTitle = appsettings$apptitle, AppID = appsettings$appid, TaskID = 1:ntasks,  TaskText =  rep("",ntasks))
 
 nrecord = 19 #number of outcomes to record
 
-allrecord = data.frame(AppTitle = appsettings$apptitle, TaskID = rep("",nrecord), Record = rep("",nrecord), Note = rep("",nrecord), Answer = rep("",nrecord), Fuzzy = rep(0,nrecord), Review = rep(0,nrecord))
+allrecord = data.frame(TaskID = 1:nrecord, Record = rep("",nrecord), Note = rep("",nrecord), Answer = rep("",nrecord), Fuzzy = rep(0,nrecord), Review = rep(0,nrecord))
+
+# used when running locally to trouble shoot
+#allrecord = data.frame(TaskID = 1:nrecord, Record = rep("",nrecord), Note = rep("",nrecord), Answer = rep("",nrecord), Fuzzy = rep(0,nrecord), Review = rep(0,nrecord))
 
 ## NOTE
 # Fuzzy if 1: means the quiz checker should not be too strict (within +/- of "right" answer)
@@ -136,11 +139,11 @@ B) Also take a look at the final number of infected. You'll see that it is at _3
 
 allrecord[1,"TaskID"] = 1  
 
-allrecord[1,"Record"] = "* Total number of recovered at end of outbreak"  
+allrecord[1,"Record"] = "Total number of recovered at end of outbreak"  
 
-allrecord[1,"Note"] = "Report the integer"
+allrecord[1,"Note"] = "Report the rounded integer"
 
-allrecord[1,"Answer"] = 798
+
 
 
 # Task 2 
@@ -150,7 +153,7 @@ D) Try again switching between ggplot and plotly as plotting engine."
 
 allrecord[2,"TaskID"] = 2
 
-allrecord[2,"Record"] = "* Nothing"
+allrecord[2,"Record"] = "Nothing"
 
 
 
@@ -165,22 +168,19 @@ D) Rerun the simulation, with the same values you just had. Does anything change
 
 allrecord[3,"TaskID"] = 3  
 
-allrecord[3,"Record"] = "* Day the outbreak peaked"  
+allrecord[3,"Record"] = "Day the outbreak peaked"  
 
-allrecord[3,"Note"] = "Report the integer"
-
-allrecord[3,"Answer"] = "14"
+allrecord[3,"Note"] = "Report the rounded integer"
 
 allrecord[3,"Fuzzy"] = 1
 
 
 allrecord[4,"TaskID"] = 3  
 
-allrecord[4,"Record"] = "* Total number infected at end of outbreak"  
+allrecord[4,"Record"] = "Total number infected at end of outbreak"  
 
-allrecord[4,"Note"] = "Report the integer"
+allrecord[4,"Note"] = "Report the rounded integer"
 
-allrecord[4,"Answer"] = "798"
 
 
 ### Task 4 
@@ -190,20 +190,16 @@ alltasks[4,"TaskText"] = "A) Set \"Models to run\" to \"both\", which runs and s
 
 allrecord[5,"TaskID"] = 4  
 
-allrecord[5,"Record"] = "* Number of susceptible at end of outbreak for continuous-time model"   
+allrecord[5,"Record"] = "Number of susceptible at end of outbreak for continuous-time model"   
 
-allrecord[5,"Note"] = "Report the integer"
-
-allrecord[5,"Answer"] = 203
+allrecord[5,"Note"] = "Report the rounded integer"
 
 
 allrecord[6,"TaskID"] = 4  
 
-allrecord[6,"Record"] = "* Number of susceptible at end of outbreak for discrete-time model"  
+allrecord[6,"Record"] = "Number of susceptible at end of outbreak for discrete-time model"  
 
-allrecord[6,"Note"] = "Report the integer"
-
-allrecord[6,"Answer"] = 202
+allrecord[6,"Note"] = "Report the rounded integer"
 
 
 
@@ -215,20 +211,16 @@ A) Now try different values for _dt_. Leave all other settings as before. You sh
 
 allrecord[7,"TaskID"] = 5  
 
-allrecord[7,"Record"] = "* Number of susceptible left at end of outbreak for continuous-time model dt=1"   
+allrecord[7,"Record"] = "Number of susceptible left at end of outbreak for continuous-time model dt=1"   
 
-allrecord[7,"Note"] = "Report the integer"
-
-allrecord[7,"Answer"] = 203
+allrecord[7,"Note"] = "Report the rounded integer"
 
 
 allrecord[8,"TaskID"] = 5  
 
-allrecord[8,"Record"] = "* Number of susceptible left at end of outbreak for discrete-time model dt=1"  
+allrecord[8,"Record"] = "Number of susceptible left at end of outbreak for discrete-time model dt=1"  
 
-allrecord[8,"Note"] = "Report the integer"
-
-allrecord[8,"Answer"] = 171
+allrecord[8,"Note"] = "Report the rounded integer"
 
 
 ### Task 6 
@@ -239,29 +231,23 @@ A) Go back to running the ODE model only. Set all parameters as described in tas
 
 allrecord[9,"TaskID"] = 6  
 
-allrecord[9,"Record"] = "* Number of susceptible at end of outbreak"   
+allrecord[9,"Record"] = "Number of susceptible at end of outbreak"   
 
-allrecord[9,"Note"] = "Report the integer"
-
-allrecord[9,"Answer"] = 20
+allrecord[9,"Note"] = "Report the rounded integer"
 
 
 allrecord[10,"TaskID"] = 6  
 
-allrecord[10,"Record"] = "* Number of recovered at end of outbreak"  
+allrecord[10,"Record"] = "Number of recovered at end of outbreak"  
 
-allrecord[10,"Note"] = "Report the integer"
-
-allrecord[10,"Answer"] = 981
+allrecord[10,"Note"] = "Report the rounded integer"
 
 
 allrecord[11,"TaskID"] = 6  
 
-allrecord[11,"Record"] = "* Day the outbreak peaked"  
+allrecord[11,"Record"] = "Day the outbreak peaked"  
 
-allrecord[11,"Note"] = "Report the integer"
-
-allrecord[11,"Answer"] = 5
+allrecord[11,"Note"] = "Report the rounded integer"
 
 allrecord[11,"Fuzzy"] = 1
 
@@ -273,31 +259,26 @@ alltasks[7,"TaskText"] = "A) Double the rate of recovery, _g_, leave everything 
 
 allrecord[12,"TaskID"] = 7  
 
-allrecord[12,"Record"] = "* Number of susceptible at end of outbreak"   
+allrecord[12,"Record"] = "Number of susceptible at end of outbreak"   
 
-allrecord[12,"Note"] = "Report the integer"
-
-allrecord[12,"Answer"] = 957
+allrecord[12,"Note"] = "Report the rounded integer"
 
 
 allrecord[13,"TaskID"] = 7  
 
-allrecord[13,"Record"] = "* Number of recovered at end of outbreak"  
+allrecord[13,"Record"] = "Number of recovered at end of outbreak"  
 
-allrecord[13,"Note"] = "Report the integer"
-
-allrecord[13,"Answer"] = 44
+allrecord[13,"Note"] = "Report the rounded integer"
 
 
 allrecord[14,"TaskID"] = 7  
 
-allrecord[14,"Record"] = "* Is there a peak for the outbreak"  
+allrecord[14,"Record"] = "Is there a peak for the outbreak"  
 
 allrecord[14,"Note"] = "Report TRUE or FALSE"
 
-allrecord[14,"Answer"] = FALSE
 
-allrecord[14,"Review"] = 1
+
 
 
 ### Task 8 
@@ -307,31 +288,24 @@ alltasks[8,"TaskText"] = "A) Double the number of susceptibles, _S~0~_, leave ev
 
 allrecord[15,"TaskID"] = 8  
 
-allrecord[15,"Record"] = "* Number of susceptible at end of outbreak"   
+allrecord[15,"Record"] = "Number of susceptible at end of outbreak"   
 
-allrecord[15,"Note"] = "Report the integer"
-
-allrecord[15,"Answer"] = 406
+allrecord[15,"Note"] = "Report the rounded integer"
 
 
 allrecord[16,"TaskID"] = 8  
 
-allrecord[16,"Record"] = "* Number of recovered at end of outbreak"  
+allrecord[16,"Record"] = "Number of recovered at end of outbreak"  
 
-allrecord[16,"Note"] = "Report the integer"
-
-allrecord[16,"Answer"] = 1595
+allrecord[16,"Note"] = "Report the rounded integer"
 
 
 allrecord[17,"TaskID"] = 8  
 
-allrecord[17,"Record"] = "* Is there a peak for the outbreak"  
+allrecord[17,"Record"] = "Is there a peak for the outbreak"  
 
 allrecord[17,"Note"] = "Report TRUE or FALSE"
 
-allrecord[17,"Answer"] = TRUE
-
-allrecord[17,"Review"] = 1
 
 
 # Task 9 
@@ -342,25 +316,23 @@ alltasks[9,"TaskText"] = "A) Keep playing around with changing any of the parame
 
 allrecord[18,"TaskID"] = 9  
 
-allrecord[18,"Record"] = "* Minimum number of outbreaks you can get"   
+allrecord[18,"Record"] = "Minimum number of outbreaks you can get"   
 
-allrecord[18,"Note"] = "Report the integer"
-
-allrecord[18,"Answer"] = 0
+allrecord[18,"Note"] = "Report an integer"
 
 
 allrecord[19,"TaskID"] = 9  
 
 allrecord[19,"Record"] = "Maximum number of outbreaks you can get"  
 
-allrecord[19,"Note"] = "Report the integer"
-
-allrecord[19,"Answer"] = 1
+allrecord[19,"Note"] = "Report an integer"
 
 
-write.table(alltasks, "basicsir_alltasks.tsv", append = FALSE, sep = "\t", row.names = F, col.names = TRUE)
+# Make a single file using join_all 
 
-write.table(allrecord, "basicsir_allrecord.tsv", append = FALSE, sep = "\t", row.names = F, col.names = TRUE)
+alltext<-dplyr::full_join(alltasks,allrecord, by="TaskID")
+
+write.table(alltext, "1_alltext.tsv", append = FALSE, sep = "\t", row.names = F, col.names = TRUE)
 
 ```
 
@@ -369,12 +341,13 @@ write.table(allrecord, "basicsir_allrecord.tsv", append = FALSE, sep = "\t", row
 
 for (n in 1:ntasks)
 {
-  writeLines(c(paste('### Task ',n), '\n', paste(alltasks[n,"TaskText"]), '\n',  '**Record**', '\n'))
+ 
+  rtext<-dplyr::filter(alltext, TaskID==n)
   
-  rtext<-dplyr::filter(allrecord, TaskID==n)
+  writeLines(c(paste('### Task ',n), '\n', paste(unique(rtext["TaskText"])), '\n',  '**Record**', '\n'))
   
   for (k in 1:nrow(rtext)){
-    writeLines(c(paste(rtext[k,"Record"]), '\n'))
+    writeLines(c(paste("*",rtext[k,"Record"]), '\n'))
   }
   
 }
