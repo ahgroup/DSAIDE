@@ -152,7 +152,6 @@ allrecord[2,"TaskID"] = 2
 
 allrecord[2,"Record"] = "* Nothing"
 
-allrecord[2,"Answer"] = " "
 
 
 ### Task 3 
@@ -296,7 +295,7 @@ allrecord[14,"Record"] = "* Is there a peak for the outbreak"
 
 allrecord[14,"Note"] = "Report TRUE or FALSE"
 
-allrecord[14,"Answer"] = 0
+allrecord[14,"Answer"] = FALSE
 
 allrecord[14,"Review"] = 1
 
@@ -312,7 +311,7 @@ allrecord[15,"Record"] = "* Number of susceptible at end of outbreak"
 
 allrecord[15,"Note"] = "Report the integer"
 
-allrecord[15,"Answer"] = 957
+allrecord[15,"Answer"] = 406
 
 
 allrecord[16,"TaskID"] = 8  
@@ -321,7 +320,7 @@ allrecord[16,"Record"] = "* Number of recovered at end of outbreak"
 
 allrecord[16,"Note"] = "Report the integer"
 
-allrecord[16,"Answer"] = 44
+allrecord[16,"Answer"] = 1595
 
 
 allrecord[17,"TaskID"] = 8  
@@ -330,7 +329,7 @@ allrecord[17,"Record"] = "* Is there a peak for the outbreak"
 
 allrecord[17,"Note"] = "Report TRUE or FALSE"
 
-allrecord[17,"Answer"] = 0
+allrecord[17,"Answer"] = TRUE
 
 allrecord[17,"Review"] = 1
 
