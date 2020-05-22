@@ -215,7 +215,7 @@ A) Now try different values for _dt_. Leave all other settings as before. You sh
 
 allrecord[7,"TaskID"] = 5  
 
-allrecord[7,"Record"] = "* Number of susceptible left at end of outbreak for continuous-time model dt=1?"   
+allrecord[7,"Record"] = "* Number of susceptible left at end of outbreak for continuous-time model dt=1"   
 
 allrecord[7,"Note"] = "Report the integer"
 
@@ -224,7 +224,7 @@ allrecord[7,"Answer"] = 203
 
 allrecord[8,"TaskID"] = 5  
 
-allrecord[8,"Record"] = "* Number of susceptible left at end of outbreak for discrete-time model dt=1?"  
+allrecord[8,"Record"] = "* Number of susceptible left at end of outbreak for discrete-time model dt=1"  
 
 allrecord[8,"Note"] = "Report the integer"
 
