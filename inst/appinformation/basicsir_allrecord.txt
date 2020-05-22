@@ -1,6 +1,6 @@
 "TaskID"	"Record"	"Note"	"Answer"	"Fuzzy"	"Review"
 "1"	"* Total number of recovered at end of outbreak"	"Report the integer"	"798"	0	0
-"2"	"* Nothing"	""	""	0	0
+"2"	"* Nothing"	""	" "	0	0
 "3"	"* Day the outbreak peaked"	"Report the integer"	"14"	1	0
 "3"	"* Total number infected at end of outbreak"	"Report the integer"	"798"	0	0
 "4"	"* Number of susceptible at end of outbreak for continuous-time model"	"Report the integer"	"203"	0	0
