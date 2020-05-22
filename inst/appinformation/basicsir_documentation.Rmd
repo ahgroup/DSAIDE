@@ -117,13 +117,26 @@ In words, the number of susceptible/infected/recovered at a time step _dt_ in th
 # is more useable later
 ntasks = 9 #number of tasks
 
-alltasks = data.frame(TaskID = 1:ntasks, TaskText = rep("",ntasks), Record = rep("",ntasks))
+alltasks = data.frame(TaskID = 1:ntasks,  TaskText =  rep("",ntasks))
+
+nrecord = 19 #number of outcomes to record
+
+allrecord = data.frame(TaskID = rep("",nrecord), Record = rep("",nrecord), Note = rep("",nrecord), Answer = rep("",nrecord), Fuzzy = rep(0,nrecord), Review = rep(0,nrecord) )
 
 # Task 1
 alltasks[1,"TaskText"] = "A) Run the simulation with 1000 susceptible individuals and 1 initially infected host, no recovered. Set simulation duration to 100 days, start time and time step can remain at 0 and 0.1. Set recovery rate _g_=0.5 per day, and infectiousness _b_=0.001. You will get an outbreak of some - currently unspecified - infectious disease. If you did it correctly, your outbreak should end with around 203 uninfected individuals still remaining.
 B) Also take a look at the final number of infected. You'll see that it is at _3E-9_, i.e. much less than 1 but not 0. That's the issue discussed above in the notes, that for ODE models, numbers can drop below 1, and then can slowly go to 0 but not fully reach 0. Often, this biologically unreasonable feature of these kinds of models can be ignored, but sometimes it matters. You will learn more about this in the apps under the \"Stochastic models\" section."
 
-alltasks[1,"Record"] = "* Total number of recovered at end of outbreak"
+
+# Record the answers for task 1
+
+allrecord[1,"TaskID"] = 1  
+
+allrecord[1,"Record"] = "* Total number of recovered at end of outbreak"  
+
+allrecord[1,"Note"] = "Report the integer"
+
+allrecord[1,"Answer"] = 798
 
 
 # Task 2 
@@ -131,7 +144,9 @@ alltasks[2,"TaskText"] = "A) Switch the plotting to have x-axis, y-axis or both 
 C) Note that while the look of the plot changes a lot, nothing has changed about the underlying simulation. The results are exactly the same in each case, only plotted differently. This is something to be aware of when you see plots in papers or produce your own. The best plot to use is the one that shows results of interest in the clearest form. Usually, the x-axis is linear and the y-axis is either linear or logarithmic.
 D) Try again switching between ggplot and plotly as plotting engine."
 
-alltasks[2,"Record"] = "* Nothing"
+allrecord[2,"TaskID"] = 2
+
+allrecord[2,"Record"] = "* Nothing"
 
 
 ### Task 3 
@@ -140,47 +155,212 @@ B) Contemplate the fact that the outbreak ends even though there are still susce
 C) You have no infected left at the end of the outbreak. Figure out how you can use the information from either the susceptibles or recovered left at the end of the outbreak to figure out how many people in total got infected during the outbreak.
 D) Rerun the simulation, with the same values you just had. Does anything change? Why (not)?"
 
-alltasks[3,"Record"] = "* Time of peak \n * Total number infected at end of outbreak"
+
+# Record the answers for task 3
+
+allrecord[3,"TaskID"] = 3  
+
+allrecord[3,"Record"] = "* Day the outbreak peaked"  
+
+allrecord[3,"Note"] = "Report the integer"
+
+allrecord[3,"Answer"] = "14"
+
+allrecord[3,"Fuzzy"] = 1
+
+
+allrecord[4,"TaskID"] = 3  
+
+allrecord[4,"Record"] = "* Total number infected at end of outbreak"  
+
+allrecord[4,"Note"] = "Report the integer"
+
+allrecord[4,"Answer"] = "798"
+
 
 ### Task 4 
 alltasks[4,"TaskText"] = "A) Set \"Models to run\" to \"both\", which runs and shows both the continuous-time and discrete-time models. Start with a discrete-time step of 0.01. Leave all other settings as before. Run the simulation, see what you get. You should see the results from the 2 models essentially on top of each other and barely distinguishable."
 
-alltasks[4,"Record"] = "* Number of susceptible at end of outbreak for continuous-time model \n * Number of susceptible at end of outbreak for discrete-time model"
+# Record the answers for task 4
+
+allrecord[5,"TaskID"] = 4  
+
+allrecord[5,"Record"] = "* Number of susceptible at end of outbreak for continuous-time model"   
+
+allrecord[5,"Note"] = "Report the integer"
+
+allrecord[5,"Answer"] = 203
+
+
+allrecord[6,"TaskID"] = 4  
+
+allrecord[6,"Record"] = "* Number of susceptible at end of outbreak for discrete-time model"  
+
+allrecord[6,"Note"] = "Report the integer"
+
+allrecord[6,"Answer"] = 202
+
 
 
 ### Task 5 
 alltasks[5,"TaskText"] = "
 A) Now try different values for _dt_. Leave all other settings as before. You should notice that as _dt_ gets larger, the differences between discrete-time and continuous-time models increase. At some point when the time-step gets too large, the discrete-time simulation 'crashes' and you get an error message. This doesn't impact the continuous/ODE simulation since it chooses its time-step during the simulation internally and _dt_ only affects the times for which the results are returned."
 
-alltasks[5,"Record"] = "* Number of susceptible left at end of outbreak for **both** models with _dt = 1_."
+# Record the answers for task 5
+
+allrecord[7,"TaskID"] = 5  
+
+allrecord[7,"Record"] = "* Number of susceptible left at end of outbreak for continuous-time model dt=1?"   
+
+allrecord[7,"Note"] = "Report the integer"
+
+allrecord[7,"Answer"] = 203
+
+
+allrecord[8,"TaskID"] = 5  
+
+allrecord[8,"Record"] = "* Number of susceptible left at end of outbreak for discrete-time model dt=1?"  
+
+allrecord[8,"Note"] = "Report the integer"
+
+allrecord[8,"Answer"] = 171
 
 
 ### Task 6 
 alltasks[6,"TaskText"] = "
 A) Go back to running the ODE model only. Set all parameters as described in task 1. Then double the value of the transmission rate, _b_. Compared to what you found in the previous task, how do you expect the min/max and number/fraction of S/I/R at the end of the outbreak to change? What about the time at which the outbreak peaks? Run the simulation with the doubled transmission rate. Compare your expectations with the results. How do they agree/disagree? Does it make sense? Anything surprising happening?"
 
-alltasks[6,"Record"] = "* Number of susceptible at end of outbreak \n * Number of recovered at end of outbreak \n * Time of peak"
+# Record the answers for task 6
+
+allrecord[9,"TaskID"] = 6  
+
+allrecord[9,"Record"] = "* Number of susceptible at end of outbreak"   
+
+allrecord[9,"Note"] = "Report the integer"
+
+allrecord[9,"Answer"] = 20
+
+
+allrecord[10,"TaskID"] = 6  
+
+allrecord[10,"Record"] = "* Number of recovered at end of outbreak"  
+
+allrecord[10,"Note"] = "Report the integer"
+
+allrecord[10,"Answer"] = 981
+
+
+allrecord[11,"TaskID"] = 6  
+
+allrecord[11,"Record"] = "* Day the outbreak peaked"  
+
+allrecord[11,"Note"] = "Report the integer"
+
+allrecord[11,"Answer"] = 5
+
+allrecord[11,"Fuzzy"] = 1
 
 
 ### Task 7
 alltasks[7,"TaskText"] = "A) Double the rate of recovery, _g_, leave everything else as previously. How do you expect the results to change? (Try to make your prediction as precise/quantitative as you can.) Run the simulation with these new parameter settings. Compare your expectations with the results. How do they agree/disagree? Does it make sense? Anything surprising happening?"
 
-alltasks[7,"Record"] = "* Number of susceptible at end of outbreak \n * Number of recovered at end of outbreak \n * Time of peak"
+# Record the answers for task 7
+
+allrecord[12,"TaskID"] = 7  
+
+allrecord[12,"Record"] = "* Number of susceptible at end of outbreak"   
+
+allrecord[12,"Note"] = "Report the integer"
+
+allrecord[12,"Answer"] = 957
+
+
+allrecord[13,"TaskID"] = 7  
+
+allrecord[13,"Record"] = "* Number of recovered at end of outbreak"  
+
+allrecord[13,"Note"] = "Report the integer"
+
+allrecord[13,"Answer"] = 44
+
+
+allrecord[14,"TaskID"] = 7  
+
+allrecord[14,"Record"] = "* Is there a peak for the outbreak"  
+
+allrecord[14,"Note"] = "Report TRUE or FALSE"
+
+allrecord[14,"Answer"] = 0
+
+allrecord[14,"Review"] = 1
 
 
 ### Task 8 
 alltasks[8,"TaskText"] = "A) Double the number of susceptibles, _S~0~_, leave everything else as you just had. How do you expect the results to change? Run the simulation with these new parameter settings. Compare your expectations with what results. How do they agree/disagree? Does it make sense? Anything surprising happening?"
 
-alltasks[8,"Record"] = "* Number of susceptible at end of outbreak \n * Number of recovered at end of outbreak \n * Time of peak"
+# Record the answers for task 8
+
+allrecord[15,"TaskID"] = 8  
+
+allrecord[15,"Record"] = "* Number of susceptible at end of outbreak"   
+
+allrecord[15,"Note"] = "Report the integer"
+
+allrecord[15,"Answer"] = 957
+
+
+allrecord[16,"TaskID"] = 8  
+
+allrecord[16,"Record"] = "* Number of recovered at end of outbreak"  
+
+allrecord[16,"Note"] = "Report the integer"
+
+allrecord[16,"Answer"] = 44
+
+
+allrecord[17,"TaskID"] = 8  
+
+allrecord[17,"Record"] = "* Is there a peak for the outbreak"  
+
+allrecord[17,"Note"] = "Report TRUE or FALSE"
+
+allrecord[17,"Answer"] = 0
+
+allrecord[17,"Review"] = 1
 
 
 # Task 9 
 alltasks[9,"TaskText"] = "A) Keep playing around with changing any of the parameters and starting conditions. Every time, think about what you expect to get, then run the simulation, compare your expectations with the results. Then make sense of it. What is the minimum and maximum number of outbreaks you can get? Why is that?"
 
-alltasks[9,"Record"] = "* Minimum number of outbreaks you can get \n * Maximum number of outbreaks you can get"
+
+# Record the answers for task 9
+
+allrecord[18,"TaskID"] = 9  
+
+allrecord[18,"Record"] = "* Minimum number of outbreaks you can get"   
+
+allrecord[18,"Note"] = "Report the integer"
+
+allrecord[18,"Answer"] = 0
+
+
+allrecord[19,"TaskID"] = 9  
+
+allrecord[19,"Record"] = "* Maximum number of outbreaks you can get"  
+
+allrecord[19,"Note"] = "Report the integer"
+
+allrecord[19,"Answer"] = 1
 
 
 writexl::write_xlsx(alltasks,"basicsir_alltasks.xlsx")
+
+writexl::write_xlsx(allrecord,"basicsir_allrecord.xlsx")
+
+
+write.table(alltasks, "basicsir_alltasks.txt", append = FALSE, sep = "\t", row.names = F, col.names = TRUE)
+
+write.table(allrecord, "basicsir_allrecord.txt", append = FALSE, sep = "\t", row.names = F, col.names = TRUE)
 
 ```
 
@@ -189,7 +369,14 @@ writexl::write_xlsx(alltasks,"basicsir_alltasks.xlsx")
 
 for (n in 1:ntasks)
 {
-  writeLines(c(paste('### Task ',n), '\n', paste(alltasks[n,"TaskText"]), '\n',  '**Record**', '\n', paste(alltasks[n,"Record"]), '\n\n'))
+  writeLines(c(paste('### Task ',n), '\n', paste(alltasks[n,"TaskText"]), '\n',  '**Record**', '\n'))
+  
+  rtext<-dplyr::filter(allrecord, TaskID==n)
+  
+  for (k in 1:nrow(rtext)){
+    writeLines(c(paste(rtext[k,"Record"]), '\n'))
+  }
+  
 }
 
 
