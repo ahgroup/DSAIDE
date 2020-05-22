@@ -5,8 +5,11 @@
 
 appsettings = list()
 
+#ID of app, unique for each app
+appsettings$appid = 18
+
 #Title of app, to be displayed on top of analyze tab
-appsettings$apptitle = "18: Parasite Model"
+appsettings$apptitle = "Parasite Model"
 
 #name of underlying simulation function(s) to be used in the app
 #must be provided

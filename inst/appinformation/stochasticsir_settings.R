@@ -5,8 +5,11 @@
 
 appsettings = list()
 
+#ID of app, unique for each app
+appsettings$appid = 13
+
 #Title of app, to be displayed on top of analyze tab
-appsettings$apptitle = "13: Stochastic SIR Model"
+appsettings$apptitle = "Stochastic SIR Model"
 
 #name of underlying simulation function(s) to be used in the app
 #must be provided

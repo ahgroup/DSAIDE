@@ -5,8 +5,11 @@
 
 appsettings = list()
 
+#ID of app, unique for each app
+appsettings$appid = 16
+
 #Title of app, to be displayed on top of analyze tab
-appsettings$apptitle = "16: Host heterogeneity model"
+appsettings$apptitle = "Host heterogeneity"
 
 #name of underlying simulation function(s) to be used in the app
 #must be provided

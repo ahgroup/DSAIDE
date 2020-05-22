@@ -5,8 +5,11 @@
 
 appsettings = list()
 
+#ID of app, unique for each app
+appsettings$appid = 7
+
 #Title of app, to be displayed on top of analyze tab
-appsettings$apptitle = "7: ID control for multiple outbreaks"
+appsettings$apptitle = "ID control for multiple outbreaks"
 
 #name of underlying simulation function(s) to be used in the app
 #must be provided

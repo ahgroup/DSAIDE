@@ -5,8 +5,11 @@
 
 appsettings = list()
 
+#ID of app, unique for each app
+appsettings$appid = 4
+
 #Title of app, to be displayed on top of analyze tab
-appsettings$apptitle = "4: Reproductive Number 1"
+appsettings$apptitle = "Reproductive Number 1"
 
 #name of underlying simulation function(s) to be used in the app
 #must be provided
