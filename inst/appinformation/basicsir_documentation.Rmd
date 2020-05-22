@@ -121,7 +121,7 @@ alltasks = data.frame(TaskID = 1:ntasks,  TaskText =  rep("",ntasks))
 
 nrecord = 19 #number of outcomes to record
 
-allrecord = data.frame(TaskID = rep("",nrecord), Record = rep("",nrecord), Note = rep("",nrecord), Answer = rep("",nrecord), Fuzzy = rep(0,nrecord), Review = rep(0,nrecord))
+allrecord = data.frame(AppTitle = appsettings$apptitle, TaskID = rep("",nrecord), Record = rep("",nrecord), Note = rep("",nrecord), Answer = rep("",nrecord), Fuzzy = rep(0,nrecord), Review = rep(0,nrecord))
 
 ## NOTE
 # Fuzzy if 1: means the quiz checker should not be too strict (within +/- of "right" answer)
@@ -351,16 +351,16 @@ allrecord[18,"Answer"] = 0
 
 allrecord[19,"TaskID"] = 9  
 
-allrecord[19,"Record"] = "* Maximum number of outbreaks you can get"  
+allrecord[19,"Record"] = "Maximum number of outbreaks you can get"  
 
 allrecord[19,"Note"] = "Report the integer"
 
 allrecord[19,"Answer"] = 1
 
 
-write.table(alltasks, "basicsir_alltasks.txt", append = FALSE, sep = "\t", row.names = F, col.names = TRUE)
+write.table(alltasks, "basicsir_alltasks.tsv", append = FALSE, sep = "\t", row.names = F, col.names = TRUE)
 
-write.table(allrecord, "basicsir_allrecord.txt", append = FALSE, sep = "\t", row.names = F, col.names = TRUE)
+write.table(allrecord, "basicsir_allrecord.tsv", append = FALSE, sep = "\t", row.names = F, col.names = TRUE)
 
 ```
 

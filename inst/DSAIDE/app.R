@@ -294,7 +294,7 @@ ui <- fluidPage(
 
                       tags$div(class='mainsectionheader', 'The Basics'),
                       fluidRow(
-                               actionButton("basicsir", "1: Basic SIR model", class="mainbutton"),
+                               actionButton("basicsir", "1. Basic SIR model", class="mainbutton"),
                                actionButton("idcharacteristics", "2: Characteristics of ID", class="mainbutton"),
                                actionButton("idpatterns", "3: ID Patterns", class="mainbutton"),
                         class = "mainmenurow"

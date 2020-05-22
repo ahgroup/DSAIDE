@@ -5,8 +5,8 @@
 "3"	"* Total number infected at end of outbreak"	"Report the integer"	"798"	0	0
 "4"	"* Number of susceptible at end of outbreak for continuous-time model"	"Report the integer"	"203"	0	0
 "4"	"* Number of susceptible at end of outbreak for discrete-time model"	"Report the integer"	"202"	0	0
-"5"	"* Number of susceptible left at end of outbreak for continuous-time model dt=1?"	"Report the integer"	"203"	0	0
-"5"	"* Number of susceptible left at end of outbreak for discrete-time model dt=1?"	"Report the integer"	"171"	0	0
+"5"	"* Number of susceptible left at end of outbreak for continuous-time model dt=1"	"Report the integer"	"203"	0	0
+"5"	"* Number of susceptible left at end of outbreak for discrete-time model dt=1"	"Report the integer"	"171"	0	0
 "6"	"* Number of susceptible at end of outbreak"	"Report the integer"	"20"	0	0
 "6"	"* Number of recovered at end of outbreak"	"Report the integer"	"981"	0	0
 "6"	"* Day the outbreak peaked"	"Report the integer"	"5"	1	0
