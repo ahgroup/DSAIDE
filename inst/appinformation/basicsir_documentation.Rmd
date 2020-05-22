@@ -121,7 +121,11 @@ alltasks = data.frame(TaskID = 1:ntasks,  TaskText =  rep("",ntasks))
 
 nrecord = 19 #number of outcomes to record
 
-allrecord = data.frame(TaskID = rep("",nrecord), Record = rep("",nrecord), Note = rep("",nrecord), Answer = rep("",nrecord), Fuzzy = rep(0,nrecord), Review = rep(0,nrecord) )
+allrecord = data.frame(TaskID = rep("",nrecord), Record = rep("",nrecord), Note = rep("",nrecord), Answer = rep("",nrecord), Fuzzy = rep(0,nrecord), Review = rep(0,nrecord))
+
+## NOTE
+# Fuzzy if 1: means the quiz checker should not be too strict (within +/- of "right" answer)
+# Review if 1: means the way the questions is asked may need to be reconsidered. 
 
 # Task 1
 alltasks[1,"TaskText"] = "A) Run the simulation with 1000 susceptible individuals and 1 initially infected host, no recovered. Set simulation duration to 100 days, start time and time step can remain at 0 and 0.1. Set recovery rate _g_=0.5 per day, and infectiousness _b_=0.001. You will get an outbreak of some - currently unspecified - infectious disease. If you did it correctly, your outbreak should end with around 203 uninfected individuals still remaining.
@@ -147,6 +151,8 @@ D) Try again switching between ggplot and plotly as plotting engine."
 allrecord[2,"TaskID"] = 2
 
 allrecord[2,"Record"] = "* Nothing"
+
+allrecord[2,"Answer"] = " "
 
 
 ### Task 3 
@@ -351,11 +357,6 @@ allrecord[19,"Record"] = "* Maximum number of outbreaks you can get"
 allrecord[19,"Note"] = "Report the integer"
 
 allrecord[19,"Answer"] = 1
-
-
-writexl::write_xlsx(alltasks,"basicsir_alltasks.xlsx")
-
-writexl::write_xlsx(allrecord,"basicsir_allrecord.xlsx")
 
 
 write.table(alltasks, "basicsir_alltasks.txt", append = FALSE, sep = "\t", row.names = F, col.names = TRUE)
