@@ -119,12 +119,14 @@ ntasks = 9 #number of tasks
 
 alltasks = data.frame(AppTitle = appsettings$apptitle, AppID = appsettings$appid, TaskID = 1:ntasks,  TaskText =  rep("",ntasks))
 
+# used only when running locally to trouble shoot
+# = data.frame(AppTitle = "Basic", AppID = 1, TaskID = 1:ntasks,  TaskText =  rep("",ntasks))
+
 nrecord = 19 #number of outcomes to record
 
-allrecord = data.frame(TaskID = 1:nrecord, Record = rep("",nrecord), Note = rep("",nrecord), Answer = rep("",nrecord), Fuzzy = rep(0,nrecord), Review = rep(0,nrecord))
+allrecord = data.frame(TaskID = 1:nrecord, RecordID = 1:nrecord, Record = rep("",nrecord), Note = rep("",nrecord), Answer = rep("",nrecord), Fuzzy = rep(0,nrecord), Review = rep(0,nrecord))
 
-# used when running locally to trouble shoot
-#allrecord = data.frame(TaskID = 1:nrecord, Record = rep("",nrecord), Note = rep("",nrecord), Answer = rep("",nrecord), Fuzzy = rep(0,nrecord), Review = rep(0,nrecord))
+
 
 ## NOTE
 # Fuzzy if 1: means the quiz checker should not be too strict (within +/- of "right" answer)
@@ -331,6 +333,10 @@ allrecord[19,"Note"] = "Report an integer"
 # Make a single file using join_all 
 
 alltext<-dplyr::full_join(alltasks,allrecord, by="TaskID")
+
+# Make a unique ID for each of the items recorded for the tasks
+
+alltext<-dplyr::mutate(alltext, RecordID = paste("T",TaskID,"R",RecordID, sep = ""))
 
 write.table(alltext, "1_alltext.tsv", append = FALSE, sep = "\t", row.names = F, col.names = TRUE)
 
