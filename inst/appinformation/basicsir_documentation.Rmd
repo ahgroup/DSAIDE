@@ -141,6 +141,8 @@ B) Also take a look at the final number of infected. You'll see that it is at _3
 
 allrecord[1,"TaskID"] = 1  
 
+allrecord[1,"RecordID"] = 1
+
 allrecord[1,"Record"] = "Total number of recovered at end of outbreak"  
 
 allrecord[1,"Note"] = "Report the rounded integer"
@@ -168,7 +170,9 @@ D) Rerun the simulation, with the same values you just had. Does anything change
 
 # Record the answers for task 3
 
-allrecord[3,"TaskID"] = 3  
+allrecord[3,"TaskID"] = 3 
+
+allrecord[3,"RecordID"] = 1
 
 allrecord[3,"Record"] = "Day the outbreak peaked"  
 
@@ -177,7 +181,9 @@ allrecord[3,"Note"] = "Report the rounded integer"
 allrecord[3,"Fuzzy"] = 1
 
 
-allrecord[4,"TaskID"] = 3  
+allrecord[4,"TaskID"] = 3
+
+allrecord[4,"RecordID"] = 2
 
 allrecord[4,"Record"] = "Total number infected at end of outbreak"  
 
@@ -190,14 +196,18 @@ alltasks[4,"TaskText"] = "A) Set \"Models to run\" to \"both\", which runs and s
 
 # Record the answers for task 4
 
-allrecord[5,"TaskID"] = 4  
+allrecord[5,"TaskID"] = 4
+
+allrecord[5,"RecordID"] = 1
 
 allrecord[5,"Record"] = "Number of susceptible at end of outbreak for continuous-time model"   
 
 allrecord[5,"Note"] = "Report the rounded integer"
 
 
-allrecord[6,"TaskID"] = 4  
+allrecord[6,"TaskID"] = 4
+
+allrecord[6,"RecordID"] = 2
 
 allrecord[6,"Record"] = "Number of susceptible at end of outbreak for discrete-time model"  
 
@@ -211,14 +221,18 @@ A) Now try different values for _dt_. Leave all other settings as before. You sh
 
 # Record the answers for task 5
 
-allrecord[7,"TaskID"] = 5  
+allrecord[7,"TaskID"] = 5
+
+allrecord[7,"RecordID"] = 1
 
 allrecord[7,"Record"] = "Number of susceptible left at end of outbreak for continuous-time model dt=1"   
 
 allrecord[7,"Note"] = "Report the rounded integer"
 
 
-allrecord[8,"TaskID"] = 5  
+allrecord[8,"TaskID"] = 5
+
+allrecord[8,"RecordID"] = 2
 
 allrecord[8,"Record"] = "Number of susceptible left at end of outbreak for discrete-time model dt=1"  
 
@@ -231,21 +245,27 @@ A) Go back to running the ODE model only. Set all parameters as described in tas
 
 # Record the answers for task 6
 
-allrecord[9,"TaskID"] = 6  
+allrecord[9,"TaskID"] = 6
+
+allrecord[9,"RecordID"] = 1
 
 allrecord[9,"Record"] = "Number of susceptible at end of outbreak"   
 
 allrecord[9,"Note"] = "Report the rounded integer"
 
 
-allrecord[10,"TaskID"] = 6  
+allrecord[10,"TaskID"] = 6
+
+allrecord[10,"RecordID"] = 2
 
 allrecord[10,"Record"] = "Number of recovered at end of outbreak"  
 
 allrecord[10,"Note"] = "Report the rounded integer"
 
 
-allrecord[11,"TaskID"] = 6  
+allrecord[11,"TaskID"] = 6
+
+allrecord[11,"RecordID"] = 3
 
 allrecord[11,"Record"] = "Day the outbreak peaked"  
 
@@ -259,7 +279,9 @@ alltasks[7,"TaskText"] = "A) Double the rate of recovery, _g_, leave everything 
 
 # Record the answers for task 7
 
-allrecord[12,"TaskID"] = 7  
+allrecord[12,"TaskID"] = 7 
+
+allrecord[12,"RecordID"] = 1
 
 allrecord[12,"Record"] = "Number of susceptible at end of outbreak"   
 
@@ -268,12 +290,16 @@ allrecord[12,"Note"] = "Report the rounded integer"
 
 allrecord[13,"TaskID"] = 7  
 
+allrecord[13,"RecordID"] = 2
+
 allrecord[13,"Record"] = "Number of recovered at end of outbreak"  
 
 allrecord[13,"Note"] = "Report the rounded integer"
 
 
 allrecord[14,"TaskID"] = 7  
+
+allrecord[14,"RecordID"] = 3
 
 allrecord[14,"Record"] = "Is there a peak for the outbreak"  
 
@@ -288,21 +314,27 @@ alltasks[8,"TaskText"] = "A) Double the number of susceptibles, _S~0~_, leave ev
 
 # Record the answers for task 8
 
-allrecord[15,"TaskID"] = 8  
+allrecord[15,"TaskID"] = 8
+
+allrecord[15,"RecordID"] = 1
 
 allrecord[15,"Record"] = "Number of susceptible at end of outbreak"   
 
 allrecord[15,"Note"] = "Report the rounded integer"
 
 
-allrecord[16,"TaskID"] = 8  
+allrecord[16,"TaskID"] = 8
+
+allrecord[16,"RecordID"] = 2
 
 allrecord[16,"Record"] = "Number of recovered at end of outbreak"  
 
 allrecord[16,"Note"] = "Report the rounded integer"
 
 
-allrecord[17,"TaskID"] = 8  
+allrecord[17,"TaskID"] = 8
+
+allrecord[17,"RecordID"] = 3
 
 allrecord[17,"Record"] = "Is there a peak for the outbreak"  
 
@@ -316,14 +348,18 @@ alltasks[9,"TaskText"] = "A) Keep playing around with changing any of the parame
 
 # Record the answers for task 9
 
-allrecord[18,"TaskID"] = 9  
+allrecord[18,"TaskID"] = 9
+
+allrecord[18,"RecordID"] = 1
 
 allrecord[18,"Record"] = "Minimum number of outbreaks you can get"   
 
 allrecord[18,"Note"] = "Report an integer"
 
 
-allrecord[19,"TaskID"] = 9  
+allrecord[19,"TaskID"] = 9
+
+allrecord[19,"RecordID"] = 2
 
 allrecord[19,"Record"] = "Maximum number of outbreaks you can get"  
 
