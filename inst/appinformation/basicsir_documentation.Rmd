@@ -132,7 +132,7 @@ In words, the number of susceptible/infected/recovered at a time step _dt_ in th
 
 ntasks = 9 #number of tasks
 
-alltasks = data.frame(QuizID=rep("dsaide_app_1",ntasks), AppTitle = appsettings$apptitle, AppID = appsettings$appid, TaskID = 1:ntasks,  TaskText =  rep("",ntasks))
+alltasks = data.frame(quizid=rep("dsaide_app_1",ntasks), AppTitle = appsettings$apptitle, AppID = appsettings$appid, TaskID = 1:ntasks,  TaskText =  rep("",ntasks))
 
 nrecord = 19 #number of outcomes to record
 
