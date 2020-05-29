@@ -115,22 +115,32 @@ In words, the number of susceptible/infected/recovered at a time step _dt_ in th
 ```{r, echo=FALSE}
 # save all tasks, outcomes, etc. into an R data frame, then print later.
 # is more useable later
+
+#Explaination for each of the columns in the R data frame 
+
+# QuizID: MUST BE THE FIRST COLUMN. Used by the grading app. naming structure "dsaide_app_#" where # is the app number in the dsaide menu
+# AppTitle: Title used for the app in the dsaide app
+# AppID: App number in the dsaide menu
+# TaskID: Identifies which task the text belongs to 
+# TaskText: The text that explains what to do for the task
+# RecordID: Identifies if it is the first, second, third,... item to record within the task
+# Record: Text explaining what value from the model that nee too be recorded
+# Note: Used by students taking quiz. Makes it clear what type of value to enter in "Answers"
+# Answers: In master it contains the rigth answer. For students it is where they record the recorded value
+# Fuzzy: The numeric value of a margin (within +/- of "right" answer) for questions where the quiz checker should not be too strict 
+# Review: Admin use if value is 1 the way the questions is asked may need to be reconsidered. 
+
 ntasks = 9 #number of tasks
 
-alltasks = data.frame(AppTitle = appsettings$apptitle, AppID = appsettings$appid, TaskID = 1:ntasks,  TaskText =  rep("",ntasks))
-
-# used only when running locally to trouble shoot
-# = data.frame(AppTitle = "Basic", AppID = 1, TaskID = 1:ntasks,  TaskText =  rep("",ntasks))
+alltasks = data.frame(QuizID=rep("dsaide_app_1",ntasks), AppTitle = appsettings$apptitle, AppID = appsettings$appid, TaskID = 1:ntasks,  TaskText =  rep("",ntasks))
 
 nrecord = 19 #number of outcomes to record
 
 allrecord = data.frame(TaskID = 1:nrecord, RecordID = 1:nrecord, Record = rep("",nrecord), Note = rep("",nrecord), Answer = rep("",nrecord), Fuzzy = rep(0,nrecord), Review = rep(0,nrecord))
 
+# used only when running locally to trouble shoot
+# alltasks = data.frame(AppTitle = "Basic", AppID = 1, TaskID = 1:ntasks,  TaskText =  rep("",ntasks))
 
-
-## NOTE
-# Fuzzy if 1: means the quiz checker should not be too strict (within +/- of "right" answer)
-# Review if 1: means the way the questions is asked may need to be reconsidered. 
 
 # Task 1
 alltasks[1,"TaskText"] = "A) Run the simulation with 1000 susceptible individuals and 1 initially infected host, no recovered. Set simulation duration to 100 days, start time and time step can remain at 0 and 0.1. Set recovery rate _g_=0.5 per day, and infectiousness _b_=0.001. You will get an outbreak of some - currently unspecified - infectious disease. If you did it correctly, your outbreak should end with around 203 uninfected individuals still remaining.
