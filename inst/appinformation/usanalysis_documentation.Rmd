@@ -88,48 +88,220 @@ For the purpose of uncertainty and sensitivity analysis, starting values for var
 
 The default outcome plots are boxplots, which show the distribution of the 3 outcomes of interest for the different parameter samples. You can set the number of samples you want to run. Samples are constructed using the latin hypercube method to efficiently span the space of possible parameter values. In general, more samples are better, but of course take longer to run.
 
+```{r, echo=FALSE}
+# save all tasks, outcomes, etc. into an R data frame, then print later.
+# is more useable later
 
-### Task 1 
-Since the creation of parameter samples involves some element of uncertainty, we need to make use of random numbers. We still want results to be reproducible. That's where the random number seed comes in. As long as the seed is the same, the code should produce the same pseudo-random numbers each time, thus ensuring reproducibility. Let's explore this.
+#Explaination for each of the columns in the R data frame 
 
-* Leave all settings as they are, run 20 samples twice with the same random number seed, check to make sure you get exactly the same result twice.
-* Now change the random number seed to a different value, run again. You should see results changed. (It doesn't matter if you change the seed by just a bit or a lot.)
-* The more samples you have, the more robust the results are to changes in the underlying sample generation (determined by the random number seed). Try checking this by running 10 samples with 2 different random number seeds, then running 100+ samples (or as many as you can do without waiting too long) with 2 different seeds. You should see less variability in the central quantities (mean, median) for the larger sample size.
+# quizID: MUST BE THE FIRST COLUMN. Used by the grading app. naming structure "dsaide_app_#" where # is the app number in the dsaide menu
+# AppTitle: Title used for the app in the dsaide app
+# AppID: App number in the dsaide menu
+# TaskID: Identifies which task the text belongs to 
+# TaskText: The text that explains what to do for the task
+# RecordID: Identifies if it is the first, second, third,... item to record within the task
+# Record: Text explaining what value from the model that nee too be recorded
+# Note: Used by students taking quiz. Makes it clear what type of value to enter in "Answers"
+# Answers: In master it contains the rigth answer. For students it is where they record the recorded value
+# Fuzzy: The numeric value of a margin (within +/- of "right" answer) for questions where the quiz checker should not be too strict 
+# Review: Admin use if value is 1 the way the questions is asked may need to be reconsidered. 
 
-Note that each sample means one simulation of the underlying dynamical model, so as sample numbers increase, things slow down.
-Also note the 'system might not have reached steady state' message. If for too many of the samples steady state has not been reached, the results for _S~final~_ and _I~final~_ do not reflect steady-state values. Increasing the simulation time can help the system reach a steady state (if there is one). For some parameter combinations, that can take very long. 
+ntasks = 7 #number of tasks
 
-### Task 2 
-* Recall the underlying SIR model and its behavior. If you can't, revisit the apps mentioned in the overview tab that discuss this model. Use your understanding of the model to predict what happens if you increase both lower and upper bound for the infection rate. 
-* Increase lower/upper bounds by a factor of 10. Run simulations, see how results change.
-* Now go the opposite, lower the initial lower/upper bounds by a factor of 10. Run simulations, see how results change.
+alltasks = data.frame(quizID=rep("dsaide_app_1",ntasks), AppTitle = appsettings$apptitle, AppID = appsettings$appid, TaskID = 1:ntasks,  TaskText =  rep("",ntasks))
+
+nrecord = 19 #number of outcomes to record
+
+allrecord = data.frame(TaskID = 1:nrecord, RecordID = 1:nrecord, Record = rep("",nrecord), Note = rep("",nrecord), Answer = rep("",nrecord), Fuzzy = rep(0,nrecord), Review = rep(0,nrecord))
+
+# used only when running locally to trouble shoot
+# alltasks = data.frame(AppTitle = "test", AppID = 24, TaskID = 1:ntasks,  TaskText =  rep("",ntasks))
+
+
+
+# Task 1
+alltasks[1,"TaskText"] = "A) Since the creation of parameter samples involves some element of uncertainty, we need to make use of random numbers. We still want results to be reproducible. That’s where the random number seed comes in. As long as the seed is the same, the code should produce the same pseudo-random numbers each time, thus ensuring reproducibility. Let’s explore this.Leave all settings as they are, run 20 samples twice with the same random number seed, check to make sure you get exactly the same result twice.
+B) Now change the random number seed to a different value, run again. You should see results changed. (It doesn’t matter if you change the seed by just a bit or a lot.)
+C) The more samples you have, the more robust the results are to changes in the underlying sample generation (determined by the random number seed). Try checking this by running 10 samples with 2 different random number seeds, then running 100+ samples (or as many as you can do without waiting too long) with 2 different seeds. You should see less variability in the central quantities (mean, median) for the larger sample size.
+**Note** that each sample means one simulation of the underlying dynamical model, so as sample numbers increase, things slow down. Also note the ‘system might not have reached steady state’ message. If for too many of the samples steady state has not been reached, the results for _S~final~_ and _I~final~_ do not reflect steady-state values. Increasing the simulation time can help the system reach a steady state (if there is one). For some parameter combinations, that can take very long."
+
+
+# Record the answers for task 1
+
+allrecord[1,"TaskID"] = 1  
+
+allrecord[1,"Record"] = "Nothing"  
+
+
+# Task 2 
+alltasks[2,"TaskText"] = "A) Recall the underlying SIR model and its behavior. If you can’t, revisit the apps mentioned in the overview tab that discuss this model. Use your understanding of the model to predict what happens if you increase both lower and upper bound for the infection rate.
+C) Increase lower/upper bounds by a factor of 10. Run simulations, see how results change.
+D) Now go the opposite, lower the initial lower/upper bounds by a factor of 10. Run simulations, see how results change."
+
+allrecord[2,"TaskID"] = 2
+
+allrecord[2,"Record"] = "Nothing"
+
 
 ### Task 3 
-* Now let's explore what happens if we change ranges for the birth and death rates. If we increase it, which of the outcomes do you expect to change, and in which direction?
-* Test your assumption by increasing and decreasing lower/upper bounds for either birth or death rate or both by a factor of 10. 
+alltasks[3,"TaskText"] = "A) Now let's explore what happens if we change ranges for the birth and death rates. If we increase it, which of the outcomes do you expect to change, and in which direction?
+B) Test your assumption by increasing and decreasing lower/upper bounds for either birth or death rate or both by a factor of 10."
+
+
+# Record the answers for task 3
+
+allrecord[3,"TaskID"] = 3 
+
+allrecord[3,"RecordID"] = 1
+
+allrecord[3,"Record"] = ""  
+
+allrecord[3,"Note"] = ""
+
+allrecord[3,"Fuzzy"] = 1
+
+
+allrecord[4,"TaskID"] = 3
+
+allrecord[4,"RecordID"] = 2
+
+allrecord[4,"Record"] = ""  
+
+allrecord[4,"Note"] = ""
+
+
 
 ### Task 4 
-* Continue exploring by changing ranges for different parameters, see what you find. It is likely that for some settings you'll get warning or error messages. That generally means that the parameters for a given simulation are such that the differential equation solver can't properly run the model. That usually corresponds to biologically unrealistic parameter settings. We'll ignore them, but if you did a research project and you got such warning or error messages, you'd have to figure out why you get them and only once you fully understand why is it maybe ok to ignore them.
+alltasks[4,"TaskText"] = "A) Continue exploring by changing ranges for different parameters, see what you find. It is likely that for some settings you'll get warning or error messages. That generally means that the parameters for a given simulation are such that the differential equation solver can't properly run the model. That usually corresponds to biologically unrealistic parameter settings. We'll ignore them, but if you did a research project and you got such warning or error messages, you'd have to figure out why you get them and only once you fully understand why is it maybe ok to ignore them."
+
+# Record the answers for task 4
+
+allrecord[5,"TaskID"] = 4
+
+allrecord[5,"RecordID"] = 1
+
+allrecord[5,"Record"] = ""   
+
+allrecord[5,"Note"] = ""
+
+
 
 ### Task 5 
-The above approach of exploring the impact of a parameter on results by varying bounds is tedious. Also, often we have bounds that are specified by biology, and not subject to us changing them. It would still be useful to know how a given parameter impacts the results. This is where sensitivity analysis comes in. We run the same simulations, but now instead of plotting outcomes as a boxplot, we produce scatterplots for outcomes as function of each varied parameter.
+alltasks[5,"TaskText"] = "The above approach of exploring the impact of a parameter on results by varying bounds is tedious. Also, often we have bounds that are specified by biology, and not subject to us changing them. It would still be useful to know how a given parameter impacts the results. This is where sensitivity analysis comes in. We run the same simulations, but now instead of plotting outcomes as a boxplot, we produce scatterplots for outcomes as function of each varied parameter.
+A) Set values back as in task 1. Switch the plot type from boxplot to scatterplot, run the simulation. Take a close look at the scatterplots to investigate the relation between different parameters and the various outcomes. To investigate specific parameters, chose them as the output for the scatterplot.
+B) Look at the text below the plots. For each parameter-output pair, the code computes a rank correlation coefficient. Numbers close to 0 mean there is essentially no correlation, close to 1 or -1 means a large positive or negative correlation. (One could compute p-values for these correlations, but they are somewhat meaningless since the values will get smaller the more samples you use, so you can basically produce any p-value you want). Increase sample size to 100+ or whatever number runs within a reasonable amount of time. With more samples, the patterns of correlation are clearer in the plots. "
 
-* Set values back as in task 1.
-* Switch the plot type from boxplot to scatterplot, run the simulation.
-* Take a close look at the scatterplots to investigate the relation between different parameters and the various outcomes. To investigate specific parameters, chose them as the output for the scatterplot.
-* Look at the text below the plots. For each parameter-output pair, the code computes a rank correlation coefficient. Numbers close to 0 mean there is essentially no correlation, close to 1 or -1 means a large positive or negative correlation. (One could compute p-values for these correlations, but they are somewhat meaningless since the values will get smaller the more samples you use, so you can basically produce any p-value you want.)
-* Increase sample size to 100+ or whatever number runs within a reasonable amount of time. With more samples, the patterns of correlation are clearer in the plots.
+# Record the answers for task 5
+
+allrecord[7,"TaskID"] = 5
+
+allrecord[7,"RecordID"] = 1
+
+allrecord[7,"Record"] = ""   
+
+allrecord[7,"Note"] = ""
+
+
+allrecord[8,"TaskID"] = 5
+
+allrecord[8,"RecordID"] = 2
+
+allrecord[8,"Record"] = ""  
+
+allrecord[8,"Note"] = ""
+
 
 ### Task 6 
-Since our model is rather simple, we can actually determine relations between parameters and some of the outcomes analytically. Specifically, it is possible to compute the steady state values for _S_ and _I_. If you don't know what steady states are and how to compute them, go through the "patterns of ID" and/or "model exploration" apps, where this is explained. 
+alltasks[6,"TaskText"] = "Since our model is rather simple, we can actually determine relations between parameters and some of the outcomes analytically. Specifically, it is possible to compute the steady state values for _S_ and _I_. If you don't know what steady states are and how to compute them, go through the \"patterns of ID\" and/or \"model exploration\" apps, where this is explained. 
+A) Get the equations for _S_ and _I_ at steady state as determined in those apps. Compare the scatterplots and correlation coefficients with the results from these equations. For instance based on the equation, you should see a linear correlation between _S~steady~_ and death rate _n_.  You might find that there is a lot of scatter in the data, too much to see clear patterns. One could always increase sample size which should help detect patterns, but it takes longer to run. Another option is to restrict the variability to a subset of parameters, which we'll do next."
 
-* Get the equations for _S_ and _I_ at steady state as determined in those apps. Compare the scatterplots and correlation coefficients with the results from these equations. For instance based on the equation, you should see a linear correlation between _S~steady~_ and death rate _n_.  You might find that there is a lot of scatter in the data, too much to see clear patterns. One could always increase sample size which should help detect patterns, but it takes longer to run. Another option is to restrict the variability to a subset of parameters, which we'll do next. 
+# Record the answers for task 6
+
+allrecord[9,"TaskID"] = 6
+
+allrecord[9,"RecordID"] = 1
+
+allrecord[9,"Record"] = ""   
+
+allrecord[9,"Note"] = ""
+
+
+allrecord[10,"TaskID"] = 6
+
+allrecord[10,"RecordID"] = 2
+
+allrecord[10,"Record"] = ""  
+
+allrecord[10,"Note"] = ""
+
+
+allrecord[11,"TaskID"] = 6
+
+allrecord[11,"RecordID"] = 3
+
+allrecord[11,"Record"] = ""  
+
+allrecord[11,"Note"] = ""
+
+allrecord[11,"Fuzzy"] = ""
+
 
 ### Task 7
-* Let's explore in more detail how different parameters impact results by making the system less 'noisy'. To do so, we can impose no variability for some parameters. For the following parameters, set **both** their lower and upper bound to the specified value: S = 1000, I = 1, b = 0.01, n = 10, m = 0.1.
-* Give _g_ a mean of 1 and variance of 0.1. Run the simulation with 50 samples and produce a scatterplot for _g_. You will see very smooth curves since no other parameters vary. Note the correlation coefficients being essentially -1 or 1.
-* Now increase the 'noise' by also allowing _n_ to vary, choose a range between 0.1 and 0.5. You will see much 'noisier' plots and the correlation coefficients change. 
-* Look at both scatterplots for _g_ and _n_. Note the different distributions for _g_ and _n_. The former has more points around its mean and less for lower/higher values, while values for _n_ are uniformly distributed along the x-axis. This comes from the underlying assumption about how the parameters are distributed, gamma-distribution versus uniform distribution.
+alltasks[7,"TaskText"] = "A) Let's explore in more detail how different parameters impact results by making the system less 'noisy'. To do so, we can impose no variability for some parameters. For the following parameters, set **both** their lower and upper bound to the specified value: S = 1000, I = 1, b = 0.01, n = 10, m = 0.1.
+B) Give _g_ a mean of 1 and variance of 0.1. Run the simulation with 50 samples and produce a scatterplot for _g_. You will see very smooth curves since no other parameters vary. Note the correlation coefficients being essentially -1 or 1.
+C) Now increase the 'noise' by also allowing _n_ to vary, choose a range between 0.1 and 0.5. You will see much 'noisier' plots and the correlation coefficients change. 
+D) Look at both scatterplots for _g_ and _n_. Note the different distributions for _g_ and _n_. The former has more points around its mean and less for lower/higher values, while values for _n_ are uniformly distributed along the x-axis. This comes from the underlying assumption about how the parameters are distributed, gamma-distribution versus uniform distribution.?"
+
+# Record the answers for task 7
+
+allrecord[12,"TaskID"] = 7 
+
+allrecord[12,"RecordID"] = 1
+
+allrecord[12,"Record"] = ""   
+
+allrecord[12,"Note"] = ""
+
+
+allrecord[13,"TaskID"] = 7  
+
+allrecord[13,"RecordID"] = 2
+
+allrecord[13,"Record"] = ""  
+
+allrecord[13,"Note"] = ""
+
+
+allrecord[14,"TaskID"] = 7  
+
+allrecord[14,"RecordID"] = 3
+
+allrecord[14,"Record"] = ""  
+
+allrecord[14,"Note"] = ""
+
+
+
+
+# Make a single file using join_all 
+
+alltext<-dplyr::full_join(alltasks,allrecord, by="TaskID")
+
+# Make a unique ID for each of the items recorded for the tasks
+
+alltext<-dplyr::mutate(alltext, RecordID = paste("T",TaskID,"R",RecordID, sep = ""))
+
+write.table(alltext, "1_alltext.tsv", append = FALSE, sep = "\t", row.names = F, col.names = TRUE)
+```
+
+
+
+
+### Task 6 
+ 
+
+### Task 7
+
 
 
 ## Further Information {#shinytab4}
