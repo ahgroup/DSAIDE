@@ -128,9 +128,13 @@ C) The more samples you have, the more robust the results are to changes in the 
 
 # Record the answers for task 1
 
-allrecord[1,"TaskID"] = 1  
+allrecord[1,"TaskID"] = 1 
 
-allrecord[1,"Record"] = "Nothing"  
+allrecord[1,"RecordID"] = 1
+
+allrecord[1,"Record"] = "Mean number of susceptible at end of outbreak"
+
+allrecord[1,"Note"] = "Report the rounded integer"
 
 
 # Task 2 
@@ -140,34 +144,47 @@ D) Now go the opposite, lower the initial lower/upper bounds by a factor of 10. 
 
 allrecord[2,"TaskID"] = 2
 
-allrecord[2,"Record"] = "Nothing"
+allrecord[2,"RecordID"] = 1
+
+allrecord[2,"Record"] = "Mean peak of infected when transmission is increased by a factor of 10"
+
+allrecord[2,"Note"] = "Report the rounded integer"
+
+
+allrecord[3,"TaskID"] = 2
+
+allrecord[3,"RecordID"] = 2
+
+allrecord[3,"Record"] = "Mean peak of infected when transmission is decreased by a factor of 10"
+
+allrecord[3,"Note"] = "Report the rounded integer"
 
 
 ### Task 3 
 alltasks[3,"TaskText"] = "A) Now let's explore what happens if we change ranges for the birth and death rates. If we increase it, which of the outcomes do you expect to change, and in which direction?
-B) Test your assumption by increasing and decreasing lower/upper bounds for either birth or death rate or both by a factor of 10."
+B) Test your assumption by decreasing lower/upper bounds for the birth rate by a factor of 10.
+C) Reset the birth rate, now decrease the lower and upper bounds for the death rate by a factor of 10.
+D) Reset the birth rate, now increase the lower/upper bounds for both birth and death rate by a factor of 10."
 
 
 # Record the answers for task 3
 
-allrecord[3,"TaskID"] = 3 
-
-allrecord[3,"RecordID"] = 1
-
-allrecord[3,"Record"] = ""  
-
-allrecord[3,"Note"] = ""
-
-allrecord[3,"Fuzzy"] = 1
-
-
 allrecord[4,"TaskID"] = 3
 
-allrecord[4,"RecordID"] = 2
+allrecord[4,"RecordID"] = 1
 
-allrecord[4,"Record"] = ""  
+allrecord[4,"Record"] = "Mean number of susceptible at end of outbreak (Part B)"  
 
 allrecord[4,"Note"] = ""
+
+
+allrecord[5,"TaskID"] = 3
+
+allrecord[5,"RecordID"] = 2
+
+allrecord[5,"Record"] = "Mean number of susceptible at end of outbreak (Part C)"   
+
+allrecord[5,"Note"] = ""
 
 
 
@@ -176,13 +193,9 @@ alltasks[4,"TaskText"] = "A) Continue exploring by changing ranges for different
 
 # Record the answers for task 4
 
-allrecord[5,"TaskID"] = 4
+allrecord[6,"TaskID"] = 4
 
-allrecord[5,"RecordID"] = 1
-
-allrecord[5,"Record"] = ""   
-
-allrecord[5,"Note"] = ""
+allrecord[6,"Record"] = "Nothing"
 
 
 
@@ -197,18 +210,18 @@ allrecord[7,"TaskID"] = 5
 
 allrecord[7,"RecordID"] = 1
 
-allrecord[7,"Record"] = ""   
+allrecord[7,"Record"] = "With 150 samples: The correlation between infection peak and **b**"   
 
-allrecord[7,"Note"] = ""
+allrecord[7,"Note"] = "Report to the hundredths"
 
 
 allrecord[8,"TaskID"] = 5
 
 allrecord[8,"RecordID"] = 2
 
-allrecord[8,"Record"] = ""  
+allrecord[8,"Record"] = "With 150 samples: The correlation between final number of susceptibles and **m**"  
 
-allrecord[8,"Note"] = ""
+allrecord[8,"Note"] = "Report to the hundredths"
 
 
 ### Task 6 
@@ -219,67 +232,21 @@ A) Get the equations for _S_ and _I_ at steady state as determined in those apps
 
 allrecord[9,"TaskID"] = 6
 
-allrecord[9,"RecordID"] = 1
-
-allrecord[9,"Record"] = ""   
-
-allrecord[9,"Note"] = ""
-
-
-allrecord[10,"TaskID"] = 6
-
-allrecord[10,"RecordID"] = 2
-
-allrecord[10,"Record"] = ""  
-
-allrecord[10,"Note"] = ""
-
-
-allrecord[11,"TaskID"] = 6
-
-allrecord[11,"RecordID"] = 3
-
-allrecord[11,"Record"] = ""  
-
-allrecord[11,"Note"] = ""
-
-allrecord[11,"Fuzzy"] = ""
+allrecord[9,"Record"] = "Nothing"
 
 
 ### Task 7
-alltasks[7,"TaskText"] = "A) Let's explore in more detail how different parameters impact results by making the system less 'noisy'. To do so, we can impose no variability for some parameters. For the following parameters, set **both** their lower and upper bound to the specified value: S = 1000, I = 1, b = 0.01, n = 10, m = 0.1.
+alltasks[7,"TaskText"] = "A) Let's explore in more detail how different parameters impact results by making the system less 'noisy'. To do so, we can impose no variability for some parameters. For the following parameters, set **both** their lower and upper bound to the specified value: S = 1000, I = 1, b = 0.01, m = 10, n = 0.1.
 B) Give _g_ a mean of 1 and variance of 0.1. Run the simulation with 50 samples and produce a scatterplot for _g_. You will see very smooth curves since no other parameters vary. Note the correlation coefficients being essentially -1 or 1.
 C) Now increase the 'noise' by also allowing _n_ to vary, choose a range between 0.1 and 0.5. You will see much 'noisier' plots and the correlation coefficients change. 
-D) Look at both scatterplots for _g_ and _n_. Note the different distributions for _g_ and _n_. The former has more points around its mean and less for lower/higher values, while values for _n_ are uniformly distributed along the x-axis. This comes from the underlying assumption about how the parameters are distributed, gamma-distribution versus uniform distribution.?"
+D) Look at both scatterplots for _g_ and _n_. Note the different distributions for _g_ and _n_. The former has more points around its mean and less for lower/higher values, while values for _n_ are uniformly distributed along the x-axis. This comes from the underlying assumption about how the parameters are distributed, gamma-distribution versus uniform distribution."
 
 # Record the answers for task 7
 
-allrecord[12,"TaskID"] = 7 
 
-allrecord[12,"RecordID"] = 1
+allrecord[10,"TaskID"] = 7
 
-allrecord[12,"Record"] = ""   
-
-allrecord[12,"Note"] = ""
-
-
-allrecord[13,"TaskID"] = 7  
-
-allrecord[13,"RecordID"] = 2
-
-allrecord[13,"Record"] = ""  
-
-allrecord[13,"Note"] = ""
-
-
-allrecord[14,"TaskID"] = 7  
-
-allrecord[14,"RecordID"] = 3
-
-allrecord[14,"Record"] = ""  
-
-allrecord[14,"Note"] = ""
-
+allrecord[10,"Record"] = "Nothing"
 
 
 
@@ -291,7 +258,7 @@ alltext<-dplyr::full_join(alltasks,allrecord, by="TaskID")
 
 alltext<-dplyr::mutate(alltext, RecordID = paste("T",TaskID,"R",RecordID, sep = ""))
 
-write.table(alltext, "1_alltext.tsv", append = FALSE, sep = "\t", row.names = F, col.names = TRUE)
+write.table(alltext, "24_alltext.tsv", append = FALSE, sep = "\t", row.names = F, col.names = TRUE)
 ```
 
 
