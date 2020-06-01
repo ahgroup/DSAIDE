@@ -108,9 +108,9 @@ The default outcome plots are boxplots, which show the distribution of the 3 out
 
 ntasks = 7 #number of tasks
 
-alltasks = data.frame(quizID=rep("dsaide_app_1",ntasks), AppTitle = appsettings$apptitle, AppID = appsettings$appid, TaskID = 1:ntasks,  TaskText =  rep("",ntasks))
+alltasks = data.frame(quizID=rep("dsaide_app_24",ntasks), AppTitle = appsettings$apptitle, AppID = appsettings$appid, TaskID = 1:ntasks,  TaskText =  rep("",ntasks))
 
-nrecord = 19 #number of outcomes to record
+nrecord = 10 #number of outcomes to record
 
 allrecord = data.frame(TaskID = 1:nrecord, RecordID = 1:nrecord, Record = rep("",nrecord), Note = rep("",nrecord), Answer = rep("",nrecord), Fuzzy = rep(0,nrecord), Review = rep(0,nrecord))
 
@@ -120,10 +120,11 @@ allrecord = data.frame(TaskID = 1:nrecord, RecordID = 1:nrecord, Record = rep(""
 
 
 # Task 1
-alltasks[1,"TaskText"] = "A) Since the creation of parameter samples involves some element of uncertainty, we need to make use of random numbers. We still want results to be reproducible. That’s where the random number seed comes in. As long as the seed is the same, the code should produce the same pseudo-random numbers each time, thus ensuring reproducibility. Let’s explore this.Leave all settings as they are, run 20 samples twice with the same random number seed, check to make sure you get exactly the same result twice.
-B) Now change the random number seed to a different value, run again. You should see results changed. (It doesn’t matter if you change the seed by just a bit or a lot.)
+alltasks[1,"TaskText"] = "A) Since the creation of parameter samples involves some element of uncertainty, we need to make use of random numbers. We still want results to be reproducible. That's where the random number seed comes in. As long as the seed is the same, the code should produce the same pseudo-random numbers each time, thus ensuring reproducibility. Let's explore this.Leave all settings as they are, run 20 samples twice with the same random number seed, check to make sure you get exactly the same result twice.
+B) Now change the random number seed to a different value, run again. You should see results changed. (It doesn't matter if you change the seed by just a bit or a lot.)
 C) The more samples you have, the more robust the results are to changes in the underlying sample generation (determined by the random number seed). Try checking this by running 10 samples with 2 different random number seeds, then running 100+ samples (or as many as you can do without waiting too long) with 2 different seeds. You should see less variability in the central quantities (mean, median) for the larger sample size.
-**Note** that each sample means one simulation of the underlying dynamical model, so as sample numbers increase, things slow down. Also note the ‘system might not have reached steady state’ message. If for too many of the samples steady state has not been reached, the results for _S~final~_ and _I~final~_ do not reflect steady-state values. Increasing the simulation time can help the system reach a steady state (if there is one). For some parameter combinations, that can take very long."
+
+**Note** that each sample means one simulation of the underlying dynamical model, so as sample numbers increase, things slow down. Also note the \"system might not have reached steady state message\". If for too many of the samples steady state has not been reached, the results for _S~final~_ and _I~final~_ do not reflect steady-state values. Increasing the simulation time can help the system reach a steady state (if there is one). For some parameter combinations, that can take very long."
 
 
 # Record the answers for task 1
@@ -138,7 +139,7 @@ allrecord[1,"Note"] = "Report the rounded integer"
 
 
 # Task 2 
-alltasks[2,"TaskText"] = "A) Recall the underlying SIR model and its behavior. If you can’t, revisit the apps mentioned in the overview tab that discuss this model. Use your understanding of the model to predict what happens if you increase both lower and upper bound for the infection rate.
+alltasks[2,"TaskText"] = "A) Recall the underlying SIR model and its behavior. If you can't, revisit the apps mentioned in the overview tab that discuss this model. Use your understanding of the model to predict what happens if you increase both lower and upper bound for the infection rate.
 C) Increase lower/upper bounds by a factor of 10. Run simulations, see how results change.
 D) Now go the opposite, lower the initial lower/upper bounds by a factor of 10. Run simulations, see how results change."
 
@@ -200,9 +201,9 @@ allrecord[6,"Record"] = "Nothing"
 
 
 ### Task 5 
-alltasks[5,"TaskText"] = "The above approach of exploring the impact of a parameter on results by varying bounds is tedious. Also, often we have bounds that are specified by biology, and not subject to us changing them. It would still be useful to know how a given parameter impacts the results. This is where sensitivity analysis comes in. We run the same simulations, but now instead of plotting outcomes as a boxplot, we produce scatterplots for outcomes as function of each varied parameter.
-A) Set values back as in task 1. Switch the plot type from boxplot to scatterplot, run the simulation. Take a close look at the scatterplots to investigate the relation between different parameters and the various outcomes. To investigate specific parameters, chose them as the output for the scatterplot.
-B) Look at the text below the plots. For each parameter-output pair, the code computes a rank correlation coefficient. Numbers close to 0 mean there is essentially no correlation, close to 1 or -1 means a large positive or negative correlation. (One could compute p-values for these correlations, but they are somewhat meaningless since the values will get smaller the more samples you use, so you can basically produce any p-value you want). Increase sample size to 100+ or whatever number runs within a reasonable amount of time. With more samples, the patterns of correlation are clearer in the plots. "
+alltasks[5,"TaskText"] = "A) The above approach of exploring the impact of a parameter on results by varying bounds is tedious. Also, often we have bounds that are specified by biology, and not subject to us changing them. It would still be useful to know how a given parameter impacts the results. This is where sensitivity analysis comes in. We run the same simulations, but now instead of plotting outcomes as a boxplot, we produce scatterplots for outcomes as function of each varied parameter.
+B) Set values back as in task 1. Switch the plot type from boxplot to scatterplot, run the simulation. Take a close look at the scatterplots to investigate the relation between different parameters and the various outcomes. To investigate specific parameters, chose them as the output for the scatterplot.
+C) Look at the text below the plots. For each parameter-output pair, the code computes a rank correlation coefficient. Numbers close to 0 mean there is essentially no correlation, close to 1 or -1 means a large positive or negative correlation. (One could compute p-values for these correlations, but they are somewhat meaningless since the values will get smaller the more samples you use, so you can basically produce any p-value you want). Increase sample size to 100+ or whatever number runs within a reasonable amount of time. With more samples, the patterns of correlation are clearer in the plots. "
 
 # Record the answers for task 5
 
@@ -250,6 +251,8 @@ allrecord[10,"Record"] = "Nothing"
 
 
 
+
+
 # Make a single file using join_all 
 
 alltext<-dplyr::full_join(alltasks,allrecord, by="TaskID")
@@ -262,12 +265,23 @@ write.table(alltext, "24_alltext.tsv", append = FALSE, sep = "\t", row.names = F
 ```
 
 
+```{r, echo=FALSE, results='asis'}
 
-
-### Task 6 
+for (n in 1:ntasks)
+{
  
+  rtext<-dplyr::filter(alltext, TaskID==n)
+  
+  writeLines(c(paste('### Task ',n), '\n', paste(unique(rtext["TaskText"])), '\n',  '**Record**', '\n'))
+  
+  for (k in 1:nrow(rtext)){
+    writeLines(c(paste("*",rtext[k,"Record"]), '\n'))
+  }
+  
+}
 
-### Task 7
+
+```
 
 
 
