@@ -163,9 +163,9 @@ allrecord[3,"Note"] = "Report the rounded integer"
 
 ### Task 3 
 alltasks[3,"TaskText"] = "A) Now let's explore what happens if we change ranges for the birth and death rates. If we increase it, which of the outcomes do you expect to change, and in which direction?
-B) Test your assumption by decreasing lower/upper bounds for the birth rate by a factor of 10.
-C) Reset the birth rate, now decrease the lower and upper bounds for the death rate by a factor of 10.
-D) Reset the birth rate, now increase the lower/upper bounds for both birth and death rate by a factor of 10."
+B) Test your assumption by decreasing the lower/upper bounds for the birth rate by a factor of 10.
+C) Reset the birth rate, now decrease the lower/upper bounds for the death rate by a factor of 10.
+D) Reset the death rate, now increase the lower/upper bounds for both birth and death rate by a factor of 10."
 
 
 # Record the answers for task 3
@@ -176,7 +176,7 @@ allrecord[4,"RecordID"] = 1
 
 allrecord[4,"Record"] = "Mean number of susceptible at end of outbreak (Part B)"  
 
-allrecord[4,"Note"] = ""
+allrecord[4,"Note"] = "Report the rounded integer"
 
 
 allrecord[5,"TaskID"] = 3
@@ -185,7 +185,7 @@ allrecord[5,"RecordID"] = 2
 
 allrecord[5,"Record"] = "Mean number of susceptible at end of outbreak (Part C)"   
 
-allrecord[5,"Note"] = ""
+allrecord[5,"Note"] = "Report the rounded integer"
 
 
 
