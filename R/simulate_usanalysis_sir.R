@@ -2,14 +2,14 @@
 #'
 #' @description This function performs uncertainty and sensitivity analysis
 #' using the SIR model.
-#' @details The SIR model with demographics  
+#' @details The SIR model with demographics
 #' is simulated for different parameter values.
 #' The user provides ranges for the initial conditions and parameter values and the number of samples.
 #' The function does Latin Hypercube Sampling (LHS) of the parameters
 #' and runs the model for each sample.
 #' Distribution for all parameters is assumed to be uniform between the min and max values.
 #' The only exception is the recovery parameter,
-#' which (for illustrative purposes) is assumed to be 
+#' which (for illustrative purposes) is assumed to be
 #' gamma distributed with the specified mean and variance.
 #' This code is part of the DSAIDE R package.
 #' For additional model details, see the corresponding app in the DSAIDE package.
@@ -53,7 +53,7 @@
 #' @export
 
 
-simulate_usanalysis_sir <- function(Smin = 1000, Smax = 1500, Imin = 1, Imax = 10, bmin=1e-4, bmax=1e-2, gmean=1, gvar=0.1, mmin = 0, mmax = 10, nmin = 0, nmax = 0.1, samples = 10, rngseed = 100, tstart = 0, tfinal = 200, dt = 0.1)
+simulate_usanalysis_sir <- function(Smin = 1000, Smax = 1500, Imin = 1, Imax = 10, bmin=1e-3, bmax=1e-2, gmean=1, gvar=0.1, mmin = 0, mmax = 5, nmin = 0, nmax = 0.2, samples = 10, rngseed = 100, tstart = 0, tfinal = 800, dt = 0.1)
   {
 
     #this creates a LHS with the specified number of samples for all parameters
@@ -68,7 +68,7 @@ simulate_usanalysis_sir <- function(Smin = 1000, Smax = 1500, Imin = 1, Imax = 1
     bvec = stats::qunif(lhssample[,3],min = bmin, max = bmax)
     mvec = stats::qunif(lhssample[,4],min = mmin, max = mmax)
     nvec = stats::qunif(lhssample[,5],min = nmin, max = nmax)
-    
+
     #transforming parameter g to a gamma distribution with mean gmean and variance gvar
     #this is just to illustrate how different assumptions of parameter distributions can be implemented
     gvec = stats::qgamma(lhssample[,6], shape = gmean^2/gvar, scale = gvar/gmean);
@@ -76,7 +76,7 @@ simulate_usanalysis_sir <- function(Smin = 1000, Smax = 1500, Imin = 1, Imax = 1
     Ipeak=rep(0,samples) #initialize vectors that will contain the solution
     Ifinal=rep(0,samples)
     Sfinal=rep(0,samples)
-    
+
     steady = rep(TRUE,samples) #indicates if steady state has not been reached
     for (ct in 1:samples)
     {
@@ -87,17 +87,17 @@ simulate_usanalysis_sir <- function(Smin = 1000, Smax = 1500, Imin = 1, Imax = 1
         g=gvec[ct]
         m=mvec[ct]
         n=nvec[ct]
-        
+
         #this runs the bacteria ODE model for each parameter sample
         #all other parameters remain fixed
-        odeout <- simulate_sirdemographic_ode(S = S, I = I, R = 0, b = b, g = g, m = m, n = n, tstart = tstart, tfinal = tfinal, dt = dt) 
-        
+        odeout <- simulate_sirdemographic_ode(S = S, I = I, R = 0, b = b, g = g, m = m, n = n, tstart = tstart, tfinal = tfinal, dt = dt)
+
         timeseries = odeout$ts
 
         Ipeak[ct]=max(timeseries[,"I"]); #get the peak for I
         Ifinal[ct] = utils::tail(timeseries[,"I"],1)
         Sfinal[ct] = utils::tail(timeseries[,"S"],1)
-        
+
 
         #a quick check to make sure the system is at steady state,
         #i.e. the value for I at the final time is not more than
@@ -112,6 +112,6 @@ simulate_usanalysis_sir <- function(Smin = 1000, Smax = 1500, Imin = 1, Imax = 1
     simresults = data.frame(Ipeak = Ipeak, Ifinal = Ifinal, Sfinal = Sfinal, S = Svec, I = Ivec, b = bvec, g = gvec, m = mvec, n = nvec, steady = steady)
 
     result = list()
-    result$dat = simresults    
+    result$dat = simresults
     return(result)
 }
