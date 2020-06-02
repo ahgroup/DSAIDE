@@ -133,7 +133,7 @@ allrecord[1,"TaskID"] = 1
 
 allrecord[1,"RecordID"] = 1
 
-allrecord[1,"Record"] = "Mean number of susceptible at end of outbreak"
+allrecord[1,"Record"] = "Mean number of susceptible at end of outbreak (Part A)"
 
 allrecord[1,"Note"] = "Report the rounded integer"
 
@@ -190,7 +190,7 @@ allrecord[5,"Note"] = ""
 
 
 ### Task 4 
-alltasks[4,"TaskText"] = "A) Continue exploring by changing ranges for different parameters, see what you find. It is likely that for some settings you'll get warning or error messages. That generally means that the parameters for a given simulation are such that the differential equation solver can't properly run the model. That usually corresponds to biologically unrealistic parameter settings. We'll ignore them, but if you did a research project and you got such warning or error messages, you'd have to figure out why you get them and only once you fully understand why is it maybe ok to ignore them."
+alltasks[4,"TaskText"] = "A) Continue exploring by changing ranges for different parameters, see what you find. It is likely that for some settings you'll get warning or error messages. That generally means that the parameters for a given simulation are such that the differential equation solver can't properly run the model. That usually corresponds to biologically unrealistic parameter settings. We'll ignore them, but if you did a research project and you got such warning or error messages, you'd have to figure out why you get them and only once you fully understand why is it maybe OK to ignore them."
 
 # Record the answers for task 4
 
@@ -226,8 +226,8 @@ allrecord[8,"Note"] = "Report to the hundredths"
 
 
 ### Task 6 
-alltasks[6,"TaskText"] = "Since our model is rather simple, we can actually determine relations between parameters and some of the outcomes analytically. Specifically, it is possible to compute the steady state values for _S_ and _I_. If you don't know what steady states are and how to compute them, go through the \"patterns of ID\" and/or \"model exploration\" apps, where this is explained. 
-A) Get the equations for _S_ and _I_ at steady state as determined in those apps. Compare the scatterplots and correlation coefficients with the results from these equations. For instance based on the equation, you should see a linear correlation between _S~steady~_ and death rate _n_.  You might find that there is a lot of scatter in the data, too much to see clear patterns. One could always increase sample size which should help detect patterns, but it takes longer to run. Another option is to restrict the variability to a subset of parameters, which we'll do next."
+alltasks[6,"TaskText"] = "A) Since our model is rather simple, we can actually determine relations between parameters and some of the outcomes analytically. Specifically, it is possible to compute the steady state values for _S_ and _I_. If you don't know what steady states are and how to compute them, go through the \"patterns of ID\" and/or \"model exploration\" apps, where this is explained.
+B) Get the equations for _S_ and _I_ at steady state as determined in those apps. Compare the scatterplots and correlation coefficients with the results from these equations. For instance based on the equation, you should see a linear correlation between _S~steady~_ and death rate _n_.  You might find that there is a lot of scatter in the data, too much to see clear patterns. One could always increase sample size which should help detect patterns, but it takes longer to run. Another option is to restrict the variability to a subset of parameters, which we'll do next."
 
 # Record the answers for task 6
 

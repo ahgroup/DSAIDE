@@ -97,7 +97,7 @@
 <p><strong>Note</strong> that each sample means one simulation of the underlying dynamical model, so as sample numbers increase, things slow down. Also note the “system might not have reached steady state message”. If for too many of the samples steady state has not been reached, the results for <em>S<sub>final</sub></em> and <em>I<sub>final</sub></em> do not reflect steady-state values. Increasing the simulation time can help the system reach a steady state (if there is one). For some parameter combinations, that can take very long.</p>
 <p><strong>Record</strong></p>
 <ul>
-<li>Mean number of susceptible at end of outbreak</li>
+<li>Mean number of susceptible at end of outbreak (Part A)</li>
 </ul>
 </div>
 <div id="task-2" class="section level3">
@@ -130,7 +130,7 @@
 <div id="task-4" class="section level3">
 <h3>Task 4</h3>
 <ol style="list-style-type: upper-alpha">
-<li>Continue exploring by changing ranges for different parameters, see what you find. It is likely that for some settings you’ll get warning or error messages. That generally means that the parameters for a given simulation are such that the differential equation solver can’t properly run the model. That usually corresponds to biologically unrealistic parameter settings. We’ll ignore them, but if you did a research project and you got such warning or error messages, you’d have to figure out why you get them and only once you fully understand why is it maybe ok to ignore them.</li>
+<li>Continue exploring by changing ranges for different parameters, see what you find. It is likely that for some settings you’ll get warning or error messages. That generally means that the parameters for a given simulation are such that the differential equation solver can’t properly run the model. That usually corresponds to biologically unrealistic parameter settings. We’ll ignore them, but if you did a research project and you got such warning or error messages, you’d have to figure out why you get them and only once you fully understand why is it maybe OK to ignore them.</li>
 </ol>
 <p><strong>Record</strong></p>
 <ul>
@@ -152,7 +152,10 @@
 </div>
 <div id="task-6" class="section level3">
 <h3>Task 6</h3>
-<p>Since our model is rather simple, we can actually determine relations between parameters and some of the outcomes analytically. Specifically, it is possible to compute the steady state values for <em>S</em> and <em>I</em>. If you don’t know what steady states are and how to compute them, go through the “patterns of ID” and/or “model exploration” apps, where this is explained. A) Get the equations for <em>S</em> and <em>I</em> at steady state as determined in those apps. Compare the scatterplots and correlation coefficients with the results from these equations. For instance based on the equation, you should see a linear correlation between <em>S<sub>steady</sub></em> and death rate <em>n</em>. You might find that there is a lot of scatter in the data, too much to see clear patterns. One could always increase sample size which should help detect patterns, but it takes longer to run. Another option is to restrict the variability to a subset of parameters, which we’ll do next.</p>
+<ol style="list-style-type: upper-alpha">
+<li>Since our model is rather simple, we can actually determine relations between parameters and some of the outcomes analytically. Specifically, it is possible to compute the steady state values for <em>S</em> and <em>I</em>. If you don’t know what steady states are and how to compute them, go through the “patterns of ID” and/or “model exploration” apps, where this is explained.</li>
+<li>Get the equations for <em>S</em> and <em>I</em> at steady state as determined in those apps. Compare the scatterplots and correlation coefficients with the results from these equations. For instance based on the equation, you should see a linear correlation between <em>S<sub>steady</sub></em> and death rate <em>n</em>. You might find that there is a lot of scatter in the data, too much to see clear patterns. One could always increase sample size which should help detect patterns, but it takes longer to run. Another option is to restrict the variability to a subset of parameters, which we’ll do next.</li>
+</ol>
 <p><strong>Record</strong></p>
 <ul>
 <li>Nothing</li>
