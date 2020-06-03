@@ -147,7 +147,7 @@ allrecord[2,"TaskID"] = 2
 
 allrecord[2,"RecordID"] = 1
 
-allrecord[2,"Record"] = "Mean peak of infected when transmission is increased by a factor of 10"
+allrecord[2,"Record"] = "Mean peak of infected when transmission is increased by a factor of 10. Use 100 samples and rngseed=100"
 
 allrecord[2,"Note"] = "Report the rounded integer"
 
@@ -156,7 +156,7 @@ allrecord[3,"TaskID"] = 2
 
 allrecord[3,"RecordID"] = 2
 
-allrecord[3,"Record"] = "Mean peak of infected when transmission is decreased by a factor of 10"
+allrecord[3,"Record"] = "Mean peak of infected when transmission is decreased by a factor of 10. Use 100 samples and rngseed=100"
 
 allrecord[3,"Note"] = "Report the rounded integer"
 
