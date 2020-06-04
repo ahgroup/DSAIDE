@@ -1,12 +1,10 @@
 # To-do list for DSAIDE package
 
 ## Code Improvements
-* Fix/finish download button for each app (currently disabled)
+* Fix/finish download button for each app (currently disabled). This downloads code that reproduces a given scenario.
 * Continue implementing unit tests using the testthat package
-* Provide a 'download scenario' button, which downloads code that reproduces a given scenario.
 * Add checks to parameter settings, don't allow unreasonable (e.g. negative) ones
 * Continue streamlining code base to make it more general/modular/flexible
-* Fix/finish plot function edits (see code in generate_ggplot)
 
 ## Content Improvement
 * Write/update all solutions
@@ -19,8 +17,10 @@
 * global warming app
 
 ## Documentation / Outreach / Advertisement
+* Add more content to the "other resources" section
 * Make list of ID Epi and related courses, email instructors
 * Send annoucements at suitable times
+* Make/update hex sticker/logo
 * Create more docs
 * Find all classes/instructors who could use package.
 * Make videos for levels 1/2/3 for packages 

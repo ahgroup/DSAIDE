@@ -34,25 +34,26 @@ The audience for this package consists individuals interested in infectious dise
 
 While the package was written as a component of a course on infectious disease epidemiology/modeling, the documentation for each app tries to be fairly complete and self-contained. This should allow you to get some understanding of the topics and models without requiring additional information. However, the information provided inside each app is not sufficient to get a very thorough understanding. If you use this package on your own without taking a class on the topc, it might be possible to learn the material covered by the apps in depth by working through some of the references provided for each app or general infectious disease modeling textbooks (e.g. [@keeling08; @vynnycky10; @bjoernstad18]). 
 
+## Pre-requisites
+Since `DSAIDE` is an `R` package, you need to have [R](https://www.r-project.org/) installed. I also highly recommend [RStudio](https://www.rstudio.com/products/rstudio/download/), though it's not required. If you are not familiar with `R` you can find [a brief introduction here](https://andreashandel.github.io/IDEMAcourse/1c_R_and_RStudio.html), which also provides a reference to detailed install instructions.
+
 
 ## Installation
-
-I assume you have [R](https://www.r-project.org/) installed. I also highly recommend [RStudio](https://www.rstudio.com/products/rstudio/download/), though it's not required. After having opened R/Rstudio, you can install the package from CRAN by typing the following into the R console (the bottom left window if you are using RStudio):
-
+After having installed and opened R/Rstudio, you can install the package from CRAN by typing the following into the R console (the bottom left window if you are using RStudio):
 
 ```r
 install.packages('DSAIDE')
 ```
 
 
-Alternatively, you can install the latest development version (with usually both more features and more bugs) from github, using the `devtools` package. The following commands, typed into the `R` console, will get you up and running:
+Alternatively, you can install the latest development version (with usually both more features and more bugs) from github, using the `remotes` package. The following commands, typed into the `R` console, will get you up and running:
 
 ```r
-install.packages('devtools') #if not already installed
-devtools::install_github('ahgroup/DSAIDE')
+install.packages('remotes') #if not already installed
+remotes::install_github('ahgroup/DSAIDE')
 ```
 
-The package depends on other packages, which will also be installed as needed. Package installation is a one-time process, unless you update or reinstall R itself, or want to install a newer version of DSAIDE. 
+The package depends on other packages, which will also be installed as needed. Package installation is a one-time process, unless you update or re-install R itself, or want to install a newer version of `DSAIDE`. 
 
 
 
@@ -84,7 +85,7 @@ dsaidemenu()
 ```
 
 
-If successful, you should see a graphical menu open in your browser that looks like this:
+If successful, you should see a graphical menu open in your browser that looks similar to this (looks might differ a bit depending on the version of `DSAIDE` you are running):
 
 ```{r dsaidemenu,  fig.cap='Main menu of the DSAIDE package.', echo=FALSE}
 knitr::include_graphics("mainmenu.png")
@@ -126,7 +127,7 @@ To facilitate direct interaction and modification of the underlying simulations,
 
 Consider as example the first app, called "ID Dynamics Intro". The simulator function for this model is called `simulate_sir_ode.R`. After loading the package (if not already loaded) with 
 
-```{r eval=TRUE, echo=FALSE}
+```{r eval=TRUE, echo=TRUE}
 library('DSAIDE') 
 ```
 
@@ -255,7 +256,8 @@ The package is on GitHub and you can use the usual GitHub process to file bug re
 The package is built in a way that makes it (hopefully) easy for others to contribute new simulations/apps. To that end, the package contains [this Markdown file](https://github.com/ahgroup/DSAIDE/blob/master/inst/docsfordevelopers/documentation.md) which provides further information on the details of the package structure. If you plan to develop new apps, or make other substantial contributions, it's best to get in touch with me first via email or GitHub.
 
 ## Further information
-* [I published a paper describing the package and how to use it](https://doi.org/10.1371/journal.pcbi.1005642). The package structure has changed since the paper was published, but it still describes the overall idea and context well, if you are interested in that. * A 'companion' package to this one, called Dynamical Systems Approaches for Immune Respone Modeling (DSAIRM), focuses on models for analyzing with-host infection dynamics. It has the same structure as DSAIDE. [See the DSAIRM site for more information.](https://ahgroup.github.io/DSAIRM)
+* [I published a paper describing the package and how to use it](https://doi.org/10.1371/journal.pcbi.1005642). The package structure has changed since the paper was published, but it still describes the overall idea and context well, if you are interested in that. 
+* A 'companion' package to this one, called Dynamical Systems Approaches for Immune Respone Modeling (DSAIRM), focuses on models for analyzing with-host infection dynamics. It has the same structure as DSAIDE. [See the DSAIRM site for more information.](https://ahgroup.github.io/DSAIRM)
 * I have solutions (as R Markdown files) to most of the 'What to do' tasks for the different apps. If you are an instructor using this package as part of a class, email me if you are interested in having access to these solutions.
 
 ## Contributors

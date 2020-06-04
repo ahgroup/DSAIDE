@@ -89,7 +89,11 @@
       <h1 data-toc-skip>DSAIDE Package Tutorial</h1>
                         <h4 class="author"><a href="http://handelgroup.uga.edu">Andreas Handel</a></h4>
             
+<<<<<<< HEAD
             <h4 class="date">2020-05-04</h4>
+=======
+            <h4 class="date">2020-05-21</h4>
+>>>>>>> master
       
       <small class="dont-index">Source: <a href="https://github.com/ahgroup/DSAIDE/blob/master/vignettes/DSAIDE.Rmd"><code>vignettes/DSAIDE.Rmd</code></a></small>
       <div class="hidden name"><code>DSAIDE.Rmd</code></div>
@@ -117,15 +121,29 @@
 <p>The audience for this package consists individuals interested in infectious disease epidemiology from a <em>systems/modeling perspective</em>. The package allows exploration of concepts such as <em>patterns of infectious disease incidence</em>, <em>reproductive number concept</em>, <em>extinctions and critical community size</em>, etc. All these concepts are not well described by applying classical epidemiology approaches (i.e. assuming independence between individuals) to infectious diseases, but can readily by understood using a systems/modeling approach.</p>
 <p>While the package was written as a component of a course on infectious disease epidemiology/modeling, the documentation for each app tries to be fairly complete and self-contained. This should allow you to get some understanding of the topics and models without requiring additional information. However, the information provided inside each app is not sufficient to get a very thorough understanding. If you use this package on your own without taking a class on the topc, it might be possible to learn the material covered by the apps in depth by working through some of the references provided for each app or general infectious disease modeling textbooks (e.g. <span class="citation">(Keeling and Rohani 2008; Vynnycky and White 2010; Bjørnstad 2018)</span>).</p>
 </div>
+<div id="pre-requisites" class="section level2">
+<h2 class="hasAnchor">
+<a href="#pre-requisites" class="anchor"></a>Pre-requisites</h2>
+<p>Since <code>DSAIDE</code> is an <code>R</code> package, you need to have <a href="https://www.r-project.org/">R</a> installed. I also highly recommend <a href="https://www.rstudio.com/products/rstudio/download/">RStudio</a>, though it’s not required. If you are not familiar with <code>R</code> you can find <a href="https://andreashandel.github.io/IDEMAcourse/1c_R_and_RStudio.html">a brief introduction here</a>, which also provides a reference to detailed install instructions.</p>
+</div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
+<<<<<<< HEAD
 <p>I assume you have <a href="https://www.r-project.org/">R</a> installed. I also highly recommend <a href="https://www.rstudio.com/products/rstudio/download/">RStudio</a>, though it’s not required. After having opened R/Rstudio, you can install the package from CRAN by typing the following into the R console (the bottom left window if you are using RStudio):</p>
 <div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">'DSAIDE'</span>)</pre></body></html></div>
 <p>Alternatively, you can install the latest development version (with usually both more features and more bugs) from github, using the <code>devtools</code> package. The following commands, typed into the <code>R</code> console, will get you up and running:</p>
 <div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">'devtools'</span>) <span class="co">#if not already installed</span>
 <span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">'ahgroup/DSAIDE'</span>)</pre></body></html></div>
 <p>The package depends on other packages, which will also be installed as needed. Package installation is a one-time process, unless you update or reinstall R itself, or want to install a newer version of DSAIDE.</p>
+=======
+<p>After having installed and opened R/Rstudio, you can install the package from CRAN by typing the following into the R console (the bottom left window if you are using RStudio):</p>
+<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">'DSAIDE'</span>)</pre></body></html></div>
+<p>Alternatively, you can install the latest development version (with usually both more features and more bugs) from github, using the <code>remotes</code> package. The following commands, typed into the <code>R</code> console, will get you up and running:</p>
+<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">'remotes'</span>) <span class="co">#if not already installed</span>
+<span class="kw pkg">remotes</span><span class="kw ns">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">'ahgroup/DSAIDE'</span>)</pre></body></html></div>
+<p>The package depends on other packages, which will also be installed as needed. Package installation is a one-time process, unless you update or re-install R itself, or want to install a newer version of <code>DSAIDE</code>.</p>
+>>>>>>> master
 </div>
 <div id="using-the-package" class="section level2">
 <h2 class="hasAnchor">
@@ -143,7 +161,11 @@
 <p>You need to load the package every time you start a new R/Rstudio session.</p>
 <p>If the package loads correctly, you should receive a short greeting. Now you can open the main menu by typing the following into the <code>R</code> console:</p>
 <div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="../reference/dsaidemenu.html">dsaidemenu</a></span>()</pre></body></html></div>
+<<<<<<< HEAD
 <p>If successful, you should see a graphical menu open in your browser that looks like this:</p>
+=======
+<p>If successful, you should see a graphical menu open in your browser that looks similar to this (looks might differ a bit depending on the version of <code>DSAIDE</code> you are running):</p>
+>>>>>>> master
 <div class="figure">
 <img src="mainmenu.png" alt="Main menu of the DSAIDE package." width="421"><p class="caption">
 Main menu of the DSAIDE package.
@@ -177,9 +199,11 @@ Screenshot of the <em>What to do</em> section of one of the apps.
 <p>Once you are comfortable interacting with the models and have a good understanding of the concepts covered by the different apps, it is possible, without too much effort, to interact with the simulation models directly. This provides more flexibility at the cost of writing a limited amount of code.</p>
 <p>To facilitate direct interaction and modification of the underlying simulations, each app is structured in such a way that the underlying model/simulation is a stand-alone function. For some apps, there are multiple underlying functions involved. You can call any of these functions directly, without going through the graphical interface. The <em>Further Information</em> tab inside each app provides the name of the corresponding underlying function(s) and how to call their help files to get information on their use.</p>
 <p>Consider as example the first app, called “ID Dynamics Intro”. The simulator function for this model is called <code>simulate_sir_ode.R</code>. After loading the package (if not already loaded) with</p>
+<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st">'DSAIDE'</span>)</pre></body></html></div>
 <pre><code>## Loading required package: shiny</code></pre>
 <pre><code>## Welcome to the DSAIDE package. Type dsaidemenu() to get started.</code></pre>
 <p>you can learn about the inputs and outputs of the model/function by looking at its documentation</p>
+<<<<<<< HEAD
 <div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/help.html">help</a></span>(<span class="st">'simulate_sir_ode'</span>)</pre></body></html></div>
 <p>The help file explains that you can run the simulation by specifying initial number of susceptibles and infected, the duration for which the simulation should be run, and the infection and recovery parameters. Each parameter has some default, listed in the help file. Running a simulation model without any specifications runs it with the defaults:</p>
 <div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">result</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/simulate_sir_ode.html">simulate_sir_ode</a></span>()</pre></body></html></div>
@@ -188,13 +212,27 @@ Screenshot of the <em>What to do</em> section of one of the apps.
 <p><img src="DSAIDE_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
 <p>You can overwrite the default settings by providing your own values for specific parameters, as shown in this example:</p>
 <div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">result</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/simulate_sir_ode.html">simulate_sir_ode</a></span>(<span class="kw">S</span> <span class="kw">=</span> <span class="fl">2000</span>, <span class="kw">b</span> <span class="kw">=</span> <span class="fl">0.001</span>, <span class="kw">g</span> <span class="kw">=</span> <span class="fl">0.5</span>, <span class="kw">tfinal</span> <span class="kw">=</span> <span class="fl">200</span>)
+=======
+<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/help.html">help</a></span>(<span class="st">'simulate_sir_ode'</span>)</pre></body></html></div>
+<p>The help file explains that you can run the simulation by specifying initial number of susceptibles and infected, the duration for which the simulation should be run, and the infection and recovery parameters. Each parameter has some default, listed in the help file. Running a simulation model without any specifications runs it with the defaults:</p>
+<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="no">result</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/simulate_sir_ode.html">simulate_sir_ode</a></span>()</pre></body></html></div>
+<p>Calling the simulation function execuctes the underlying dynamical model (here a simple 3 compartment ODE model, as described in the “Model” section of the app). Most simulation functions produce and return time-series for the dynamics of each of the variables that are tracked as a list. You can then take the results returned from the simulation function and further process them. For instance you could plot the time-series for susceptible as function of time:</p>
+<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">result</span>$<span class="no">ts</span>[ , <span class="st">"time"</span>],<span class="no">result</span>$<span class="no">ts</span>[ , <span class="st">"S"</span>],<span class="kw">xlab</span><span class="kw">=</span><span class="st">'Time'</span>,<span class="kw">ylab</span><span class="kw">=</span><span class="st">'Number Susceptible'</span>,<span class="kw">type</span><span class="kw">=</span><span class="st">'l'</span>)</pre></body></html></div>
+<p><img src="DSAIDE_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
+<p>You can overwrite the default settings by providing your own values for specific parameters, as shown in this example:</p>
+<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="no">result</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/simulate_sir_ode.html">simulate_sir_ode</a></span>(<span class="kw">S</span> <span class="kw">=</span> <span class="fl">2000</span>, <span class="kw">b</span> <span class="kw">=</span> <span class="fl">0.001</span>, <span class="kw">g</span> <span class="kw">=</span> <span class="fl">0.5</span>, <span class="kw">tfinal</span> <span class="kw">=</span> <span class="fl">200</span>)
+>>>>>>> master
 <span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">result</span>$<span class="no">ts</span>[ , <span class="st">"time"</span>],<span class="no">result</span>$<span class="no">ts</span>[ , <span class="st">"S"</span>],<span class="kw">xlab</span><span class="kw">=</span><span class="st">'Time'</span>,<span class="kw">ylab</span><span class="kw">=</span><span class="st">'Number Susceptible'</span>,<span class="kw">type</span><span class="kw">=</span><span class="st">'l'</span>)</pre></body></html></div>
 <p><img src="DSAIDE_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
 <p>Any values that you do not specify will be kept at their defaults.</p>
 <p>Note that unless explicitly specified, the models do not have inherent time units. Instead, those depend on the time units you choose for the parameters. It is important to ensure that all quantities (parameters and time settings) have the same time units, e.g. days or months (or the inverse of those units for the rate parameters).</p>
 <p>Not all simulator functions return time-series. For instance the function underlying the uncertainty and sensitivity app returns specific outcomes (maximum and final state of variables) for different parameter values. In every instance, the documentation for the function explains what is returned, so you know how to take the returned results and further process them.</p>
 <p>The ability to call the simulation functions directly instead of going through the graphical interface allows additional exploration of the models. For instance if you wanted to explore the behavior of a model systematically for different values of a given parameter, this would need to be done manually if run through the graphical interface. Calling the function directly allows you to automate this by wrapping the function inside a loop over the parameter of interest, recording some quantity of interest for each run, and report the result at the end. The following is a simple example, showing a loop over different values of the recovery rate and recording the peak of the outbreak each time, with the final result <em>peak of outbreak as function of recovery time</em> shown in a plot:</p>
+<<<<<<< HEAD
 <div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="no">gvec</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">0.01</span>,<span class="fl">0.3</span>,<span class="kw">by</span><span class="kw">=</span><span class="fl">0.01</span>) <span class="co">#values of recovery rate, g, for which to run the simulation </span>
+=======
+<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="no">gvec</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">0.01</span>,<span class="fl">0.3</span>,<span class="kw">by</span><span class="kw">=</span><span class="fl">0.01</span>) <span class="co">#values of recovery rate, g, for which to run the simulation </span>
+>>>>>>> master
 <span class="no">peak</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="fl">0</span>,<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">gvec</span>)) <span class="co">#this will record the peak values for each g</span>
 <span class="kw">for</span> (<span class="no">n</span> <span class="kw">in</span> <span class="fl">1</span>:<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">gvec</span>))
 {
@@ -217,6 +255,7 @@ Screenshot of the <em>What to do</em> section of one of the apps.
 <p>Say we want to include waning immunity with recovered returning to the susceptible class at rate <em>w</em>.</p>
 <p>We will need to modify the following lines of code:</p>
 <p>old:</p>
+<<<<<<< HEAD
 <div class="sourceCode" id="cb12"><html><body><pre class="r">simulate_sir_ode &lt;- function(S = 1000, I = 1, R = 0, b = 0.002, g = 1, tstart = 0, tfinal = 100, dt = 0.1 ) </pre></body></html></div>
 <p>new:</p>
 <div class="sourceCode" id="cb13"><html><body><pre class="r">mysimulator &lt;- function( S = 1000, I = 1, R = 0, b = 0.002, g = 1, w = 0, tstart = 0, tfinal = 100, dt = 0.1 ) </pre></body></html></div>
@@ -230,11 +269,30 @@ Screenshot of the <em>What to do</em> section of one of the apps.
 <span class="no">dR</span> <span class="kw">=</span> <span class="no">g</span>*<span class="no">I</span></pre></body></html></div>
 <p>new:</p>
 <div class="sourceCode" id="cb17"><html><body><pre class="r"><span class="no">dS</span> <span class="kw">=</span> -<span class="no">b</span>*<span class="no">S</span>*<span class="no">I</span> +<span class="no">w</span>*<span class="no">R</span>
+=======
+<div class="sourceCode" id="cb13"><html><body><pre class="r">simulate_sir_ode &lt;- function(S = 1000, I = 1, R = 0, b = 0.002, g = 1, tstart = 0, tfinal = 100, dt = 0.1 ) </pre></body></html></div>
+<p>new:</p>
+<div class="sourceCode" id="cb14"><html><body><pre class="r">mysimulator &lt;- function( S = 1000, I = 1, R = 0, b = 0.002, g = 1, w = 0, tstart = 0, tfinal = 100, dt = 0.1 ) </pre></body></html></div>
+<p>old:</p>
+<div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="no">pars</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="kw">b</span> <span class="kw">=</span> <span class="no">b</span>, <span class="kw">g</span> <span class="kw">=</span> <span class="no">g</span>)</pre></body></html></div>
+<p>new:</p>
+<div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="no">pars</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="kw">b</span> <span class="kw">=</span> <span class="no">b</span>, <span class="kw">g</span> <span class="kw">=</span> <span class="no">g</span>, <span class="kw">w</span> <span class="kw">=</span> <span class="no">w</span>)</pre></body></html></div>
+<p>old (ignoring comments present in the code):</p>
+<div class="sourceCode" id="cb17"><html><body><pre class="r"><span class="no">dS</span> <span class="kw">=</span> -<span class="no">b</span>*<span class="no">S</span>*<span class="no">I</span>
+<span class="no">dI</span> <span class="kw">=</span> <span class="no">b</span>*<span class="no">S</span>*<span class="no">I</span> -<span class="no">g</span>*<span class="no">I</span>
+<span class="no">dR</span> <span class="kw">=</span> <span class="no">g</span>*<span class="no">I</span></pre></body></html></div>
+<p>new:</p>
+<div class="sourceCode" id="cb18"><html><body><pre class="r"><span class="no">dS</span> <span class="kw">=</span> -<span class="no">b</span>*<span class="no">S</span>*<span class="no">I</span> +<span class="no">w</span>*<span class="no">R</span>
+>>>>>>> master
 <span class="no">dI</span> <span class="kw">=</span> <span class="no">b</span>*<span class="no">S</span>*<span class="no">I</span> -<span class="no">g</span>*<span class="no">I</span>
 <span class="no">dR</span> <span class="kw">=</span> <span class="no">g</span>*<span class="no">I</span> -<span class="no">w</span>*<span class="no">R</span></pre></body></html></div>
 <p>Note that if we wanted to share this function with others, we would need to also update the function documentation at the start of the file. For personal use of the function, this is a good idea but not required.</p>
 <p>We could now for instance explore how different rates of waning immunity impact the maximum peak size over all outbreaks. This requires a slight modification of the code shown above in <em>Level 2</em> as follows:</p>
+<<<<<<< HEAD
 <div class="sourceCode" id="cb18"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/source.html">source</a></span>(<span class="st">'mysimulator.R'</span>) <span class="co">#to initialize the new function - it needs to be in same directory as this code</span>
+=======
+<div class="sourceCode" id="cb19"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/source.html">source</a></span>(<span class="st">'mysimulator.R'</span>) <span class="co">#to initialize the new function - it needs to be in same directory as this code</span>
+>>>>>>> master
 <span class="no">wvec</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">0</span>,<span class="fl">1</span>,<span class="kw">by</span><span class="kw">=</span><span class="fl">0.02</span>) <span class="co">#values of immunity loss rate, w, for which to run the simulation </span>
 <span class="no">peak</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="fl">0</span>,<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">wvec</span>)) <span class="co">#this will record the peak values for each g</span>
 <span class="kw">for</span> (<span class="no">n</span> <span class="kw">in</span> <span class="fl">1</span>:<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">wvec</span>))
@@ -258,7 +316,8 @@ Screenshot of the <em>What to do</em> section of one of the apps.
 <a href="#further-information" class="anchor"></a>Further information</h2>
 <ul>
 <li>
-<a href="https://doi.org/10.1371/journal.pcbi.1005642">I published a paper describing the package and how to use it</a>. The package structure has changed since the paper was published, but it still describes the overall idea and context well, if you are interested in that. * A ‘companion’ package to this one, called Dynamical Systems Approaches for Immune Respone Modeling (DSAIRM), focuses on models for analyzing with-host infection dynamics. It has the same structure as DSAIDE. <a href="https://ahgroup.github.io/DSAIRM">See the DSAIRM site for more information.</a>
+<a href="https://doi.org/10.1371/journal.pcbi.1005642">I published a paper describing the package and how to use it</a>. The package structure has changed since the paper was published, but it still describes the overall idea and context well, if you are interested in that.</li>
+<li>A ‘companion’ package to this one, called Dynamical Systems Approaches for Immune Respone Modeling (DSAIRM), focuses on models for analyzing with-host infection dynamics. It has the same structure as DSAIDE. <a href="https://ahgroup.github.io/DSAIRM">See the DSAIRM site for more information.</a>
 </li>
 <li>I have solutions (as R Markdown files) to most of the ‘What to do’ tasks for the different apps. If you are an instructor using this package as part of a class, email me if you are interested in having access to these solutions.</li>
 </ul>
