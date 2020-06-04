@@ -9,18 +9,18 @@ simulate_usanalysis_sir(
   Smax = 1500,
   Imin = 1,
   Imax = 10,
-  bmin = 1e-04,
+  bmin = 0.001,
   bmax = 0.01,
   gmean = 1,
   gvar = 0.1,
   mmin = 0,
-  mmax = 10,
+  mmax = 5,
   nmin = 0,
-  nmax = 0.1,
+  nmax = 0.2,
   samples = 10,
   rngseed = 100,
   tstart = 0,
-  tfinal = 200,
+  tfinal = 800,
   dt = 0.1
 )
 }
@@ -73,14 +73,14 @@ This function performs uncertainty and sensitivity analysis
 using the SIR model.
 }
 \details{
-The SIR model with demographics  
+The SIR model with demographics
 is simulated for different parameter values.
 The user provides ranges for the initial conditions and parameter values and the number of samples.
 The function does Latin Hypercube Sampling (LHS) of the parameters
 and runs the model for each sample.
 Distribution for all parameters is assumed to be uniform between the min and max values.
 The only exception is the recovery parameter,
-which (for illustrative purposes) is assumed to be 
+which (for illustrative purposes) is assumed to be
 gamma distributed with the specified mean and variance.
 This code is part of the DSAIDE R package.
 For additional model details, see the corresponding app in the DSAIDE package.
