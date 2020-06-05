@@ -109,22 +109,21 @@
 </ol>
 <p><strong>Record</strong></p>
 <ul>
-<li><p>Mean peak of infected when transmission is increased by a factor of 10</p></li>
-<li><p>Mean peak of infected when transmission is decreased by a factor of 10</p></li>
+<li><p>Mean peak of infected when transmission is increased by a factor of 10. Use 100 samples and rngseed=100</p></li>
+<li><p>Mean peak of infected when transmission is decreased by a factor of 10. Use 100 samples and rngseed=100</p></li>
 </ul>
 </div>
 <div id="task-3" class="section level3">
 <h3>Task 3</h3>
 <ol style="list-style-type: upper-alpha">
 <li>Now let’s explore what happens if we change ranges for the birth and death rates. If we increase it, which of the outcomes do you expect to change, and in which direction?</li>
-<li>Test your assumption by decreasing the lower/upper bounds for the birth rate by a factor of 10.</li>
-<li>Reset the birth rate, now decrease the lower/upper bounds for the death rate by a factor of 10.</li>
-<li>Reset the death rate, now increase the lower/upper bounds for both birth and death rate by a factor of 10.</li>
+<li>Test your assumption by decreasing the upper bound for the birth rate by a factor of 10.</li>
+<li>Reset the birth rate, now decrease the upper bound for the death rate by a factor of 10.</li>
 </ol>
 <p><strong>Record</strong></p>
 <ul>
-<li><p>Mean number of susceptible at end of outbreak (Part B)</p></li>
-<li><p>Mean number of susceptible at end of outbreak (Part C)</p></li>
+<li><p>Mean number of susceptible at end of outbreak (Part B). Use 100 samples and rngseed=100</p></li>
+<li><p>Mean number of susceptible at end of outbreak (Part C). Use 100 samples and rngseed=100</p></li>
 </ul>
 </div>
 <div id="task-4" class="section level3">
@@ -146,8 +145,8 @@
 </ol>
 <p><strong>Record</strong></p>
 <ul>
-<li><p>With 150 samples: The correlation between infection peak and <strong>b</strong></p></li>
-<li><p>With 150 samples: The correlation between final number of susceptibles and <strong>m</strong></p></li>
+<li><p>The correlation between infection peak and <strong>b</strong>. Use 150 samples and rngseed=100</p></li>
+<li><p>The correlation between final number of susceptibles and <strong>m</strong>. Use 150 samples and rngseed=100</p></li>
 </ul>
 </div>
 <div id="task-6" class="section level3">
@@ -166,12 +165,12 @@
 <ol style="list-style-type: upper-alpha">
 <li>Let’s explore in more detail how different parameters impact results by making the system less ‘noisy’. To do so, we can impose no variability for some parameters. For the following parameters, set <strong>both</strong> their lower and upper bound to the specified value: S = 1000, I = 1, b = 0.01, m = 10, n = 0.1.</li>
 <li>Give <em>g</em> a mean of 1 and variance of 0.1. Run the simulation with 50 samples and produce a scatterplot for <em>g</em>. You will see very smooth curves since no other parameters vary. Note the correlation coefficients being essentially -1 or 1.</li>
-<li>Now increase the ‘noise’ by also allowing <em>n</em> to vary, choose a range between 0.1 and 0.5. You will see much ‘noisier’ plots and the correlation coefficients change.</li>
+<li>Now increase the ‘noise’ by also allowing <em>n</em> to vary between 0.1 and 0.5. You will see much ‘noisier’ plots and the correlation coefficients change.</li>
 <li>Look at both scatterplots for <em>g</em> and <em>n</em>. Note the different distributions for <em>g</em> and <em>n</em>. The former has more points around its mean and less for lower/higher values, while values for <em>n</em> are uniformly distributed along the x-axis. This comes from the underlying assumption about how the parameters are distributed, gamma-distribution versus uniform distribution.</li>
 </ol>
 <p><strong>Record</strong></p>
 <ul>
-<li>Nothing</li>
+<li>Correlation between <em>g</em> and the mean peak (Part C). Use 150 samples and rngseed=100</li>
 </ul>
 </div>
 </div>
