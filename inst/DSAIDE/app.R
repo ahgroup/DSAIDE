@@ -123,6 +123,10 @@ server <- function(input, output, session)
     #end code that listens to model selection buttons and creates UI for a chosen model
     #######################################################
 
+    #supposed to run simulation once so user sees outputs
+    #when first opening app. not working.
+    #shinyjs::click('submitBtn')
+
     ###############
     #Code to reset the model settings
     ###############
@@ -280,6 +284,7 @@ server <- function(input, output, session)
 #######################################################
 
 ui <- fluidPage(
+  shinyjs::useShinyjs(),  # Set up shinyjs
   tags$head(includeHTML(("google-analytics.html"))), #this is only needed for Google analytics when deployed as app to the UGA server. Should not affect R package use.
   includeCSS("packagestyle.css"), #use custom styling
   tags$div(id = "shinyheadertitle", "DSAIDE - Dynamical Systems Approach to Infectious Disease Epidemiology"),
