@@ -246,7 +246,9 @@ D) Look at both scatterplots for _g_ and _n_. Note the different distributions f
 
 allrecord[10,"TaskID"] = 7
 
-allrecord[10,"Record"] = "Correlation between _g_ and the mean peak (Part C). Use 150 samples and rngseed=100"
+allrecord[10,"RecordID"] = 1
+
+allrecord[10,"Record"] = "Correlation between _g_ and the outbreak peak (Part C). Use 150 samples and rngseed=100"
 
 allrecord[10,"Note"] = "Report to the hundredths"
 
