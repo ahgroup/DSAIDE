@@ -8,7 +8,7 @@ library('zip')
 
 #get path to Rmd files containing documentation
 basepath = here::here()
-files = list.files(path = paste0(basepath, "/inst/appinformation/"), recursive=TRUE, pattern = "\\.Rmd$", full.names = TRUE)
+files = list.files(path = paste0(basepath, "/inst/appinformation/"), recursive=FALSE, pattern = "\\.Rmd$", full.names = TRUE)
 
 #run spell check - only turn on if wanted
 #spelling::spell_check_files(files)

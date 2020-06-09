@@ -6,7 +6,7 @@
 #' @param modelsettings a list with model settings. Required list elements are: \cr
 #' modelsettings$simfunction - name of simulation function(s) as string.  \cr
 #' modelsettings$modeltype - specify what kind of model should be run.
-#' Currently one of: _ode_, _discrete_, _stochastic_, _usanalysis_, _modelexploration_, _fit_ . \cr
+#' Currently one of: _ode_, _discrete_, _stochastic_, _usanalysis_, _modelexploration_, _fit_, _mixed_ . \cr
 #' modelsettings$plottype - 'Boxplot' or 'Scatterplot' , required for US app \cr
 #' Optinal list elements are: \cr
 #' List elements with names and values for inputs expected by simulation function.
@@ -52,9 +52,18 @@ run_model <- function(modelsettings) {
   if (is.null(modelsettings$simfunction)) { return("List element simfunction must be provided.") }
   if (is.null(modelsettings$modeltype)) { return("List element modeltype must be provided.") }
 
+
+  #if the user sets the model type, apply that choice
+  if (!is.null(modelsettings$modeltypeUI))
+  {
+    #browser()
+    modelsettings$modeltype = modelsettings$modeltypeUI
+  }
+
   datall = NULL #will hold data for all different models and replicates
   finaltext = NULL
   simfunction = modelsettings$simfunction #name(s) for model function(s) to run
+
 
   ##################################
   #stochastic dynamical model execution

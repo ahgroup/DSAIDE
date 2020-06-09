@@ -3,7 +3,7 @@
 #' @description This function generates shiny UI inputs for a supplied model.
 #' This is a helper function called by the shiny app.
 #' @param mbmodel a string containing the name of a simulator function for which to build inputs
-#' @param otherinputs a list of other shiny inputs to include in the UI
+#' @param otherinputs a text string that specifies a list of other shiny inputs to include in the UI
 #' @param packagename name of package using this function (DSAIDE or DSAIRM)
 #' @return A renderUI object that can be added to the shiny output object for display in a Shiny UI
 #' @details This function is called by the Shiny app to produce the Shiny input UI elements.
@@ -54,11 +54,12 @@ generate_shinyinput <- function(mbmodel, otherinputs = NULL, packagename)
     }) #close lapply
 
     #if the user provided otherinputs (which need to be in the form of a list of shiny input elements)
-    #thos will be added to the whole UI structure
+    #those will be added to the whole UI structure
+    #the default is an empty string, then nothing will be added
     otherargs = NULL
-    if (!is.null(otherinputs))
+    if (nchar(otherinputs)>1)
     {
-        otherargs = lapply(otherinputs,myclassfct)
+        otherargs = lapply(eval(str2expression(otherinputs)),myclassfct)
     }
 
     #return structure
@@ -66,12 +67,26 @@ generate_shinyinput <- function(mbmodel, otherinputs = NULL, packagename)
             p(
                 shiny::actionButton("submitBtn", "Run Simulation", class = "submitbutton"),
                 shiny::actionButton(inputId = "reset", label = "Reset Inputs", class = "submitbutton"),
-                shiny::downloadButton(outputId = "download_code", label = "Download Code", class = "submitbutton"),
+                #shiny::downloadButton(outputId = "download_code", label = "Download Code", class = "submitbutton"),
                 align = 'center'),
             modelargs,
-            otherargs
+            otherargs,
+            myclassfct(shiny::selectInput("plotscale", "Log-scale for plot",c("none" = "none", 'x-axis' = "x", 'y-axis' = "y", 'both axes' = "both"))),
+            myclassfct(shiny::selectInput("plotengine", "Plot engine",c("ggplot" = "ggplot", "plotly" = "plotly")))
         ) #end tagList
+
 
     return(modelinputs)
 } #end overall function
 
+
+
+# modelinputs <- tagList(
+#     p(
+#         shiny::actionButton("submitBtn", "Run Simulation", class = "submitbutton"),
+#         shiny::actionButton(inputId = "reset", label = "Reset Inputs", class = "submitbutton"),
+#         shiny::downloadButton(outputId = "download_code", label = "Download Code", class = "submitbutton"),
+#         align = 'center'),
+#     modelargs,
+#     otherargs
+# ) #end tagList

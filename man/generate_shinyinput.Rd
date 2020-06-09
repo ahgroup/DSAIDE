@@ -9,7 +9,7 @@ generate_shinyinput(mbmodel, otherinputs = NULL, packagename)
 \arguments{
 \item{mbmodel}{a string containing the name of a simulator function for which to build inputs}
 
-\item{otherinputs}{a list of other shiny inputs to include in the UI}
+\item{otherinputs}{a text string that specifies a list of other shiny inputs to include in the UI}
 
 \item{packagename}{name of package using this function (DSAIDE or DSAIRM)}
 }

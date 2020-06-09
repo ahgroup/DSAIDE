@@ -36,16 +36,23 @@
 
 #get names of all existing apps
 packagename = "DSAIDE"
-appdir = system.file("appinformation", package = packagename) #find path to apps
-fullappNames = list.files(path = appdir, pattern = "+.settings", full.names = FALSE)
-appNames = gsub("_settings.R" ,"",fullappNames)
+
+#find path to apps
+appdir = here::here("appinformation")
+
+#load table that has all the app information
+at = read.table(file = paste0(appdir,"/apptable.tsv"), sep = '\t', header = TRUE)
+
+appNames = at$shorttitle
+
+#path to simulator function zip file
 allsimfctfile = paste0(system.file("simulatorfunctions", package = packagename),"/simulatorfunctions.zip")
 currentdocfilename <<- NULL
 
 #this function is the server part of the app
 server <- function(input, output, session)
 {
-  #to get plot engine be object to always be processed
+  #to get plot engine to be an object that is always be processed
   output$plotengine <- renderText('ggplot')
   outputOptions(output, "plotengine", suspendWhenHidden = FALSE)
 
@@ -56,28 +63,45 @@ server <- function(input, output, session)
   {
     observeEvent(input[[appName]],
     {
-      currentapp <<- appName #assign currently chosen app to global app variable
-      #file name for documentation
-      currentdocfilename <<- paste0(appdir,'/',currentapp,'_documentation.html')
-      settingfilename = paste0(appdir,'/',currentapp,'_settings.R')
-
+      #clear out anything that might be left over from previous app
       output$ggplot <- NULL
       output$plotly <- NULL
       output$text <- NULL
       output$floattask <- NULL
+      output$analyzemodel <- NULL
 
-      #load/source an R settings file that contains additional information for a given app
+      appsettings <<- NULL
+      modelsettings <<- NULL
+
+
+      #each app has settings stored in apptable
+      #read and assign to list called 'appsettings'
+      #store in global variable
+      appsettings <<- as.list(at[which(at$shorttitle == appName),])
+      #file name for documentation
+      currentdocfilename <<- paste0(appdir,"/",appsettings$docname)
+
+
+      #a few apps have 2 simulator functions, combine here into vector
+      if (nchar(appsettings$simfunction2) > 1)
+      {
+        appsettings$simfunction <<- c(appsettings$simfunction,appsettings$simfunction2)
+      }
+
       #the information is stored in a list called 'appsettings'
       #different models can have different variables
       #all models need the following:
+      #variable appid - ID of the app
       #variable apptitle - the name of the app
+      #variable shorttitle - short name of the app, including ID
+      #variable docname - name of documentation file for app
       #variable simfunction - the name of the simulation function(s)
-      #variable modeltype - the type of the model to be run or NULL if set by UI
+      #variable modeltype - the type of the model to be run. "_mixed_" if set by UI.
       #additional elements that can be provided:
-      #variable otherinputs - contains additional shiny UI elements that are not generated automaticall by functions above
+      #variable otherinputs - contains additional shiny UI elements that are not generated automatically by functions above
       #for instance all non-numeric inputs need to be provided separately.
-      #If not needed, it is NULL
-      source(settingfilename) #source the file with additional settings to load them
+      #this is provided as text
+      #If not needed, it is empty ""
 
       #extract function and other inputs and turn them into a taglist
       #this uses the 1st function provided by the settings file and stored in currentsimfct
@@ -85,6 +109,7 @@ server <- function(input, output, session)
 
       modelinputs <- generate_shinyinput(mbmodel = appsettings$simfunction[1], otherinputs = appsettings$otherinputs, packagename = packagename)
       output$modelinputs <- renderUI({modelinputs})
+
 
       #display all inputs and outputs on the analyze tab
       output$analyzemodel <- renderUI({
@@ -95,9 +120,7 @@ server <- function(input, output, session)
             fluidRow(
               column(6,
                 h2('Simulation Settings'),
-                wellPanel(uiOutput("modelinputs")
-                # tags$p(downloadButton(outputId = "download_code", label = "Download Code"), align = "center")  #don't show for now until all works
-                          ) #end wellPanel
+                wellPanel(uiOutput("modelinputs"))
               ), #end sidebar column for inputs
               column(6,
                 h2('Simulation Results'),
@@ -157,11 +180,15 @@ server <- function(input, output, session)
                      x1=isolate(reactiveValuesToList(input)) #get all shiny inputs
                      x2 = x1[! (names(x1) %in% appNames)] #remove inputs that are action buttons for apps
                      x3 = (x2[! (names(x2) %in% c('submitBtn','Exit') ) ]) #remove further inputs
-                     modelsettings = x3[!grepl("*selectized$", names(x3))] #remove any input with selectized
+                     modelsettings = x3
+                     #hacky way of removing the UI from input
+                     if (appsettings$modeltype!="_mixed_") {modelsettings$modeltypeUI <- NULL}
+                     #modelsettings = x3[!grepl("*selectized$", names(x3))] #remove any selectized type input
                      #remove nested list of shiny input tags
                      appsettings$otherinputs <- NULL
                      #add settings information from appsettings list
                      modelsettings = c(appsettings, modelsettings)
+                     #browser()
                      if (is.null(modelsettings$nreps)) {modelsettings$nreps <- 1} #if there is no UI input for replicates, assume reps is 1
                      #if no random seed is set in UI, set it to 123.
                      if (is.null(modelsettings$rngseed)) {modelsettings$rngseed <- 123}
@@ -201,6 +228,7 @@ server <- function(input, output, session)
 
   #######################################################
   #start code that listens to the "download code" button
+  #not currently implemented/activated
   #######################################################
 
   output$download_code <- downloadHandler(
@@ -277,6 +305,12 @@ server <- function(input, output, session)
 
 } #ends the server function for the app
 
+#simple function that creates app buttons for UI
+#specify data frame containing app info and the id of the app
+make_button <- function(at,id)
+{
+  actionButton(at$shorttitle[id], paste0(at$appid[id],". ",at$apptitle[id]), class="mainbutton")
+}
 
 
 #######################################################
@@ -296,67 +330,64 @@ ui <- fluidPage(
   tags$div(id = "infotext", "More information can be found", a("on the package website.",  href="https://ahgroup.github.io/DSAIDE/", target="_blank")),
   navbarPage(title = packagename, id = packagename, selected = 'Menu',
              tabPanel(title = "Menu",
-
                       tags$div(class='mainsectionheader', 'The Basics'),
                       fluidRow(
-                               actionButton("basicsir", "1. Basic SIR model", class="mainbutton"),
-                               actionButton("idcharacteristics", "2. Characteristics of ID", class="mainbutton"),
-                               actionButton("idpatterns", "3. ID Patterns", class="mainbutton"),
+                               make_button(at,1),
+                               make_button(at,2),
+                               make_button(at,3),
                         class = "mainmenurow"
                       ), #close fluidRow structure for input
 
                       tags$div(class='mainsectionheader', 'The Reproductive Number'),
                       fluidRow(
-                        actionButton("reproductivenumber1", "4. Reproductive Number 1", class="mainbutton"),
-                        actionButton("reproductivenumber2", "5. Reproductive Number 2", class="mainbutton"),
+                        make_button(at,4),
+                        make_button(at,5),
                         class = "mainmenurow"
                       ), #close fluidRow structure for input
 
                       tags$div(class='mainsectionheader', 'Controlling Infectious Diseases'),
                       fluidRow(
-                        actionButton("idcontrolvaccine", "6. Basics of ID control", class="mainbutton"),
-                        actionButton("idcontrolmultioutbreak", "7. ID control for multiple outbreaks", class="mainbutton"),
-                        actionButton("idcontrolmultigroup", "8. ID control of different populations", class="mainbutton"),
-                        actionButton("idcontrolcomplex", "9. Complex ID control scenarios", class="mainbutton"),
+                        make_button(at,6),
+                        make_button(at,7),
+                        make_button(at,8),
+                        make_button(at,9),
                         class = "mainmenurow"
                       ), #close fluidRow structure for input
 
                       tags$div(class='mainsectionheader', 'Types of Transmission'),
                       fluidRow(
-                        actionButton("directtransmission", "10. Direct transmission", class="mainbutton"),
-                      actionButton("environmentaltransmission", "11. Environmental transmission", class="mainbutton"),
-                        actionButton("vectortransmission", "12. Vector transmission", class="mainbutton"),
+                        make_button(at,10),
+                        make_button(at,11),
+                        make_button(at,12),
                         class = "mainmenurow"
                       ), #close fluidRow structure for input
 
                       tags$div(class='mainsectionheader', 'Stochastic Models'),
                       fluidRow(
-                        actionButton("stochasticsir", "13. Stochastic SIR model", class="mainbutton"),
-                         actionButton("stochasticseir", "14. Stochastic SEIR model", class="mainbutton"),
-                         actionButton("evolutionarydynamics", "15. Evolutionary dynamics", class="mainbutton"),
+                        make_button(at,13),
+                        make_button(at,14),
+                        make_button(at,15),
                         class = "mainmenurow"
                       ),
-                      tags$div(class='mainsectionheader', 'Further ID Topics'),
-                      fluidRow(
-                        actionButton("hostheterogeneity", "16. Host heterogeneity", class="mainbutton"),
-                       actionButton("multipathogen", "17. Multi-Pathogen dynamics", class="mainbutton"),
-                       actionButton("parasitemodel", "18. Parasite model", class="mainbutton"),
-                       actionButton("idsurveillance", "19. ID surveillance", class="mainbutton"),
-                       actionButton("maternalimmunity", "20. Maternal immunity", class="mainbutton"),
-                       #actionButton("globalwarming", "Global Warming", class="mainbutton"),
-                       #actionButton("metapopulation", "Metapopulation Dynamics", class="mainbutton"),
-                       class = "mainmenurow"
-                      ), #close fluidRow structure for input
                       tags$div(class='mainsectionheader', 'Fitting Models to Data'),
                       fluidRow(
-                        actionButton("fitflu", "21. Fitting influenza data", class="mainbutton"),
-                        actionButton("fitnoro", "22. Fitting norovirus data", class="mainbutton"),
+                        make_button(at,16),
+                        make_button(at,17),
                         class = "mainmenurow"
                       ), #close fluidRow structure for input
-                      tags$div(class='mainsectionheader', 'Further Modeling Topics'),
+                      tags$div(class='mainsectionheader', 'Model Exploration'),
                       fluidRow(
-                        actionButton("modelexploration", "23. Model exploration", class="mainbutton"),
-                        actionButton("usanalysis", "24. Uncertainty and sensitivity analysis", class="mainbutton"),
+                        make_button(at,18),
+                        make_button(at,19),
+                        class = "mainmenurow"
+                      ), #close fluidRow structure for input
+                      tags$div(class='mainsectionheader', 'Further ID Topics'),
+                      fluidRow(
+                        make_button(at,20),
+                        make_button(at,21),
+                        make_button(at,22),
+                        make_button(at,23),
+                        make_button(at,24),
                         class = "mainmenurow"
                       ), #close fluidRow structure for input
                       withTags({
