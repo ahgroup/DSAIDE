@@ -282,8 +282,8 @@ alltasks[tid,"TaskText"] = "A) Keep playing around with changing any of the para
 
 # Record for task 9
 nrec = 2 # number of items to record
-rectext = c("Number of susceptible at end of outbreak",
-            "Number of recovered at end of outbreak")
+rectext = c("Minimum number of outbreaks you can get",
+            "Maximum number of outbreaks you can get")
 recnote = c("Report an integer",
             "Report an integer")
 recfuzzy = c(0,0)
