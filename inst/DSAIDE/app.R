@@ -114,7 +114,7 @@ server <- function(input, output, session)
       #display all inputs and outputs on the analyze tab
       output$analyzemodel <- renderUI({
           tagList(
-            tags$div(id = "shinyapptitle", appsettings$apptitle),
+            tags$div(id = "shinyapptitle", paste0(appsettings$appid,". ",appsettings$apptitle)),
             tags$hr(),
             #Split screen with input on left, output on right
             fluidRow(
