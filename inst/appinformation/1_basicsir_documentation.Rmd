@@ -144,7 +144,8 @@ allrecord = data.frame(TaskID = 1:nrecord, RecordID = 1:nrecord, Record = rep(""
 
 
 # Task 1
-alltasks[1,"TaskText"] = "A) Run the simulation with 1000 susceptible individuals and 1 initially infected host, no recovered. Set simulation duration to 100 days, start time and time step can remain at 0 and 0.1. Set recovery rate _g_=0.5 per day, and infectiousness _b_=0.001. You will get an outbreak of some - currently unspecified - infectious disease. If you did it correctly, your outbreak should end with around 203 uninfected individuals still remaining.
+tid = 1
+alltasks[tid,"TaskText"] = "A) Run the simulation with 1000 susceptible individuals and 1 initially infected host, no recovered. Set simulation duration to 100 days, start time and time step can remain at 0 and 0.1. Set recovery rate _g_=0.5 per day, and infectiousness _b_=0.001. You will get an outbreak of some - currently unspecified - infectious disease. If you did it correctly, your outbreak should end with around 203 uninfected individuals still remaining.
 B) Also take a look at the final number of infected. You'll see that it is at _3E-9_, i.e. much less than 1 but not 0. That's the issue discussed above in the notes, that for ODE models, numbers can drop below 1, and then can slowly go to 0 but not fully reach 0. Often, this biologically unreasonable feature of these kinds of models can be ignored, but sometimes it matters. You will learn more about this in the apps under the \"Stochastic models\" section."
 
 
@@ -173,10 +174,35 @@ allrecord[2,"Record"] = "Nothing"
 
 
 ### Task 3 
-alltasks[3,"TaskText"] = "A) From the graph, get a (rough) estimate of the day at which the outbreak peaks. That's easiest done when you make a plotly plot.
+tid = 3
+alltasks[tid,"TaskText"] = "A) From the graph, get a (rough) estimate of the day at which the outbreak peaks. That's easiest done when you make a plotly plot.
 B) Contemplate the fact that the outbreak ends even though there are still susceptible remaining, i.e. not everyone got infected. Do you find that surprising? How could you maybe explain that? This topic is discussed in more detail in the reproductive number app. 
 C) You have no infected left at the end of the outbreak. Figure out how you can use the information from either the susceptibles or recovered left at the end of the outbreak to figure out how many people in total got infected during the outbreak.
 D) Rerun the simulation, with the same values you just had. Does anything change? Why (not)?"
+nrec = 2
+rectext = c("Day the outbreak peaked",
+            "Total number infected at end of outbreak")
+recnote = c("Report the rounded integer",
+            "Report the rounded integer")
+recfuzzy = c(1,0)
+allrecord <- filltasks(tid,rc,nrec,rectext,recnote,recfuzzy,allrecord)
+rc = rc + nrec
+
+
+filltasks <- function(tid,rc,nrec,rectext,recnote,recfuzzy,allrecord)
+{
+  for (n in 1:nrec)
+  {
+  allrecord[rc,"TaskID"] = tid
+  allrecord[rc,"RecordID"] = n
+  allrecord[rc,"Record"] = rectext[n]
+  allrecord[rc,"Note"] = recnote[n]
+  allrecord[rc,"Fuzzy"] = recfuzzy[n]
+  rc = rc+1
+  }
+  return(allrecord)
+}
+
 
 
 # Record the answers for task 3
@@ -185,20 +211,21 @@ allrecord[3,"TaskID"] = 3
 
 allrecord[3,"RecordID"] = 1
 
-allrecord[3,"Record"] = "Day the outbreak peaked"  
+allrecord[3,"Record"] = 
 
-allrecord[3,"Note"] = "Report the rounded integer"
+allrecord[3,"Note"] = 
 
 allrecord[3,"Fuzzy"] = 1
 
+}
 
 allrecord[4,"TaskID"] = 3
 
 allrecord[4,"RecordID"] = 2
 
-allrecord[4,"Record"] = "Total number infected at end of outbreak"  
+allrecord[4,"Record"] =   
 
-allrecord[4,"Note"] = "Report the rounded integer"
+allrecord[4,"Note"] = 
 
 
 
