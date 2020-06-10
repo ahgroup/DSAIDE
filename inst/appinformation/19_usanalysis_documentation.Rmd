@@ -11,15 +11,26 @@ output:
 bibliography: references.bib
 ---
 
+```{r, include = FALSE}
+#*************************************
+#Note: for this to process/knit, several helper functions need to be available (sourced) first
+#those are in the inst/helperfunctions folder
+#Note: in general, the "processing-script.R" in the docsfordevelopers should be used to produce the html docs
+#manual knitting of each doc only during development/testing
+#*************************************
+files_to_source = list.files(here::here("inst/helperfunctions"),full.names=TRUE)
+sapply(files_to_source, source)
+```
+
+
 ```{r, echo = FALSE}
-#this code loads the settings file for the current app so we can automatically 
-#list the functions in the further information section
-source(here::here("inst/appinformation","get_settings.R"))
-source(here::here("inst/appinformation","filltasks.R"))
+#load the settings file for the current app 
+#so we can automatically include figure, list the functions in the further information section
+#and use other information specific to the current app for the task table generation
 currentrmdfile = knitr::current_input() 
 appsettings = get_settings(currentrmdfile)
-
 ```
+
 
 ## Overview {#shinytab1}
 This app allows exploration of the concept of uncertainty and sensitivity analysis.  For this purpose, we use the SIR model with demographics (also used in the stochastic SIR app and model exploration app). 
@@ -91,15 +102,15 @@ For the purpose of uncertainty and sensitivity analysis, starting values for var
 
 The default outcome plots are boxplots, which show the distribution of the 3 outcomes of interest for the different parameter samples. You can set the number of samples you want to run. Samples are constructed using the latin hypercube method to efficiently span the space of possible parameter values. In general, more samples are better, but of course take longer to run.
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, eval=TRUE}
 # save all tasks, outcomes, etc. into an R data frame, then print later.
-# is more useable later
+# this data frame is used to automate shiny solutions and quiz generation
 
-#Explaination for each of the columns in the R data frame 
+# Explanation for each of the columns in the R data frame 
 
-# quizID: MUST BE THE FIRST COLUMN. Used by the grading app. naming structure "dsaide_app_#" where # is the app number in the dsaide menu
-# AppTitle: Title used for the app in the dsaide app
-# AppID: App number in the dsaide menu
+# quizID: MUST BE THE FIRST COLUMN. Used by the grading app. naming structure "dsaide_shorttitle" where shorttitle is from appsettings$shorttitle
+# AppTitle: Title used for the app in the dsaide app, from appsettings$apptitle
+# AppID: App number in the dsaide menu, from appsettings$appid
 # TaskID: Identifies which task the text belongs to 
 # TaskText: The text that explains what to do for the task
 # RecordID: Identifies if it is the first, second, third,... item to record within the task
@@ -110,19 +121,16 @@ The default outcome plots are boxplots, which show the distribution of the 3 out
 # Review: Admin use if value is 1 the way the questions is asked may need to be reconsidered. 
 
 ntasks = 7 #number of tasks
-
-alltasks = data.frame(quizID=rep(paste0("dsaide_",appsettings$shorttitle),ntasks), AppTitle = appsettings$apptitle, AppID = appsettings$appid, TaskID = 1:ntasks,  TaskText =  rep("",ntasks))
-
 nrecord = 10 #number of outcomes to record
+#set up task tables
+#returned as list for generality, take apart
+tablist <- make_tasktable(ntasks,nrecord,appsettings)
+alltasks = tablist[[1]]
+allrecord = tablist[[2]]
 
-allrecord = data.frame(TaskID = 1:nrecord, RecordID = 1:nrecord, Record = rep("",nrecord), Note = rep("",nrecord), Answer = rep("",nrecord), Fuzzy = rep(0,nrecord), Review = rep(0,nrecord))
-
-# used only when running locally to trouble shoot
-# alltasks = data.frame(AppTitle = "test", AppID = 24, TaskID = 1:ntasks,  TaskText =  rep("",ntasks))
 
 #this is the running counter for the records which starts at 1 
 rc=1
-
 
 # Task 1
 tid = 1
@@ -137,7 +145,7 @@ nrec = 1 # number of items to record
 rectext = c("Mean number of susceptible at end of outbreak (Part A)")
 recnote = c("Report the rounded integer")
 recfuzzy = c(0)
-allrecord <- filltasks(tid,rc,nrec,rectext,recnote,recfuzzy,allrecord)
+allrecord <- fill_tasktable(tid,rc,nrec,rectext,recnote,recfuzzy,allrecord)
 rc = rc + nrec
 
 
@@ -154,7 +162,7 @@ rectext = c("Mean peak of infected when transmission is increased by a factor of
 recnote = c("Report the rounded integer",
             "Report the rounded integer")
 recfuzzy = c(0,0)
-allrecord <- filltasks(tid,rc,nrec,rectext,recnote,recfuzzy,allrecord)
+allrecord <- fill_tasktable(tid,rc,nrec,rectext,recnote,recfuzzy,allrecord)
 rc = rc + nrec
 
 
@@ -171,7 +179,7 @@ rectext = c("Mean number of susceptible at end of outbreak (Part B)",
 recnote = c("Report the rounded integer",
             "Report the rounded integer")
 recfuzzy = c(0,0)
-allrecord <- filltasks(tid,rc,nrec,rectext,recnote,recfuzzy,allrecord)
+allrecord <- fill_tasktable(tid,rc,nrec,rectext,recnote,recfuzzy,allrecord)
 rc = rc + nrec
 
 
@@ -184,7 +192,7 @@ nrec = 1 # number of items to record
 rectext = c("Nothing")
 recnote = c("")
 recfuzzy = c(0)
-allrecord <- filltasks(tid,rc,nrec,rectext,recnote,recfuzzy,allrecord)
+allrecord <- fill_tasktable(tid,rc,nrec,rectext,recnote,recfuzzy,allrecord)
 rc = rc + nrec
 
 
@@ -201,7 +209,7 @@ rectext = c("The correlation between infection peak and _b_ (Part C)",
 recnote = c("Report to the hundredths",
             "Report to the hundredths")
 recfuzzy = c(0.01,0.01)
-allrecord <- filltasks(tid,rc,nrec,rectext,recnote,recfuzzy,allrecord)
+allrecord <- fill_tasktable(tid,rc,nrec,rectext,recnote,recfuzzy,allrecord)
 rc = rc + nrec
 
 
@@ -215,7 +223,7 @@ nrec = 1 # number of items to record
 rectext = c("Nothing")
 recnote = c("")
 recfuzzy = c(0)
-allrecord <- filltasks(tid,rc,nrec,rectext,recnote,recfuzzy,allrecord)
+allrecord <- fill_tasktable(tid,rc,nrec,rectext,recnote,recfuzzy,allrecord)
 rc = rc + nrec
 
 
@@ -231,36 +239,22 @@ nrec = 1 # number of items to record
 rectext = c("Correlation between _g_ and the outbreak peak (Part C).")
 recnote = c("Report to the hundredths")
 recfuzzy = c(0.01)
-allrecord <- filltasks(tid,rc,nrec,rectext,recnote,recfuzzy,allrecord)
+allrecord <- fill_tasktable(tid,rc,nrec,rectext,recnote,recfuzzy,allrecord)
 rc = rc + nrec
+```
 
 
-# Make a single file using join_all 
-alltext<-dplyr::full_join(alltasks,allrecord, by="TaskID")
 
-# Make a unique ID for each of the items recorded for the tasks
-alltext<-dplyr::mutate(alltext, RecordID = paste("T",TaskID,"R",RecordID, sep = ""))
 
-write.table(alltext, paste0(appsettings$shorttitle,"_tasktable.tsv"), append = FALSE, sep = "\t", row.names = F, col.names = TRUE)
+```{r echo=FALSE}
+#save the fully filled task table to a tsv file
+save_tasktable(alltasks,allrecord,appsettings)
 ```
 
 
 ```{r, echo=FALSE, results='asis'}
-
-for (n in 1:ntasks)
-{
- 
-  rtext<-dplyr::filter(alltext, TaskID==n)
-  
-  writeLines(c(paste('### Task ',n), '\n', paste(unique(rtext["TaskText"])), '\n',  '**Record**', '\n'))
-  
-  for (k in 1:nrow(rtext)){
-    writeLines(c(paste("*",rtext[k,"Record"]), '\n'))
-  }
-  
-}
-
-
+# Take all the text stored in the table and print the tasks and items to record
+write_tasktext(alltasks,allrecord)
 ```
 
 

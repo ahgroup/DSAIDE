@@ -12,11 +12,22 @@ bibliography: references.bib
 ---
 
 
+```{r, include = FALSE}
+#*************************************
+#Note: for this to process/knit, several helper functions need to be available (sourced) first
+#those are in the inst/helperfunctions folder
+#Note: in general, the "processing-script.R" in the docsfordevelopers should be used to produce the html docs
+#manual knitting of each doc only during development/testing
+#*************************************
+files_to_source = list.files(here::here("inst/helperfunctions"),full.names=TRUE)
+sapply(files_to_source, source) #sourcing needs to happen inside each Rmd file since knitr starts a new environment
+```
+
+
 ```{r, echo = FALSE}
-#this code loads the settings file for the current app so we can automatically 
-#list the functions in the further information section
-source(here::here("inst/appinformation","get_settings.R"))
-source(here::here("inst/appinformation","filltasks.R"))
+#load the settings file for the current app 
+#so we can automatically include figure, list the functions in the further information section
+#and use other information specific to the current app for the task table generation
 currentrmdfile = knitr::current_input() 
 appsettings = get_settings(currentrmdfile)
 ```
@@ -115,9 +126,9 @@ In words, the number of susceptible/infected/recovered at a time step _dt_ in th
 
 ```{r, echo=FALSE, eval=TRUE}
 # save all tasks, outcomes, etc. into an R data frame, then print later.
-# is more useable later
+# this data frame is used to automate shiny solutions and quiz generation
 
-#Explaination for each of the columns in the R data frame 
+# Explanation for each of the columns in the R data frame 
 
 # quizID: MUST BE THE FIRST COLUMN. Used by the grading app. naming structure "dsaide_shorttitle" where shorttitle is from appsettings$shorttitle
 # AppTitle: Title used for the app in the dsaide app, from appsettings$apptitle
@@ -132,33 +143,33 @@ In words, the number of susceptible/infected/recovered at a time step _dt_ in th
 # Review: Admin use if value is 1 the way the questions is asked may need to be reconsidered. 
 
 ntasks = 9 #number of tasks
-
-
-alltasks = data.frame(quizID=rep(paste0("dsaide_",appsettings$shorttitle),ntasks), AppTitle = appsettings$apptitle, AppID = appsettings$appid, TaskID = 1:ntasks,  TaskText =  rep("",ntasks))
-
 nrecord = 19 #number of outcomes to record
+#set up task tables
+#returned as list for generality, take apart
+tablist <- make_tasktable(ntasks,nrecord,appsettings)
+alltasks = tablist[[1]]
+allrecord = tablist[[2]]
 
-allrecord = data.frame(TaskID = 1:nrecord, RecordID = 1:nrecord, Record = rep("",nrecord), Note = rep("",nrecord), Answer = rep("",nrecord), Fuzzy = rep(0,nrecord), Review = rep(0,nrecord))
 
-# used only when running locally to trouble shoot
-# alltasks = data.frame(AppTitle = "Basic", AppID = 1, TaskID = 1:ntasks,  TaskText =  rep("",ntasks))
 
 #this is the running counter for the records which starts at 1 
 rc=1
 
-
 # Task 1
 tid = 1
 alltasks[tid,"TaskText"] = "A) Run the simulation with 1000 susceptible individuals and 1 initially infected host, no recovered. Set simulation duration to 100 days, start time and time step can remain at 0 and 0.1. Set recovery rate _g_=0.5 per day, and infectiousness _b_=0.001. You will get an outbreak of some - currently unspecified - infectious disease. If you did it correctly, your outbreak should end with around 203 uninfected individuals still remaining.
-B) Also take a look at the final number of infected. You'll see that it is at _3E-9_, i.e. much less than 1 but not 0. That's the issue discussed above in the notes, that for ODE models, numbers can drop below 1, and then can slowly go to 0 but not fully reach 0. Often, this biologically unreasonable feature of these kinds of models can be ignored, but sometimes it matters. You will learn more about this in the apps under the \"Stochastic models\" section."
+B) Also take a look at the final number of infected. You'll see that it is at _3E-9_, i.e. much less than 1 but not 0. That's the issue discussed above in the notes, that for ODE models, numbers can drop below 1, and then can slowly go to 0 but not fully reach 0. Often, this biologically unreasonable feature of these kinds of models can be ignored, but sometimes it matters. You will learn more about this when you work through the stochastic model apps."
 
 # Record for task 1
 nrec = 1 # number of items to record
-rectext = c("Total number of recovered at end of outbreak")
-recnote = c("Report the rounded integer")
-recfuzzy = c(0)
-allrecord <- filltasks(tid,rc,nrec,rectext,recnote,recfuzzy,allrecord)
-rc = rc + nrec
+reclist = list()
+reclist$rectext = c("Total number of recovered at end of outbreak")
+reclist$rectype = "Numeric"
+reclist$recnote = c("Report the rounded integer")
+reclist$recfuzzy = c(0)
+
+allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
+rc = rc + nrec #increment record counter by number of outcomes to record for this task 
 
 
 # Task 2
@@ -169,10 +180,11 @@ D) Try again switching between ggplot and plotly as plotting engine."
 
 # Record for task 2
 nrec = 1 # number of items to record
-rectext = c("Nothing")
-recnote = c("")
-recfuzzy = c(0)
-allrecord <- filltasks(tid,rc,nrec,rectext,recnote,recfuzzy,allrecord)
+reclist$rectext = c("Nothing")
+reclist$rectype = "None"
+reclist$recnote = c("")
+reclist$recfuzzy = c(0)
+allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
 rc = rc + nrec
 
 
@@ -185,27 +197,29 @@ D) Rerun the simulation, with the same values you just had. Does anything change
 
 # Record for task 3
 nrec = 2 # number of items to record
-rectext = c("Day the outbreak peaked",
+reclist$rectext = c("Day the outbreak peaked",
             "Total number infected at end of outbreak")
-recnote = c("Report the rounded integer",
+reclist$recnote = c("Report the rounded integer",
             "Report the rounded integer")
-recfuzzy = c(1,0)
-allrecord <- filltasks(tid,rc,nrec,rectext,recnote,recfuzzy,allrecord)
+reclist$rectype = c("Numeric","Numeric")
+reclist$recfuzzy = c(1,0)
+allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
 rc = rc + nrec
 
 
 ### Task 4
 tid = 4
-alltasks[tid,"TaskText"] = "A) Set \"Models to run\" to \"both\", which runs and shows both the continuous-time and discrete-time models. Start with a discrete-time step of 0.01. Leave all other settings as before. Run the simulation, see what you get. You should see the results from the 2 models essentially on top of each other and barely distinguishable."
+alltasks[tid,"TaskText"] = "A) Set _Models to run_ to _both_, which runs and shows both the continuous-time and discrete-time models. Start with a discrete-time step of 0.01. Leave all other settings as before. Run the simulation, see what you get. You should see the results from the 2 models essentially on top of each other and barely distinguishable."
 
 # Record for task 4
 nrec = 2 # number of items to record
-rectext = c("Number of susceptible at end of outbreak for continuous-time model",
+reclist$rectext = c("Number of susceptible at end of outbreak for continuous-time model",
             "Number of susceptible at end of outbreak for discrete-time model")
-recnote = c("Report the rounded integer",
+reclist$recnote = c("Report the rounded integer",
             "Report the rounded integer")
-recfuzzy = c(0,0)
-allrecord <- filltasks(tid,rc,nrec,rectext,recnote,recfuzzy,allrecord)
+reclist$rectype = c("Numeric","Numeric")
+reclist$recfuzzy = c(0,0)
+allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
 rc = rc + nrec
 
 
@@ -215,30 +229,31 @@ alltasks[tid,"TaskText"] = "A) Now try different values for _dt_. Leave all othe
 
 # Record for task 5
 nrec = 2 # number of items to record
-rectext = c("Number of susceptible left at end of outbreak for continuous-time model dt=1",
+reclist$rectext = c("Number of susceptible left at end of outbreak for continuous-time model dt=1",
             "Number of susceptible left at end of outbreak for discrete-time model dt=1")
-recnote = c("Report the rounded integer",
+reclist$recnote = c("Report the rounded integer",
             "Report the rounded integer")
-recfuzzy = c(0,0)
-allrecord <- filltasks(tid,rc,nrec,rectext,recnote,recfuzzy,allrecord)
+reclist$rectype = c("Numeric","Numeric")
+reclist$recfuzzy = c(0,0)
+allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
 rc = rc + nrec
 
 
 ### Task 6
 tid = 6
-alltasks[tid,"TaskText"] = "
-A) Go back to running the ODE model only. Set all parameters as described in task 1. Then double the value of the transmission rate, _b_. Compared to what you found in the previous task, how do you expect the min/max and number/fraction of S/I/R at the end of the outbreak to change? What about the time at which the outbreak peaks? Run the simulation with the doubled transmission rate. Compare your expectations with the results. How do they agree/disagree? Does it make sense? Anything surprising happening?"
+alltasks[tid,"TaskText"] = "A) Go back to running the ODE model only. Set all parameters as described in task 1. Then double the value of the transmission rate, _b_. Compared to what you found in the previous task, how do you expect the min/max and number/fraction of S/I/R at the end of the outbreak to change? What about the time at which the outbreak peaks? Run the simulation with the doubled transmission rate. Compare your expectations with the results. How do they agree/disagree? Does it make sense? Anything surprising happening?"
 
 # Record for task 6
 nrec = 3 # number of items to record
-rectext = c("Number of susceptible at end of outbreak",
+reclist$rectext = c("Number of susceptible at end of outbreak",
             "Number of recovered at end of outbreak",
             "Day the outbreak peaked")
-recnote = c("Report the rounded integer",
+reclist$recnote = c("Report the rounded integer",
             "Report the rounded integer",
             "Report the rounded integer")
-recfuzzy = c(0,0,1)
-allrecord <- filltasks(tid,rc,nrec,rectext,recnote,recfuzzy,allrecord)
+reclist$rectype = c("Numeric","Numeric")
+reclist$recfuzzy = c(0,0,1)
+allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
 rc = rc + nrec
 
 
@@ -248,14 +263,15 @@ alltasks[tid,"TaskText"] = "A) Double the rate of recovery, _g_, leave everythin
 
 # Record for task 7
 nrec = 3 # number of items to record
-rectext = c("Number of susceptible at end of outbreak",
+reclist$rectext = c("Number of susceptible at end of outbreak",
             "Number of recovered at end of outbreak",
             "There is a peak for the outbreak (TRUE/FALSE)")
-recnote = c("Report the rounded integer",
+reclist$recnote = c("Report the rounded integer",
             "Report the rounded integer",
             "Report TRUE or FALSE")
-recfuzzy = c(0,0,0)
-allrecord <- filltasks(tid,rc,nrec,rectext,recnote,recfuzzy,allrecord)
+reclist$rectype = c("Numeric","Logical")
+reclist$recfuzzy = c(0,0,0)
+allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
 rc = rc + nrec
 
 
@@ -265,14 +281,15 @@ alltasks[tid,"TaskText"] = "A) Double the number of susceptibles, _S~0~_, leave 
 
 # Record for task 8
 nrec = 3 # number of items to record
-rectext = c("Number of susceptible at end of outbreak",
+reclist$rectext = c("Number of susceptible at end of outbreak",
             "Number of recovered at end of outbreak",
             "There is a peak for the outbreak (TRUE/FALSE)")
-recnote = c("Report the rounded integer",
+reclist$recnote = c("Report the rounded integer",
             "Report the rounded integer",
             "Report TRUE or FALSE")
-recfuzzy = c(0,0,0)
-allrecord <- filltasks(tid,rc,nrec,rectext,recnote,recfuzzy,allrecord)
+reclist$rectype = c("Numeric","Numeric","Logical")
+reclist$recfuzzy = c(0,0,0)
+allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
 rc = rc + nrec
 
 
@@ -282,47 +299,28 @@ alltasks[tid,"TaskText"] = "A) Keep playing around with changing any of the para
 
 # Record for task 9
 nrec = 2 # number of items to record
-rectext = c("Minimum number of outbreaks you can get",
-            "Maximum number of outbreaks you can get")
-recnote = c("Report an integer",
-            "Report an integer")
-recfuzzy = c(0,0)
-allrecord <- filltasks(tid,rc,nrec,rectext,recnote,recfuzzy,allrecord)
+reclist$rectext = c("Minimum number of outbreaks you can get",
+                    "Maximum number of outbreaks you can get")
+reclist$recnote = c("Report an integer",
+                   "Report an integer")
+reclist$rectype = c("Numeric","Numeric")
+reclist$recfuzzy = c(0,0)
+allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
 rc = rc + nrec
+```
 
 
-# Make a single file using join_all 
 
-alltext<-dplyr::full_join(alltasks,allrecord, by="TaskID")
 
-# Make a unique ID for each of the items recorded for the tasks
-
-alltext<-dplyr::mutate(alltext, RecordID = paste("T",TaskID,"R",RecordID, sep = ""))
-
-write.table(alltext, paste0(appsettings$shorttitle,"_tasktable.tsv"), append = FALSE, sep = "\t", row.names = F, col.names = TRUE)
-
+```{r echo=FALSE}
+#save the fully filled task table to a tsv file
+save_tasktable(alltasks,allrecord,appsettings)
 ```
 
 
 ```{r, echo=FALSE, results='asis'}
-
-# This loop prints all the stored text above
-# prints task and items to record
-
-for (n in 1:ntasks)
-{
- 
-  rtext<-dplyr::filter(alltext, TaskID==n)
-  
-  writeLines(c(paste('### Task ',n), '\n', paste(unique(rtext["TaskText"])), '\n',  '**Record**', '\n'))
-  
-  for (k in 1:nrow(rtext)){
-    writeLines(c(paste("*",rtext[k,"Record"]), '\n'))
-  }
-  
-}
-
-
+# Take all the text stored in the table and print the tasks and items to record
+write_tasktext(alltasks,allrecord)
 ```
 
 
