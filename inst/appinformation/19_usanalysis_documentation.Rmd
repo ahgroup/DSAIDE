@@ -142,10 +142,12 @@ C) The more samples you have, the more robust the results are to changes in the 
 
 # Record the answers for task 1
 nrec = 1 # number of items to record
-rectext = c("Mean number of susceptible at end of outbreak (Part A)")
-recnote = c("Report the rounded integer")
-recfuzzy = c(0)
-allrecord <- fill_tasktable(tid,rc,nrec,rectext,recnote,recfuzzy,allrecord)
+reclist = list()
+reclist$rectext = c("Mean number of susceptible at end of outbreak (Part A)")
+reclist$recnote = c("Report the rounded integer")
+reclist$rectype = "Numeric"
+reclist$recfuzzy = c(0)
+allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
 rc = rc + nrec
 
 
@@ -157,12 +159,13 @@ C) Now go the opposite way and lower the initial lower/upper bounds by a factor 
 
 # Record the answers for task 2
 nrec = 2 # number of items to record
-rectext = c("Mean peak of infected when transmission is increased by a factor of 10 (Part B)",
+reclist$rectext = c("Mean peak of infected when transmission is increased by a factor of 10 (Part B)",
             "Mean peak of infected when transmission is decreased by a factor of 10 (Part C)")
-recnote = c("Report the rounded integer",
+reclist$recnote = c("Report the rounded integer",
             "Report the rounded integer")
-recfuzzy = c(0,0)
-allrecord <- fill_tasktable(tid,rc,nrec,rectext,recnote,recfuzzy,allrecord)
+reclist$rectype = c("Numeric","Numeric")
+reclist$recfuzzy = c(0,0)
+allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
 rc = rc + nrec
 
 
@@ -174,12 +177,13 @@ C) Reset the birth rate, now decrease the upper bound for the death rate by a fa
 
 # Record the answers for task 3
 nrec = 2 # number of items to record
-rectext = c("Mean number of susceptible at end of outbreak (Part B)",
+reclist$rectext = c("Mean number of susceptible at end of outbreak (Part B)",
             "Mean number of susceptible at end of outbreak (Part C)")
-recnote = c("Report the rounded integer",
+reclist$recnote = c("Report the rounded integer",
             "Report the rounded integer")
-recfuzzy = c(0,0)
-allrecord <- fill_tasktable(tid,rc,nrec,rectext,recnote,recfuzzy,allrecord)
+reclist$rectype = c("Numeric","Numeric")
+reclist$recfuzzy = c(0,0)
+allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
 rc = rc + nrec
 
 
@@ -189,10 +193,11 @@ alltasks[4,"TaskText"] = "A) Continue exploring by changing ranges for different
 
 # Record the answers for task 4
 nrec = 1 # number of items to record
-rectext = c("Nothing")
-recnote = c("")
-recfuzzy = c(0)
-allrecord <- fill_tasktable(tid,rc,nrec,rectext,recnote,recfuzzy,allrecord)
+reclist$rectext = c("Nothing")
+reclist$recnote = c("")
+reclist$rectype = c("None")
+reclist$recfuzzy = c(0)
+allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
 rc = rc + nrec
 
 
@@ -204,26 +209,28 @@ C) Now use a sample size of 150 and use rngseed=100. Run the simulation"
 
 # Record the answers for task 5
 nrec = 2 # number of items to record
-rectext = c("The correlation between infection peak and _b_ (Part C)",
+reclist$rectext = c("The correlation between infection peak and _b_ (Part C)",
             "The correlation between final number of susceptibles and _m_ (Part C)")
-recnote = c("Report to the hundredths",
+reclist$recnote = c("Report to the hundredths",
             "Report to the hundredths")
-recfuzzy = c(0.01,0.01)
-allrecord <- fill_tasktable(tid,rc,nrec,rectext,recnote,recfuzzy,allrecord)
+reclist$rectype = c("Numeric","Numeric")
+reclist$recfuzzy = c(0.01,0.01)
+allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
 rc = rc + nrec
 
 
 ### Task 6
 tid = 6
-alltasks[6,"TaskText"] = "A) Since our model is rather simple, we can actually determine relations between parameters and some of the outcomes analytically. Specifically, it is possible to compute the steady state values for _S_ and _I_. If you don't know what steady states are and how to compute them, go through the \"patterns of ID\" and/or \"model exploration\" apps, where this is explained.
+alltasks[6,"TaskText"] = "A) Since our model is rather simple, we can actually determine relations between parameters and some of the outcomes analytically. Specifically, it is possible to compute the steady state values for _S_ and _I_. If you don't know what steady states are and how to compute them, go through the _Patterns of ID_ and/or _Model Exploration_ apps, where this is explained.
 B) Get the equations for _S_ and _I_ at steady state as determined in those apps. Compare the scatterplots and correlation coefficients with the results from these equations. For instance based on the equation, you should see a linear correlation between _S~steady~_ and death rate _n_.  You might find that there is a lot of scatter in the data, too much to see clear patterns. One could always increase sample size which should help detect patterns, but it takes longer to run. Another option is to restrict the variability to a subset of parameters, which we'll do next."
 
 # Record the answers for task 6
 nrec = 1 # number of items to record
-rectext = c("Nothing")
-recnote = c("")
-recfuzzy = c(0)
-allrecord <- fill_tasktable(tid,rc,nrec,rectext,recnote,recfuzzy,allrecord)
+reclist$rectext = c("Nothing")
+reclist$recnote = c("")
+reclist$rectype = c("None")
+reclist$recfuzzy = c(0)
+allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
 rc = rc + nrec
 
 
@@ -236,10 +243,11 @@ D) Look at both scatterplots for _g_ and _n_. Note the different distributions f
 
 # Record the answers for task 7
 nrec = 1 # number of items to record
-rectext = c("Correlation between _g_ and the outbreak peak (Part C).")
-recnote = c("Report to the hundredths")
-recfuzzy = c(0.01)
-allrecord <- fill_tasktable(tid,rc,nrec,rectext,recnote,recfuzzy,allrecord)
+reclist$rectext = c("Correlation between _g_ and the outbreak peak (Part C).")
+reclist$recnote = c("Report to the hundredths")
+reclist$rectype = c("Numeric")
+reclist$recfuzzy = c(0.01)
+allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
 rc = rc + nrec
 ```
 
