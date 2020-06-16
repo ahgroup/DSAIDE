@@ -198,11 +198,13 @@ D) Rerun the simulation, with the same values you just had. Does anything change
 # Record for task 3
 nrec = 2 # number of items to record
 reclist$rectext = c("Day the outbreak peaked",
-            "Total number infected at end of outbreak")
+                    "Total number infected at end of outbreak")
 reclist$recnote = c("Report the rounded integer",
-            "Report the rounded integer")
-reclist$rectype = c("Numeric","Numeric")
-reclist$recfuzzy = c(1,0)
+                    "Report the rounded integer")
+reclist$rectype = c("Numeric",
+                    "Numeric")
+reclist$recfuzzy = c(1,
+                     0)
 allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
 rc = rc + nrec
 
@@ -214,11 +216,13 @@ alltasks[tid,"TaskText"] = "A) Set _Models to run_ to _both_, which runs and sho
 # Record for task 4
 nrec = 2 # number of items to record
 reclist$rectext = c("Number of susceptible at end of outbreak for continuous-time model",
-            "Number of susceptible at end of outbreak for discrete-time model")
+                    "Number of susceptible at end of outbreak for discrete-time model")
 reclist$recnote = c("Report the rounded integer",
-            "Report the rounded integer")
-reclist$rectype = c("Numeric","Numeric")
-reclist$recfuzzy = c(0,0)
+                    "Report the rounded integer")
+reclist$rectype = c("Numeric",
+                    "Numeric")
+reclist$recfuzzy = c(0,
+                     0)
 allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
 rc = rc + nrec
 
@@ -230,11 +234,13 @@ alltasks[tid,"TaskText"] = "A) Now try different values for _dt_. Leave all othe
 # Record for task 5
 nrec = 2 # number of items to record
 reclist$rectext = c("Number of susceptible left at end of outbreak for continuous-time model dt=1",
-            "Number of susceptible left at end of outbreak for discrete-time model dt=1")
+                    "Number of susceptible left at end of outbreak for discrete-time model dt=1")
 reclist$recnote = c("Report the rounded integer",
-            "Report the rounded integer")
-reclist$rectype = c("Numeric","Numeric")
-reclist$recfuzzy = c(0,0)
+                    "Report the rounded integer")
+reclist$rectype = c("Numeric",
+                    "Numeric")
+reclist$recfuzzy = c(0,
+                     0)
 allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
 rc = rc + nrec
 
@@ -246,13 +252,17 @@ alltasks[tid,"TaskText"] = "A) Go back to running the ODE model only. Set all pa
 # Record for task 6
 nrec = 3 # number of items to record
 reclist$rectext = c("Number of susceptible at end of outbreak",
-            "Number of recovered at end of outbreak",
-            "Day the outbreak peaked")
+                    "Number of recovered at end of outbreak",
+                    "Day the outbreak peaked")
 reclist$recnote = c("Report the rounded integer",
-            "Report the rounded integer",
-            "Report the rounded integer")
-reclist$rectype = c("Numeric","Numeric")
-reclist$recfuzzy = c(0,0,1)
+                    "Report the rounded integer",
+                    "Report the rounded integer")
+reclist$rectype = c("Numeric",
+                    "Numeric",
+                    "Numeric")
+reclist$recfuzzy = c(0,
+                     0,
+                     1)
 allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
 rc = rc + nrec
 
@@ -264,13 +274,17 @@ alltasks[tid,"TaskText"] = "A) Double the rate of recovery, _g_, leave everythin
 # Record for task 7
 nrec = 3 # number of items to record
 reclist$rectext = c("Number of susceptible at end of outbreak",
-            "Number of recovered at end of outbreak",
-            "Is there a peak for the outbreak? (Yes/No)")
+                    "Number of recovered at end of outbreak",
+                    "Is there a peak for the outbreak? (Yes/No)")
 reclist$recnote = c("Report the rounded integer",
-            "Report the rounded integer",
-            "Report Yes or No")
-reclist$rectype = c("Numeric","Numeric","Character")
-reclist$recfuzzy = c(0,0,0)
+                    "Report the rounded integer",
+                    "Report Yes or No")
+reclist$rectype = c("Numeric",
+                    "Numeric",
+                    "Character")
+reclist$recfuzzy = c(0,
+                     0,
+                     0)
 allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
 rc = rc + nrec
 
@@ -282,13 +296,17 @@ alltasks[tid,"TaskText"] = "A) Double the number of susceptibles, _S~0~_, leave 
 # Record for task 8
 nrec = 3 # number of items to record
 reclist$rectext = c("Number of susceptible at end of outbreak",
-            "Number of recovered at end of outbreak",
-            "Is there a peak for the outbreak? (Yes/No)")
+                    "Number of recovered at end of outbreak",
+                    "Is there a peak for the outbreak? (Yes/No)")
 reclist$recnote = c("Report the rounded integer",
-            "Report the rounded integer",
-            "Report Yes or No")
-reclist$rectype = c("Numeric","Numeric","Character")
-reclist$recfuzzy = c(0,0,0)
+                    "Report the rounded integer",
+                    "Report Yes or No")
+reclist$rectype = c("Numeric",
+                    "Numeric",
+                    "Character")
+reclist$recfuzzy = c(0,
+                     0,
+                     0)
 allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
 rc = rc + nrec
 
@@ -302,14 +320,14 @@ nrec = 2 # number of items to record
 reclist$rectext = c("Minimum number of outbreaks you can get",
                     "Maximum number of outbreaks you can get")
 reclist$recnote = c("Report an integer",
-                   "Report an integer")
-reclist$rectype = c("Numeric","Numeric")
-reclist$recfuzzy = c(0,0)
+                    "Report an integer")
+reclist$rectype = c("Numeric",
+                    "Numeric")
+reclist$recfuzzy = c(0,
+                     0)
 allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
 rc = rc + nrec
 ```
-
-
 
 
 ```{r echo=FALSE}
