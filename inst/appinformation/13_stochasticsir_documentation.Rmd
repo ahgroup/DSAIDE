@@ -162,9 +162,10 @@ alltasks[tid,"TaskText"] = "A) Keep everything as in task 1, with random number 
 
 # Record for task 2
 nrec = 1 # number of items to record
-reclist$rectext = c("Nothing")
-reclist$rectype = "None"
-reclist$recnote = c("")
+reclist = list()
+reclist$rectext = c("How many simulations produced an outbreak?")
+reclist$rectype = c("Numeric")
+reclist$recnote = c("Report integer")
 reclist$recfuzzy = c(0)
 allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
 rc = rc + nrec
@@ -175,13 +176,11 @@ tid = 3
 alltasks[tid,"TaskText"] = "A) Try to understand and explain what the fact that you outbreaks in some of the stochastic simulations but not in others (for exactly the same model parameter values) says about the role of _R~0~_ in stochastic models and how that differs in deterministic models."
 
 # Record for task 3
-nrec = 2 # number of items to record
-reclist$rectext = c("Day the outbreak peaked",
-            "Total number infected at end of outbreak")
-reclist$recnote = c("Report the rounded integer",
-            "Report the rounded integer")
-reclist$rectype = c("Numeric","Numeric")
-reclist$recfuzzy = c(1,0)
+nrec = 1 # number of items to record
+reclist$rectext = c("Nothing")
+reclist$rectype = "None"
+reclist$recnote = c("")
+reclist$recfuzzy = c(0)
 allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
 rc = rc + nrec
 
@@ -191,13 +190,11 @@ tid = 4
 alltasks[tid,"TaskText"] = "A) You can mathematically derive an equation linking the probability that an outbreak occurs, _p_, to the reproductive number (see e.g. [@keeling08]). We won't try to do the math here but instead see if we can use the simulation to figure it out. Start with the settings in task 1. Run the stochastic model for b = 0.0002, 0.0003, 0.0004, 0.0005, 0.0006, 0.001, 0.002. For each value, compute R~0~, run the model 100 times, with max time 300 and record the number of times you get an outbreak. Plot the relationship (either by hand or using the computer) between the probability of getting an outbreak and _R~0~_."
 
 # Record for task 4
-nrec = 2 # number of items to record
-reclist$rectext = c("Number of susceptible at end of outbreak for continuous-time model",
-            "Number of susceptible at end of outbreak for discrete-time model")
-reclist$recnote = c("Report the rounded integer",
-            "Report the rounded integer")
-reclist$rectype = c("Numeric","Numeric")
-reclist$recfuzzy = c(0,0)
+nrec = 1 # number of items to record
+reclist$rectext = c("Is there a postive or negative relationship between R~0~ and the probability of getting an outbreak?")
+reclist$recnote = c("Report 'positive' or 'negative'")
+reclist$rectype = c("Character")
+reclist$recfuzzy = c(0)
 allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
 rc = rc + nrec
 
@@ -207,19 +204,15 @@ tid = 5
 alltasks[tid,"TaskText"] = "A) There is a similar relation between outbreak probability an the initial number of infected individuals. Let's see if we can use the model to determine it. Follow the steps of the previous task. Keep _b_ fixed at 0.0003, vary the initial number of infected individuals, _I~0~_, from 1 to 10. Record the fraction of outbreaks you got for each _I~0~_. Plot the relationship (either by hand or using the computer) between the probability of getting an outbreak and _I~0~_."
 
 # Record for task 5
-nrec = 2 # number of items to record
-reclist$rectext = c("Number of susceptible left at end of outbreak for continuous-time model dt=1",
-            "Number of susceptible left at end of outbreak for discrete-time model dt=1")
-reclist$recnote = c("Report the rounded integer",
-            "Report the rounded integer")
-reclist$rectype = c("Numeric","Numeric")
-reclist$recfuzzy = c(0,0)
+nrec = 1 # number of items to record
+reclist$rectext = c("Is there a postive or negative relationship between the initial number of infected and the probability of getting an outbreak?")
+reclist$recnote = c("Report 'positive' or 'negative'")
+reclist$rectype = c("Character")
+reclist$recfuzzy = c(0)
 allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
 rc = rc + nrec
 
 ```
-
-
 
 
 ```{r echo=FALSE}
