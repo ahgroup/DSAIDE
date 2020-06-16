@@ -138,7 +138,7 @@ alltasks[1,"TaskText"] = "A) Since the creation of parameter samples involves so
 B) Now change the random number seed to a different value, run again. You should see the results changed. (It doesn't matter if you change the seed by just a bit or a lot.)
 C) The more samples you have, the more robust the results are to changes in the underlying sample generation (determined by the random number seed). Try checking this by running 10 samples with 2 different random number seeds, then running 100+ samples (or as many as you can do without waiting too long) with 2 different seeds. You should see less variability in the central quantities (mean, median) for the larger sample size.
 
-**Note** that each sample means one simulation of the underlying dynamical model, so as sample numbers increase, things slow down. Also note the \"system might not have reached steady state message\". If for too many of the samples steady state has not been reached, the results for _S~final~_ and _I~final~_ do not reflect steady-state values. Increasing the simulation time can help the system reach a steady state (if there is one). For some parameter combinations, that can take very long."
+**Note** that each sample means one simulation of the underlying dynamical model, so as sample numbers increase, things slow down. Also note the _system might not have reached steady state message_. If for too many of the samples steady state has not been reached, the results for _S~final~_ and _I~final~_ do not reflect steady-state values. Increasing the simulation time can help the system reach a steady state (if there is one). For some parameter combinations, that can take very long."
 
 # Record the answers for task 1
 nrec = 1 # number of items to record
