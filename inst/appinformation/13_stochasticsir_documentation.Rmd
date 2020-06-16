@@ -12,14 +12,26 @@ bibliography: references.bib
 ---
 
 
-```{r, echo = FALSE}
-#this code loads the settings file for the current app so we can automatically 
-#list the functions in the further information section
-currentrmdfile = knitr::current_input() 
-source(here::here("inst/appinformation","get_settings.R"))
-appsettings = get_settings(currentrmdfile)
-
+```{r, include = FALSE}
+#*************************************
+#Note: for this to process/knit, several helper functions need to be available (sourced) first
+#those are in the inst/helperfunctions folder
+#Note: in general, the "processing-script.R" in the docsfordevelopers should be used to produce the html docs
+#manual knitting of each doc only during development/testing
+#*************************************
+files_to_source = list.files(here::here("inst/helperfunctions"),full.names=TRUE)
+sapply(files_to_source, source) #sourcing needs to happen inside each Rmd file since knitr starts a new environment
 ```
+
+
+```{r, echo = FALSE}
+#load the settings file for the current app 
+#so we can automatically include figure, list the functions in the further information section
+#and use other information specific to the current app for the task table generation
+currentrmdfile = knitr::current_input() 
+appsettings = get_settings(currentrmdfile)
+```
+
 
 
 ## Overview {#shinytab1}
@@ -92,30 +104,135 @@ This simulation (as well as some of the others) involves using random numbers to
 
 _Some of the simulations might take a few seconds to run. Be patient._
 
-### Task 1
-* Start with 1000 susceptibles, 1 infected, simulation time of 100 days. Transmission rate of 0.0005, duration of infectious period 5 days, no births and deaths, random seed of 100.
-* Run the deterministic simulation multiple times. You should always see the same result.
-* Now run a single stochastic simulation multiple times. What do you expect? What do you see?
-* Change the random seed to 101, then 102. Test how this changes the simulation.
+
+```{r, echo=FALSE, eval=TRUE}
+# save all tasks, outcomes, etc. into an R data frame, then print later.
+# this data frame is used to automate shiny solutions and quiz generation
+
+# Explanation for each of the columns in the R data frame 
+
+# quizID: MUST BE THE FIRST COLUMN. Used by the grading app. naming structure "dsaide_shorttitle" where shorttitle is from appsettings$shorttitle
+# AppTitle: Title used for the app in the dsaide app, from appsettings$apptitle
+# AppID: App number in the dsaide menu, from appsettings$appid
+# TaskID: Identifies which task the text belongs to 
+# TaskText: The text that explains what to do for the task
+# RecordID: Identifies if it is the first, second, third,... item to record within the task
+# Record: Text explaining what value from the model that nee too be recorded
+# Note: Used by students taking quiz. Makes it clear what type of value to enter in "Answers"
+# Answers: In master it contains the rigth answer. For students it is where they record the recorded value
+# Fuzzy: The numeric value of a margin (within +/- of "right" answer) for questions where the quiz checker should not be too strict 
+# Review: Admin use if value is 1 the way the questions is asked may need to be reconsidered. 
+
+ntasks = 5 #number of tasks
+nrecord = 9 #number of outcomes to record
+#set up task tables
+#returned as list for generality, take apart
+tablist <- make_tasktable(ntasks,nrecord,appsettings)
+alltasks = tablist[[1]]
+allrecord = tablist[[2]]
 
 
-### Task 2
-* Keep everything as in task 1, with random number seed at 100. Run both simulations and set the number of stochastic simulations to 5. You'll get a plot showing the deterministic model dynamics and 5 runs for the stochastic model (each of the stochastic runs gets consecutive random number seeds, i.e. the first one is 100, the 2nd is 101,...).
-* Try to understand and explain why you see some stochastic simulations lead to an outbreak, while some do not.
 
-### Task 3
-* Try to understand and explain what the fact that you outbreaks in some of the stochastic simulations but not in others (for exactly the same model parameter values) says about the role of _R~0~_ in stochastic models and how that differs in deterministic models.
+#this is the running counter for the records which starts at 1 
+rc=1
+
+# Task 1
+tid = 1
+alltasks[tid,"TaskText"] = "A) Start with 1000 susceptibles, 1 infected, simulation time of 100 days. Transmission rate of 0.0005, duration of infectious period 5 days, no births and deaths, random seed of 100. Run the deterministic simulation multiple times. You should always see the same result.
+B) Now run a single stochastic simulation multiple times. What do you expect? What do you see? Change the random seed to 101, then 102. Test how this changes the simulation."
+
+# Record for task 1
+nrec = 2 # number of items to record
+reclist = list()
+reclist$rectext = c("Total number of recovered at end of outbreak with random seed = 101",
+                    "Total number of recovered at end of outbreak with random seed = 102")
+reclist$rectype = c("Numeric", 
+                    "Numeric")
+reclist$recnote = c("Report the rounded integer",
+                    "Report the rounded integer")
+reclist$recfuzzy = c(0,0)
+
+allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
+rc = rc + nrec #increment record counter by number of outcomes to record for this task 
+
+
+# Task 2
+tid = 2
+alltasks[tid,"TaskText"] = "A) Keep everything as in task 1, with random number seed at 100. Run both simulations and set the number of stochastic simulations to 5. You'll get a plot showing the deterministic model dynamics and 5 runs for the stochastic model (each of the stochastic runs gets consecutive random number seeds, i.e. the first one is 100, the 2nd is 101,...). Try to understand and explain why you see some stochastic simulations lead to an outbreak, while some do not."
+
+# Record for task 2
+nrec = 1 # number of items to record
+reclist$rectext = c("Nothing")
+reclist$rectype = "None"
+reclist$recnote = c("")
+reclist$recfuzzy = c(0)
+allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
+rc = rc + nrec
+
+
+### Task 3 
+tid = 3
+alltasks[tid,"TaskText"] = "A) Try to understand and explain what the fact that you outbreaks in some of the stochastic simulations but not in others (for exactly the same model parameter values) says about the role of _R~0~_ in stochastic models and how that differs in deterministic models."
+
+# Record for task 3
+nrec = 2 # number of items to record
+reclist$rectext = c("Day the outbreak peaked",
+            "Total number infected at end of outbreak")
+reclist$recnote = c("Report the rounded integer",
+            "Report the rounded integer")
+reclist$rectype = c("Numeric","Numeric")
+reclist$recfuzzy = c(1,0)
+allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
+rc = rc + nrec
 
 
 ### Task 4
-* One can mathematically derive an equation linking the probability that an outbreak occurs, _p_, to the reproductive number (see e.g. [@keeling08]). We won't try to do the math here but instead see if we can use the simulation to figure it out.
-* Start with the settings in task 1. Run the stochastic model for b = 0.0002, 0.0003, 0.0004, 0.0005, 0.0006, 0.001, 0.002. For each value, compute R~0~, run the model 100 times, with max time 300 and record the number of times you get an outbreak.
-* Plot (either by hand or using the computer) a relation between the probability of getting an outbreak and _R~0~_.
+tid = 4
+alltasks[tid,"TaskText"] = "A) You can mathematically derive an equation linking the probability that an outbreak occurs, _p_, to the reproductive number (see e.g. [@keeling08]). We won't try to do the math here but instead see if we can use the simulation to figure it out. Start with the settings in task 1. Run the stochastic model for b = 0.0002, 0.0003, 0.0004, 0.0005, 0.0006, 0.001, 0.002. For each value, compute R~0~, run the model 100 times, with max time 300 and record the number of times you get an outbreak. Plot the relationship (either by hand or using the computer) between the probability of getting an outbreak and _R~0~_."
+
+# Record for task 4
+nrec = 2 # number of items to record
+reclist$rectext = c("Number of susceptible at end of outbreak for continuous-time model",
+            "Number of susceptible at end of outbreak for discrete-time model")
+reclist$recnote = c("Report the rounded integer",
+            "Report the rounded integer")
+reclist$rectype = c("Numeric","Numeric")
+reclist$recfuzzy = c(0,0)
+allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
+rc = rc + nrec
+
 
 ### Task 5
-* There is a similar relation between outbreak probability an the initial number of infected individuals. Let's see if we can use the model to determine it.
-* Follow the steps of the previous task. Keep _b_ fixed at 0.0003, vary the initial number of infected individuals, _I~0~_, from 1 to 10. Record the fraction of outbreaks you got for each _I~0~_. 
-* Plot (either by hand or using the computer) a relation between the probability of getting an outbreak and _I~0~_.
+tid = 5
+alltasks[tid,"TaskText"] = "A) There is a similar relation between outbreak probability an the initial number of infected individuals. Let's see if we can use the model to determine it. Follow the steps of the previous task. Keep _b_ fixed at 0.0003, vary the initial number of infected individuals, _I~0~_, from 1 to 10. Record the fraction of outbreaks you got for each _I~0~_. Plot the relationship (either by hand or using the computer) between the probability of getting an outbreak and _I~0~_."
+
+# Record for task 5
+nrec = 2 # number of items to record
+reclist$rectext = c("Number of susceptible left at end of outbreak for continuous-time model dt=1",
+            "Number of susceptible left at end of outbreak for discrete-time model dt=1")
+reclist$recnote = c("Report the rounded integer",
+            "Report the rounded integer")
+reclist$rectype = c("Numeric","Numeric")
+reclist$recfuzzy = c(0,0)
+allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
+rc = rc + nrec
+
+```
+
+
+
+
+```{r echo=FALSE}
+#save the fully filled task table to a tsv file
+save_tasktable(alltasks,allrecord,appsettings)
+```
+
+
+```{r, echo=FALSE, results='asis'}
+# Take all the text stored in the table and print the tasks and items to record
+write_tasktext(alltasks,allrecord)
+```
+
 
 
 ## Further Information {#shinytab4}
