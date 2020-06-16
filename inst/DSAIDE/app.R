@@ -40,7 +40,7 @@ packagename = "DSAIDE"
 #find path to apps
 appdir = here::here("appinformation")
 
-#load table that has all the app information
+#load app table that has all the app information
 at = read.table(file = paste0(appdir,"/apptable.tsv"), sep = '\t', header = TRUE)
 
 appNames = at$shorttitle
@@ -69,10 +69,8 @@ server <- function(input, output, session)
       output$text <- NULL
       output$floattask <- NULL
       output$analyzemodel <- NULL
-
       appsettings <<- NULL
       modelsettings <<- NULL
-
 
       #each app has settings stored in apptable
       #read and assign to list called 'appsettings'
@@ -81,6 +79,14 @@ server <- function(input, output, session)
       #file name for documentation
       currentdocfilename <<- paste0(appdir,"/",appsettings$docname)
 
+      #store model name. Used to build UI and generate function call.
+      #If Rds file exits, use it. Otherwise use simfunction name
+      if (nchar(appsettings$mbmodel) > 1)
+      {
+        modelname = appsettings$mbmodel
+      } else {
+        modelname = appsettings$simfunction
+      }
 
       #a few apps have 2 simulator functions, combine here into vector
       if (nchar(appsettings$simfunction2) > 1)
@@ -96,6 +102,7 @@ server <- function(input, output, session)
       #variable shorttitle - short name of the app, including ID
       #variable docname - name of documentation file for app
       #variable simfunction - the name of the simulation function(s)
+      #variable mbmodel - the name of an mbmodel Rds file
       #variable modeltype - the type of the model to be run. "_mixed_" if set by UI.
       #additional elements that can be provided:
       #variable otherinputs - contains additional shiny UI elements that are not generated automatically by functions above

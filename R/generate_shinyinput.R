@@ -2,12 +2,13 @@
 #'
 #' @description This function generates shiny UI inputs for a supplied model.
 #' This is a helper function called by the shiny app.
-#' @param mbmodel a string containing the name of a simulator function for which to build inputs
+#' @param mbmodel a string containing the name of a simulator function or an mbmodel object for which to build inputs
 #' @param otherinputs a text string that specifies a list of other shiny inputs to include in the UI
 #' @param packagename name of package using this function (DSAIDE or DSAIRM)
 #' @return A renderUI object that can be added to the shiny output object for display in a Shiny UI
 #' @details This function is called by the Shiny app to produce the Shiny input UI elements.
-#' mbmodel is assumed to be the name of a function. The file correpsonding to this function is assumed to live in the
+#' mbmodel is assumed to be either the name of an mbmodel object or the name of a function.
+#' If it is a file name, it needs to end in .R and the file corresponding to this function is assumed to live in the
 #' simulatorfunctions subfolder and to be an exact copy of the same file in the /R folder of the source package.
 #' This R file will be loaded and the documentation parsed to create UI elements.
 #' Therefore, all simulator_ R functions/scripts need to follow a specific syntax.
@@ -16,6 +17,9 @@
 #' example:
 #' b : transmission rate : numeric
 #' Non-numeric arguments of functions are removed and need to be included in the otherinputs argument.
+#' If mbmodel is a mbmodel list object, it will be parsed and shiny inputs created from it
+#' An mbmodel is assumed if the string ends in .Rds. In that case, the Rds file will be loaded.
+#' The loaded object will be parsed and shiny input will be created from it.
 #' @export
 
 generate_shinyinput <- function(mbmodel, otherinputs = NULL, packagename)
@@ -27,9 +31,11 @@ generate_shinyinput <- function(mbmodel, otherinputs = NULL, packagename)
         tags$div(class="myinput", x)
     }
 
+
+
     ###########################################
     #create UI elements as input/output for shiny
-	#done by parsing a function/R code
+	  #done by parsing a function/R code
     #requires that function arguments are given in a vector
     #find R file that contains the simulator_ code of the specified name
     fcfile = paste0(system.file("simulatorfunctions", package = packagename),'/',mbmodel,'.R')
