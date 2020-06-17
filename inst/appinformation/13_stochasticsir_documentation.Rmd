@@ -124,7 +124,7 @@ _Some of the simulations might take a few seconds to run. Be patient._
 # Review: Admin use if value is 1 the way the questions is asked may need to be reconsidered. 
 
 ntasks = 5 #number of tasks
-nrecord = 9 #number of outcomes to record
+nrecord = 6 #number of outcomes to record
 #set up task tables
 #returned as list for generality, take apart
 tablist <- make_tasktable(ntasks,nrecord,appsettings)
