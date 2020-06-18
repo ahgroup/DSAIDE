@@ -9,6 +9,7 @@ run_model(modelsettings)
 \arguments{
 \item{modelsettings}{a list with model settings. Required list elements are: \cr
 modelsettings$simfunction - name of simulation function(s) as string.  \cr
+modelsettings$is_mbmodel - indicate of simulation function has mbmodel structure
 modelsettings$modeltype - specify what kind of model should be run.
 Currently one of: _ode_, _discrete_, _stochastic_, _usanalysis_, _modelexploration_, _fit_, _mixed_ . \cr
 modelsettings$plottype - 'Boxplot' or 'Scatterplot' , required for US app \cr

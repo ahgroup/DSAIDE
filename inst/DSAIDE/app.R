@@ -79,15 +79,6 @@ server <- function(input, output, session)
       #file name for documentation
       currentdocfilename <<- paste0(appdir,"/",appsettings$docname)
 
-      #store model name. Used to build UI and generate function call.
-      #If Rds file exits, use it. Otherwise use simfunction name
-      if (nchar(appsettings$mbmodel) > 1)
-      {
-        modelname = appsettings$mbmodel
-      } else {
-        modelname = appsettings$simfunction
-      }
-
       #a few apps have 2 simulator functions, combine here into vector
       if (nchar(appsettings$simfunction2) > 1)
       {
@@ -98,12 +89,14 @@ server <- function(input, output, session)
       #different models can have different variables
       #all models need the following:
       #variable appid - ID of the app
-      #variable apptitle - the name of the app
-      #variable shorttitle - short name of the app, including ID
+      #variable apptitle - the name of the app. Used to display.
+      #variable shorttitle - short name of the app, including ID. needs to match docname.
       #variable docname - name of documentation file for app
+      #variable modelfigname - name of figure file for app
       #variable simfunction - the name of the simulation function(s)
-      #variable mbmodel - the name of an mbmodel Rds file
+      #variable is_mbmodel - if the function follows mbmodel structure
       #variable modeltype - the type of the model to be run. "_mixed_" if set by UI.
+
       #additional elements that can be provided:
       #variable otherinputs - contains additional shiny UI elements that are not generated automatically by functions above
       #for instance all non-numeric inputs need to be provided separately.
@@ -114,7 +107,10 @@ server <- function(input, output, session)
       #this uses the 1st function provided by the settings file and stored in currentsimfct
       #indexing sim function in case there are multiple
 
-      modelinputs <- generate_shinyinput(mbmodel = appsettings$simfunction[1], otherinputs = appsettings$otherinputs, packagename = packagename)
+      modelinputs <- generate_shinyinput(model_function = appsettings$simfunction[1],
+                                         is_mbmodel = appsettings$is_mbmodel,
+                                         otherinputs = appsettings$otherinputs,
+                                         packagename = packagename)
       output$modelinputs <- renderUI({modelinputs})
 
 
@@ -161,7 +157,10 @@ server <- function(input, output, session)
     #Code to reset the model settings
     ###############
     observeEvent(input$reset, {
-      modelinputs <- generate_shinyinput(mbmodel = appsettings$simfunction[1], otherinputs = appsettings$otherinputs, packagename = packagename)
+      modelinputs <- generate_shinyinput(model_function = appsettings$simfunction[1],
+                                                        is_mbmodel = appsettings$is_mbmodel,
+                                                        otherinputs = appsettings$otherinputs,
+                                                        packagename = packagename)
       output$modelinputs <- renderUI({modelinputs})
       output$plotly <- NULL
       output$ggplot <- NULL

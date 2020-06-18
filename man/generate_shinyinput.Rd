@@ -4,10 +4,17 @@
 \alias{generate_shinyinput}
 \title{A helper function that takes a model and generates shiny UI elements}
 \usage{
-generate_shinyinput(mbmodel, otherinputs = NULL, packagename)
+generate_shinyinput(
+  model_function,
+  is_mbmodel,
+  otherinputs = NULL,
+  packagename
+)
 }
 \arguments{
-\item{mbmodel}{a string containing the name of a simulator function for which to build inputs}
+\item{model_function}{a string containing the name of a simulator function for which to build inputs}
+
+\item{is_mbmodel}{a logical, indicating if the simulator function follows the modelbuilder syntax}
 
 \item{otherinputs}{a text string that specifies a list of other shiny inputs to include in the UI}
 
@@ -22,13 +29,10 @@ This is a helper function called by the shiny app.
 }
 \details{
 This function is called by the Shiny app to produce the Shiny input UI elements.
-mbmodel is assumed to be the name of a function. The file correpsonding to this function is assumed to live in the
-simulatorfunctions subfolder and to be an exact copy of the same file in the /R folder of the source package.
-This R file will be loaded and the documentation parsed to create UI elements.
+model_function is assumed to be the name of a function.
+The formals of the function will be parsed to create UI elements.
 Therefore, all simulator_ R functions/scripts need to follow a specific syntax.
-Every argument needs to be of the form
-param X : param explanation : param type
-example:
-b : transmission rate : numeric
+Either it needs to be created by modelbuilder and have vars/pars/times as vector inputs.
+Or it has all single var = X inputs. They all need to have defaults provided.
 Non-numeric arguments of functions are removed and need to be included in the otherinputs argument.
 }

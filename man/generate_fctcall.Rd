@@ -9,7 +9,8 @@ generate_fctcall(modelsettings)
 \arguments{
 \item{modelsettings}{a list with model settings. Required list elements are: \cr
 List elements with names and values for all inputs expected by simulation function. \cr
-modelsettings$simfunction - name of simulation function in variable  \cr}
+modelsettings$simfunction - name of simulation function in variable  \cr
+modelsettings$is_mbmodel - indicate of simulation function has mbmodel structure}
 }
 \value{
 A string containing an unevaluated function call with the specified settings
