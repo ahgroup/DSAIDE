@@ -1,3 +1,7 @@
+# DSAIDE 0.8.5
+
+* Small improvements and bug fixes
+
 # DSAIDE 0.8.4
 
 * Small improvements and bug fixes
