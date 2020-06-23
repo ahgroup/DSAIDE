@@ -31,17 +31,16 @@ Imports:
     dplyr (>= 0.7.4),
     ggplot2 (>= 2.2),
     gridExtra (>= 2.3),
-	  here,
     lhs (>= 0.15),
     nloptr,
 	  pomp (>= 2.7),
     plotly,
     shinyjs,
-    stats (>= 3.4),
-    utils (>= 3.4),
+    stats,
+    utils,
     XML (>= 3.98)
 Depends:
-    R (>= 3.4),
+    R (>= 3.5),
     shiny (>= 1.0)
 Suggests: 
     covr,

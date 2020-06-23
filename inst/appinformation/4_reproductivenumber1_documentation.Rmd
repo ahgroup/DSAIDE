@@ -70,7 +70,7 @@ The underlying model implements one other process. In previous apps, you learned
 
 ### Reproductive number
 
-_The app and tasks deal with the reproductive number concept. The following section provides a very brief introduction. I recommend reading a bit more about it. I'm following the terminology of [my own write-up](https://ahgroup.github.io/DSAIDEbook/reproductive-number.html). You can also check the books listed in the ID introduction app or some of the papers listed in the _Further Resources_ section of this app._
+_The app and tasks deal with the reproductive number concept. The following section provides a very brief introduction. I recommend reading a bit more about it. I'm following the terminology of [my own write-up](https://andreashandel.github.io/IDEMAbook/reproductive-number.html). You can also check the books listed in the ID introduction app or some of the papers listed in the _Further Resources_ section of this app._
 
 The reproductive number is defined as the average number of new infected (and infectious) individuals caused by one infectious individual. The _basic_ reproductive number is the reproductive number in a scenario where everyone is susceptible. For the SIR model shown above, this quantity is 
 $$R_0=\frac{bS_0}{g}$$ 

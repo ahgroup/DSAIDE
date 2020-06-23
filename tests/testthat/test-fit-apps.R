@@ -12,7 +12,7 @@ test_that("fit apps all run correctly",
             modelsettings$usesimdata = 0
             modelsettings$plotscale = 'y'
             modelsettings$solvertype = 1
-            modelsettings$simfunction = 'simulate_fit_flu'
+            modelsettings$simfunction = 'simulate_flu_fit'
 
             result = run_model(modelsettings)
             finaldatapoint = tail(result[[1]]$dat$yvals,1)
@@ -27,7 +27,7 @@ test_that("fit apps all run correctly",
             modelsettings$modeltype = "_fit_"
             modelsettings$nplots = 1
             modelsettings$plotscale = 'both'
-            modelsettings$simfunction = 'simulate_fit_noro'
+            modelsettings$simfunction = 'simulate_noro_fit'
             result = run_model(modelsettings)
             testthat::  expect_is(generate_ggplot(result), "ggplot" )
             testthat::  expect_is(generate_plotly(result), "plotly" )
@@ -36,7 +36,7 @@ test_that("fit apps all run correctly",
             modelsettings =  list(fitmodel = 2, iter = 5, solvertype = 2)
             modelsettings$modeltype = "_fit_"
             modelsettings$nplots = 1
-            modelsettings$simfunction = 'simulate_fit_noro'
+            modelsettings$simfunction = 'simulate_noro_fit'
             result = run_model(modelsettings)
             testthat::  expect_is(generate_ggplot(result), "ggplot" )
             testthat::  expect_is(generate_plotly(result), "plotly" )
@@ -45,12 +45,12 @@ test_that("fit apps all run correctly",
             modelsettings =  list(fitmodel = 3, iter = 5, solvertype = 3)
             modelsettings$modeltype = "_fit_"
             modelsettings$nplots = 1
-            modelsettings$simfunction = 'simulate_fit_noro'
+            modelsettings$simfunction = 'simulate_noro_fit'
             result = run_model(modelsettings)
             testthat::  expect_is(generate_ggplot(result), "ggplot" )
             testthat::  expect_is(generate_plotly(result), "plotly" )
             testthat::  expect_is(generate_text(result), "html" )
-            
+
             #test fit app - this one should not work
             modelsettings =  list()
             result = run_model(modelsettings)

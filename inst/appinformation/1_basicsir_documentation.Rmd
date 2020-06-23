@@ -19,7 +19,9 @@ bibliography: references.bib
 #Note: in general, the "processing-script.R" in the docsfordevelopers should be used to produce the html docs
 #manual knitting of each doc only during development/testing
 #*************************************
-files_to_source = list.files(here::here("inst/helperfunctions"),full.names=TRUE)
+packagename = "DSAIDE"
+helperdir = system.file("helperfunctions", package = packagename) #find path to apps
+files_to_source = list.files(helperdir,full.names=TRUE)
 sapply(files_to_source, source) #sourcing needs to happen inside each Rmd file since knitr starts a new environment
 ```
 
@@ -69,13 +71,17 @@ knitr::include_graphics(here::here('inst/media',appsettings$modelfigname))
 ### Model Implementation I
 To allow us to simulate this model, we need to implement it on the computer. For that purpose, it is often useful to write the model as mathematical equations (this is not strictly needed, some computer simulation models are never formulated as mathematical models). A very common way (but not the only one) to implement compartmental models such as the simple SIR model is a set of ordinary differential equations. Each compartment/variable gets an equation. The right side of each equation specifies the processes going on in the system and how they change the numbers in each compartment via inflows and outflows. For the model described above, the equations look like this: 
 
-$$
-\begin{aligned}
-\dot S & = -bSI \\
-\dot I & = bSI - gI \\
-\dot R & = gI
-\end{aligned}
-$$
+
+```{r, echo = FALSE}
+if (appsettings$use_mbmodel)
+{
+  modeldir = system.file("mbmodels", package = packagename) #find path to apps
+  mbmodel = readRDS(paste0(modeldir,"/",appsettings$mbmodelname) )
+  eqs = DSAIDE::generate_equations(mbmodel)
+  print(eqs)
+}
+```
+
 
 *Note: If you don't see equations but instead gibberish, try opening the app with a different browser. I have found that occasionally, on some computers/browsers, the math is not shown properly.* 
 

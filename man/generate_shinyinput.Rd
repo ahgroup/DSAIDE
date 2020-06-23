@@ -5,20 +5,29 @@
 \title{A helper function that takes a model and generates shiny UI elements}
 \usage{
 generate_shinyinput(
-  model_function,
-  is_mbmodel,
+  use_mbmodel = FALSE,
+  mbmodel = NULL,
+  use_doc = FALSE,
+  model_file = NULL,
+  model_function = NULL,
   otherinputs = NULL,
-  packagename
+  packagename = NULL
 )
 }
 \arguments{
-\item{model_function}{a string containing the name of a simulator function for which to build inputs}
+\item{use_mbmodel}{TRUE/FALSE if mbmodel list should be used to generate UI}
 
-\item{is_mbmodel}{a logical, indicating if the simulator function follows the modelbuilder syntax}
+\item{mbmodel}{a valid mbmodel object}
+
+\item{use_doc}{TRUE/FALSE if doc of a model file should be parsed to make UI}
+
+\item{model_file}{name/path to function file for parsing doc}
+
+\item{model_function}{name of function who's formals are parsed to make UI}
 
 \item{otherinputs}{a text string that specifies a list of other shiny inputs to include in the UI}
 
-\item{packagename}{name of package using this function (DSAIDE or DSAIRM)}
+\item{packagename}{name of package using this function}
 }
 \value{
 A renderUI object that can be added to the shiny output object for display in a Shiny UI
@@ -29,10 +38,14 @@ This is a helper function called by the shiny app.
 }
 \details{
 This function is called by the Shiny app to produce the Shiny input UI elements.
+It produces UI by 3 different ways.
+1. If use_mbmodel is TRUE, an mbmodel list structure, which needs to be provided, is used
+2. If use_mbmodel is FALSE and use_doc is TRUE, the documentation header of the function is used.
+For that approach, model_file needs to contain the name/path to the R script for the function
+The doc needs to have a specific format for this.
+3. If both use_mbmodel and use_doc are FALSE, the function formals are parsed and used as UI.
+For that approach, model_function needs to specify the name of the model
 model_function is assumed to be the name of a function.
 The formals of the function will be parsed to create UI elements.
-Therefore, all simulator_ R functions/scripts need to follow a specific syntax.
-Either it needs to be created by modelbuilder and have vars/pars/times as vector inputs.
-Or it has all single var = X inputs. They all need to have defaults provided.
 Non-numeric arguments of functions are removed and need to be included in the otherinputs argument.
 }

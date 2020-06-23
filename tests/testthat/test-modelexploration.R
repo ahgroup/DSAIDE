@@ -4,7 +4,7 @@ test_that("test that modelexploration app returns the proper plots",
           {
 
             modelsettings = list()
-            
+
             modelsettings$samples = 10
             modelsettings$parmin = 1e-04
             modelsettings$parmax = 1e-02
@@ -17,21 +17,21 @@ test_that("test that modelexploration app returns the proper plots",
 
             modelsettings$modeltype = '_modelexploration_'
             modelsettings$nplots = 1
-            modelsettings$simfunction = 'simulate_modelexploration_sir'
+            modelsettings$simfunction = 'simulate_SIR_modelexploration'
             modelsettings$plotscale = 'x'
 
             result = run_model(modelsettings)
-            
+
             testthat::expect_is( generate_ggplot(result), "ggplot" )
             testthat::expect_is( generate_plotly(result), "plotly" )
             testthat::expect_is( generate_text(result), "html" )
             testthat::expect_is( generate_text(result), "character" )
-            
-            
+
+
             modelsettings$pardist = "log"
             modelsettings$samplepar = "m"
             result = run_model(modelsettings)
             testthat::expect_is( generate_ggplot(result), "ggplot" )
-            
+
             })
 

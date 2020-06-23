@@ -38,7 +38,9 @@
 packagename = "DSAIDE"
 
 #find path to apps
-appdir = here::here("appinformation")
+appdir = system.file("appinformation", package = packagename) #find path to apps
+modeldir = system.file("mbmodels", package = packagename) #find path to apps
+simdir = system.file("simulatorfunctions", package = packagename) #find path to apps
 
 #load app table that has all the app information
 at = read.table(file = paste0(appdir,"/apptable.tsv"), sep = '\t', header = TRUE)
@@ -76,14 +78,40 @@ server <- function(input, output, session)
       #read and assign to list called 'appsettings'
       #store in global variable
       appsettings <<- as.list(at[which(at$shorttitle == appName),])
-      #file name for documentation
-      currentdocfilename <<- paste0(appdir,"/",appsettings$docname)
 
       #a few apps have 2 simulator functions, combine here into vector
       if (nchar(appsettings$simfunction2) > 1)
       {
         appsettings$simfunction <<- c(appsettings$simfunction,appsettings$simfunction2)
       }
+
+      #all columns are read in as characters, convert some
+      appsettings$use_mbmodel = as.logical(appsettings$use_mbmodel)
+      appsettings$use_doc = as.logical(appsettings$use_doc)
+      appsettings$nplots = as.numeric(appsettings$nplots)
+
+      #if an mbmodel should be used, check that it exists and load
+      appsettings$mbmodel <- NULL
+      if (appsettings$use_mbmodel)
+      {
+        appsettings$mbmodel = readRDS(paste0(modeldir,"/",appsettings$mbmodelname) )
+        if (! is.list(appsettings$mbmodel))  {return("mbmodel could not be loaded in app.R")}
+      }
+
+      #if the doc of a file should be parsed for UI generation, get it here
+      appsettings$filepath <- NULL
+      if (appsettings$use_doc)
+      {
+        filepath = paste0(simdir,'/',appsettings$simfunction[1],'.R')
+        if (! file.exists(filepath))  {return("file for function can't be found")}
+        appsettings$filepath = filepath
+      }
+
+      #file name for documentation
+      currentdocfilename <<- paste0(appdir,"/",appsettings$docname)
+
+      #make globally available
+      appsettings <<- appsettings
 
       #the information is stored in a list called 'appsettings'
       #different models can have different variables
@@ -94,8 +122,8 @@ server <- function(input, output, session)
       #variable docname - name of documentation file for app
       #variable modelfigname - name of figure file for app
       #variable simfunction - the name of the simulation function(s)
-      #variable is_mbmodel - if the function follows mbmodel structure
-      #variable modeltype - the type of the model to be run. "_mixed_" if set by UI.
+      #variable mbmodelname - if there is an mbmodel available, list its name
+      #variable modeltype - the type of the model to be run. if multiple, i.e. containing "_and_" it is set by UI.
 
       #additional elements that can be provided:
       #variable otherinputs - contains additional shiny UI elements that are not generated automatically by functions above
@@ -104,13 +132,13 @@ server <- function(input, output, session)
       #If not needed, it is empty ""
 
       #extract function and other inputs and turn them into a taglist
-      #this uses the 1st function provided by the settings file and stored in currentsimfct
+      #this uses the 1st function provided by the settings file
       #indexing sim function in case there are multiple
 
-      modelinputs <- generate_shinyinput(model_function = appsettings$simfunction[1],
-                                         is_mbmodel = appsettings$is_mbmodel,
-                                         otherinputs = appsettings$otherinputs,
-                                         packagename = packagename)
+      modelinputs <- generate_shinyinput(use_mbmodel = appsettings$use_mbmodel, mbmodel = appsettings$mbmodel,
+                                         use_doc = appsettings$use_doc, model_file = appsettings$filepath,
+                                         model_function = appsettings$simfunction[1],
+                                         otherinputs = appsettings$otherinputs, packagename = packagename)
       output$modelinputs <- renderUI({modelinputs})
 
 
@@ -157,10 +185,10 @@ server <- function(input, output, session)
     #Code to reset the model settings
     ###############
     observeEvent(input$reset, {
-      modelinputs <- generate_shinyinput(model_function = appsettings$simfunction[1],
-                                                        is_mbmodel = appsettings$is_mbmodel,
-                                                        otherinputs = appsettings$otherinputs,
-                                                        packagename = packagename)
+      modelinputs <- generate_shinyinput(use_mbmodel = appsettings$use_mbmodel, mbmodel = appsettings$mbmodel,
+                                         use_doc = appsettings$use_doc, model_file = appsettings$filepath,
+                                         model_function = appsettings$simfunction[1],
+                                         otherinputs = appsettings$otherinputs, packagename = packagename)
       output$modelinputs <- renderUI({modelinputs})
       output$plotly <- NULL
       output$ggplot <- NULL
@@ -188,7 +216,8 @@ server <- function(input, output, session)
                      x3 = (x2[! (names(x2) %in% c('submitBtn','Exit') ) ]) #remove further inputs
                      modelsettings = x3
                      #hacky way of removing the UI from input
-                     if (appsettings$modeltype!="_mixed_") {modelsettings$modeltypeUI <- NULL}
+                     #if (appsettings$modeltype!="_mixed_") {modelsettings$modeltypeUI <- NULL}
+
                      #modelsettings = x3[!grepl("*selectized$", names(x3))] #remove any selectized type input
                      #remove nested list of shiny input tags
                      appsettings$otherinputs <- NULL
