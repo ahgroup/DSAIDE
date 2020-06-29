@@ -28,6 +28,7 @@ test_that("run_model correctly runs different models",
             tfinal = 120
             modelsettings =  list(S = 1000, I = 10, R = 0 , b = 1e-3, g = 0.5, tstart = 0, tfinal = tfinal, dt = 0.1, modeltype = "_ode_and_discrete_", plotscale = 'y', nplots = 1)
             modelsettings$simfunction =  c('simulate_SIR_model_ode','simulate_SIR_model_discrete')
+            modelsettings$modeltypeUI = "_ode_and_discrete_"
             result = run_model(modelsettings)
             #check that simulation ran until max time
             Imaxode = round(max(dplyr::filter(result[[1]]$dat, varnames == "I_ode")$yvals))
