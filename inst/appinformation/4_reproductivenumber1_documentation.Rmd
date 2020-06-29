@@ -12,13 +12,28 @@ bibliography: references.bib
 ---
 
 
-```{r, echo = FALSE}
-#this code loads the settings file for the current app so we can automatically 
-#list the functions in the further information section
-currentrmdfile = knitr::current_input() 
-source(here::here("inst/appinformation","get_settings.R"))
-appsettings = get_settings(currentrmdfile)
 
+```{r, include = FALSE}
+#*************************************
+#Note: for this to process/knit, several helper functions need to be available (sourced) first
+#those are in the inst/helperfunctions folder
+#Note: in general, the "processing-script.R" in the docsfordevelopers should be used to produce the html docs
+#manual knitting of each doc only during development/testing
+#*************************************
+packagename = "DSAIDE"
+helperdir = system.file("helperfunctions", package = packagename) #find path to apps
+files_to_source = list.files(helperdir,full.names=TRUE)
+sapply(files_to_source, source) #sourcing needs to happen inside each Rmd file since knitr starts a new environment
+```
+
+
+```{r, echo = FALSE}
+#load the settings file for the current app 
+#so we can automatically include figure, list the functions in the further information section
+#and use other information specific to the current app for the task table generation
+currentrmdfile = knitr::current_input() 
+#currentrmdfile = "1_basicsir_documentation.Rmd" #for debugging 
+appsettings = get_settings(currentrmdfile)
 ```
 
 
@@ -35,7 +50,7 @@ This app is meant to teach you about the basic concepts behind the reproductive 
 ## The Model {#shinytab2}
 
 ### Model Overview
-For this app, we'll use the basic compartmental SIR model. We allow for 3 different stages/compartments: 
+For this app, we'll use the basic compartmental SIR model. THis model has the following compartments: We allow for 3 different stages/compartments: 
 
 * **S** - uninfected and susceptible individuals 
 * **I** - infected and infectious individuals (note that these terms are often used interchangeably, but technically we are talking about someone who is infected **and** is infectious, i.e. can infect others)
@@ -61,9 +76,16 @@ knitr::include_graphics(here::here('inst/media',appsettings$modelfigname))
 
 Model equations:
 
-$$\dot S = - b SI $$ 
-$$\dot I = b S I - g I $$
-$$\dot R = g I $$
+
+
+```{r, echo = FALSE,  results='asis'}
+if (appsettings$use_mbmodel)
+{
+  modeldir = system.file("mbmodels", package = packagename) #find path to apps
+  mbmodel = readRDS(paste0(modeldir,"/",appsettings$mbmodelname) )
+  eqs = DSAIDE::generate_equations(mbmodel)
+}
+```
 
 The underlying model implements one other process. In previous apps, you learned that an unrealistic feature of models implemented by ordinary differential equations (ODE) is that the number of individuals can drop below 1, i.e. there could be fraction of infected. For this app, the underlying code is such that if the number of infected drops below 1, it is set to 0. This is in some way a bit of a "hack" to deal with this issue. When you work through the stochastic apps, you will learn better ways of treating this. The advantage of doing it the way it's done here is that we can keep using the ODE model formulation, without stochasticity, which makes things easy.
 

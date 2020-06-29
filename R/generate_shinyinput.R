@@ -128,7 +128,7 @@ generate_shinyinput <- function(use_mbmodel = FALSE, mbmodel = NULL,
     {
       #standard additional input elements for each model
       standardui <- shiny::tagList(
-        shiny::selectInput("modeltype", "Model to run",c("ODE" = "_ode_", 'stochastic' = '_stochastic_', 'discrete time' = '_discrete_'), selected = '_ode_'),
+        shiny::selectInput("modeltype", "Model to run",c("ODE" = "ode", 'stochastic' = 'stochastic', 'discrete time' = 'discrete'), selected = 'ode'),
         shiny::selectInput("plotscale", "Log-scale for plot",c("none" = "none", 'x-axis' = "x", 'y-axis' = "y", 'both axes' = "both")),
         shiny::selectInput("plotengine", "Plot engine",c("ggplot" = "ggplot", "plotly" = "plotly"))
       ) #end taglist

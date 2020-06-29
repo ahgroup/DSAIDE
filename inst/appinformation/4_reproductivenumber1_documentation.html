@@ -75,12 +75,18 @@ Flow diagram for this model.
 </p>
 </div>
 <p>Model equations:</p>
-<p><span class="math display">\[\dot S = - b SI \]</span> <span class="math display">\[\dot I = b S I - g I \]</span> <span class="math display">\[\dot R = g I \]</span></p>
+$$ 
+\begin{aligned} 
+\dot S & = -bSI \\ 
+\dot I & = +bSI -gI \\ 
+\dot R & = +gI \\ 
+\end{aligned} 
+$$
 <p>The underlying model implements one other process. In previous apps, you learned that an unrealistic feature of models implemented by ordinary differential equations (ODE) is that the number of individuals can drop below 1, i.e. there could be fraction of infected. For this app, the underlying code is such that if the number of infected drops below 1, it is set to 0. This is in some way a bit of a “hack” to deal with this issue. When you work through the stochastic apps, you will learn better ways of treating this. The advantage of doing it the way it’s done here is that we can keep using the ODE model formulation, without stochasticity, which makes things easy.</p>
 </div>
 <div id="reproductive-number" class="section level3">
 <h3>Reproductive number</h3>
-<p><em>The app and tasks deal with the reproductive number concept. The following section provides a very brief introduction. I recommend reading a bit more about it. I’m following the terminology of <a href="https://ahgroup.github.io/DSAIDEbook/reproductive-number.html">my own write-up</a>. You can also check the books listed in the ID introduction app or some of the papers listed in the <em>Further Resources</em> section of this app.</em></p>
+<p><em>The app and tasks deal with the reproductive number concept. The following section provides a very brief introduction. I recommend reading a bit more about it. I’m following the terminology of <a href="https://andreashandel.github.io/IDEMAbook/reproductive-number.html">my own write-up</a>. You can also check the books listed in the ID introduction app or some of the papers listed in the <em>Further Resources</em> section of this app.</em></p>
 <p>The reproductive number is defined as the average number of new infected (and infectious) individuals caused by one infectious individual. The <em>basic</em> reproductive number is the reproductive number in a scenario where everyone is susceptible. For the SIR model shown above, this quantity is <span class="math display">\[R_0=\frac{bS_0}{g}\]</span> where <em>S<sub>0</sub></em> is the initial number of susceptibles.</p>
 <p>For a single outbreak (no births, natural death or waning immunity) and a basic SIR model, an equation linking the final number of susceptibles left at the end and the basic reproductive number is <span class="math display">\[R_0=\frac{\ln(S_f)}{(S_f - 1)}\]</span> where <span class="math inline">\(\ln()\)</span> is the natural logarithm and <em>S<sub>f</sub></em> is the <strong>fraction</strong> of susceptibles still left.</p>
 <p>Note the unfortunate fact that the letter <em>R</em> is used both for the recovered compartment in the model and the reproductive number. This is standard notation and I’ll therefore use it here. Just be careful to figure out from the context if someone is talking about the recovered individuals or the reproductive number.</p>
@@ -152,7 +158,7 @@ Flow diagram for this model.
 <h2>Further Information</h2>
 <ul>
 <li>This app (and all others) are structured such that the Shiny part (the graphical interface you see and the server-side function that goes with it) calls an underlying R script (or several) which runs the simulation for the model of interest and returns the results.</li>
-<li>For this app, the underlying function running the simulation is called <code>simulate_reproductivenumber1_ode,</code>. You can call them directly, without going through the shiny app. Use the <code>help()</code> command for more information on how to use the functions directly. If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself.</li>
+<li>For this app, the underlying function running the simulation is called <code>simulate_SIR_model_ode,</code>. You can call them directly, without going through the shiny app. Use the <code>help()</code> command for more information on how to use the functions directly. If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself.</li>
 <li>You can also download all simulator functions and modify them for your own purposes. Of course to modify these functions, you’ll need to do some coding.</li>
 <li>For examples on using the simulators directly and how to modify them, read the package vignette by typing <code>vignette(&#39;DSAIDE&#39;)</code> into the R console.</li>
 <li>For the equations mentioned in the tasks, see e.g. <span class="citation">(Heffernan, Smith, and Wahl 2005; Keeling and Rohani 2008; Vynnycky and White 2010)</span>.</li>

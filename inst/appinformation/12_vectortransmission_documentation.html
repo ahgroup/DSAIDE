@@ -72,7 +72,15 @@ Flow diagram for this model.
 </p>
 </div>
 <p>Model equations:</p>
-<p><span class="math display">\[\dot S_h = - b_1 S_h I_v + w R_h\]</span> <span class="math display">\[\dot I_h = b_1 S_h I_v  - g I_h\]</span> <span class="math display">\[\dot R_h = g I_h - w R_h\]</span> <span class="math display">\[\dot S_v =b - b_2 S_v I_h - n S_v\]</span> <span class="math display">\[\dot I_v = b_2 S_v I_h  - n I_v\]</span></p>
+$$ 
+\begin{aligned} 
+\dot Sh & = -b1ShIv +wRh \\ 
+\dot Ih & = +b1ShIv -gIh \\ 
+\dot Rh & = +gIh -wRh \\ 
+\dot Sv & = +n -b2SvIh -mSv \\ 
+\dot Iv & = +b2SvIh -mIv \\ 
+\end{aligned} 
+$$
 </div>
 </div>
 <div id="shinytab3" class="section level2">
@@ -153,7 +161,7 @@ Flow diagram for this model.
 <h2>Further Information</h2>
 <ul>
 <li>This app (and all others) are structured such that the Shiny part (the graphical interface you see and the server-side function that goes with it) calls an underlying R script (or several) which runs the simulation for the model of interest and returns the results.</li>
-<li>For this app, the underlying function(s) running the simulation are called <code>simulate_vectortransmission_ode,</code>. You can call them directly, without going through the shiny app. Use the <code>help()</code> command for more information on how to use the functions directly. If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself.</li>
+<li>For this app, the underlying function(s) running the simulation are called <code>simulate_Vector_transmission_model_ode,</code>. You can call them directly, without going through the shiny app. Use the <code>help()</code> command for more information on how to use the functions directly. If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself.</li>
 <li>You can also download all simulator functions and modify them for your own purposes. Of course to modify these functions, you’ll need to do some coding.</li>
 <li>For examples on using the simulators directly and how to modify them, read the package vignette by typing <code>vignette(&#39;DSAIDE&#39;)</code> into the R console.</li>
 <li>Some more information on vector-borne diseases and modeling can be found in <span class="citation">(Kilpatrick and Randolph 2012)</span>.</li>

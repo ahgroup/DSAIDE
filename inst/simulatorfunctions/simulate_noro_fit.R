@@ -33,9 +33,9 @@
 #'   the code will likely abort with an error message.
 #' @examples
 #' # To run the code with default parameters just call the function:
-#' \dontrun{result <- simulate_fit_noro()}
+#' \dontrun{result <- simulate_noro_fit()}
 #' # To apply different settings, provide them to the simulator function, like such:
-#' result <- simulate_fit_noro(iter = 5, fitmodel = 2)
+#' result <- simulate_noro_fit(iter = 5, fitmodel = 2)
 #' @seealso See the Shiny app documentation corresponding to this
 #' function for more details on this model.
 #' @author Andreas Handel
@@ -43,36 +43,36 @@
 
 #' @export
 
-simulate_fit_noro <- function(S = 100, I = 1, R = 0, b = 1e-3, blow = 1e-10, bhigh = 1e-1,  g = 0.5, glow = 1e-3, ghigh = 1e2,  n = 0, nlow = 0, nhigh = 1e3, t1 = 8, t2 = 15, fitmodel = 1, iter = 100, solvertype = 1)
+simulate_noro_fit <- function(S = 100, I = 1, R = 0, b = 1e-3, blow = 1e-10, bhigh = 1e-1,  g = 0.5, glow = 1e-3, ghigh = 1e2,  n = 0, nlow = 0, nhigh = 1e3, t1 = 8, t2 = 15, fitmodel = 1, iter = 100, solvertype = 1)
 
 {
 
   ###################################################################
-  #function specifying the ode model. 
+  #function specifying the ode model.
   #This is called by the ode solver inside the fit function
   ###################################################################
-  
-  noro_model_ode <- function(t, y, parms, fitmodel) 
+
+  noro_model_ode <- function(t, y, parms, fitmodel)
     {
-      with( as.list(c(y,parms)), { #lets us access variables and parameters stored in y and parms by name 
-        
+      with( as.list(c(y,parms)), { #lets us access variables and parameters stored in y and parms by name
+
         #we are fitting 3 different models, depending on the scenario variable
-        #by default (fitmodel 2), n is 'on' and constant 
-        if (fitmodel==1)  
+        #by default (fitmodel 2), n is 'on' and constant
+        if (fitmodel==1)
         {
-          n=0; #no external source 
+          n=0; #no external source
         }
-        if (fitmodel==3) 
+        if (fitmodel==3)
         {
-          if (t1 > t || t > t2) {n=0} #with step-function environmental source 
+          if (t1 > t || t > t2) {n=0} #with step-function environmental source
         }
-        
+
         dS = - n*S  - b*I*S
         dI = n*S + b*I*S - g*I
         dR =  g*I
-        list(c(dS,dI,dR)) 
-      } ) 
-    } #close with statement, end ODE code block 
+        list(c(dS,dI,dR))
+      } )
+    } #close with statement, end ODE code block
 
 
   ###################################################################
@@ -103,7 +103,7 @@ simulate_fit_noro <- function(S = 100, I = 1, R = 0, b = 1e-3, blow = 1e-10, bhi
   #some settings for ode solver and optimizer
   #those are hardcoded here, could in principle be rewritten to allow user to pass it into function
   atolv=1e-8; rtolv=1e-8; #accuracy settings for the ODE solver routine
-  
+
   #load data
   fitdata =  norodata
   colnames(fitdata) = c("xvals",'outcome')
@@ -137,7 +137,7 @@ simulate_fit_noro <- function(S = 100, I = 1, R = 0, b = 1e-3, blow = 1e-10, bhi
   if (solvertype == 1) {algname = "NLOPT_LN_COBYLA"}
   if (solvertype == 2) {algname = "NLOPT_LN_NELDERMEAD"}
   if (solvertype == 3) {algname = "NLOPT_LN_SBPLX"}
-  
+
   #this line runs the simulation, i.e. integrates the differential equations describing the infection process
   #the result is saved in the odeoutput matrix, with the 1st column the time, all other column the model variables
   #in the order they are passed into Y0 (which needs to agree with the order in virusode)
@@ -150,7 +150,7 @@ simulate_fit_noro <- function(S = 100, I = 1, R = 0, b = 1e-3, blow = 1e-10, bhi
 
   #time-series for best fit model
   odeout <- try(deSolve::ode(y = Y0, times = xvals, func = noro_model_ode, parms=params, atol=1e-8, rtol=1e-8, fitmodel = fitmodel));
-  
+
   #compute sum of square residuals (SSR) for initial guess and final solution
   modelpred = odeout[match(fitdata$xvals,odeout[,"time"]),"I"];
 

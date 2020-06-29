@@ -12,11 +12,26 @@ bibliography: references.bib
 ---
 
 
+```{r, include = FALSE}
+#*************************************
+#Note: for this to process/knit, several helper functions need to be available (sourced) first
+#those are in the inst/helperfunctions folder
+#Note: in general, the "processing-script.R" in the docsfordevelopers should be used to produce the html docs
+#manual knitting of each doc only during development/testing
+#*************************************
+packagename = "DSAIDE"
+helperdir = system.file("helperfunctions", package = packagename) #find path to apps
+files_to_source = list.files(helperdir,full.names=TRUE)
+sapply(files_to_source, source) #sourcing needs to happen inside each Rmd file since knitr starts a new environment
+```
+
+
 ```{r, echo = FALSE}
-#this code loads the settings file for the current app so we can automatically 
-#list the functions in the further information section
+#load the settings file for the current app 
+#so we can automatically include figure, list the functions in the further information section
+#and use other information specific to the current app for the task table generation
 currentrmdfile = knitr::current_input() 
-source(here::here("inst/appinformation","get_settings.R"))
+currentrmdfile = "11_environmentaltransmission_documentation.Rmd" #for debugging 
 appsettings = get_settings(currentrmdfile)
 ```
 
@@ -49,16 +64,25 @@ The processes being modeled are:
 
 
 ### Model Implementation
-The flow diagram and the set of ordinary differential equations (ODE) which are used to implement this model are as follows:
+The flow diagram for this model is shown in this figure:
 
-```{r modeldiagram,  fig.cap='Flow diagram for this model. ',  echo=FALSE}
+```{r modeldiagram,  fig.cap='',  echo=FALSE}
 knitr::include_graphics(here::here('inst/media',appsettings$modelfigname))
 ```
 
-$$\dot S =b - b_d S I - b_e S E - nS$$ 
-$$\dot I = b_d S I + b_e S E - g I -nI$$ 
-$$\dot R = g I - nR$$
-$$\dot E = p I - cE$$
+The set of ordinary differential equations (ODE) for this model are:
+
+
+```{r, echo = FALSE,  results='asis'}
+if (appsettings$use_mbmodel)
+{
+  modeldir = system.file("mbmodels", package = packagename) #find path to apps
+  mbmodel = readRDS(paste0(modeldir,"/",appsettings$mbmodelname) )
+  eqs = DSAIDE::generate_equations(mbmodel)
+  eqs
+}
+```
+
 
 
 ### A comment on terminology  

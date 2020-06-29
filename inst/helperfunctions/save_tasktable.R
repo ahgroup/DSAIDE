@@ -1,3 +1,4 @@
+#writes task table for an app into the current directory
 save_tasktable <- function(alltasks,allrecord,appsettings)
 {
   # Make a single file using join_all

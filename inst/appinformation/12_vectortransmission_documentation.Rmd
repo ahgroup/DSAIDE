@@ -12,14 +12,29 @@ bibliography: references.bib
 ---
 
 
-```{r, echo = FALSE}
-#this code loads the settings file for the current app so we can automatically 
-#list the functions in the further information section
-currentrmdfile = knitr::current_input() 
-source(here::here("inst/appinformation","get_settings.R"))
-appsettings = get_settings(currentrmdfile)
 
+```{r, include = FALSE}
+#*************************************
+#Note: for this to process/knit, several helper functions need to be available (sourced) first
+#those are in the inst/helperfunctions folder
+#Note: in general, the "processing-script.R" in the docsfordevelopers should be used to produce the html docs
+#manual knitting of each doc only during development/testing
+#*************************************
+packagename = "DSAIDE"
+helperdir = system.file("helperfunctions", package = packagename) #find path to apps
+files_to_source = list.files(helperdir,full.names=TRUE)
+sapply(files_to_source, source) #sourcing needs to happen inside each Rmd file since knitr starts a new environment
 ```
+
+
+```{r, echo = FALSE}
+#load the settings file for the current app 
+#so we can automatically include figure, list the functions in the further information section
+#and use other information specific to the current app for the task table generation
+currentrmdfile = knitr::current_input() 
+appsettings = get_settings(currentrmdfile)
+```
+
 
 
 ## Overview {#shinytab1}
@@ -64,11 +79,17 @@ knitr::include_graphics(here::here('inst/media',appsettings$modelfigname))
 
 Model equations:
 
-$$\dot S_h = - b_1 S_h I_v + w R_h$$ 
-$$\dot I_h = b_1 S_h I_v  - g I_h$$ 
-$$\dot R_h = g I_h - w R_h$$
-$$\dot S_v =b - b_2 S_v I_h - n S_v$$ 
-$$\dot I_v = b_2 S_v I_h  - n I_v$$ 
+
+
+```{r, echo = FALSE}
+if (appsettings$use_mbmodel)
+{
+  modeldir = system.file("mbmodels", package = packagename) #find path to apps
+  mbmodel = readRDS(paste0(modeldir,"/",appsettings$mbmodelname) )
+  eqs = DSAIDE::generate_equations(mbmodel)
+  eqs
+}
+```
 
 
 

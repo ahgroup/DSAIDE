@@ -11,6 +11,16 @@ output:
 bibliography: references.bib
 ---
 
+```{r, include = FALSE}
+#general setup to define package and get path locations
+#all paths are inside the package and retrieved with system.file
+packagename = "DSAIDE"
+helperdir = "helperfunctions"
+mbmodeldir = "mbmodels"
+figuredir = "media"
+appdocdir = "appinformation" 
+```
+
 
 ```{r, include = FALSE}
 #*************************************
@@ -19,9 +29,7 @@ bibliography: references.bib
 #Note: in general, the "processing-script.R" in the docsfordevelopers should be used to produce the html docs
 #manual knitting of each doc only during development/testing
 #*************************************
-packagename = "DSAIDE"
-helperdir = system.file("helperfunctions", package = packagename) #find path to apps
-files_to_source = list.files(helperdir,full.names=TRUE)
+files_to_source = list.files(system.file(helperdir,package = packagename),full.names=TRUE)
 sapply(files_to_source, source) #sourcing needs to happen inside each Rmd file since knitr starts a new environment
 ```
 
@@ -31,7 +39,8 @@ sapply(files_to_source, source) #sourcing needs to happen inside each Rmd file s
 #so we can automatically include figure, list the functions in the further information section
 #and use other information specific to the current app for the task table generation
 currentrmdfile = knitr::current_input() 
-appsettings = get_settings(currentrmdfile)
+#currentrmdfile = "1_basicsir_documentation.Rmd" #for debugging 
+appsettings = get_settings(currentrmdfile,appdocdir,packagename)
 ```
 
 
@@ -63,8 +72,8 @@ As with the compartments, we could extend the model and allow other processes to
 For compartmental models (and also often other types of models), it is useful to show a graphical schematic representation of the compartments and processes included in the model. For compartmental models, such a diagram/figure is usually called a flow diagram. Such a diagram consists of a box for each compartment, and arrows pointing in and out of boxes to describe flows and interactions. For the simple SIR model, the flow diagram looks as follows:
 
 
-```{r modeldiagram,  fig.cap='Flow diagram for this model. ',  echo=FALSE}
-knitr::include_graphics(here::here('inst/media',appsettings$modelfigname))
+```{r modeldiagram,  fig.cap='',  echo=FALSE}
+knitr::include_graphics( system.file(figuredir,appsettings$modelfigname,package=packagename))
 ```
 
 
@@ -75,13 +84,12 @@ To allow us to simulate this model, we need to implement it on the computer. For
 ```{r, echo = FALSE}
 if (appsettings$use_mbmodel)
 {
-  modeldir = system.file("mbmodels", package = packagename) #find path to apps
-  mbmodel = readRDS(paste0(modeldir,"/",appsettings$mbmodelname) )
+  modelfile = system.file(mbmodeldir,appsettings$mbmodelname, package = packagename) #find path to apps
+  mbmodel = readRDS(modelfile)
   eqs = DSAIDE::generate_equations(mbmodel)
-  print(eqs)
+  eqs
 }
 ```
-
 
 *Note: If you don't see equations but instead gibberish, try opening the app with a different browser. I have found that occasionally, on some computers/browsers, the math is not shown properly.* 
 

@@ -42,7 +42,7 @@
 #' @section Code creation date: 2020-06-19
 #' @export 
  
-simulate_SIRSd_model_stochastic <- function(S = 1000, I = 1, R = 0, n = 0, b = 0.001, g = 1, w = 1, m = 1, tstart = 0, tfinal = 100, dt = 0.1, rngseed = 123) 
+simulate_SIRSd_model_stochastic <- function(S = 1000, I = 1, R = 0, n = 0, b = 0.001, g = 1, w = 0, m = 0, tstart = 0, tfinal = 100, dt = 0.1, rngseed = 123) 
 { 
   #Block of ODE equations for adaptivetau 
   SIRSd_model_fct <- function(y, parms, t) 

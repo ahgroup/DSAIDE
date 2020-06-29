@@ -11,6 +11,16 @@ output:
 bibliography: references.bib
 ---
 
+```{r, include = FALSE}
+#general setup to define package and get path locations
+#all paths are inside the package and retrieved with system.file
+packagename = "DSAIDE"
+helperdir = "helperfunctions"
+mbmodeldir = "mbmodels"
+figuredir = "media"
+appdocdir = "appinformation" 
+```
+
 
 ```{r, include = FALSE}
 #*************************************
@@ -19,7 +29,7 @@ bibliography: references.bib
 #Note: in general, the "processing-script.R" in the docsfordevelopers should be used to produce the html docs
 #manual knitting of each doc only during development/testing
 #*************************************
-files_to_source = list.files(here::here("inst/helperfunctions"),full.names=TRUE)
+files_to_source = list.files(system.file(helperdir,package = packagename),full.names=TRUE)
 sapply(files_to_source, source) #sourcing needs to happen inside each Rmd file since knitr starts a new environment
 ```
 
@@ -29,7 +39,8 @@ sapply(files_to_source, source) #sourcing needs to happen inside each Rmd file s
 #so we can automatically include figure, list the functions in the further information section
 #and use other information specific to the current app for the task table generation
 currentrmdfile = knitr::current_input() 
-appsettings = get_settings(currentrmdfile)
+#currentrmdfile = "1_basicsir_documentation.Rmd" #for debugging 
+appsettings = get_settings(currentrmdfile,appdocdir,packagename)
 ```
 
 
@@ -66,8 +77,10 @@ The included processes/mechanisms are the following:
 ### Model Implementation
 The flow diagram for the model implemented in this app is:
 
-```{r modeldiagram,  fig.cap='Flow diagram for this model. ',  echo=FALSE}
-knitr::include_graphics(here::here('inst/media',appsettings$modelfigname))
+
+
+```{r modeldiagram,  fig.cap='',  echo=FALSE}
+knitr::include_graphics( system.file(figuredir,appsettings$modelfigname,package=packagename))
 ```
 
 
