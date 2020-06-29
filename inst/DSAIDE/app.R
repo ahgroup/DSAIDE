@@ -1,6 +1,6 @@
-#The main use for DSAIDE is as R package
+#The main use is as R package
 #since it is a shiny app, it can also deployed to a shiny server
-#The comments below explain how one can deploy DSAIDE to shinyappsio or a shiny server
+#The comments below explain how one can deploy to shinyappsio or a shiny server
 
 #note that the UI loads the google analytics bit, which currently is for the UGA server.
 #Shouldn't affect deployment as R package.
@@ -10,8 +10,7 @@
 #to deploy, follow these steps:
 #1. go into the folder where this file (app.R) resides
 #2. install the package through CRAN or github if we want to use the github version
-#devtools::install_github('ahgroup/DSAIDE')
-#3. #uncomment the library('DSAIDE') commant below
+#3. #uncomment the library() command below
 #4. with the above 'library' statement active, deploy with:
 # run rsconnect::deployApp(account = 'epibiouga')
 # as suitable, change the account to another one, e.g. handelgroup
@@ -22,17 +21,17 @@
 #5. comment out the library command again
 
 #for deployment to a shiny server, steps are similar
-#1. install DSAIDE on server, either CRAN or Github version
-#2. uncomment the library('DSAIDE') command below
+#1. install package on server, either CRAN or Github version
+#2. uncomment the library() command below
 #3. save app.R, copy it and packagestyle.css to the server app folder
 #4. comment out the library command again
 #5. as needed, update DSAIDE on server by running: sudo su - -c "R -e \"devtools::install_github('ahgroup/DSAIDE')\""
 
 #library('DSAIDE')
 
-
 ##############################################
 #This is the Shiny App for the main menu of DSAIDE
+##############################################
 
 #get names of all existing apps
 packagename = "DSAIDE"
@@ -177,10 +176,6 @@ server <- function(input, output, session)
     #end code that listens to model selection buttons and creates UI for a chosen model
     #######################################################
 
-    #supposed to run simulation once so user sees outputs
-    #when first opening app. not working.
-    #shinyjs::click('submitBtn')
-
     ###############
     #Code to reset the model settings
     ###############
@@ -214,16 +209,14 @@ server <- function(input, output, session)
                      x1=isolate(reactiveValuesToList(input)) #get all shiny inputs
                      x2 = x1[! (names(x1) %in% appNames)] #remove inputs that are action buttons for apps
                      x3 = (x2[! (names(x2) %in% c('submitBtn','Exit') ) ]) #remove further inputs
+                     #modelsettings = x3[!grepl("*selectized$", names(x3))] #remove any input with selectized
                      modelsettings = x3
                      #hacky way of removing the UI from input
                      #if (appsettings$modeltype!="_mixed_") {modelsettings$modeltypeUI <- NULL}
-
-                     #modelsettings = x3[!grepl("*selectized$", names(x3))] #remove any selectized type input
                      #remove nested list of shiny input tags
                      appsettings$otherinputs <- NULL
                      #add settings information from appsettings list
                      modelsettings = c(appsettings, modelsettings)
-                     #browser()
                      if (is.null(modelsettings$nreps)) {modelsettings$nreps <- 1} #if there is no UI input for replicates, assume reps is 1
                      #if no random seed is set in UI, set it to 123.
                      if (is.null(modelsettings$rngseed)) {modelsettings$rngseed <- 123}
@@ -293,7 +286,6 @@ server <- function(input, output, session)
     ,
     contentType= "application/zip"
   )
-
   #######################################################
   #end code that listens to the "download code" button
   #######################################################

@@ -161,6 +161,10 @@ simulate_noro_fit <- function(S = 100, I = 1, R = 0, b = 1e-3, blow = 1e-10, bhi
   K=length(par_ini); #fitted parameters for model
   AICc= N * log(ssrfinal/N) + 2*(K+1)+(2*(K+1)*(K+2))/(N-K)
 
+  #adjust data a bit for consistent formatting on return
+  fitdata$varnames = "I_data"
+  colnames(fitdata) = c("xvals",'yvals','varnames')
+
   #list structure that contains all output
   result = list()
   result$ts = odeout

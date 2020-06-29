@@ -12,6 +12,7 @@ bibliography: references.bib
 ---
 
 ```{r, include = FALSE}
+#*************************************
 #general setup to define package and get path locations
 #all paths are inside the package and retrieved with system.file
 packagename = "DSAIDE"
@@ -19,10 +20,6 @@ helperdir = "helperfunctions"
 mbmodeldir = "mbmodels"
 figuredir = "media"
 appdocdir = "appinformation" 
-```
-
-
-```{r, include = FALSE}
 #*************************************
 #Note: for this to process/knit, several helper functions need to be available (sourced) first
 #those are in the inst/helperfunctions folder
@@ -31,17 +28,13 @@ appdocdir = "appinformation"
 #*************************************
 files_to_source = list.files(system.file(helperdir,package = packagename),full.names=TRUE)
 sapply(files_to_source, source) #sourcing needs to happen inside each Rmd file since knitr starts a new environment
-```
-
-
-```{r, echo = FALSE}
 #load the settings file for the current app 
 #so we can automatically include figure, list the functions in the further information section
 #and use other information specific to the current app for the task table generation
 currentrmdfile = knitr::current_input() 
-#currentrmdfile = "1_basicsir_documentation.Rmd" #for debugging 
 appsettings = get_settings(currentrmdfile,appdocdir,packagename)
 ```
+
 
 
 ## Overview {#shinytab1}

@@ -56,9 +56,9 @@ run_model <- function(modelsettings) {
 
 
   #if the user sets the model type, apply that choice
-  if (!is.null(modelsettings$modeltypeUI))
+  #that happens for any models that have an "_and_" in their modeltype variable as defined in the spreadsheet
+  if (grepl('_and_',modelsettings$modeltype))
   {
-    #browser()
     modelsettings$modeltype = modelsettings$modeltypeUI
   }
 
@@ -149,6 +149,7 @@ run_model <- function(modelsettings) {
   {
     modelsettings$currentmodel = simfunction[grep('_discrete',simfunction)] #list of model functions, get the ode function
     #run model
+
     simresult = try(eval(generate_fctcall(modelsettings)))
     checkres <- check_results(simresult)
     if (!is.null(checkres)) {return(checkres)}
@@ -289,6 +290,8 @@ run_model <- function(modelsettings) {
   ##################################
   if (grepl('_fit_',modelsettings$modeltype))
   {
+
+
     modelsettings$currentmodel = simfunction
     simresult = try(eval(generate_fctcall(modelsettings)))
     checkres <- check_results(simresult)
@@ -297,7 +300,7 @@ run_model <- function(modelsettings) {
 
     colnames(simresult$ts)[1] = 'xvals' #rename time to xvals for consistent plotting
     #reformat data to be in the right format for plotting
-    #each plot/text output is a list entry with a data frame in form xvals, yvals, extra variables for stratifications for each plot
+    #each plot/text output is a list entry with a data frame in form xvals, yvals, extra variables for stratification for each plot
     rawdat = as.data.frame(simresult$ts)
     #using tidyr to reshape
     #dat = tidyr::gather(rawdat, -xvals, value = "yvals", key = "varnames")
@@ -308,8 +311,6 @@ run_model <- function(modelsettings) {
 
     #next, add data that's being fit to data frame
     fitdata  = simresult$data
-    colnames(fitdata) = c('xvals','yvals')
-    fitdata$varnames = 'Data'
     fitdata$style = 'point'
     datall = rbind(dat,fitdata)
 
