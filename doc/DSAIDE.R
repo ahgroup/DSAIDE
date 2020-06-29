@@ -20,16 +20,16 @@ knitr::include_graphics("whattodoexample.png")
 library('DSAIDE') 
 
 ## ----eval=FALSE, echo=TRUE----------------------------------------------------
-#  help('simulate_sir_ode')
+#  help('simulate_SIR_model_ode')
 
 ## ---- eval=TRUE, echo=TRUE----------------------------------------------------
-result <- simulate_sir_ode()
+result <- simulate_SIR_model_ode()
 
 ## ---- eval=TRUE, echo=TRUE----------------------------------------------------
 plot(result$ts[ , "time"],result$ts[ , "S"],xlab='Time',ylab='Number Susceptible',type='l')
 
 ## ---- eval=TRUE, echo=TRUE----------------------------------------------------
-result <- simulate_sir_ode(S = 2000, b = 0.001, g = 0.5, tfinal = 200)
+result <- simulate_SIR_model_ode(S = 2000, b = 0.001, g = 0.5, tfinal = 200)
 plot(result$ts[ , "time"],result$ts[ , "S"],xlab='Time',ylab='Number Susceptible',type='l')
 
 ## ---- eval=TRUE, echo=TRUE----------------------------------------------------
@@ -38,33 +38,33 @@ peak = rep(0,length(gvec)) #this will record the peak values for each g
 for (n in 1:length(gvec))
 {
   #call the simulator function with different values of g each time
-  result <- simulate_sir_ode(S = 500, b = 1/2500, g = gvec[n],  tfinal = 200)
+  result <- simulate_SIR_model_ode(S = 500, b = 1/2500, g = gvec[n],  tfinal = 200)
   peak[n] <- max(result$ts[,"I"]) #record max number of infected for each value of g
 }
 #plot final result
 plot(gvec,peak,type='p',xlab='Rate of recovery',ylab='Max number of infected')
 
 ## ----eval=FALSE, echo=TRUE----------------------------------------------------
-#  simulate_sir_ode <- function(S = 1000, I = 1, R = 0, b = 0.002, g = 1, tstart = 0, tfinal = 100, dt = 0.1 )
+#  simulate_SIR_model_ode <- function(S = 1000, I = 1, R = 0, b = 0.002, g = 1, tstart = 0, tfinal = 100, dt = 0.1)
 
 ## ----eval=FALSE, echo=TRUE, color='red'---------------------------------------
 #  mysimulator <- function( S = 1000, I = 1, R = 0, b = 0.002, g = 1, w = 0, tstart = 0, tfinal = 100, dt = 0.1 )
 
 ## ----eval=FALSE, echo=TRUE----------------------------------------------------
-#  pars = c(b = b, g = g)
+#  parvec_mb = c(b = b, g = g)
 
 ## ----eval=FALSE, echo=TRUE, color='red'---------------------------------------
-#  pars = c(b = b, g = g, w = w)
+#  parvec_mb = c(b = b, g = g, w = w)
 
 ## ----eval=FALSE, echo=TRUE----------------------------------------------------
-#  dS = -b*S*I
-#  dI = b*S*I -g*I
-#  dR = g*I
+#  dS_mb = -b*S*I
+#  dI_mb = b*S*I -g*I
+#  dR_mb = g*I
 
 ## ----eval=FALSE, echo=TRUE, color='red'---------------------------------------
-#  dS = -b*S*I +w*R
-#  dI = b*S*I -g*I
-#  dR = g*I -w*R
+#  dS_mb = -b*S*I +w*R
+#  dI_mb = b*S*I -g*I
+#  dR_mb = g*I -w*R
 
 ## ----eval=TRUE, echo=TRUE-----------------------------------------------------
 source('mysimulator.R') #to initialize the new function - it needs to be in same directory as this code

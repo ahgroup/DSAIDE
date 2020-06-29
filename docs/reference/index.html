@@ -73,7 +73,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DSAIDE</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.5</span>
       </span>
     </div>
 
@@ -184,6 +184,12 @@ Disease Epidemiology</p></td>
       </tr><tr>
         
         <td>
+          <p><code><a href="generate_equations.html">generate_equations()</a></code> </p>
+        </td>
+        <td><p>Turn a model into a set of differential equations displayed as LaTeX/HTML object</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="generate_fctcall.html">generate_fctcall()</a></code> </p>
         </td>
         <td><p>A helper function that produces a call to a simulator function for specific settings</p></td>
@@ -232,7 +238,7 @@ Disease Epidemiology</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="simulate_environmentaltransmission_ode.html">simulate_environmentaltransmission_ode()</a></code> </p>
+          <p><code><a href="simulate_Environmental_Transmission_model_ode.html">simulate_Environmental_Transmission_model_ode()</a></code> </p>
         </td>
         <td><p>Environmental Transmission model</p></td>
       </tr><tr>
@@ -244,15 +250,9 @@ Disease Epidemiology</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="simulate_fit_flu.html">simulate_fit_flu()</a></code> </p>
+          <p><code><a href="simulate_flu_fit.html">simulate_flu_fit()</a></code> </p>
         </td>
         <td><p>Fitting a SIR-type model to flu data</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="simulate_fit_noro.html">simulate_fit_noro()</a></code> </p>
-        </td>
-        <td><p>Fitting a simple SIR type model to norovirus outbreak data</p></td>
       </tr><tr>
         
         <td>
@@ -306,16 +306,15 @@ maternal antibodies</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="simulate_modelexploration_sir.html">simulate_modelexploration_sir()</a></code> </p>
-        </td>
-        <td><p>Simulation to illustrate parameter scan of the basic SIR model with births and deaths
-#'</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="simulate_multipathogen_ode.html">simulate_multipathogen_ode()</a></code> </p>
         </td>
         <td><p>Simulation of a compartmental infectious disease transmission model with 2 types of pathogens</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="simulate_noro_fit.html">simulate_noro_fit()</a></code> </p>
+        </td>
+        <td><p>Fitting a simple SIR type model to norovirus outbreak data</p></td>
       </tr><tr>
         
         <td>
@@ -326,61 +325,56 @@ parasite infection dynamics with intermediate hosts</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="simulate_reproductivenumber1_ode.html">simulate_reproductivenumber1_ode()</a></code> </p>
-        </td>
-        <td><p>Basic SIR model</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="simulate_reproductivenumber2_ode.html">simulate_reproductivenumber2_ode()</a></code> </p>
         </td>
         <td><p>Simulation of a compartmental infectious disease transmission model to study the reproductive number</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="simulate_schoolclosure_ode.html">simulate_schoolclosure_ode()</a></code> </p>
+          <p><code><a href="simulate_SEIRSd_model_stochastic.html">simulate_SEIRSd_model_stochastic()</a></code> </p>
         </td>
-        <td><p>Simulation of a compartmental infectious disease transmission model with 3 types of hosts and intervention</p></td>
+        <td><p>SEIRSd model</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="simulate_seir_stochastic.html">simulate_seir_stochastic()</a></code> </p>
+          <p><code><a href="simulate_SIRSd_model_ode.html">simulate_SIRSd_model_ode()</a></code> </p>
         </td>
-        <td><p>Stochastic simulation of an SEIR-type model</p></td>
+        <td><p>SIRSd model</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="simulate_sirdemographic_ode.html">simulate_sirdemographic_ode()</a></code> </p>
+          <p><code><a href="simulate_SIRSd_model_stochastic.html">simulate_SIRSd_model_stochastic()</a></code> </p>
         </td>
-        <td><p>Basic SIR model with births and deaths</p></td>
+        <td><p>SIRSd model</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="simulate_sirdemographic_stochastic.html">simulate_sirdemographic_stochastic()</a></code> </p>
+          <p><code><a href="simulate_SIR_modelexploration.html">simulate_SIR_modelexploration()</a></code> </p>
         </td>
-        <td><p>Stochastic simulation of an SIR-type model with births and deaths</p></td>
+        <td><p>Simulation to illustrate parameter scan of the basic SIR model with births and deaths
+#'</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="simulate_sir_discrete.html">simulate_sir_discrete()</a></code> </p>
+          <p><code><a href="simulate_SIR_model_discrete.html">simulate_SIR_model_discrete()</a></code> </p>
         </td>
-        <td><p>Basic discrete time SIR model</p></td>
+        <td><p>SIR model</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="simulate_sir_ode.html">simulate_sir_ode()</a></code> </p>
+          <p><code><a href="simulate_SIR_model_ode.html">simulate_SIR_model_ode()</a></code> </p>
         </td>
-        <td><p>Basic SIR model</p></td>
+        <td><p>SIR model</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="simulate_usanalysis_sir.html">simulate_usanalysis_sir()</a></code> </p>
+          <p><code><a href="simulate_SIR_usanalysis.html">simulate_SIR_usanalysis()</a></code> </p>
         </td>
         <td><p>Simulation to illustrate uncertainty and sensitivity analysis</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="simulate_vectortransmission_ode.html">simulate_vectortransmission_ode()</a></code> </p>
+          <p><code><a href="simulate_Vector_transmission_model_ode.html">simulate_Vector_transmission_model_ode()</a></code> </p>
         </td>
         <td><p>Vector transmission model</p></td>
       </tr>

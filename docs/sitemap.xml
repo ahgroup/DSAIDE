@@ -19,6 +19,9 @@
     <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/generate_documentation.html</loc>
   </url>
   <url>
+    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/generate_equations.html</loc>
+  </url>
+  <url>
     <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/generate_fctcall.html</loc>
   </url>
   <url>
@@ -43,16 +46,13 @@
     <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_directtransmission_ode.html</loc>
   </url>
   <url>
-    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_environmentaltransmission_ode.html</loc>
+    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_Environmental_Transmission_model_ode.html</loc>
   </url>
   <url>
     <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_evolution_stochastic.html</loc>
   </url>
   <url>
-    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_fit_flu.html</loc>
-  </url>
-  <url>
-    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_fit_noro.html</loc>
+    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_flu_fit.html</loc>
   </url>
   <url>
     <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_heterogeneity_ode.html</loc>
@@ -79,43 +79,40 @@
     <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_maternalimmunity_ode.html</loc>
   </url>
   <url>
-    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_modelexploration_sir.html</loc>
+    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_multipathogen_ode.html</loc>
   </url>
   <url>
-    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_multipathogen_ode.html</loc>
+    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_noro_fit.html</loc>
   </url>
   <url>
     <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_parasites_ode.html</loc>
   </url>
   <url>
-    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_reproductivenumber1_ode.html</loc>
-  </url>
-  <url>
     <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_reproductivenumber2_ode.html</loc>
   </url>
   <url>
-    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_schoolclosure_ode.html</loc>
+    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_SEIRSd_model_stochastic.html</loc>
   </url>
   <url>
-    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_seir_stochastic.html</loc>
+    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_SIRSd_model_ode.html</loc>
   </url>
   <url>
-    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_sirdemographic_ode.html</loc>
+    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_SIRSd_model_stochastic.html</loc>
   </url>
   <url>
-    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_sirdemographic_stochastic.html</loc>
+    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_SIR_modelexploration.html</loc>
   </url>
   <url>
-    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_sir_discrete.html</loc>
+    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_SIR_model_discrete.html</loc>
   </url>
   <url>
-    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_sir_ode.html</loc>
+    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_SIR_model_ode.html</loc>
   </url>
   <url>
-    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_usanalysis_sir.html</loc>
+    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_SIR_usanalysis.html</loc>
   </url>
   <url>
-    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_vectortransmission_ode.html</loc>
+    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_Vector_transmission_model_ode.html</loc>
   </url>
   <url>
     <loc>https://ahgroup.github.io/DSAIDE/index.html/articles/DSAIDE.html</loc>

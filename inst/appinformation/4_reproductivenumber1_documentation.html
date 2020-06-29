@@ -51,7 +51,7 @@
 <h2>The Model</h2>
 <div id="model-overview" class="section level3">
 <h3>Model Overview</h3>
-<p>For this app, we’ll use the basic compartmental SIR model. We allow for 3 different stages/compartments:</p>
+<p>For this app, we’ll use the basic compartmental SIR model. THis model has the following compartments: We allow for 3 different stages/compartments:</p>
 <ul>
 <li><strong>S</strong> - uninfected and susceptible individuals</li>
 <li><strong>I</strong> - infected and infectious individuals (note that these terms are often used interchangeably, but technically we are talking about someone who is infected <strong>and</strong> is infectious, i.e. can infect others)</li>
@@ -75,13 +75,6 @@ Flow diagram for this model.
 </p>
 </div>
 <p>Model equations:</p>
-$$ 
-\begin{aligned} 
-\dot S & = -bSI \\ 
-\dot I & = +bSI -gI \\ 
-\dot R & = +gI \\ 
-\end{aligned} 
-$$
 <p>The underlying model implements one other process. In previous apps, you learned that an unrealistic feature of models implemented by ordinary differential equations (ODE) is that the number of individuals can drop below 1, i.e. there could be fraction of infected. For this app, the underlying code is such that if the number of infected drops below 1, it is set to 0. This is in some way a bit of a “hack” to deal with this issue. When you work through the stochastic apps, you will learn better ways of treating this. The advantage of doing it the way it’s done here is that we can keep using the ODE model formulation, without stochasticity, which makes things easy.</p>
 </div>
 <div id="reproductive-number" class="section level3">
@@ -158,7 +151,7 @@ $$
 <h2>Further Information</h2>
 <ul>
 <li>This app (and all others) are structured such that the Shiny part (the graphical interface you see and the server-side function that goes with it) calls an underlying R script (or several) which runs the simulation for the model of interest and returns the results.</li>
-<li>For this app, the underlying function running the simulation is called <code>simulate_SIR_model_ode,</code>. You can call them directly, without going through the shiny app. Use the <code>help()</code> command for more information on how to use the functions directly. If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself.</li>
+<li>For this app, the underlying function running the simulation is called <code>simulate_SIR_model_ode</code>. You can call them directly, without going through the shiny app. Use the <code>help()</code> command for more information on how to use the functions directly. If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself.</li>
 <li>You can also download all simulator functions and modify them for your own purposes. Of course to modify these functions, you’ll need to do some coding.</li>
 <li>For examples on using the simulators directly and how to modify them, read the package vignette by typing <code>vignette(&#39;DSAIDE&#39;)</code> into the R console.</li>
 <li>For the equations mentioned in the tasks, see e.g. <span class="citation">(Heffernan, Smith, and Wahl 2005; Keeling and Rohani 2008; Vynnycky and White 2010)</span>.</li>

@@ -162,6 +162,11 @@ simulate_flu_fit <- function(S = 5e6, I = 1, D = 0, b = 1e-6, blow = 1e-10, bhig
     ssrfinal=sum((log10(modelpred)-log10(fitdata$outcome))^2) #fit is done on a log scale
   }
 
+  #adjust data a bit for consistent formatting on return
+  fitdata$varnames = "I_data"
+  colnames(fitdata) = c("xvals",'yvals','varnames')
+
+
   #list structure that contains all output
   output$ts = simres
   output$bestpars = params
