@@ -1,0 +1,25 @@
+Thoughts on consistent DSAIDE model notation:
+
+Main textbooks are V&W, K&R, Bjornstadt.
+
+We don't want to use greek labels.
+
+VW and KR use b_ij to mean transmission to i from j
+
+KR and BS use gamma for recovery rate
+
+Natural mortality is mu in KR and BS and m in VW
+
+VW use b for birth rate, KR use nu
+
+KR use sigma for latent rate, VW use f
+
+
+
+Our notation:
+n for birth rate
+m for mortality (opposite of what's in there currently)
+b for transmission
+b_ij for transmission TO i FROM j (opposite of what's in there currently)
+g_i for transition rate out of a compartment
+w for waning immmunity
