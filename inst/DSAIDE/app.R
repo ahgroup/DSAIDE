@@ -44,7 +44,7 @@ simdir = system.file("simulatorfunctions", package = packagename) #find path to 
 #load app table that has all the app information
 at = read.table(file = paste0(appdir,"/apptable.tsv"), sep = '\t', header = TRUE)
 
-appNames = at$shorttitle
+appNames = at$appid
 
 #path to simulator function zip file
 allsimfctfile = paste0(system.file("simulatorfunctions", package = packagename),"/simulatorfunctions.zip")
@@ -76,7 +76,7 @@ server <- function(input, output, session)
       #each app has settings stored in apptable
       #read and assign to list called 'appsettings'
       #store in global variable
-      appsettings <<- as.list(at[which(at$shorttitle == appName),])
+      appsettings <<- as.list(at[which(at$appid == appName),])
 
       #a few apps have 2 simulator functions, combine here into vector
       if (nchar(appsettings$simfunction2) > 1)
@@ -115,9 +115,8 @@ server <- function(input, output, session)
       #the information is stored in a list called 'appsettings'
       #different models can have different variables
       #all models need the following:
-      #variable appid - ID of the app
+      #variable appid - ID of the app, given as short name
       #variable apptitle - the name of the app. Used to display.
-      #variable shorttitle - short name of the app, including ID. needs to match docname.
       #variable docname - name of documentation file for app
       #variable modelfigname - name of figure file for app
       #variable simfunction - the name of the simulation function(s)
@@ -334,9 +333,10 @@ server <- function(input, output, session)
 
 #simple function that creates app buttons for UI
 #specify data frame containing app info and the id of the app
-make_button <- function(at,id)
+make_button <- function(at,appid)
 {
-  actionButton(at$shorttitle[id], paste0(at$appid[id],". ",at$apptitle[id]), class="mainbutton")
+  id = which(at$appid == appid)
+  actionButton(at$appid[id], paste0(at$apptitle[id]), class="mainbutton")
 }
 
 
@@ -359,62 +359,62 @@ ui <- fluidPage(
              tabPanel(title = "Menu",
                       tags$div(class='mainsectionheader', 'The Basics'),
                       fluidRow(
-                               make_button(at,1),
-                               make_button(at,2),
-                               make_button(at,3),
+                               make_button(at,"basicsir"),
+                               make_button(at,"idcharacteristics"),
+                               make_button(at,"idpatterns"),
                         class = "mainmenurow"
                       ), #close fluidRow structure for input
 
                       tags$div(class='mainsectionheader', 'The Reproductive Number'),
                       fluidRow(
-                        make_button(at,4),
-                        make_button(at,5),
+                        make_button(at,"reproductivenumber1"),
+                        make_button(at,"reproductivenumber2",
                         class = "mainmenurow"
                       ), #close fluidRow structure for input
 
                       tags$div(class='mainsectionheader', 'Controlling Infectious Diseases'),
                       fluidRow(
-                        make_button(at,6),
-                        make_button(at,7),
-                        make_button(at,8),
-                        make_button(at,9),
+                        make_button(at,"idcontrolvaccine"),
+                        make_button(at,"idcontrolmultioutbreak"),
+                        make_button(at,"idcontrolmultigroup"),
+                        make_button(at,"idcontrolcomplex"),
                         class = "mainmenurow"
                       ), #close fluidRow structure for input
 
                       tags$div(class='mainsectionheader', 'Types of Transmission'),
                       fluidRow(
-                        make_button(at,10),
-                        make_button(at,11),
-                        make_button(at,12),
+                        make_button(at,"directtransmission"),
+                        make_button(at,"environmentaltransmission"),
+                        make_button(at,"vectortransmission"),
                         class = "mainmenurow"
                       ), #close fluidRow structure for input
 
                       tags$div(class='mainsectionheader', 'Stochastic Models'),
                       fluidRow(
-                        make_button(at,13),
-                        make_button(at,14),
-                        make_button(at,15),
+                        make_button(at,"stochasticsir"),
+                        make_button(at,"stochasticseir"),
+                        make_button(at,"evolutionarydynamics"),
                         class = "mainmenurow"
                       ),
                       tags$div(class='mainsectionheader', 'Fitting Models to Data'),
                       fluidRow(
-                        make_button(at,16),
-                        make_button(at,17),
+                        make_button(at,"fitflu"),
+                        make_button(at,"fitnoro"),
                         class = "mainmenurow"
                       ), #close fluidRow structure for input
                       tags$div(class='mainsectionheader', 'Model Exploration'),
                       fluidRow(
-                        make_button(at,18),
-                        make_button(at,19),
+                        make_button(at,"modelexploration"),
+                        make_button(at,"usanalysis"),
                         class = "mainmenurow"
                       ), #close fluidRow structure for input
                       tags$div(class='mainsectionheader', 'Further ID Topics'),
                       fluidRow(
-                        make_button(at,20),
-                        make_button(at,21),
-                        make_button(at,22),
-                        make_button(at,23),
-                        make_button(at,24),
+                        make_button(at,"hostheterogeneity"),
+                        make_button(at,"multipathogen"),
+                        make_button(at,"parasitemodel"),
+                        make_button(at,"idsurveillance"),
+                        make_button(at,"maternalimmunity"),
                         class = "mainmenurow"
                       ), #close fluidRow structure for input
                       withTags({
