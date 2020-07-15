@@ -5,8 +5,8 @@ Description: Exploration of simulation models (apps) of various infectious disea
     The purpose of the package is to help individuals learn 
     about infectious disease epidemiology (ecology/evolution) from a dynamical systems perspective.
     All apps include explanations of the underlying models and instructions on what to do with the models. 
-Version: 0.8.5
-Date: 2020-06-29
+Version: 0.8.6
+Date: 2020-07-29
 Authors@R: c(
     person("Andreas", "Handel", email = "ahandel@uga.edu", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-4622-1146") ),
 	person("Christine", "Casey",  role = "ctb", comment = "Parasite model app"), 
@@ -35,10 +35,9 @@ Imports:
     nloptr,
     plotly,
     rlang,
-    shinyjs,
     stats,
     tidyr,
-    utils,
+    utils (>= 3.4),
     XML (>= 3.98)
 Depends:
     R (>= 3.5),
@@ -46,9 +45,9 @@ Depends:
 Suggests: 
     covr,
     devtools,
-    knitr (>= 1.15),
+    knitr,
     pkgdown,
-    rmarkdown (>= 1.10),
+    rmarkdown,
     roxygen2,
     testthat
 RoxygenNote: 7.1.0

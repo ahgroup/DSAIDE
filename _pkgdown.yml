@@ -27,11 +27,6 @@ navbar:
     news:
       text: Changelog
       href: news/index.html
-    articles:
-      text: "Articles"
-      menu:
-      - text: "Related resources"
-        href: articles/related-resources.html
     github:
       icon: fa-github fa-lg
       href: https://github.com/ahgroup/DSAIDE
