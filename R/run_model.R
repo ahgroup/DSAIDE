@@ -92,11 +92,13 @@ run_model <- function(modelsettings) {
       #needs to be in the right format to be passed to generate_plots and generate_text
       #see documentation for those functions for details
       simresult <- simresult$ts
+      if (grepl('_and_',modelsettings$modeltype)) #this means  model is run with another one, relabel variables to indicate stochastic
+      {
+        colnames(simresult) = paste0(colnames(simresult),'_sto')
+      }
       colnames(simresult)[1] = 'xvals' #rename time to xvals for consistent plotting
       #reformat data to be in the right format for plotting
       rawdat = as.data.frame(simresult)
-      #using tidyr to reshape
-      #dat = tidyr::gather(rawdat, -xvals, value = "yvals", key = "varnames")
       #using basic reshape function to reformat data
       dat = stats::reshape(rawdat, varying = colnames(rawdat)[-1], v.names = 'yvals', timevar = "varnames", times = colnames(rawdat)[-1], direction = 'long', new.row.names = NULL); dat$id <- NULL
       dat$IDvar = paste(dat$varnames,nn,sep='') #make a variable for plotting same color lines for each run in ggplot2
@@ -130,9 +132,7 @@ run_model <- function(modelsettings) {
     colnames(simresult)[1] = 'xvals' #rename time to xvals for consistent plotting
     #reformat data to be in the right format for plotting
     rawdat = as.data.frame(simresult)
-    #using tidyr to reshape
-    #dat = tidyr::gather(rawdat, -xvals, value = "yvals", key = "varnames")
-    #using basic reshape function to reformat data
+     #using basic reshape function to reformat data
     dat = stats::reshape(rawdat, varying = colnames(rawdat)[-1], v.names = 'yvals', timevar = "varnames", times = colnames(rawdat)[-1], direction = 'long', new.row.names = NULL); dat$id <- NULL
 
     dat$IDvar = dat$varnames #make variables in case data is combined with stochastic runs. not used for ode.
@@ -154,11 +154,13 @@ run_model <- function(modelsettings) {
     if (!is.null(checkres)) {return(checkres)}
 
     simresult <- simresult$ts
+    if (grepl('_and_',modelsettings$modeltype)) #this means  model is run with another one, relabel variables to indicate discrete
+    {
+      colnames(simresult) = paste0(colnames(simresult),'_dis')
+    }
     colnames(simresult)[1] = 'xvals' #rename time to xvals for consistent plotting
     #reformat data to be in the right format for plotting
     rawdat = as.data.frame(simresult)
-    #using tidyr to reshape
-    #dat = tidyr::gather(rawdat, -xvals, value = "yvals", key = "varnames")
     #using basic reshape function to reformat data
     dat = stats::reshape(rawdat, varying = colnames(rawdat)[-1], v.names = 'yvals', timevar = "varnames", times = colnames(rawdat)[-1], direction = 'long', new.row.names = NULL); dat$id <- NULL
     dat$IDvar = dat$varnames #make variables in case data is combined with stochastic runs. not used for discrete.
@@ -301,8 +303,6 @@ run_model <- function(modelsettings) {
     #reformat data to be in the right format for plotting
     #each plot/text output is a list entry with a data frame in form xvals, yvals, extra variables for stratification for each plot
     rawdat = as.data.frame(simresult$ts)
-    #using tidyr to reshape
-    #dat = tidyr::gather(rawdat, -xvals, value = "yvals", key = "varnames")
     #using basic reshape function to reformat data
     dat = stats::reshape(rawdat, varying = colnames(rawdat)[-1], v.names = 'yvals', timevar = "varnames", times = colnames(rawdat)[-1], direction = 'long', new.row.names = NULL); dat$id <- NULL
 
@@ -349,7 +349,7 @@ run_model <- function(modelsettings) {
       txt4 <- paste('SSR is ', format(simresult$SSR, digits =2, nsmall = 2))
       result[[1]]$finaltext = paste(txt1,txt2,txt3,txt4, sep = "<br/>")
     }
-    if (grepl('noro_fit',simfunction) || grepl('fludrug_fit',simfunction))
+    if (grepl('noro_fit',simfunction) || grepl('fludrug_fit',simfunction) || grepl('modelcomparison_fit',simfunction))
     {
       txt1 <- paste('Best fit values for model', modelsettings$fitmodel, 'parameters',paste(names(simresult$bestpars), collapse = '/'), ' are ', paste(format(simresult$bestpars,  digits =2, nsmall = 2), collapse = '/' ))
       txt2 <- paste('SSR and AICc are ',format(simresult$SSR, digits =2, nsmall = 2),' and ',format(simresult$AICc, digits =2, nsmall = 2))

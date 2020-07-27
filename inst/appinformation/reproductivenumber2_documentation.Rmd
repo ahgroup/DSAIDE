@@ -77,9 +77,9 @@ knitr::include_graphics(here::here('inst/media',appsettings$modelfigname))
 ```
 
 
-$$\dot S =m - b SI - nS + wR$$ 
-$$\dot I = b S I - g I - nI$$
-$$\dot R = g I - nR - wR$$
+$$\dot S =n - b SI - mS + wR$$ 
+$$\dot I = b S I - g I - mI$$
+$$\dot R = g I - mR - wR$$
 
 
 
