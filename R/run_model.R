@@ -278,6 +278,10 @@ run_model <- function(modelsettings) {
         result[[ct]]$maketext = TRUE #if true we want the generate_text function to process data and generate text, if 0 no result processing will occur insinde generate_text
         result[[ct]]$finaltext = paste("System might not have reached steady state", length(steady) - sum(steady), "times")
 
+        #set y-axis limits based on variable
+        result[[ct]]$ymin = min(result[[ct]]$dat$yvals, na.rm=TRUE)
+        result[[ct]]$ymax = max(result[[ct]]$dat$yvals, na.rm=TRUE)
+
         ct = ct + 1
     } #loop over plots
   }

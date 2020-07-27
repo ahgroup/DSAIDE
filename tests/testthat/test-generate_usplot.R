@@ -6,21 +6,21 @@ test_that("running US analysis app returns the proper plot",
             modelsettings = list()
 
             modelsettings$Smin = 1000
-            modelsettings$Smax = 1500
+            modelsettings$Smax = 1200
             modelsettings$Imin = 1
             modelsettings$Imax = 10
             modelsettings$bmin = 1e-03
-            modelsettings$bmax = 0.01
+            modelsettings$bmax = 1e-2
             modelsettings$gmean = 1
             modelsettings$gvar = 0.01
             modelsettings$mmin = 0
-            modelsettings$mmax = 5
+            modelsettings$mmax = 0.1
             modelsettings$nmin = 0
-            modelsettings$nmax = 0.1
+            modelsettings$nmax = 10
             modelsettings$wmin = 0
             modelsettings$wmax = 0.1
 
-            modelsettings$samples = 10
+            modelsettings$samples = 30
             modelsettings$rngseed = 100
             modelsettings$tstart = 0
             modelsettings$tfinal = 200
@@ -31,7 +31,7 @@ test_that("running US analysis app returns the proper plot",
             modelsettings$ncols = 3
             modelsettings$simfunction = 'simulate_SIR_usanalysis'
             modelsettings$plotscale = 'y'
-            modelsettings$samplepar = 'g'
+            modelsettings$samplepar = 'n'
 
             #test boxplots
             modelsettings$plottype = 'Boxplot'

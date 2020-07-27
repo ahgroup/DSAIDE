@@ -33,7 +33,7 @@ test_that("run_model correctly runs different models",
             #check that simulation ran until max time
             Imaxode = round(max(dplyr::filter(result[[1]]$dat, varnames == "I_ode")$yvals))
             expect_equal(Imaxode, 163)
-            Imaxdisc = round(max(dplyr::filter(result[[1]]$dat, varnames == "I")$yvals))
+            Imaxdisc = round(max(dplyr::filter(result[[1]]$dat, varnames == "I_dis")$yvals))
             expect_equal(Imaxdisc, 165)
             expect_equal(max(result[[1]]$dat$xvals), tfinal)
             expect_is(generate_ggplot(result), "ggplot" )

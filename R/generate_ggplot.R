@@ -229,8 +229,6 @@ generate_ggplot <- function(res)
 
       allplots[[n]] = pfinal
 
-
-
     } #end loop over individual plots
 
     #using gridExtra pacakge for multiple plots, ggplot for a single one
@@ -243,7 +241,6 @@ generate_ggplot <- function(res)
     if (nplots>1)
     {
       #number of columns needs to be stored in 1st list element
-      #browser()
       resultplot <- gridExtra::grid.arrange(grobs = allplots, ncol = res[[1]]$ncols)
       #resultplot <- gridExtra::arrangeGrob(grobs = allplots, ncol = res[[1]]$ncol)
       #cowplot::plot_grid(plotlist = allplots, ncol = res[[1]]$ncol)

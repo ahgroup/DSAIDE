@@ -13,12 +13,12 @@ simulate_SIR_usanalysis(
   bmax = 0.01,
   gmean = 1,
   gvar = 0.05,
-  mmin = 0,
-  mmax = 5,
   nmin = 0,
-  nmax = 0.2,
+  nmax = 10,
+  mmin = 0,
+  mmax = 0.1,
   wmin = 0,
-  wmax = 0.2,
+  wmax = 0.1,
   samples = 10,
   rngseed = 100,
   tstart = 0,
@@ -43,13 +43,13 @@ simulate_SIR_usanalysis(
 
 \item{gvar}{: variance for recovery rate : numeric}
 
-\item{mmin}{: lower bound for death rate : numeric}
-
-\item{mmax}{: upper bound for death rate : numeric}
-
 \item{nmin}{: lower bound for birth rate : numeric}
 
 \item{nmax}{: upper bound for birth rate : numeric}
+
+\item{mmin}{: lower bound for death rate : numeric}
+
+\item{mmax}{: upper bound for death rate : numeric}
 
 \item{wmin}{: lower bound for waning immunity rate : numeric}
 
