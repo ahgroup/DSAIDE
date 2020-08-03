@@ -79,68 +79,53 @@ Flow diagram for this model.
 <h2>What to do</h2>
 <p><strong>The tasks below are described in a way that assumes everything is in units of MONTHS (rate parameters, therefore, have units of inverse months). If any quantity is not given in those units, you need to convert it first (e.g. if it says a year, you need to convert it to 12 months).</strong></p>
 <div id="task-1" class="section level3">
-<h3>Task 1:</h3>
-<ul>
-<li>Set the model parameters such that it corresponds to the following setting:
-<ul>
-<li>A starting population of 1000 individuals, 999 susceptible and 1 initially infected host.</li>
-<li>Simulation duration, <em>tmax</em> approximately 10 years.</li>
-<li>Consider density-dependent transmission, with a transmission rate of <em>b<sub>d</sub></em> = 0.005, and an area of size 2.</li>
-<li>Assume that the duration of the infectious period is 15 days long (and that there are 30 days in a month).</li>
-<li>Turn off births, deaths and waning immunity for now.</li>
-</ul></li>
-<li>With parameters set to correspond to the scenario just described, run the simulation.</li>
-<li>You should be left with 625 susceptibles.</li>
-</ul>
+<h3>Task 1</h3>
+<ol style="list-style-type: upper-alpha">
+<li>Run the simulation with 1000 susceptible individuals and 1 initially infected host. Set the simulation duration, <em>tmax</em> to 10 years. Consider density-dependent transmission, with a transmission rate of <em>b<sub>d</sub></em> = 0.005, and an area of size 2. Assume that the duration of the infectious period is 15 days long (and that there are 30 days in a month). Turn off births, deaths and waning immunity for now. If you did it correctly, your outbreak should end with around 625 susceptible individuals still remaining.</li>
+</ol>
 <p><strong>Record</strong></p>
 <ul>
-<li>Number of susceptible/infected/recovered (S/I/R) at the end of the outbreak.</li>
-<li>Fraction of S/I/R at the end of the outbreak.</li>
+<li>Total number of recovered at end of outbreak</li>
 </ul>
 </div>
 <div id="task-2" class="section level3">
-<h3>Task 2:</h3>
-<ul>
-<li>Now switch to frequency-dependent transmission, set <em>b<sub>f</sub></em> = 2.5. Keep everything else as before.</li>
-<li>Think about your expectations, run the simulation and compare your expectations with the results.</li>
-<li>Anything surprising happening? Do you understand why you see what you see?</li>
-</ul>
+<h3>Task 2</h3>
+<ol style="list-style-type: upper-alpha">
+<li>Now switch to frequency-dependent transmission, set <em>b<sub>f</sub></em> = 2.5. Leave all other settings as before.</li>
+<li>Think about your expectations, run the simulation and compare your expectations with the results.Anything surprising happening? Do you understand why you see what you see?</li>
+</ol>
 <p><strong>Record</strong></p>
 <ul>
 <li>Nothing</li>
 </ul>
 </div>
 <div id="task-3" class="section level3">
-<h3>Task 3:</h3>
-<ul>
-<li>Let’s assume we are now in a location with twice the number of people as before (<em>S<sub>0</sub></em> = 1999) , living in roughly the same area.</li>
-<li>Implement that in the simulation by changing population size, keep all other settings as above.</li>
-<li>What do you expect to see for the frequency and density dependent scenarios? Run simulations and check.</li>
-</ul>
+<h3>Task 3</h3>
+<ol style="list-style-type: upper-alpha">
+<li>Let’s assume we are now in a location with twice the number of people as before (<em>S<sub>0</sub></em> = 1999) , living in the same area. Implement that in the simulation by changing population size, keep all other settings as above.</li>
+<li>What do you expect to see for the frequency and density dependent scenarios? Does anything change? Do you undstand why?</li>
+</ol>
 <p><strong>Record</strong></p>
 <ul>
-<li>Number of S/I/R individuals at the end of the outbreak.</li>
-<li>Fraction of S/I/R individuals at the end of the outbreak.</li>
+<li>Total number of recovered at end of outbreak</li>
 </ul>
 </div>
 <div id="task-4" class="section level3">
-<h3>Task 4:</h3>
-<ul>
-<li>If you double the population size as you just did, how do you need to adjust the area to obtain the same sized outbreak with regard to the fraction of people getting infected/remaining susceptible for density-dependent transmission?</li>
-<li>Try with the simulation and see if your expectation is correct.</li>
-</ul>
+<h3>Task 4</h3>
+<ol style="list-style-type: upper-alpha">
+<li>If you double the population size as you just did, how do you need to adjust the area to obtain the same sized outbreak with regard to the fraction of people getting infected/remaining susceptible for density-dependent transmission? Try with the simulation and see if your expectation is correct.</li>
+</ol>
 <p><strong>Record</strong></p>
 <ul>
 <li>Nothing</li>
 </ul>
 </div>
 <div id="task-5" class="section level3">
-<h3>Task 5:</h3>
-<ul>
-<li>Keep exploring by trying different parameters and transmission settings and see how they influence results.</li>
-<li>You can also go beyond a single outbreak and turn on births/deaths (which can impact population size) or waning immunity.</li>
+<h3>Task 5</h3>
+<ol style="list-style-type: upper-alpha">
+<li>Keep exploring by trying different parameters and transmission settings and see how they influence results. You can also go beyond a single outbreak and turn on births/deaths (which can impact population size) or waning immunity.</li>
 <li>As you continue your exploration, think about real infectious diseases that might be approximated by either one of the transmission types, and what approximate choices for the model parameters would describe those IDs.</li>
-</ul>
+</ol>
 <p><strong>Record</strong></p>
 <ul>
 <li>Nothing</li>
