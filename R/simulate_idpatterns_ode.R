@@ -50,7 +50,7 @@
 #' @author Andreas Handel
 #' @export
 
-simulate_idpatterns_ode <- function(S = 1000, P = 1, bP = 0, bA = 0, bI = 0.001, s = 0, gP = 0.5, gA = 0.5, gI = 0.5, f = 0, d = 0, w = 0, m = 0, n = 0,  timeunit = 1, tmax = 300)
+simulate_idpatterns_ode <- function(S = 1000, P = 1, bP = 0, bA = 0, bI = 0.001, s = 0, gP = 0.5, gA = 0.5, gI = 0.5, f = 0, d = 0, w = 0, n = 0, m = 0, timeunit = 1, tmax = 300)
 {
 
   ############################################################
