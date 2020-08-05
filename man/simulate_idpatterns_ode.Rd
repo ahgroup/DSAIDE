@@ -48,9 +48,9 @@ simulate_idpatterns_ode(
 
 \item{w}{: rate at which recovered persons lose immunity and return to susceptible state : numeric}
 
-\item{m}{: the rate at which new individuals enter the model (are born) : numeric}
+\item{n}{: the rate at which new individuals enter the model (are born) : numeric}
 
-\item{n}{: the rate of natural death (the inverse it the average lifespan) : numeric}
+\item{m}{: the rate of natural death (the inverse it the average lifespan) : numeric}
 
 \item{timeunit}{: units of time in which the model should run (1=day, 2=week, 3=month, 4=year) : numeric}
 
