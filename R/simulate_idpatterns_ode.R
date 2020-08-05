@@ -10,7 +10,7 @@
 #'   The model is assumed to run in units of months.
 #'   This assumption is hard-coded into the sinusoidally varying
 #'   transmission coefficient, which is assumed to have a period of a year.
-#'   
+#'
 #' @param S : initial number of susceptible hosts : numeric
 #' @param P : initial number of infected, pre-symptomatic hosts : numeric
 #' @param bP : level/rate of infectiousness for hosts in the P compartment : numeric
@@ -23,8 +23,8 @@
 #' @param f : fraction of pre-symptomatic individuals that have an asymptomatic infection : numeric
 #' @param d : fraction of symptomatic infected hosts that die due to disease : numeric
 #' @param w : rate at which recovered persons lose immunity and return to susceptible state : numeric
-#' @param m : the rate at which new individuals enter the model (are born) : numeric
-#' @param n : the rate of natural death (the inverse it the average lifespan) : numeric
+#' @param n : the rate at which new individuals enter the model (are born) : numeric
+#' @param m : the rate of natural death (the inverse it the average lifespan) : numeric
 #' @param timeunit : units of time in which the model should run (1=day, 2=week, 3=month, 4=year) : numeric
 #' @param tmax : maximum simulation time, in units of months : numeric
 #' @return This function returns the simulation result as obtained from a call
@@ -52,12 +52,12 @@
 
 simulate_idpatterns_ode <- function(S = 1000, P = 1, bP = 0, bA = 0, bI = 0.001, s = 0, gP = 0.5, gA = 0.5, gI = 0.5, f = 0, d = 0, w = 0, m = 0, n = 0,  timeunit = 1, tmax = 300)
 {
-  
+
   ############################################################
   # start function that specifies differential equations used by deSolve
   idpatternsode <- function(t, y, parms)
   {
-    
+
     with(
       as.list(c(y,parms)), #lets us access variables and parameters stored in y and pars by name
       {
@@ -65,29 +65,29 @@ simulate_idpatterns_ode <- function(S = 1000, P = 1, bP = 0, bA = 0, bI = 0.001,
         bPs <- bP * (1 + s * sin(2*pi*t/tunit) )
         bAs <- bA * (1 + s * sin(2*pi*t/tunit) )
         bIs <- bI * (1 + s * sin(2*pi*t/tunit) )
-        
+
         #the ordinary differential equations
-        dS =  m - S * (bPs * P + bAs * A + bIs * I) + w * R - n *S; #susceptibles
-        dP =    S * (bPs * P + bAs * A + bIs * I) - gP * P - n * P; #infected, pre-symptomatic
-        dA =  f*gP*P - gA * A - n * A #infected, asymptomatic
-        dI =  (1-f)*gP*P -  gI*I - n * I #infected, symptomatic
-        dR =  (1-d)*gI*I + gA * A - w * R - n * R #recovered, immune
+        dS =  n - S * (bPs * P + bAs * A + bIs * I) + w * R - m *S; #susceptibles
+        dP =    S * (bPs * P + bAs * A + bIs * I) - gP * P - m * P; #infected, pre-symptomatic
+        dA =  f*gP*P - gA * A - m * A #infected, asymptomatic
+        dI =  (1-f)*gP*P -  gI*I - m * I #infected, symptomatic
+        dR =  (1-d)*gI*I + gA * A - w * R - m * R #recovered, immune
         dD = d*gI*I #dead
-        
+
         list(c(dS, dP, dA, dI, dR, dD))
       }
     ) #close with statement
   } #end function specifying the ODEs
   ############################################################
-  
+
   Y0 = c(S = S, P = P, A = 0, I = 0, R = 0, D = 0);  #combine initial conditions into a vector
   dt = min(0.1, tmax / 1000); #time step for which to get results back
   timevec = seq(0, tmax, dt); #vector of times for which solution is returned (not that internal timestep of the integrator is different)
 
   tunitvec=c(365,52,12,1) #depending on choice of units (days/weeks/months/years), pick divisor for annual variation in transmission in the ODEs
   tunit=tunitvec[timeunit]
- 
- 
+
+
   #combining parameters into a parameter vector
   pars = c(bP = bP, bA = bA, bI = bI, gP = gP , gA = gA, gI = gI, f = f, d = d, w = w, m = m, n = n, s = s , tunit = tunit);
 
