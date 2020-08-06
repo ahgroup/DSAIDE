@@ -130,7 +130,7 @@ Flow diagram for this model.
 <ol style="list-style-type: upper-alpha">
 <li>It is possible to compute the steady state values for the model variables at the endemic scenario, i.e. when the number of infected is non-zero. This computation is a bit messy for the model above because it has the extra <em>P</em> and <em>A</em> states that make the math more complicated (you can try for yourself as a challenge after you’ve done the simple model we’ll do next.) To keep the math simpler, we consider a simplified approximation of the above model. Since the way we have set our parameters so far, individuals spend a very short time in <em>P</em> compared to <em>I</em>, so we can ignore the <em>P</em> compartment and assume that individuals directly go from <em>S</em> to <em>I</em>. Further, for our parameter choices, nobody enters <em>A</em> and <em>D</em>, so we can ignore those compartments too. This produces the following simpler SIR model:</li>
 </ol>
-<p><span class="math display">\[ S = n -   b_I IS - m S \]</span> <span class="math display">\[ I = b_I SI - g_I I - m I \]</span> <span class="math display">\[ R =  g_I I  - m R\]</span></p>
+<p><span class="math display">\[ dS/dt = n -   b_I IS - m S \]</span> <span class="math display">\[ dI/dt = b_I SI - g_I I - m I \]</span> <span class="math display">\[ dR/dt =  g_I I  - m R\]</span></p>
 <p>Following the procedure above for computing the steady state for <em>S</em> in the absence of a pathogen, now compute the endemic steady state by setting the left side of the equations to 0 and solving for the variables <em>S</em>, <em>I</em> and <em>R</em> as functions of model parameters only. You should get <em>S=(g<sub>I</sub> + m)/b<sub>I</sub> </em> and similar equations for <em>I</em> and <em>R</em>. For more on steady state calculations, see e.g. <span class="citation">(Vynnycky and White 2010)</span> or <span class="citation">(Keeling and Rohani 2008)</span> (but note that each of those references uses their own notation which is not the same as used here.) B) Let’s compare the model simulations with the equations you found. Substitute the parameter values from the task above into the equations and confirm that you get the approximately the same results as you get from running the model to steady state.</p>
 <p><strong>Record</strong></p>
 <ul>
@@ -146,7 +146,7 @@ Flow diagram for this model.
 <p><strong>Record</strong></p>
 <ul>
 <li><p>Total number recovered at the end (part B; 10 Months)</p></li>
-<li><p>Total number susceptible at steady state (part B; 20 Months)</p></li>
+<li><p>Total number recovered at the end (part B; 20 Months)</p></li>
 </ul>
 </div>
 <div id="task-7" class="section level3">
@@ -189,9 +189,9 @@ Flow diagram for this model.
 </ol>
 <p><strong>Record</strong></p>
 <ul>
-<li><p>Total number of outbreaks (<em>w=0.1</em>, s=0.1, tmax=1200)</p></li>
-<li><p>Total number of outbreaks (<em>w=0.05</em>, s=0.1, tmax=1200)</p></li>
-<li><p>Total number of outbreaks (<em>w=0.01</em>, s=0.1, tmax=1200)</p></li>
+<li><p>Total number of outbreaks (<em>w=0.1</em>, <em>s=0.1</em>, <em>tmax=1200</em>)</p></li>
+<li><p>Total number of outbreaks (<em>w=0.05</em>, <em>s=0.1</em>, <em>tmax=1200</em>)</p></li>
+<li><p>Total number of outbreaks (<em>w=0.01</em>, <em>s=0.1</em>, <em>tmax=1200</em>)</p></li>
 </ul>
 </div>
 <div id="task-11" class="section level3">
