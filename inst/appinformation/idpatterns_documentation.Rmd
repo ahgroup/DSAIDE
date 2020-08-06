@@ -188,7 +188,7 @@ rc = rc + nrec
 
 # Task 4
 tid = 4
-alltasks[tid,"TaskText"] = "A) Now, set the birth and death rate as in task #2 and also adjust the population size to the steady state value you found in task #2. We do that because we don't want a mixing of underlying population growth/decline dynamics on top if the ID dynamics. That would make it more complicated to understand what's going on. (You get to do that later). Ensure that if you run the simulation now, nothing changes. Now introduce an infected individual (_P0=1_), with other values as set in task #1. If needed, adjust the simulation duration to see the initial pattern and ensure everything reaches steady state. What do you expect to see? Run the simulation, compare expectations with results."
+alltasks[tid,"TaskText"] = "A) Now, set the birth and death rate as in task 2 and also adjust the population size to the steady state value you found in task 2. We do that because we don't want a mixing of underlying population growth/decline dynamics on top if the ID dynamics. That would make it more complicated to understand what's going on. (You get to do that later). Ensure that if you run the simulation now, nothing changes. Now introduce an infected individual (_P0=1_), with other values as set in task 1. If needed, adjust the simulation duration to see the initial pattern and ensure everything reaches steady state. What do you expect to see? Run the simulation, compare expectations with results."
 
 nrec = 1 # number of items to record
 reclist$rectext = c("Nothing")
@@ -205,7 +205,7 @@ alltasks[tid,"TaskText"] = "A) It is possible to compute the steady state values
 
 $$ dS/dt = n -   b_I IS - m S $$ 
 $$ dI/dt = b_I SI - g_I I - m I $$ 
-$$ dR/dt =  g_I I  - m R$$
+$$ dR/dt =  g_I I  - m R $$
 
 Following the procedure above for computing the steady state for _S_ in the absence of a pathogen, now compute the endemic steady state by setting the left side of the equations to 0 and solving for the variables _S_, _I_ and _R_ as functions of model parameters only. You should get _S=(g~I~ + m)/b~I~ _ and similar equations for _I_ and _R_. For more on steady state calculations, see e.g. [@vynnycky10] or [@keeling08] (but note that each of those references uses their own notation which is not the same as used here.)
 B) Let's compare the model simulations with the equations you found. Substitute the parameter values from the task above into the equations and confirm that you get the approximately the same results as you get from running the model to steady state."
@@ -227,8 +227,8 @@ B) Now, assume that immunity wanes within on average 10 months and set simulatio
 
 # Record for task 6
 nrec = 2 # number of items to record
-reclist$rectext = c("Total number recovered at the end (part B; 10 Months)",
-                    "Total number recovered at the end (part B; 20 Months)")
+reclist$rectext = c("Total number infected at the end (part B; 10 Months)",
+                    "Total number infected at the end (part B; 20 Months)")
 reclist$recnote = c("Report the rounded integer",
                     "Report the rounded integer")
 reclist$rectype = c("Numeric",
@@ -257,7 +257,7 @@ rc = rc + nrec #increment record counter by number of outcomes to record for thi
 
 # Task 8
 tid = 8 
-alltasks[tid,"TaskText"] = "A) Now combine births and deaths with waning immunity. Explore how the two different mechanisms interact and influence the observed ID dynamics. Set everything as in the beginning of the previous task. Then, let birth rate _n=10_, natural death rate _m=0.005_, and simulation time of 600 months."
+alltasks[tid,"TaskText"] = "A) Now combine births and deaths with waning immunity. Explore how the two different mechanisms interact and influence the observed ID dynamics. Set everything as in task 1. Then, set waning immunity to 10 months, birth rate _n=10_, natural death rate _m=0.005_, and simulation time of 600 months."
 
 # Record for task 8
 nrec = 1 # number of items to record
@@ -312,9 +312,9 @@ reclist$recnote = c("Report the rounded integer",
 reclist$rectype = c("Numeric",
                     "Numeric",
                     "Numeric")
-reclist$recfuzzy = c(0,
-                     0,
-                     0)
+reclist$recfuzzy = c(1,
+                     1,
+                     1)
 allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
 rc = rc + nrec
 
