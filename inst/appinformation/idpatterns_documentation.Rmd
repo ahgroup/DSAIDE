@@ -261,7 +261,7 @@ alltasks[tid,"TaskText"] = "A) Now combine births and deaths with waning immunit
 
 # Record for task 8
 nrec = 1 # number of items to record
-reclist$rectext = c("Total number of recovered at end of outbreak")
+reclist$rectext = c("Total number of recovered at the end")
 reclist$rectype = "Numeric"
 reclist$recnote = c("Report the rounded integer")
 reclist$recfuzzy = c(0)
