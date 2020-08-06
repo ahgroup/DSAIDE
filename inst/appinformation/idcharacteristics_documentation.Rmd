@@ -112,7 +112,7 @@ $$\dot D = d g_I I$$
 # Review: Admin use if value is 1 the way the questions is asked may need to be reconsidered. 
 
 ntasks = 6 #number of tasks
-nrecord = 9 #number of outcomes to record
+nrecord = 11 #number of outcomes to record
 #set up task tables
 #returned as list for generality, take apart
 tablist <- make_tasktable(ntasks,nrecord,appsettings)
@@ -204,8 +204,8 @@ B) Further explore how changes in the infectiousness of the different groups (_b
 
 # Record for task 5
 nrec = 2 # number of items to record
-reclist$rectext = c("Max number of pre-symptomatic",
-                    "Max number of infected")
+reclist$rectext = c("Max number of pre-symptomatic (Part A)",
+                    "Max number of infected (Part A)")
 reclist$recnote = c("Report the rounded integer",
                     "Report the rounded integer")
 reclist$rectype = c("Numeric",
@@ -223,8 +223,8 @@ B) Further explore how changes in the fraction becoming asymptomatic and fractio
 
 # Record for task 6
 nrec = 2 # number of items to record
-reclist$rectext = c("Max number of pre-symptomatic",
-                    "Max number of infected")
+reclist$rectext = c("Max number of pre-symptomatic (Part A)",
+                    "Max number of infected (Part A)")
 reclist$recnote = c("Report the rounded integer",
                     "Report the rounded integer")
 reclist$rectype = c("Numeric",
