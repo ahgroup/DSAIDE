@@ -1,7 +1,7 @@
 #helper function that sets up task tables to be filled
 make_tasktable <- function(ntasks,nrecord,appsettings)
 {
-  alltasks = data.frame(quizID=rep(paste0("dsaide_",appsettings$shorttitle),ntasks),
+  alltasks = data.frame(quizID=rep(paste0("dsaide_",appsettings$appid),ntasks),
                         AppTitle = appsettings$apptitle,
                         AppID = appsettings$appid,
                         TaskID = 1:ntasks,

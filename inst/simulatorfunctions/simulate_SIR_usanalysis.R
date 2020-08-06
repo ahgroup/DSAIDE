@@ -55,7 +55,7 @@
 #' @export
 
 
-simulate_SIR_usanalysis <- function(Smin = 1000, Smax = 1200, Imin = 1, Imax = 10, bmin=1e-3, bmax=1e-2, gmean=1, gvar=0.05, mmin = 0, mmax = 5, nmin = 0, nmax = 0.2, wmin = 0, wmax = 0.2, samples = 10, rngseed = 100, tstart = 0, tfinal = 100, dt = 0.1)
+simulate_SIR_usanalysis <- function(Smin = 1000, Smax = 1200, Imin = 1, Imax = 10, bmin=1e-3, bmax=1e-2, gmean=1, gvar=0.05, nmin = 0, nmax = 10, mmin = 0, mmax = 0.1, wmin = 0, wmax = 0.1, samples = 10, rngseed = 100, tstart = 0, tfinal = 100, dt = 0.1)
   {
 
     #this creates a LHS with the specified number of samples for all parameters
@@ -102,6 +102,10 @@ simulate_SIR_usanalysis <- function(Smin = 1000, Smax = 1200, Imin = 1, Imax = 1
         Ifinal[ct] = utils::tail(timeseries[,"I"],1)
         Sfinal[ct] = utils::tail(timeseries[,"S"],1)
 
+        #if any of the recorded results is nonsensical, return as NA
+        if ( !is.finite(Ipeak[ct])  ) { Ipeak[ct] <- NA}
+        if ( !is.finite(Ifinal[ct]) ) { Ifinal[ct] <- NA}
+        if ( !is.finite(Sfinal[ct]) ) { Sfinal[ct] <- NA}
 
         #a quick check to make sure the system is at steady state,
         #i.e. the value for I at the final time is not more than
@@ -109,8 +113,8 @@ simulate_SIR_usanalysis <- function(Smin = 1000, Smax = 1200, Imin = 1, Imax = 1
         #add a tiny amount to denominator to avoid division by 0
         vl=nrow(timeseries)
         finaldiff = (abs(timeseries[vl,"I"]-timeseries[vl-10,"I"])/(1e-12 + timeseries[vl,"I"]))
-        if (is.nan(finaldiff)) { browser()}
-        if (finaldiff > 1e-2)
+        if (is.nan(finaldiff) || is.na(finaldiff)) { finaldiff = 1} #if something isn't going right, set to 'non-steady state'
+        if (abs(finaldiff) > 1e-2)
         {
           steady[ct] = FALSE
         }

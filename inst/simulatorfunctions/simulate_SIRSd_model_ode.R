@@ -67,7 +67,7 @@ simulate_SIRSd_model_ode <- function(S = 1000, I = 1, R = 0, n = 0, b = 0.001, g
   parvec_mb = c(n = n, b = b, g = g, w = w, m = m)
   timevec_mb = seq(tstart, tfinal,by = dt)
   #Running the model
-  simout = deSolve::ode(y = varvec_mb, parms = parvec_mb, times = timevec_mb,  func = SIRSd_model_ode_fct, rtol = 1e-12, atol = 1e-12)
+  simout = deSolve::ode(y = varvec_mb, parms = parvec_mb, times = timevec_mb,  func = SIRSd_model_ode_fct, rtol = 1e-14, atol = 1e-14)
   #Setting up empty list and returning result as data frame called ts
   result <- list()
   result$ts <- as.data.frame(simout)
