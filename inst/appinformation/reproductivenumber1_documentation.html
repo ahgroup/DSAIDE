@@ -51,7 +51,7 @@
 <h2>The Model</h2>
 <div id="model-overview" class="section level3">
 <h3>Model Overview</h3>
-<p>For this app, we’ll use the basic compartmental SIR model. THis model has the following compartments: We allow for 3 different stages/compartments:</p>
+<p>For this app, we’ll use the basic compartmental SIR model. This model has the following compartments: We allow for 3 different stages/compartments:</p>
 <ul>
 <li><strong>S</strong> - uninfected and susceptible individuals</li>
 <li><strong>I</strong> - infected and infectious individuals (note that these terms are often used interchangeably, but technically we are talking about someone who is infected <strong>and</strong> is infectious, i.e. can infect others)</li>
@@ -90,60 +90,85 @@ Flow diagram for this model.
 <p><strong>The tasks below are described in a way that assumes everything is in units of months (rate parameters, therefore, have units of inverse months). If any quantity is not given in those units, you need to convert it first (e.g. if it says a year, you need to convert it to 12 months).</strong></p>
 <div id="task-1" class="section level3">
 <h3>Task 1</h3>
+<ol style="list-style-type: upper-alpha">
+<li>Set the simulation the following simulation parameter values 1000 susceptibles, 1 infected, tfinal = 12 months, <em>g</em>=5, and <em>b</em>=0.01. Run the simulation, you should get an outbreak. Use the final size equation linking R<sub>0</sub> and the fraction of susceptible hosts left at the end of the outbreak to compute the reproductive number (see the information in the <em>Model</em> tab).</li>
+</ol>
+<p><strong>Record</strong></p>
 <ul>
-<li>Set the simulation with 1000 susceptibles and 1 infected.</li>
-<li>Simulation time 12 months, <em>g</em>=5, <em>b</em>=0.01.</li>
-<li>Run the simulation, you should get an outbreak. Use the final size equation linking R<sub>0</sub> and the fraction of susceptible hosts left at the end of the outbreak to compute the reproductive number (see the information in the <em>Model</em> tab).</li>
+<li>The value for R<sub>0</sub></li>
 </ul>
 </div>
 <div id="task-2" class="section level3">
 <h3>Task 2</h3>
+<ol style="list-style-type: upper-alpha">
+<li>Use the equation that expresses R<sub>0</sub> as a function of the model parameters. Using the values of the model parameters from task 1, compute R<sub>0</sub>. Check that it agrees with what you found in the previous task.</li>
+</ol>
+<p><strong>Record</strong></p>
 <ul>
-<li>Use the equation that expresses R<sub>0</sub> as a function of model parameters for the simple SIR model. Using the values of the model parameters, compute R<sub>0</sub> that way. Check that it agrees with what you found in the previous task.</li>
+<li>The value for R<sub>0</sub></li>
 </ul>
 </div>
 <div id="task-3" class="section level3">
 <h3>Task 3</h3>
+<ol style="list-style-type: upper-alpha">
+<li>Double the value of the transmission parameter, <em>b</em>. Leave everything else as before. Before you run the simulation, what do you expect to see and what do you expect to get for R<sub>0</sub>? Run the simulation and compute R<sub>0</sub> using the final outbreak size to test your expectations.</li>
+</ol>
+<p><strong>Record</strong></p>
 <ul>
-<li>Double the value of the transmission parameter, <em>b</em>. Leave everything else as before.</li>
-<li>Before you run the simulation, what do you expect to see and what do you expect to get for R<sub>0</sub>?</li>
-<li>Run the simulation and compute R<sub>0</sub> using the final outbreak size to test your expectations.</li>
+<li>The value for R<sub>0</sub></li>
 </ul>
 </div>
 <div id="task-4" class="section level3">
 <h3>Task 4</h3>
+<ol style="list-style-type: upper-alpha">
+<li>Double the rate of the recovery parameter, <em>g</em>. Leave everything else unchanged. Think about your expectations for R<sub>0</sub> and the resulting outbreak dynamics. Run the simulation to check your expectations. Use the final outbreak size to compute R<sub>0</sub>.</li>
+</ol>
+<p><strong>Record</strong></p>
 <ul>
-<li>Double the rate of the recovery parameter, <em>g</em>. Leave everything else unchanged.</li>
-<li>Think about your expectations for R<sub>0</sub> and the resulting outbreak dynamics.</li>
-<li>Run the simulation to check your expectations. Use the final outbreak size to compute R<sub>0</sub>.</li>
+<li>The value for R<sub>0</sub></li>
 </ul>
 </div>
 <div id="task-5" class="section level3">
 <h3>Task 5</h3>
-<ul>
-<li>Set the model parameters back to those given in task #1.</li>
+<ol style="list-style-type: upper-alpha">
 <li>Another way to estimate R<sub>0</sub> is to determine the rate of increase in infected hosts at the beginning of the outbreak. During the initial phase, new infections increase exponentially according to <em>I(t)=I<sub>0</sub> exp(rt)</em>, with <em>r</em> being the rate of growth. Usually, for any real outbreak, you do not know the number of infected at the start, I<sub>0</sub>, or the exact time the outbreak starts. It is still possible to estimate <em>r</em> by obtaining two values of <em>I</em> at two time points during that initial growth rate, i.e. <em>I<sub>1</sub></em> at time <em>t<sub>1</sub></em> and <em>I<sub>2</sub></em> at time <em>t<sub>2</sub></em>. One obtains equation <em>I<sub>1</sub>=I<sub>0</sub> exp(r t<sub>1</sub>)</em> and <em>I<sub>2</sub>=I<sub>0</sub> exp(r t<sub>2</sub>)</em>. By solving one of these equations for <em>I<sub>0</sub></em> and substituting into the other, we get <em>I<sub>2</sub>= I<sub>1</sub> exp(r (t<sub>2</sub> - t<sub>1</sub>))</em>. By solving the model for <em>r</em> and entering numbers for <em>I<sub>1</sub></em> and <em>I<sub>2</sub></em> and times <em>t<sub>1</sub></em> and <em>t<sub>2</sub></em> we can figure out <em>r</em>.</li>
-<li>Let’s try that. Run the model with tmax = 0.2 and tmax = 0.4 and record the number of infected at the end of the simulation for each time. Then substitute all the values into the equation you found for <em>r</em> and thus compute the growth rate.</li>
-<li>For this model, the growth rate and R<sub>0</sub> are related through <em>R<sub>0</sub> = 1+rD</em>, where <em>D</em> is the average duration of the infectious period (i.e. the inverse of the recovery rate). Use this to determine R<sub>0</sub>. You should get essentially the same answer (up to some rounding differences) as for task #1.</li>
-<li>Note that the choice of <em>t<sub>1</sub></em> and <em>t<sub>2</sub></em> can influence the results. Earlier times are better since once the number of susceptibles starts to drop markedly, the growth of infected slows down and is not exponential anymore.</li>
+<li>Set the model parameters back to those given in task #1. Let’s try using the new method for estimating R<sub>0</sub>. Run the model with tfinal = 0.2 and tfinal = 0.4 and record the number of infected at the end of the simulation each time. Then substitute all the values into the equation you found for <em>r</em> and thus compute the growth rate. For this model, the growth rate and R<sub>0</sub> are related through <em>R<sub>0</sub> = 1+rD</em>, where <em>D</em> is the average duration of the infectious period (i.e. the inverse of the recovery rate). Use this to determine R<sub>0</sub>. You should get essentially the same answer (up to some rounding differences) as for task #1. Note that the choice of <em>t<sub>1</sub></em> and <em>t<sub>2</sub></em> can influence the results. Earlier times are better since once the number of susceptibles starts to drop markedly, the growth of infected slows down and is not exponential anymore.</li>
+</ol>
+<p><strong>Record</strong></p>
+<ul>
+<li>The value for R<sub>0</sub> (Part B)</li>
 </ul>
 </div>
 <div id="task-6" class="section level3">
 <h3>Task 6</h3>
-<ul>
+<ol style="list-style-type: upper-alpha">
 <li>What is the value of the reproductive number <em>R</em> at the time the outbreak peaks? (It’s only called R<sub>0</sub> at the beginning for a fully susceptible population). Explain how you can find that value for R, both using intuitive reasoning and using the equation for R<sub>0</sub> given above (R<sub>0</sub> = 1+rD). Note that at this R value, the outbreak wanes, but people still get infected. What R value would you need to halt any further infections completely?</li>
+</ol>
+<p><strong>Record</strong></p>
+<ul>
+<li>R value to completely halt any further infections</li>
 </ul>
 </div>
 <div id="task-7" class="section level3">
 <h3>Task 7</h3>
-<ul>
+<ol style="list-style-type: upper-alpha">
 <li>What would happen if a new ID came along that had an R<sub>0</sub> value that was the same as the one you just determined in the previous question, namely the value of R at the peak of an outbreak? Test this with the simulation. Choose parameter values for which you get the right R<sub>0</sub> and observe what the model produces.</li>
+</ol>
+<p><strong>Record</strong></p>
+<ul>
+<li>Nothing</li>
 </ul>
 </div>
 <div id="task-8" class="section level3">
 <h3>Task 8</h3>
+<ol style="list-style-type: upper-alpha">
+<li>R<sub>0</sub> quantifies the level of transmissibility of an ID, which determines how many people will become infected or what level of intervention is needed to stop/prevent an outbreak. However, it is important to be aware that R<sub>0</sub> says nothing about the timing/dynamics of the outbreak. Set parameter values as in #1. Run an outbreak, pay attention to the time of peak and duration of the outbreak (the latter is somewhat ill-defined, so just come up with a rough number).</li>
+<li>Now increase the infectious duration by a factor of 4 (rate reduced by a factor of 4) and adjust the infectiousness-level such that you get the same R<sub>0</sub> as before. Run again and compare the results concerning total outbreak size and timing of outbreak.</li>
+</ol>
+<p><strong>Record</strong></p>
 <ul>
-<li>R<sub>0</sub> quantifies the level of transmissibility of an ID, which determines how many people will become infected or what level of intervention is needed to stop/prevent an outbreak. However, it is important to be aware that R<sub>0</sub> says nothing about the timing/dynamics of the outbreak. Set parameter values as in #1. Run an outbreak, record the time of peak and duration of the outbreak (the latter is somewhat ill-defined, so just come up with a rough number). Then increase the infectious duration by a factor of 4 (rate reduced by a factor of 4) and adjust the infectiousness-level such that you get the same R<sub>0</sub> as before. Run again and compare the results concerning total outbreak size and timing of outbreak.</li>
+<li><p>Day the outbreak peaked (Part A)</p></li>
+<li><p>Day the outbreak peaked (Part B)</p></li>
 </ul>
 </div>
 </div>
