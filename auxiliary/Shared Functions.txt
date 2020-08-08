@@ -1,0 +1,17 @@
+As much as possible, the different packages should have/share the same functions.
+
+Functions currently shared between DSAIDE and DSAIRM:
+
+* All generate_ functions
+* download_code
+* run_model
+
+
+
+Thoughts:
+
+Turn DSAIRM and DSAIDE into a single package?
+
+SimModEx:
+Simulation Model Explorer?
+
