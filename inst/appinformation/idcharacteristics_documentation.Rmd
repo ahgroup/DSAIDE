@@ -93,73 +93,174 @@ $$\dot D = d g_I I$$
 
 **The tasks below are described in a way that assumes everything is in units of days  (rate parameters, therefore, have units of inverse days). If any quantity is not given in those units, you need to convert it first (e.g. if it says a week, you need to convert it to 7 days).**
 
-### Task 1: 
-* Set the model parameters such that it corresponds to the following setting: 
-    * A population size, _S~0~_, of 1000, 1 initially infected presymptomatic host, _P~0~_, simulation duration _tmax_= 200 days.
-    * Assume that only symptomatic individuals transmit, at rate _b~I~_ = 0.001.
-    * Assume that the duration of the presymptomatic, asymptomatic and symptomatic periods are all 5 days long. (Hint: The parameters _g~P~_, _g~A~_, and _g~I~_ are the inverses of these periods.)
-    * Assume that there are no asymptomatic infections, _f_=0, and nobody dies due to disease _d_=0.
+```{r, echo=FALSE, eval=TRUE}
+# save all tasks, outcomes, etc. into an R data frame, then print later.
+# this data frame is used to automate shiny solutions and quiz generation
 
-* With parameters set to correspond to the scenario just described, run the simulation. You should end up with around 7 susceptibles left at the end of the simulation.
-* Check the results with the assumptions for the model and make sure they agree. For instance you shouldn't get any deaths, and no asymptomatic infected.
-* From the graph, contemplate how you would estimate the day at which the outbreak peaks. What's the problem? How would you solve it?
-* Rerun the simulation, with the same values you just had. Does anything change? Why (not)?
+# Explanation for each of the columns in the R data frame 
 
-**Record**
+# quizID: MUST BE THE FIRST COLUMN. Used by the grading app. naming structure "dsaide_shorttitle" where shorttitle is from appsettings$shorttitle
+# AppTitle: Title used for the app in the dsaide app, from appsettings$apptitle
+# AppID: App number in the dsaide menu, from appsettings$appid
+# TaskID: Identifies which task the text belongs to 
+# TaskText: The text that explains what to do for the task
+# RecordID: Identifies if it is the first, second, third,... item to record within the task
+# Record: Text explaining what value from the model that nee too be recorded
+# Note: Used by students taking quiz. Makes it clear what type of value to enter in "Answers"
+# Answers: In master it contains the rigth answer. For students it is where they record the recorded value
+# Fuzzy: The numeric value of a margin (within +/- of "right" answer) for questions where the quiz checker should not be too strict 
+# Review: Admin use if value is 1 the way the questions is asked may need to be reconsidered. 
 
-* Number recovered at the end
+ntasks = 6 #number of tasks
+nrecord = 11 #number of outcomes to record
+#set up task tables
+#returned as list for generality, take apart
+tablist <- make_tasktable(ntasks,nrecord,appsettings)
+alltasks = tablist[[1]]
+allrecord = tablist[[2]]
 
-### Task 2: 
-* Assume now that half of the infected are asymptomatic. Don't change any other assumption.
-* What do you expect to get for the number/fraction of S/I/R at the end of the outbreak and the time at which the outbreak peaks?
-* Run another simulation, record the same values as above.
-* Compare your expectations with the results. How do they agree/disagree? Does it make sense? Anything surprising happening?
 
-**Record**
 
-* Number recovered at the end
+#this is the running counter for the records which starts at 1 
+rc=1
 
-### Task 3: 
-* Now assume that the asymptomatics transmit at the same rate as the symptomatic. Change _b~A~_ accordingly. Leave everything else as before. How do you expect the results to change? (Try to make as precise/quantitative a prediction as you can).
-* Run another simulation, compare your expectations with the results. How do they agree/disagree? Does it make sense? Anything surprising happening?
+# Task 1
+tid = 1
+alltasks[tid,"TaskText"] = "A) Run the simulation with A population size, _S~0~_, of 1000, 1 initially infected presymptomatic host, _P~0~_, simulation duration _tmax_= 200 days. Assume that only symptomatic individuals transmit, at rate _b~I~_ = 0.001. Assume that the duration of the presymptomatic, asymptomatic and symptomatic periods are all 5 days long. (Hint: The parameters _g~P~_, _g~A~_, and _g~I~_ are the inverses of these periods.) Assume that there are no asymptomatic infections, _f_=0, and nobody dies due to disease _d_=0. If you did it correctly, your outbreak should end with around 7 susceptibles remaining.
+B) Check the results with the assumptions for the model and make sure they agree. For instance you shouldn't get any deaths, and no asymptomatic infected. From the graph, contemplate how you would estimate the day at which the outbreak peaks. What's the problem? How would you solve it? Rerun the simulation, with the same values you just had. Does anything change? Why (not)?"
 
-**Record**
+# Record for task 1
+nrec = 1 # number of items to record
+reclist = list()
+reclist$rectext = c("Total number of recovered at end of outbreak")
+reclist$rectype = "Numeric"
+reclist$recnote = c("Report the rounded integer")
+reclist$recfuzzy = c(0)
 
-* Number susceptible at the end
+allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
+rc = rc + nrec #increment record counter by number of outcomes to record for this task 
 
-### Task 4: 
-* Next, let's assume that half the symptomatic infected die. Change the corresponding parameter in the model to reflect this new assumption. Leave everything as in #3.
-* How do you expect the results to change?
-* Run another simulation, record the same values as above.
-* Compare your expectations with the results. How do they agree/disagree? Does it make sense? Anything surprising happening?
 
-**Record**
+# Task 2
+tid = 2
+alltasks[tid,"TaskText"] = "A) Assume now that half of the infected are asymptomatic. Don't change any other assumption. What do you expect to get for the number/fraction of S/I/R at the end of the outbreak and the time at which the outbreak peaks?
+B) Run another simulation, record the same values as above. Compare your expectations with the results. How do they agree/disagree? Does it make sense? Anything surprising happening?"
 
-* Max number of pre-symptomatic
-* Max number of infected
-* Total fraction infected
+# Record for task 2
+nrec = 2 # number of items to record
+reclist$rectext = c("Day the outbreak peaked",
+                    "Total number infected at end of outbreak")
+reclist$recnote = c("Report the rounded integer",
+                    "Report the rounded integer")
+reclist$rectype = c("Numeric",
+                    "Numeric")
+reclist$recfuzzy = c(1,
+                     0)
+allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
+rc = rc + nrec
 
-### Task 5: 
-* Set all transmission parameters to 0.0005, leave everything else as before. What do you expect will happen to the peak of _P_ and _I_ as well as the total fraction of population ever infected (i.e., _R_ + _D_ at the end of simulation), compared to the previous task?
-* Further explore how changes in the infectiousness of the different groups (_b~P~_, _b~A~_, _b~I~_) and the average time a person spends in each of those states (_g~P~_, _g~A~_, _g~I~_) affects the infection dynamics.
-* Every time, think about what you expect to get, then run the simulation, compare your expectations with the results. Then make sense of it.
 
-**Record**
+# Task 3 
+tid = 3
+alltasks[tid,"TaskText"] = "A) Now assume that the asymptomatics transmit at the same rate as the symptomatic. Change _b~A~_ accordingly. Leave everything else as before. How do you expect the results to change? (Try to make as precise/quantitative a prediction as you can). Run another simulation, compare your expectations with the results. How do they agree/disagree? Does it make sense? Anything surprising happening?"
 
-* Max number of pre-symptomatic
-* Max number of infected
-* Total fraction infected
+# Record for task 3
+nrec = 2 # number of items to record
+reclist$rectext = c("Day the outbreak peaked",
+                    "Total number recovered at end of outbreak")
+reclist$recnote = c("Report the rounded integer",
+                    "Report the rounded integer")
+reclist$rectype = c("Numeric",
+                    "Numeric")
+reclist$recfuzzy = c(1,
+                     0)
+allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
+rc = rc + nrec
 
-### Task 6: 
-* Now assume that 90% of infections are asymptomatic. How do things change?  
-* Further explore how changes in the fraction becoming asymptomatic and fraction dying does (or does not) affect the infection dynamics.
-* Every time, think about what you expect to get, then run the simulation, compare your expectations with the results. Then make sense of it.
 
-**Record**
+# Task 4
+tid = 4
+alltasks[tid,"TaskText"] = "A) Next, let's assume that half the symptomatic infected die. Change the corresponding parameter in the model to reflect this new assumption. Leave everything as in task 3.How do you expect the results to change?
+B) Run another simulation, record the same values as above. Compare your expectations with the results. How do they agree/disagree? Does it make sense? Anything surprising happening? "
 
-* Max number of pre-symptomatic
-* Max number of infected
-* Total fraction infected
+# Record for task 4
+nrec = 2 # number of items to record
+reclist$rectext = c("Max number of pre-symptomatic",
+                    "Max number of infected")
+reclist$recnote = c("Report the rounded integer",
+                    "Report the rounded integer")
+reclist$rectype = c("Numeric",
+                    "Numeric")
+reclist$recfuzzy = c(0,
+                     0)
+allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
+rc = rc + nrec
+
+
+# Task 5
+tid = 5
+alltasks[tid,"TaskText"] = "A) Set all transmission parameters to 0.0005, leave everything else as before. What do you expect will happen to the peak of _P_ and _I_ as well as the total fraction of population ever infected (i.e., _R_ + _D_ at the end of simulation), compared to the previous task? (use these values for the recorded max values below)
+B) Further explore how changes in the infectiousness of the different groups (_b~P~_, _b~A~_, _b~I~_) and the average time a person spends in each of those states (_g~P~_, _g~A~_, _g~I~_) affects the infection dynamics. Every time, think about what you expect to get, then run the simulation, compare your expectations with the results. Then make sense of it."
+
+# Record for task 5
+nrec = 2 # number of items to record
+reclist$rectext = c("Max number of pre-symptomatic (Part A)",
+                    "Max number of infected (Part A)")
+reclist$recnote = c("Report the rounded integer",
+                    "Report the rounded integer")
+reclist$rectype = c("Numeric",
+                    "Numeric")
+reclist$recfuzzy = c(0,
+                     0)
+allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
+rc = rc + nrec
+
+
+# Task 6
+tid = 6
+alltasks[tid,"TaskText"] = "A) Using the settings from task 5 part A, now assume that 90% of infections are asymptomatic. How do things change?
+B) Further explore how changes in the fraction becoming asymptomatic and fraction dying does (or does not) affect the infection dynamics. Every time, think about what you expect to get, then run the simulation, compare your expectations with the results. Then make sense of it."
+
+# Record for task 6
+nrec = 2 # number of items to record
+reclist$rectext = c("Max number of pre-symptomatic (Part A)",
+                    "Max number of infected (Part A)")
+reclist$recnote = c("Report the rounded integer",
+                    "Report the rounded integer")
+reclist$rectype = c("Numeric",
+                    "Numeric")
+reclist$recfuzzy = c(0,
+                     0)
+allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
+rc = rc + nrec
+
+```
+
+
+```{r echo=FALSE}
+#save the fully filled task table to a tsv file
+save_tasktable(alltasks,allrecord,appsettings)
+```
+
+
+```{r, echo=FALSE, results='asis'}
+# Take all the text stored in the table and print the tasks and items to record
+write_tasktext(alltasks,allrecord)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ## Further Information {#shinytab4}

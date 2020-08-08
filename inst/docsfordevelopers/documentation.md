@@ -60,6 +60,13 @@ Also needed (which could be done by you or me):
 
 ## Information for package development
 
+
+## Using the DSAIDE solutions
+* Each _documentation.Rmd file has the tasks and outcomes to record stored as a table. When knitting/processing this file, both the html file of the documentation is generated and a .tsv file containing a table with the tasks and quantities to be reported, as well as other columns.
+* The .tsv files should be copied into the (private) DSAIDEsolutions repository into the tasktable_files folder.
+* Solutions and answers to each question are added by scripts in the DSAIDEsolutions repo. Those can be further processed with the grading app (not part of DSAIDE). 
+
+
 ### To work on package (through RStudio): 
 * Fork and clone package.
 * Load DSAIDE.Rproj in RStudio. Edit files as needed.

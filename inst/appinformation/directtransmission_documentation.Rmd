@@ -93,57 +93,123 @@ Note that quite often, we assume that the area is constant and do not include it
 
 **The tasks below are described in a way that assumes everything is in units of MONTHS (rate parameters, therefore, have units of inverse months). If any quantity is not given in those units, you need to convert it first (e.g. if it says a year, you need to convert it to 12 months).**
 
+```{r, echo=FALSE, eval=TRUE}
+# save all tasks, outcomes, etc. into an R data frame, then print later.
+# this data frame is used to automate shiny solutions and quiz generation
 
-### Task 1: 
-* Set the model parameters such that it corresponds to the following setting: 
-    * A starting population of 1000 individuals, 999 susceptible and 1 initially infected host.
-    * Simulation duration, _tmax_ approximately 10 years.
-    * Consider density-dependent transmission, with a transmission rate of _b~d~_ = 0.005, and an area of size 2.
-    * Assume that the duration of the infectious period is 15 days long (and that there are 30 days in a month). 
-    * Turn off births, deaths and waning immunity for now.
-* With parameters set to correspond to the scenario just described, run the simulation.
-* You should be left with 625 susceptibles.
+# Explanation for each of the columns in the R data frame 
 
-**Record**
+# quizID: MUST BE THE FIRST COLUMN. Used by the grading app. naming structure "dsaide_shorttitle" where shorttitle is from appsettings$shorttitle
+# AppTitle: Title used for the app in the dsaide app, from appsettings$apptitle
+# AppID: App number in the dsaide menu, from appsettings$appid
+# TaskID: Identifies which task the text belongs to 
+# TaskText: The text that explains what to do for the task
+# RecordID: Identifies if it is the first, second, third,... item to record within the task
+# Record: Text explaining what value from the model that nee too be recorded
+# Note: Used by students taking quiz. Makes it clear what type of value to enter in "Answers"
+# Answers: In master it contains the rigth answer. For students it is where they record the recorded value
+# Fuzzy: The numeric value of a margin (within +/- of "right" answer) for questions where the quiz checker should not be too strict 
+# Review: Admin use if value is 1 the way the questions is asked may need to be reconsidered. 
 
-* Number of susceptible/infected/recovered (S/I/R) at the end of the outbreak.
-* Fraction of S/I/R at the end of the outbreak.
+ntasks = 5 #number of tasks
+nrecord = 5 #number of outcomes to record
+#set up task tables
+#returned as list for generality, take apart
+tablist <- make_tasktable(ntasks,nrecord,appsettings)
+alltasks = tablist[[1]]
+allrecord = tablist[[2]]
 
-### Task 2: 
-* Now switch to frequency-dependent transmission, set _b~f~_ = 2.5. Keep everything else as before.
-* Think about your expectations, run the simulation and compare your expectations with the results.
-* Anything surprising happening? Do you understand why you see what you see?
+#this is the running counter for the records which starts at 1 
+rc=1
 
-**Record**
 
-* Nothing
+# Task 1
+tid = 1
+alltasks[tid,"TaskText"] = "A) Run the simulation with 1000 susceptible individuals and 1 initially infected host. Set the simulation duration, _tmax_ to 10 years. Consider density-dependent transmission, with a transmission rate of _b~d~_ = 0.005, and an area of size 2. Assume that the duration of the infectious period is 15 days long (and that there are 30 days in a month). Turn off births, deaths and waning immunity for now. If you did it correctly, your outbreak should end with around 625 susceptible individuals still remaining."
 
-### Task 3: 
-* Let's assume we are now in a location with twice the number of people as before (_S~0~_ = 1999) , living in roughly the same area.
-* Implement that in the simulation by changing population size, keep all other settings as above. 
-* What do you expect to see for the frequency and density dependent scenarios? Run simulations and check.   
+# Record for task 1
+nrec = 1 # number of items to record
+reclist = list()
+reclist$rectext = c("Total number of recovered at end of outbreak")
+reclist$rectype = "Numeric"
+reclist$recnote = c("Report the rounded integer")
+reclist$recfuzzy = c(0)
 
-**Record**
+allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
+rc = rc + nrec #increment record counter by number of outcomes to record for this task 
 
-* Number of S/I/R individuals at the end of the outbreak.
-* Fraction of S/I/R individuals at the end of the outbreak.
 
-### Task 4: 
-* If you double the population size as you just did, how do you need to adjust the area to obtain the same sized outbreak with regard to the fraction of people getting infected/remaining susceptible for density-dependent transmission?
-* Try with the simulation and see if your expectation is correct.
+# Task 2
+tid = 2
+alltasks[tid,"TaskText"] = "A) Now switch to frequency-dependent transmission, set _b~f~_ = 2.5. Leave all other settings as before.
+B) Think about your expectations, run the simulation and compare your expectations with the results.Anything surprising happening? Do you understand why you see what you see?"
 
-**Record**
+# Record for task 2
+nrec = 1 # number of items to record
+reclist$rectext = c("Nothing")
+reclist$rectype = "None"
+reclist$recnote = c("")
+reclist$recfuzzy = c(0)
+allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
+rc = rc + nrec
 
-* Nothing
 
-### Task 5: 
-* Keep exploring by trying different parameters and transmission settings and see how they influence results.
-* You can also go beyond a single outbreak and turn on births/deaths (which can impact population size) or waning immunity.
-* As you continue your exploration, think about real infectious diseases that might be approximated by either one of the transmission types, and what approximate choices for the model parameters would describe those IDs.
+### Task 3 
+tid = 3
+alltasks[tid,"TaskText"] = "A) Let's assume we are now in a location with twice the number of people as before (_S~0~_ = 1999) , living in the same area. Implement that in the simulation by changing population size, keep all other settings as above.
+B) What do you expect to see for the frequency and density dependent scenarios? Does anything change? Do you undstand why?"
 
-**Record**
+# Record for task 3
+nrec = 1 # number of items to record
+reclist$rectext = c("Total number of recovered at end of outbreak")
+reclist$recnote = c("Report the rounded integer")
+reclist$rectype = c("Numeric")
+reclist$recfuzzy = c(0)
+allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
+rc = rc + nrec
 
-* Nothing
+### Task 4
+tid = 4
+alltasks[tid,"TaskText"] = "A) If you double the population size as you just did, how do you need to adjust the area to obtain the same sized outbreak with regard to the fraction of people getting infected/remaining susceptible for density-dependent transmission? Try with the simulation and see if your expectation is correct."
+
+# Record for task 4
+nrec = 1 # number of items to record
+reclist$rectext = c("Nothing")
+reclist$rectype = "None"
+reclist$recnote = c("")
+reclist$recfuzzy = c(0)
+allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
+rc = rc + nrec
+
+
+### Task 5
+tid = 5
+alltasks[tid,"TaskText"] = "A) Keep exploring by trying different parameters and transmission settings and see how they influence results. You can also go beyond a single outbreak and turn on births/deaths (which can impact population size) or waning immunity.
+B) As you continue your exploration, think about real infectious diseases that might be approximated by either one of the transmission types, and what approximate choices for the model parameters would describe those IDs."
+
+# Record for task 5
+nrec = 1 # number of items to record
+reclist$rectext = c("Nothing")
+reclist$rectype = "None"
+reclist$recnote = c("")
+reclist$recfuzzy = c(0)
+allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
+rc = rc + nrec
+
+```
+
+
+```{r echo=FALSE}
+#save the fully filled task table to a tsv file
+save_tasktable(alltasks,allrecord,appsettings)
+```
+
+
+```{r, echo=FALSE, results='asis'}
+# Take all the text stored in the table and print the tasks and items to record
+write_tasktext(alltasks,allrecord)
+```
+
 
 
 ## Further Information {#shinytab4}
