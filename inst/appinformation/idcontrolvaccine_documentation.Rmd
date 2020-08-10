@@ -177,8 +177,8 @@ reclist$rectype = c("Numeric",
                     "Numeric")
 reclist$recnote = c("Report two decimals",
                     "Report two decimals")
-reclist$recfuzzy = c(0.01,
-                     0.01)
+reclist$recfuzzy = c(0,
+                     0)
 allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
 rc = rc + nrec #increment record counter by number of outcomes to record for this task 
 
