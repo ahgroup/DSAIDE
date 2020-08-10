@@ -64,7 +64,7 @@ For our system, we specify the following processes/flows:
 * Susceptible individuals (S) can become infected by infectious individuals (I) at some rate, _b_. This leads to the susceptible individual leaving the S compartment and entering the I compartment.   
 * Infected individuals recover and enter the recovered (R) compartment at some rate, _g_.
 * Recovered individuals can lose immunity at rate _w_ and return to the susceptible compartment. 
-* Natural births (into the S compartment at rate _m_) and deaths (from all compartments at rate _n_) are possible.
+* Natural births (into the S compartment at rate _n_) and deaths (from all compartments at rate _m_) are possible.
 
 
 
@@ -89,34 +89,127 @@ $$\dot R = g I - mR - wR$$
 **The tasks below are described in a way that assumes everything is in units of MONTHS (rate parameters, therefore, have units of inverse months). If any quantity is not given in those units, you need to convert it first (e.g. if it says a year, you need to convert it to 12 months).**
 
 
+```{r, echo=FALSE, eval=TRUE}
+# save all tasks, outcomes, etc. into an R data frame, then print later.
+# this data frame is used to automate shiny solutions and quiz generation
 
-### Task 1 
-* In 'Reproductive Number 1', the focus was on a single outbreak. But the reproductive number concept is also useful in situations where a disease is endemic. 
-* As you learned in the 'Patterns of ID' app (if not, go do it before this one), to achieve an endemic state, we need replenishment of susceptibles through for instance births or waning immunity. We'll start with natural births and deaths. 
-* If births (and deaths) are present, you will be able to get multiple outbreaks and endemic states. Set the parameter values such that your hosts have approximately an average lifespan of 41 years. Make sure to convert to months and convert to a rate. Set birth rate such that the population is steady at 1000 in the absence of the ID. Set simulation time to around 500 years, 1 infected, _g_=5, _b_=0.015. 
-* Run the simulation, make sure you reach a steady state. Compare the steady state values for S (and optional I and R) from the simulation with those predicted from the SIR steady state equations (see "Patterns of ID" app).
+# Explanation for each of the columns in the R data frame 
+
+# quizID: MUST BE THE FIRST COLUMN. Used by the grading app. naming structure "dsaide_shorttitle" where shorttitle is from appsettings$shorttitle
+# AppTitle: Title used for the app in the dsaide app, from appsettings$apptitle
+# AppID: App number in the dsaide menu, from appsettings$appid
+# TaskID: Identifies which task the text belongs to 
+# TaskText: The text that explains what to do for the task
+# RecordID: Identifies if it is the first, second, third,... item to record within the task
+# Record: Text explaining what value from the model that nee too be recorded
+# Note: Used by students taking quiz. Makes it clear what type of value to enter in "Answers"
+# Answers: In master it contains the rigth answer. For students it is where they record the recorded value
+# Fuzzy: The numeric value of a margin (within +/- of "right" answer) for questions where the quiz checker should not be too strict 
+# Review: Admin use if value is 1 the way the questions is asked may need to be reconsidered. 
+
+ntasks = 5 #number of tasks
+nrecord = 5 #number of outcomes to record
+#set up task tables
+#returned as list for generality, take apart
+tablist <- make_tasktable(ntasks,nrecord,appsettings)
+alltasks = tablist[[1]]
+allrecord = tablist[[2]]
+
+#this is the running counter for the records which starts at 1 
+rc=1
+
+# this is a list where all the items that need to be recorded are stored
+reclist = list()
 
 
-### Task 2 
-* Figure out what the reproductive number is at the endemic steady state. To that end, recall its definition and determine what has to be true if the number of infected neither increases nor decreases. 
-* You've learned that the equation for the reproductive number for this simple model is R=bS/g. If the reproductive number at steady state is _R~s~_ and we have _S~f~_ susceptibles, then with _S~0~_ susceptibles at the start, what is the basic reproductive number? First do it by simply reasoning from the values of _R~s~_ and _S~f~_ to the values of _R~0~_ and _S~0~_. You can then confirm this by sticking in all parameter values into the _R~0~_ equation.
+
+# Task 1
+tid = 1
+alltasks[tid,"TaskText"] = "A) In _Reproductive Number 1_, the focus was on a single outbreak. But the reproductive number concept is also useful in situations where a disease is endemic. As you learned in the _Patterns of ID_ app (if not, go do it before this one), to achieve an endemic state, we need replenishment of susceptibles through for instance births or waning immunity. 
+B) We'll start with natural births and deaths. If births (and deaths) are present, you will be able to get multiple outbreaks and endemic states. Set the parameter values such that your hosts have approximately an average lifespan of 41 years. Make sure to convert to months and convert to a rate. Set birth rate such that the population is steady at 1000 in the absence of the ID. Set simulation time to around 500 years, 1 infected, _g_=5, _b_=0.015. Run the simulation, make sure you reach a steady state. Compare the steady state values for S (and optional I and R) from the simulation with those predicted from the SIR steady state equations (see _Patterns of ID_ app)."
+
+# Record for task 1
+nrec = 1 # number of items to record
+reclist$rectext = c("The value you used for births")
+reclist$rectype = "Numeric"
+reclist$recnote = c("Report Interger")
+reclist$recfuzzy = c(0)
+allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
+rc = rc + nrec #increment record counter by number of outcomes to record for this task 
 
 
-### Task 3 
-* Double the value of _g_, run the simulation and again compute R~0~ using the steady state result. 
-* Next double the values for both natural birth and death rates and repeat. 
+# Task 2
+tid = 2
+alltasks[tid,"TaskText"] = "A) Figure out what the reproductive number is at the endemic steady state. To that end, recall its definition and determine what has to be true if the number of infected neither increases nor decreases. You've learned that the equation for the reproductive number for this simple model is R=bS/g. If the reproductive number at steady state is _R~s~_ and we have _S~f~_ susceptibles, then with _S~0~_ susceptibles at the start, what is the basic reproductive number? First do it by simply reasoning from the values of _R~s~_ and _S~f~_ to the values of _R~0~_ and _S~0~_. You can then confirm this by sticking in all parameter values into the _R~0~_ equation."
+
+# Record for task 2
+nrec = 1 # number of items to record
+reclist$rectext = c("The value for R~0~")
+reclist$rectype = "Numeric"
+reclist$recnote = c("Report two decimals")
+reclist$recfuzzy = c(0.01)
+allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
+rc = rc + nrec #increment record counter by number of outcomes to record for this task 
 
 
+# Task 3
+tid = 3
+alltasks[tid,"TaskText"] = "A) Double the value of _g_, run the simulation and again compute R~0~ using the steady state result. 
+B) Next double the values for both natural birth and death rates and recalculate R~0~. "
 
-### Task 4 
-* One usually obtains R~0~ from the data/literature and uses it to pick values for the transmission parameter, _b_, which is otherwise very hard to estimate. Let's try that. Go online and find (approximate) values for the duration of the infectious period and R~0~ for SARS. Keep the population size at 1000. Use those values to compute the transmission parameter, _b_. Run a single outbreak (no births and deaths), see if things work out right. Specifically, using the equation involving the final number of susceptibles left should give you an R~0~ that roughly agrees with the one you started out with.
+# Record for task 3
+nrec = 1 # number of items to record
+reclist$rectext = c("The value for R~0~ (Part A)")
+reclist$rectype = "Numeric"
+reclist$recnote = c("Report two decimals")
+reclist$recfuzzy = c(0.01)
+allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
+rc = rc + nrec #increment record counter by number of outcomes to record for this task 
 
-### Task 5
-* Let's repeat the same for a disease that causes an endemic state, tuberculosis (TB). Go online and find estimates for the basic reproductive number of TB. Note that TB is somewhat special: An infected and infectious person (someone with TB disease) might infect many others, but only some of those will go on to develop disease and become infectious. For R~0~, we always need to go from infectious individual to another infectious individual.
-* Also find an estimate for the duration of the infectious period for TB. Then use these quantities to determine parameters _b_ and _g_ and run a simulation with the same birth and death rates as in task 1.
-* Check that the steady state levels of infected/infectious individuals matches with the R~0~ value you chose.
 
-Note: The SIR model is not a good model for TB since for TB, the stage where individuals are infected but not yet infectious is long and important. So to really model TB, one would need to include such details. We are only using TB here for illustrative purposes. 
+# Task 4
+tid = 4
+alltasks[tid,"TaskText"] = "A) One usually obtains R~0~ from the data/literature and uses it to pick values for the transmission parameter, _b_, which is otherwise very hard to estimate. Let's try that. Go online and find (approximate) values for the duration of the infectious period and R~0~ for SARS. Keep the population size at 1000. Use those values to compute the transmission parameter, _b_. Run a single outbreak (no births and deaths), see if things work out right. Specifically, using the equation involving the final number of susceptibles left should give you an R~0~ that roughly agrees with the one you started out with."
+
+# Record for task 4
+nrec = 1 # number of items to record
+reclist$rectext = c("Nothing")
+reclist$rectype = "None"
+reclist$recnote = c("")
+reclist$recfuzzy = c(0)
+allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
+rc = rc + nrec #increment record counter by number of outcomes to record for this task  
+
+
+# Task 5
+tid = 5
+alltasks[tid,"TaskText"] = "A) Let's repeat the same for a disease that causes an endemic state, tuberculosis (TB). Go online and find estimates for the basic reproductive number of TB. Note that TB is somewhat special: An infected and infectious person (someone with TB disease) might infect many others, but only some of those will go on to develop disease and become infectious. For R~0~, we always need to go from infectious individual to another infectious individual. Also find an estimate for the duration of the infectious period for TB. Then use these quantities to determine parameters _b_ and _g_ and run a simulation with the same birth and death rates as in task 1. Check that the steady state levels of infected/infectious individuals matches with the R~0~ value you chose.
+
+Note: The SIR model is not a good model for TB since for TB, the stage where individuals are infected but not yet infectious is long and important. So to really model TB, one would need to include such details. We are only using TB here for illustrative purposes."
+
+# Record for task 5
+nrec = 1 # number of items to record
+reclist$rectext = c("Nothing")
+reclist$rectype = "None"
+reclist$recnote = c("")
+reclist$recfuzzy = c(0)
+allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
+rc = rc + nrec #increment record counter by number of outcomes to record for this task 
+
+```
+
+
+```{r echo=FALSE}
+#save the fully filled task table to a tsv file
+save_tasktable(alltasks,allrecord,appsettings)
+```
+
+
+```{r, echo=FALSE, results='asis'}
+# Take all the text stored in the table and print the tasks and items to record
+write_tasktext(alltasks,allrecord)
+```
+
 
 
 ## Further Information {#shinytab4}
