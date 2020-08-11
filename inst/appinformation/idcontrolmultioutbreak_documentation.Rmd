@@ -142,6 +142,7 @@ alltasks[tid,"TaskText"] = "A) First without running the simulation and using wh
 
 
 # Record for task 2
+nrec = 1 # number of items to record
 reclist$rectext = c("Nothing")
 reclist$rectype = "None"
 reclist$recnote = c("")
@@ -181,11 +182,7 @@ rc = rc + nrec #increment record counter by number of outcomes to record for thi
 # Task 5
 tid = 5
 alltasks[tid,"TaskText"] = "A) For multiple outbreaks, more control is not necessarily better. Let's explore that. Set control end to 100 (_tend_). All of the other settings should be the same as the previous task. Slowly increase control, _f_ and run the simulation for the different values of _f_. Initially, things look as before. But once you reach a certain level of control, you will see that a second outbreak occurs and the total number of susceptibles drops again.
-B) To explore this in more detail, set f=0.55 and f=0.6 and try to understand why in one case you only get a single outbreak and in the other you get 2. Run the simulation for _f=0.2-0.7_ (in steps of 0.1) and record the number of susceptibles left at the end of the simulation. Based on that, what do you conclude about the impact of different levels of control on the outcome? What seems to be the best level of control, and why? 
-
-**Record**
-
-* Nothing"
+B) To explore this in more detail, set f=0.55 and f=0.6 and try to understand why in one case you only get a single outbreak and in the other you get 2. Run the simulation for _f=0.2-0.7_ (in steps of 0.1) and record the number of susceptibles left at the end of the simulation. Based on that, what do you conclude about the impact of different levels of control on the outcome? What seems to be the best level of control, and why?"
 
 # Record for task 5
 nrec = 1 # number of items to record
