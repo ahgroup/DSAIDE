@@ -84,15 +84,9 @@ Flow diagram for this model.
 <p><em>The tasks below are described in a way that assumes everything is in units of days (rate parameters, therefore, have units of inverse days). If any quantity is not given in those units, you need to convert it first.</em></p>
 <div id="task-1" class="section level3">
 <h3>Task 1</h3>
-<ul>
-<li>Set the model to 1000 initial susceptible, 1 infected, no recovered.</li>
-<li>Set the recovery rate, <em>g</em>, such that it corresponds to an infectiousness duration of 5 days.<br />
-</li>
-<li>Set the infectiousness rate <em>b</em> such that the model has a reproductive number, R<sub>0</sub>, of 4. If you don’t know how to do that, please work through the <em>Reproductive Number</em> apps first and then come back.</li>
-<li>Keep the intervention level, <em>f</em>, at 0 for now.</li>
-<li>Set <em>tmax</em> and <em>tnew</em> to 200. Values for <em>tstart</em> and <em>tend</em> do not matter since <em>f</em> is 0.</li>
-<li>Run the simulation. You should get an outbreak with around 20 susceptibles left at the end.</li>
-</ul>
+<ol style="list-style-type: upper-alpha">
+<li>Set the model to 1000 initial susceptible, 1 infected, no recovered. Set the recovery rate, <em>g</em>, such that it corresponds to an infectiousness duration of 5 days. Set the infectiousness rate <em>b</em> such that the model has a reproductive number, R<sub>0</sub>, of 4. If you don’t know how to do that, please work through the <em>Reproductive Number</em> apps first and then come back. Keep the intervention level, <em>f</em>, at 0 for now. Set <em>tmax</em> and <em>tnew</em> to 200. Values for <em>tstart</em> and <em>tend</em> do not matter since <em>f</em> is 0. Run the simulation. You should get an outbreak with around 20 susceptibles left at the end.</li>
+</ol>
 <p><strong>Record</strong></p>
 <ul>
 <li>Nothing</li>
@@ -100,11 +94,9 @@ Flow diagram for this model.
 </div>
 <div id="task-2" class="section level3">
 <h3>Task 2</h3>
-<ul>
-<li>First without running the simulation and using what you know about R<sub>0</sub> and how it relates to the susceptible population size, figure out what the number of susceptibles is - assuming every other parameter stays the same - at which you don’t get an outbreak anymore.</li>
-<li>Now test your expectation by trying different values for <em>S</em>. You might have to adjust the simulation time to see this better.</li>
-</ul>
-<p>This value for <em>S</em> provides a threshold below which we don’t get an outbreak. This directly corresponds to the threshold value for R<sub>0</sub> which you learned about previously.</p>
+<ol style="list-style-type: upper-alpha">
+<li>First without running the simulation and using what you know about R<sub>0</sub> and how it relates to the susceptible population size, figure out what the number of susceptibles is (assuming every other parameter stays the same) at which you don’t get an outbreak anymore. Now test your expectation by trying different values for <em>S</em>. You might have to adjust the simulation time to see this better. This value for <em>S</em> provides a threshold below which we don’t get an outbreak. This directly corresponds to the threshold value for R<sub>0</sub> which you learned about previously.</li>
+</ol>
 <p><strong>Record</strong></p>
 <ul>
 <li>Nothing</li>
@@ -112,7 +104,9 @@ Flow diagram for this model.
 </div>
 <div id="task-3" class="section level3">
 <h3>Task 3</h3>
-<p>The threshold value below which you do not get an outbreak is around 250 for the parameter settings here. However, in the first task, the number of susceptibles left at the end of the outbreak was much less, around 20. The outbreak ‘overshoots’ by depleting more susceptibles than the threshold value. Why is that? Think about what happens at the peak of the outbreak when R<sub>0</sub> switches from being larger than 1 to smaller than 1. Does the outbreak stop immediately? Why not?</p>
+<ol style="list-style-type: upper-alpha">
+<li>The threshold value below which you do not get an outbreak is around 250 for the parameter settings here. However, in the first task, the number of susceptibles left at the end of the outbreak was much less, around 20. The outbreak ‘overshoots’ by depleting more susceptibles than the threshold value. Why is that? Think about what happens at the peak of the outbreak when R<sub>0</sub> switches from being larger than 1 to smaller than 1. Does the outbreak stop immediately? Why not?</li>
+</ol>
 <p><strong>Record</strong></p>
 <ul>
 <li>The maximum number infected</li>
@@ -120,13 +114,9 @@ Flow diagram for this model.
 </div>
 <div id="task-4" class="section level3">
 <h3>Task 4</h3>
-<p>For a single outbreak, more control is better. We can test that.</p>
-<ul>
-<li>Using the same number of susceptibles, infected and recovered from <strong>Task 1</strong>.</li>
-<li>Set control to start at time 0 (<em>tstart</em>) and end at 200 (<em>tend</em>).</li>
-<li>Set <em>tmax</em> and <em>tnew</em> both to 200.</li>
-<li>Slowly increase control, <em>f</em> (e.g. in steps of 0.1). Run the simulation for each value of <em>f</em>. As <em>f</em> increases, you should see smaller outbreaks until you hit a value of <em>f</em> for which you don’t see outbreaks anymore. Understand how this value of <em>f</em> relates to the reproductive number.</li>
-</ul>
+<ol style="list-style-type: upper-alpha">
+<li>For a single outbreak, more control is better. We can test that. Using the same number of susceptibles, infected and recovered from <strong>Task 1</strong>. Set control to start at time 0 (<em>tstart</em>) and end at 200 (<em>tend</em>). Set <em>tmax</em> and <em>tnew</em> both to 200. Slowly increase control, <em>f</em> (e.g. in steps of 0.1). Run the simulation for each value of <em>f</em>. As <em>f</em> increases, you should see smaller outbreaks until you hit a value of <em>f</em> for which you don’t see outbreaks anymore. Understand how this value of <em>f</em> relates to the reproductive number.</li>
+</ol>
 <p><strong>Record</strong></p>
 <ul>
 <li>Nothing</li>
@@ -134,12 +124,13 @@ Flow diagram for this model.
 </div>
 <div id="task-5" class="section level3">
 <h3>Task 5</h3>
-<p>For multiple outbreaks, more control is not necessarily better. Let’s explore that.</p>
+<ol style="list-style-type: upper-alpha">
+<li>For multiple outbreaks, more control is not necessarily better. Let’s explore that. Set control end to 100 (<em>tend</em>). All of the other settings should be the same as the previous task. Slowly increase control, <em>f</em> and run the simulation for the different values of <em>f</em>. Initially, things look as before. But once you reach a certain level of control, you will see that a second outbreak occurs and the total number of susceptibles drops again.</li>
+<li>To explore this in more detail, set f=0.55 and f=0.6 and try to understand why in one case you only get a single outbreak and in the other you get 2. Run the simulation for <em>f=0.2-0.7</em> (in steps of 0.1) and record the number of susceptibles left at the end of the simulation. Based on that, what do you conclude about the impact of different levels of control on the outcome? What seems to be the best level of control, and why?</li>
+</ol>
+<p><strong>Record</strong></p>
 <ul>
-<li>Set control end to 100 (<em>tend</em>). All of the other settings should be the same as the previous task.</li>
-<li>Slowly increase control, <em>f</em> and run the simulation for the different values of <em>f</em>. Initially, things look as before. But once you reach a certain level of control, you will see that a second outbreak occurs and the total number of susceptibles drops again.</li>
-<li>To explore this in more detail, set f=0.55 and f=0.6 and try to understand why in one case you only get a single outbreak and in the other you get 2.</li>
-<li>Run the simulation for <em>f=0.2-0.7</em> (in steps of 0.1) and record the number of susceptibles left at the end of the simulation. Based on that, what do you conclude about the impact of different levels of control on the outcome? What seems to be the best level of control, and why?</li>
+<li>Nothing</li>
 </ul>
 <p><strong>Record</strong></p>
 <ul>
@@ -148,22 +139,15 @@ Flow diagram for this model.
 </div>
 <div id="task-6" class="section level3">
 <h3>Task 6</h3>
-<p>In the previous task, control ends while there are still a few infected around, which can lead to a second outbreak. An alternative scenario is one where control ends after infected are gone, but then a newly infected person enters the population. We can explore this scenario, as well.</p>
-<ul>
-<li>Using the same number of susceptibles, infected and recovered from <strong>Task 5</strong>.</li>
-<li>Set control to start at time 0 (<em>tstart</em>) and end at 250 (<em>tend</em>), control strength to <em>f=0.7</em>.</li>
-<li>Set <em>tmax</em> and <em>tnew</em> to 500.</li>
-<li>Run the simulation, you should see a single outbreak with around 686 susceptibles left.</li>
-<li>Now set <em>tnew=300</em>. That means at time 300 a newly infected individual enters the population. You’ll see another outbreak. Make sure you understand why.</li>
-<li>Try the above again with <em>f=0.6</em>. You should see a bigger first and smaller second outbreak.</li>
-<li>Try the above again with <em>f=0.5</em>. This time you will only get one initial outbreak.</li>
-<li>Compare the number of susceptibles left at the end of the simulation for <em>f=0.3, 0.5</em> and <em>f=0.7</em>. Think about why it is again that for some levels of control, you get a single outbreak and for some, you get more than one, and what that means for optimal intervention strength. You should come to the same conclusions as in the previous task.</li>
-</ul>
+<ol style="list-style-type: upper-alpha">
+<li><p>In the previous task, control ends while there are still a few infected around, which can lead to a second outbreak. An alternative scenario is one where control ends after infected are gone, but then a newly infected person enters the population. We can explore this scenario, as well. Using the same number of susceptibles, infected and recovered from <strong>Task 5</strong>. Set control to start at time 0 (<em>tstart</em>) and end at 250 (<em>tend</em>), control strength to <em>f=0.7</em>. Set <em>tmax</em> and <em>tnew</em> to 500. Run the simulation, you should see a single outbreak with around 686 susceptibles left.</p></li>
+<li><p>Now set <em>tnew=300</em>. That means at time 300 a newly infected individual enters the population. You’ll see another outbreak. Make sure you understand why. Try the above again with <em>f=0.6</em>. You should see a bigger first and smaller second outbreak. Try the above again with <em>f=0.5</em>. This time you will only get one initial outbreak. Compare the number of susceptibles left at the end of the simulation for <em>f=0.3, 0.5</em> and <em>f=0.7</em>. Think about why it is again that for some levels of control, you get a single outbreak and for some, you get more than one, and what that means for optimal intervention strength. You should come to the same conclusions as in the previous task.</p></li>
+</ol>
 <p><strong>Record</strong></p>
 <ul>
-<li>Number of susceptiable at the end when <em>f=0.3</em></li>
-<li>Number of susceptiable at the end when <em>f=0.5</em></li>
-<li>Number of susceptiable at the end when <em>f=0.7</em></li>
+<li><p>Number of susceptible at the end when <em>f=0.3</em> (Part B)</p></li>
+<li><p>Number of susceptible at the end when <em>f=0.5</em> (Part B)</p></li>
+<li><p>Number of susceptible at the end when <em>f=0.7</em> (Part B)</p></li>
 </ul>
 </div>
 </div>
