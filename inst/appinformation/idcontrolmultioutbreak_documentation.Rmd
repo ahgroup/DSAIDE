@@ -156,9 +156,9 @@ alltasks[tid,"TaskText"] = "A) The threshold value below which you do not get an
 
 # Record for task 3
 nrec = 1 # number of items to record
-reclist$rectext = c("The maximum number infected")
-reclist$rectype = "Numeric"
-reclist$recnote = c("Report rounded integer")
+reclist$rectext = c("Nothing")
+reclist$rectype = "None"
+reclist$recnote = c("")
 reclist$recfuzzy = c(0)
 allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
 rc = rc + nrec #increment record counter by number of outcomes to record for this task 
