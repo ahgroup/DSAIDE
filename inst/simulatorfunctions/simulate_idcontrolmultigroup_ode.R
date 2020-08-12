@@ -12,13 +12,13 @@
 #' @param Se :  initial number of susceptible elderly : numeric
 #' @param Ie :  initial number of infected elderly : numeric
 #' @param bcc :  rate of transmission to susceptible child from infected child : numeric
-#' @param bac :  rate of transmission to susceptible adult from infected child : numeric
-#' @param bec :  rate of transmission to susceptible elderly from infected child : numeric
 #' @param bca :  rate of transmission to susceptible child from infected adult : numeric
-#' @param baa :  rate of transmission to susceptible adult from infected adult : numeric
-#' @param bea :  rate of transmission to susceptible elderly from infected adult : numeric
 #' @param bce :  rate of transmission to susceptible child from infected elderly : numeric
+#' @param bac :  rate of transmission to susceptible adult from infected child : numeric
+#' @param baa :  rate of transmission to susceptible adult from infected adult : numeric
 #' @param bae :  rate of transmission to susceptible adult from infected elderly : numeric
+#' @param bec :  rate of transmission to susceptible elderly from infected child : numeric
+#' @param bea :  rate of transmission to susceptible elderly from infected adult : numeric
 #' @param bee :  rate of transmission to susceptible elderly from infected elderly : numeric
 #' @param gc :  rate at which infected children recover or die : numeric
 #' @param ga :  rate at which infected adults recover or die : numeric
@@ -61,7 +61,7 @@
 #' @author Andreas Handel
 #' @export
 
-simulate_idcontrolmultigroup_ode <- function(Sc = 0.2e6, Ic = 1, Sa = 0.55e6, Ia = 1, Se = 0.25e6, Ie = 1, bcc = 3e-7, bac = 1.5e-7, bec = 7.5e-8, bca = 7.5e-8, baa = 3e-7, bea = 1.5e-7, bce = 7.5e-8, bae = 1.5e-7, bee = 2.25e-7, gc = 0.1, ga = 0.1, ge = 0.1, wc = 0, wa = 0, we = 0, mc = 0.001, ma = 0.01, me = 0.1, f1 = 0, f1_start = 90, f1_end = 180, f2 = 0, f2_start = 90, f2_end = 180, f3 = 0, f3_start = 90, f3_end = 180,  tmax = 500)
+simulate_idcontrolmultigroup_ode <- function(Sc = 0.2e6, Ic = 1, Sa = 0.55e6, Ia = 1, Se = 0.25e6, Ie = 1, bcc = 3e-7, bca = 7.5e-8, bce = 7.5e-8, bac = 1.5e-7, baa = 3e-7, bae = 1.5e-7, bec = 7.5e-8, bea = 1.5e-7, bee = 2.25e-7, gc = 0.1, ga = 0.1, ge = 0.1, wc = 0, wa = 0, we = 0, mc = 0.001, ma = 0.01, me = 0.1, f1 = 0, f1_start = 90, f1_end = 180, f2 = 0, f2_start = 90, f2_end = 180, f3 = 0, f3_start = 90, f3_end = 180,  tmax = 500)
 {
 
   # This function is used in the solver function and has no independent usages
@@ -105,7 +105,7 @@ simulate_idcontrolmultigroup_ode <- function(Sc = 0.2e6, Ic = 1, Sa = 0.55e6, Ia
 
   ############################################################
   #vector of parameters which is sent to the ODE function
-  pars=c(bcc = bcc, bac = bac, bec = bec, bca = bca, baa = baa, bea = bea, bce = bce, bae = bae , bee = bee, gc = gc, ga = ga, ge = ge, wc = wc, wa = wa, we = we, mc = mc, ma = ma, me = me, f1  = f1, f1_start = f1_start, f1_end = f1_end, f2 = f2, f2_start = f2_start, f2_end = f2_end, f3 = f3, f3_start = f3_start, f3_end = f3_end)
+  pars=c(bcc = bcc, bca = bca, bce = bce, bac = bac, baa = baa, bae = bae , bec = bec, bea = bea, bee = bee, gc = gc, ga = ga, ge = ge, wc = wc, wa = wa, we = we, mc = mc, ma = ma, me = me, f1  = f1, f1_start = f1_start, f1_end = f1_end, f2 = f2, f2_start = f2_start, f2_end = f2_end, f3 = f3, f3_start = f3_start, f3_end = f3_end)
 
   odeoutput = deSolve::ode(y = Y0, times = timevec, func = interventionmodel, parms=pars, method = "lsoda", atol=1e-8, rtol=1e-8);
 
