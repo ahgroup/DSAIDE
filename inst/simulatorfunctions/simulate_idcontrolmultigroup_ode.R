@@ -11,15 +11,15 @@
 #' @param Ia :  initial number of infected adults : numeric
 #' @param Se :  initial number of susceptible elderly : numeric
 #' @param Ie :  initial number of infected elderly : numeric
-#' @param bcc :  rate of transmission from infected child to susceptible child : numeric
-#' @param bca :  rate of transmission from infected child to susceptible adult : numeric
-#' @param bce :  rate of transmission from infected child to susceptible elderly : numeric
-#' @param bac :  rate of transmission from infected adult to susceptible child : numeric
-#' @param baa :  rate of transmission from infected adult to susceptible adult : numeric
-#' @param bae :  rate of transmission from infected adult to susceptible elderly : numeric
-#' @param bec :  rate of transmission from infected elderly to susceptible child : numeric
-#' @param bea :  rate of transmission from infected elderly to susceptible adult : numeric
-#' @param bee :  rate of transmission from infected elderly to susceptible elderly : numeric
+#' @param bcc :  rate of transmission to susceptible child from infected child : numeric
+#' @param bac :  rate of transmission to susceptible adult from infected child : numeric
+#' @param bec :  rate of transmission to susceptible elderly from infected child : numeric
+#' @param bca :  rate of transmission to susceptible child from infected adult : numeric
+#' @param baa :  rate of transmission to susceptible adult from infected adult : numeric
+#' @param bea :  rate of transmission to susceptible elderly from infected adult : numeric
+#' @param bce :  rate of transmission to susceptible child from infected elderly : numeric
+#' @param bae :  rate of transmission to susceptible adult from infected elderly : numeric
+#' @param bee :  rate of transmission to susceptible elderly from infected elderly : numeric
 #' @param gc :  rate at which infected children recover or die : numeric
 #' @param ga :  rate at which infected adults recover or die : numeric
 #' @param ge :  rate at which infected elderly recover or die : numeric
@@ -61,7 +61,7 @@
 #' @author Andreas Handel
 #' @export
 
-simulate_idcontrolmultigroup_ode <- function(Sc = 0.2e6, Ic = 1, Sa = 0.55e6, Ia = 1, Se = 0.25e6, Ie = 1, bcc = 3e-7, bca = 1.5e-7, bce = 7.5e-8, bac = 7.5e-8, baa = 3e-7, bae = 1.5e-7, bec = 7.5e-8, bea = 1.5e-7, bee = 2.25e-7, gc = 0.1, ga = 0.1, ge = 0.1, wc = 0, wa = 0, we = 0, mc = 0.001, ma = 0.01, me = 0.1, f1 = 0, f1_start = 90, f1_end = 180, f2 = 0, f2_start = 90, f2_end = 180, f3 = 0, f3_start = 90, f3_end = 180,  tmax = 500)
+simulate_idcontrolmultigroup_ode <- function(Sc = 0.2e6, Ic = 1, Sa = 0.55e6, Ia = 1, Se = 0.25e6, Ie = 1, bcc = 3e-7, bac = 1.5e-7, bec = 7.5e-8, bca = 7.5e-8, baa = 3e-7, bea = 1.5e-7, bce = 7.5e-8, bae = 1.5e-7, bee = 2.25e-7, gc = 0.1, ga = 0.1, ge = 0.1, wc = 0, wa = 0, we = 0, mc = 0.001, ma = 0.01, me = 0.1, f1 = 0, f1_start = 90, f1_end = 180, f2 = 0, f2_start = 90, f2_end = 180, f3 = 0, f3_start = 90, f3_end = 180,  tmax = 500)
 {
 
   # This function is used in the solver function and has no independent usages
@@ -73,23 +73,23 @@ simulate_idcontrolmultigroup_ode <- function(Sc = 0.2e6, Ic = 1, Sa = 0.55e6, Ia
 
         #apply intervention, which reduces rates at which a group gets infected
         #since bac means transmission from adult to children, intervention for kids would reduce bac (but not bca)
-        if (t>=f1_start &&  t<=f1_end) {bcc = (1 - f1) * bcc; bac = (1 - f1) * bac; bec = (1 - f1) * bec; }
-        if (t>=f2_start &&  t<=f2_end) {bca = (1 - f2) * bca; baa = (1 - f2) * baa; bea = (1 - f2) * bea; }
-        if (t>=f3_start &&  t<=f3_end) {bce = (1 - f3) * bce; bae = (1 - f3) * bae; bee = (1 - f3) * bee; }
+        if (t>=f1_start &&  t<=f1_end) {bcc = (1 - f1) * bcc; bca = (1 - f1) * bca; bce = (1 - f1) * bce; }
+        if (t>=f2_start &&  t<=f2_end) {bac = (1 - f2) * bac; baa = (1 - f2) * baa; bae = (1 - f2) * bae; }
+        if (t>=f3_start &&  t<=f3_end) {bec = (1 - f3) * bec; bea = (1 - f3) * bea; bee = (1 - f3) * bee; }
 
         #the ordinary differential equations
-        dSc =  - Sc * (bcc * Ic + bac * Ia + bec * Ie) + wc * Rc
-        dIc =    Sc * (bcc * Ic + bac * Ia + bec * Ie) - gc * Ic
+        dSc =  - Sc * (bcc * Ic + bca * Ia + bce * Ie) + wc * Rc
+        dIc =    Sc * (bcc * Ic + bca * Ia + bce * Ie) - gc * Ic
         dRc =   (1-mc)*gc * Ic - wc * Rc
         dDc =   mc*gc*Ic
 
-        dSa =  - Sa * (bca * Ic + baa * Ia + bea * Ie) + wa * Ra
-        dIa =    Sa * (bca * Ic + baa * Ia + bea * Ie) - ga * Ia
+        dSa =  - Sa * (bac * Ic + baa * Ia + bae * Ie) + wa * Ra
+        dIa =    Sa * (bac * Ic + baa * Ia + bae * Ie) - ga * Ia
         dRa =   (1-ma)*ga * Ia - wa * Ra
         dDa =   ma*ga*Ia
 
-        dSe =  - Se * (bce * Ic + bae * Ia + bee * Ie) + we *Re
-        dIe =    Se * (bce * Ic + bae * Ia + bee * Ie) - ge * Ie
+        dSe =  - Se * (bec * Ic + bea * Ia + bee * Ie) + we *Re
+        dIe =    Se * (bec * Ic + bea * Ia + bee * Ie) - ge * Ie
         dRe =   (1-me)*ge * Ie - we * Re
         dDe =   me*ge*Ie
 
@@ -105,7 +105,7 @@ simulate_idcontrolmultigroup_ode <- function(Sc = 0.2e6, Ic = 1, Sa = 0.55e6, Ia
 
   ############################################################
   #vector of parameters which is sent to the ODE function
-  pars=c(bcc = bcc, bca = bca, bce = bce, bac = bac, baa = baa, bae = bae, bec = bec, bea = bea , bee = bee, gc = gc, ga = ga, ge = ge, wc = wc, wa = wa, we = we, mc = mc, ma = ma, me = me, f1  = f1, f1_start = f1_start, f1_end = f1_end, f2 = f2, f2_start = f2_start, f2_end = f2_end, f3 = f3, f3_start = f3_start, f3_end = f3_end)
+  pars=c(bcc = bcc, bac = bac, bec = bec, bca = bca, baa = baa, bea = bea, bce = bce, bae = bae , bee = bee, gc = gc, ga = ga, ge = ge, wc = wc, wa = wa, we = we, mc = mc, ma = ma, me = me, f1  = f1, f1_start = f1_start, f1_end = f1_end, f2 = f2, f2_start = f2_start, f2_end = f2_end, f3 = f3, f3_start = f3_start, f3_end = f3_end)
 
   odeoutput = deSolve::ode(y = Y0, times = timevec, func = interventionmodel, parms=pars, method = "lsoda", atol=1e-8, rtol=1e-8);
 
