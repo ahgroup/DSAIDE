@@ -13,12 +13,12 @@
 #' @param E : initial amount of pathogen in environment : numeric
 #' @param Sv : initial number of susceptible vectors : numeric
 #' @param Iv : initial number of infected vectors : numeric
-#' @param bP : rate of transmission from pre-symptomatic to susceptible hosts : numeric
-#' @param bA : rate of transmission from asymptomatic to susceptible hosts : numeric
-#' @param bI : rate of transmission from symptomatic to susceptible hosts : numeric
-#' @param bE : rate of transmission from environment to susceptible hosts : numeric
-#' @param bv : rate of transmission from infected vectors to susceptible hosts : numeric
-#' @param bh : rate of transmission from symptomatic hosts to susceptible vectors : numeric
+#' @param bP : rate of transmission to susceptible hosts from pre-symptomatic : numeric
+#' @param bA : rate of transmission to susceptible hosts from asymptomatic : numeric
+#' @param bI : rate of transmission to susceptible hosts from symptomatic : numeric
+#' @param bE : rate of transmission to susceptible hosts from environment : numeric
+#' @param bv : rate of transmission to susceptible hosts from infected vectors : numeric
+#' @param bh : rate of transmission to susceptible vectors from symptomatic hosts : numeric
 #' @param gP : rate at which a person leaves the P compartment : numeric
 #' @param gA : rate at which a person leaves the A compartment : numeric
 #' @param gI : rate at which a person leaves the I compartment : numeric
@@ -28,10 +28,10 @@
 #' @param f : fraction of pre-symptomatic individuals that have an asymptomatic infection : numeric
 #' @param d : fraction of symptomatic infected hosts that die due to disease : numeric
 #' @param w : rate at which recovered persons lose immunity and return to susceptible state : numeric
-#' @param mh : the rate at which new hosts enter the model (are born) : numeric
-#' @param nh : the rate of natural death of hosts (the inverse it the average lifespan) : numeric
-#' @param mv : the rate at which new vectors enter the model (are born) : numeric
-#' @param nv : the rate of natural death of vectors (the inverse it the average lifespan) : numeric
+#' @param nh : the rate at which new hosts enter the model (are born) : numeric
+#' @param mh : the rate of mortality of hosts (the inverse it the average lifespan) : numeric
+#' @param nv : the rate at which new vectors enter the model (are born) : numeric
+#' @param mv : the rate of mortality of vectors (the inverse it the average lifespan) : numeric
 #' @param tmax : maximum simulation time, in units of months : numeric
 #' @return This function returns the simulation result as obtained from a call
 #'   to the deSolve ode solver.
@@ -56,40 +56,40 @@
 #' @author Andreas Handel
 #' @export
 
-simulate_idcontrol_ode <- function(S = 1000, I = 1, E = 0, Sv = 1000, Iv = 0, bP = 0, bA = 0, bI = 1e-3, bE = 0, bv = 1e-3, bh = 1e-3, gP = 0.5, gA = 0.5, gI = 0.5, pA = 1, pI = 10, c = 1,  f = 0, d = 0, w = 0, mh = 0, nh = 0, mv = 0, nv = 0, tmax = 300)
+simulate_idcontrol_ode <- function(S = 1000, I = 1, E = 0, Sv = 1000, Iv = 0, bP = 0, bA = 0, bI = 1e-3, bE = 0, bv = 1e-3, bh = 1e-3, gP = 0.5, gA = 0.5, gI = 0.5, pA = 1, pI = 10, c = 1,  f = 0, d = 0, w = 0, nh = 0, mh = 0, nv = 0, mv = 0, tmax = 300)
 {
 
   # This function is used in the ode solver function and has no independent usages
   idcontrolode <- function(t, y, parms)
   {
-    
+
     with(
       as.list(c(y,parms)), #lets us access variables and parameters stored in y and parms by name
       {
-        
+
         #the ordinary differential equations
-        dS =  mh - S * (bP * P + bA * A + bI * I + bE * E + bv * Iv) + w * R - nh *S; #susceptibles
-        dP =    S * (bP * P + bA * A + bI * I + bE * E + bv * Iv) - gP * P - nh * P; #infected, pre-symptomatic
-        dA =  f*gP*P - gA * A - nh * A #infected, asymptomatic
-        dI =  (1-f)*gP*P -  gI*I - nh * I #infected, symptomatic
-        dR =  (1-d)*gI*I + gA * A - w * R - nh * R #recovered, immune
+        dS =  nh - S * (bP * P + bA * A + bI * I + bE * E + bv * Iv) + w * R - mh *S; #susceptibles
+        dP =    S * (bP * P + bA * A + bI * I + bE * E + bv * Iv) - gP * P - mh * P; #infected, pre-symptomatic
+        dA =  f*gP*P - gA * A - mh * A #infected, asymptomatic
+        dI =  (1-f)*gP*P -  gI*I - mh * I #infected, symptomatic
+        dR =  (1-d)*gI*I + gA * A - w * R - mh * R #recovered, immune
         dD = d*gI*I #dead
         dE = pI * I + pA * A - c * E; #pathogen in environment
-        dSv = mv - nv * Sv - bh * I * Sv; #susceptible vectors
-        dIv = bh * I * Sv - nv * Iv ; #susceptible hosts
-        
+        dSv = nv - mv * Sv - bh * I * Sv; #susceptible vectors
+        dIv = bh * I * Sv - mv * Iv ; #susceptible hosts
+
         list(c(dS, dP, dA, dI, dR, dD, dE, dSv, dIv))
       }
     ) #close with statement
-    
+
   } #end function specifying the ODEs
-  
+
     Y0 = c(S = S, P = 0, A = 0, I = I, R = 0, D = 0, E = E, Sv = Sv, Iv = Iv);  #combine initial conditions into a vector
   dt = min(0.1, tmax / 1000); #time step for which to get results back
   timevec = seq(0, tmax, dt); #vector of times for which solution is returned (not that internal timestep of the integrator is different)
 
   #combining parameters into a parameter vector
-  pars = c(bP = bP, bA = bA, bI = bI, bE = bE, bv = bv, bh = bh, gP = gP , gA = gA, gI = gI, pA = pA, pI = pI, c = c, f = f, d = d, w = w, mh = mh, nh = nh, mv = mv, nv = nv);
+  pars = c(bP = bP, bA = bA, bI = bI, bE = bE, bv = bv, bh = bh, gP = gP , gA = gA, gI = gI, pA = pA, pI = pI, c = c, f = f, d = d, w = w, nh = nh, mh = mh, nv = nv, mv = mv);
 
   #this line runs the simulation, i.e. integrates the differential equations describing the infection process
   #the result is saved in the odeoutput matrix, with the 1st column the time, the remaining columns are the variables
@@ -97,6 +97,6 @@ simulate_idcontrol_ode <- function(S = 1000, I = 1, E = 0, Sv = 1000, Iv = 0, bP
 
   result <- list()
   result$ts <- as.data.frame(odeoutput)
-  
+
   return(result)
 }
