@@ -131,7 +131,7 @@ alltasks[tid,"TaskText"] = "A) Set the model parameters to the following values.
 # Record for task 1
 nrec = 1 # number of items to record
 reclist = list()
-reclist$rectext = c("Total number of infected at end of outbreak")
+reclist$rectext = c("Max number of infected")
 reclist$rectype = "Numeric"
 reclist$recnote = c("Report the rounded integer")
 reclist$recfuzzy = c(0)
@@ -161,7 +161,7 @@ B) Now turn on environmental transmission, set it to _b~E~ = 0.001_. Leave every
 
 # Record for task 3
 nrec = 1 # number of items to record
-reclist$rectext = c("Total number of infected at end of outbreak (Part B)")
+reclist$rectext = c("Total number infected during the outbreak (Part B)")
 reclist$rectype = c("Numeric")
 reclist$recnote = c("Report the rounded integer")
 reclist$recfuzzy = c(0)
@@ -174,7 +174,7 @@ alltasks[tid,"TaskText"] = "A) Now also turn on direct transmission by setting _
 
 # Record for task 4
 nrec = 1 # number of items to record
-reclist$rectext = c("Total number of infected at end of outbreak")
+reclist$rectext = c("Total number infected during the outbreak")
 reclist$rectype = c("Numeric")
 reclist$recnote = c("Report the rounded integer")
 reclist$recfuzzy = c(0)
@@ -188,7 +188,7 @@ alltasks[tid,"TaskText"] = "A) Now set the initial number of infected to 0 and i
 
 # Record for task 5
 nrec = 1 # number of items to record
-reclist$rectext = c("Total number of infected at end of outbreak")
+reclist$rectext = c("Total number infected during the outbreak")
 reclist$rectype = c("Numeric")
 reclist$recnote = c("Report the rounded integer")
 reclist$recfuzzy = c(0)
