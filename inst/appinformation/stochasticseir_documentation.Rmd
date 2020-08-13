@@ -140,7 +140,7 @@ alltasks[tid,"TaskText"] = "A) Set the following model parameters to start 1000 
 B) If you rerun the simulation without changing anything, what do you expect to see? Test your expectations by running the simulation several times. To speed things up, set the number of simulations to 20, to run all 20."
 
 # Record for task 1
-nrec = 2 # number of items to record
+nrec = 1 # number of items to record
 reclist = list()
 reclist$rectext = c("Nothing")
 reclist$rectype = "None"
