@@ -15,7 +15,7 @@
 #' @param E : starting value for Pathogen in environment : numeric
 #' Values for model parameters : numeric
 #' @param bd : direct transmission rate : numeric
-#' @param bp : environmental transmission rate : numeric
+#' @param be : environmental transmission rate : numeric
 #' @param n : birth rate : numeric
 #' @param m : natural death rate : numeric
 #' @param g : recovery rate : numeric
@@ -43,7 +43,7 @@
 #' @section Code creation date: 2020-06-19
 #' @export
 
-simulate_Environmental_Transmission_model_ode <- function(S = 10000, I = 1, R = 0, E = 0, bd = 1e-04, bp = 0, n = 0, m = 0, g = 0.2, p = 0, c = 10, tstart = 0, tfinal = 500, dt = 0.1)
+simulate_Environmental_Transmission_model_ode <- function(S = 10000, I = 1, R = 0, E = 0, bd = 1e-04, be = 0, n = 0, m = 0, g = 0.2, p = 0, c = 10, tstart = 0, tfinal = 500, dt = 0.1)
 {
   ##############################
   #Block of ODE equations for deSolve
@@ -53,9 +53,9 @@ simulate_Environmental_Transmission_model_ode <- function(S = 10000, I = 1, R = 
     with( as.list(c(y,parms)), { #lets us access variables and parameters stored in y and parms by name
     #StartODES
     #Susceptible : births : natural death : direct infection : environmental infection :
-    dS_mb = +n -m*S -bd*I*S -bp*E*S
+    dS_mb = +n -m*S -bd*I*S -be*E*S
     #Infected : direct infection : environmental infection : natural death : recovery of infected :
-    dI_mb = +bd*I*S +bp*E*S -m*I -g*I
+    dI_mb = +bd*I*S +be*E*S -m*I -g*I
     #Recovered : natural death : recovery of infected :
     dR_mb = -m*I +g*I
     #Pathogen in environment : shedding by infected : decay :
@@ -69,7 +69,7 @@ simulate_Environmental_Transmission_model_ode <- function(S = 10000, I = 1, R = 
   ##############################
   #Creating named vectors
   varvec_mb = c(S = S, I = I, R = R, E = E)
-  parvec_mb = c(bd = bd, bp = bp, n = n, m = m, g = g, p = p, c = c)
+  parvec_mb = c(bd = bd, be = be, n = n, m = m, g = g, p = p, c = c)
   timevec_mb = seq(tstart, tfinal,by = dt)
   #Running the model
   simout = deSolve::ode(y = varvec_mb, parms = parvec_mb, times = timevec_mb,  func = Environmental_Transmission_model_ode_fct)
