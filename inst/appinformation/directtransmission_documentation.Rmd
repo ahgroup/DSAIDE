@@ -60,7 +60,7 @@ The processes being modeled are:
 * Susceptible individuals can become infected by two types of direct transmission from infected hosts, further described below.
 * Infected hosts recover after some time (specified by the rate _g_). 
 * Recovered individuals are initially immune to reinfection. They can lose their immunity at rate _w_ and return to the susceptible compartment. 
-* New susceptibles enter (are born) at a rate _m_. From each compartment, hosts "leave" after some time (i.e. they die) at rate _n_. The inverse of this rate is the average lifespan of a host. 
+* New susceptibles enter (are born) at a rate _n_. From each compartment, hosts "leave" after some time (i.e. they die) at rate _m_. The inverse of this rate is the average lifespan of a host. 
 
 
 
@@ -78,9 +78,9 @@ knitr::include_graphics(here::here('inst/media',appsettings$modelfigname))
 
 
 
-$$\dot S =m - f S  + wR - nS$$ 
-$$\dot I = f S - g I -nI$$ 
-$$\dot R = g I - wR - nR$$
+$$\dot S =n - f S  + wR - mS$$ 
+$$\dot I = f S - g I - mI$$ 
+$$\dot R = g I - wR - mR$$
 
 with _f = b~d~ I / A_ for density-dependent transmission and _f = b~f~ I / N_ for frequency-dependent transmission.
 
@@ -162,8 +162,8 @@ B) What do you expect to see for the frequency and density dependent scenarios? 
 # Record for task 3
 nrec = 1 # number of items to record
 reclist$rectext = c("Total number of recovered at end of outbreak")
-reclist$recnote = c("Report the rounded integer")
 reclist$rectype = c("Numeric")
+reclist$recnote = c("Report the rounded integer")
 reclist$recfuzzy = c(0)
 allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
 rc = rc + nrec
@@ -174,9 +174,9 @@ alltasks[tid,"TaskText"] = "A) If you double the population size as you just did
 
 # Record for task 4
 nrec = 1 # number of items to record
-reclist$rectext = c("Nothing")
-reclist$rectype = "None"
-reclist$recnote = c("")
+reclist$rectext = c("The area used to get the same fraction")
+reclist$rectype = c("Numeric")
+reclist$recnote = c("Report the rounded integer")
 reclist$recfuzzy = c(0)
 allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
 rc = rc + nrec
