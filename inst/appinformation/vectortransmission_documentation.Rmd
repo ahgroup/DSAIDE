@@ -96,50 +96,162 @@ if (appsettings$use_mbmodel)
 
 **The tasks below are described in a way that assumes everything is in units of months (rate parameters, therefore, have units of inverse months). If any quantity is not given in those units, you need to convert it first (e.g. if it says a year, you need to convert it to 12 months).**
 
-### Task 1
-* Set the model parameters such that it corresponds to the following setting: 
-    * 1000 initially susceptible for both hosts and vectors, 1 initially infected host, no infected vector, simulation duration approximately 10 years.
-    * Set host -> vector transmission rate, _b~2~_=0.003, and _b~1~_ = 0.
-    * Assume that the duration of the infectious period in hosts is half a month (about 2 weeks) long. 
-    * Assume that vectors live for half a month (about 2 weeks). Set the birth rate such that in the absence of the ID, you get a steady population of 1000 vectors. You should have learned the relation between births, deaths and steady state susceptibles in the _Patterns of ID_ app. If you don't remember, you can figure it out by trying different values for the birth rate (with no infected hosts or vectors present).  
-    * Turn off waning immunity for now.
-* Run the simulation, observe what you get. 
-* You should not see any outbreak happening. Make sure you know why.
 
-### Task 2 
-* Set _b~1~_ = _b~2~_ = 0.003, rerun. 
-* You should see an outbreak with around 183 susceptible hosts left.
-* Record the numbers/fractions of susceptible/infected/recovered hosts and vectors. 
+```{r, echo=FALSE, eval=TRUE}
+# save all tasks, outcomes, etc. into an R data frame, then print later.
+# this data frame is used to automate shiny solutions and quiz generation
+
+# Explanation for each of the columns in the R data frame 
+
+# quizID: MUST BE THE FIRST COLUMN. Used by the grading app. naming structure "dsaide_shorttitle" where shorttitle is from appsettings$shorttitle
+# AppTitle: Title used for the app in the dsaide app, from appsettings$apptitle
+# AppID: App number in the dsaide menu, from appsettings$appid
+# TaskID: Identifies which task the text belongs to 
+# TaskText: The text that explains what to do for the task
+# RecordID: Identifies if it is the first, second, third,... item to record within the task
+# Record: Text explaining what value from the model that nee too be recorded
+# Note: Used by students taking quiz. Makes it clear what type of value to enter in "Answers"
+# Answers: In master it contains the rigth answer. For students it is where they record the recorded value
+# Fuzzy: The numeric value of a margin (within +/- of "right" answer) for questions where the quiz checker should not be too strict 
+# Review: Admin use if value is 1 the way the questions is asked may need to be reconsidered. 
+
+ntasks = 8 #number of tasks
+nrecord = 8 #number of outcomes to record
+#set up task tables
+#returned as list for generality, take apart
+tablist <- make_tasktable(ntasks,nrecord,appsettings)
+alltasks = tablist[[1]]
+allrecord = tablist[[2]]
+
+#this is the running counter for the records which starts at 1 
+rc=1
+
+
+# Task 1
+tid = 1
+alltasks[tid,"TaskText"] = "A) Set the model parameters so that there are 1000 initially susceptible for both hosts and vectors, 1 initially infected host, no infected vector, simulation duration approximately 10 years. Set the transmission rates, _b~2~_=0.003, and _b~1~_ = 0. Assume that the duration of the infectious period in hosts is half a month (about 2 weeks) long. Assume that vectors live for half a month (about 2 weeks). Set the birth rate such that in the absence of the ID, you get a steady population of 1000 vectors. You should have learned the relation between births, deaths and steady state susceptibles in the _Patterns of ID_ app. If you don't remember, you can figure it out by trying different values for the birth rate (with no infected hosts or vectors present). Turn off waning immunity for now. Run the simulation, observe what you get. You should not see any outbreak happening. Make sure you know why."
+
+# Record for task 1
+nrec = 1 # number of items to record
+reclist = list()
+reclist$rectext = c("Nothing")
+reclist$rectype = "None"
+reclist$recnote = c("")
+reclist$recfuzzy = c(0)
+allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
+rc = rc + nrec
+
+
+# Task 2
+tid = 2
+alltasks[tid,"TaskText"] = "A) Now set _b~1~_ and _b~2~_ = 0.003, and rerun the simulation. You should see an outbreak with around 183 susceptible hosts left."
+
+# Record for task 2
+nrec = 1 # number of items to record
+reclist$rectext = c("Max number of infected hosts")
+reclist$rectype = c("Numeric")
+reclist$recnote = c("Report the rounded integer")
+reclist$recfuzzy = c(0)
+allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
+rc = rc + nrec
+
 
 ### Task 3 
-* Play around with _b~1~_ and _b~2~_ and see how different values affect the ID dynamics.
+tid = 3
+alltasks[tid,"TaskText"] = "A) Play around with _b~1~_ and _b~2~_ and see how different values affect the ID dynamics."
 
-### Task 4 
-* Now set everything back as in task #2 and start with no infected hosts and 1 infected vector. 
-* What do you expect to see? Run the simulation to check your expectation.
-* Play around with a different initial number of infected hosts and vectors and different transmission rates.
-* Anything surprising happening? Do you understand why you see what you see?
+# Record for task 3
+nrec = 1 # number of items to record
+reclist$rectext = c("Nothing")
+reclist$rectype = "None"
+reclist$recnote = c("")
+reclist$recfuzzy = c(0)
+allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
+rc = rc + nrec
 
-### Task 5 
-* Turn off any infection process by setting the number of initial infected hosts and vectors to 0. 
-* Adjust the birth rate such that the vector population settles at 5000.
-* Set the maximum simulation time to 12 months. Note the time it takes for the vector population to go from the initial 1000 to 5000. This rapid increase can be a problem for vector control measures.
+### Task 4
+tid = 4
+alltasks[tid,"TaskText"] = "A) Now set everything back as in task #2 and start with no infected hosts and 1 infected vector. What do you expect to see? Run the simulation to check your expectation.
+B) Play around with a different initial number of infected hosts and vectors and different transmission rates. Anything surprising happening? Do you understand why you see what you see?"
 
-### Task 6 
-* Turn infection process back on by having an infected host. Everything else as above.
-* Set simulation time back to 10 years. Run the simulation, contemplate the dynamics you see. 
-* You have births and deaths now, and usually with those, you can get multiple outbreaks and an endemic state. Why not here?
-
-### Task 7 
-* Assume host immunity wanes after an average of 2 months. 
-* What do you expect to see? Run simulations to check your expectations.
-* You should get a steady endemic state with a constant, non-zero number of infected hosts and vectors. The number of infected vectors at steady, endemic state should be around 1052.
-
-### Task 8 
-* Keep exploring. 
-* Try to figure out how the different parameters influence the dynamics, specifically the (lack of) sustained cycles.
+# Record for task 4
+nrec = 1 # number of items to record
+reclist$rectext = c("Max number of infected hosts (Part A)")
+reclist$rectype = c("Numeric")
+reclist$recnote = c("Report the rounded integer")
+reclist$recfuzzy = c(0)
+allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
+rc = rc + nrec
 
 
+### Task 5
+tid = 5
+alltasks[tid,"TaskText"] = "A) Turn off any infection process by setting the number of initial infected hosts and vectors to 0. Adjust the birth rate such that the vector population settles at 5000. Set the maximum simulation time to 12 months. Note the time it takes for the vector population to go from the initial 1000 to 5000. This rapid increase can be a problem for vector control measures."
+
+# Record for task 5
+nrec = 1 # number of items to record
+reclist$rectext = c("The number of months it takes for Sv to be 4000")
+reclist$rectype = c("Numeric")
+reclist$recnote = c("Report the rounded integer")
+reclist$recfuzzy = c(0)
+allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
+rc = rc + nrec
+
+
+### Task 6
+tid = 6
+alltasks[tid,"TaskText"] = "A) Turn infection process back on by having 1 infected host. Set simulation time back to 10 years. Everything else as above. Run the simulation, contemplate the dynamics you see. You have births and deaths now, and usually with those, you can get multiple outbreaks and an endemic state. Why not here?"
+
+# Record for task 6
+nrec = 1 # number of items to record
+reclist$rectext = c("Nothing")
+reclist$rectype = "None"
+reclist$recnote = c("")
+reclist$recfuzzy = c(0)
+allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
+rc = rc + nrec
+
+
+### Task 7
+tid = 7
+alltasks[tid,"TaskText"] = "A) Assume host immunity wanes after an average of 2 months. What do you expect to see? Run simulations to check your expectations. You should get a steady endemic state with a constant, non-zero number of infected hosts and vectors. The number of infected vectors at steady, endemic state should be around 1052."
+
+# Record for task 7
+nrec = 1 # number of items to record
+reclist$rectext = c("Final number of suscepitble hosts at steady state")
+reclist$rectype = c("Numeric")
+reclist$recnote = c("Report the rounded integer")
+reclist$recfuzzy = c(0)
+allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
+rc = rc + nrec
+
+
+### Task 8
+tid = 8
+alltasks[tid,"TaskText"] = "A) Keep exploring. Try to figure out how the different parameters influence the dynamics, specifically the (lack of) sustained cycles."
+
+# Record for task 8
+nrec = 1 # number of items to record
+reclist$rectext = c("Nothing")
+reclist$rectype = "None"
+reclist$recnote = c("")
+reclist$recfuzzy = c(0)
+allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
+rc = rc + nrec
+
+```
+
+
+```{r echo=FALSE}
+#save the fully filled task table to a tsv file
+save_tasktable(alltasks,allrecord,appsettings)
+```
+
+
+```{r, echo=FALSE, results='asis'}
+# Take all the text stored in the table and print the tasks and items to record
+write_tasktext(alltasks,allrecord)
+```
 
 
 ## Further Information {#shinytab4}
