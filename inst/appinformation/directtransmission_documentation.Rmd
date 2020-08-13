@@ -112,7 +112,7 @@ Note that quite often, we assume that the area is constant and do not include it
 # Review: Admin use if value is 1 the way the questions is asked may need to be reconsidered. 
 
 ntasks = 5 #number of tasks
-nrecord = 5 #number of outcomes to record
+nrecord = 6 #number of outcomes to record
 #set up task tables
 #returned as list for generality, take apart
 tablist <- make_tasktable(ntasks,nrecord,appsettings)
@@ -160,11 +160,15 @@ alltasks[tid,"TaskText"] = "A) Let's assume we are now in a location with twice 
 B) What do you expect to see for the frequency and density dependent scenarios? Does anything change? Do you undstand why?"
 
 # Record for task 3
-nrec = 1 # number of items to record
-reclist$rectext = c("Total number of recovered at end of outbreak")
-reclist$rectype = c("Numeric")
-reclist$recnote = c("Report the rounded integer")
-reclist$recfuzzy = c(0)
+nrec = 2 # number of items to record
+reclist$rectext = c("Total number of recovered at end of outbreak (senario = 1)",
+                    "Total number of recovered at end of outbreak (senario = 2)")
+reclist$rectype = c("Numeric",
+                    "Numeric")
+reclist$recnote = c("Report the rounded integer",
+                    "Report the rounded integer")
+reclist$recfuzzy = c(0,
+                     0)
 allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
 rc = rc + nrec
 
