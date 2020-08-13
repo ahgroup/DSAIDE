@@ -176,7 +176,7 @@ B) Play around with a different initial number of infected hosts and vectors and
 
 # Record for task 4
 nrec = 1 # number of items to record
-reclist$rectext = c("Max number of infected (Part A)")
+reclist$rectext = c("Max number of infected hosts (Part A)")
 reclist$rectype = c("Numeric")
 reclist$recnote = c("Report the rounded integer")
 reclist$recfuzzy = c(0)
