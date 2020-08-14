@@ -57,7 +57,7 @@ The following compartments are included, twice for each type (i=1,2):
 
 The included processes/mechanisms are the following:
 
-* Susceptible individuals of type 1 or 2 can become infected by infected hosts of type 1 or 2. The rates at which infections from type 1/2 to type 1/2 occur are given by the parameters _b~11~_, _b~12~_, _b~21~_ and _b~22~_. 
+* Susceptible individuals of type 1 or 2 can become infected by infected hosts of type 1 or 2. The rates at which infections to type 1/2 from type 1/2 occur are given by the parameters _b~11~_, _b~12~_, _b~21~_ and _b~22~_. 
 * Infected hosts of type 1/2 recover after some time at rates _g~1~_/_g~2~_. 
 * Recovered individuals are initially immune to reinfection. They can lose their immunity at rates _w~1~_/_w~2~_ and return to the susceptible state. 
  
@@ -71,11 +71,11 @@ knitr::include_graphics(here::here('inst/media',appsettings$modelfigname))
 ```
 
 
-$$\dot S_1 = - S_1 (b_{11} I_1 + b_{21} I_2) + w_1 R_1 $$ 
-$$\dot I_1 =  S_1 (b_{11} I_1 + b_{21} I_2) - g_1 I_1 $$ 
+$$\dot S_1 = - S_1 (b_{11} I_1 + b_{12} I_2) + w_1 R_1 $$ 
+$$\dot I_1 =  S_1 (b_{11} I_1 + b_{12} I_2) - g_1 I_1 $$ 
 $$\dot R_1 = g_1 I_1 - w_1 R_1 $$
-$$\dot S_2 = - S_2 (b_{22} I_2 + b_{12} I_1) + w_2 R_2 $$ 
-$$\dot I_2 =  S_2 (b_{22} I_2 + b_{12} I_1) - g_2 I_2  $$ 
+$$\dot S_2 = - S_2 (b_{22} I_2 + b_{21} I_1) + w_2 R_2 $$ 
+$$\dot I_2 =  S_2 (b_{22} I_2 + b_{21} I_1) - g_2 I_2  $$ 
 $$\dot R_2 = g_2 I_2 - w_2 R_2 $$
 
 
@@ -86,144 +86,305 @@ $$\dot R_2 = g_2 I_2 - w_2 R_2 $$
 
 **The tasks below are described in a way that assumes everything is in units of MONTHS (rate parameters, therefore, have units of inverse months). If any quantity is not given in those units, you need to convert it first (e.g. if it says a year, you need to convert it to 12 months).**
 
+```{r, echo=FALSE, eval=TRUE}
+# save all tasks, outcomes, etc. into an R data frame, then print later.
+# this data frame is used to automate shiny solutions and quiz generation
 
-### Task 1: 
-Set the model parameters such that it corresponds to the following setting: 
+# Explanation for each of the columns in the R data frame 
 
- * 1000 susceptible hosts and 1 infected host of type 1.
- * 200 susceptible hosts and 1 infected host of type 2. 
- * Simulation duration approximately 5 years.
- * Assume that transmission from host 1 to host 1 is _b~11~ = 0.002_, from host 2 to host 2 is _b~22~ = 0.01_. No transmission from one host type to the other _b~12~ = 0_ and _b~21~ = 0_.
- * Assume that the duration of the infectious period is 1 month long for both types ( _g~1~_ and _g~2~_ ). 
- * No waning immunity.
- * Run the simulation and ensure you get outbreaks in both populations with 20% susceptibles left at the end.
+# quizID: MUST BE THE FIRST COLUMN. Used by the grading app. naming structure "dsaide_shorttitle" where shorttitle is from appsettings$shorttitle
+# AppTitle: Title used for the app in the dsaide app, from appsettings$apptitle
+# AppID: App number in the dsaide menu, from appsettings$appid
+# TaskID: Identifies which task the text belongs to 
+# TaskText: The text that explains what to do for the task
+# RecordID: Identifies if it is the first, second, third,... item to record within the task
+# Record: Text explaining what value from the model that nee too be recorded
+# Note: Used by students taking quiz. Makes it clear what type of value to enter in "Answers"
+# Answers: In master it contains the rigth answer. For students it is where they record the recorded value
+# Fuzzy: The numeric value of a margin (within +/- of "right" answer) for questions where the quiz checker should not be too strict 
+# Review: Admin use if value is 1 the way the questions is asked may need to be reconsidered. 
 
-**Record**
+ntasks = 15 #number of tasks
+nrecord = 25 #number of outcomes to record
+#set up task tables
+#returned as list for generality, take apart
+tablist <- make_tasktable(ntasks,nrecord,appsettings)
+alltasks = tablist[[1]]
+allrecord = tablist[[2]]
 
-* Nothing
-
-### Task 2: 
-* Set _b~11~ = 0.001_. Rest as before. 
-* Run the simulation. You should get the same outbreak as before among type 2 hosts, no real outbreak among type 1 hosts.
-* If you have worked through the reproductive number app already, contemplate what R~0~ was for both types/populations in task 1, what it is now in task 2, and how that influences what you see in the simulation. 
-
-**Record**
-
-* R~0~ for type 1 hosts
-* R~0~ for type 2 hosts
+#this is the running counter for the records which starts at 1 
+rc=1
 
 
-### Task 3: 
-* Now set the transmission rate from host 2 to host 1 _b~21~ = 0.001_. Everything as before.
-* Run the simulation. You should see an outbreak in both populations. This is an example of a core group driving the dynamics. Contemplate what the core group does.
+# Task 1
+tid = 1
+alltasks[tid,"TaskText"] = "A) Set the model to the following 1000 susceptible hosts and 1 infected host of type 1. 200 susceptible hosts and 1 infected host of type 2. Simulation duration approximately 5 years. Assume that transmission from host 1 to host 1 is _b~11~ = 0.002_, from host 2 to host 2 is _b~22~ = 0.01_. No transmission from one host type to the other _b~12~ = 0_ and _b~21~ = 0_. Assume that the duration of the infectious period is 1 month long for both types ( _g~1~_ and _g~2~_ ). No waning immunity. Run the simulation and ensure you get outbreaks in both populations with 20% susceptibles left at the end."
 
-**Record**
+# Record for task 1
+nrec = 1 # number of items to record
+reclist = list()
+reclist$rectext = c("Nothing")
+reclist$rectype = "None"
+reclist$recnote = c("")
+reclist$recfuzzy = c(0)
+allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
+rc = rc + nrec #increment record counter by number of outcomes to record for this task 
 
-* Number of type 1 susceptible remaining at the end
-* Number of type 2 susceptible remaining at the end
 
-### Task 4: 
-* Keep all settings as before, but set initial number of infected type 1 hosts to 0.
-* Contemplate what you expect to see, run the simulation, see if your expectations are confirmed.
+# Task 2
+tid = 2
+alltasks[tid,"TaskText"] = "A) Set _b~11~ = 0.001_. Rest as before. Run the simulation. You should get the same outbreak as before among type 2 hosts, no real outbreak among type 1 hosts. If you have worked through the reproductive number app already, contemplate what R~0~ was for both types/populations in task 1, what it is now in task 2, and how that influences what you see in the simulation."
 
-**Record**
+# Record for task 2
+nrec = 2 # number of items to record
+reclist = list()
+reclist$rectext = c("R~0~ for type 1 hosts",
+                    "R~0~ for type 2 hosts")
+reclist$rectype = c("Numeric",
+                    "Numeric")
+reclist$recnote = c("Round to the tenths",
+                    "Round to the tenths")
+reclist$recfuzzy = c(0.1,
+                     0.1)
+allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
+rc = rc + nrec
 
-* Number of type 1 susceptible remaining at the end
-* Number of type 2 susceptible remaining at the end
 
-### Task 5: 
-* Now set the initial number of infected type 1 hosts back to 1, and infected type 2 hosts to 0. 
-* Contemplate what you expect to see, run the simulation, see if your expectations are confirmed.
+# Task 3
+tid = 3
+alltasks[tid,"TaskText"] = "A) Now set the transmission rate from host 2 to host 1 _b~21~ = 0.001_. Everything as before. Run the simulation. You should see an outbreak in both populations. This is an example of a core group driving the dynamics. Contemplate what the core group does."
 
-**Record**
+# Record for task 3
+nrec = 2 # number of items to record
+reclist = list()
+reclist$rectext = c("Number of type 1 susceptible remaining at the end",
+                    "Number of type 2 susceptible remaining at the end")
+reclist$rectype = c("Numeric",
+                    "Numeric")
+reclist$recnote = c("Report the rounded integer",
+                    "Report the rounded integer")
+reclist$recfuzzy = c(0,
+                     0)
+allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
+rc = rc + nrec #increment record counter by number of outcomes to record for this task  
 
-* Number of type 1 susceptible remaining at the end
-* Number of type 2 susceptible remaining at the end
 
-### Task 6: 
-* Set _I1~0~ = 1_ and _I2~0~ = 1_.
-* Set the transmission rates from host 1 to host 1 and host 2 to host 2 to 0. 
-* Set the transmission rate from host 2 to host 1 to _b~21~_ = 0.01, from host 1 to host 2 to _b~12~_ = 0.002. Those are the same values used in task 1 for transmission among the same hosts.
-* Contemplate what you expect to see, run the simulation, see if your expectations are confirmed.
+# Task 4
+tid = 4
+alltasks[tid,"TaskText"] = "A) Set initial number of infected type 1 hosts to 0. Leave all other settings as before. Contemplate what you expect to see, run the simulation, see if your expectations are confirmed."
 
-Transmission only between hosts of different type could for instance represent a sexually transmitted disease in a heterosexual population, with the 2 types of hosts being females and males.
+# Record for task 4
+nrec = 2 # number of items to record
+reclist = list()
+reclist$rectext = c("Number of type 1 susceptible remaining at the end",
+                    "Number of type 2 susceptible remaining at the end")
+reclist$rectype = c("Numeric",
+                    "Numeric")
+reclist$recnote = c("Report the rounded integer",
+                    "Report the rounded integer")
+reclist$recfuzzy = c(0,
+                     0)
+allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
+rc = rc + nrec #increment record counter by number of outcomes to record for this task
 
-**Record**
 
-* Number of type 1 recoved at the end
-* Number of type 2 recoved at the end
+# Task 5
+tid = 5
+alltasks[tid,"TaskText"] = "A) Now set the initial number of infected type 1 hosts back to 1, and infected type 2 hosts to 0. Contemplate what you expect to see, run the simulation, see if your expectations are confirmed."
 
-### Task 7: 
-* Now set the transmission rate _b~12~ = 0.01_, and _b~21~ = 0.002_. Everything else as before.
-* Again, think about your expectations, run simulation and check.
+# Record for task 5
+nrec = 2 # number of items to record
+reclist = list()
+reclist$rectext = c("Number of type 1 susceptible remaining at the end",
+                    "Number of type 2 susceptible remaining at the end")
+reclist$rectype = c("Numeric",
+                    "Numeric")
+reclist$recnote = c("Report the rounded integer",
+                    "Report the rounded integer")
+reclist$recfuzzy = c(0,
+                     0)
+allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
+rc = rc + nrec #increment record counter by number of outcomes to record for this task  
 
-**Record**
+# Task 6
+tid = 6
+alltasks[tid,"TaskText"] = "A) Set _I1~0~ = 1_ and _I2~0~ = 1_. Set the transmission rates to host 1 from host 1 and to host 2 from host 2 to 0. Set the transmission rate to host 1 from host 2  to _b~12~_ = 0.01, to host 2 from host 1  to _b~21~_ = 0.002. Those are the same values used in task 1 for transmission among the same hosts. Contemplate what you expect to see, run the simulation, see if your expectations are confirmed. Transmission only between hosts of different type could for instance represent a sexually transmitted disease in a heterosexual population, with the 2 types of hosts being females and males."
 
-* Number of type 1 recoved at the end
-* Number of type 2 recoved at the end
+# Record for task 6
+nrec = 2 # number of items to record
+reclist = list()
+reclist$rectext = c("Number of type 1 recovered at the end",
+                    "Number of type 2 recovered at the end")
+reclist$rectype = c("Numeric",
+                    "Numeric")
+reclist$recnote = c("Report the rounded integer",
+                    "Report the rounded integer")
+reclist$recfuzzy = c(0,
+                     0)
+allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
+rc = rc + nrec #increment record counter by number of outcomes to record for this task
 
-### Task 8: 
-* Repeat the previous task, with only an infected of type 1 initially present.
-* Contemplate what you expect to see, run the simulation, see if your expectations are confirmed.
 
-**Record**
+# Task 7
+tid = 7
+alltasks[tid,"TaskText"] = "A) Now set the transmission rate _b~12~ = 0.01_, and _b~21~ = 0.002_. Everything else as before. Again, think about your expectations, run simulation and check."
 
-* Number of type 1 susceptible remaining at the end
-* Number of type 2 susceptible remaining at the end
+# Record for task 7
+nrec = 2 # number of items to record
+reclist = list()
+reclist$rectext = c("Number of type 1 recovered at the end",
+                    "Number of type 2 recovered at the end")
+reclist$rectype = c("Numeric",
+                    "Numeric")
+reclist$recnote = c("Report the rounded integer",
+                    "Report the rounded integer")
+reclist$recfuzzy = c(0,
+                     0)
+allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
+rc = rc + nrec #increment record counter by number of outcomes to record for this task
 
-### Task 9: 
-* Repeat the previous task, with only an infected of type 2 initially present.
-* Contemplate what you expect to see, run the simulation, see if your expectations are confirmed.
+# Task 8
+tid = 8
+alltasks[tid,"TaskText"] = "A) Repeat the previous task, with only an infected of type 1 initially present. Contemplate what you expect to see, run the simulation, see if your expectations are confirmed."
 
-**Record**
+# Record for task 8
+nrec = 2 # number of items to record
+reclist = list()
+reclist$rectext = c("Number of type 1 susceptible remaining at the end",
+                    "Number of type 2 susceptible remaining at the end")
+reclist$rectype = c("Numeric",
+                    "Numeric")
+reclist$recnote = c("Report the rounded integer",
+                    "Report the rounded integer")
+reclist$recfuzzy = c(0,
+                     0)
+allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
+rc = rc + nrec #increment record counter by number of outcomes to record for this task 
 
-* Number of type 1 susceptible remaining at the end
-* Number of type 2 susceptible remaining at the end
+# Task 9
+tid = 9
+alltasks[tid,"TaskText"] = "A) Repeat the previous task, with only an infected of type 2 initially present. Contemplate what you expect to see, run the simulation, see if your expectations are confirmed."
 
-### Task 10: 
-* Set everything back as in task 1, but with waning immunity with an average duration of immunity of 5 months for each population (i.e. rates _w~1~_ and _w~2~_ need to be the inverse of 5 months.).
-* Run simulation, confirm that both populations reach a steady endemic state.
+# Record for task 9
+nrec = 2 # number of items to record
+reclist = list()
+reclist$rectext = c("Number of type 1 susceptible remaining at the end",
+                    "Number of type 2 susceptible remaining at the end")
+reclist$rectype = c("Numeric",
+                    "Numeric")
+reclist$recnote = c("Report the rounded integer",
+                    "Report the rounded integer")
+reclist$recfuzzy = c(0,
+                     0)
+allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
+rc = rc + nrec #increment record counter by number of outcomes to record for this task  
 
-**Record**
+# Task 10
+tid = 10
+alltasks[tid,"TaskText"] = "A) Set everything back as in task 1, but with waning immunity with an average duration of immunity of 5 months for each population (i.e. rates _w~1~_ and _w~2~_ need to be the inverse of 5 months.). Run simulation, confirm that both populations reach a steady endemic state."
 
-* Nothing
+# Record for task 10
+nrec = 1 # number of items to record
+reclist = list()
+reclist$rectext = c("Nothing")
+reclist$rectype = "None"
+reclist$recnote = c("")
+reclist$recfuzzy = c(0)
+allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
+rc = rc + nrec #increment record counter by number of outcomes to record for this task 
 
-### Task 11: 
-* Set transmission rate _b~21~ = 0.005_, everything else as before.
-* Run the simulation and see what changes.
+# Task 11
+tid = 11
+alltasks[tid,"TaskText"] = "A) Set transmission rate _b~12~ = 0.005_, everything else as before. Run the simulation and see what changes."
 
-**Record**
+# Record for task 11
+nrec = 1 # number of items to record
+reclist = list()
+reclist$rectext = c("Nothing")
+reclist$rectype = "None"
+reclist$recnote = c("")
+reclist$recfuzzy = c(0)
+allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
+rc = rc + nrec #increment record counter by number of outcomes to record for this task 
 
-* Nothing
+# Task 12
+tid = 12
+alltasks[tid,"TaskText"] = "A) Set transmission rate _b~21~ = 0.005_, and _b~12~ = 0_, everything else as before. Run the simulation and see what changes."
 
-### Task 12: 
-* Set transmission rate _b~12~ = 0.005_, and _b~21~ = 0_, everything else as before. 
-* Run the simulation and see what changes.
+# Record for task 12
+nrec = 1 # number of items to record
+reclist = list()
+reclist$rectext = c("Nothing")
+reclist$rectype = "None"
+reclist$recnote = c("")
+reclist$recfuzzy = c(0)
+allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
+rc = rc + nrec #increment record counter by number of outcomes to record for this task 
 
-**Record**
+# Task 13
+tid = 13
+alltasks[tid,"TaskText"] = "A) With the settings you just had, turn off waning immunity for type 1, run the simulation and see what you get."
 
-* Nothing
+# Record for task 13
+nrec = 2 # number of items to record
+reclist = list()
+reclist$rectext = c("Number of type 1 susceptible remaining at the end",
+                    "Number of type 2 susceptible remaining at the end")
+reclist$rectype = c("Numeric",
+                    "Numeric")
+reclist$recnote = c("Report the rounded integer",
+                    "Report the rounded integer")
+reclist$recfuzzy = c(0,
+                     0)
+allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
+rc = rc + nrec #increment record counter by number of outcomes to record for this task  
 
-### Task 13: 
-* With the settings you just had, turn off waning immunity for type 1, run the simulation and see what you get.
+# Task 14
+tid = 14
+alltasks[tid,"TaskText"] = "A) Turn waning immunity for type 1 back on and turn off for type 2, run the simulation and see what you get."
 
-**Record**
+# Record for task 14
+nrec = 2 # number of items to record
+reclist = list()
+reclist$rectext = c("Number of type 1 susceptible remaining at the end",
+                    "Number of type 2 susceptible remaining at the end")
+reclist$rectype = c("Numeric",
+                    "Numeric")
+reclist$recnote = c("Report the rounded integer",
+                    "Report the rounded integer")
+reclist$recfuzzy = c(0,
+                     0)
+allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
+rc = rc + nrec #increment record counter by number of outcomes to record for this task   
 
-* Number of type 1 susceptible remaining at the end
+# Task 15
+tid = 15
+alltasks[tid,"TaskText"] = "A) Keep exploring. Think of a real ID where accounting for 2 types of hosts is important, see if you can use the simulation to approximate and explore that ID."
 
-### Task 14: 
-* Turn waning immunity for type 1 back on and turn off for type 2, run the simulation and see what you get.
+# Record for task 15
+nrec = 1 # number of items to record
+reclist = list()
+reclist$rectext = c("Nothing")
+reclist$rectype = "None"
+reclist$recnote = c("")
+reclist$recfuzzy = c(0)
+allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
+rc = rc + nrec #increment record counter by number of outcomes to record for this task 
+```
 
-**Record**
 
-* Number of type 2 susceptible remaining at the end
+```{r echo=FALSE}
+#save the fully filled task table to a tsv file
+save_tasktable(alltasks,allrecord,appsettings)
+```
 
-### Task 15: 
-* Keep exploring. Think of a real ID where accounting for 2 types of hosts is important, see if you can use the simulation to approximate and explore that ID.
 
-**Record**
+```{r, echo=FALSE, results='asis'}
+# Take all the text stored in the table and print the tasks and items to record
+write_tasktext(alltasks,allrecord)
+```
 
-* Nothing
+
 
 ## Further Information {#shinytab4}
 
