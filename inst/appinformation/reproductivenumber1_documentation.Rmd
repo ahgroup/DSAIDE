@@ -138,10 +138,6 @@ allrecord = tablist[[2]]
 #this is the running counter for the records which starts at 1 
 rc=1
 
-# this is a list where all the items that need to be recorded are stored
-reclist = list()
-
-
 
 # Task 1
 tid = 1
@@ -149,6 +145,7 @@ alltasks[tid,"TaskText"] = "A) Set the simulation the following simulation param
 
 # Record for task 1
 nrec = 1 # number of items to record
+reclist = list()
 reclist$rectext = c("The value for R~0~")
 reclist$rectype = "Numeric"
 reclist$recnote = c("Report two decimals")
@@ -163,6 +160,7 @@ alltasks[tid,"TaskText"] = "A) Use the equation that expresses R~0~ as a functio
 
 # Record for task 2
 nrec = 1 # number of items to record
+reclist = list()
 reclist$rectext = c("The value for R~0~")
 reclist$rectype = "Numeric"
 reclist$recnote = c("Report two decimals")
@@ -177,6 +175,7 @@ alltasks[tid,"TaskText"] = "A) Double the value of the transmission parameter, _
 
 # Record for task 3
 nrec = 1 # number of items to record
+reclist = list()
 reclist$rectext = c("The value for R~0~")
 reclist$rectype = "Numeric"
 reclist$recnote = c("Report two decimals")
@@ -191,6 +190,7 @@ alltasks[tid,"TaskText"] = "A) Double the rate of the recovery parameter, _g_. L
 
 # Record for task 4
 nrec = 1 # number of items to record
+reclist = list()
 reclist$rectext = c("The value for R~0~")
 reclist$rectype = "Numeric"
 reclist$recnote = c("Report two decimals")
@@ -206,6 +206,7 @@ B) Set the model parameters back to those given in task #1. Let's try using the 
 
 # Record for task 5
 nrec = 1 # number of items to record
+reclist = list()
 reclist$rectext = c("The value for R~0~ (Part B)")
 reclist$rectype = "Numeric"
 reclist$recnote = c("Report two decimals")
@@ -220,6 +221,7 @@ alltasks[tid,"TaskText"] = "A) What is the value of the reproductive number _R_ 
 
 # Record for task 6
 nrec = 1 # number of items to record
+reclist = list()
 reclist$rectext = c("R value to completely halt any further infections")
 reclist$rectype = "Numeric"
 reclist$recnote = c("Report the rounded integer")
@@ -234,6 +236,7 @@ alltasks[tid,"TaskText"] = "A) What would happen if a new ID came along that had
 
 # Record for task 7
 nrec = 1 # number of items to record
+reclist = list()
 reclist$rectext = c("Nothing")
 reclist$rectype = "None"
 reclist$recnote = c("")
@@ -249,6 +252,7 @@ B) Now increase the infectious duration by a factor of 4 (rate reduced by a fact
 
 # Record for task 8
 nrec = 2 # number of items to record
+reclist = list()
 reclist$rectext = c("Day the outbreak peaked (Part A)",
                     "Day the outbreak peaked (Part B)")
 reclist$recnote = c("Report the rounded integer",

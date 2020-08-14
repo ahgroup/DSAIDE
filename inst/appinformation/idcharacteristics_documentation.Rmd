@@ -148,6 +148,7 @@ B) Run another simulation, record the same values as above. Compare your expecta
 
 # Record for task 2
 nrec = 2 # number of items to record
+reclist = list()
 reclist$rectext = c("Day the outbreak peaked",
                     "Total number infected at end of outbreak")
 reclist$recnote = c("Report the rounded integer",
@@ -166,6 +167,7 @@ alltasks[tid,"TaskText"] = "A) Now assume that the asymptomatics transmit at the
 
 # Record for task 3
 nrec = 2 # number of items to record
+reclist = list()
 reclist$rectext = c("Day the outbreak peaked",
                     "Total number recovered at end of outbreak")
 reclist$recnote = c("Report the rounded integer",
@@ -185,6 +187,7 @@ B) Run another simulation, record the same values as above. Compare your expecta
 
 # Record for task 4
 nrec = 2 # number of items to record
+reclist = list()
 reclist$rectext = c("Max number of pre-symptomatic",
                     "Max number of infected")
 reclist$recnote = c("Report the rounded integer",
@@ -204,6 +207,7 @@ B) Further explore how changes in the infectiousness of the different groups (_b
 
 # Record for task 5
 nrec = 2 # number of items to record
+reclist = list()
 reclist$rectext = c("Max number of pre-symptomatic (Part A)",
                     "Max number of infected (Part A)")
 reclist$recnote = c("Report the rounded integer",
@@ -223,6 +227,7 @@ B) Further explore how changes in the fraction becoming asymptomatic and fractio
 
 # Record for task 6
 nrec = 2 # number of items to record
+reclist = list()
 reclist$rectext = c("Max number of pre-symptomatic (Part A)",
                     "Max number of infected (Part A)")
 reclist$recnote = c("Report the rounded integer",

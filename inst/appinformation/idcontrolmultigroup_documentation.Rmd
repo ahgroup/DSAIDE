@@ -128,10 +128,6 @@ allrecord = tablist[[2]]
 #this is the running counter for the records which starts at 1 
 rc=1
 
-# this is a list where all the items that need to be recorded are stored
-reclist = list()
-
-
 
 # Task 1
 tid = 1
@@ -139,6 +135,7 @@ alltasks[tid,"TaskText"] = "A) We start by considering an outbreak of something 
 
 # Record for task 1
 nrec = 1 # number of items to record
+reclist = list()
 reclist$rectext = c("Nothing")
 reclist$rectype = "None"
 reclist$recnote = c("")
@@ -153,6 +150,7 @@ alltasks[tid,"TaskText"] = "A) Now lets implement strong control for each age gr
 
 # Record for task 2
 nrec = 1 # number of items to record
+reclist = list()
 reclist$rectext = c("Nothing")
 reclist$rectype = "None"
 reclist$recnote = c("")
@@ -167,6 +165,7 @@ alltasks[tid,"TaskText"] = "A) Now lets implement control that targets mainly ch
 
 # Record for task 3
 nrec = 1 # number of items to record
+reclist = list()
 reclist$rectext = c("Nothing")
 reclist$rectype = "None"
 reclist$recnote = c("")
@@ -181,6 +180,7 @@ alltasks[tid,"TaskText"] = "A) Now lets implement control applied to adults only
 
 # Record for task 4
 nrec = 1 # number of items to record
+reclist = list()
 reclist$rectext = c("Nothing")
 reclist$rectype = "None"
 reclist$recnote = c("")
@@ -195,6 +195,7 @@ alltasks[tid,"TaskText"] = "A) * Now lets implement control that targets mainly 
 
 # Record for task 5
 nrec = 1 # number of items to record
+reclist = list()
 reclist$rectext = c("Nothing")
 reclist$rectype = "None"
 reclist$recnote = c("")

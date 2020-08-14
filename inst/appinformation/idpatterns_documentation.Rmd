@@ -129,10 +129,6 @@ allrecord = tablist[[2]]
 #this is the running counter for the records which starts at 1 
 rc=1
 
-# this is a list where all the items that need to be recorded are stored
-reclist = list()
-
-
 
 # Task 1
 tid = 1
@@ -140,6 +136,7 @@ alltasks[tid,"TaskText"] = "A) Run the simulation with A population size, _S~0~_
 
 # Record for task 1
 nrec = 1 # number of items to record
+reclist = list()
 reclist$rectext = c("Nothing")
 reclist$rectype = "None"
 reclist$recnote = c("")
@@ -155,6 +152,7 @@ B) It is possible to compute the steady state population size of susceptibles in
 
 # Record for task 2
 nrec = 1 # number of items to record
+reclist = list()
 reclist$rectext = c("Total number susceptibles at steady state")
 reclist$recnote = c("Report the rounded integer")
 reclist$rectype = c("Numeric")
@@ -170,6 +168,7 @@ B) Set population size back to 1000, now try out different values for the birth 
 
 # Record for task 3
 nrec = 3 # number of items to record
+reclist = list()
 reclist$rectext = c("Total number susceptible at steady state (part A; _S~0~=3000_)",
                     "Total number susceptible at steady state (part B; _n=2_ and _m=0.002_)",
                     "Total number susceptible at steady state (part B; _n=6_ and _m=0.003_)")
@@ -191,6 +190,7 @@ tid = 4
 alltasks[tid,"TaskText"] = "A) Now, set the birth and death rate as in task 2 and also adjust the population size to the steady state value you found in task 2. We do that because we don't want a mixing of underlying population growth/decline dynamics on top if the ID dynamics. That would make it more complicated to understand what's going on. (You get to do that later). Ensure that if you run the simulation now, nothing changes. Now introduce an infected individual (_P0=1_), with other values as set in task 1. If needed, adjust the simulation duration to see the initial pattern and ensure everything reaches steady state. What do you expect to see? Run the simulation, compare expectations with results."
 
 nrec = 1 # number of items to record
+reclist = list()
 reclist$rectext = c("Nothing")
 reclist$rectype = "None"
 reclist$recnote = c("")
@@ -212,6 +212,7 @@ B) Let's compare the model simulations with the equations you found. Substitute 
 
 # Record for task 5
 nrec = 1 # number of items to record
+reclist = list()
 reclist$rectext = c("Nothing")
 reclist$rectype = "None"
 reclist$recnote = c("")
@@ -227,6 +228,7 @@ B) Now, assume that immunity wanes within on average 10 months and set simulatio
 
 # Record for task 6
 nrec = 2 # number of items to record
+reclist = list()
 reclist$rectext = c("Total number infected at the end (part B; 10 Months)",
                     "Total number infected at the end (part B; 20 Months)")
 reclist$recnote = c("Report the rounded integer",
@@ -246,6 +248,7 @@ alltasks[tid,"TaskText"] = "A) Take the SIR model from above, add the terms desc
 
 # Record for task 7
 nrec = 1 # number of items to record
+reclist = list()
 reclist$rectext = c("Nothing")
 reclist$rectype = "None"
 reclist$recnote = c("")
@@ -261,6 +264,7 @@ alltasks[tid,"TaskText"] = "A) Now combine births and deaths with waning immunit
 
 # Record for task 8
 nrec = 1 # number of items to record
+reclist = list()
 reclist$rectext = c("Total number of recovered at the end")
 reclist$rectype = "Numeric"
 reclist$recnote = c("Report the rounded integer")
@@ -276,6 +280,7 @@ alltasks[tid,"TaskText"] = "A) So far, the cycles were due to the intrinsic dyna
 
 # Record for task 9
 nrec = 4 # number of items to record
+reclist = list()
 reclist$rectext = c("Total number of outbreaks (s = 0.001)",
                     "Total number of outbreaks (s = 0.01)",
                     "Total number of outbreaks (s = 0.1)",
@@ -303,6 +308,7 @@ alltasks[tid,"TaskText"] = "A) Assume now that immunity wanes within 10 months. 
 
 # Record for task 10
 nrec = 3 # number of items to record
+reclist = list()
 reclist$rectext = c("Total number of outbreaks (_w=0.1_, _s=0.1_, _tmax=1200_)",
                     "Total number of outbreaks (_w=0.05_, _s=0.1_, _tmax=1200_)",
                     "Total number of outbreaks (_w=0.01_, _s=0.1_, _tmax=1200_)")
@@ -325,6 +331,7 @@ alltasks[tid,"TaskText"] = "A) Keep exploring! You can let people enter the A an
 
 # Record for task 11
 nrec = 1 # number of items to record
+reclist = list()
 reclist$rectext = c("Nothing")
 reclist$rectype = "None"
 reclist$recnote = c("")
