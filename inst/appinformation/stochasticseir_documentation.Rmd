@@ -129,8 +129,6 @@ tablist <- make_tasktable(ntasks,nrecord,appsettings)
 alltasks = tablist[[1]]
 allrecord = tablist[[2]]
 
-
-
 #this is the running counter for the records which starts at 1 
 rc=1
 

@@ -146,6 +146,7 @@ B) Think about your expectations, run the simulation and compare your expectatio
 
 # Record for task 2
 nrec = 1 # number of items to record
+reclist = list()
 reclist$rectext = c("Nothing")
 reclist$rectype = "None"
 reclist$recnote = c("")
@@ -157,12 +158,13 @@ rc = rc + nrec
 ### Task 3 
 tid = 3
 alltasks[tid,"TaskText"] = "A) Let's assume we are now in a location with twice the number of people as before (_S~0~_ = 1999) , living in the same area. Implement that in the simulation by changing population size, keep all other settings as above.
-B) What do you expect to see for the frequency and density dependent scenarios? Does anything change? Do you undstand why?"
+B) What do you expect to see for the frequency and density dependent scenarios? Does anything change? Do you understand why?"
 
 # Record for task 3
 nrec = 2 # number of items to record
-reclist$rectext = c("Total number of recovered at end of outbreak (senario = 1)",
-                    "Total number of recovered at end of outbreak (senario = 2)")
+reclist = list()
+reclist$rectext = c("Total number of recovered at end of outbreak (scenario = 1)",
+                    "Total number of recovered at end of outbreak (scenario = 2)")
 reclist$rectype = c("Numeric",
                     "Numeric")
 reclist$recnote = c("Report the rounded integer",
@@ -178,6 +180,7 @@ alltasks[tid,"TaskText"] = "A) If you double the population size as you just did
 
 # Record for task 4
 nrec = 1 # number of items to record
+reclist = list()
 reclist$rectext = c("The area used to get the same fraction")
 reclist$rectype = c("Numeric")
 reclist$recnote = c("Report the rounded integer")
@@ -193,6 +196,7 @@ B) As you continue your exploration, think about real infectious diseases that m
 
 # Record for task 5
 nrec = 1 # number of items to record
+reclist = list()
 reclist$rectext = c("Nothing")
 reclist$rectype = "None"
 reclist$recnote = c("")

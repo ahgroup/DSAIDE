@@ -148,6 +148,7 @@ alltasks[tid,"TaskText"] = "A) Now set _b~1~_ and _b~2~_ = 0.003, and rerun the 
 
 # Record for task 2
 nrec = 1 # number of items to record
+reclist = list()
 reclist$rectext = c("Max number of infected hosts")
 reclist$rectype = c("Numeric")
 reclist$recnote = c("Report the rounded integer")
@@ -162,6 +163,7 @@ alltasks[tid,"TaskText"] = "A) Play around with _b~1~_ and _b~2~_ and see how di
 
 # Record for task 3
 nrec = 1 # number of items to record
+reclist = list()
 reclist$rectext = c("Nothing")
 reclist$rectype = "None"
 reclist$recnote = c("")
@@ -176,6 +178,7 @@ B) Play around with a different initial number of infected hosts and vectors and
 
 # Record for task 4
 nrec = 1 # number of items to record
+reclist = list()
 reclist$rectext = c("Max number of infected hosts (Part A)")
 reclist$rectype = c("Numeric")
 reclist$recnote = c("Report the rounded integer")
@@ -190,6 +193,7 @@ alltasks[tid,"TaskText"] = "A) Turn off any infection process by setting the num
 
 # Record for task 5
 nrec = 1 # number of items to record
+reclist = list()
 reclist$rectext = c("The number of months it takes for Sv to be 4000")
 reclist$rectype = c("Numeric")
 reclist$recnote = c("Report the rounded integer")
@@ -204,6 +208,7 @@ alltasks[tid,"TaskText"] = "A) Turn infection process back on by having 1 infect
 
 # Record for task 6
 nrec = 1 # number of items to record
+reclist = list()
 reclist$rectext = c("Nothing")
 reclist$rectype = "None"
 reclist$recnote = c("")
@@ -218,6 +223,7 @@ alltasks[tid,"TaskText"] = "A) Assume host immunity wanes after an average of 2 
 
 # Record for task 7
 nrec = 1 # number of items to record
+reclist = list()
 reclist$rectext = c("Final number of suscepitble hosts at steady state")
 reclist$rectype = c("Numeric")
 reclist$recnote = c("Report the rounded integer")
@@ -232,6 +238,7 @@ alltasks[tid,"TaskText"] = "A) Keep exploring. Try to figure out how the differe
 
 # Record for task 8
 nrec = 1 # number of items to record
+reclist = list()
 reclist$rectext = c("Nothing")
 reclist$rectype = "None"
 reclist$recnote = c("")

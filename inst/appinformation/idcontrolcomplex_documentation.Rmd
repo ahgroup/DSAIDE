@@ -136,10 +136,6 @@ allrecord = tablist[[2]]
 #this is the running counter for the records which starts at 1 
 rc=1
 
-# this is a list where all the items that need to be recorded are stored
-reclist = list()
-
-
 
 # Task 1
 tid = 1
@@ -147,6 +143,7 @@ alltasks[tid,"TaskText"] = "A) Set the model parameters such that it corresponds
 
 # Record for task 1
 nrec = 1 # number of items to record
+reclist = list()
 reclist$rectext = c("Nothing")
 reclist$rectype = "None"
 reclist$recnote = c("")
@@ -163,6 +160,7 @@ C) Now, we will envision a scenario where we can quarantine everyone who has bec
 
 # Record for task 2
 nrec = 2 # number of items to record
+reclist = list()
 reclist$rectext = c("The number of susceptibles left at the end (Part B)",
                     "The number of susceptibles left at the end (Part C)")
 reclist$rectype = c("Numeric",
@@ -182,6 +180,7 @@ B) Now assume that the drug _also_ reduces the duration of the symptomatic perio
 
 # Record for task 3
 nrec = 2 # number of items to record
+reclist = list()
 reclist$rectext = c("The number of susceptibles left at the end (Part A)",
                     "The number of susceptibles left at the end (Part B)")
 reclist$rectype = c("Numeric",
@@ -202,6 +201,7 @@ C) Now assume that the drug also cuts infectiousness by half. Run the simulation
 
 # Record for task 4
 nrec = 2 # number of items to record
+reclist = list()
 reclist$rectext = c("The number of susceptibles left at the end (Part B)",
                     "The number of susceptibles left at the end (Part C)")
 reclist$rectype = c("Numeric",
@@ -220,6 +220,7 @@ alltasks[tid,"TaskText"] = "A) Set everything as in task 1. Then turn on environ
 
 # Record for task 5
 nrec = 1 # number of items to record
+reclist = list()
 reclist$rectext = c("The number of susceptibles left at the end")
 reclist$rectype = c("Numeric")
 reclist$recnote = c("Report rounded interger")
@@ -236,6 +237,7 @@ C) Now instead of faster clearance, assume a 50% reduced rate of infection from 
 
 # Record for task 6
 nrec = 2 # number of items to record
+reclist = list()
 reclist$rectext = c("The number of susceptibles left at the end (Part B)",
                     "The number of susceptibles left at the end (Part C)")
 reclist$rectype = c("Numeric",
@@ -254,6 +256,7 @@ B) Double host-vector and vector-host transmission rates. Now consider some vect
 
 # Record for task 7
 nrec = 1 # number of items to record
+reclist = list()
 reclist$rectext = c("The total number infected at the end (Part B)")
 reclist$rectype = c("Numeric")
 reclist$recnote = c("Report rounded interger")
@@ -267,6 +270,7 @@ alltasks[tid,"TaskText"] = "A) Instead of killing vector populations, we now con
 
 # Record for task 8
 nrec = 1 # number of items to record
+reclist = list()
 reclist$rectext = c("Nothing")
 reclist$rectype = "None"
 reclist$recnote = c("")
@@ -280,6 +284,7 @@ alltasks[tid,"TaskText"] = "A) Keep exploring. The model has many more parameter
 
 # Record for task 9
 nrec = 1 # number of items to record
+reclist = list()
 reclist$rectext = c("Nothing")
 reclist$rectype = "None"
 reclist$recnote = c("")

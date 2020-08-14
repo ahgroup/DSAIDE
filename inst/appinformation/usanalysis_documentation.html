@@ -52,7 +52,7 @@
 <ul>
 <li>Susceptible individuals (S) can become infected at rate <em>b</em>.</li>
 <li>Infected hosts recover at rate <em>g</em>.</li>
-<li>New susceptible hosts enter the system (are born) at rate <em>m</em>. Natural death occurs at rate <em>n</em>.</li>
+<li>New susceptible hosts enter the system (are born) at rate <em>n</em>. Natural death occurs at rate <em>m</em>.</li>
 </ul>
 </div>
 <div id="model-implementation" class="section level3">
@@ -65,7 +65,7 @@ Flow diagram for this model.
 </p>
 </div>
 <p>The deterministic model implemented as set of differential equations is given by the following equations:</p>
-<p><span class="math display">\[\dot S = m - bSI - nS\]</span> <span class="math display">\[\dot I = bSI - gI - nI\]</span> <span class="math display">\[\dot R = gI - nR\]</span></p>
+<p><span class="math display">\[\dot S = n - bSI - mS\]</span> <span class="math display">\[\dot I = bSI - gI - mI\]</span> <span class="math display">\[\dot R = gI - mR\]</span></p>
 <p>This is almost the same model as the basic SIR model from the introductory app, with the only difference that this model also allows natural births and deaths.</p>
 </div>
 <div id="uncertainty-and-sensitivity-analysis" class="section level3">

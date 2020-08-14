@@ -117,17 +117,13 @@ allrecord = tablist[[2]]
 #this is the running counter for the records which starts at 1 
 rc=1
 
-# this is a list where all the items that need to be recorded are stored
-reclist = list()
-
-
-
 # Task 1
 tid = 1
 alltasks[tid,"TaskText"] = "A) Set the model to 1000 initial susceptible, 1 infected, no recovered. Set the recovery rate, _g_, such that it corresponds to an infectiousness duration of 5 days. Set the infectiousness rate _b_ such that the model has a reproductive number, R~0~, of 4. If you don't know how to do that, please work through the _Reproductive Number_ apps first and then come back. Keep the intervention level, _f_, at 0 for now. Set _tmax_ and _tnew_ to 200. Values for _tstart_ and _tend_ do not matter since _f_ is 0. Run the simulation. You should get an outbreak with around 20 susceptibles left at the end."
 
 # Record for task 1
 nrec = 1 # number of items to record
+reclist = list()
 reclist$rectext = c("Nothing")
 reclist$rectype = "None"
 reclist$recnote = c("")
@@ -143,6 +139,7 @@ alltasks[tid,"TaskText"] = "A) First without running the simulation and using wh
 
 # Record for task 2
 nrec = 1 # number of items to record
+reclist = list()
 reclist$rectext = c("Nothing")
 reclist$rectype = "None"
 reclist$recnote = c("")
@@ -157,6 +154,7 @@ alltasks[tid,"TaskText"] = "A) The threshold value below which you do not get an
 
 # Record for task 3
 nrec = 1 # number of items to record
+reclist = list()
 reclist$rectext = c("Nothing")
 reclist$rectype = "None"
 reclist$recnote = c("")
@@ -171,6 +169,7 @@ alltasks[tid,"TaskText"] = "A) For a single outbreak, more control is better. We
 
 # Record for task 4
 nrec = 1 # number of items to record
+reclist = list()
 reclist$rectext = c("Nothing")
 reclist$rectype = "None"
 reclist$recnote = c("")
@@ -186,6 +185,7 @@ B) To explore this in more detail, set f=0.55 and f=0.6 and try to understand wh
 
 # Record for task 5
 nrec = 1 # number of items to record
+reclist = list()
 reclist$rectext = c("Nothing")
 reclist$rectype = "None"
 reclist$recnote = c("")
@@ -201,6 +201,7 @@ B) Now set _tnew=300_. That means at time 300 a newly infected individual enters
 
 # Record for task 6
 nrec = 3 # number of items to record
+reclist = list()
 reclist$rectext = c("Number of susceptible at the end when _f=0.3_ (Part B)",
                     "Number of susceptible at the end when _f=0.5_ (Part B)",
                     "Number of susceptible at the end when _f=0.7_ (Part B)")

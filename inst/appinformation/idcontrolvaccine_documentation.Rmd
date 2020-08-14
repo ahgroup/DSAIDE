@@ -126,10 +126,6 @@ allrecord = tablist[[2]]
 #this is the running counter for the records which starts at 1 
 rc=1
 
-# this is a list where all the items that need to be recorded are stored
-reclist = list()
-
-
 
 # Task 1
 tid = 1
@@ -137,6 +133,7 @@ alltasks[tid,"TaskText"] = "A) Knowing the reproductive number, _R_, is importan
 
 # Record for task 1
 nrec = 2 # number of items to record
+reclist = list()
 reclist$rectext = c("The new value for R",
                     "The proportion vaccinated needed to prevent an outbreak")
 reclist$rectype = c("Numeric",
@@ -157,6 +154,7 @@ B) Now set 50% vaccination coverage at 100% vaccine efficacy (_f=0.5_ and _e=1_)
 
 # Record for task 2
 nrec = 1 # number of items to record
+reclist = list()
 reclist$rectext = c("Effective _R_ after vaccination (Part B, _f=0.5_)")
 reclist$rectype = "Numeric"
 reclist$recnote = c("Report two decimals")
@@ -171,6 +169,7 @@ alltasks[tid,"TaskText"] = "A) Most vaccines are not perfect. What fraction of t
 
 # Record for task 3
 nrec = 2 # number of items to record
+reclist = list()
 reclist$rectext = c("The proportion vaccinated needed to prevent an outbreak (_e=.75_)",
                     "The proportion vaccinated needed to prevent an outbreak (_e=.60_)")
 reclist$rectype = c("Numeric",
@@ -191,6 +190,7 @@ Note: In this model, we can't distinguish between interventions that target susc
 
 # Record for task 4
 nrec = 1 # number of items to record
+reclist = list()
 reclist$rectext = c("Value of _b_ that prevents an outbreak")
 reclist$rectype = c("Numeric")
 reclist$recnote = c("Report decimal to thousandths")

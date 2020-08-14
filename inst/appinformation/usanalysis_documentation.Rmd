@@ -56,7 +56,7 @@ The included processes/mechanisms are the following:
 
 * Susceptible individuals (S) can become infected at rate _b_. 
 * Infected hosts recover at rate _g_. 
-* New susceptible hosts enter the system (are born) at rate _m_. Natural death occurs at rate _n_.
+* New susceptible hosts enter the system (are born) at rate _n_. Natural death occurs at rate _m_.
 
 
 
@@ -71,9 +71,9 @@ knitr::include_graphics(here::here('inst/media',appsettings$modelfigname))
 
 The deterministic model implemented as set of differential equations is given by the following equations:
 
-$$\dot S = m - bSI - nS$$
-$$\dot I = bSI - gI - nI$$
-$$\dot R = gI - nR$$
+$$\dot S = n - bSI - mS$$
+$$\dot I = bSI - gI - mI$$
+$$\dot R = gI - mR$$
 
 This is almost the same model as the basic SIR model from the introductory app, with the only difference that this model also allows natural births and deaths. 
 
@@ -133,7 +133,6 @@ tablist <- make_tasktable(ntasks,nrecord,appsettings)
 alltasks = tablist[[1]]
 allrecord = tablist[[2]]
 
-
 #this is the running counter for the records which starts at 1 
 rc=1
 
@@ -164,6 +163,7 @@ C) Now go the opposite way and lower the initial lower/upper bounds by a factor 
 
 # Record the answers for task 2
 nrec = 2 # number of items to record
+reclist = list()
 reclist$rectext = c("Mean peak of infected when transmission is increased by a factor of 10 (Part B)",
             "Mean peak of infected when transmission is decreased by a factor of 10 (Part C)")
 reclist$recnote = c("Report the rounded integer",
@@ -182,6 +182,7 @@ C) Reset the birth rate, now decrease the upper bound for the death rate by a fa
 
 # Record the answers for task 3
 nrec = 2 # number of items to record
+reclist = list()
 reclist$rectext = c("Mean number of susceptible at end of outbreak (Part B)",
             "Mean number of susceptible at end of outbreak (Part C)")
 reclist$recnote = c("Report the rounded integer",
@@ -198,6 +199,7 @@ alltasks[4,"TaskText"] = "A) Continue exploring by changing ranges for different
 
 # Record the answers for task 4
 nrec = 1 # number of items to record
+reclist = list()
 reclist$rectext = c("Nothing")
 reclist$recnote = c("")
 reclist$rectype = c("None")
@@ -214,6 +216,7 @@ C) Now use a sample size of 150 and use rngseed=100. Run the simulation"
 
 # Record the answers for task 5
 nrec = 2 # number of items to record
+reclist = list()
 reclist$rectext = c("The correlation between infection peak and _b_ (Part C)",
             "The correlation between final number of susceptibles and _m_ (Part C)")
 reclist$recnote = c("Report to the hundredths",
@@ -231,6 +234,7 @@ B) Get the equations for _S_ and _I_ at steady state as determined in those apps
 
 # Record the answers for task 6
 nrec = 1 # number of items to record
+reclist = list()
 reclist$rectext = c("Nothing")
 reclist$recnote = c("")
 reclist$rectype = c("None")
@@ -248,6 +252,7 @@ D) Look at both scatterplots for _g_ and _n_. Note the different distributions f
 
 # Record the answers for task 7
 nrec = 1 # number of items to record
+reclist = list()
 reclist$rectext = c("Correlation between _g_ and the outbreak peak (Part C).")
 reclist$recnote = c("Report to the hundredths")
 reclist$rectype = c("Numeric")

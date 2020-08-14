@@ -118,10 +118,6 @@ allrecord = tablist[[2]]
 #this is the running counter for the records which starts at 1 
 rc=1
 
-# this is a list where all the items that need to be recorded are stored
-reclist = list()
-
-
 
 # Task 1
 tid = 1
@@ -130,9 +126,10 @@ B) We'll start with natural births and deaths. If births (and deaths) are presen
 
 # Record for task 1
 nrec = 1 # number of items to record
+reclist = list()
 reclist$rectext = c("The value you used for births")
 reclist$rectype = "Numeric"
-reclist$recnote = c("Report Interger")
+reclist$recnote = c("Report Integer")
 reclist$recfuzzy = c(0)
 allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
 rc = rc + nrec #increment record counter by number of outcomes to record for this task 
@@ -144,6 +141,7 @@ alltasks[tid,"TaskText"] = "A) Figure out what the reproductive number is at the
 
 # Record for task 2
 nrec = 1 # number of items to record
+reclist = list()
 reclist$rectext = c("The value for R~0~")
 reclist$rectype = "Numeric"
 reclist$recnote = c("Report two decimals")
@@ -159,6 +157,7 @@ B) Next double the values for both natural birth and death rates and recalculate
 
 # Record for task 3
 nrec = 1 # number of items to record
+reclist = list()
 reclist$rectext = c("The value for R~0~ (Part A)")
 reclist$rectype = "Numeric"
 reclist$recnote = c("Report two decimals")
@@ -173,6 +172,7 @@ alltasks[tid,"TaskText"] = "A) One usually obtains R~0~ from the data/literature
 
 # Record for task 4
 nrec = 1 # number of items to record
+reclist = list()
 reclist$rectext = c("Nothing")
 reclist$rectype = "None"
 reclist$recnote = c("")
@@ -189,6 +189,7 @@ Note: The SIR model is not a good model for TB since for TB, the stage where ind
 
 # Record for task 5
 nrec = 1 # number of items to record
+reclist = list()
 reclist$rectext = c("Nothing")
 reclist$rectype = "None"
 reclist$recnote = c("")
