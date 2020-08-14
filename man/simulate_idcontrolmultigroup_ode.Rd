@@ -12,9 +12,9 @@ simulate_idcontrolmultigroup_ode(
   Se = 250000,
   Ie = 1,
   bcc = 3e-07,
-  bca = 1.5e-07,
+  bca = 7.5e-08,
   bce = 7.5e-08,
-  bac = 7.5e-08,
+  bac = 1.5e-07,
   baa = 3e-07,
   bae = 1.5e-07,
   bec = 7.5e-08,
@@ -54,23 +54,23 @@ simulate_idcontrolmultigroup_ode(
 
 \item{Ie}{:  initial number of infected elderly : numeric}
 
-\item{bcc}{:  rate of transmission from infected child to susceptible child : numeric}
+\item{bcc}{:  rate of transmission to susceptible child from infected child : numeric}
 
-\item{bca}{:  rate of transmission from infected child to susceptible adult : numeric}
+\item{bca}{:  rate of transmission to susceptible child from infected adult : numeric}
 
-\item{bce}{:  rate of transmission from infected child to susceptible elderly : numeric}
+\item{bce}{:  rate of transmission to susceptible child from infected elderly : numeric}
 
-\item{bac}{:  rate of transmission from infected adult to susceptible child : numeric}
+\item{bac}{:  rate of transmission to susceptible adult from infected child : numeric}
 
-\item{baa}{:  rate of transmission from infected adult to susceptible adult : numeric}
+\item{baa}{:  rate of transmission to susceptible adult from infected adult : numeric}
 
-\item{bae}{:  rate of transmission from infected adult to susceptible elderly : numeric}
+\item{bae}{:  rate of transmission to susceptible adult from infected elderly : numeric}
 
-\item{bec}{:  rate of transmission from infected elderly to susceptible child : numeric}
+\item{bec}{:  rate of transmission to susceptible elderly from infected child : numeric}
 
-\item{bea}{:  rate of transmission from infected elderly to susceptible adult : numeric}
+\item{bea}{:  rate of transmission to susceptible elderly from infected adult : numeric}
 
-\item{bee}{:  rate of transmission from infected elderly to susceptible elderly : numeric}
+\item{bee}{:  rate of transmission to susceptible elderly from infected elderly : numeric}
 
 \item{gc}{:  rate at which infected children recover or die : numeric}
 

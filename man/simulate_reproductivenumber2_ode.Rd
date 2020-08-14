@@ -11,8 +11,8 @@ simulate_reproductivenumber2_ode(
   e = 0,
   b = 0.01,
   g = 10,
-  m = 0,
   n = 0,
+  m = 0,
   w = 0,
   tmax = 300
 )
@@ -30,9 +30,9 @@ simulate_reproductivenumber2_ode(
 
 \item{g}{: rate at which a person leaves the I compartment : numeric}
 
-\item{m}{: the rate at which new individuals enter the model (are born) : numeric}
+\item{n}{: the rate at which new individuals enter the model (are born) : numeric}
 
-\item{n}{: the rate of natural death (the inverse it the average lifespan) : numeric}
+\item{m}{: the rate of natural death (the inverse it the average lifespan) : numeric}
 
 \item{w}{: rate at which recovered persons lose immunity and return to susceptible state : numeric}
 
@@ -46,9 +46,9 @@ This function returns the simulation result as obtained from a call
 Simulation of a basic SIR compartmental model with these compartments:
   Susceptibles (S), Infected/Infectious (I),
   Recovered and Immune (R).
-  
+
   The model is assumed to be in units of months when run through the Shiny App.
-  However as long as all parameters are chosen in the same units, 
+  However as long as all parameters are chosen in the same units,
   one can directly call the simulator assuming any time unit.
 }
 \details{
@@ -67,7 +67,7 @@ A compartmental ID model with several states/compartments
 \examples{
   # To run the simulation with default parameters just call the function:
   result <- simulate_reproductivenumber2_ode()
-  # To choose parameter values other than the standard one, 
+  # To choose parameter values other than the standard one,
   # specify the parameters you want to change, e.g. like such:
   result <- simulate_reproductivenumber2_ode(S = 2000, I = 10, tmax = 100, g = 0.5, n = 0.1)
   # You should then use the simulation result returned from the function, like this:

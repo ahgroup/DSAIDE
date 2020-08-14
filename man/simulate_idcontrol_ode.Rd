@@ -25,10 +25,10 @@ simulate_idcontrol_ode(
   f = 0,
   d = 0,
   w = 0,
-  mh = 0,
   nh = 0,
-  mv = 0,
+  mh = 0,
   nv = 0,
+  mv = 0,
   tmax = 300
 )
 }
@@ -43,17 +43,17 @@ simulate_idcontrol_ode(
 
 \item{Iv}{: initial number of infected vectors : numeric}
 
-\item{bP}{: rate of transmission from pre-symptomatic to susceptible hosts : numeric}
+\item{bP}{: rate of transmission to susceptible hosts from pre-symptomatic : numeric}
 
-\item{bA}{: rate of transmission from asymptomatic to susceptible hosts : numeric}
+\item{bA}{: rate of transmission to susceptible hosts from asymptomatic : numeric}
 
-\item{bI}{: rate of transmission from symptomatic to susceptible hosts : numeric}
+\item{bI}{: rate of transmission to susceptible hosts from symptomatic : numeric}
 
-\item{bE}{: rate of transmission from environment to susceptible hosts : numeric}
+\item{bE}{: rate of transmission to susceptible hosts from environment : numeric}
 
-\item{bv}{: rate of transmission from infected vectors to susceptible hosts : numeric}
+\item{bv}{: rate of transmission to susceptible hosts from infected vectors : numeric}
 
-\item{bh}{: rate of transmission from symptomatic hosts to susceptible vectors : numeric}
+\item{bh}{: rate of transmission to susceptible vectors from symptomatic hosts : numeric}
 
 \item{gP}{: rate at which a person leaves the P compartment : numeric}
 
@@ -73,13 +73,13 @@ simulate_idcontrol_ode(
 
 \item{w}{: rate at which recovered persons lose immunity and return to susceptible state : numeric}
 
-\item{mh}{: the rate at which new hosts enter the model (are born) : numeric}
+\item{nh}{: the rate at which new hosts enter the model (are born) : numeric}
 
-\item{nh}{: the rate of natural death of hosts (the inverse it the average lifespan) : numeric}
+\item{mh}{: the rate of mortality of hosts (the inverse it the average lifespan) : numeric}
 
-\item{mv}{: the rate at which new vectors enter the model (are born) : numeric}
+\item{nv}{: the rate at which new vectors enter the model (are born) : numeric}
 
-\item{nv}{: the rate of natural death of vectors (the inverse it the average lifespan) : numeric}
+\item{mv}{: the rate of mortality of vectors (the inverse it the average lifespan) : numeric}
 
 \item{tmax}{: maximum simulation time, in units of months : numeric}
 }
