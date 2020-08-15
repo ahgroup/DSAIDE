@@ -112,43 +112,49 @@ Flow diagram for this model.
 <div id="task-2" class="section level3">
 <h3>Task 2</h3>
 <ol style="list-style-type: upper-alpha">
-<li>Now lets implement strong control for each age group by setting <span class="math inline">\(f_1 = f_2 = f_3 = 0.9\)</span>. Assume that each control starts 90 days after outbreak start and lasts for 90 days. Keep all other values as previously. Run the simulation. You should see that the strong control initially pushes infected down, but once control is stopped, the outbreak rebounds and the overall size of the outbreak is similar to that without control, with susceptibles at the end of the outbreak at <span class="math inline">\(S_c = 63247\)</span>, <span class="math inline">\(S_a = 99107\)</span>, <span class="math inline">\(S_e = 83557\)</span> and deaths of <span class="math inline">\(D_c = 137\)</span>, <span class="math inline">\(D_a = 4509\)</span>, <span class="math inline">\(D_e = 16644\)</span>.</li>
+<li>Now lets implement strong control for each age group by setting <span class="math inline">\(f_1 = f_2 = f_3 = 0.9\)</span>. Assume that each control starts 90 days after outbreak start and lasts for 90 days. Keep all other values as previously. Run the simulation. You should see that the strong control initially pushes infected down, but once control is stopped, the outbreak rebounds and the overall size of the outbreak is similar to that without control, with susceptibles at the end of the outbreak at <span class="math inline">\(S_c = 63247\)</span>, <span class="math inline">\(S_a = 99107\)</span>, <span class="math inline">\(S_e = 83557\)</span></li>
 </ol>
 <p><strong>Record</strong></p>
 <ul>
-<li>Nothing</li>
+<li><p>Number of D_c at the end</p></li>
+<li><p>Number of D_a at the end</p></li>
+<li><p>Number of D_e at the end</p></li>
 </ul>
 </div>
 <div id="task-3" class="section level3">
 <h3>Task 3</h3>
 <ol style="list-style-type: upper-alpha">
-<li>Now lets implement control that targets mainly children. We also need to apply some control to adults, the largest group, to make the effective reproductive number values comparable. This can be achieved by setting <span class="math inline">\(f_1=1; f_2=0.339; f_3=0\)</span>. Assume that each control starts 90 days after outbreak start and lasts for 90 days. Keep all other values as previously. Run the simulation. You should see susceptibles at the end of the outbreak at <span class="math inline">\(S_c = 120683\)</span>, <span class="math inline">\(S_a = 159146\)</span>, <span class="math inline">\(S_e = 91818\)</span> and deaths of <span class="math inline">\(D_c = 79\)</span>, <span class="math inline">\(D_a = 3908\)</span>, <span class="math inline">\(D_e = 15817\)</span>.</li>
+<li>Now lets implement control that targets mainly children. We also need to apply some control to adults, the largest group, to make the effective reproductive number values comparable. This can be achieved by setting <span class="math inline">\(f_1=1; f_2=0.339; f_3=0\)</span>. Assume that each control starts 90 days after outbreak start and lasts for 90 days. Keep all other values as previously. Run the simulation. You should see susceptibles at the end of the outbreak at <span class="math inline">\(S_c = 120683\)</span>, <span class="math inline">\(S_a = 159146\)</span>, <span class="math inline">\(S_e = 91818\)</span></li>
 </ol>
 <p><strong>Record</strong></p>
 <ul>
-<li>Nothing</li>
+<li><p>Number of D_c at the end</p></li>
+<li><p>Number of D_a at the end</p></li>
+<li><p>Number of D_e at the end</p></li>
 </ul>
 </div>
 <div id="task-4" class="section level3">
 <h3>Task 4</h3>
 <ol style="list-style-type: upper-alpha">
-<li>Now lets implement control applied to adults only, in such a way that the effective reproductive number is the same as for the previous task. This can be achieved by setting <span class="math inline">\(f_1=0; f_2=0.475; f_3=0\)</span>. Keep all other values as previously. Run the simulation. You should see susceptibles at the end of the outbreak at <span class="math inline">\(S_c = 69000\)</span>, <span class="math inline">\(S_a = 181882\)</span>, <span class="math inline">\(S_e = 91279\)</span> and deaths of <span class="math inline">\(D_c = 131\)</span>, <span class="math inline">\(D_a = 3681\)</span>, <span class="math inline">\(D_e = 15871\)</span>.</li>
+<li>Now lets implement control applied to adults only, in such a way that the effective reproductive number is the same as for the previous task. This can be achieved by setting <span class="math inline">\(f_1=0; f_2=0.475; f_3=0\)</span>. Keep all other values as previously. Run the simulation. You should see susceptibles at the end of the outbreak at <span class="math inline">\(S_c = 69000\)</span>, <span class="math inline">\(S_a = 181882\)</span>, <span class="math inline">\(S_e = 91279\)</span></li>
 </ol>
 <p><strong>Record</strong></p>
 <ul>
-<li>Nothing</li>
+<li><p>Number of D_c at the end</p></li>
+<li><p>Number of D_a at the end</p></li>
+<li><p>Number of D_e at the end</p></li>
 </ul>
 </div>
 <div id="task-5" class="section level3">
 <h3>Task 5</h3>
 <ol style="list-style-type: upper-alpha">
-<li><ul>
-<li>Now lets implement control that targets mainly the elderly group, again keeping the overall effective reproductive number the same. This can be achieved by setting <span class="math inline">\(f_1=0; f_2=0.318; f_3=1\)</span>. Keep all other values as previously. Run the simulation. You should see susceptibles at the end of the outbreak at <span class="math inline">\(S_c = 69988\)</span>, <span class="math inline">\(S_a = 157328\)</span>, <span class="math inline">\(S_e = 155342\)</span> and deaths of <span class="math inline">\(D_c = 130\)</span>, <span class="math inline">\(D_a = 3927\)</span>, <span class="math inline">\(D_e = 9465\)</span>. Overall, you will find that control applied to the elderly is best in terms of mortality, and beats the strategy of strong control for each group, since still enough get infected to prevent a rebound of the outbreak.</li>
-</ul></li>
+<li>Now lets implement control that targets mainly the elderly group, again keeping the overall effective reproductive number the same. This can be achieved by setting <span class="math inline">\(f_1=0; f_2=0.318; f_3=1\)</span>. Keep all other values as previously. Run the simulation. You should see susceptibles at the end of the outbreak at <span class="math inline">\(S_c = 69988\)</span>, <span class="math inline">\(S_a = 157328\)</span>, <span class="math inline">\(S_e = 155342\)</span></li>
 </ol>
 <p><strong>Record</strong></p>
 <ul>
-<li>Nothing</li>
+<li><p>Number of D_c at the end</p></li>
+<li><p>Number of D_a at the end</p></li>
+<li><p>Number of D_e at the end</p></li>
 </ul>
 </div>
 </div>
