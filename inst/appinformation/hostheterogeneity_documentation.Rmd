@@ -152,7 +152,7 @@ rc = rc + nrec
 
 # Task 3
 tid = 3
-alltasks[tid,"TaskText"] = "A) Now set the transmission rate from host 2 to host 1 _b~21~ = 0.001_. Everything as before. Run the simulation. You should see an outbreak in both populations. This is an example of a core group driving the dynamics. Contemplate what the core group does."
+alltasks[tid,"TaskText"] = "A) Now set the transmission rate to host 1 from host 2 _b~12~ = 0.001_. Everything as before. Run the simulation. You should see an outbreak in both populations. This is an example of a core group driving the dynamics. Contemplate what the core group does."
 
 # Record for task 3
 nrec = 2 # number of items to record
