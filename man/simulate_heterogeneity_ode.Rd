@@ -29,13 +29,13 @@ simulate_heterogeneity_ode(
 
 \item{I2}{:  initial number of infected type 2 hosts : numeric}
 
-\item{b11}{:  rate of transmission from infected type 1 host to susceptible type 1 host : numeric}
+\item{b11}{:  rate of transmission to susceptible type 1 host from infected type 1 host : numeric}
 
-\item{b12}{:  rate of transmission from infected type 1 host to susceptible type 2 host : numeric}
+\item{b12}{:  rate of transmission to susceptible type 1 host from infected type 2 host : numeric}
 
-\item{b21}{:  rate of transmission from infected type 2 host to susceptible type 1 host : numeric}
+\item{b21}{:  rate of transmission to susceptible type 2 host from infected type 1 host : numeric}
 
-\item{b22}{:  rate of transmission from infected type 2 host to susceptible type 2 host : numeric}
+\item{b22}{:  rate of transmission to susceptible type 2 host from infected type 2 host : numeric}
 
 \item{g1}{:  the rate at which infected type 1 hosts recover : numeric}
 
