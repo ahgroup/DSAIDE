@@ -80,7 +80,7 @@ Also, note that we made several simplifications to keep the model from getting t
 The flow diagram and equations describe the model implemented in this app (Note: births and natural deaths are not drawn to keep the diagram from getting too cluttered):
 
 
-```{r modeldiagram,  fig.cap='Flow diagram for this model. ',  echo=FALSE}
+```{r modeldiagram,  fig.cap='Flow diagram for this model. ',  echo=FALSE, out.width = "70%"}
 knitr::include_graphics(here::here('inst/media',appsettings$modelfigname))
 ```
 
@@ -165,8 +165,8 @@ reclist$rectext = c("The number of susceptibles left at the end (Part B)",
                     "The number of susceptibles left at the end (Part C)")
 reclist$rectype = c("Numeric",
                     "Numeric")
-reclist$recnote = c("Report rounded interger",
-                    "Report rounded interger")
+reclist$recnote = c("Report rounded integer",
+                    "Report rounded integer")
 reclist$recfuzzy = c(0,
                      0)
 allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
@@ -185,8 +185,8 @@ reclist$rectext = c("The number of susceptibles left at the end (Part A)",
                     "The number of susceptibles left at the end (Part B)")
 reclist$rectype = c("Numeric",
                     "Numeric")
-reclist$recnote = c("Report rounded interger",
-                    "Report rounded interger")
+reclist$recnote = c("Report rounded integer",
+                    "Report rounded integer")
 reclist$recfuzzy = c(0,
                      0)
 allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
@@ -206,8 +206,8 @@ reclist$rectext = c("The number of susceptibles left at the end (Part B)",
                     "The number of susceptibles left at the end (Part C)")
 reclist$rectype = c("Numeric",
                     "Numeric")
-reclist$recnote = c("Report rounded interger",
-                    "Report rounded interger")
+reclist$recnote = c("Report rounded integer",
+                    "Report rounded integer")
 reclist$recfuzzy = c(0,
                      0)
 allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
@@ -223,7 +223,7 @@ nrec = 1 # number of items to record
 reclist = list()
 reclist$rectext = c("The number of susceptibles left at the end")
 reclist$rectype = c("Numeric")
-reclist$recnote = c("Report rounded interger")
+reclist$recnote = c("Report rounded integer")
 reclist$recfuzzy = c(0)
 allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
 rc = rc + nrec #increment record counter by number of outcomes to record for this task 
@@ -242,8 +242,8 @@ reclist$rectext = c("The number of susceptibles left at the end (Part B)",
                     "The number of susceptibles left at the end (Part C)")
 reclist$rectype = c("Numeric",
                     "Numeric")
-reclist$recnote = c("Report rounded interger",
-                    "Report rounded interger")
+reclist$recnote = c("Report rounded integer",
+                    "Report rounded integer")
 reclist$recfuzzy = c(0,
                      0)
 allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
@@ -259,7 +259,7 @@ nrec = 1 # number of items to record
 reclist = list()
 reclist$rectext = c("The total number infected at the end (Part B)")
 reclist$rectype = c("Numeric")
-reclist$recnote = c("Report rounded interger")
+reclist$recnote = c("Report rounded integer")
 reclist$recfuzzy = c(0)
 allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
 rc = rc + nrec #increment record counter by number of outcomes to record for this task 
