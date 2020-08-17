@@ -8,7 +8,7 @@ output:
     fig_caption: true
     mathjax: default 
     keep_md: false
-bibliography: references.bib
+bibliography: dsaide_references.bib
 ---
 
 
@@ -112,7 +112,7 @@ In words, the number of susceptible/infected/recovered at a time step _dt_ in th
 
 * Some of the tasks below (and in future apps) are fairly open-ended. The idea is that these tasks give you something to get started, but you should feel free to explore the simulations any way you want. Play with them, query them, go through iterations of thinking what you expect, observing it, and if discrepancies occur, figure out why. Essentially, the best way to use these apps is to _do your own science/research_ with them.
 
-* You might find for some parameter settings that numbers in specific compartments (e.g. number of infected) drop below 1 (and possibly rebound later). This of course is biologically not reasonable. Numbers less than 1 are an artifact of the underlying differential equation model. All ODE models (and the discrete time model we consider here) have that problem. A ‘hacky’ solution is to monitor the simulation and if a quantity drops below 1, set it to 0 or stop the simulation. Some apps use this approach. A cleaner solution is to treat all variables as discrete units and allow them to only change in integer steps (in a probabilistic manner). This approach will be discussed in the apps under the “Stochastic models” section. For most apps, neither approach is taken, so you’ll see numbers less than 1. That’s ok for the purpose we use the apps here. Just be careful if you use these kinds of models in your research you might need to pay attention to this issue.
+* You might find for some parameter settings that numbers in specific compartments (e.g. number of infected) drop below 1 (and possibly rebound later). This of course is biologically not reasonable. Numbers less than 1 are an artifact of the underlying differential equation model. All ODE models (and the discrete time model we consider here) have that problem. A ‘hacky’ solution is to monitor the simulation and if a quantity drops below 1, set it to 0 or stop the simulation. Some apps use this approach. A cleaner solution is to treat all variables as discrete units and allow them to only change in integer steps (in a probabilistic manner). This approach will be discussed in the apps under the “Stochastic models�? section. For most apps, neither approach is taken, so you’ll see numbers less than 1. That’s ok for the purpose we use the apps here. Just be careful if you use these kinds of models in your research you might need to pay attention to this issue.
 
 * While the list of tasks for each app always states what time units you should run the model in, this and most other simulations/apps in DSAIDE do not have natural time units (unless specifically stated). You could, therefore, assume that your model runs in units of days or weeks/months/years, based on what's most suitable for the disease you want to study. You have to make sure that all your parameters are in the right time units. Always make sure to check if a given simulation can handle different time units or assumes specific ones. Again, for the tasks the time units are specified.
 

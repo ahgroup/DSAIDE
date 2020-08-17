@@ -8,7 +8,7 @@ output:
     fig_caption: true
     mathjax: default 
     keep_md: false
-bibliography: references.bib
+bibliography: dsaide_references.bib
 ---
 
 
@@ -58,7 +58,7 @@ For this model, we include the following processes:
 * Asymptomatic infected hosts are removed by surveillance after some time (specified by the rate _rA_). 
 * Similarly, infected symptomatic hosts and presymptomatic hosts leave that stage at rate _rI_ and _rP_ respectively.
 * Removed individuals recover from the infection and are initially immune to reinfection. They can loose their immunity at rate _w_ and return to the susceptible compartment.
-* New susceptibles enter the system/model at a fixed rate m. From each compartment (apart from the observed/removed compartment), hosts “leave” after some time (i.e. they die) at rate _n_. The inverse of this rate is the average lifespan of a host. In addition, infected symptomatic individuals can die due to the disease at rate _d_.
+* New susceptibles enter the system/model at a fixed rate m. From each compartment (apart from the observed/removed compartment), hosts “leave�? after some time (i.e. they die) at rate _n_. The inverse of this rate is the average lifespan of a host. In addition, infected symptomatic individuals can die due to the disease at rate _d_.
 
 
 
