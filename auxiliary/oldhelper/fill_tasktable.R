@@ -1,5 +1,3 @@
-
-
 # This function fills in what to record
 # Prevents records being stored in the wrong index
 
