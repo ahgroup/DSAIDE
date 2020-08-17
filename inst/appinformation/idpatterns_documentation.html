@@ -49,7 +49,7 @@
 <li><strong>P</strong> - individuals who are infected and do not yet show symptoms. Those individuals can potentially be infectious</li>
 <li><strong>A</strong> - individuals who are infected and do not show symptoms. Those individuals can potentially be infectious</li>
 <li><strong>I</strong> - individuals who are infected and show symptoms. Those individuals are likely infectious, but the model allows to adjust this, including no infectiousness.</li>
-<li><strong>R</strong> - recovered/removed individuals. Those individuals have recovered and are immune. They can loose their immunity in this model.</li>
+<li><strong>R</strong> - recovered/removed individuals. Those individuals have recovered and are immune. They can lose their immunity in this model.</li>
 <li><strong>D</strong> - individuals who have died due to the disease.</li>
 </ul>
 <p>We include the following processes in this model:</p>
@@ -59,7 +59,7 @@
 <li>Asymptomatic infected hosts recover after some time (specified by the rate <em>g<sub>A</sub></em>). Similarly, the rate <em>g<sub>I</sub></em> determines the duration the symptomatic hosts stay in the symptomatic state. For symptomatic hosts, two outcomes are possible. Either recovery or death. The parameter <em>d</em> determines the fraction of hosts that die.</li>
 <li>Recovered individuals are initially immune to reinfection. They can loose their immunity at rate <em>w</em> and return to the susceptible compartment.</li>
 <li>New susceptibles enter the system/model at a fixed rate <em>n</em>. From each compartment (apart from the dead compartment), hosts “leave” after some time (i.e. they die) at rate <em>m</em>. The inverse of this rate is the average lifespan of a host.</li>
-<li>The rates of transmission, <em>b<sub>P</sub></em>, <em>b<sub>A</sub></em> and <em>b<sub>I</sub></em> can vary seasonally/annually, modeled as a sinusoidal function. The strength of this seasonal variation is controlled by the parameter <em>s</em>.</li>
+<li>The rates of transmission, <em>b<sub>P</sub></em>, <em>b<sub>A</sub></em> and <em>b<sub>I</sub></em> can vary seasonally/annually, modeled as a sinusoidal function. The strength of this seasonal variation, i.e. the amplitude of the sinusoidal variation, is controlled by the parameter <em>s</em>. Reasonable values for <em>s</em> are between 0 and 1. For values larger than 1, the model produces negative transmission rates, which are of course nonsensical.</li>
 </ul>
 <p>Note that we only track people that die due to the disease in our <span class="math inline">\(D\)</span> compartment. All hosts dying due to other causes just “exit the system” and we don’t further keep track of them (though we could add another compartment to “collect” and track all individuals who died from non-disease-related causes.)</p>
 </div>
@@ -84,7 +84,7 @@ Flow diagram for this model.
 <div id="task-1" class="section level3">
 <h3>Task 1</h3>
 <ol style="list-style-type: upper-alpha">
-<li>Run the simulation with A population size, <em>S<sub>0</sub></em>, of 1000, , 1 initially infected and presymptomatic host, simulation duration (approximately) 10 years. Assume that only symptomatic individuals transmit, at rate <em>b<sub>I</sub></em> = 0.002 and that there is no seasonal variation. Assume that the duration of the presymptomatic, asymptomatic and symptomatic periods are all 5 days long. (Hint: The parameters <em>g<sub>P</sub></em>, <em>g<sub>A</sub></em>, and <em>g<sub>I</sub></em> are the inverses of these periods.) Assume that the duration of the symptomatic period is 1 month long. (Hint: The parameter <em>g<sub>I</sub></em> is the inverse of this period.) Assume that the duration of the presymptomatic period is approximately 6 days long. (Make sure you convert units correctly. You can assume that a month is roughly 30 days.) Assume that there are no asymptomatic infections. You can, therefore, set the rate of recovery of asymptomatics, <em>g<sub>A</sub></em> to anything, it doesn’t matter because nobody will be asymptomatic. Assume nobody dies due to disease, immunity does not wane, no births, and no natural deaths. If you did it correctly, you should get a single outbreak with around 203 susceptibles left at the end.</li>
+<li>Run the simulation with A population size, <em>S<sub>0</sub></em>, of 1000, 1 initially infected and presymptomatic host, simulation duration 10 years (convert to months). Assume that only symptomatic individuals transmit, at rate <em>b<sub>I</sub></em> = 0.002 and that there is no seasonal variation (s=0). Assume that the duration of the symptomatic period is 1 month long. (Hint: The parameter <em>g<sub>I</sub></em> is the inverse of this period.) Assume that the duration of the presymptomatic period is approximately 6 days long. (Make sure you convert units correctly. First convert from days to months. You can assume that a month is roughly 30 days. Then take the inverse to get the rate.) Assume that there are no asymptomatic infections. You can, therefore, set the rate of recovery of asymptomatics, <em>g<sub>A</sub></em> to anything, it doesn’t matter because nobody will be asymptomatic. Assume nobody dies due to disease, immunity does not wane, no births, and no natural deaths. If you did it correctly, you should get a single outbreak with around 203 susceptibles left at the end.</li>
 </ol>
 <p><strong>Record</strong></p>
 <ul>
@@ -94,31 +94,28 @@ Flow diagram for this model.
 <div id="task-2" class="section level3">
 <h3>Task 2</h3>
 <ol style="list-style-type: upper-alpha">
-<li>Next, turn on births and deaths. It’s always good to check parts of a model. Here, we want to first look at births and deaths in the absence of disease. Therefore, set initial number of presymptomatic to 0, keep the number of susceptible at 1000. Set the natural mortality rate, <em>m</em>, to a value that corresponds to an average lifespan of 41 years. Recall that the unit of <em>m</em> needs to be in 1/months. You need to convert lifespan to months, then take the inverse to get the death rate. Round to the first significant digit (i.e. 0.00X). Set the birth rate to <em>n=4</em> per month. Also increase the simulation duration to 1000 years. (Depending on the speed of your computer, it will take several seconds for the simulation to finish).</li>
-<li>It is possible to compute the steady state population size of susceptibles in the absence of infection, by setting the differential equation for S to 0 and solving for S as a function of birth and death parameters. Compute this equation (you should get something like <em>S=..</em> with the right side involving parameters <em>m</em> and <em>n</em>. Then stick in the values for the parameters from the previous task and compute <em>S</em> at steady state. Make sure it’s the same you get from the simulation (once it has settled down to a steady state).</li>
+<li>Next, turn on births and deaths. It’s always good to check parts of a model. Here, we want to first look at births and deaths in the absence of disease. Therefore, set initial number of presymptomatic to 0, keep the number of susceptible at 1000. Set the natural mortality rate, <em>m</em>, to a value that corresponds to an average lifespan of 41 years. Recall that the unit of <em>m</em> needs to be in 1/months. You need to convert lifespan to months, then take the inverse to get the death rate. Round to the first significant digit (i.e. 0.00X). Set the birth rate to <em>n=4</em> per month. Also increase the simulation duration to 500 years (make sure to convert to months). (Depending on the speed of your computer, it will take several seconds for the simulation to finish). Set the initial number of pre-symptomatic individuals to 0. This means there are no infected, and thus no transmission can happen. We are focusing on only the susceptibles. Run the simulation, record the number of susceptibles at the end.</li>
+<li>Repeat this for different starting values of S, you should always end up at the same final value.</li>
+<li>You will find that susceptibles slowly reach some state. It is possible to compute this value from the equations. In the absence of disease, the equation for the susceptibles becomes <span class="math inline">\(dS/dt=n-mS\)</span>. S settles down to a state where there is no more change, the so-called steady state. At that state, we have <span class="math inline">\(dS/dt=0=n-mS\)</span>. You can now solve this equation for <em>S</em> as a function of the parameters <em>m</em> and <em>n</em>. Do that, then stick in the values for the parameters you just used to run the simulation, and convince yourself that the <em>S</em> you get doing the math and the value you get from running the simulation are the same (up to some rounding error).</li>
 </ol>
 <p><strong>Record</strong></p>
 <ul>
-<li>Total number susceptibles at steady state</li>
+<li>Number susceptibles at end of simulation (A)</li>
 </ul>
 </div>
 <div id="task-3" class="section level3">
 <h3>Task 3</h3>
-<ol style="list-style-type: upper-alpha">
-<li>Now set <em>S<sub>0</sub></em> = 3000, keep everything else unchanged. Run the simulation and note what you get for the final, steady-state population size. Try out different values for the initial number of susceptibles and see what happens.</li>
-<li>Set population size back to 1000, now try out different values for the birth and death rates, specifically, set <em>n=2</em> and <em>m=0.002</em> and <em>n=6</em> and <em>m=0.003</em>. For each setting, think about what you expect to see, based on your intuition and based on the theory/math, i.e. the equation from the previous task, and compare with the simulation results.</li>
-</ol>
+<p>Try out different values for the birth and death rates, specifically, set <em>n=2</em> and <em>m=0.002</em> and then <em>n=6</em> and <em>m=0.003</em>. Use the equation from the previous task to compute the value you expect to see <em>S</em> go to. Then check with the simulation. For each setting, think about what you expect to see, based on your intuition and based on the theory/math, i.e. the equation from the previous task, and compare with the simulation results. Depending on the value of <em>S</em> you start with, you might have to increase the simulation time for the model to reach the value that matches the equation.</p>
 <p><strong>Record</strong></p>
 <ul>
-<li><p>Total number susceptible at steady state (part A; <em>S<sub>0</sub>=3000</em>)</p></li>
-<li><p>Total number susceptible at steady state (part B; <em>n=2</em> and <em>m=0.002</em>)</p></li>
-<li><p>Total number susceptible at steady state (part B; <em>n=6</em> and <em>m=0.003</em>)</p></li>
+<li><p>Total number susceptible at end of simulation for <em>n=2</em> and <em>m=0.002</em></p></li>
+<li><p>Total number susceptible at end of simulation for <em>n=6</em> and <em>m=0.003</em></p></li>
 </ul>
 </div>
 <div id="task-4" class="section level3">
 <h3>Task 4</h3>
 <ol style="list-style-type: upper-alpha">
-<li>Now, set the birth and death rate as in task 2 and also adjust the population size to the steady state value you found in task 2. We do that because we don’t want a mixing of underlying population growth/decline dynamics on top if the ID dynamics. That would make it more complicated to understand what’s going on. (You get to do that later). Ensure that if you run the simulation now, nothing changes. Now introduce an infected individual (<em>P0=1</em>), with other values as set in task 1. If needed, adjust the simulation duration to see the initial pattern and ensure everything reaches steady state. What do you expect to see? Run the simulation, compare expectations with results.</li>
+<li>Set the birth and death rate to <em>n=4</em> and <em>m==0.002</em> and the initial number of susceptibles to the steady state value you computed above. We do that because we don’t want a mixing of underlying population growth/decline dynamics on top if the ID dynamics. That would make it more complicated to understand what’s going on. (You get to do that later). Ensure that if you run the simulation now, nothing changes, i.e. the susceptibles remain at the same number. Now introduce an infected individual (<em>P0=1</em>), with other values as set in task 1. Set the simulation duration to 200 years. What do you expect to see? Run the simulation, compare expectations with results. If things work right, you should see around 510 susceptibles at the end of the simulation.</li>
 </ol>
 <p><strong>Record</strong></p>
 <ul>
@@ -128,10 +125,10 @@ Flow diagram for this model.
 <div id="task-5" class="section level3">
 <h3>Task 5</h3>
 <ol style="list-style-type: upper-alpha">
-<li>It is possible to compute the steady state values for the model variables at the endemic scenario, i.e. when the number of infected is non-zero. This computation is a bit messy for the model above because it has the extra <em>P</em> and <em>A</em> states that make the math more complicated (you can try for yourself as a challenge after you’ve done the simple model we’ll do next.) To keep the math simpler, we consider a simplified approximation of the above model. Since the way we have set our parameters so far, individuals spend a very short time in <em>P</em> compared to <em>I</em>, so we can ignore the <em>P</em> compartment and assume that individuals directly go from <em>S</em> to <em>I</em>. Further, for our parameter choices, nobody enters <em>A</em> and <em>D</em>, so we can ignore those compartments too. This produces the following simpler SIR model:</li>
+<li>It is possible to compute the steady state values for the model variables at the endemic scenario, i.e. when the number of infected is non-zero. This computation is a bit messy for the model above because it has the extra <em>P</em> and <em>A</em> states that make the math more complicated (you can try for yourself as a challenge after you’ve done the simple model.) To keep the math simpler, we consider a simplified approximation of the above model. The way we have set our parameters so far, individuals spend a very short time in <em>P</em> compared to <em>I</em>. We can thus approximately ignore the <em>P</em> compartment and assume that individuals go directly from <em>S</em> to <em>I</em>. Further, for our parameter choices, nobody enters <em>A</em> and <em>D</em>, so we can ignore those compartments too. This produces the following simpler SIR model:</li>
 </ol>
 <p><span class="math display">\[ dS/dt = n -   b_I IS - m S \]</span> <span class="math display">\[ dI/dt = b_I SI - g_I I - m I \]</span> <span class="math display">\[ dR/dt =  g_I I  - m R \]</span></p>
-<p>Following the procedure above for computing the steady state for <em>S</em> in the absence of a pathogen, now compute the endemic steady state by setting the left side of the equations to 0 and solving for the variables <em>S</em>, <em>I</em> and <em>R</em> as functions of model parameters only. You should get <em>S=(g<sub>I</sub> + m)/b<sub>I</sub> </em> and similar equations for <em>I</em> and <em>R</em>. For more on steady state calculations, see e.g. <span class="citation">(Vynnycky and White 2010)</span> or <span class="citation">(Keeling and Rohani 2008)</span> (but note that each of those references uses their own notation which is not the same as used here.) B) Let’s compare the model simulations with the equations you found. Substitute the parameter values from the task above into the equations and confirm that you get the approximately the same results as you get from running the model to steady state.</p>
+<p>We can follow the procedure above for computing the steady state for <em>S</em> to compute the endemic steady state by setting the left side of the equations to 0 and solving for the variables <em>S</em>, <em>I</em> and <em>R</em> as functions of model parameters only. Try it. You should get <em>S=(g<sub>I</sub> + m)/b<sub>I</sub> </em> and similar equations for <em>I</em> and <em>R</em>. For more on steady state calculations, see e.g. <span class="citation">(Vynnycky and White 2010)</span> or <span class="citation">(Keeling and Rohani 2008)</span> (but note that each of those references uses their own notation which is not quite the same as used here.) Compare the model simulations with the equations you found. Substitute the parameter values from the task above into the equations you found for <em>S</em>, <em>I</em> and <em>R</em> and confirm that you get the approximately the same results as you get from running the model to steady state.</p>
 <p><strong>Record</strong></p>
 <ul>
 <li>Nothing</li>
@@ -140,20 +137,21 @@ Flow diagram for this model.
 <div id="task-6" class="section level3">
 <h3>Task 6</h3>
 <ol style="list-style-type: upper-alpha">
-<li>The patterns we’ve seen so far are oscillations/cycles (i.e. repeated outbreaks) that eventually settle down to a steady state. The oscillations are what is often referred to as <em>intrinsic</em>, purely produced by the interplay between depletion of susceptibles due to infection and replenishment due to birth. Waning immunity is another mechanism of resource replenishment. To investigate that, set everything back as in task #1 (i.e. no more births and deaths). Do a quick run to ensure you get a single outbreak.</li>
-<li>Now, assume that immunity wanes within on average 10 months and set simulation time for 100 years. Think about your expectations, run the simulation and check with what you expected. Double the <em>duration</em> of immunity. What do you expect? What do you see?</li>
+<li>The patterns we’ve seen so far are oscillations/cycles (i.e. repeated outbreaks) that eventually settle down to a steady state. These oscillations are often referred to as <em>intrinsic</em>, purely produced by the interplay between depletion of susceptibles due to infection and replenishment due to birth. Waning immunity is another mechanism by which susceptibles can be replenished and one can thus get repeat outbkreaks. To investigate that, set everything back to the values from task #1. Now, assume that immunity wanes within on average 10 months and set simulation time for 100 years. Record the number of susceptible and infected at the end of the simulation. Double the <em>duration</em> of immunity. What do you expect? What do you see? Run again and record the number susceptible and infected at steady state.</li>
 </ol>
 <p><strong>Record</strong></p>
 <ul>
-<li><p>Total number infected at the end (part B; 10 Months)</p></li>
-<li><p>Total number infected at the end (part B; 20 Months)</p></li>
+<li><p>Number of susceptible at end of simulation, 10 months immunity</p></li>
+<li><p>Number of infected at end of simulation, 10 months immunity</p></li>
+<li><p>Number of susceptible at end of simulation, 20 months immunity</p></li>
+<li><p>Number of infected at end of simulation, 20 months immunity</p></li>
 </ul>
 </div>
 <div id="task-7" class="section level3">
 <h3>Task 7</h3>
-<ol style="list-style-type: upper-alpha">
-<li>Take the SIR model from above, add the terms describing waning immunity, and use this new set of equations to again solve for the steady states of the model. Then compare the steady state values from the equations with those from the simulations. The equations will directly let you see which variables do and don’t change if waning immunity changes. This allows you to confirm what you found in the previous task. This task is challenging! The equations are getting big and ugly. You might want to consider using software that can solve such equations analytically. The free <a href="http://maxima.sourceforge.net/">Maxima software</a> might be a good option.</li>
-</ol>
+<p>We can again compare the steady state values we get from the simulation with those we get from a model. To do so, we follow the approach above. The model we now solve is one that doesn’t include births and deaths but does including waning immunity. The equations are:</p>
+<p><span class="math display">\[ dS/dt = w R  -   b_I IS \]</span> <span class="math display">\[ dI/dt = b_I SI - g_I I \]</span> <span class="math display">\[ dR/dt =  g_I I  - W R \]</span></p>
+<p>You can set the left sides to zero and solve for the steady states of <em>S</em>, <em>I</em> and <em>R</em>. You will find that <em>S</em> at steady state is independent of <em>w</em>, which you should have also seen in your simulations. <em>I</em> and <em>R</em> are not uniquely determined. Going deeper into what this means is beyond what we want to discuss here. See see e.g. <span class="citation">(Vynnycky and White 2010)</span> or <span class="citation">(Keeling and Rohani 2008)</span> for more. To get an exact match between simulation and math would require solving the full model, i.e. the one shown in the <em>Model</em> tab (with <em>s=0</em>). But those equations are getting big and ugly. If you want to give it a try, I recommend using software that can solve such equations analytically. The free <a href="http://maxima.sourceforge.net/">Maxima software</a> might be a good option.</p>
 <p><strong>Record</strong></p>
 <ul>
 <li>Nothing</li>
@@ -161,44 +159,31 @@ Flow diagram for this model.
 </div>
 <div id="task-8" class="section level3">
 <h3>Task 8</h3>
-<ol style="list-style-type: upper-alpha">
-<li>Now combine births and deaths with waning immunity. Explore how the two different mechanisms interact and influence the observed ID dynamics. Set everything as in task 1. Then, set waning immunity to 10 months, birth rate <em>n=10</em>, natural death rate <em>m=0.005</em>, and simulation time of 600 months.</li>
-</ol>
+<p>Now combine births and deaths with waning immunity. Explore how the two different mechanisms interact and influence the observed ID dynamics by choosing different values for waning immunity, births and deaths and exploring how those different values impact both the cycles and the steady state you see.</p>
 <p><strong>Record</strong></p>
 <ul>
-<li>Total number of recovered at the end</li>
+<li>Nothing</li>
 </ul>
 </div>
 <div id="task-9" class="section level3">
 <h3>Task 9</h3>
-<ol style="list-style-type: upper-alpha">
-<li>So far, the cycles were due to the intrinsic dynamics of the system. Now we’ll explore what happens if some outside phenomenon - e.g. the weather - influences some model parameters. Generally, when running the kind of models we investigate here, the variables change (and each gets its own equation) and the parameters remain fixed during the simulation. Here, we are looking at a model where this is not the case. The model allows you to let the transmission rate parameters vary sinusoidally with a period of 1 year. (It would also be possible to instead give each changing parameter their own equation, but that would be more complicated here). Set everything as in task #1, do a quick run to make sure you only get one outbreak. Now run the model with increasing seasonality by setting s = 0.001, 0.01, 0.1, and 1. How many outbreaks do you observe? What else new is going on? Think about the system and formulate your expectations, then run the model to check.</li>
-</ol>
+<p>So far, the cycles were due to the intrinsic dynamics of the system. Now we’ll explore what happens if some outside phenomenon - e.g. the weather - influences some model parameters. Generally, when running the kind of models we investigate here, the variables change (and each gets its own equation) and the parameters remain fixed during the simulation. Here, we are looking at a model where this is not the case. The model allows you to let the transmission rate parameters vary as the simulation progresses. Such time-varying parameters are possible. One could give them their own compartment/equation, but often instead of treating them as variables, it makes conceptually more sense to still consider them as parameters, albeit now time-varying. In our model, the transmission parameters can vary sinusoidally with a period of 1 year. Set everything as in task #1, do a quick run to make sure you only get one outbreak. Now run the model with increasing seasonality by setting s = 0.001, 0.01, 0.1, and 1. Even though you are letting the transmission vary seasonally, you will only see a single outbreak, though the dynamics changes slightly. Why is that so? Why don’t you see patterns like before? Think about the concept of <em>resource replenishment</em> and what that means here.</p>
 <p><strong>Record</strong></p>
 <ul>
-<li><p>Total number of outbreaks (s = 0.001)</p></li>
-<li><p>Total number of outbreaks (s = 0.01)</p></li>
-<li><p>Total number of outbreaks (s = 0.1)</p></li>
-<li><p>Total number of outbreaks (s = 1)</p></li>
+<li>Nothing</li>
 </ul>
 </div>
 <div id="task-10" class="section level3">
 <h3>Task 10</h3>
-<ol style="list-style-type: upper-alpha">
-<li>Assume now that immunity wanes within 10 months. Also, set the strength of seasonal variation to 0.5. Everything else as before. Think about your expectations. Run the model and compare. Adjust the simulation time to <em>zoom in/out</em> by running for both 120 and 1200 months. Explore how prolonging immunity, i.e. decreasing <em>w</em> to 0.05 and 0.01, changes the patterns you see. Repeat the simulations for the 3 values of the immunity parameter at a lower seasonal variation value of s=0.1. Contemplate the main difference between the pattern you now observe and the ones you’ve seen so far with no external driver.</li>
-</ol>
+<p>I hope you figured out above that without replenishment of resources (i.e. susceptibles), you can’t get multiple outbreaks, even with seasonally changing transmission. let’s introduce replenishment by assuming immunity wanes within 10 months. Start with no seasonal variation, i.e. <em>s=0</em>. You should see one decent outbreak with a peak at around 10 months, another small one with a peak at around 30 months, and not much else (you might want to use plotly so you can easier zoom in/out). Now that seasonal variation strength to <em>s=0.5</em>. You should see that the outbreaks keep going now. Approximately how many months are there between outbreak peaks? (Remember in what way we let the transmission strength vary and make sure what we specify in the model and the time between peaks makes sense).</p>
 <p><strong>Record</strong></p>
 <ul>
-<li><p>Total number of outbreaks (<em>w=0.1</em>, <em>s=0.1</em>, <em>tmax=1200</em>)</p></li>
-<li><p>Total number of outbreaks (<em>w=0.05</em>, <em>s=0.1</em>, <em>tmax=1200</em>)</p></li>
-<li><p>Total number of outbreaks (<em>w=0.01</em>, <em>s=0.1</em>, <em>tmax=1200</em>)</p></li>
+<li>Months between peaks (approximate/rounded)</li>
 </ul>
 </div>
 <div id="task-11" class="section level3">
 <h3>Task 11</h3>
-<ol style="list-style-type: upper-alpha">
-<li>Keep exploring! You can let people enter the A and D compartments, have an underlying growing or declining population in the absence of disease and let the disease run on top of it, allow for birth/death, waning immunity and seasonality, etc. There is lots to explore. While it can be fun running simulations with random parameters, I suggest a more deliberate exploration. Before you run a simulation, think about what you expect. Then run and compare results with expectations. If they don’t agree, try to figure out what’s going on. This way, you will gain more and more insight into how the different components and processes influence the observed outcome - the basics of a systems science approach.</li>
-</ol>
+<p>Explore how changing the rate of waning immunity interacts with seasonality to affect patterns. To that end, run simulations with <em>s=0.5</em> and <em>w=0.2</em> and <em>w+0.05</em>. You can further explore by switching off waning immunity and turning on births and deaths instead. You can also have both mechanisms present and explore how they interact with seasonality. And of course, you can set parameters to allow for asymptomatic infections and deaths, ore have an underlying growing or declining population in the absence of disease and let the disease run on top of it. There is lots to explore. While it can be fun running simulations with random parameters, I suggest you learn more if you are deliberate in your explorations. After you set the model inputs to some values and before you run a simulation, think about what you expect. Then run and compare results with expectations. If they don’t agree, try to figure out what’s going on. This way, you will gain more and more insight into how the different components and processes influence the observed outcome - the basics of doing science.</p>
 <p><strong>Record</strong></p>
 <ul>
 <li>Nothing</li>
