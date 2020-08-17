@@ -1,9 +1,10 @@
 /* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
-/* [ Created with wxMaxima version 0.8.6 ] */
-
+/* [ Created with wxMaxima version 20.06.6 ] */
 /* [wxMaxima: input   start ] */
-solve([w*R-b*S*I=0, b*S*I-g*I=0, g*I-w*R=0],[S,I,R]);
+solve([w*R-b*S*I-m*S+n=0, b*S*I-g*I-m*I=0, g*I-w*R-m*R=0],[S,I,R]);
 /* [wxMaxima: input   end   ] */
 
-/* Maxima can't load/batch files which end with a comment! */
-"Created with wxMaxima"$
+
+
+/* Old versions of Maxima abort on loading files that end in a comment. */
+"Created with wxMaxima 20.06.6"$
