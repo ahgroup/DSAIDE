@@ -150,11 +150,11 @@ In words, the number of susceptible/infected/recovered at a time step _dt_ in th
 # Fuzzy: The numeric value of a margin (within +/- of "right" answer) for questions where the quiz checker should not be too strict 
 # Review: Admin use if value is 1 the way the questions is asked may need to be reconsidered. 
 
-#ntasks = 9 #number of tasks
-#nrecord = 19 #number of outcomes to record
+ntasks = 9 #number of tasks
+nrecord = 19 #number of outcomes to record
 #set up task tables
 #returned as list for generality, take apart
-tablist <- make_tasktable()
+tablist <- make_tasktable(ntasks,nrecord,appsettings)
 alltasks = tablist[[1]]
 allrecord = tablist[[2]]
 #all<-list()
@@ -176,7 +176,7 @@ reclist$rectype = "Numeric"
 reclist$recnote = c("Report the rounded integer")
 reclist$recfuzzy = c(1)
 
-tablist<-fill_tasktable(alltasks,allrecord,tid,rc,nrec,reclist,appsettings) #the allrecord table is updated with the new entries
+allrecord<-fill_tasktable(allrecords,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
 rc = rc + nrec #increment record counter by number of outcomes to record for this task 
 
 
@@ -261,7 +261,7 @@ rc = rc + nrec
 
 ### Task 6
 tid = 6
-alltasks[tid,"TaskText"] = "A) Go back to running the ODE model only. Set all parameters as described in task 1. Then increase the rate of recovery by a factor of for, i.e. set it to g=2. (What duration of the infectious period does that translate to?) Contemplate what you expect to find for the increased recovery rate before you run the simulation. Then run the simulation. Compare your expectations with the results. How do they agree/disagree? Does it make sense? Anything surprising happening?"
+alltasks[tid,"TaskText"] = "A) Go back to running the ODE model only. Set all parameters as described in task 1. Then increase the rate of recovery by a factor of four, i.e. set it to g=2. (What duration of the infectious period does that translate to?) Contemplate what you expect to find for the increased recovery rate before you run the simulation. Then run the simulation. Compare your expectations with the results. How do they agree/disagree? Does it make sense? Anything surprising happening?"
 
 # Record for task 6
 nrec = 3 # number of items to record
