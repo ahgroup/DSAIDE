@@ -49,9 +49,9 @@
 #' @author Andreas Handel
 #' @export
 
-simulate_idcharacteristics_ode <- function(S = 1000, P = 1, bP = 0, bA = 0, bI = 0.001, gP = 0.5, gA = 0.5, gI = 0.5, f = 0, d = 0, tmax = 300)
+simulate_idcharacteristics_ode <- function(S = 1000, P = 1, bP = 0, bA = 0, bI = 0.001, gP = 0.5, gA = 0.5, gI = 0.5, f = 0, d = 0, tmax = 200)
 {
-  
+
   ############################################################
   # start function that specifies differential equations used by deSolve
   idcharacteristicsode <- function(t, y, parms)
@@ -66,16 +66,16 @@ simulate_idcharacteristics_ode <- function(S = 1000, P = 1, bP = 0, bA = 0, bI =
         dI =  (1-f)*gP*P -  gI*I #infected, symptomatic
         dR =  (1-d)*gI*I + gA * A  #recovered, immune
         dD = d*gI*I #dead
-        
+
         list(c(dS, dP, dA, dI, dR, dD))
       }
     ) #close with statement
   } #end function specifying the ODEs
   ############################################################
-  
-  
-  
-  
+
+
+
+
   Y0 = c(S = S, P = P, A = 0, I = 0, R = 0, D = 0);  #combine initial conditions into a vector
   dt = min(0.1, tmax / 1000); #time step for which to get results back
   timevec = seq(0, tmax, dt); #vector of times for which solution is returned (not that internal timestep of the integrator is different)
@@ -88,7 +88,7 @@ simulate_idcharacteristics_ode <- function(S = 1000, P = 1, bP = 0, bA = 0, bI =
   odeoutput = deSolve::ode(y = Y0, times = timevec, func = idcharacteristicsode, parms=pars, atol=1e-12, rtol=1e-12);
   result <- list()
   result$ts <- as.data.frame(odeoutput)
-  
+
   #The output produced by a call to the odesolver is odeoutput matrix is returned by the function
   return(result)
 }
