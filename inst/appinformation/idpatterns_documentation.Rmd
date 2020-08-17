@@ -72,7 +72,7 @@ Note that we only track people that die due to the disease in our $D$ compartmen
 ### Model Implementation
 The flow diagram and equations describe the model implemented in this app:
 
-```{r modeldiagram,  fig.cap='Flow diagram for this model. ',  echo=FALSE}
+```{r modeldiagram,  fig.cap='Flow diagram for this model. ',  echo=FALSE, out.width = "70%"}
 knitr::include_graphics(here::here('inst/media',appsettings$modelfigname))
 ```
 
