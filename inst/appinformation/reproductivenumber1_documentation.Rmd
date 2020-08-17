@@ -128,7 +128,7 @@ Note the unfortunate fact that the letter _R_ is used both for the recovered com
 # Review: Admin use if value is 1 the way the questions is asked may need to be reconsidered. 
 
 ntasks = 8 #number of tasks
-nrecord = 9 #number of outcomes to record
+nrecord = 16 #number of outcomes to record
 #set up task tables
 #returned as list for generality, take apart
 tablist <- make_tasktable(ntasks,nrecord,appsettings)

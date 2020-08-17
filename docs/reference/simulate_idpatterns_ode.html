@@ -146,16 +146,16 @@ This model includes natural births and deaths and waning immunity.
   <span class='kw'>P</span> <span class='kw'>=</span> <span class='fl'>1</span>,
   <span class='kw'>bP</span> <span class='kw'>=</span> <span class='fl'>0</span>,
   <span class='kw'>bA</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>bI</span> <span class='kw'>=</span> <span class='fl'>0.001</span>,
+  <span class='kw'>bI</span> <span class='kw'>=</span> <span class='fl'>0.002</span>,
   <span class='kw'>s</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>gP</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
-  <span class='kw'>gA</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
-  <span class='kw'>gI</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
+  <span class='kw'>gP</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>gA</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>gI</span> <span class='kw'>=</span> <span class='fl'>1</span>,
   <span class='kw'>f</span> <span class='kw'>=</span> <span class='fl'>0</span>,
   <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>0</span>,
   <span class='kw'>w</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>m</span> <span class='kw'>=</span> <span class='fl'>0</span>,
   <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>m</span> <span class='kw'>=</span> <span class='fl'>0</span>,
   <span class='kw'>timeunit</span> <span class='kw'>=</span> <span class='fl'>1</span>,
   <span class='kw'>tmax</span> <span class='kw'>=</span> <span class='fl'>300</span>
 )</pre>
@@ -212,12 +212,12 @@ This model includes natural births and deaths and waning immunity.
       <td><p>: rate at which recovered persons lose immunity and return to susceptible state : numeric</p></td>
     </tr>
     <tr>
-      <th>m</th>
-      <td><p>: the rate of natural death (the inverse it the average lifespan) : numeric</p></td>
-    </tr>
-    <tr>
       <th>n</th>
       <td><p>: the rate at which new individuals enter the model (are born) : numeric</p></td>
+    </tr>
+    <tr>
+      <th>m</th>
+      <td><p>: the rate of natural death (the inverse it the average lifespan) : numeric</p></td>
     </tr>
     <tr>
       <th>timeunit</th>
@@ -225,7 +225,7 @@ This model includes natural births and deaths and waning immunity.
     </tr>
     <tr>
       <th>tmax</th>
-      <td><p>: maximum simulation time, in units of months : numeric</p></td>
+      <td><p>: maximum simulation time : numeric</p></td>
     </tr>
     </table>
 

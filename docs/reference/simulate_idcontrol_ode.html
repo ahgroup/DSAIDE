@@ -156,10 +156,10 @@ Any initial conditions not specified below start at 0." />
   <span class='kw'>f</span> <span class='kw'>=</span> <span class='fl'>0</span>,
   <span class='kw'>d</span> <span class='kw'>=</span> <span class='fl'>0</span>,
   <span class='kw'>w</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>mh</span> <span class='kw'>=</span> <span class='fl'>0</span>,
   <span class='kw'>nh</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>mv</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>mh</span> <span class='kw'>=</span> <span class='fl'>0</span>,
   <span class='kw'>nv</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>mv</span> <span class='kw'>=</span> <span class='fl'>0</span>,
   <span class='kw'>tmax</span> <span class='kw'>=</span> <span class='fl'>300</span>
 )</pre>
 
@@ -188,27 +188,27 @@ Any initial conditions not specified below start at 0." />
     </tr>
     <tr>
       <th>bP</th>
-      <td><p>: rate of transmission from pre-symptomatic to susceptible hosts : numeric</p></td>
+      <td><p>: rate of transmission to susceptible hosts from pre-symptomatic : numeric</p></td>
     </tr>
     <tr>
       <th>bA</th>
-      <td><p>: rate of transmission from asymptomatic to susceptible hosts : numeric</p></td>
+      <td><p>: rate of transmission to susceptible hosts from asymptomatic : numeric</p></td>
     </tr>
     <tr>
       <th>bI</th>
-      <td><p>: rate of transmission from symptomatic to susceptible hosts : numeric</p></td>
+      <td><p>: rate of transmission to susceptible hosts from symptomatic : numeric</p></td>
     </tr>
     <tr>
       <th>bE</th>
-      <td><p>: rate of transmission from environment to susceptible hosts : numeric</p></td>
+      <td><p>: rate of transmission to susceptible hosts from environment : numeric</p></td>
     </tr>
     <tr>
       <th>bv</th>
-      <td><p>: rate of transmission from infected vectors to susceptible hosts : numeric</p></td>
+      <td><p>: rate of transmission to susceptible hosts from infected vectors : numeric</p></td>
     </tr>
     <tr>
       <th>bh</th>
-      <td><p>: rate of transmission from symptomatic hosts to susceptible vectors : numeric</p></td>
+      <td><p>: rate of transmission to susceptible vectors from symptomatic hosts : numeric</p></td>
     </tr>
     <tr>
       <th>gP</th>
@@ -247,20 +247,20 @@ Any initial conditions not specified below start at 0." />
       <td><p>: rate at which recovered persons lose immunity and return to susceptible state : numeric</p></td>
     </tr>
     <tr>
-      <th>mh</th>
+      <th>nh</th>
       <td><p>: the rate at which new hosts enter the model (are born) : numeric</p></td>
     </tr>
     <tr>
-      <th>nh</th>
-      <td><p>: the rate of natural death of hosts (the inverse it the average lifespan) : numeric</p></td>
-    </tr>
-    <tr>
-      <th>mv</th>
-      <td><p>: the rate at which new vectors enter the model (are born) : numeric</p></td>
+      <th>mh</th>
+      <td><p>: the rate of mortality of hosts (the inverse it the average lifespan) : numeric</p></td>
     </tr>
     <tr>
       <th>nv</th>
-      <td><p>: the rate of natural death of vectors (the inverse it the average lifespan) : numeric</p></td>
+      <td><p>: the rate at which new vectors enter the model (are born) : numeric</p></td>
+    </tr>
+    <tr>
+      <th>mv</th>
+      <td><p>: the rate of mortality of vectors (the inverse it the average lifespan) : numeric</p></td>
     </tr>
     <tr>
       <th>tmax</th>
