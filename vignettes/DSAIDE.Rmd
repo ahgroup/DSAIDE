@@ -35,7 +35,7 @@ The audience for this package consists individuals interested in infectious dise
 While the package was written as a component of a course on infectious disease epidemiology/modeling, the documentation for each app tries to be fairly complete and self-contained. This should allow you to get some understanding of the topics and models without requiring additional information. However, the information provided inside each app is not sufficient to get a very thorough understanding. If you use this package on your own without taking a class on the topc, it might be possible to learn the material covered by the apps in depth by working through some of the references provided for each app or general infectious disease modeling textbooks (e.g. [@keeling08; @vynnycky10; @bjoernstad18]). 
 
 ## Pre-requisites
-Since `DSAIDE` is an `R` package, you need to have [R](https://www.r-project.org/) installed. I also highly recommend [RStudio](https://www.rstudio.com/products/rstudio/download/), though it's not required. If you are not familiar with `R` you can find [a brief introduction here](https://andreashandel.github.io/IDEMAcourse/1c_R_and_RStudio.html), which also provides a reference to detailed install instructions.
+Since `DSAIDE` is an `R` package, you need to have [R](https://www.r-project.org/) installed. I also highly recommend [RStudio](https://www.rstudio.com/products/rstudio/download/), though it's not required. If you are not familiar with `R` you can find [a brief introduction here](https://andreashandel.github.io/IDEMAcourse/R_and_RStudio.html), which also provides a reference to detailed install instructions.
 
 
 ## Installation
