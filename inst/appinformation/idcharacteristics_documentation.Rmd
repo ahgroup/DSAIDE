@@ -149,7 +149,7 @@ alltasks[tid,"TaskText"] = "A) Assume now that half of the infected are asymptom
 # Record for task 2
 nrec = 2 # number of items to record
 reclist = list()
-reclist$rectext = c( "Number susceptible left at end of simulation",
+reclist$rectext = c("Number susceptible left at end of simulation",
                     "Total/cumulative number who got infected")
 reclist$recnote = c("Report the rounded integer",
                     "Report the rounded integer")
@@ -236,7 +236,7 @@ reclist = list()
 reclist$rectext = c("Max number of pre-symptomatic",
                     "Max number of infected",
                     "Number susceptible left at end of simulation",
-                    "Total deaths")
+                    "Total deaths at end of simulation")
 reclist$rectype = rep(c("Numeric"),nrec)
 reclist$recnote = rep(c("Report the rounded integer"),nrec)
 reclist$recfuzzy = rep(0,nrec)
