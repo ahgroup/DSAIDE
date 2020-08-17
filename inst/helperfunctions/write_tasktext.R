@@ -1,16 +1,13 @@
 #helper function that writes task text for each app into the Rmd/html file
-write_tasktext <- function(alltasks,allrecord)
+write_tasktext <- function(alltasktable)
 {
 
-  # Make a single file using join_all
-  alltext<-dplyr::full_join(alltasks,allrecord, by="TaskID")
-
-  ntasks = max(alltasks$TaskID)
+  ntasks = max(alltasktable$TaskID)
 
   for (n in 1:ntasks)
   {
 
-    rtext<-dplyr::filter(alltext, TaskID==n)
+    rtext<-dplyr::filter(alltasktable, TaskID==n)
 
     writeLines(c(paste('### Task ',n), '\n', paste(unique(rtext["TaskText"])), '\n',  '**Record**', '\n'))
 

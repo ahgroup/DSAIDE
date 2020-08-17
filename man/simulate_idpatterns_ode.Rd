@@ -9,11 +9,11 @@ simulate_idpatterns_ode(
   P = 1,
   bP = 0,
   bA = 0,
-  bI = 0.001,
+  bI = 0.002,
   s = 0,
-  gP = 0.5,
-  gA = 0.5,
-  gI = 0.5,
+  gP = 1,
+  gA = 1,
+  gI = 1,
   f = 0,
   d = 0,
   w = 0,
@@ -54,7 +54,7 @@ simulate_idpatterns_ode(
 
 \item{timeunit}{: units of time in which the model should run (1=day, 2=week, 3=month, 4=year) : numeric}
 
-\item{tmax}{: maximum simulation time, in units of months : numeric}
+\item{tmax}{: maximum simulation time : numeric}
 }
 \value{
 This function returns the simulation result as obtained from a call

@@ -15,7 +15,7 @@ simulate_idcharacteristics_ode(
   gI = 0.5,
   f = 0,
   d = 0,
-  tmax = 300
+  tmax = 200
 )
 }
 \arguments{

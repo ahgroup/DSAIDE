@@ -107,7 +107,7 @@ Note the unfortunate fact that the letter _R_ is used both for the recovered com
 ## What to do {#shinytab3}
 
 
-**The tasks below are described in a way that assumes everything is in units of months (rate parameters, therefore, have units of inverse months). If any quantity is not given in those units, you need to convert it first (e.g. if it says a year, you need to convert it to 12 months).**
+**The tasks below are described in a way that assumes everything is in units of days (rate parameters, therefore, have units of inverse days). If any quantity is not given in those units, you need to convert it first.**
 
 ```{r, echo=FALSE, eval=TRUE}
 # save all tasks, outcomes, etc. into an R data frame, then print later.
@@ -141,12 +141,12 @@ rc=1
 
 # Task 1
 tid = 1
-alltasks[tid,"TaskText"] = "Set the simulation the following simulation parameter values 1000 susceptibles, 1 infected, tfinal = 12 months, _g_=5, and _b_=0.01. Run the simulation, you should get an outbreak. Use the final size equation linking R~0~ and the fraction of susceptible hosts left at the end of the outbreak to compute the reproductive number (see the information in the _Model_ tab)."
+alltasks[tid,"TaskText"] = "Set the simulation the following simulation parameter values 1000 susceptibles, 1 infected, tfinal = 100 days, _g_=0.5, and _b_=0.001. Run the simulation, you should get an outbreak. Use the final size equation linking R~0~ and the fraction of susceptible hosts left at the end of the outbreak to compute the reproductive number (see the information in the _Model_ tab)."
 
 # Record for task 1
 nrec = 3 # number of items to record
 reclist = list()
-reclist$rectext = c("Time of outbreak peak",
+reclist$rectext = c("Day at which outbreak peaks",
                     "Susceptible at end of simulation",
                     "The value for R~0~")
 reclist$rectype = rep("Numeric",nrec)
@@ -192,7 +192,7 @@ alltasks[tid,"TaskText"] = "Double the rate of the recovery parameter, _g_. Leav
 nrec = 3 # number of items to record
 reclist = list()
 # Record for task 4
-reclist$rectext = c("Time of outbreak peak",
+reclist$rectext = c("Day at which outbreak peaks",
                     "Susceptible at end of simulation",
                     "The value for R~0~")
 reclist$rectype = rep("Numeric",nrec)
@@ -204,7 +204,7 @@ rc = rc + nrec #increment record counter by number of outcomes to record for thi
 
 # Task 5
 tid = 5
-alltasks[tid,"TaskText"] = "Another way to estimate R~0~ is to determine the rate of increase in infected hosts at the beginning of the outbreak. During the initial phase, new infections increase exponentially according to _I(t)=I~0~ exp(rt)_, with _r_ being the rate of growth. Usually, for any real outbreak, you do not know the number of infected at the start, I~0~, or the exact time the outbreak starts. It is still possible to estimate _r_ by obtaining two values of _I_ at two time points during that initial growth rate, i.e. _I~1~_ at time _t~1~_ and _I~2~_ at time _t~2~_. One obtains equations _I~1~=I~0~ exp(r t~1~)_ and _I~2~=I~0~ exp(r t~2~)_. By solving one of these equations for _I~0~_ and substituting into the other, we get _I~2~= I~1~ exp(r (t~2~ - t~1~))_. By solving the model for _r_ and entering numbers for _I~1~_ and _I~2~_ and times _t~1~_ and _t~2~_ we can figure out _r_. Let's try taht out. Set the model parameters back to those given in task #1. Let's try using the new method for estimating R~0~. Run the model with tfinal = 0.2 and tfinal = 0.4 and record the number of infected at the end of the simulation each time. Then substitute all the values into the equation you found for _r_ and thus compute the growth rate. For this model, the growth rate and R~0~ are related through _R~0~ = 1+rD_, where _D_ is the average duration of the infectious period (i.e. the inverse of the recovery rate). Use this to determine R~0~. You should get essentially the same answer (up to some rounding differences) as for task #1. Note that the choice of _t~1~_ and _t~2~_ can influence the results. Earlier times are better since once the number of susceptibles starts to drop markedly, the growth of infected slows down and is not exponential anymore."
+alltasks[tid,"TaskText"] = "Another way to estimate R~0~ is to determine the rate of increase in infected hosts at the beginning of the outbreak. During the initial phase, new infections increase exponentially according to _I(t)=I~0~ exp(rt)_, with _r_ being the rate of growth. Usually, for any real outbreak, you do not know the number of infected at the start, I~0~, or the exact time the outbreak starts. It is still possible to estimate _r_ by obtaining two values of _I_ at two time points during that initial growth rate, i.e. _I~1~_ at time _t~1~_ and _I~2~_ at time _t~2~_. One obtains equations _I~1~=I~0~ exp(r t~1~)_ and _I~2~=I~0~ exp(r t~2~)_. By solving one of these equations for _I~0~_ and substituting into the other, we get _I~2~= I~1~ exp(r (t~2~ - t~1~))_. By solving the model for _r_ and entering numbers for _I~1~_ and _I~2~_ and times _t~1~_ and _t~2~_ we can figure out _r_. Let's try taht out. Set the model parameters back to those given in task #1. Let's try using the new method for estimating R~0~. Run the model with tfinal = 5 and tfinal = 10 and record the number of infected at the end of the simulation each time. Then substitute all the values into the equation you found for _r_ and thus compute the growth rate. For this model, the growth rate and R~0~ are related through _R~0~ = 1+rD_, where _D_ is the average duration of the infectious period (i.e. the inverse of the recovery rate). Use this to determine R~0~. You should get essentially the same answer (up to some rounding differences) as for task #1. Note that the choice of _t~1~_ and _t~2~_ can influence the results. Earlier times are better since once the number of susceptibles starts to drop markedly, the growth of infected slows down and is not exponential anymore."
 
 # Record for task 5
 nrec = 1 # number of items to record
@@ -219,7 +219,7 @@ rc = rc + nrec #increment record counter by number of outcomes to record for thi
 
 # Task 6
 tid = 6
-alltasks[tid,"TaskText"] = "A) What is the value of the reproductive number _R_ at the time the outbreak peaks? (It's only called R~0~ at the beginning for a fully susceptible population). Explain how you can find that value for R, both using intuitive reasoning and using the equation for R~0~ given above (R~0~ = 1+rD). For some hints, note that at the peak numbers of infected are briefly flat, i.e. there is no more growth (what does that mean for _r_?). Also, there is no decline yet, for the infected to stay exactly the same, the average number of infections produced by one infected person before they recover needs to have a very specific value. What is that value? Note that at this R value, the outbreak wanes, but people still get infected. What R value would you need to halt any further infections completely?"
+alltasks[tid,"TaskText"] = "What is the value of the reproductive number _R_ at the time the outbreak peaks? (It's only called R~0~ at the beginning for a fully susceptible population). Explain how you can find that value for R, both using intuitive reasoning and using the equation for R~0~ given above (R~0~ = 1+rD). For some hints, note that at the peak numbers of infected are briefly flat, i.e. there is no more growth (what does that mean for _r_?). Also, there is no decline yet, for the infected to stay exactly the same, the average number of infections produced by one infected person before they recover needs to have a very specific value. What is that value? Note that at this R value, the outbreak wanes, but people still get infected. What R value would you need to halt any further infections completely?"
 
 # Record for task 6
 nrec = 2 # number of items to record
@@ -235,7 +235,7 @@ rc = rc + nrec #increment record counter by number of outcomes to record for thi
 
 # Task 7
 tid = 7
-alltasks[tid,"TaskText"] = "A) What would happen if a new ID came along that had an R~0~ value that was the same as the one you just determined in the previous question, namely the value of R at the peak of an outbreak? Test this with the simulation. Choose parameter values for which you get the right R~0~ and observe what the model produces."
+alltasks[tid,"TaskText"] = "What would happen if a new ID came along that had an R~0~ value that was the same as the one you just determined in the previous question, namely the value of R at the peak of an outbreak? Test this with the simulation. Set everyting as in task 1, then reduce transmission rate by half, which should get you the right R~0~ (you can check by plugging the parameter values into the R~0~ equation). Run the simulation and observe what the model produces. You should not see any outbreak."
 
 # Record for task 7
 nrec = 1 # number of items to record
@@ -254,20 +254,17 @@ alltasks[tid,"TaskText"] = "A) R~0~ quantifies the level of transmissibility of 
 B) Now increase the infectious duration by a factor of 4 (rate reduced by a factor of 4) and adjust the infectiousness-level such that you get the same R~0~ as before. Run again and compare the results concerning total outbreak size and timing of outbreak."
 
 # Record for task 8
-nrec = 2 # number of items to record
+nrec = 4 # number of items to record
 reclist = list()
-reclist$rectext = c("Day the outbreak peaked (Part A)",
-                    "Day the outbreak peaked (Part B)")
-reclist$recnote = c("Report the rounded integer",
-                    "Report the rounded integer")
-reclist$rectype = c("Numeric",
-                    "Numeric")
-reclist$recfuzzy = c(1,
-                     1)
+reclist$rectext = c("Number susceptible left at end of outbreak (part A)",
+                    "Day the outbreak peaked (part A)",
+                    "Number susceptible left at end of outbreak (part B)",
+                    "Day the outbreak peaked (part B)")
+reclist$recnote = rep("Report the rounded integer", nrec)
+reclist$rectype = rep("Numeric",nrec)
+reclist$recfuzzy = rep(1,nrec)
 allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
 rc = rc + nrec
-
-
 
 
 ```

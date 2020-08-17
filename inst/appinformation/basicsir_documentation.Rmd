@@ -176,7 +176,7 @@ reclist$rectype = "Numeric"
 reclist$recnote = c("Report the rounded integer")
 reclist$recfuzzy = c(1)
 
-allrecord<-fill_tasktable(allrecords,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
+allrecord <- fill_tasktable(allrecords,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
 rc = rc + nrec #increment record counter by number of outcomes to record for this task 
 
 
