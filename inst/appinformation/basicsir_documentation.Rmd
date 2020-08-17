@@ -65,7 +65,7 @@ As with the compartments, we could extend the model and allow other processes to
 For compartmental models (and also often other types of models), it is useful to show a graphical schematic representation of the compartments and processes included in the model. For compartmental models, such a diagram/figure is usually called a flow diagram. Such a diagram consists of a box for each compartment, and arrows pointing in and out of boxes to describe flows and interactions. For the simple SIR model, the flow diagram looks as follows:
 
 
-```{r modeldiagram,  fig.cap='',  echo=FALSE, fig, out.width = "70%"}
+```{r modeldiagram,  fig.cap='',  echo=FALSE, out.width = "70%"}
 knitr::include_graphics( system.file(figuredir,appsettings$modelfigname,package=packagename))
 ```
 
@@ -200,14 +200,14 @@ rc = rc + nrec
 tid = 3
 alltasks[tid,"TaskText"] = "A) From the graph, get a (rough) estimate of the day at which the outbreak peaks. That's easiest done when you make a plotly plot.
 B) Contemplate the fact that the outbreak ends even though there are still susceptible remaining, i.e. not everyone got infected. Do you find that surprising? How could you maybe explain that? This topic is discussed in more detail in the reproductive number app. 
-C) You have no infected left at the end of the outbreak. Figure out how you can use the information from either the susceptibles or recovered left at the end of the outbreak to figure out how many people in total got infected during the outbreak.
+C) You have no infected left at the end of the outbreak. Figure out how you can use the information from either the susceptibles or recovered left at the end of the outbreak to figure out how many people in total got infected during the outbreak. To that end, think about how individuals move through the different compartments in this model. What can happen to those in the S/I/R compartments as the outbreak progresses? Where are they at the end of the outbreak? Use either information about the number of individuals in S or R at the beginning and end of the outbreak to determine the total (cumulative) number of individuals that got infected during the outbreak.
 D) Rerun the simulation, with the same values you just had. Does anything change? Why (not)?"
 
 # Record for task 3
 nrec = 2 # number of items to record
 reclist = list()
 reclist$rectext = c("Day the outbreak peaked",
-                    "Total number infected at end of outbreak")
+                    "Total number infected at end of outbreak (compute as described in text)")
 reclist$recnote = c("Report the rounded integer",
                     "Report the rounded integer")
 reclist$rectype = c("Numeric",
@@ -258,37 +258,14 @@ rc = rc + nrec
 
 ### Task 6
 tid = 6
-alltasks[tid,"TaskText"] = "A) Go back to running the ODE model only. Set all parameters as described in task 1. Then double the value of the transmission rate, _b_. Compared to what you found in the previous task, how do you expect the min/max and number/fraction of S/I/R at the end of the outbreak to change? What about the time at which the outbreak peaks? Run the simulation with the doubled transmission rate. Compare your expectations with the results. How do they agree/disagree? Does it make sense? Anything surprising happening?"
+alltasks[tid,"TaskText"] = "A) Go back to running the ODE model only. Set all parameters as described in task 1. Then increase the rate of recovery by a factor of for, i.e. set it to g=2. (What duration of the infectious period does that translate to?) Contemplate what you expect to find for the increased recovery rate before you run the simulation. Then run the simulation. Compare your expectations with the results. How do they agree/disagree? Does it make sense? Anything surprising happening?"
 
 # Record for task 6
 nrec = 3 # number of items to record
 reclist = list()
-reclist$rectext = c("Number of susceptible at end of outbreak",
-                    "Number of recovered at end of outbreak",
-                    "Day the outbreak peaked")
-reclist$recnote = c("Report the rounded integer",
-                    "Report the rounded integer",
-                    "Report the rounded integer")
-reclist$rectype = c("Numeric",
-                    "Numeric",
-                    "Numeric")
-reclist$recfuzzy = c(0,
-                     0,
-                     1)
-allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
-rc = rc + nrec
-
-
-### Task 7
-tid = 7 
-alltasks[tid,"TaskText"] = "A) Double the rate of recovery, _g_, leave everything else as previously. How do you expect the results to change? (Try to make your prediction as precise/quantitative as you can.) Run the simulation with these new parameter settings. Compare your expectations with the results. How do they agree/disagree? Does it make sense? Anything surprising happening?"
-
-# Record for task 7
-nrec = 3 # number of items to record
-reclist = list()
-reclist$rectext = c("Number of susceptible at end of outbreak",
-                    "Number of recovered at end of outbreak",
-                    "Is there a peak for the outbreak? (Yes/No)")
+reclist$rectext = c("Number of susceptible at end of simulation",
+                    "Number of recovered at end of simulation",
+                    "Do you see an outbreak? (Yes/No)")
 reclist$recnote = c("Report the rounded integer",
                     "Report the rounded integer",
                     "Report Yes or No")
@@ -302,23 +279,55 @@ allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table 
 rc = rc + nrec
 
 
-### Task 8 
-tid = 8
-alltasks[tid,"TaskText"] = "A) Double the number of susceptibles, _S~0~_, leave everything else as you just had. How do you expect the results to change? Run the simulation with these new parameter settings. Compare your expectations with what results. How do they agree/disagree? Does it make sense? Anything surprising happening?"
 
-# Record for task 8
-nrec = 3 # number of items to record
+### Task 7
+tid = 7 
+alltasks[tid,"TaskText"] = "A) Increase the transmission rate by a factor of 4, leave everything else as previously. How do you expect the results to change? (Try to make your prediction as precise/quantitative as you can.) Run the simulation with these new parameter settings. Compare your expectations with the results. How do they agree/disagree? Does it make sense? Compare the values for number susceptible/recovered at end of simulation and the peak of the outbreak to the values you found in the initial tasks. Hint: You should see that the _magnitude_ of the outbreak is essentially the same, but the _timing_ has changed."
+
+# Record for task 7
+nrec = 4 # number of items to record
 reclist = list()
-reclist$rectext = c("Number of susceptible at end of outbreak",
-                    "Number of recovered at end of outbreak",
-                    "Is there a peak for the outbreak? (Yes/No)")
+reclist$rectext = c("Number of susceptible at end of simulation",
+                    "Number of recovered at end of simulation",
+                    "Do you see an outbreak? (Yes/No)",
+                    "Day at which outbreak peaked")
 reclist$recnote = c("Report the rounded integer",
                     "Report the rounded integer",
-                    "Report Yes or No")
+                    "Report Yes or No",
+                    "Report the rounded integer")
 reclist$rectype = c("Numeric",
                     "Numeric",
-                    "Character")
+                    "Character",
+                    "Numeric")
 reclist$recfuzzy = c(0,
+                     0,
+                     0,
+                     0)
+allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
+rc = rc + nrec
+
+
+### Task 8 
+tid = 8
+alltasks[tid,"TaskText"] = "A) Half the number of susceptibles, _S~0~_, leave everything else as you just had. How do you expect the results to change? Run the simulation with these new parameter settings. Compare your expectations with what results. How do they agree/disagree? Does it make sense? Anything surprising happening?"
+
+# Record for task 8
+nrec =43 # number of items to record
+reclist = list()
+reclist$rectext = c("Number of susceptible at end of simulation",
+                    "Number of recovered at end of simulation",
+                    "Do you see an outbreak? (Yes/No)",
+                    "Day at which outbreak peaked")
+reclist$recnote = c("Report the rounded integer",
+                    "Report the rounded integer",
+                    "Report Yes or No",
+                    "Report the rounded integer")
+reclist$rectype = c("Numeric",
+                    "Numeric",
+                    "Character",
+                    "Numeric")
+reclist$recfuzzy = c(0,
+                     0,
                      0,
                      0)
 allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
