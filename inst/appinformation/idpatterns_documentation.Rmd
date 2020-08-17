@@ -228,10 +228,16 @@ reclist$rectext = c("Number of susceptible at end of simulation, 10 months immun
                     "Number of susceptible at end of simulation, 20 months immunity",
                     "Number of infected at end of simulation, 20 months immunity")
 reclist$recnote = c("Report the rounded integer",
+                    "Report the rounded integer",
+                    "Report the rounded integer",
                     "Report the rounded integer")
 reclist$rectype = c("Numeric",
+                    "Numeric",
+                    "Numeric",
                     "Numeric")
 reclist$recfuzzy = c(0,
+                     0,
+                     0,
                      0)
 
 allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
