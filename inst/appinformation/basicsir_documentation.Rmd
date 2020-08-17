@@ -309,10 +309,10 @@ rc = rc + nrec
 
 ### Task 8 
 tid = 8
-alltasks[tid,"TaskText"] = "A) Half the number of susceptibles, _S~0~_, leave everything else as you just had. How do you expect the results to change? Run the simulation with these new parameter settings. Compare your expectations with what results. How do they agree/disagree? Does it make sense? Anything surprising happening?"
+alltasks[tid,"TaskText"] = "A) Half the number of susceptibles, _S~0~_, leave everything else as you just had. How do you expect the results to change? Run the simulation with these new parameter settings. Compare your expectations with the results. How do they agree/disagree? Does it make sense? Anything surprising happening?"
 
 # Record for task 8
-nrec =43 # number of items to record
+nrec =4 # number of items to record
 reclist = list()
 reclist$rectext = c("Number of susceptible at end of simulation",
                     "Number of recovered at end of simulation",
