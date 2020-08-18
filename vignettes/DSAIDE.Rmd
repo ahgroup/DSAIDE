@@ -35,7 +35,7 @@ The audience for this package consists individuals interested in infectious dise
 While the package was written as a component of a course on infectious disease epidemiology/modeling, the documentation for each app tries to be fairly complete and self-contained. This should allow you to get some understanding of the topics and models without requiring additional information. However, the information provided inside each app is not sufficient to get a very thorough understanding. If you use this package on your own without taking a class on the topc, it might be possible to learn the material covered by the apps in depth by working through some of the references provided for each app or general infectious disease modeling textbooks (e.g. [@keeling08; @vynnycky10; @bjoernstad18]). 
 
 ## Pre-requisites
-Since `DSAIDE` is an `R` package, you need to have [R](https://www.r-project.org/) installed. I also highly recommend [RStudio](https://www.rstudio.com/products/rstudio/download/), though it's not required. If you are not familiar with `R` you can find [a brief introduction here](https://andreashandel.github.io/IDEMAcourse/R_and_RStudio.html), which also provides a reference to detailed install instructions.
+Since `DSAIDE` is an `R` package, you need to have [R](https://www.r-project.org/) installed. I also highly recommend [RStudio](https://rstudio.com/products/rstudio/download/), though it's not required. If you are not familiar with `R` you can find [a brief introduction here](https://andreashandel.github.io/IDEMAcourse/R_and_RStudio.html), which also provides a reference to detailed install instructions.
 
 
 ## Installation
@@ -257,7 +257,7 @@ The package is built in a way that makes it (hopefully) easy for others to contr
 
 ## Further information
 * [I published a paper describing the package and how to use it](https://doi.org/10.1371/journal.pcbi.1005642). The package structure has changed since the paper was published, but it still describes the overall idea and context well, if you are interested in that. 
-* A 'companion' package to this one, called Dynamical Systems Approaches for Immune Respone Modeling (DSAIRM), focuses on models for analyzing with-host infection dynamics. It has the same structure as DSAIDE. [See the DSAIRM site for more information.](https://ahgroup.github.io/DSAIRM)
+* A 'companion' package to this one, called Dynamical Systems Approaches for Immune Respone Modeling (DSAIRM), focuses on models for analyzing with-host infection dynamics. It has the same structure as DSAIDE. [See the DSAIRM site for more information.](https://ahgroup.github.io/DSAIRM/)
 * I have solutions (as R Markdown files) to most of the 'What to do' tasks for the different apps. If you are an instructor using this package as part of a class, email me if you are interested in having access to these solutions.
 
 ## Contributors

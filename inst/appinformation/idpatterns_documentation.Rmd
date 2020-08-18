@@ -64,7 +64,7 @@ We include the following processes in this model:
 * Asymptomatic infected hosts recover after some time (specified by the rate _g~A~_). Similarly, the rate _g~I~_ determines the duration the symptomatic hosts stay in the symptomatic state. For symptomatic hosts, two outcomes are possible. Either recovery or death. The parameter _d_ determines the fraction of hosts that die.
 * Recovered individuals are initially immune to reinfection. They can loose their immunity at rate _w_ and return to the susceptible compartment. 
 * New susceptibles enter the system/model at a fixed rate _n_. From each compartment (apart from the dead compartment), hosts "leave" after some time (i.e. they die) at rate _m_. The inverse of this rate is the average lifespan of a host. 
-* The rates of transmission, _b~P~_, _b~A~_ and _b~I~_ can vary seasonally/annually, modeled as a sinusoidal function. The strength of this seasonal variation, i.e. the amplitude of the sinusoidal variation, is controlled by the parameter _s_. Reasonable values for _s_ are between 0 and 1. For values larger than 1, the model produces negative transmission rates, which are of course nonsensical.
+* The rates of transmission, _b~P~_, _b~A~_ and _b~I~_ can vary seasonally/annually, as described more below. 
 
 Note that we only track people that die due to the disease in our $D$ compartment. All hosts dying due to other causes just "exit the system" and we don't further keep track of them (though we could add another compartment to "collect" and track all individuals who died from non-disease-related causes.)
 
@@ -90,7 +90,17 @@ $$\dot D = d g_I I $$
 
 Since we do not track people dying due to non-disease causes, all the "m - arrows" are not pointing to another compartment, instead of those individuals just "leave the system". Similarly new susceptibles enter the system (are born) from "outside the system".
 
-Also note that the transmission rates, _b~I~_, can be time varying as described above. The parameter _T_ is set depending on the time units chosen for the model. For example if you want to run the model in units of days, the underlying simulation code will set _T=365_, similarly, for weeks it will be _T=52_. This ensures that the seasonal variation always has a period of a year.
+### Modeling seasonality
+
+Generally, when running the kind of models we investigate here, the variables change (and each gets its own equation) and the parameters remain fixed during the simulation. However, sometimes one wants parameters that change over time. In this example, we want the transmission rate to vary seasonally. The model allows you to let the transmission rate parameters vary as the simulation progresses. We model seasonality with a sin-function which has a period of 1 year. At time $t=0$, the function is zero, it reaches its max of 1 at 3 months, goes back to 0 at 6 months, reaches its minimum of -1 at 9 months and is back to zero at 12 months. 
+
+The strength of this seasonal variation, i.e. the amplitude of the sinusoidal variation, is controlled by the parameter _s_. Reasonable values for _s_ are between 0 and 1. For values larger than 1, the model produces negative transmission rates, which are of course nonsensical.
+
+Note that for even more flexibility, we could have included another parameter that can shift the sin-function along the time axis such that the minimum doesn't always have to be at t=9 but instead any other time. For simplicity, that's not done here, but would likely be good to have for modeling any real disease (e.g. influenza which has its minimum of transmission during the summer, which is around month 6-8 in the northern hemisphere).
+
+The parameter _T_ is set depending on the time units chosen for the model. For example if you want to run the model in units of days, the underlying simulation code will set _T=365_, similarly, for weeks it will be _T=52_. This ensures that the seasonal variation always has a period of a year.
+
+Instead of defining time-varying parameters, one could treat each such parameter as a variable and give it their own compartment/equation. But often, it is easier and makes conceptually more sense to still consider them as parameters, and implement them in the way shown here, with explicit time-dependence.
 
 
 
@@ -132,7 +142,7 @@ rc=1
 
 # Task 1
 tid = 1
-alltasks[tid,"TaskText"] = "A) Run the simulation with A population size, _S~0~_, of 1000, 1 initially infected and presymptomatic host, simulation duration 10 years (convert to months). Assume that only symptomatic individuals transmit, at rate _b~I~_ = 0.002 and that there is no seasonal variation (s=0). Assume that the duration of the symptomatic period is 1 month long. (Hint: The parameter _g~I~_ is the inverse of this period.) Assume that the duration of the presymptomatic period is approximately 6 days long. (Make sure you convert units correctly. First convert from days to months. You can assume that a month is roughly 30 days. Then take the inverse to get the rate.) Assume that there are no asymptomatic infections. You can, therefore, set the rate of recovery of asymptomatics, _g~A~_ to anything, it doesn't matter because nobody will be asymptomatic. Assume nobody dies due to disease, immunity does not wane, no births, and no natural deaths. If you did it correctly, you should get a single outbreak with around 203 susceptibles left at the end."
+alltasks[tid,"TaskText"] = "Run the simulation with A population size, _S~0~_, of 1000, 1 initially infected and presymptomatic host, simulation duration 10 years (convert to months). Assume that only symptomatic individuals transmit, at rate _b~I~_ = 0.002 and that there is no seasonal variation (s=0). Assume that the duration of the symptomatic period is 1 month long. (Hint: The parameter _g~I~_ is the inverse of this period.) Assume that the duration of the presymptomatic period is approximately 6 days long. (Make sure you convert units correctly. First convert from days to months. You can assume that a month is roughly 30 days. Then take the inverse to get the rate.) Assume that there are no asymptomatic infections. You can, therefore, set the rate of recovery of asymptomatics, _g~A~_ to anything, it doesn't matter because nobody will be asymptomatic. Assume nobody dies due to disease, immunity does not wane, no births, and no natural deaths. If you did it correctly, you should get a single outbreak with around 203 susceptibles left at the end."
 
 # Record for task 1
 nrec = 1 # number of items to record
@@ -183,7 +193,7 @@ rc = rc + nrec
 
 # Task 4
 tid = 4
-alltasks[tid,"TaskText"] = "A) Set the birth and death rate to _n=4_ and _m==0.002_ and the initial number of susceptibles to the steady state value you computed above. We do that because we don't want a mixing of underlying population growth/decline dynamics on top if the ID dynamics. That would make it more complicated to understand what's going on. (You get to do that later). Ensure that if you run the simulation now, nothing changes, i.e. the susceptibles remain at the same number. Now introduce an infected individual (_P0=1_), with other values as set in task 1. Set the simulation duration to 200 years. What do you expect to see? Run the simulation, compare expectations with results. If things work right, you should see around 510 susceptibles at the end of the simulation."
+alltasks[tid,"TaskText"] = "Set the birth and death rate to _n=4_ and _m=0.002_ and the initial number of susceptibles to the steady state value you computed above. We do that because we don't want a mixing of underlying population growth/decline dynamics on top if the ID dynamics. That would make it more complicated to understand what's going on. (You get to do that later). Ensure that if you run the simulation now, nothing changes, i.e. the susceptibles remain at the same number. Now introduce an infected individual (_P0=1_), with other values as set in task 1. Set the simulation duration to 200 years. What do you expect to see? Run the simulation, compare expectations with results. If things work right, you should see around 501 susceptibles at the end of the simulation."
 
 nrec = 1 # number of items to record
 reclist = list()
@@ -197,7 +207,7 @@ rc = rc + nrec #increment record counter by number of outcomes to record for thi
 
 # Task 5
 tid = 5
-alltasks[tid,"TaskText"] = "A) It is possible to compute the steady state values for the model variables at the endemic scenario, i.e. when the number of infected is non-zero. This computation is a bit messy for the model above because it has the extra _P_ and _A_ states that make the math more complicated (you can try for yourself as a challenge after you've done the simple model.) To keep the math simpler, we consider a simplified approximation of the above model. The way we have set our parameters so far, individuals spend a very short time in _P_ compared to _I_. We can thus approximately ignore the _P_ compartment and assume that individuals go directly from _S_ to _I_. Further, for our parameter choices, nobody enters _A_ and _D_, so we can ignore those compartments too. This produces the following simpler SIR model:
+alltasks[tid,"TaskText"] = "It is possible to compute the steady state values for the model variables at the endemic scenario, i.e. when the number of infected is non-zero. This computation is a bit messy for the model above because it has the extra _P_ and _A_ states that make the math more complicated (you can try for yourself as a challenge after you've done the simple model.) To keep the math simpler, we consider a simplified approximation of the above model. The way we have set our parameters so far, individuals spend a very short time in _P_ compared to _I_. We can thus approximately ignore the _P_ compartment and assume that individuals go directly from _S_ to _I_. Further, for our parameter choices, nobody enters _A_ and _D_, so we can ignore those compartments too. This produces the following simpler SIR model:
 
 $$ dS/dt = n -   b_I IS - m S $$ 
 $$ dI/dt = b_I SI - g_I I - m I $$ 
@@ -218,7 +228,7 @@ rc = rc + nrec #increment record counter by number of outcomes to record for thi
 
 # Task 6
 tid = 6
-alltasks[tid,"TaskText"] = "A) The patterns we've seen so far are oscillations/cycles (i.e. repeated outbreaks) that eventually settle down to a steady state. These oscillations are often referred to as _intrinsic_, purely produced by the interplay between depletion of susceptibles due to infection and replenishment due to birth. Waning immunity is another mechanism by which susceptibles can be replenished and one can thus get repeat outbkreaks. To investigate that, set everything back to the values from task #1. Now, assume that immunity wanes within on average 10 months and set simulation time for 100 years. Record the number of susceptible and infected at the end of the simulation. Double the _duration_ of immunity. What do you expect? What do you see? Run again and record the number susceptible and infected at steady state."
+alltasks[tid,"TaskText"] = "The patterns we've seen so far are oscillations/cycles (i.e. repeated outbreaks) that eventually settle down to a steady state. These oscillations are often referred to as _intrinsic_, purely produced by the interplay between depletion of susceptibles due to infection and replenishment due to birth. Waning immunity is another mechanism by which susceptibles can be replenished and one can thus get repeat outbkreaks. To investigate that, set everything back to the values from task #1. Now, assume that immunity wanes within on average 10 months and set simulation time for 100 years. Record the number of susceptible and infected at the end of the simulation. Double the _duration_ of immunity. What do you expect? What do you see? Run again and record the number susceptible and infected at steady state."
 
 # Record for task 6
 nrec = 4 # number of items to record
@@ -284,7 +294,7 @@ rc = rc + nrec #increment record counter by number of outcomes to record for thi
 
 # Task 9
 tid = 9
-alltasks[tid,"TaskText"] = "So far, the cycles were due to the intrinsic dynamics of the system. Now we'll explore what happens if some outside phenomenon - e.g. the weather - influences some model parameters. Generally, when running the kind of models we investigate here, the variables change (and each gets its own equation) and the parameters remain fixed during the simulation. Here, we are looking at a model where this is not the case. The model allows you to let the transmission rate parameters vary as the simulation progresses. Such time-varying parameters are possible. One could give them their own compartment/equation, but often instead of treating them as variables, it makes conceptually more sense to still consider them as parameters, albeit now time-varying. In our model, the transmission parameters can vary sinusoidally with a period of 1 year. Set everything as in task #1, do a quick run to make sure you only get one outbreak. Now run the model with increasing seasonality by setting s = 0.001, 0.01, 0.1, and 1. Even though you are letting the transmission vary seasonally, you will only see a single outbreak, though the dynamics changes slightly. Why is that so? Why don't you see patterns like before? Think about the concept of _resource replenishment_ and what that means here."
+alltasks[tid,"TaskText"] = "So far, the cycles were due to the intrinsic dynamics of the system. Now we'll explore what happens if some outside phenomenon - e.g. the weather - influences some model parameters. In our model, the transmission parameters can vary sinusoidally with a period of 1 year. Set everything as in task #1, do a quick run to make sure you only get one outbreak. Now run the model with increasing seasonality by setting s = 0.001, 0.01, 0.1, and 1. Even though you are letting the transmission vary seasonally, you will only see a single outbreak, though the dynamics changes slightly. Why is that so? Why don't you see patterns like before? Think about the concept of _resource replenishment_ and what that means here."
 
 # Record for task 9
 nrec = 1 # number of items to record

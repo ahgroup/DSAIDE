@@ -4,7 +4,6 @@ library('devtools')
 library('pkgdown')
 library('zip')
 
-
 ###################################################
 # build all html documentation files from Rmd files
 ##################################################
@@ -44,6 +43,11 @@ zip::zipr(zipfile = paste0(basepath,"/inst/simulatorfunctions/simulatorfunctions
 
 #run spell check - only turn on if wanted
 #spelling::spell_check_files(files)
+
+###################################################
+# recreate documentation for exported functions
+##################################################
+devtools::document(roclets = c('rd', 'collate', 'namespace'))
 
 # re-build vignette
 devtools::build_vignettes()

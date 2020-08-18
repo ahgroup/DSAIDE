@@ -138,8 +138,6 @@ The model is assumed to be in units of months when run through the Shiny App.
     <pre class="usage"><span class='fu'>simulate_reproductivenumber2_ode</span>(
   <span class='kw'>S</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
   <span class='kw'>I</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>f</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>e</span> <span class='kw'>=</span> <span class='fl'>0</span>,
   <span class='kw'>b</span> <span class='kw'>=</span> <span class='fl'>0.01</span>,
   <span class='kw'>g</span> <span class='kw'>=</span> <span class='fl'>10</span>,
   <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>0</span>,
@@ -158,14 +156,6 @@ The model is assumed to be in units of months when run through the Shiny App.
     <tr>
       <th>I</th>
       <td><p>: initial number of infected hosts : numeric</p></td>
-    </tr>
-    <tr>
-      <th>f</th>
-      <td><p>: fraction of vaccinated individuals. Those individuals are moved from S to R at the beginning of the simulation : numeric</p></td>
-    </tr>
-    <tr>
-      <th>e</th>
-      <td><p>: efficacy of vaccine, given as fraction between 0 and 1 : numeric</p></td>
     </tr>
     <tr>
       <th>b</th>

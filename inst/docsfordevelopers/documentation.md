@@ -52,11 +52,13 @@ To build a new app, you need to create the following:
 
 If you contribute/send those files, I will - after testing - include them into the package. You'll of course receive full credit as package contributor.
 
-
 ## Using the DSAIDE solutions
 * Each _documentation.Rmd file has the tasks and outcomes to record stored as a table. When knitting/processing this file, both the html file of the documentation is generated and a .tsv file containing a table with the tasks and quantities to be reported, as well as other columns.
 * The .tsv files should be copied into the (private) DSAIDEsolutions repository into the tasktable_files folder.
 * Solutions and answers to each question are added by scripts in the DSAIDEsolutions repo. Those can be further processed with the grading app (not part of DSAIDE). 
+
+
+
 
 ## Information for package development
 
@@ -101,12 +103,10 @@ library('DSAIDE')
 
 ### To-do for CRAN release  
 * "by hand" edit the DESCRIPTION file to make sure it's up to date
+* update news.md and cran-comments.md
 * run processing-script to Re-build documentation, vignettes and copy latest versions of simulator functions - see above
 * Run check and make sure no problems occur
-* update news.md and cran-comments.md
-* Re-create package site with pkgdown::build_site()
 * Sync everything to github
-* Check vignette and function references on website, fix errors
 * Run devtools::check_rhub(), devtools::check_win_release() and devtools::check_win_devel()
 * Do a test run of devtools::release() - fix any remaining issues, then re-run and release
 

@@ -168,7 +168,7 @@ alltasks[tid,"TaskText"] = "Now assume that asymptomatic individuals transmit at
 # Record for task 3
 nrec = 3 # number of items to record
 reclist = list()
-reclist$rectext = c("Total number of recovered (at end of simulation)",
+reclist$rectext = c("Number recovered at end of simulation",
                     "Number susceptible left at end of simulation",
                     "Total deaths")
 reclist$rectype = rep(c("Numeric"),nrec)
@@ -181,12 +181,12 @@ rc = rc + nrec
 
 # Task 4
 tid = 4
-alltasks[tid,"TaskText"] = "Next, let's assume that half the symptomatic infected die. Change the corresponding parameter in the model to reflect this new assumption. Leave everything as in task 3. How do you expect the results to change?"
+alltasks[tid,"TaskText"] = "Next, let's assume that half the symptomatic infected die. Change the corresponding parameter in the model to reflect this new assumption. Leave everything else as in task 3. How do you expect the results to change?"
 
 # Record for task 4
 nrec = 3 # number of items to record
 reclist = list()
-reclist$rectext = c("Total number of recovered (at end of simulation)",
+reclist$rectext = c("Number of recovered at end of simulation",
                     "Number susceptible left at end of simulation",
                     "Total deaths")
 reclist$rectype = rep(c("Numeric"),nrec)
