@@ -18,7 +18,7 @@
 
 * Small improvements and bug fixes
 
-# DSAIDE 0.8.2
+# DSAIDE 0.8.2 (2019-07-04)
 
 * Added new apps, updated a few others
 
@@ -27,7 +27,7 @@
 * Fixed bug in environmental transmission app 
 * Updated readme.md and package vignette/tutorial
 
-# DSAIDE 0.8.0
+# DSAIDE 0.8.0 (2019-03-30)
 
 ## User facing changes
 
@@ -52,7 +52,7 @@
 * various bug fixes
 
 
-# DSAIDE 0.7.0
+# DSAIDE 0.7.0 (2018-08-07)
 
 ## User facing changes
 
@@ -77,19 +77,19 @@
 * Lots of other code cleanup to make things more robust and streamlined
 
 
-# DSAIDE 0.6.0
+# DSAIDE 0.6.0 (2017-09-30)
 
 * Various bug fixes in the apps and documentation.
 
 * Updated "what to do" instructions for multiple apps.
 
-# DSAIDE 0.5.0
+# DSAIDE 0.5.0 (2017-08-07)
 
 * Added one new app.
 
 * Various bug fixes in the apps and documentation.
 
 
-# DSAIDE 0.4.0
+# DSAIDE 0.4.0 (2017-03-02)
 
 * This is the first release to CRAN.

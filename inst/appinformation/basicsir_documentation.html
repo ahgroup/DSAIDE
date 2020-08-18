@@ -108,7 +108,7 @@ R_{t+dt} &amp; =  R_t + dt * \left( g I_t  \right)
 <ul>
 <li><p>For all tasks in this and the other apps, you are given a list of quantities to report (write down). If you use this software as part of a course, you might be asked to submit the answers to these quantities for grading. Unless otherwise specified, you can round each number to the closest integer.</p></li>
 <li><p>Some of the tasks below (and in future apps) are fairly open-ended. The idea is that these tasks give you something to get started, but you should feel free to explore the simulations any way you want. Play with them, query them, go through iterations of thinking what you expect, observing it, and if discrepancies occur, figure out why. Essentially, the best way to use these apps is to <em>do your own science/research</em> with them.</p></li>
-<li><p>You might find for some parameter settings that numbers in specific compartments (e.g. number of infected) drop below 1 (and possibly rebound later). This of course is biologically not reasonable. Numbers less than 1 are an artifact of the underlying differential equation model. All ODE models (and the discrete time model we consider here) have that problem. A ‘hacky’ solution is to monitor the simulation and if a quantity drops below 1, set it to 0 or stop the simulation. Some apps use this approach. A cleaner solution is to treat all variables as discrete units and allow them to only change in integer steps (in a probabilistic manner). This approach will be discussed in the apps under the “Stochastic models??? section. For most apps, neither approach is taken, so you’ll see numbers less than 1. That’s ok for the purpose we use the apps here. Just be careful if you use these kinds of models in your research you might need to pay attention to this issue.</p></li>
+<li><p>You might find for some parameter settings that numbers in specific compartments (e.g. number of infected) drop below 1 (and possibly rebound later). This of course is biologically not reasonable. Numbers less than 1 are an artifact of the underlying differential equation model. All ODE models (and the discrete time model we consider here) have that problem. A ‘hacky’ solution is to monitor the simulation and if a quantity drops below 1, set it to 0 or stop the simulation. Some apps use this approach. A cleaner solution is to treat all variables as discrete units and allow them to only change in integer steps (in a probabilistic manner). This approach will be discussed in the apps under the <em>Stochastic models</em> section. For most apps, neither approach is taken, so you’ll see numbers less than 1. That’s ok for the purpose we use the apps here. Just be careful if you use these kinds of models in your research you might need to pay attention to this issue.</p></li>
 <li><p>While the list of tasks for each app always states what time units you should run the model in, this and most other simulations/apps in DSAIDE do not have natural time units (unless specifically stated). You could, therefore, assume that your model runs in units of days or weeks/months/years, based on what’s most suitable for the disease you want to study. You have to make sure that all your parameters are in the right time units. Always make sure to check if a given simulation can handle different time units or assumes specific ones. Again, for the tasks the time units are specified.</p></li>
 <li><p>The app lets you choose the maximum simulation time. Some apps also let you set the starting time and time step. Starting time generally does not matter and is almost always set to 0. Sometimes an app doesn’t even allow you to change this. For models like that are based on differential equations, the time step does not affect the internal time steps taken by the numeric solver, only the times for which results are returned. Thus, for some apps, it is also not an input. It is here, so it can run together with a discrete-time model. Only for discrete-time models is this the actual time step that’s being taken.</p></li>
 </ul>
@@ -130,7 +130,7 @@ R_{t+dt} &amp; =  R_t + dt * \left( g I_t  \right)
 <ol style="list-style-type: upper-alpha">
 <li>Switch the plotting to have x-axis, y-axis or both plotted on a log scale. Leave all other settings as before.</li>
 <li>Note that while the look of the plot changes a lot, nothing has changed about the underlying simulation. The results are exactly the same in each case, only plotted differently. This is something to be aware of when you see plots in papers or produce your own. The best plot to use is the one that shows results of interest in the clearest form. Usually, the x-axis is linear and the y-axis is either linear or logarithmic.</li>
-<li>Try again switching between ggplot and plotly as plotting engine.</li>
+<li>Try again switching between ggplot and plotly as plotting engine. Play around a bit with plotly. It has a number of interactive features, such as zooming, reading off values from a graph, turning on/off specific lines, etc. Those features will likely be useful as you go through the different apps in DSAIDE, thus I encourage you to explore the plotly functionality somewhat.</li>
 </ol>
 <p><strong>Record</strong></p>
 <ul>
@@ -148,7 +148,7 @@ R_{t+dt} &amp; =  R_t + dt * \left( g I_t  \right)
 <p><strong>Record</strong></p>
 <ul>
 <li><p>Day the outbreak peaked</p></li>
-<li><p>Total number infected at end of simulation (compute as described in text)</p></li>
+<li><p>Total/cumulative number infected (compute as described in text)</p></li>
 </ul>
 </div>
 <div id="task-4" class="section level3">
@@ -192,7 +192,7 @@ R_{t+dt} &amp; =  R_t + dt * \left( g I_t  \right)
 </div>
 <div id="task-8" class="section level3">
 <h3>Task 8</h3>
-<p>Half the number of susceptibles, <em>S<sub>0</sub></em>, leave everything else as you just had. How do you expect the results to change? Run the simulation with these new parameter settings. Compare your expectations with the results. How do they agree/disagree? Does it make sense? Anything surprising happening?</p>
+<p>Double the number of susceptibles, <em>S<sub>0</sub></em>, leave everything else as you just had. How do you expect the results to change? Run the simulation with these new parameter settings. Compare your expectations with the results. How do they agree/disagree? Does it make sense? Anything surprising happening?</p>
 <p><strong>Record</strong></p>
 <ul>
 <li><p>Number of susceptible at end of simulation</p></li>

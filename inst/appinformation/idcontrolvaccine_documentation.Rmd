@@ -86,9 +86,10 @@ $$S_{v} = (1-ef)S(0)$$
 $$R(0) = efS(0)$$
 
 
+### Vaccination Implementation
+The model includes the process of vaccinating individuals. It is modeled in a fairly simple way. Before the simulation starts, it is assumed that a fraction _f_ of susceptibles are vaccinated. The vaccine protects those vaccinated with efficacy _e_. Those protected individuals move into the _R_ compartment, the remainder stay in _S_. Thus, the simulation is started with values for susceptibles and recovered following vaccination given by $S_{v} = (1 - fe) S$ and $R = feS$. As an example, for a perfect vaccine ($e=1$) given to half the population ($f=0.5$) the initial number of susceptibles is reduced by half.
 
-
-Here, _S(0)_ is the initial population of susceptibles, and _S~v~_ is the susceptible population left after vaccinating a fraction _f_ (at vaccine efficacy _e_). Vaccinated and protected individuals are moved to the _R_ compartment before the start of the outbreak, _R(0)_. Note the unfortunate fact that the recovered compartment uses the same letter as the reproductive number, and the starting value for the _R_ compartment, _R(0)_ looks similar to the basic reproductive number. This is common notation and I therefore use it here too. Just be careful to make sure you know which quantity is discussed.
+Note the unfortunate fact that the recovered compartment uses the same letter as the reproductive number, and the starting value for the _R_ compartment, _R(0)_ looks similar to the basic reproductive number. This is common notation and I therefore use it here too. Just be careful to make sure you know which quantity is discussed.
 
 
 

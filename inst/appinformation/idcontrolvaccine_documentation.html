@@ -76,7 +76,11 @@ Flow diagram for this model.
 </p>
 </div>
 <p><span class="math display">\[\dot S =n - b SI - mS + wR\]</span> <span class="math display">\[\dot I = b S I - g I - mI\]</span> <span class="math display">\[\dot R = g I - mR - wR\]</span> <span class="math display">\[S_{v} = (1-ef)S(0)\]</span> <span class="math display">\[R(0) = efS(0)\]</span></p>
-<p>Here, <em>S(0)</em> is the initial population of susceptibles, and <em>S<sub>v</sub></em> is the susceptible population left after vaccinating a fraction <em>f</em> (at vaccine efficacy <em>e</em>). Vaccinated and protected individuals are moved to the <em>R</em> compartment before the start of the outbreak, <em>R(0)</em>. Note the unfortunate fact that the recovered compartment uses the same letter as the reproductive number, and the starting value for the <em>R</em> compartment, <em>R(0)</em> looks similar to the basic reproductive number. This is common notation and I therefore use it here too. Just be careful to make sure you know which quantity is discussed.</p>
+</div>
+<div id="vaccination-implementation" class="section level3">
+<h3>Vaccination Implementation</h3>
+<p>The model includes the process of vaccinating individuals. It is modeled in a fairly simple way. Before the simulation starts, it is assumed that a fraction <em>f</em> of susceptibles are vaccinated. The vaccine protects those vaccinated with efficacy <em>e</em>. Those protected individuals move into the <em>R</em> compartment, the remainder stay in <em>S</em>. Thus, the simulation is started with values for susceptibles and recovered following vaccination given by <span class="math inline">\(S_{v} = (1 - fe) S\)</span> and <span class="math inline">\(R = feS\)</span>. As an example, for a perfect vaccine (<span class="math inline">\(e=1\)</span>) given to half the population (<span class="math inline">\(f=0.5\)</span>) the initial number of susceptibles is reduced by half.</p>
+<p>Note the unfortunate fact that the recovered compartment uses the same letter as the reproductive number, and the starting value for the <em>R</em> compartment, <em>R(0)</em> looks similar to the basic reproductive number. This is common notation and I therefore use it here too. Just be careful to make sure you know which quantity is discussed.</p>
 </div>
 </div>
 <div id="shinytab3" class="section level2">

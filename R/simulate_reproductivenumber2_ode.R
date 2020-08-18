@@ -10,8 +10,6 @@
 #'
 #' @param S : initial number of susceptible hosts : numeric
 #' @param I : initial number of infected hosts : numeric
-#' @param f : fraction of vaccinated individuals. Those individuals are moved from S to R at the beginning of the simulation : numeric
-#' @param e : efficacy of vaccine, given as fraction between 0 and 1 : numeric
 #' @param b : level/rate of infectiousness for hosts in the I compartment : numeric
 #' @param g : rate at which a person leaves the I compartment : numeric
 #' @param n : the rate at which new individuals enter the model (are born) : numeric
@@ -43,7 +41,7 @@
 #' @export
 
 
-simulate_reproductivenumber2_ode <- function(S = 1000, I = 1, f = 0.0, e = 0.0, b = 1e-2, g = 10, n = 0, m = 0, w = 0, tmax = 300){
+simulate_reproductivenumber2_ode <- function(S = 1000, I = 1, b = 1e-2, g = 10, n = 0, m = 0, w = 0, tmax = 300){
 
 
   ############################################################
@@ -66,9 +64,7 @@ simulate_reproductivenumber2_ode <- function(S = 1000, I = 1, f = 0.0, e = 0.0, 
 
 
 
-  S0eff = (1 - f*e) * S;
-  R = f*e * S; #initial number of recovered/removed (inlcudes vaccinated)
-  Y0 = c(S = S0eff, I = I, R = R);  #combine initial conditions into a vector
+  Y0 = c(S = S, I = I, R = R);  #combine initial conditions into a vector
   dt = min(0.1, tmax / 1000); #time step for which to get results back
   timevec = seq(0, tmax, dt); #vector of times for which solution is returned (not that internal timestep of the integrator is different)
 
