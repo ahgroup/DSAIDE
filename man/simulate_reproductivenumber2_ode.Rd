@@ -7,8 +7,6 @@
 simulate_reproductivenumber2_ode(
   S = 1000,
   I = 1,
-  f = 0,
-  e = 0,
   b = 0.01,
   g = 10,
   n = 0,
@@ -21,10 +19,6 @@ simulate_reproductivenumber2_ode(
 \item{S}{: initial number of susceptible hosts : numeric}
 
 \item{I}{: initial number of infected hosts : numeric}
-
-\item{f}{: fraction of vaccinated individuals. Those individuals are moved from S to R at the beginning of the simulation : numeric}
-
-\item{e}{: efficacy of vaccine, given as fraction between 0 and 1 : numeric}
 
 \item{b}{: level/rate of infectiousness for hosts in the I compartment : numeric}
 

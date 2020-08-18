@@ -64,7 +64,7 @@ simulate_reproductivenumber2_ode <- function(S = 1000, I = 1, b = 1e-2, g = 10, 
 
 
 
-  Y0 = c(S = S, I = I, R = R);  #combine initial conditions into a vector
+  Y0 = c(S = S, I = I, R = 0);  #combine initial conditions into a vector
   dt = min(0.1, tmax / 1000); #time step for which to get results back
   timevec = seq(0, tmax, dt); #vector of times for which solution is returned (not that internal timestep of the integrator is different)
 
