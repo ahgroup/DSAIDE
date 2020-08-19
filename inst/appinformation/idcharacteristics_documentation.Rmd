@@ -33,7 +33,7 @@ sapply(files_to_source, source) #sourcing needs to happen inside each Rmd file s
 #so we can automatically include figure, list the functions in the further information section
 #and use other information specific to the current app for the task table generation
 currentrmdfile = knitr::current_input() 
-currentrmdfile = "idcharacteristics_documentation.Rmd" #for debugging
+#currentrmdfile = "idcharacteristics_documentation.Rmd" #for debugging
 appsettings = get_settings(currentrmdfile,appdocdir,packagename)
 ```
 
