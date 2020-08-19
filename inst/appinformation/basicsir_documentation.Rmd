@@ -157,7 +157,7 @@ nrecord = 21 #number of outcomes to record
 tablist <- make_tasktable(ntasks,nrecord,appsettings)
 alltasks = tablist[[1]]
 allrecord = tablist[[2]]
-#all<-list()
+
 
 
 #this is the running counter for the records which starts at 1 
