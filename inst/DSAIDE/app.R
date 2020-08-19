@@ -6,8 +6,10 @@
 #Shouldn't affect deployment as R package.
 #Will not apply to loading to shinyappsio (would need to create a new google analytics property)
 
-#This is a bit of code and instructions for deployment of the package to shinyappsio
-#to deploy, follow these steps:
+##############################################
+#This is a bit of code and instructions for deployment of the package to a server
+##############################################
+#to deploy to shinyappsio, follow these steps:
 #1. go into the folder where this file (app.R) resides
 #2. install the package through CRAN or github if we want to use the github version
 #3. #uncomment the library() command below
@@ -20,7 +22,8 @@
 # 'tokens' and copy the command into the console
 #5. comment out the library command again
 
-#for deployment to a shiny server, steps are similar
+##############################################
+#to deploy to a self-hosted shiny server, steps are similar
 #1. install package on server, either CRAN or Github version
 #2. uncomment the library() command below
 #3. save app.R, copy it and packagestyle.css to the server app folder
