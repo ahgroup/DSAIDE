@@ -116,10 +116,7 @@ R_{t+dt} &amp; =  R_t + dt * \left( g I_t  \right)
 </div>
 <div id="task-1" class="section level3">
 <h3>Task 1</h3>
-<ol style="list-style-type: upper-alpha">
-<li>Run the simulation with 1000 susceptible individuals and 1 initially infected host, no recovered. Set simulation duration to 100 days, start time and time step can remain at 0 and 0.1. Set recovery rate <em>g</em>=0.5 per day, and infectiousness <em>b</em>=0.001. You will get an outbreak of some - currently unspecified - infectious disease. If you did it correctly, your outbreak should end with around 203 uninfected individuals still remaining.</li>
-<li>Also take a look at the final number of infected. You’ll see that it is at <em>3E-9</em>, i.e. much less than 1 but not 0. That’s the issue discussed above in the notes, that for ODE models, numbers can drop below 1, and then can slowly go to 0 but not fully reach 0. Often, this biologically unreasonable feature of these kinds of models can be ignored, but sometimes it matters. You will learn more about this when you work through the stochastic model apps.</li>
-</ol>
+<p>Run the simulation with 1000 susceptible individuals and 1 initially infected host, no recovered. Set simulation duration to 100 days, start time and time step can remain at 0 and 0.1. Set recovery rate <em>g</em>=0.5 per day, and infectiousness <em>b</em>=0.001. You will get an outbreak of some - currently unspecified - infectious disease. If you did it correctly, your outbreak should end with around 203 uninfected individuals still remaining. Also take a look at the final number of infected. You’ll see that it is at <em>3E-9</em>, i.e. much less than 1 but not 0. That’s the issue discussed above in the notes, that for ODE models, numbers can drop below 1, and then can slowly go to 0 but not fully reach 0. Often, this biologically unreasonable feature of these kinds of models can be ignored, but sometimes it matters. You will learn more about this when you work through the stochastic model apps.</p>
 <p><strong>Record</strong></p>
 <ul>
 <li>Total number of recovered at end of simulation</li>
@@ -127,11 +124,7 @@ R_{t+dt} &amp; =  R_t + dt * \left( g I_t  \right)
 </div>
 <div id="task-2" class="section level3">
 <h3>Task 2</h3>
-<ol style="list-style-type: upper-alpha">
-<li>Switch the plotting to have x-axis, y-axis or both plotted on a log scale. Leave all other settings as before.</li>
-<li>Note that while the look of the plot changes a lot, nothing has changed about the underlying simulation. The results are exactly the same in each case, only plotted differently. This is something to be aware of when you see plots in papers or produce your own. The best plot to use is the one that shows results of interest in the clearest form. Usually, the x-axis is linear and the y-axis is either linear or logarithmic.</li>
-<li>Try again switching between ggplot and plotly as plotting engine. Play around a bit with plotly. It has a number of interactive features, such as zooming, reading off values from a graph, turning on/off specific lines, etc. Those features will likely be useful as you go through the different apps in DSAIDE, thus I encourage you to explore the plotly functionality somewhat.</li>
-</ol>
+<p>Switch the plotting to have x-axis, y-axis or both plotted on a log scale. Leave all other settings as before. Note that while the look of the plot changes a lot, nothing has changed about the underlying simulation. The results are exactly the same in each case, only plotted differently. This is something to be aware of when you see plots in papers or produce your own. The best plot to use is the one that shows results of interest in the clearest form. Usually, the x-axis is linear and the y-axis is either linear or logarithmic. Try again switching between ggplot and plotly as plotting engine. Play around a bit with plotly. It has a number of interactive features, such as zooming, reading off values from a graph, turning on/off specific lines, etc. Those features will likely be useful as you go through the different apps in DSAIDE, thus I encourage you to explore the plotly functionality somewhat.</p>
 <p><strong>Record</strong></p>
 <ul>
 <li>Nothing</li>
@@ -139,12 +132,9 @@ R_{t+dt} &amp; =  R_t + dt * \left( g I_t  \right)
 </div>
 <div id="task-3" class="section level3">
 <h3>Task 3</h3>
-<ol style="list-style-type: upper-alpha">
-<li>From the graph, get a (rough) estimate of the day at which the outbreak peaks. That’s easiest done when you make a plotly plot.</li>
-<li>Contemplate the fact that the outbreak ends even though there are still susceptible remaining, i.e. not everyone got infected. Do you find that surprising? How could you maybe explain that? This topic is discussed in more detail in the reproductive number app.</li>
-<li>You have no infected left at the end of the outbreak. Figure out how you can use the information from either the susceptibles or recovered left at the end of the outbreak to figure out how many people in total got infected during the outbreak. To that end, think about how individuals move through the different compartments in this model. What can happen to those in the S/I/R compartments as the outbreak progresses? Where are they at the end of the outbreak? Use either information about the number of individuals in S or R at the beginning and end of the outbreak to determine the total (cumulative) number of individuals that got infected during the outbreak.</li>
-<li>Rerun the simulation, with the same values you just had. Does anything change? Why (not)?</li>
-</ol>
+<p>From the graph, get a (rough) estimate of the day at which the outbreak peaks. That’s easiest done when you make a plotly plot. Contemplate the fact that the outbreak ends even though there are still susceptible remaining, i.e. not everyone got infected. Do you find that surprising? How could you maybe explain that? This topic is discussed in more detail in the reproductive number app.</p>
+<p>You have no infected left at the end of the outbreak. Figure out how you can use the information from either the susceptibles or recovered left at the end of the outbreak to figure out how many people in total got infected during the outbreak. To that end, think about how individuals move through the different compartments in this model. What can happen to those in the S/I/R compartments as the outbreak progresses? Where are they at the end of the outbreak? Use either information about the number of individuals in S or R at the beginning and end of the outbreak to determine the total (cumulative) number of individuals that got infected during the outbreak.</p>
+<p>Rerun the simulation, with the same values you just had. Does anything change? Why (not)?</p>
 <p><strong>Record</strong></p>
 <ul>
 <li><p>Day the outbreak peaked</p></li>
