@@ -99,8 +99,9 @@ alloutcomes = NULL
 
 # Task 1
 tid = 1
-tasktext = "A) In _Reproductive Number 1_, the focus was on a single outbreak. But the reproductive number concept is also useful in situations where a disease is endemic. As you learned in the _Patterns of ID_ app (if not, go do it before this one), to achieve an endemic state, we need replenishment of susceptibles through for instance births or waning immunity. We'll start with natural births and deaths. If births (and deaths) are present, you will be able to get multiple outbreaks and endemic states. Set the parameter values such that your hosts have approximately an average lifespan of 41 years (remember to convert to months before taking the inverse). Round to the first significant digit (i.e. 0.00X). Set birth rate such that the population is steady at 1000 in the absence of any infected hosts. 
-B) Now we'll introduce the disease. Set simulation time to around 500 years, 1 infected, _g_=5, _b_=0.015. Run the simulation, make sure you reach a steady state. Compare the steady state values for S (and optional I and R) from the simulation with those predicted from the SIR steady state equations (see _Patterns of ID_ app)."
+tasktext = "In _Reproductive Number 1_, the focus was on a single outbreak. But the reproductive number concept is also useful in situations where a disease is endemic. As you learned in the _Patterns of ID_ app (if not, go do it before this one), to achieve an endemic state, we need replenishment of susceptibles through for instance births or waning immunity. We'll start with natural births and deaths. If births (and deaths) are present, you will be able to get multiple outbreaks and endemic states. Set the parameter values such that your hosts have approximately an average lifespan of 41 years (remember to convert to months before taking the inverse). Round to the first significant digit (i.e. 0.00X). Set birth rate such that the population is steady at 1000 in the absence of any infected hosts. 
+
+Now we'll introduce the disease. Set simulation time to around 500 years, 1 infected, _g_=5, _b_=0.015. Run the simulation, make sure you reach a steady state. Compare the steady state values for S (and optional I and R) from the simulation with those predicted from the SIR steady state equations (see _Patterns of ID_ app)."
 
 # Record for task 1
 nrec = 2 # number of items to record
@@ -120,9 +121,11 @@ rc = rc + nrec #increment record counter by number of outcomes to record for thi
 
 # Task 2
 tid = 2
-tasktext = "A) Figure out what the reproductive number is at the endemic steady state. To that end, recall its definition (average number of new infectious persons created by one infectious person) and determine what has to be true if the number of infected neither increases nor decreases. How does that compare to the reproductive number at the peak of an outbreak, which you learned about before?
-B) You've learned that the equation for the reproductive number for this simple model is $R_0=bS_0/g$. Use it to compute the reproductive number. Compare the value of $R_0$ if there are $S_0$ susceptible to the value of the reproductive number at steady state, _R~s~_, when you have have _S~f~_ susceptibles. Can you figure out how they relate? Does that confirm what you figured out in A) about _R_ at steady state?
-C) Next double the values for both natural birth and death rates. What do you get for the value of S at steady state? Is that surprising? If it is, take another look at the relation between $R_0$ and S at steady state, and the equation for $R_0$ (what does it contain, what does it not contain?)"
+tasktext = "Figure out what the reproductive number is at the endemic steady state. To that end, recall its definition (average number of new infectious persons created by one infectious person) and determine what has to be true if the number of infected neither increases nor decreases. How does that compare to the reproductive number at the peak of an outbreak, which you learned about before?
+
+You've learned that the equation for the reproductive number for this simple model is $R_0=bS_0/g$. Use it to compute the reproductive number. Compare the value of $R_0$ if there are $S_0$ susceptible to the value of the reproductive number at steady state, _R~s~_, when you have have _S~f~_ susceptibles. Can you figure out how they relate? Does that confirm what you figured out in A) about _R_ at steady state?
+
+Next double the values for both natural birth and death rates. What do you get for the value of S at steady state? Is that surprising? If it is, take another look at the relation between $R_0$ and S at steady state, and the equation for $R_0$ (what does it contain, what does it not contain?)"
 
 # Record for task 2
 nrec = 2 # number of items to record
@@ -163,7 +166,7 @@ rc = rc + nrec #increment record counter by number of outcomes to record for thi
 
 # Task 4
 tid = 4
-tasktext = "A) One usually obtains R~0~ from the data/literature and uses it to pick values for the transmission parameter, _b_, which is otherwise very hard to estimate. Let's try that. Go online and find (approximate) values for the duration of the infectious period and R~0~ for SARS. Keep the population size at 1000. Use those values and the $R_0$ equation to compute the transmission parameter, _b_. Run a single outbreak (no births and deaths). Recall from the _Reproductive Number 1_ app how you can use the fraction if suceptibles left at the end of an outbreak to compute $R_0$. Do that here again to confirm that you get indeed (approximately) the value you started out with."
+tasktext = "One usually obtains R~0~ from the data/literature and uses it to pick values for the transmission parameter, _b_, which is otherwise very hard to estimate. Let's try that. Go online and find (approximate) values for the duration of the infectious period and R~0~ for SARS. Keep the population size at 1000. Use those values and the $R_0$ equation to compute the transmission parameter, _b_. Run a single outbreak (no births and deaths). Recall from the _Reproductive Number 1_ app how you can use the fraction if suceptibles left at the end of an outbreak to compute $R_0$. Do that here again to confirm that you get indeed (approximately) the value you started out with."
 
 # Record for task 4
 nrec = 1 # number of items to record
@@ -182,7 +185,7 @@ rc = rc + nrec #increment record counter by number of outcomes to record for thi
 
 # Task 5
 tid = 5
-tasktext = "A) Let's repeat the same for a disease that causes an endemic state, tuberculosis (TB). Go online and find estimates for the basic reproductive number of TB. Note that TB is somewhat special: An infected and infectious person (someone with TB disease) might infect many others, but only some of those will go on to develop disease and become infectious. For R~0~, we always need to go from infectious individual to another infectious individual. Also find an estimate for the duration of the infectious period for TB. Then use these quantities to determine parameters _b_ and _g_ and run a simulation with the same birth and death rates as in task 1. Check that the steady state levels of infected/infectious individuals matches with the R~0~ value you chose.
+tasktext = "Let's repeat the same for a disease that causes an endemic state, tuberculosis (TB). Go online and find estimates for the basic reproductive number of TB. Note that TB is somewhat special: An infected and infectious person (someone with TB disease) might infect many others, but only some of those will go on to develop disease and become infectious. For R~0~, we always need to go from infectious individual to another infectious individual. Also find an estimate for the duration of the infectious period for TB. Then use these quantities to determine parameters _b_ and _g_ and run a simulation with 1000 susceptible and the same birth and death rates as in task 1 (m=0.002 and n=2). Check that the steady state levels of infected/infectious individuals matches with the R~0~ value you chose.
 
 Note: The SIR model is not a good model for TB since for TB, the stage where individuals are infected but not yet infectious is long and important. So to really model TB, one would need to include such details. We are only using TB here for illustrative purposes."
 

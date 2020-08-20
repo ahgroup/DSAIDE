@@ -82,10 +82,8 @@ Flow diagram for this model.
 <p><strong>The tasks below are described in a way that assumes everything is in units of MONTHS (rate parameters, therefore, have units of inverse months). If any quantity is not given in those units, you need to convert it first (e.g. if it says a year, you need to convert it to 12 months).</strong></p>
 <div id="task-1" class="section level3">
 <h3>Task 1</h3>
-<ol style="list-style-type: upper-alpha">
-<li>In <em>Reproductive Number 1</em>, the focus was on a single outbreak. But the reproductive number concept is also useful in situations where a disease is endemic. As you learned in the <em>Patterns of ID</em> app (if not, go do it before this one), to achieve an endemic state, we need replenishment of susceptibles through for instance births or waning immunity. We’ll start with natural births and deaths. If births (and deaths) are present, you will be able to get multiple outbreaks and endemic states. Set the parameter values such that your hosts have approximately an average lifespan of 41 years (remember to convert to months before taking the inverse). Round to the first significant digit (i.e. 0.00X). Set birth rate such that the population is steady at 1000 in the absence of any infected hosts.</li>
-<li>Now we’ll introduce the disease. Set simulation time to around 500 years, 1 infected, <em>g</em>=5, <em>b</em>=0.015. Run the simulation, make sure you reach a steady state. Compare the steady state values for S (and optional I and R) from the simulation with those predicted from the SIR steady state equations (see <em>Patterns of ID</em> app).</li>
-</ol>
+<p>In <em>Reproductive Number 1</em>, the focus was on a single outbreak. But the reproductive number concept is also useful in situations where a disease is endemic. As you learned in the <em>Patterns of ID</em> app (if not, go do it before this one), to achieve an endemic state, we need replenishment of susceptibles through for instance births or waning immunity. We’ll start with natural births and deaths. If births (and deaths) are present, you will be able to get multiple outbreaks and endemic states. Set the parameter values such that your hosts have approximately an average lifespan of 41 years (remember to convert to months before taking the inverse). Round to the first significant digit (i.e. 0.00X). Set birth rate such that the population is steady at 1000 in the absence of any infected hosts.</p>
+<p>Now we’ll introduce the disease. Set simulation time to around 500 years, 1 infected, <em>g</em>=5, <em>b</em>=0.015. Run the simulation, make sure you reach a steady state. Compare the steady state values for S (and optional I and R) from the simulation with those predicted from the SIR steady state equations (see <em>Patterns of ID</em> app).</p>
 <p><strong>Record</strong></p>
 <ul>
 <li><p>The value you used for birth rate</p></li>
@@ -94,11 +92,9 @@ Flow diagram for this model.
 </div>
 <div id="task-2" class="section level3">
 <h3>Task 2</h3>
-<ol style="list-style-type: upper-alpha">
-<li>Figure out what the reproductive number is at the endemic steady state. To that end, recall its definition (average number of new infectious persons created by one infectious person) and determine what has to be true if the number of infected neither increases nor decreases. How does that compare to the reproductive number at the peak of an outbreak, which you learned about before?</li>
-<li>You’ve learned that the equation for the reproductive number for this simple model is <span class="math inline">\(R_0=bS_0/g\)</span>. Use it to compute the reproductive number. Compare the value of <span class="math inline">\(R_0\)</span> if there are <span class="math inline">\(S_0\)</span> susceptible to the value of the reproductive number at steady state, <em>R<sub>s</sub></em>, when you have have <em>S<sub>f</sub></em> susceptibles. Can you figure out how they relate? Does that confirm what you figured out in A) about <em>R</em> at steady state?</li>
-<li>Next double the values for both natural birth and death rates. What do you get for the value of S at steady state? Is that surprising? If it is, take another look at the relation between <span class="math inline">\(R_0\)</span> and S at steady state, and the equation for <span class="math inline">\(R_0\)</span> (what does it contain, what does it not contain?)</li>
-</ol>
+<p>Figure out what the reproductive number is at the endemic steady state. To that end, recall its definition (average number of new infectious persons created by one infectious person) and determine what has to be true if the number of infected neither increases nor decreases. How does that compare to the reproductive number at the peak of an outbreak, which you learned about before?</p>
+<p>You’ve learned that the equation for the reproductive number for this simple model is <span class="math inline">\(R_0=bS_0/g\)</span>. Use it to compute the reproductive number. Compare the value of <span class="math inline">\(R_0\)</span> if there are <span class="math inline">\(S_0\)</span> susceptible to the value of the reproductive number at steady state, <em>R<sub>s</sub></em>, when you have have <em>S<sub>f</sub></em> susceptibles. Can you figure out how they relate? Does that confirm what you figured out in A) about <em>R</em> at steady state?</p>
+<p>Next double the values for both natural birth and death rates. What do you get for the value of S at steady state? Is that surprising? If it is, take another look at the relation between <span class="math inline">\(R_0\)</span> and S at steady state, and the equation for <span class="math inline">\(R_0\)</span> (what does it contain, what does it not contain?)</p>
 <p><strong>Record</strong></p>
 <ul>
 <li><p>Value of R at endemic steady state</p></li>
@@ -119,9 +115,7 @@ Flow diagram for this model.
 </div>
 <div id="task-4" class="section level3">
 <h3>Task 4</h3>
-<ol style="list-style-type: upper-alpha">
-<li>One usually obtains R<sub>0</sub> from the data/literature and uses it to pick values for the transmission parameter, <em>b</em>, which is otherwise very hard to estimate. Let’s try that. Go online and find (approximate) values for the duration of the infectious period and R<sub>0</sub> for SARS. Keep the population size at 1000. Use those values and the <span class="math inline">\(R_0\)</span> equation to compute the transmission parameter, <em>b</em>. Run a single outbreak (no births and deaths). Recall from the <em>Reproductive Number 1</em> app how you can use the fraction if suceptibles left at the end of an outbreak to compute <span class="math inline">\(R_0\)</span>. Do that here again to confirm that you get indeed (approximately) the value you started out with.</li>
-</ol>
+<p>One usually obtains R<sub>0</sub> from the data/literature and uses it to pick values for the transmission parameter, <em>b</em>, which is otherwise very hard to estimate. Let’s try that. Go online and find (approximate) values for the duration of the infectious period and R<sub>0</sub> for SARS. Keep the population size at 1000. Use those values and the <span class="math inline">\(R_0\)</span> equation to compute the transmission parameter, <em>b</em>. Run a single outbreak (no births and deaths). Recall from the <em>Reproductive Number 1</em> app how you can use the fraction if suceptibles left at the end of an outbreak to compute <span class="math inline">\(R_0\)</span>. Do that here again to confirm that you get indeed (approximately) the value you started out with.</p>
 <p><strong>Record</strong></p>
 <ul>
 <li>Nothing</li>
@@ -129,9 +123,7 @@ Flow diagram for this model.
 </div>
 <div id="task-5" class="section level3">
 <h3>Task 5</h3>
-<ol style="list-style-type: upper-alpha">
-<li>Let’s repeat the same for a disease that causes an endemic state, tuberculosis (TB). Go online and find estimates for the basic reproductive number of TB. Note that TB is somewhat special: An infected and infectious person (someone with TB disease) might infect many others, but only some of those will go on to develop disease and become infectious. For R<sub>0</sub>, we always need to go from infectious individual to another infectious individual. Also find an estimate for the duration of the infectious period for TB. Then use these quantities to determine parameters <em>b</em> and <em>g</em> and run a simulation with the same birth and death rates as in task 1. Check that the steady state levels of infected/infectious individuals matches with the R<sub>0</sub> value you chose.</li>
-</ol>
+<p>Let’s repeat the same for a disease that causes an endemic state, tuberculosis (TB). Go online and find estimates for the basic reproductive number of TB. Note that TB is somewhat special: An infected and infectious person (someone with TB disease) might infect many others, but only some of those will go on to develop disease and become infectious. For R<sub>0</sub>, we always need to go from infectious individual to another infectious individual. Also find an estimate for the duration of the infectious period for TB. Then use these quantities to determine parameters <em>b</em> and <em>g</em> and run a simulation with 1000 susceptible and the same birth and death rates as in task 1 (m=0.002 and n=2). Check that the steady state levels of infected/infectious individuals matches with the R<sub>0</sub> value you chose.</p>
 <p>Note: The SIR model is not a good model for TB since for TB, the stage where individuals are infected but not yet infectious is long and important. So to really model TB, one would need to include such details. We are only using TB here for illustrative purposes.</p>
 <p><strong>Record</strong></p>
 <ul>
