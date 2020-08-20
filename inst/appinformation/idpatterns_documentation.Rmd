@@ -202,7 +202,9 @@ $$ dS/dt = n -   b_I IS - m S $$
 $$ dI/dt = b_I SI - g_I I - m I $$ 
 $$ dR/dt =  g_I I  - m R $$
 
-We can follow the procedure above for computing the steady state for _S_ to compute the endemic steady state by setting the left side of the equations to 0 and solving for the variables _S_, _I_ and _R_ as functions of model parameters only. Try it. You should get _S=(g~I~ + m)/b~I~ _ and similar equations for _I_ and _R_. For more on steady state calculations, see e.g. [@vynnycky10] or [@keeling08] (but note that each of those references uses their own notation which is not quite the same as used here.) Compare the model simulations with the equations you found. Substitute the parameter values from the task above into the equations you found for _S_, _I_ and _R_ and confirm that you get approximately the same results as you get from running the model to steady state."
+We can follow the procedure above for computing the steady state for _S_ to compute the endemic steady state by setting the left side of the equations to 0 and solving for the variables _S_, _I_ and _R_ as functions of model parameters only. Try it. You should get _S=(g~I~ + m)/b~I~ _ and similar equations for _I_ and _R_. For more on steady state calculations, see e.g. [@vynnycky10] or [@keeling08] (but note that each of those references uses their own notation which is not quite the same as used here.) Compare the model simulations with the equations you found. Substitute the parameter values from the task above into the equations you found for _S_, _I_ and _R_ and confirm that you get approximately the same results as you get from running the model to steady state.
+
+To get an exact match between simulation and math would require solving the full model (i.e. the one that includes _P_ and _A_ as shown in the _Model_ tab. But those equations are getting big and ugly. If you want to give it a try, I recommend using software that can solve such equations analytically. The free [Maxima software](http://maxima.sourceforge.net/) might be a good option. If you have access to it, Mathematica or Maple are other good choices."
 
 # Record for task 5
 nrec = 1 # number of items to record
@@ -221,7 +223,7 @@ rc = rc + nrec #increment record counter by number of outcomes to record for thi
 
 # Task 6
 tid = 6
-tasktext = "The patterns we've seen so far are oscillations/cycles (i.e. repeated outbreaks) that eventually settle down to a steady state. These oscillations are often referred to as _intrinsic_, purely produced by the interplay between depletion of susceptibles due to infection and replenishment due to birth. Waning immunity is another mechanism by which susceptibles can be replenished and one can thus get repeat outbkreaks. To investigate that, set everything back to the values from task #1. Now, assume that immunity wanes within on average 10 months and set simulation time for 100 years. Record the number of susceptible and infected at the end of the simulation. Double the _duration_ of immunity. What do you expect? What do you see? Run again and record the number susceptible and infected at steady state."
+tasktext = "The patterns we've seen so far are oscillations/cycles (i.e. repeated outbreaks) that eventually settle down to a steady state. These oscillations are often referred to as _intrinsic_, purely produced by the interplay between depletion of susceptibles due to infection and replenishment due to birth. Waning immunity is another mechanism by which susceptibles can be replenished and one can thus get repeat outbkreaks. To investigate that, set everything back to the values from task #1. Now, assume that immunity wanes within on average 10 months and set simulation time for 20 years. Record the number of susceptible and infected at the end of the simulation. Double the _duration_ of immunity. What do you expect? What do you see? Run again and record the number susceptible and infected at steady state. Try a few more waning immunity values and observe how the osciallations and the steady state is affected (you might have to change the simulation time to ensure you reach steady state)."
 
 # Record for task 6
 nrec = 4 # number of items to record
@@ -248,7 +250,7 @@ $$ dS/dt = w R  -   b_I IS $$
 $$ dI/dt = b_I SI - g_I I $$ 
 $$ dR/dt =  g_I I  - W R $$
 
-You can set the left sides to zero and solve for the steady states of _S_, _I_ and _R_. You will find that _S_ at steady state is independent of _w_, which you should have also seen in your simulations. _I_ and _R_ are not uniquely determined. Going deeper into what this means is beyond what we want to discuss here. See see e.g. [@vynnycky10] or [@keeling08] for more. To get an exact match between simulation and math would require solving the full model, i.e. the one shown in the _Model_ tab (with _s=0_). But those equations are getting big and ugly. If you want to give it a try, I recommend using software that can solve such equations analytically. The free [Maxima software](http://maxima.sourceforge.net/) might be a good option."
+You can set the left sides to zero and solve for the steady states of _S_, _I_ and _R_. By solving the second equation for _S_, you will find that its steady state is independent of _w_, which you should have also seen in your simulations. _I_ and _R_ are not uniquely determined, you'll realize you can't solve them as before. Going deeper into what this means is beyond what we want to discuss here. For more on steady states, see e.g. [@keeling08] or some mathematical biology textbook."
 
 # Record for task 7
 nrec = 1 # number of items to record
