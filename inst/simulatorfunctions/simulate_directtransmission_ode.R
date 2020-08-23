@@ -40,7 +40,7 @@
 
 
 
-simulate_directtransmission_ode <- function(S = 1e3, I = 1, bd = 0.01, bf = 0, A = 1, n = 0, m = 0, g = 0.1, w = 0, scenario = 1, tmax = 120)
+simulate_directtransmission_ode <- function(S = 999, I = 1, bd = 0.005, bf = 0, A = 2, n = 0, m = 0, g = 0.1, w = 0, scenario = 1, tmax = 120)
 {
 
 

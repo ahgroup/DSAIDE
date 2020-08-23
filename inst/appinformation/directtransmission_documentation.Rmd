@@ -72,7 +72,7 @@ The force of infection, denoted by _f_ here, depends on the transmission model. 
 The flow diagram and the set of ordinary differential equations (ODE) which are used to implement this model are as follows:
 
 
-```{r modeldiagram,  fig.cap='Flow diagram for this model. ',  echo=FALSE}
+```{r modeldiagram,  fig.cap='Flow diagram for this model. ',  echo=FALSE, out.width = "70%"}
 knitr::include_graphics(here::here('inst/media',appsettings$modelfigname))
 ```
 
