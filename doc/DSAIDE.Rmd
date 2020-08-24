@@ -125,7 +125,7 @@ Once you are comfortable interacting with the models and have a good understandi
 
 To facilitate direct interaction and modification of the underlying simulations, each app is structured in such a way that the underlying model/simulation is a stand-alone function. For some apps, there are multiple underlying functions involved. You can call any of these functions directly, without going through the graphical interface. The _Further Information_ tab inside each app provides the name of the corresponding underlying function(s) and how to call their help files to get information on their use.
 
-Consider as example the first app, called "ID Dynamics Intro". The simulator function for this model is called `simulate_sir_ode.R`. After loading the package (if not already loaded) with 
+Consider as example the first app, called "ID Dynamics Intro". The simulator function for this model is called `simulate_SIR_model_ode.R`. After loading the package (if not already loaded) with 
 
 ```{r eval=TRUE, echo=TRUE}
 library('DSAIDE') 

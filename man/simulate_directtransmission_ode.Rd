@@ -5,11 +5,11 @@
 \title{Simulation of a compartmental infectious disease transmission model illustrating different types of direct transmission}
 \usage{
 simulate_directtransmission_ode(
-  S = 1000,
+  S = 999,
   I = 1,
-  bd = 0.01,
+  bd = 0.005,
   bf = 0,
-  A = 1,
+  A = 2,
   n = 0,
   m = 0,
   g = 0.1,

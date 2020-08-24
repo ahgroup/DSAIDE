@@ -12,7 +12,7 @@
 
 <meta name="author" content="Andreas Handel" />
 
-<meta name="date" content="2020-08-19" />
+<meta name="date" content="2020-08-24" />
 
 <title>DSAIDE Package Tutorial</title>
 
@@ -319,7 +319,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 <h1 class="title toc-ignore">DSAIDE Package Tutorial</h1>
 <h4 class="author"><a href="http://handelgroup.uga.edu">Andreas Handel</a></h4>
-<h4 class="date">2020-08-19</h4>
+<h4 class="date">2020-08-24</h4>
 
 
 
@@ -401,7 +401,7 @@ Screenshot of the <em>What to do</em> section of one of the apps.
 <h3>Level 2: Directly interacting with the simulation functions</h3>
 <p>Once you are comfortable interacting with the models and have a good understanding of the concepts covered by the different apps, it is possible, without too much effort, to interact with the simulation models directly. This provides more flexibility at the cost of writing a limited amount of code.</p>
 <p>To facilitate direct interaction and modification of the underlying simulations, each app is structured in such a way that the underlying model/simulation is a stand-alone function. For some apps, there are multiple underlying functions involved. You can call any of these functions directly, without going through the graphical interface. The <em>Further Information</em> tab inside each app provides the name of the corresponding underlying function(s) and how to call their help files to get information on their use.</p>
-<p>Consider as example the first app, called “ID Dynamics Intro”. The simulator function for this model is called <code>simulate_sir_ode.R</code>. After loading the package (if not already loaded) with</p>
+<p>Consider as example the first app, called “ID Dynamics Intro”. The simulator function for this model is called <code>simulate_SIR_model_ode.R</code>. After loading the package (if not already loaded) with</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">library</span>(<span class="st">&#39;DSAIDE&#39;</span>) </span></code></pre></div>
 <pre><code>## Loading required package: shiny</code></pre>
 <pre><code>## Welcome to the DSAIDE package. Type dsaidemenu() to get started.</code></pre>

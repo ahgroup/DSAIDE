@@ -198,75 +198,41 @@ rc = rc + nrec #increment record counter by number of outcomes to record for thi
 tid = 4
 tasktext = "A) Now also turn on direct transmission by setting _b~D~ = b~E~ = 0.001_. Leave everything else unchanged. What do you expect to see? Run simulations and see how your expectations hold up."
 
-# Record for task 4
-nrec = 1 # number of items to record
-reclist = list()
-reclist$rectext = c("Total number infected during the outbreak")
-reclist$rectype = c("Numeric")
-reclist$recnote = c("Report the rounded integer")
-reclist$recfuzzy = c(0)
-allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
-rc = rc + nrec
 
 
 ### Task 5
 tid = 5
 tasktext = "A) Now set the initial number of infected to 0 and initial pathogen in the environment to 1. Leave everything else unchanged. What do you expect to see? Run simulations and see how your expectations hold up."
 
-# Record for task 5
-nrec = 1 # number of items to record
-reclist = list()
-reclist$rectext = c("Total number infected during the outbreak")
-reclist$rectype = c("Numeric")
-reclist$recnote = c("Report the rounded integer")
-reclist$recfuzzy = c(0)
-allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
-rc = rc + nrec
 
 
 ### Task 6
 tid = 6
 tasktext = "A) Try different combinations of direct and environmental transmission only and having only infected hosts or only pathogen in the environment at the start. What do you expect to see? Run simulations and see how your expectations hold up."
 
-# Record for task 6
-nrec = 1 # number of items to record
-reclist = list()
-reclist$rectext = c("Nothing")
-reclist$rectype = "None"
-reclist$recnote = c("")
-reclist$recfuzzy = c(0)
-allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
-rc = rc + nrec
-
 
 ### Task 7
 tid = 7
 tasktext = "A) Keep exploring by trying different parameters and transmission settings and see how they influence results. You can also turn on births/deaths and see what you get. As you continue your exploration, think about potential real infectious diseases that might be approximated by either one of the transmission types, and what settings for other model parameters would be for those ID."
 
-# Record for task 7
-nrec = 1 # number of items to record
-reclist = list()
-reclist$rectext = c("Nothing")
-reclist$rectype = "None"
-reclist$recnote = c("")
-reclist$recfuzzy = c(0)
-allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
 rc = rc + nrec
 
 ```
 
-
 ```{r echo=FALSE}
 #save the fully filled task table to a tsv file
-save_tasktable(alltasks,allrecord,appsettings)
+alloutcomes$QuizID = paste0('dsaide_',appsettings$appid)
+alloutcomes$AppTitle = appsettings$apptitle
+alloutcomes$AppID = appsettings$appid
+alloutcomes$Answer = "" #add empty answer column, just for consistency. Should probably be removed here.
+write.table(alloutcomes, paste0(appsettings$appid,"_tasktable.tsv"), append = FALSE, sep = "\t", row.names = F, col.names = TRUE)
 ```
 
 
 ```{r, echo=FALSE, results='asis'}
 # Take all the text stored in the table and print the tasks and items to record
-write_tasktext(alltasks,allrecord)
+write_tasktext_new(alloutcomes)
 ```
-
 
 
 ## Further Information {#shinytab4}
