@@ -211,7 +211,7 @@ rc = rc + nrec #increment record counter by number of outcomes to record for thi
 alloutcomes$QuizID = paste0('dsaide_',appsettings$appid)
 alloutcomes$AppTitle = appsettings$apptitle
 alloutcomes$AppID = appsettings$appid
-alloutcomes$Answer = "" #add empty answer column, just for consistency. Should probably be removed here.
+alloutcomes <- alloutcomes %>% dplyr::select(QuizID,AppID,AppTitle,TaskID,TaskText,RecordID,Record,Type,Note)		
 write.table(alloutcomes, paste0(appsettings$appid,"_tasktable.tsv"), append = FALSE, sep = "\t", row.names = F, col.names = TRUE)
 ```
 

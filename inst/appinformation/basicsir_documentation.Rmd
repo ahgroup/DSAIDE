@@ -12,6 +12,8 @@ bibliography: dsaide_references.bib
 ---
 
 ```{r, include = FALSE}
+library(dplyr)
+
 #*************************************
 #general setup to define package and get path locations
 #all paths are inside the package and retrieved with system.file
@@ -19,7 +21,7 @@ packagename = "DSAIDE"
 helperdir = "helperfunctions"
 mbmodeldir = "mbmodels"
 figuredir = "media"
-appdocdir = "appinformation" 
+appdocdir = "appinformation"
 #*************************************
 #Note: for this to process/knit, several helper functions need to be available (sourced) first
 #those are in the inst/helperfunctions folder
@@ -28,6 +30,7 @@ appdocdir = "appinformation"
 #*************************************
 files_to_source = list.files(system.file(helperdir,package = packagename),full.names=TRUE)
 sapply(files_to_source, source) #sourcing needs to happen inside each Rmd file since knitr starts a new environment
+
 #load the settings file for the current app 
 #so we can automatically include figure, list the functions in the further information section
 #and use other information specific to the current app for the task table generation
@@ -145,7 +148,15 @@ In words, the number of susceptible/infected/recovered at a time step _dt_ in th
 # TaskText: The text that explains what to do for the task
 # RecordID: Identifies if it is the first, second,... item to record, labeling is T1R1, T1R2, etc.
 # Record: Text explaining what value from the model that nee too be recorded
-# Type: type of entry: Character, Numeric, Rounded_Integer
+# Type: type of entry: 
+#     Character (single letter - for multiple choice), 
+#     Text (any text - should be avoided, hard to match/grade),
+#     Numeric
+#     Rounded_Integer
+#     Rounded_Numeric
+#     Integer
+#     Logical - could be Yes/No or True/False. Will be evaluated the same in grading app.
+#     None - if nothing is to be reported for a given task
 # Note: Used by students taking quiz. Makes it clear what type of value to enter in "Answers"
 
 #this is the running counter for the records which starts at 1 
@@ -270,7 +281,7 @@ out_records = c("Number of susceptible at end of simulation",
                     "Do you see an outbreak? (Yes/No)")
 out_types = c("Rounded_Integer",
                     "Rounded_Integer",
-                    "Character")
+                    "Logical")
 out_notes = c("Report the rounded integer",
                     "Report the rounded integer",
                     "Report Yes or No")
@@ -297,7 +308,7 @@ out_records = c("Number of susceptible at end of simulation",
                     "Day at which outbreak peaked")
 out_types = c("Rounded_Integer",
                     "Rounded_Integer",
-                    "Character",
+                    "Logical",
                     "Rounded_Integer")
 out_notes = c("Report the rounded integer",
                     "Report the rounded integer",
@@ -325,7 +336,7 @@ out_records = c("Number of susceptible at end of simulation",
                     "Day at which outbreak peaked")
 out_types = c("Rounded_Integer",
                     "Rounded_Integer",
-                    "Character",
+                    "Logical",
                     "Rounded_Integer")
 out_notes = c("Report the rounded integer",
                     "Report the rounded integer",
@@ -366,7 +377,7 @@ rc = rc + nrec
 alloutcomes$QuizID = paste0('dsaide_',appsettings$appid)
 alloutcomes$AppTitle = appsettings$apptitle
 alloutcomes$AppID = appsettings$appid
-alloutcomes$Answer = "" #add empty answer column, just for consistency. Should probably be removed here.
+alloutcomes <- alloutcomes %>% dplyr::select(QuizID,AppID,AppTitle,TaskID,TaskText,RecordID,Record,Type,Note)		
 write.table(alloutcomes, paste0(appsettings$appid,"_tasktable.tsv"), append = FALSE, sep = "\t", row.names = F, col.names = TRUE)
 ```
 

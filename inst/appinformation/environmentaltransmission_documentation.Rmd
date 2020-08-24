@@ -161,7 +161,7 @@ rc = rc + nrec #increment record counter by number of outcomes to record for thi
 tid = 4
 tasktext = "In the previous task, removal of pathogens in the environment happened at a rate that was so fast that it essentially tracked whatever was going on in the infected population, and the choice of _q_ and _c_ values were such that that the magnitude of _P_ was the same as _I_. That is generally not the case. Explore a more general scenario by setting _q = 100_ and _c = 50_. Have direct transmission off and environmental transmission as in the previous task. Since decay is now slower, pathogen in the environment builds up to higher levels and produces an overall larger outbreak. Keep exploring how things change for different values of _q_ and _c_."
 nrec = 1 # number of items to record
-out_records = c("Susceptible left at end of simulation for q=100, c=50.")
+out_records = c("Susceptible left at end of simulation for q=100, c=50")
 out_types = c("Rounded_Integer")
 out_notes = c("Report the rounded integer")
 outcomes = data.frame( TaskID = rep(tid,nrec),
@@ -178,9 +178,9 @@ rc = rc + nrec #increment record counter by number of outcomes to record for thi
 # Task 5
 ##################
 tid = 5
-tasktext = "It is possible to compute the reproductive number for enviromental transmission. Recall that it is defined as the average number of infectious hosts (of 1 type) that are infected by one infectious host of the same type. Here, we need to go through the environment. First, we need to compute _how much environment_ an individual host infects before they recover, and then how many hosts are infected by the environmental pathogen. This can be done as follows: One infected host sheds pathogen for a duration of _1/g_ at a rate _q_, so the total environmental pathogen produced by that host is _q/g_. This amount of pathogen is around for an average time of _1/c_, during which time it infects new hosts at rate $b_P$ for a total production of new infected hosts $b_P/c$. To get the reproductive number that connects one infectious host to further infectious hosts, one needs to multiply the two quantities to get $R_0=qb_P/(gc)$. Use the values from the last task (q=100, c=50) to compute R0 for this simulation. Then use the final-size equation to compute the fraction of susceptible you expect to get for this $R_0$ value and confirm with the simulation."
+tasktext = "It is possible to compute the reproductive number for enviromental transmission. Recall that it is defined as the average number of infectious hosts (of 1 type) that are infected by one infectious host of the same type. Here, we need to go through the environment. First, we need to compute _how much environment_ an individual host infects before they recover, and then how many hosts are infected by the environmental pathogen. This can be done as follows: One infected host sheds pathogen for a duration of _1/g_ at a rate _q_, so the total environmental pathogen produced by that host is _q/g_. This amount of pathogen is around for an average time of _1/c_, during which time it infects new hosts at rate $b_P$ for a total production of new infected hosts $b_P/c$. To get the number of new infectious hosts produced by one infectious host, one needs to multiply these two quantities. Then, to get the basic reproductive number, one also needs to multiply by the inital number of susceptible to get $R_0=qb_PS/(gc)$. Use the values from the last task (q=100, c=50) to compute R0 for this simulation. Then use the final-size equation to compute the fraction of susceptible you expect to get for this $R_0$ value and confirm with the simulation."
 nrec = 1 # number of items to record
-out_records = c("Susceptible left at end of simulation for q=100, c=50.")
+out_records = c("Value of R0")
 out_types = c("Rounded_Integer")
 out_notes = c("Report the rounded integer")
 outcomes = data.frame( TaskID = rep(tid,nrec),
@@ -192,30 +192,15 @@ outcomes = data.frame( TaskID = rep(tid,nrec),
 alloutcomes = rbind(alloutcomes,outcomes)
 rc = rc + nrec #increment record counter by number of outcomes to record for this task 
 
-
-
-### Task 4
-tid = 4
 tasktext = "A) Now also turn on direct transmission by setting _b~D~ = b~E~ = 0.001_. Leave everything else unchanged. What do you expect to see? Run simulations and see how your expectations hold up."
 
 
-
-### Task 5
-tid = 5
 tasktext = "A) Now set the initial number of infected to 0 and initial pathogen in the environment to 1. Leave everything else unchanged. What do you expect to see? Run simulations and see how your expectations hold up."
 
 
-
-### Task 6
-tid = 6
 tasktext = "A) Try different combinations of direct and environmental transmission only and having only infected hosts or only pathogen in the environment at the start. What do you expect to see? Run simulations and see how your expectations hold up."
 
-
-### Task 7
-tid = 7
 tasktext = "A) Keep exploring by trying different parameters and transmission settings and see how they influence results. You can also turn on births/deaths and see what you get. As you continue your exploration, think about potential real infectious diseases that might be approximated by either one of the transmission types, and what settings for other model parameters would be for those ID."
-
-rc = rc + nrec
 
 ```
 

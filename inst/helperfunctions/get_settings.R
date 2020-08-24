@@ -1,5 +1,6 @@
 #helper function that returns app settings for each Rmd doc file
 
+
 get_settings <- function(currentrmdfile, appdocdir, packagename)
 {
   appName = gsub("_documentation.Rmd" ,"",currentrmdfile)
