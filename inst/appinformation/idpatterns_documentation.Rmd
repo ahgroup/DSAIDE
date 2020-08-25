@@ -313,6 +313,7 @@ tasktext = "I hope you figured out above that without replenishment of resources
 # Record for task 10
 nrec = 1 # number of items to record
 out_records = c("Months between peaks (approximate/rounded)")
+out_types = rep("Rounded_Integer",nrec)
 out_notes = rep("Report the rounded integer",nrec)
 outcomes = data.frame( TaskID = rep(tid,nrec),
                        TaskText = rep(tasktext,nrec),
