@@ -60,7 +60,7 @@ Starting conditions for model variables
 }
 
 \section{Model creation date}{
- 2019-03-19
+ 2020-09-01
 }
 
 \section{Code Author}{
@@ -68,7 +68,7 @@ Starting conditions for model variables
 }
 
 \section{Code creation date}{
- 2020-06-19
+ 2020-09-01
 }
 
 \examples{

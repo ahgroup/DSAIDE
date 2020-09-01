@@ -10,11 +10,11 @@ simulate_Vector_transmission_model_ode(
   Rh = 0,
   Sv = 1000,
   Iv = 1,
-  b1 = 0.002,
-  b2 = 0.002,
-  g = 1,
-  w = 0.1,
-  n = 100,
+  b1 = 0.003,
+  b2 = 0.003,
+  g = 2,
+  w = 0,
+  n = 200,
   m = 0.1,
   tstart = 0,
   tfinal = 100,
@@ -33,9 +33,9 @@ simulate_Vector_transmission_model_ode(
 \item{Iv}{: starting value for Infected Vectors : numeric
 Values for model parameters : numeric}
 
-\item{b1}{: infection rate of hosts : numeric}
+\item{b1}{: rate at which susceptible hosts are infected by vectors : numeric}
 
-\item{b2}{: infection rate of vectors : numeric}
+\item{b2}{: rate at which susceptible vectors are infected by hosts : numeric}
 
 \item{g}{: recovery rate of hosts : numeric}
 
@@ -78,7 +78,7 @@ Starting conditions for model variables
 }
 
 \section{Model creation date}{
- 2020-06-19
+ 2020-09-01
 }
 
 \section{Code Author}{
@@ -86,7 +86,7 @@ Starting conditions for model variables
 }
 
 \section{Code creation date}{
- 2020-06-19
+ 2020-09-01
 }
 
 \examples{

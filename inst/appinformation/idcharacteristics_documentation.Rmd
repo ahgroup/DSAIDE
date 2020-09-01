@@ -62,7 +62,7 @@ In addition to specifying the *compartments* of a model, we need to specify the 
 
 For this model, we include the following processes: 
 
-* Susceptible individuals (S) can become infected by pre-symptomatic (P), asymptomatic (A) or symptomatic (I) hosts. The rates at which infections from the different types of infected individuals (P, A and I) occur are governed by 3 parameters, _b~P~_, _b~A~_, and _b~I~_. In other words, those b~i~ parameters determine how infectious an individual in stages P, A and I is.
+* Susceptible individuals (S) can become infected by pre-symptomatic (P), asymptomatic (A) or symptomatic (I) hosts. Different types of infected individuals (P, A and I) transmit to other individuals and infect them at rates governed by the parameters, _b~P~_, _b~A~_, and _b~I~_. In other words, those b~i~ parameters determine how infectious an individual in stages P, A and I is.
 * All infected individuals first enter the presymptomatic stage. They remain there for some time (determined by rate _g~P~_, the inverse of which is the average time spent in the presymptomatic stage). A fraction _f_ of presymptomatic hosts move into the asymptomatic category, and the rest become symptomatic infected hosts.
 * Asymptomatic infected hosts recover after some time (specified by the rate _g~A~_). 
 * Similarly, infected symptomatic hosts leave that stage at rate _g~I~_. For symptomatic hosts, two outcomes are possible, either recovery or death. The parameter _d_ determines the fraction of hosts that die.
@@ -75,7 +75,7 @@ The flow diagram and the set of ordinary differential equations (ODE) which are 
 
 
 
-```{r modeldiagram,  fig.cap='Flow diagram for this model. ',  echo=FALSE, out.width = "70%"}
+```{r modeldiagram,  fig.cap='',  echo=FALSE, out.width = "70%"}
 knitr::include_graphics(here::here('inst/media',appsettings$modelfigname))
 ```
 
@@ -106,7 +106,7 @@ alloutcomes = NULL
 
 # Task 1
 tid = 1
-tasktext = "Start with 1000 susceptibles, 1 initially infected presymptomatic host, _P~0~_, simulation duration _tmax_= 200 days. Assume that only symptomatic individuals transmit, at rate _b~I~_ = 0.001. Assume that the duration of the presymptomatic, asymptomatic and symptomatic periods are all 5 days long. (Hint: The parameters _g~P~_, _g~A~_, and _g~I~_ are the inverses of these periods.) Assume that there are no asymptomatic infections, _f_=0, and nobody dies due to disease _d_=0. Make sure the results agree with model settings. For instance you shouldn't get any deaths, and no asymptomatic infected. If you did it correctly, your outbreak should end with around 7 susceptibles remaining. From the graph, contemplate how you would estimate the day at which the outbreak peaks. What's the problem? How would you solve it? Rerun the simulation, with the same values you just had. Does anything change? Why (not)?"
+tasktext = "Start with 1000 susceptibles, 1 initially infected presymptomatic host, _P~0~_, simulation duration _tmax_= 200 days. Assume that only symptomatic individuals transmit, at rate _b~I~_ = 0.001. Assume that the duration of the presymptomatic, asymptomatic and symptomatic periods are all 5 days long. (Hint: The parameters _g~P~_, _g~A~_, and _g~I~_ are the inverses of these periods.) Assume that there are no asymptomatic infections, _f_=0, and nobody dies due to disease _d_=0. Make sure the results agree with model settings. For instance you shouldn't get any deaths, and no asymptomatic infected. If you did it correctly, your outbreak should end with around 7 susceptibles remaining. From the graph, contemplate how you would estimate the day at which the outbreak peaks. What's the problem? How would you solve it? Rerun the simulation, with the same input settings (i.e. don't change anything, just hit the Run Simulation button again). Do you see any changes in the results? Why (not)? (This will be different once we move to the stochastic models)."
 
 # Record for task 1
 nrec = 2 # number of items to record
@@ -185,14 +185,16 @@ outcomes = data.frame( TaskID = rep(tid,nrec),
 alloutcomes = rbind(alloutcomes,outcomes)
 rc = rc + nrec #increment record counter by number of outcomes to record for this task 
 
+#########
 # Task 5
+#########
 tid = 5
-tasktext = "Set all transmission parameters to 0.0005, leave everything else as before. Note that this lowers the transmission rate of the asymptomatic and symptomatic groups by a factor of 2, but now pre-symptomatic individuals are also infectious. What do you expect will happen to the peak of _P_ and _I_ as well as the total number of individuals who got infected (i.e., _R_ + _D_ at the end of simulation), compared to the previous task?" 
+tasktext = "Set all 3 transmission parameters (_b~P~_, _b~A~_, and _b~I~_) to 0.0005, leave everything else as before. Note that this lowers the transmission rate of the asymptomatic and symptomatic groups by a factor of 2, but now pre-symptomatic individuals are also infectious. What do you expect will happen to the peak of _P_ and _I_ as well as the total number of individuals who got infected (i.e., _R_ + _D_ at the end of simulation), compared to the previous task?" 
 
 # Record for task 5
 nrec = 4 # number of items to record
-out_records = c("Max number of pre-symptomatic",
-                    "Max number of infected",
+out_records = c("Max number (peak) of pre-symptomatic",
+                    "Max number (peak) of infected",
                     "Number susceptible left at end of simulation",
                     "Total deaths")
 out_types = rep("Rounded_Integer",nrec)
