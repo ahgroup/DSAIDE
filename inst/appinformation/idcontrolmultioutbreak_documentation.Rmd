@@ -85,87 +85,83 @@ The parameter _f_ can be non-zero outside of the treatment interval given by _ts
 
 __This app assumes knowledge of the reproductive number concept. If you are not familiar with it, please go through the 'Reproductive Number' apps first.__
 
-_The tasks below are described in a way that assumes everything is in units of days (rate parameters, therefore, have units of inverse days). If any quantity is not given in those units, you need to convert it first._
+_The tasks below are described in a way that assumes everything is in units of **days** (rate parameters, therefore, have units of inverse days). If any quantity is not given in those units, you need to convert it first._
 
 
 ```{r, echo=FALSE, eval=TRUE}
-# save all tasks, outcomes, etc. into an R data frame, then print later.
-# this data frame is used to automate shiny solutions and quiz generation
-
-# Explanation for each of the columns in the R data frame 
-
-# quizID: MUST BE THE FIRST COLUMN. Used by the grading app. naming structure "dsaide_shorttitle" where shorttitle is from appsettings$shorttitle
-# AppTitle: Title used for the app in the dsaide app, from appsettings$apptitle
-# AppID: App number in the dsaide menu, from appsettings$appid
-# TaskID: Identifies which task the text belongs to 
-# TaskText: The text that explains what to do for the task
-# RecordID: Identifies if it is the first, second, third,... item to record within the task
-# Record: Text explaining what value from the model that nee too be recorded
-# Note: Used by students taking quiz. Makes it clear what type of value to enter in "Answers"
-# Answers: In master it contains the rigth answer. For students it is where they record the recorded value
-# Fuzzy: The numeric value of a margin (within +/- of "right" answer) for questions where the quiz checker should not be too strict 
-# Review: Admin use if value is 1 the way the questions is asked may need to be reconsidered. 
-
-ntasks = 6 #number of tasks
-nrecord = 8 #number of outcomes to record
-#set up task tables
-#returned as list for generality, take apart
-tablist <- make_tasktable(ntasks,nrecord,appsettings)
-alltasks = tablist[[1]]
-allrecord = tablist[[2]]
 
 #this is the running counter for the records which starts at 1 
 rc=1
 
+#empty object, will hold all outcomes
+alloutcomes = NULL
+
+########################
 # Task 1
+########################
 tid = 1
-alltasks[tid,"TaskText"] = "A) Set the model to 1000 initial susceptible, 1 infected, no recovered. Set the recovery rate, _g_, such that it corresponds to an infectiousness duration of 5 days. Set the infectiousness rate _b_ such that the model has a reproductive number, R~0~, of 4. If you don't know how to do that, please work through the _Reproductive Number_ apps first and then come back. Keep the intervention level, _f_, at 0 for now. Set _tmax_ and _tnew_ to 200. Values for _tstart_ and _tend_ do not matter since _f_ is 0. Run the simulation. You should get an outbreak with around 20 susceptibles left at the end."
-
-# Record for task 1
+tasktext = "Set the model to 1000 initial susceptible, 1 infected, no recovered. Set the recovery rate, _g_, such that it corresponds to an infectiousness duration of 5 days. Set the infectiousness rate _b_ such that the model has a reproductive number, R~0~, of 4. If you don't know how to do that, please work through the _Reproductive Number_ apps first and then come back. Keep the intervention level, _f_, at 0 for now. Set _tmax_ and _tnew_ to 200. Values for _tstart_ and _tend_ do not matter since _f_ is 0. Run the simulation. You should get an outbreak with around 20 susceptibles left at the end."
 nrec = 1 # number of items to record
-reclist = list()
-reclist$rectext = c("Nothing")
-reclist$rectype = "None"
-reclist$recnote = c("")
-reclist$recfuzzy = c(0)
-allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
-rc = rc + nrec #increment record counter by number of outcomes to record for this task  
+out_records = c("Nothing")
+out_types = rep("None",nrec)
+out_notes = c("")
+outcomes = data.frame( TaskID = rep(tid,nrec),
+                       TaskText = rep(tasktext,nrec),
+                      RecordID = paste0('T',tid,'R',(1:nrec)),
+                      Record = out_records, 
+                      Type = out_types, 
+                      Note = out_notes)
+alloutcomes = rbind(alloutcomes,outcomes)
+rc = rc + nrec #increment record counter by number of outcomes to record for this task 
 
-
+########################
 # Task 2
-tid = 2
-alltasks[tid,"TaskText"] = "A) First without running the simulation and using what you know about R~0~ and how it relates to the susceptible population size, figure out what the number of susceptibles is (assuming every other parameter stays the same) at which you don't get an outbreak anymore. Now test your expectation by trying different values for _S_. You might have to adjust the simulation time to see this better. This value for _S_ provides a threshold below which we don't get an outbreak. This directly corresponds to the threshold value for R~0~ which you learned about previously."
-
-
-# Record for task 2
+########################
+tid = tid + 1
+tasktext = "First without running the simulation and using what you know about R~0~ and how it relates to the susceptible population size, figure out what the number of susceptibles is (assuming every other parameter stays the same) at which you do not get an outbreak anymore. Now test your expectation by trying different values for _S_. You might have to adjust the simulation time to see this better. This value for _S_ provides a threshold below which we don't get an outbreak. This threshold value is often called the _herd immunity_ or _community immunity_ level. It corresponds to the threshold value of R~0~=1 which you learned about previously."
 nrec = 1 # number of items to record
-reclist = list()
-reclist$rectext = c("Nothing")
-reclist$rectype = "None"
-reclist$recnote = c("")
-reclist$recfuzzy = c(0)
-allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
-rc = rc + nrec #increment record counter by number of outcomes to record for this task
-
-
-# Task 3
-tid = 3
-alltasks[tid,"TaskText"] = "A) The threshold value below which you do not get an outbreak is around 250 for the parameter settings here. However, in the first task, the number of susceptibles left at the end of the outbreak was much less, around 20. The outbreak 'overshoots' by depleting more susceptibles than the threshold value. Why is that? Think about what happens at the peak of the outbreak when R~0~ switches from being larger than 1 to smaller than 1. Does the outbreak stop immediately? Why not?"
-
-# Record for task 3
-nrec = 1 # number of items to record
-reclist = list()
-reclist$rectext = c("Nothing")
-reclist$rectype = "None"
-reclist$recnote = c("")
-reclist$recfuzzy = c(0)
-allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
+out_records = c("Nothing")
+out_types = rep("None",nrec)
+out_notes = c("")
+outcomes = data.frame( TaskID = rep(tid,nrec),
+                       TaskText = rep(tasktext,nrec),
+                      RecordID = paste0('T',tid,'R',(1:nrec)),
+                      Record = out_records, 
+                      Type = out_types, 
+                      Note = out_notes)
+alloutcomes = rbind(alloutcomes,outcomes)
 rc = rc + nrec #increment record counter by number of outcomes to record for this task 
 
 
+########################
+# Task 3
+########################
+tid = tid + 1
+tasktext = "Compare the herd immunity value for the number of susceptibles with the the number of susceptibles left at the end of the outbreak. You will find that the latter is much less. The outbreak _overshoots_ by depleting more susceptibles than the threshold value. Why is that? Think about what happens at the peak of the outbreak when R~0~ switches from being larger than 1 to smaller than 1. Does the outbreak stop immediately? Why not?"
+nrec = 1 # number of items to record
+out_records = c("Nothing")
+out_types = rep("None",nrec)
+out_notes = c("")
+outcomes = data.frame( TaskID = rep(tid,nrec),
+                       TaskText = rep(tasktext,nrec),
+                      RecordID = paste0('T',tid,'R',(1:nrec)),
+                      Record = out_records, 
+                      Type = out_types, 
+                      Note = out_notes)
+alloutcomes = rbind(alloutcomes,outcomes)
+rc = rc + nrec #increment record counter by number of outcomes to record for this task 
+
+
+
+
+########################
 # Task 4
-tid = 4
-alltasks[tid,"TaskText"] = "A) For a single outbreak, more control is better. We can test that. Using the same number of susceptibles, infected and recovered from __Task 1__. Set control to start at time 0 (_tstart_) and end at 200 (_tend_). Set _tmax_ and _tnew_ both to 200. Slowly increase control, _f_ (e.g. in steps of 0.1). Run the simulation for each value of _f_. As _f_ increases, you should see smaller outbreaks until you hit a value of _f_ for which you don't see outbreaks anymore. Understand how this value of _f_ relates to the reproductive number."
+########################
+tid = tid + 1
+tasktext = "For a single outbreak, more control is better. We can test that. Use the same number of susceptibles, infected and recovered from task 1. Set control to start at time 0 (_tstart_) and end at 200 (_tend_). Set _tmax_ and _tnew_ both to 200. Slowly increase control, _f_ (e.g. in steps of 0.1). Run the simulation for each value of _f_. As _f_ increases, you should see smaller outbreaks until you hit a value of _f_ for which you don't see outbreaks anymore. Understand how this value of _f_ relates to the reproductive number."
+
+
+
 
 # Record for task 4
 nrec = 1 # number of items to record
