@@ -93,7 +93,7 @@ The underlying model implements one other process. In previous apps, you learned
 
 _The app and tasks deal with the reproductive number concept. The following section provides a very brief introduction. I recommend reading a bit more about it. I'm following the terminology of [my own write-up](https://andreashandel.github.io/IDEMAbook/R0.html). You can also check the books listed in the ID introduction app or some of the papers listed in the _Further Resources_ section of this app._
 
-The reproductive number is defined as the average number of new infected (and infectious) individuals caused by one infectious individual. The _basic_ reproductive number is the reproductive number in a scenario where everyone is susceptible. For the SIR model shown above, this quantity is 
+The reproductive number is defined as the average number of new infected (and infectious) individuals caused by one infectious individual. The _basic_ reproductive number is the reproductive number in a scenario where everyone is susceptible. For the SIR model shown above, one can figure the value out by determining how many new infections are caused by one infected person. A person is infectious for a duration of _1/g_, during that time they infect others at rate _b_. Thus the average number of new infections during created in _b/g_. For the whole population, assuming initially everyone is susceptible, we multiply by the number of initial susceptibles to get
 $$R_0=\frac{bS_0}{g}$$ 
 where _S~0~_ is the initial number of susceptibles.
 
