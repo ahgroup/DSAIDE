@@ -192,12 +192,11 @@ rc = rc + nrec #increment record counter by number of outcomes to record for thi
 # Task 5
 #########################
 tid = 5
-tasktext = "Most vaccines are not perfect. For the model settings above (R=4), what fraction of the population would you need to vaccinate to prevent an outbreak if the vaccine efficacy/effectiveness was 75%? Confirm with the simulation. 
-What happens to your ability to prevent an outbreak if the vaccine efficacy was was 65% or less?"
+tasktext = "Most vaccines are not perfect. For the model settings above (R=4), what percentage of the population would you need to vaccinate to prevent an outbreak if the vaccine efficacy/effectiveness was 75% (_e=0.75_)? Confirm with the simulation.  What happens to your ability to prevent an outbreak if the vaccine efficacy was was 65% or less?"
 nrec = 1 # number of items to record
-out_records = c("The proportion vaccinated needed to prevent an outbreak for _e=0.75_")
-out_types = rep("Numeric",nrec)
-out_notes = rep("Report two decimals",nrec)
+out_records = c("The percentage vaccinated needed to prevent an outbreak for _e=0.75_")
+out_types = rep("Rounded_Integer",nrec)
+out_notes = rep("Report rounded integer",nrec)
 outcomes = data.frame( TaskID = rep(tid,nrec),
                        TaskText = rep(tasktext,nrec),
                       RecordID = paste0('T',tid,'R',(1:nrec)),
@@ -235,9 +234,9 @@ rc = rc + nrec #increment record counter by number of outcomes to record for thi
 # Task 7
 #########################
 tid = 7
-tasktext = "To what percentage of the initial value do we need to recude transmission to prevent an outbreak? Determine this by reasoning/using _R~0~_, then confirm with the model." 
+tasktext = "To what percentage of the initial value do we need to reduce transmission to prevent an outbreak? Determine this by reasoning/using _R~0~_, then confirm with the model." 
 nrec = 1 # number of items to record
-out_records = c("Percentage of the initial value Value to which transmission needs to be reduced")
+out_records = c("Percentage of the initial value to which transmission needs to be reduced")
 out_types = rep("Rounded_integer",nrec)
 out_notes = rep("Report rounded integer",nrec)
 outcomes = data.frame( TaskID = rep(tid,nrec),
@@ -247,6 +246,25 @@ outcomes = data.frame( TaskID = rep(tid,nrec),
                       Type = out_types, 
                       Note = out_notes)
 
+alloutcomes = rbind(alloutcomes,outcomes)
+rc = rc + nrec #increment record counter by number of outcomes to record for this task 
+
+#########################
+# Task 8
+#########################
+tid = 8
+tasktext = "Keep exploring. The model allows for births and deaths and waning immunity. We haven't explored that here, but you might want to. One limitation of the model is that it only allows vaccination at the start of the simulation, so any births will always be un-vaccinated. If one wanted a more realistic model, e.g. one that can mimick vaccination of children, one would want to modify the model to allow ongoing vaccination of a fraction of those entering the susceptible compartment." 
+nrec = 1 # number of items to record
+nrec = 1 # number of items to record
+out_records = c("Nothing")
+out_types = rep("None",nrec)
+out_notes = c("")
+outcomes = data.frame( TaskID = rep(tid,nrec),
+                       TaskText = rep(tasktext,nrec),
+                      RecordID = paste0('T',tid,'R',(1:nrec)),
+                      Record = out_records, 
+                      Type = out_types, 
+                      Note = out_notes)
 alloutcomes = rbind(alloutcomes,outcomes)
 rc = rc + nrec #increment record counter by number of outcomes to record for this task 
 ```
