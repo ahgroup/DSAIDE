@@ -193,8 +193,8 @@ tasktext = "Set all 3 transmission parameters (_b~P~_, _b~A~_, and _b~I~_) to 0.
 
 # Record for task 5
 nrec = 4 # number of items to record
-out_records = c("Max number (peak) of pre-symptomatic",
-                    "Max number (peak) of infected",
+out_records = c("Max number (peak) of pre-symptomatic (P)",
+                    "Max number (peak) of symptomatic infected (I)",
                     "Number susceptible left at end of simulation",
                     "Total deaths")
 out_types = rep("Rounded_Integer",nrec)
@@ -230,8 +230,8 @@ rc = rc + nrec #increment record counter by number of outcomes to record for thi
 tid = 7
 tasktext = "Using the settings from task 5, but now assume that 90% of infections are asymptomatic. How do things change?"
 nrec = 4 # number of items to record
-out_records = c("Max number of pre-symptomatic",
-                    "Max number of infected",
+out_records = c("Max number of pre-symptomatic (P)",
+                    "Max number of symptomatic infected (I)",
                     "Number susceptible left at end of simulation",
                     "Total deaths")
 out_types = rep("Rounded_Integer",nrec)
