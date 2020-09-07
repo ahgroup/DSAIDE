@@ -38,7 +38,7 @@ appsettings = get_settings(currentrmdfile,appdocdir,packagename)
 
 
 ## Overview {#shinytab1}  
-This app lets you explore interventions applied to different population subgroups with potentially different infectiousness and mortality patterns. Read about the model in the "Model" tab. Then do the tasks described in the "What to do" tab. Before going through this app, it might be useful to go through the 'Reproductive Number' and `Multi Outbreak ID Control` apps first. This app closely follows a model and analysis described in [@Handel2020], see the "Further Information" tab for this and other related references.
+This app lets you explore interventions applied to different population subgroups with potentially different infectiousness and mortality patterns. The app assumes you have worked through _The Basics_ and _Reproductive Number_ sections, as well as the first to apps in the _Control_ section. This app specifically builds on the _ID Control for multiple outbreaks_ app and follows a model and analysis described in [@Handel2020], see the _Further Information_ tab for this and other related references.
 
 
 ### Learning Objectives  
@@ -57,14 +57,14 @@ For this app, we use a version of the basic compartmental SIR-type model. We tra
 * **$R_i$** - recovered individuals
 * **$D_i$** - dead individuals
 
-Individuals are divided into 3 populations, namely children, adults and elderly ($i=c,a,e$). Thus, our model with 3 age groups and 4 compartments per age group leads to a 12-compartment model.
+Individuals are divided into 3 populations, namely children, adults and elderly (_i=c,a,e_). Thus, our model with 3 age groups and 4 compartments per age group leads to a 12-compartment model.
 
 For this app, we specify the following processes/flows: 
 
-* $b_{ij}$ is the rate of transmission to susceptible individuals ($S_i$) from infected individuals ($I_j$). This leads to the susceptible individual leaving the S compartment and entering the I compartment. Transmission among and between groups can occur at different rates.   
+* _b~ij~_ is the rate of transmission to susceptible individuals (_S~i~_) from infected individuals (_I~j~_). This leads to the susceptible individual leaving the _S~i~_ compartment and entering the _I~i~_ compartment. Transmission among and between groups can occur at different rates, i.e. all the _b~ij~_ can potentially be different.   
 * Infected individuals stay infectious for some time, and leave the infected/infectious compartment at rate $g_i$. A fraction $m_i$ of those individuals will die and enter the dead compartment, the remaining fraction $1-m_i$ will enter the recovered compartment. 
 * Recovered individuals are initially immune to re-infection, but can lose immunity at rate $w_i$.
-* Control measures can applied to each group at some strength $f_i$ (between 0 and 1) which reduces the rate at which infections in that group occur. Control measures for each group start at time $f^i_{start}$ and end at time $f^i_{end}$.
+* Control measures can be applied to each group at some strength $f_i$ (between 0 and 1) which reduces the rate at which infections in that group occur. Control measures for each group start at time $T^i_{start}$ and end at time $T^i_{end}$.
 
 
 ### Model Implementation
@@ -75,7 +75,7 @@ knitr::include_graphics(here::here('inst/media',appsettings$modelfigname))
 ```
 
 
-Model equations:
+The model equations are given by
 
 $$
 \begin{aligned}
@@ -94,160 +94,88 @@ $$
 \end{aligned}
 $$
 
+with control _f~i~_ being only non-zero between times $T^i_{start}$ and $T^i_{end}$.
+
+
+Note that we'll be exploring multi-outbreak scenarios with this app, similar to the _ID control for multiple outbreaks_ app. Instead of setting infected to zero once they drop below 1, and introducing new infected at certain times, we simply do not set infected to zero, which means they might approach very low, but never fully zero values. Having fractions of infected individuals is of course not quite realistic, but it works for our purpose here and the overall patterns would be the same if we implemented it more realistically (e.g. a stochastic model with regular new introductions of infected).
+
 
 ## What to do {#shinytab3}
 
-In the following, we explore a few simple hypothetical interventions for different scenarios and assess their effects.
+In the following, we explore a few simple hypothetical interventions for different scenarios and assess their effects. We are thinking of a pathogen like SARS-CoV-2/COVID-19, but the overall findings are general and can apply to other pathogens as well.
+
+**The tasks below are described in a way that assumes everything is in units of days  (rate parameters, therefore, have units of inverse days).**
+
 
 ```{r, echo=FALSE, eval=TRUE}
-# save all tasks, outcomes, etc. into an R data frame, then print later.
-# this data frame is used to automate shiny solutions and quiz generation
-
-# Explanation for each of the columns in the R data frame 
-
-# quizID: MUST BE THE FIRST COLUMN. Used by the grading app. naming structure "dsaide_shorttitle" where shorttitle is from appsettings$shorttitle
-# AppTitle: Title used for the app in the dsaide app, from appsettings$apptitle
-# AppID: App number in the dsaide menu, from appsettings$appid
-# TaskID: Identifies which task the text belongs to 
-# TaskText: The text that explains what to do for the task
-# RecordID: Identifies if it is the first, second, third,... item to record within the task
-# Record: Text explaining what value from the model that nee too be recorded
-# Note: Used by students taking quiz. Makes it clear what type of value to enter in "Answers"
-# Answers: In master it contains the rigth answer. For students it is where they record the recorded value
-# Fuzzy: The numeric value of a margin (within +/- of "right" answer) for questions where the quiz checker should not be too strict 
-# Review: Admin use if value is 1 the way the questions is asked may need to be reconsidered. 
-
-ntasks = 5 #number of tasks
-nrecord = 13 #number of outcomes to record
-#set up task tables
-#returned as list for generality, take apart
-tablist <- make_tasktable(ntasks,nrecord,appsettings)
-alltasks = tablist[[1]]
-allrecord = tablist[[2]]
 
 #this is the running counter for the records which starts at 1 
 rc=1
 
+#empty object, will hold all outcomes
+alloutcomes = NULL
 
+########################
 # Task 1
+########################
 tid = 1
-alltasks[tid,"TaskText"] = "A) We start by considering an outbreak of something like COVID-19. We assume a population of 1 million individuals, with 20% children, 25% elderly and the remainder middle-aged adults. Set the values for $S_c$, $S_a$ and $S_e$ to reflect these assumptions. We consider rates of transmission to be larger within groups than between groups. We also choose values to have an overall reproductive number of 2. This can be achieved by setting $b_{cc} = 3*10^{-7}$, $b_{ca} = 1.5*10^{-7}$, $b_{ce} = 7.5*10^{-8}$, $b_{ac} = 1.5*10^{-7}$, $b_{aa} = 3*10^{-7}$, $b_{ae} = 1.5*10^{-7}$, $b_{ec} = 7.5*10^{-8}$,  $b_{ea} = 1.5*10^{-7}$, $b_{ee} = 2.25*10^{-7}$. We make the assumption that infection lasts around 10 days in each age group. This means setting the rates $g_i=0.1$. To obtain age-related mortality similar to COVID, we assume mortality risks of 0.1%, 1% and 10% for children, adults and elderly respectively. Set the parameters $m_i$ accordingly. Run the simulation without any control applied, i.e. $f_1 = f_2 = f_3 = 0$. You should see an outbreak with susceptibles at the end of the outbreak at $S_c = 56799$, $S_a = 84498$, $S_e = 75413$ and deaths of $D_c = 143$, $D_a = 4655$, $D_e = 17459$."
+tasktext = " We start by assuming a population of 1000 individuals, with 20% children, 25% elderly and the remainder middle-aged adults. Set the values for _S~c~_, _S~a~_ and _S~e~_ to reflect these assumptions. Start with one infected adult, no infected in the other groups. We make the assumption that infection lasts around 10 days in each age group. This means setting the rates g~i~=0.1. 
 
-# Record for task 1
-nrec = 1 # number of items to record
-reclist = list()
-reclist$rectext = c("Nothing")
-reclist$rectype = "None"
-reclist$recnote = c("")
-reclist$recfuzzy = c(0)
-allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
+If one wanted to run a model for research or policy purposes, one would want to choose transmission rates within and between groups to approximate reality. These transmission rates depend on the pathogen. For respiratory infections, the POLYMOD data is often used (see _Further Resources_ for references). We keep it simple here and assume that rates of transmission within groups is larger than between groups, but that otherwise all groups have the same rates. We'll set b~cc~ = b~aa~ = b~ee~ = 0.0003 (within-group transmission) and all other transmission rates to 0.0001.  
+
+To obtain age-related mortality that mimic COVID-19, we assume mortality among infected to be 0.1%, 1% and 10% for children, adults and elderly respectively. Set the parameters $m_i$ accordingly. Turn off waning immunity for now. Run the simulation without any control applied, i.e. f~1~ = f~2~ = f~3~ = 0 (thus the start and end times for the control do not matter). Run the simulation for 300 days. 
+
+You should see an outbreak with remaining susceptibles in the children/adult/elderly categories of around 75/109/86."
+nrec = 3 # number of items to record
+out_records = c("Total dead children at end of simulation",
+                "Total dead adults at end of simulation",
+                "Total dead elderly at end of simulation")
+out_types = rep("Rounded_Integer",nrec)
+out_notes = rep("Report the rounded integer",nrec)
+outcomes = data.frame( TaskID = rep(tid,nrec),
+                       TaskText = rep(tasktext,nrec),
+                      RecordID = paste0('T',tid,'R',(1:nrec)),
+                      Record = out_records, 
+                      Type = out_types, 
+                      Note = out_notes)
+alloutcomes = rbind(alloutcomes,outcomes)
 rc = rc + nrec #increment record counter by number of outcomes to record for this task 
 
-
+########################
 # Task 2
-tid = 2
-alltasks[tid,"TaskText"] = "A) Now lets implement strong control for each age group by setting $f_1 = f_2 = f_3 = 0.9$. Assume that each control starts 90 days after outbreak start and lasts for 90 days. Keep all other values as previously. Run the simulation. You should see that the strong control initially pushes infected down, but once control is stopped, the outbreak rebounds and the overall size of the outbreak is similar to that without control, with susceptibles at the end of the outbreak at $S_c = 63247$, $S_a = 99107$, $S_e = 83557$"
+########################
+tid = tid + 1
+tasktext = # Now lets implement strong control for each age group by setting f~1~ = f~2~ = f~3~ = 0.9. Assume that each control starts 90 days after outbreak start and lasts for 90 days. Keep all other values as previously. Run the simulation. You should see that the strong control initially pushes infected down, but once control is stopped, the outbreak rebounds and the overall size of the outbreak is similar to that without control."
 
-# Record for task 2
-nrec = 3 # number of items to record
-reclist = list()
-reclist$rectext = c("Number of D_c at the end",
-                    "Number of D_a at the end",
-                    "Number of D_e at the end")
-reclist$rectype = c("Numeric",
-                    "Numeric",
-                    "Numeric")
-reclist$recnote = c("Report the rounded integer",
-                    "Report the rounded integer",
-                    "Report the rounded integer")
-reclist$recfuzzy = c(0,
-                     0,
-                     0)
-allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
-rc = rc + nrec #increment record counter by number of outcomes to record for this task   
+tasktext = "A) Now lets implement control that targets mainly children. We also need to apply some control to adults, the largest group, to make the effective reproductive number values comparable. This can be achieved by setting $f_1=1; f_2=0.339; f_3=0$. Assume that each control starts 90 days after outbreak start and lasts for 90 days. Keep all other values as previously. Run the simulation. "
 
+tasktext = "A) Now lets implement control applied to adults only, in such a way that the effective reproductive number is the same as for the previous task. This can be achieved by setting $f_1=0; f_2=0.475; f_3=0$. Keep all other values as previously. Run the simulation."
 
-# Task 3
-tid = 3
-alltasks[tid,"TaskText"] = "A) Now lets implement control that targets mainly children. We also need to apply some control to adults, the largest group, to make the effective reproductive number values comparable. This can be achieved by setting $f_1=1; f_2=0.339; f_3=0$. Assume that each control starts 90 days after outbreak start and lasts for 90 days. Keep all other values as previously. Run the simulation. You should see susceptibles at the end of the outbreak at $S_c = 120683$, $S_a = 159146$, $S_e = 91818$"
-
-# Record for task 3
-nrec = 3 # number of items to record
-reclist = list()
-reclist$rectext = c("Number of D_c at the end",
-                    "Number of D_a at the end",
-                    "Number of D_e at the end")
-reclist$rectype = c("Numeric",
-                    "Numeric",
-                    "Numeric")
-reclist$recnote = c("Report the rounded integer",
-                    "Report the rounded integer",
-                    "Report the rounded integer")
-reclist$recfuzzy = c(0,
-                     0,
-                     0)
-allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
-rc = rc + nrec #increment record counter by number of outcomes to record for this task    
-
-
-# Task 4
-tid = 4
-alltasks[tid,"TaskText"] = "A) Now lets implement control applied to adults only, in such a way that the effective reproductive number is the same as for the previous task. This can be achieved by setting $f_1=0; f_2=0.475; f_3=0$. Keep all other values as previously. Run the simulation. You should see susceptibles at the end of the outbreak at $S_c = 69000$, $S_a = 181882$, $S_e = 91279$"
-
-# Record for task 4
-nrec = 3 # number of items to record
-reclist = list()
-reclist$rectext = c("Number of D_c at the end",
-                    "Number of D_a at the end",
-                    "Number of D_e at the end")
-reclist$rectype = c("Numeric",
-                    "Numeric",
-                    "Numeric")
-reclist$recnote = c("Report the rounded integer",
-                    "Report the rounded integer",
-                    "Report the rounded integer")
-reclist$recfuzzy = c(0,
-                     0,
-                     0)
-allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
-rc = rc + nrec #increment record counter by number of outcomes to record for this task  
-
-
-# Task 5
-tid = 5
-alltasks[tid,"TaskText"] = "A) Now lets implement control that targets mainly the elderly group, again keeping the overall effective reproductive number the same. This can be achieved by setting $f_1=0; f_2=0.318; f_3=1$. Keep all other values as previously. Run the simulation. You should see susceptibles at the end of the outbreak at $S_c = 69988$, $S_a = 157328$, $S_e = 155342$"
-
-# Record for task 5
-nrec = 3 # number of items to record
-reclist = list()
-reclist$rectext = c("Number of D_c at the end",
-                    "Number of D_a at the end",
-                    "Number of D_e at the end")
-reclist$rectype = c("Numeric",
-                    "Numeric",
-                    "Numeric")
-reclist$recnote = c("Report the rounded integer",
-                    "Report the rounded integer",
-                    "Report the rounded integer")
-reclist$recfuzzy = c(0,
-                     0,
-                     0)
-allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
-rc = rc + nrec #increment record counter by number of outcomes to record for this task   
+tasktext = "A) Now lets implement control that targets mainly the elderly group, again keeping the overall effective reproductive number the same. This can be achieved by setting $f_1=0; f_2=0.318; f_3=1$. Keep all other values as previously. Run the simulation. "
 
 ```
 
 
 ```{r echo=FALSE}
+##################
+# All Tasks done, add app specific columns to data frame and save all to file 
+##################
 #save the fully filled task table to a tsv file
-save_tasktable(alltasks,allrecord,appsettings)
+alloutcomes$QuizID = paste0('dsaide_',appsettings$appid)
+alloutcomes$AppTitle = appsettings$apptitle
+alloutcomes$AppID = appsettings$appid
+alloutcomes$Answer = "" #add empty answer column, just for consistency. Should probably be removed here.
+write.table(alloutcomes, paste0(appsettings$appid,"_tasktable.tsv"), append = FALSE, sep = "\t", row.names = F, col.names = TRUE)
 ```
 
 
 ```{r, echo=FALSE, results='asis'}
-# Take all the text stored in the table and print the tasks and items to record
-write_tasktext(alltasks,allrecord)
+##################
+# write all the task text and outcome into the html during conversion
+##################
+write_tasktext_new(alloutcomes)
 ```
+
 
 
 ## Further Information {#shinytab4}
@@ -257,6 +185,7 @@ write_tasktext(alltasks,allrecord)
 * You can also download all simulator functions and modify them for your own purposes.  Of course, to modify these functions, you'll need to do some coding.
 * For examples on using the simulators directly and how to modify them, read the package vignette by typing `vignette('DSAIDE')` into the R console.
 * This app closely follows a model and analysis described in [@Handel2020]. 
+* The POLYMOD mixing data is described in [@mossong08]. Similar studies have since provided additional data, e.g. [@zhang20a; @klepac20].
 
 ### References
 

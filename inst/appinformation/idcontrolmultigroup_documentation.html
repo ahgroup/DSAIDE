@@ -36,7 +36,7 @@
 
 <div id="shinytab1" class="section level2">
 <h2>Overview</h2>
-<p>This app lets you explore interventions applied to different population subgroups with potentially different infectiousness and mortality patterns. Read about the model in the “Model” tab. Then do the tasks described in the “What to do” tab. Before going through this app, it might be useful to go through the ‘Reproductive Number’ and <code>Multi Outbreak ID Control</code> apps first. This app closely follows a model and analysis described in <span class="citation">(Handel et al. 2020)</span>, see the “Further Information” tab for this and other related references.</p>
+<p>This app lets you explore interventions applied to different population subgroups with potentially different infectiousness and mortality patterns. The app assumes you have worked through <em>The Basics</em> and <em>Reproductive Number</em> sections, as well as the first to apps in the <em>Control</em> section. This app specifically builds on the <em>ID Control for multiple outbreaks</em> app and follows a model and analysis described in <span class="citation">(Handel et al. 2020)</span>, see the <em>Further Information</em> tab for this and other related references.</p>
 <div id="learning-objectives" class="section level3">
 <h3>Learning Objectives</h3>
 <ul>
@@ -58,14 +58,14 @@
 <li><strong><span class="math inline">\(R_i\)</span></strong> - recovered individuals</li>
 <li><strong><span class="math inline">\(D_i\)</span></strong> - dead individuals</li>
 </ul>
-<p>Individuals are divided into 3 populations, namely children, adults and elderly (<span class="math inline">\(i=c,a,e\)</span>). Thus, our model with 3 age groups and 4 compartments per age group leads to a 12-compartment model.</p>
+<p>Individuals are divided into 3 populations, namely children, adults and elderly (<em>i=c,a,e</em>). Thus, our model with 3 age groups and 4 compartments per age group leads to a 12-compartment model.</p>
 <p>For this app, we specify the following processes/flows:</p>
 <ul>
-<li><span class="math inline">\(b_{ij}\)</span> is the rate of transmission to susceptible individuals (<span class="math inline">\(S_i\)</span>) from infected individuals (<span class="math inline">\(I_j\)</span>). This leads to the susceptible individual leaving the S compartment and entering the I compartment. Transmission among and between groups can occur at different rates.<br />
+<li><em>b<sub>ij</sub></em> is the rate of transmission to susceptible individuals (<em>S<sub>i</sub></em>) from infected individuals (<em>I<sub>j</sub></em>). This leads to the susceptible individual leaving the <em>S<sub>i</sub></em> compartment and entering the <em>I<sub>i</sub></em> compartment. Transmission among and between groups can occur at different rates, i.e. all the <em>b<sub>ij</sub></em> can potentially be different.<br />
 </li>
 <li>Infected individuals stay infectious for some time, and leave the infected/infectious compartment at rate <span class="math inline">\(g_i\)</span>. A fraction <span class="math inline">\(m_i\)</span> of those individuals will die and enter the dead compartment, the remaining fraction <span class="math inline">\(1-m_i\)</span> will enter the recovered compartment.</li>
 <li>Recovered individuals are initially immune to re-infection, but can lose immunity at rate <span class="math inline">\(w_i\)</span>.</li>
-<li>Control measures can applied to each group at some strength <span class="math inline">\(f_i\)</span> (between 0 and 1) which reduces the rate at which infections in that group occur. Control measures for each group start at time <span class="math inline">\(f^i_{start}\)</span> and end at time <span class="math inline">\(f^i_{end}\)</span>.</li>
+<li>Control measures can be applied to each group at some strength <span class="math inline">\(f_i\)</span> (between 0 and 1) which reduces the rate at which infections in that group occur. Control measures for each group start at time <span class="math inline">\(T^i_{start}\)</span> and end at time <span class="math inline">\(T^i_{end}\)</span>.</li>
 </ul>
 </div>
 <div id="model-implementation" class="section level3">
@@ -77,7 +77,7 @@
 Flow diagram for this model.
 </p>
 </div>
-<p>Model equations:</p>
+<p>The model equations are given by</p>
 <p><span class="math display">\[
 \begin{aligned}
 \dot{S}_c &amp;= - (1 - f_1)(b_{cc} I_c + b_{ca} I_a + b_{ce} I_e) S_c + w_c R_c\\
@@ -94,67 +94,25 @@ Flow diagram for this model.
 \dot{D}_e &amp;= m_e g_e I_e
 \end{aligned}
 \]</span></p>
+<p>with control <em>f<sub>i</sub></em> being only non-zero between times <span class="math inline">\(T^i_{start}\)</span> and <span class="math inline">\(T^i_{end}\)</span>.</p>
+<p>Note that we’ll be exploring multi-outbreak scenarios with this app, similar to the <em>ID control for multiple outbreaks</em> app. Instead of setting infected to zero once they drop below 1, and introducing new infected at certain times, we simply do not set infected to zero, which means they might approach very low, but never fully zero values. Having fractions of infected individuals is of course not quite realistic, but it works for our purpose here and the overall patterns would be the same if we implemented it more realistically (e.g. a stochastic model with regular new introductions of infected).</p>
 </div>
 </div>
 <div id="shinytab3" class="section level2">
 <h2>What to do</h2>
-<p>In the following, we explore a few simple hypothetical interventions for different scenarios and assess their effects.</p>
+<p>In the following, we explore a few simple hypothetical interventions for different scenarios and assess their effects. We are thinking of a pathogen like SARS-CoV-2/COVID-19, but the overall findings are general and can apply to other pathogens as well.</p>
+<p><strong>The tasks below are described in a way that assumes everything is in units of days (rate parameters, therefore, have units of inverse days).</strong></p>
 <div id="task-1" class="section level3">
 <h3>Task 1</h3>
-<ol style="list-style-type: upper-alpha">
-<li>We start by considering an outbreak of something like COVID-19. We assume a population of 1 million individuals, with 20% children, 25% elderly and the remainder middle-aged adults. Set the values for <span class="math inline">\(S_c\)</span>, <span class="math inline">\(S_a\)</span> and <span class="math inline">\(S_e\)</span> to reflect these assumptions. We consider rates of transmission to be larger within groups than between groups. We also choose values to have an overall reproductive number of 2. This can be achieved by setting <span class="math inline">\(b_{cc} = 3*10^{-7}\)</span>, <span class="math inline">\(b_{ca} = 1.5*10^{-7}\)</span>, <span class="math inline">\(b_{ce} = 7.5*10^{-8}\)</span>, <span class="math inline">\(b_{ac} = 1.5*10^{-7}\)</span>, <span class="math inline">\(b_{aa} = 3*10^{-7}\)</span>, <span class="math inline">\(b_{ae} = 1.5*10^{-7}\)</span>, <span class="math inline">\(b_{ec} = 7.5*10^{-8}\)</span>, <span class="math inline">\(b_{ea} = 1.5*10^{-7}\)</span>, <span class="math inline">\(b_{ee} = 2.25*10^{-7}\)</span>. We make the assumption that infection lasts around 10 days in each age group. This means setting the rates <span class="math inline">\(g_i=0.1\)</span>. To obtain age-related mortality similar to COVID, we assume mortality risks of 0.1%, 1% and 10% for children, adults and elderly respectively. Set the parameters <span class="math inline">\(m_i\)</span> accordingly. Run the simulation without any control applied, i.e. <span class="math inline">\(f_1 = f_2 = f_3 = 0\)</span>. You should see an outbreak with susceptibles at the end of the outbreak at <span class="math inline">\(S_c = 56799\)</span>, <span class="math inline">\(S_a = 84498\)</span>, <span class="math inline">\(S_e = 75413\)</span> and deaths of <span class="math inline">\(D_c = 143\)</span>, <span class="math inline">\(D_a = 4655\)</span>, <span class="math inline">\(D_e = 17459\)</span>.</li>
-</ol>
+<p>We start by assuming a population of 1000 individuals, with 20% children, 25% elderly and the remainder middle-aged adults. Set the values for <em>S<sub>c</sub></em>, <em>S<sub>a</sub></em> and <em>S<sub>e</sub></em> to reflect these assumptions. Start with one infected adult, no infected in the other groups. We make the assumption that infection lasts around 10 days in each age group. This means setting the rates g<sub>i</sub>=0.1.</p>
+<p>If one wanted to run a model for research or policy purposes, one would want to choose transmission rates within and between groups to approximate reality. These transmission rates depend on the pathogen. For respiratory infections, the POLYMOD data is often used (see <em>Further Resources</em> for references). We keep it simple here and assume that rates of transmission within groups is larger than between groups, but that otherwise all groups have the same rates. We’ll set b<sub>cc</sub> = b<sub>aa</sub> = b<sub>ee</sub> = 0.0003 (within-group transmission) and all other transmission rates to 0.0001.</p>
+<p>To obtain age-related mortality that mimic COVID-19, we assume mortality among infected to be 0.1%, 1% and 10% for children, adults and elderly respectively. Set the parameters <span class="math inline">\(m_i\)</span> accordingly. Turn off waning immunity for now. Run the simulation without any control applied, i.e. f<sub>1</sub> = f<sub>2</sub> = f<sub>3</sub> = 0 (thus the start and end times for the control do not matter). Run the simulation for 300 days.</p>
+<p>You should see an outbreak with remaining susceptibles in the children/adult/elderly categories of around 75/109/86.</p>
 <p><strong>Record</strong></p>
 <ul>
-<li>Nothing</li>
-</ul>
-</div>
-<div id="task-2" class="section level3">
-<h3>Task 2</h3>
-<ol style="list-style-type: upper-alpha">
-<li>Now lets implement strong control for each age group by setting <span class="math inline">\(f_1 = f_2 = f_3 = 0.9\)</span>. Assume that each control starts 90 days after outbreak start and lasts for 90 days. Keep all other values as previously. Run the simulation. You should see that the strong control initially pushes infected down, but once control is stopped, the outbreak rebounds and the overall size of the outbreak is similar to that without control, with susceptibles at the end of the outbreak at <span class="math inline">\(S_c = 63247\)</span>, <span class="math inline">\(S_a = 99107\)</span>, <span class="math inline">\(S_e = 83557\)</span></li>
-</ol>
-<p><strong>Record</strong></p>
-<ul>
-<li><p>Number of D_c at the end</p></li>
-<li><p>Number of D_a at the end</p></li>
-<li><p>Number of D_e at the end</p></li>
-</ul>
-</div>
-<div id="task-3" class="section level3">
-<h3>Task 3</h3>
-<ol style="list-style-type: upper-alpha">
-<li>Now lets implement control that targets mainly children. We also need to apply some control to adults, the largest group, to make the effective reproductive number values comparable. This can be achieved by setting <span class="math inline">\(f_1=1; f_2=0.339; f_3=0\)</span>. Assume that each control starts 90 days after outbreak start and lasts for 90 days. Keep all other values as previously. Run the simulation. You should see susceptibles at the end of the outbreak at <span class="math inline">\(S_c = 120683\)</span>, <span class="math inline">\(S_a = 159146\)</span>, <span class="math inline">\(S_e = 91818\)</span></li>
-</ol>
-<p><strong>Record</strong></p>
-<ul>
-<li><p>Number of D_c at the end</p></li>
-<li><p>Number of D_a at the end</p></li>
-<li><p>Number of D_e at the end</p></li>
-</ul>
-</div>
-<div id="task-4" class="section level3">
-<h3>Task 4</h3>
-<ol style="list-style-type: upper-alpha">
-<li>Now lets implement control applied to adults only, in such a way that the effective reproductive number is the same as for the previous task. This can be achieved by setting <span class="math inline">\(f_1=0; f_2=0.475; f_3=0\)</span>. Keep all other values as previously. Run the simulation. You should see susceptibles at the end of the outbreak at <span class="math inline">\(S_c = 69000\)</span>, <span class="math inline">\(S_a = 181882\)</span>, <span class="math inline">\(S_e = 91279\)</span></li>
-</ol>
-<p><strong>Record</strong></p>
-<ul>
-<li><p>Number of D_c at the end</p></li>
-<li><p>Number of D_a at the end</p></li>
-<li><p>Number of D_e at the end</p></li>
-</ul>
-</div>
-<div id="task-5" class="section level3">
-<h3>Task 5</h3>
-<ol style="list-style-type: upper-alpha">
-<li>Now lets implement control that targets mainly the elderly group, again keeping the overall effective reproductive number the same. This can be achieved by setting <span class="math inline">\(f_1=0; f_2=0.318; f_3=1\)</span>. Keep all other values as previously. Run the simulation. You should see susceptibles at the end of the outbreak at <span class="math inline">\(S_c = 69988\)</span>, <span class="math inline">\(S_a = 157328\)</span>, <span class="math inline">\(S_e = 155342\)</span></li>
-</ol>
-<p><strong>Record</strong></p>
-<ul>
-<li><p>Number of D_c at the end</p></li>
-<li><p>Number of D_a at the end</p></li>
-<li><p>Number of D_e at the end</p></li>
+<li><p>Total dead children at end of simulation</p></li>
+<li><p>Total dead adults at end of simulation</p></li>
+<li><p>Total dead elderly at end of simulation</p></li>
 </ul>
 </div>
 </div>
@@ -166,12 +124,22 @@ Flow diagram for this model.
 <li>You can also download all simulator functions and modify them for your own purposes. Of course, to modify these functions, you’ll need to do some coding.</li>
 <li>For examples on using the simulators directly and how to modify them, read the package vignette by typing <code>vignette(&#39;DSAIDE&#39;)</code> into the R console.</li>
 <li>This app closely follows a model and analysis described in <span class="citation">(Handel et al. 2020)</span>.</li>
+<li>The POLYMOD mixing data is described in <span class="citation">(Mossong et al. 2008)</span>. Similar studies have since provided additional data, e.g. <span class="citation">(Zhang et al. 2020; Klepac et al. 2020)</span>.</li>
 </ul>
 <div id="references" class="section level3 unnumbered">
 <h3>References</h3>
 <div id="refs" class="references">
 <div id="ref-Handel2020">
 <p>Handel, Andreas, Joel Miller, Yang Ge, and Isaac Chun-Hai Fung. 2020. “If Containment Is Not Possible, How Do We Minimize Mortality for COVID-19 and Other Emerging Infectious Disease Outbreaks?” <a href="https://doi.org/10.1101/2020.03.13.20034892">https://doi.org/10.1101/2020.03.13.20034892</a>.</p>
+</div>
+<div id="ref-klepac20">
+<p>Klepac, Petra, Adam J Kucharski, Andrew JK Conlan, Stephen Kissler, Maria Tang, Hannah Fry, and Julia R Gog. 2020. “Contacts in Context: Large-Scale Setting-Specific Social Mixing Matrices from the BBC Pandemic Project.” <em>medRxiv</em>. <a href="https://doi.org/10.1101/2020.02.16.20023754">https://doi.org/10.1101/2020.02.16.20023754</a>.</p>
+</div>
+<div id="ref-mossong08">
+<p>Mossong, Joël, Niel Hens, Mark Jit, Philippe Beutels, Kari Auranen, Rafael Mikolajczyk, Marco Massari, et al. 2008. “Social Contacts and Mixing Patterns Relevant to the Spread of Infectious Diseases.” <em>PLoS Medicine</em> 5 (3): e74. <a href="https://doi.org/10.1371/journal.pmed.0050074">https://doi.org/10.1371/journal.pmed.0050074</a>.</p>
+</div>
+<div id="ref-zhang20a">
+<p>Zhang, Juanjuan, Maria Litvinova, Yuxia Liang, Yan Wang, Wei Wang, Shanlu Zhao, Qianhui Wu, et al. 2020. “Changes in Contact Patterns Shape the Dynamics of the COVID-19 Outbreak in China.” <em>Science</em> 368 (6498): 1481–6. <a href="https://doi.org/10.1126/science.abb8001">https://doi.org/10.1126/science.abb8001</a>.</p>
 </div>
 </div>
 </div>

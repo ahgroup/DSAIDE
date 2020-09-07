@@ -5,21 +5,21 @@
 \title{Simulation of a compartmental infectious disease transmission model with 3 types of hosts and intervention}
 \usage{
 simulate_idcontrolmultigroup_ode(
-  Sc = 2e+05,
-  Ic = 1,
-  Sa = 550000,
+  Sc = 1000,
+  Ic = 0,
+  Sa = 1000,
   Ia = 1,
-  Se = 250000,
-  Ie = 1,
-  bcc = 3e-07,
-  bca = 7.5e-08,
-  bce = 7.5e-08,
-  bac = 1.5e-07,
-  baa = 3e-07,
-  bae = 1.5e-07,
-  bec = 7.5e-08,
-  bea = 1.5e-07,
-  bee = 2.25e-07,
+  Se = 1000,
+  Ie = 0,
+  bcc = 3e-04,
+  bca = 1e-04,
+  bce = 1e-04,
+  bac = 1e-04,
+  baa = 3e-04,
+  bae = 1e-04,
+  bec = 1e-04,
+  bea = 1e-04,
+  bee = 3e-04,
   gc = 0.1,
   ga = 0.1,
   ge = 0.1,
@@ -30,15 +30,15 @@ simulate_idcontrolmultigroup_ode(
   ma = 0.01,
   me = 0.1,
   f1 = 0,
-  f1_start = 90,
-  f1_end = 180,
+  T1_start = 60,
+  T1_end = 120,
   f2 = 0,
-  f2_start = 90,
-  f2_end = 180,
+  T2_start = 60,
+  T2_end = 120,
   f3 = 0,
-  f3_start = 90,
-  f3_end = 180,
-  tmax = 500
+  T3_start = 60,
+  T3_end = 120,
+  tmax = 400
 )
 }
 \arguments{
@@ -92,21 +92,21 @@ simulate_idcontrolmultigroup_ode(
 
 \item{f1}{: strength of intervention applied to children, between 0 and 1 : numeric}
 
-\item{f1_start}{: start of intervention applied to children : numeric}
+\item{T1_start}{: start of intervention applied to children : numeric}
 
-\item{f1_end}{: end of intervention applied to children : numeric}
+\item{T1_end}{: end of intervention applied to children : numeric}
 
 \item{f2}{: strength of intervention applied to adults, between 0 and 1 : numeric}
 
-\item{f2_start}{: start of intervention applied to adults : numeric}
+\item{T2_start}{: start of intervention applied to adults : numeric}
 
-\item{f2_end}{: end of intervention applied to adults : numeric}
+\item{T2_end}{: end of intervention applied to adults : numeric}
 
 \item{f3}{: strength of intervention applied to elderly, between 0 and 1 : numeric}
 
-\item{f3_start}{: start of intervention applied to elderly : numeric}
+\item{T3_start}{: start of intervention applied to elderly : numeric}
 
-\item{f3_end}{: end of intervention applied to elderly : numeric}
+\item{T3_end}{: end of intervention applied to elderly : numeric}
 
 \item{tmax}{:  maximum simulation time, units of months : numeric}
 }

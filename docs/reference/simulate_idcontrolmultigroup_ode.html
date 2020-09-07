@@ -130,21 +130,21 @@ Intervention can be applied to any of the groups for a certain duration.</p>
     </div>
 
     <pre class="usage"><span class='fu'>simulate_idcontrolmultigroup_ode</span>(
-  <span class='kw'>Sc</span> <span class='kw'>=</span> <span class='fl'>2e+05</span>,
-  <span class='kw'>Ic</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>Sa</span> <span class='kw'>=</span> <span class='fl'>550000</span>,
+  <span class='kw'>Sc</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
+  <span class='kw'>Ic</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>Sa</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
   <span class='kw'>Ia</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>Se</span> <span class='kw'>=</span> <span class='fl'>250000</span>,
-  <span class='kw'>Ie</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>bcc</span> <span class='kw'>=</span> <span class='fl'>3e-07</span>,
-  <span class='kw'>bca</span> <span class='kw'>=</span> <span class='fl'>7.5e-08</span>,
-  <span class='kw'>bce</span> <span class='kw'>=</span> <span class='fl'>7.5e-08</span>,
-  <span class='kw'>bac</span> <span class='kw'>=</span> <span class='fl'>1.5e-07</span>,
-  <span class='kw'>baa</span> <span class='kw'>=</span> <span class='fl'>3e-07</span>,
-  <span class='kw'>bae</span> <span class='kw'>=</span> <span class='fl'>1.5e-07</span>,
-  <span class='kw'>bec</span> <span class='kw'>=</span> <span class='fl'>7.5e-08</span>,
-  <span class='kw'>bea</span> <span class='kw'>=</span> <span class='fl'>1.5e-07</span>,
-  <span class='kw'>bee</span> <span class='kw'>=</span> <span class='fl'>2.25e-07</span>,
+  <span class='kw'>Se</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
+  <span class='kw'>Ie</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>bcc</span> <span class='kw'>=</span> <span class='fl'>3e-04</span>,
+  <span class='kw'>bca</span> <span class='kw'>=</span> <span class='fl'>1e-04</span>,
+  <span class='kw'>bce</span> <span class='kw'>=</span> <span class='fl'>1e-04</span>,
+  <span class='kw'>bac</span> <span class='kw'>=</span> <span class='fl'>1e-04</span>,
+  <span class='kw'>baa</span> <span class='kw'>=</span> <span class='fl'>3e-04</span>,
+  <span class='kw'>bae</span> <span class='kw'>=</span> <span class='fl'>1e-04</span>,
+  <span class='kw'>bec</span> <span class='kw'>=</span> <span class='fl'>1e-04</span>,
+  <span class='kw'>bea</span> <span class='kw'>=</span> <span class='fl'>1e-04</span>,
+  <span class='kw'>bee</span> <span class='kw'>=</span> <span class='fl'>3e-04</span>,
   <span class='kw'>gc</span> <span class='kw'>=</span> <span class='fl'>0.1</span>,
   <span class='kw'>ga</span> <span class='kw'>=</span> <span class='fl'>0.1</span>,
   <span class='kw'>ge</span> <span class='kw'>=</span> <span class='fl'>0.1</span>,
@@ -155,15 +155,15 @@ Intervention can be applied to any of the groups for a certain duration.</p>
   <span class='kw'>ma</span> <span class='kw'>=</span> <span class='fl'>0.01</span>,
   <span class='kw'>me</span> <span class='kw'>=</span> <span class='fl'>0.1</span>,
   <span class='kw'>f1</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>f1_start</span> <span class='kw'>=</span> <span class='fl'>90</span>,
-  <span class='kw'>f1_end</span> <span class='kw'>=</span> <span class='fl'>180</span>,
+  <span class='kw'>T1_start</span> <span class='kw'>=</span> <span class='fl'>60</span>,
+  <span class='kw'>T1_end</span> <span class='kw'>=</span> <span class='fl'>120</span>,
   <span class='kw'>f2</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>f2_start</span> <span class='kw'>=</span> <span class='fl'>90</span>,
-  <span class='kw'>f2_end</span> <span class='kw'>=</span> <span class='fl'>180</span>,
+  <span class='kw'>T2_start</span> <span class='kw'>=</span> <span class='fl'>60</span>,
+  <span class='kw'>T2_end</span> <span class='kw'>=</span> <span class='fl'>120</span>,
   <span class='kw'>f3</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>f3_start</span> <span class='kw'>=</span> <span class='fl'>90</span>,
-  <span class='kw'>f3_end</span> <span class='kw'>=</span> <span class='fl'>180</span>,
-  <span class='kw'>tmax</span> <span class='kw'>=</span> <span class='fl'>500</span>
+  <span class='kw'>T3_start</span> <span class='kw'>=</span> <span class='fl'>60</span>,
+  <span class='kw'>T3_end</span> <span class='kw'>=</span> <span class='fl'>120</span>,
+  <span class='kw'>tmax</span> <span class='kw'>=</span> <span class='fl'>400</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -270,11 +270,11 @@ Intervention can be applied to any of the groups for a certain duration.</p>
       <td><p>: strength of intervention applied to children, between 0 and 1 : numeric</p></td>
     </tr>
     <tr>
-      <th>f1_start</th>
+      <th>T1_start</th>
       <td><p>: start of intervention applied to children : numeric</p></td>
     </tr>
     <tr>
-      <th>f1_end</th>
+      <th>T1_end</th>
       <td><p>: end of intervention applied to children : numeric</p></td>
     </tr>
     <tr>
@@ -282,11 +282,11 @@ Intervention can be applied to any of the groups for a certain duration.</p>
       <td><p>: strength of intervention applied to adults, between 0 and 1 : numeric</p></td>
     </tr>
     <tr>
-      <th>f2_start</th>
+      <th>T2_start</th>
       <td><p>: start of intervention applied to adults : numeric</p></td>
     </tr>
     <tr>
-      <th>f2_end</th>
+      <th>T2_end</th>
       <td><p>: end of intervention applied to adults : numeric</p></td>
     </tr>
     <tr>
@@ -294,11 +294,11 @@ Intervention can be applied to any of the groups for a certain duration.</p>
       <td><p>: strength of intervention applied to elderly, between 0 and 1 : numeric</p></td>
     </tr>
     <tr>
-      <th>f3_start</th>
+      <th>T3_start</th>
       <td><p>: start of intervention applied to elderly : numeric</p></td>
     </tr>
     <tr>
-      <th>f3_end</th>
+      <th>T3_end</th>
       <td><p>: end of intervention applied to elderly : numeric</p></td>
     </tr>
     <tr>
