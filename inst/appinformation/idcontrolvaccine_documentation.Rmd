@@ -153,7 +153,7 @@ rc = rc + nrec #increment record counter by number of outcomes to record for thi
 # Task 3
 #########################
 tid = 3
-tasktext = "Now set 50% vaccination coverage at 100% vaccine efficacy (_f=0.5_ and _e=1_). What is the value of the effective _R_ after vaccination? Run a simulation, use final size equation to confirm the expected R value."
+tasktext = "Now set 50% vaccination coverage at 100% vaccine efficacy (_f=0.5_ and _e=1_). This changes the effective number of susceptible, as described in the _Model_ section. What is the value of the effective _R_ after vaccination? Run a simulation, use final size equation to confirm the expected R value."
 nrec = 2 # number of items to record
 out_records = c("The new value for R",
             "Number of susceptible at end of simulation")
@@ -213,7 +213,7 @@ rc = rc + nrec #increment record counter by number of outcomes to record for thi
 # Task 6
 #########################
 tid = 6
-tasktext = "Other useful interventions are quarantine or isolation, types of social distancing. Isolation is usually the term applied to reduction of contacts of an infected/infectious individual, quarantine to possibly exposed but likely still susceptible individuals (though that terminololgy can vary). In oue model, we can't distinguish between interventions that target susceptibles or infected, both could reduce the transmission rate. Targeting susceptibles before they become infected is of course preferable, but there are usually many more of those, so targeting infected is often easier. Interventions that reduce contact and transmission/infection risk for both groups are of course best.
+tasktext = "Other useful interventions are quarantine or isolation, types of social distancing. Isolation is usually the term applied to reduction of contacts of an infected/infectious individual, quarantine to possibly exposed but likely still susceptible individuals (though that terminololgy can vary). In our model, we can't distinguish between interventions that target susceptibles or infected, both could reduce the transmission rate. Targeting susceptibles before they become infected is of course preferable, but there are usually many more of those, so targeting infected is often easier. Interventions that reduce contact and transmission/infection risk for both groups are of course best.
 Consider the scenario as in task 2, but now with _b=0.015_. If we were able to reduce contacts and thus transmission by half, what would _R~0~_ be (and would that prevent an outbreak)? Test with the simulation."
 nrec = 1 # number of items to record
 out_records = c("Value of R0 if transmission is reduced by half")
@@ -234,9 +234,9 @@ rc = rc + nrec #increment record counter by number of outcomes to record for thi
 # Task 7
 #########################
 tid = 7
-tasktext = "To what percentage of the initial value do we need to reduce transmission to prevent an outbreak? Determine this by reasoning/using _R~0~_, then confirm with the model." 
+tasktext = "If we want to completely prevent an outbreak, what value do we need to reduce _R~0~_ to? To achieve this, by what percentage do we need to reduce transmission? Express this reduction as a percent of the original value (e.g. reducing transmission from 0.1 to 0.06 is a (0.1-0.06)/0.1*100 = 40% reduction). Confirm with the model." 
 nrec = 1 # number of items to record
-out_records = c("Percentage of the initial value to which transmission needs to be reduced")
+out_records = c("Percentage by which transmission needs to be reduced")
 out_types = rep("Rounded_integer",nrec)
 out_notes = rep("Report rounded integer",nrec)
 outcomes = data.frame( TaskID = rep(tid,nrec),
