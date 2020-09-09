@@ -248,7 +248,7 @@ tasktext = "We can again compare the steady state values we get from the simulat
 
 $$ dS/dt = w R  -   b_I IS $$ 
 $$ dI/dt = b_I SI - g_I I $$ 
-$$ dR/dt =  g_I I  - W R $$
+$$ dR/dt =  g_I I  - w R $$
 
 You can set the left sides to zero and solve for the steady states of _S_, _I_ and _R_. By solving the second equation for _S_, you will find that its steady state is independent of _w_, which you should have also seen in your simulations. _I_ and _R_ are not uniquely determined, you'll realize you can't solve them as before. Going deeper into what this means is beyond what we want to discuss here. For more on steady states, see e.g. [@keeling08] or some mathematical biology textbook."
 

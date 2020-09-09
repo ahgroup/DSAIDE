@@ -68,25 +68,19 @@ For our system, we specify the following processes/flows:
 ### Model Implementation
 The flow diagram and the set of equations which are used are the basic SIR model and are shown again:
 
-
-```{r modeldiagram,  fig.cap='Flow diagram for this model. ',  echo=FALSE, out.width = "70%"}
+```{r modeldiagram,  fig.cap='',  echo=FALSE, out.width = "70%"}
 knitr::include_graphics(here::here('inst/media',appsettings$modelfigname))
 ```
 
-Model equations:
+
+The model equations are:
 
 
+$$\dot S = - b SI $$ 
+$$\dot I = b S I - g I $$
+$$\dot R = g I$$
 
-```{r, echo = FALSE,  results='asis'}
-if (appsettings$use_mbmodel)
-{
-  modeldir = system.file("mbmodels", package = packagename) #find path to apps
-  mbmodel = readRDS(paste0(modeldir,"/",appsettings$mbmodelname) )
-  eqs = DSAIDE::generate_equations(mbmodel)
-}
-```
 
-The underlying model implements one other process. In previous apps, you learned that an unrealistic feature of models implemented by ordinary differential equations (ODE) is that the number of individuals can drop below 1, i.e. there could be fraction of infected. For this app, the underlying code is such that if the number of infected drops below 1, it is set to 0. This is in some way a bit of a "hack" to deal with this issue. When you work through the stochastic apps, you will learn better ways of treating this. The advantage of doing it the way it's done here is that we can keep using the ODE model formulation, without stochasticity, which makes things easy.
 
 
 ### Reproductive number
