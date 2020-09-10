@@ -71,161 +71,119 @@ Flow diagram for this model.
 <div id="shinytab3" class="section level2">
 <h2>What to do</h2>
 <p><strong>The tasks below are described in a way that assumes everything is in units of MONTHS (rate parameters, therefore, have units of inverse months). If any quantity is not given in those units, you need to convert it first (e.g. if it says a year, you need to convert it to 12 months).</strong></p>
+<pre class="r"><code>###
+#Stuff in here not really working, not sure what&#39;s going on just now
+###
+
+# tasktext = &quot;You learned that the reproductive number is defined as new infections/infectious hosts of the same type produced by one infectious host. For the case where this is cross-transmission, one can derive it without too much effort. This follows the same reasoning you saw in the vector-borne transmission app. Type 1 infected produce new infections of type 2 at rate _b~21~_ for time 1/g~1~, and if initially all type 2 are susceptible, this leads to a total number of new type 2 infected of _b~21~ S~2~_/_g~1~_. A similar equations holds for the number of type 1 infections produced by a type 2 infected host. The total reproductive number is the product, thus _R~0~_ = _S~1~ S~2~_ _b~21~_ _b~12~_ / (_g~1~ g~2~_). Compute _R~0~_ for the current model settings.&quot;
+# nrec = 1 # number of items to record
+# out_records = c(&quot;R~0~&quot;)
+# out_types = c(&quot;Rounded_Integer&quot;)
+# out_notes = c(&quot;Report the rounded integer&quot;)
+# outcomes = data.frame( TaskID = rep(tid,nrec),
+#                        TaskText = rep(tasktext,nrec),
+#                       RecordID = paste0(&#39;T&#39;,tid,&#39;R&#39;,(1:nrec)),
+#                       Record = out_records, 
+#                       Type = out_types, 
+#                       Note = out_notes)
+# alloutcomes = rbind(alloutcomes,outcomes)
+# rc = rc + nrec #increment record counter by number of outcomes to record for this task 
+
+
+# tasktext = &quot;Let&#39;s explore the idea of something like a sexually transmitted disease that only goes from host 1 to 2 and the other way (assuming a fully heterosexual population) and combine it with the core group idea. Above, we found that the reproductive number was the product of the 2 components. Let&#39;s compute them separately. You should find that for the settings above, they are equal and both larger than 1. Let&#39;s change that. Set the 2 populations to equal size, both 1000 susceptible. Set _b~12~_ = 0.01, _b~21~_ = 0.002. Now compute both the expected new infections of type 2 produced by type 1, R~{21}, and the equivalent value for R~{12}, as well as the overall _R~0~_. What do you find? Given those values, do you expect to see an outbreak when you run the simulation with those values? Run and confirm.&quot;
+# nrec = 3 # number of items to record
+# out_records = c(&quot;R~21~&quot;,&quot;R~12~&quot;,&quot;R~0~&quot;)
+# out_types = rep(&quot;Rounded_Integer&quot;,nrec)
+# out_notes = rep(&quot;Report the rounded integer&quot;,nrec)
+# outcomes = data.frame( TaskID = rep(tid,nrec),
+#                        TaskText = rep(tasktext,nrec),
+#                       RecordID = paste0(&#39;T&#39;,tid,&#39;R&#39;,(1:nrec)),
+#                       Record = out_records, 
+#                       Type = out_types, 
+#                       Note = out_notes)
+# alloutcomes = rbind(alloutcomes,outcomes)
+# rc = rc + nrec #increment record counter by number of outcomes to record for this task </code></pre>
 <div id="task-1" class="section level3">
 <h3>Task 1</h3>
-<ol style="list-style-type: upper-alpha">
-<li>Set the model to the following 1000 susceptible hosts and 1 infected host of type 1. 200 susceptible hosts and 1 infected host of type 2. Simulation duration approximately 5 years. Assume that transmission from host 1 to host 1 is <em>b<sub>11</sub> = 0.002</em>, from host 2 to host 2 is <em>b<sub>22</sub> = 0.01</em>. No transmission from one host type to the other <em>b<sub>12</sub> = 0</em> and <em>b<sub>21</sub> = 0</em>. Assume that the duration of the infectious period is 1 month long for both types ( <em>g<sub>1</sub></em> and <em>g<sub>2</sub></em> ). No waning immunity. Run the simulation and ensure you get outbreaks in both populations with 20% susceptibles left at the end.</li>
-</ol>
+<p>Start with 1000 susceptible hosts and 1 infected host of type 1. 200 susceptible hosts and 1 infected host of type 2. Simulation duration approximately 5 years. Assume that transmission from host 1 to host 1 is <em>b<sub>11</sub> = 0.002</em>, from host 2 to host 2 is <em>b<sub>22</sub> = 0.01</em>. No transmission from one host type to the other <em>b<sub>12</sub> = 0</em> and <em>b<sub>21</sub> = 0</em>. Assume that the duration of the infectious period is 1 month long for both types of hosts (i.e. same recovery rate). No waning immunity. Run the simulation and ensure you get outbreaks in both populations with approximately 20% susceptibles left at the end.</p>
 <p><strong>Record</strong></p>
 <ul>
-<li>Nothing</li>
+<li><p>Number susceptible of type 1 left at end of simulation</p></li>
+<li><p>Number susceptible of type 2 left at end of simulation</p></li>
 </ul>
 </div>
 <div id="task-2" class="section level3">
 <h3>Task 2</h3>
-<ol style="list-style-type: upper-alpha">
-<li>Set <em>b<sub>11</sub> = 0.001</em>. Rest as before. Run the simulation. You should get the same outbreak as before among type 2 hosts, no real outbreak among type 1 hosts. If you have worked through the reproductive number app already, contemplate what R<sub>0</sub> was for both types/populations in task 1, what it is now in task 2, and how that influences what you see in the simulation.</li>
-</ol>
+<p>Set <em>b<sub>22</sub> = 0.02</em>. Rest as before. Run the simulation. You should get the same outbreak as before among type 1 hosts, a larger outbreak among type 2 hosts. For our current choice of parameters, more specifically the transmission rates, it is ok to define and compute separate R<sub>0</sub> for the two populations. Contemplate why it is ok to do so and compute the two R<sub>0</sub> values. Use what you know about how R<sub>0</sub> is defined to compute a theoretical value, then check with the simulation using the final size equation.</p>
 <p><strong>Record</strong></p>
 <ul>
-<li><p>R<sub>0</sub> for type 1 hosts</p></li>
-<li><p>R<sub>0</sub> for type 2 hosts</p></li>
+<li><p>R0 for type 1 hosts</p></li>
+<li><p>R0 for type 2 hosts</p></li>
 </ul>
 </div>
 <div id="task-3" class="section level3">
 <h3>Task 3</h3>
-<ol style="list-style-type: upper-alpha">
-<li>Now set the transmission rate to host 1 from host 2 <em>b<sub>12</sub> = 0.001</em>. Everything as before. Run the simulation. You should see an outbreak in both populations. This is an example of a core group driving the dynamics. Contemplate what the core group does.</li>
-</ol>
+<p>Set <em>b<sub>11</sub> = 0.001</em>. Rest as in previous task. Run the simulation. You should get the same outbreak as before among type 2 hosts, but no outbreak among type 1 hosts. Compute the R<sub>0</sub> values for these settings and convince yourself that the theoretical values and simulation results agree.</p>
 <p><strong>Record</strong></p>
 <ul>
-<li><p>Number of type 1 susceptible remaining at the end</p></li>
-<li><p>Number of type 2 susceptible remaining at the end</p></li>
+<li><p>R0 for type 1 hosts</p></li>
+<li><p>R0 for type 2 hosts</p></li>
 </ul>
 </div>
 <div id="task-4" class="section level3">
 <h3>Task 4</h3>
-<ol style="list-style-type: upper-alpha">
-<li>Set initial number of infected type 1 hosts to 0. Leave all other settings as before. Contemplate what you expect to see, run the simulation, see if your expectations are confirmed.</li>
-</ol>
+<p>Now set the transmission rate to host 1 from host 2 <em>b<sub>12</sub> = 0.001</em>. Everything else unchanged. Run the simulation. You should see an outbreak in both populations. This is an example of a (small) core group driving an outbreak in the larger group. Now that the two groups interact, the simple individual equations for <em>R<sub>0</sub></em> do not apply anymore. One can compute an overall <em>R<sub>0</sub></em> for the joint populations, but that is a bit involved and beyond what we want to do here. For more details on that, see e.g. <span class="citation">(Keeling and Rohani 2008)</span>.</p>
 <p><strong>Record</strong></p>
 <ul>
-<li><p>Number of type 1 susceptible remaining at the end</p></li>
-<li><p>Number of type 2 susceptible remaining at the end</p></li>
+<li><p>Number susceptible of type 1 left at end of simulation</p></li>
+<li><p>Number susceptible of type 2 left at end of simulation</p></li>
 </ul>
 </div>
 <div id="task-5" class="section level3">
 <h3>Task 5</h3>
-<ol style="list-style-type: upper-alpha">
-<li>Now set the initial number of infected type 1 hosts back to 1, and infected type 2 hosts to 0. Contemplate what you expect to see, run the simulation, see if your expectations are confirmed.</li>
-</ol>
+<p>Let’s test the idea that the small core group is driving the outbreaks and it’s not just because we introduced cross-transmission and that feature alone led to outbreaks in both populations. To do so, set <em>b<sub>12</sub></em> to 0 and instead set <em>b<sub>21</sub> = 0.001</em>. If it was just due to cross-transmission, we should probably see outbreaks in both populations. If it was a more infectious/transmissible (i.e. higher <em>R<sub>0</sub></em>) core-group driving the outbreak in the less transmissible group, we should not see an outbreak. Run the simulation and interpret the results.</p>
 <p><strong>Record</strong></p>
 <ul>
-<li><p>Number of type 1 susceptible remaining at the end</p></li>
-<li><p>Number of type 2 susceptible remaining at the end</p></li>
+<li>Nothing</li>
 </ul>
 </div>
 <div id="task-6" class="section level3">
 <h3>Task 6</h3>
-<ol style="list-style-type: upper-alpha">
-<li>Set <em>I1<sub>0</sub> = 1</em> and <em>I2<sub>0</sub> = 1</em>. Set the transmission rates to host 1 from host 1 and to host 2 from host 2 to 0. Set the transmission rate to host 1 from host 2 to <em>b<sub>12</sub></em> = 0.01, to host 2 from host 1 to <em>b<sub>21</sub></em> = 0.002. Those are the same values used in task 1 for transmission among the same hosts. Contemplate what you expect to see, run the simulation, see if your expectations are confirmed. Transmission only between hosts of different type could for instance represent a sexually transmitted disease in a heterosexual population, with the 2 types of hosts being females and males.</li>
-</ol>
+<p>Set everything as in task 1. Then change transmission rates such that <em>b<sub>11</sub></em> = <em>b<sub>22</sub></em> = 0 and <em>b<sub>12</sub></em> = 0.01, <em>b<sub>21</sub></em> = 0.002. Note that these are the same values for the transmission terms as in task 1, but we switched to now have zeros for transmission among individuals of the same type and non-zero for transmission between types. Those are the same values used in task 1 for transmission among the same hosts. Contemplate what you expect to see, run the simulation, see if your expectations are confirmed. Compare the results to those from task 1.</p>
 <p><strong>Record</strong></p>
 <ul>
-<li><p>Number of type 1 recovered at the end</p></li>
-<li><p>Number of type 2 recovered at the end</p></li>
+<li><p>Number susceptible of type 1 left at end of simulation</p></li>
+<li><p>Number susceptible of type 2 left at end of simulation</p></li>
 </ul>
 </div>
 <div id="task-7" class="section level3">
 <h3>Task 7</h3>
-<ol style="list-style-type: upper-alpha">
-<li>Now set the transmission rate <em>b<sub>12</sub> = 0.01</em>, and <em>b<sub>21</sub> = 0.002</em>. Everything else as before. Again, think about your expectations, run simulation and check.</li>
-</ol>
+<p>Note that things are not <em>symmetric</em> here when it comes to values of cross-transmission. Explore what is meant by this by switching the values for the cross-transmission terms, such that now <em>b<sub>12</sub></em> = 0.002, <em>b<sub>21</sub></em> = 0.01. Leave everything else as in the previous task. Run the simulation and compare the results to those from the previous task.</p>
 <p><strong>Record</strong></p>
 <ul>
-<li><p>Number of type 1 recovered at the end</p></li>
-<li><p>Number of type 2 recovered at the end</p></li>
+<li><p>Number susceptible of type 1 left at end of simulation</p></li>
+<li><p>Number susceptible of type 2 left at end of simulation</p></li>
 </ul>
 </div>
 <div id="task-8" class="section level3">
 <h3>Task 8</h3>
-<ol style="list-style-type: upper-alpha">
-<li>Repeat the previous task, with only an infected of type 1 initially present. Contemplate what you expect to see, run the simulation, see if your expectations are confirmed.</li>
-</ol>
+<p>You have encountered the idea of transmission only between hosts of different type previously, namely in the vector-borne transmission app. There we thought of the different types as different species, e.g. humans and mosquitoes. But it could also be the same hosts. For instance this type of transmission could represent a sexually transmitted disease in a heterosexual population, with the 2 types of hosts being females and males. Many sexually transmitted infections do not produce life-long immunity, re-infection is possible and not uncommon. Let’s explore this. Set everything as in the previous task. Then set the number of susceptibles for both populations to 1000 and set b<sub>12</sub> = 0.001. Then turn on waning immunity, assume it has an average duration of 5 months for each population (i.e. rates <em>w<sub>1</sub></em> and <em>w<sub>2</sub></em> need to be the inverse of 5 months. Run the simulation for 10 years). Confirm that you reach a steady state, with around 667 susceptible of type 2 at the end.</p>
 <p><strong>Record</strong></p>
 <ul>
-<li><p>Number of type 1 susceptible remaining at the end</p></li>
-<li><p>Number of type 2 susceptible remaining at the end</p></li>
+<li>Number susceptible of type 1 left at end of simulation</li>
 </ul>
 </div>
 <div id="task-9" class="section level3">
 <h3>Task 9</h3>
-<ol style="list-style-type: upper-alpha">
-<li>Repeat the previous task, with only an infected of type 2 initially present. Contemplate what you expect to see, run the simulation, see if your expectations are confirmed.</li>
-</ol>
+<p>In the previous task, the steady state values for S/I/R for the 2 populations were different. Think about why that is the case. Try to find the value for b<sub>12</sub> for which the 2 populations reach the same steady state. Then explore different values for both transmission rates and see how that impact the outcomes. Consider what that means for a real infectious disease. Would you expect transmission rates to be the same or not? What does it depend on?</p>
 <p><strong>Record</strong></p>
 <ul>
-<li><p>Number of type 1 susceptible remaining at the end</p></li>
-<li><p>Number of type 2 susceptible remaining at the end</p></li>
+<li>Value for b12 at wich steady state values for both populations are the same.</li>
 </ul>
 </div>
 <div id="task-10" class="section level3">
 <h3>Task 10</h3>
-<ol style="list-style-type: upper-alpha">
-<li>Set everything back as in task 1, but with waning immunity with an average duration of immunity of 5 months for each population (i.e. rates <em>w<sub>1</sub></em> and <em>w<sub>2</sub></em> need to be the inverse of 5 months.). Run simulation, confirm that both populations reach a steady endemic state.</li>
-</ol>
-<p><strong>Record</strong></p>
-<ul>
-<li>Nothing</li>
-</ul>
-</div>
-<div id="task-11" class="section level3">
-<h3>Task 11</h3>
-<ol style="list-style-type: upper-alpha">
-<li>Set transmission rate <em>b<sub>12</sub> = 0.005</em>, everything else as before. Run the simulation and see what changes.</li>
-</ol>
-<p><strong>Record</strong></p>
-<ul>
-<li>Nothing</li>
-</ul>
-</div>
-<div id="task-12" class="section level3">
-<h3>Task 12</h3>
-<ol style="list-style-type: upper-alpha">
-<li>Set transmission rate <em>b<sub>21</sub> = 0.005</em>, and <em>b<sub>12</sub> = 0</em>, everything else as before. Run the simulation and see what changes.</li>
-</ol>
-<p><strong>Record</strong></p>
-<ul>
-<li>Nothing</li>
-</ul>
-</div>
-<div id="task-13" class="section level3">
-<h3>Task 13</h3>
-<ol style="list-style-type: upper-alpha">
-<li>With the settings you just had, turn off waning immunity for type 1, run the simulation and see what you get.</li>
-</ol>
-<p><strong>Record</strong></p>
-<ul>
-<li><p>Number of type 1 susceptible remaining at the end</p></li>
-<li><p>Number of type 2 susceptible remaining at the end</p></li>
-</ul>
-</div>
-<div id="task-14" class="section level3">
-<h3>Task 14</h3>
-<ol style="list-style-type: upper-alpha">
-<li>Turn waning immunity for type 1 back on and turn off for type 2, run the simulation and see what you get.</li>
-</ol>
-<p><strong>Record</strong></p>
-<ul>
-<li><p>Number of type 1 susceptible remaining at the end</p></li>
-<li><p>Number of type 2 susceptible remaining at the end</p></li>
-</ul>
-</div>
-<div id="task-15" class="section level3">
-<h3>Task 15</h3>
-<ol style="list-style-type: upper-alpha">
-<li>Keep exploring. Think of a real ID where accounting for 2 types of hosts is important, see if you can use the simulation to approximate and explore that ID.</li>
-</ol>
+<p>Keep exploring. You can continue the exploration from the previous task by altering other parameters for the 2 types. You might for instance want to consider some real ID where accounting for 2 types of hosts is important, e.g. some type of STI. You can try to go to the literature and see if you can find parameter values for the ID of interest and explore potential patterns of that ID with the simulation.</p>
 <p><strong>Record</strong></p>
 <ul>
 <li>Nothing</li>
@@ -246,6 +204,9 @@ Flow diagram for this model.
 <div id="refs" class="references">
 <div id="ref-beldomenico10">
 <p>Beldomenico, Pablo M, and Michael Begon. 2010. “Disease Spread, Susceptibility and Infection Intensity: Vicious Circles?” <em>Trends in Ecology &amp; Evolution</em> 25 (1): 21–27. <a href="https://doi.org/10.1016/j.tree.2009.06.015">https://doi.org/10.1016/j.tree.2009.06.015</a>.</p>
+</div>
+<div id="ref-keeling08">
+<p>Keeling, Matt J, and Pejman Rohani. 2008. <em>Modeling Infectious Diseases in Humans and Animals</em>. Princeton University Press.</p>
 </div>
 <div id="ref-lloyd-smith05">
 <p>Lloyd-Smith, J. O., S. J. Schreiber, P. E. Kopp, and W. M. Getz. 2005. “Superspreading and the Effect of Individual Variation on Disease Emergence.” <em>Nature</em> 438 (7066): 355–59. <a href="https://doi.org/10.1038/nature04153">https://doi.org/10.1038/nature04153</a>.</p>
