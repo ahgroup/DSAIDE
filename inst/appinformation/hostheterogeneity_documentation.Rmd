@@ -66,7 +66,7 @@ The included processes/mechanisms are the following:
 ### Model Implementation
 The flow diagram and equations describe the model implemented in this app:
 
-```{r modeldiagram,  fig.cap='Flow diagram for this model. ',  echo=FALSE}
+```{r modeldiagram,  fig.cap='',  echo=FALSE, out.width = "70%"}
 knitr::include_graphics(here::here('inst/media',appsettings$modelfigname))
 ```
 
@@ -299,7 +299,7 @@ rc = rc + nrec #increment record counter by number of outcomes to record for thi
 
 
 
-```{r}
+```{r, include = FALSE}
 ###
 #Stuff in here not really working, not sure what's going on just now
 ###

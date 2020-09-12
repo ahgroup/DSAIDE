@@ -71,38 +71,6 @@ Flow diagram for this model.
 <div id="shinytab3" class="section level2">
 <h2>What to do</h2>
 <p><strong>The tasks below are described in a way that assumes everything is in units of MONTHS (rate parameters, therefore, have units of inverse months). If any quantity is not given in those units, you need to convert it first (e.g. if it says a year, you need to convert it to 12 months).</strong></p>
-<pre class="r"><code>###
-#Stuff in here not really working, not sure what&#39;s going on just now
-###
-
-# tasktext = &quot;You learned that the reproductive number is defined as new infections/infectious hosts of the same type produced by one infectious host. For the case where this is cross-transmission, one can derive it without too much effort. This follows the same reasoning you saw in the vector-borne transmission app. Type 1 infected produce new infections of type 2 at rate _b~21~_ for time 1/g~1~, and if initially all type 2 are susceptible, this leads to a total number of new type 2 infected of _b~21~ S~2~_/_g~1~_. A similar equations holds for the number of type 1 infections produced by a type 2 infected host. The total reproductive number is the product, thus _R~0~_ = _S~1~ S~2~_ _b~21~_ _b~12~_ / (_g~1~ g~2~_). Compute _R~0~_ for the current model settings.&quot;
-# nrec = 1 # number of items to record
-# out_records = c(&quot;R~0~&quot;)
-# out_types = c(&quot;Rounded_Integer&quot;)
-# out_notes = c(&quot;Report the rounded integer&quot;)
-# outcomes = data.frame( TaskID = rep(tid,nrec),
-#                        TaskText = rep(tasktext,nrec),
-#                       RecordID = paste0(&#39;T&#39;,tid,&#39;R&#39;,(1:nrec)),
-#                       Record = out_records, 
-#                       Type = out_types, 
-#                       Note = out_notes)
-# alloutcomes = rbind(alloutcomes,outcomes)
-# rc = rc + nrec #increment record counter by number of outcomes to record for this task 
-
-
-# tasktext = &quot;Let&#39;s explore the idea of something like a sexually transmitted disease that only goes from host 1 to 2 and the other way (assuming a fully heterosexual population) and combine it with the core group idea. Above, we found that the reproductive number was the product of the 2 components. Let&#39;s compute them separately. You should find that for the settings above, they are equal and both larger than 1. Let&#39;s change that. Set the 2 populations to equal size, both 1000 susceptible. Set _b~12~_ = 0.01, _b~21~_ = 0.002. Now compute both the expected new infections of type 2 produced by type 1, R~{21}, and the equivalent value for R~{12}, as well as the overall _R~0~_. What do you find? Given those values, do you expect to see an outbreak when you run the simulation with those values? Run and confirm.&quot;
-# nrec = 3 # number of items to record
-# out_records = c(&quot;R~21~&quot;,&quot;R~12~&quot;,&quot;R~0~&quot;)
-# out_types = rep(&quot;Rounded_Integer&quot;,nrec)
-# out_notes = rep(&quot;Report the rounded integer&quot;,nrec)
-# outcomes = data.frame( TaskID = rep(tid,nrec),
-#                        TaskText = rep(tasktext,nrec),
-#                       RecordID = paste0(&#39;T&#39;,tid,&#39;R&#39;,(1:nrec)),
-#                       Record = out_records, 
-#                       Type = out_types, 
-#                       Note = out_notes)
-# alloutcomes = rbind(alloutcomes,outcomes)
-# rc = rc + nrec #increment record counter by number of outcomes to record for this task </code></pre>
 <div id="task-1" class="section level3">
 <h3>Task 1</h3>
 <p>Start with 1000 susceptible hosts and 1 infected host of type 1. 200 susceptible hosts and 1 infected host of type 2. Simulation duration approximately 5 years. Assume that transmission from host 1 to host 1 is <em>b<sub>11</sub> = 0.002</em>, from host 2 to host 2 is <em>b<sub>22</sub> = 0.01</em>. No transmission from one host type to the other <em>b<sub>12</sub> = 0</em> and <em>b<sub>21</sub> = 0</em>. Assume that the duration of the infectious period is 1 month long for both types of hosts (i.e. same recovery rate). No waning immunity. Run the simulation and ensure you get outbreaks in both populations with approximately 20% susceptibles left at the end.</p>

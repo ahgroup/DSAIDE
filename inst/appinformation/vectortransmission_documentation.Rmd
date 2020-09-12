@@ -76,19 +76,17 @@ knitr::include_graphics(here::here('inst/media',appsettings$modelfigname))
 ```
 
 
-Model equations:
+The model equations are:
 
 
 
-```{r, echo = FALSE}
-if (appsettings$use_mbmodel)
-{
-  modeldir = system.file("mbmodels", package = packagename) #find path to apps
-  mbmodel = readRDS(paste0(modeldir,"/",appsettings$mbmodelname) )
-  eqs = DSAIDE::generate_equations(mbmodel)
-  eqs
-}
-```
+$$\dot S_h = - b_1 S_h I_v + w R_h $$ 
+$$\dot I_h =  b_1 S_h I_v  - g I_h $$ 
+$$\dot R_h = g I_h - w R_h $$
+$$\dot S_v = n - b_2 S_v I_h - m S_v $$ 
+$$\dot I_v =  b_2 S_v I_h - m I_v$$ 
+
+
 
 
 
@@ -127,7 +125,7 @@ rc = rc + nrec #increment record counter by number of outcomes to record for thi
 # Task 2
 ############
 tid = 2
-tasktext = "In the previous task, there was no outbreak because while infected hosts were able to transmit to the vectors (_b~2~_>0), the vectors where not able to pass the pathogen back to the hosts (_b~1~_=0), thus no sustained transmission and no outbreak. Now set _b~1~_ = 0.002 and _b~2~_ = 0.004, and rerun the simulation. Since this now _closes the loop_ and allows for sustained transmission from hosts to vectors and back, you should seen an outbreak. Run the simulation and confirm that you get an outbreak with around 183 susceptible hosts left. Also check that it doesn't matter if you start with an infected host or an infected vector (and none of the other), you'll get essentially the same results."
+tasktext = "In the previous task, there was no outbreak because while infected hosts were able to transmit to the vectors (_b~2~_>0), the vectors where not able to pass the pathogen back to the hosts (_b~1~_=0), thus no sustained transmission and no outbreak. Now set _b~1~_ = 0.002 and _b~2~_ = 0.004, and rerun the simulation. Since this now _closes the loop_ and allows for sustained transmission from hosts to vectors and back, you should seen an outbreak. Run the simulation and confirm that you get an outbreak with around 251 susceptible hosts left. Also check that it doesn't matter if you start with an infected host or an infected vector (and none of the other), you'll get essentially the same results."
 nrec = 1 # number of items to record
 out_records = c("Maximum/Peak number of infected human hosts")
 out_types = rep("Rounded_Integer",nrec)
@@ -147,7 +145,7 @@ rc = rc + nrec #increment record counter by number of outcomes to record for thi
 # Task 3
 ############
 tid = 3
-tasktext = "Recall from the _Environmental Transmission_ app that the definition of the reproductive number always goes from an infectious compartment of one type back to that compartment. Here, that means we can compute how many new infectious human hosts are produced (via vectors) by one infectious host. Completely equivalently, we can determine the number of new infectious vectors produced (via hosts) by one infectious vector. One infectious human is infectious for duration _1/g_ and during that time infects vectors at rate _b~2~_, for a total of _b~2~/g_ infected vectors. Similarly, each vector transmits at rate _b~1~_, for a duration of _1/m_, for a total of _b~1~/m_ new infected hosts. To go from one type of infected back to the same time, one multiplies the two quantities, and multiplying by the initial susceptibles of each type gives the basic reproductive number, _R~0~=b~1~ b~2~Sh~0~Sv~0~/(gm)_ . Let's explore this equation with the simulation. Compute _R~0~_ for the model settings from the previous task."
+tasktext = "Recall from the _Environmental Transmission_ app that the definition of the reproductive number always goes from an infectious compartment of one type back to that compartment. Here, that means we can compute how many new infectious human hosts are produced (via vectors) by one infectious host. Completely equivalently, we can determine the number of new infectious vectors produced (via hosts) by one infectious vector. One infectious human is infectious for duration _1/g_ and during that time infects vectors at rate _b~2~_, for a total of _b~2~/g_ infected vectors. Similarly, each vector transmits at rate _b~1~_, for a duration of _1/m_, for a total of _b~1~/m_ new infected hosts. To go from one type of infected back to the same time, one multiplies the two quantities, and multiplying by the initial susceptibles of each type gives the basic reproductive number, _R~0~=b~1~*b~2~*Sh~0~*Sv~0~/(g*m)_ . Let's explore this equation with the simulation. Compute _R~0~_ for the model settings from the previous task."
 nrec = 1 # number of items to record
 out_records = c("Value of R0")
 out_types = rep("Rounded_Integer",nrec)
@@ -166,7 +164,7 @@ rc = rc + nrec #increment record counter by number of outcomes to record for thi
 # Task 4
 ############
 tid = 4
-tasktext = "Run the simulation for _b~1~_=0.003 and _b~2~_ = 0.004, everything else as in task 1. Compute _R~0~_ and compute the outbreak size among hosts (total/cumulative number infected, which you need to compute from the output)."
+tasktext = "Run the simulation for _b~1~ = 0.003_ and _b~2~ = 0.004_, everything else as in task 1. Compute _R~0~_ and compute the outbreak size among hosts (total/cumulative number infected, which you need to compute from the output)."
 nrec = 2 # number of items to record
 out_records = c("Value of R0",
                 "Total (cumulative) number of infected hosts")
@@ -185,7 +183,7 @@ rc = rc + nrec #increment record counter by number of outcomes to record for thi
 # Task 5
 ############
 tid = 5
-tasktext = "Repeat the previous task, now for _b~1~_=0.006 and _b~2~_ = 0.002. Compare the values for _R~0~_ and the outbreak size between the two settings. Are you surprised? Can you explain/guess why you see what you see?"
+tasktext = "Repeat the previous task, now for _b~1~ = 0.006_ and _b~2~ = 0.002_. Compare the values for _R~0~_ and the outbreak size between the two settings. Are you surprised? Can you explain/guess why you see what you see?"
 nrec = 2 # number of items to record
 out_records = c("Value of R0",
                 "Total (cumulative) number of infected hosts")
@@ -204,7 +202,7 @@ rc = rc + nrec #increment record counter by number of outcomes to record for thi
 # Task 6
 ############
 tid = 6
-tasktext = "You might have expected to see the same size outbreaks in the previous two tasks. The reason why you don't is that here we do not have a closed population, instead vectors are born and die, and their changing populations can affect the result. To test that, we can make vector dynamics so fast that they are essentially fixed. That is not biologically realistic, but we can do it just to explore model behavior and see if our intuition of why we see different outbreak sizes is correct. To do so, set the vector death rate to an (biologically unreasonable) rate of _m=200_ and adjust birth rate so that vector population size (in absence of disease) remains at 1000. Now run simulations again for the settings from the last 2 tasks. Before you do that, we also need to adjust transmission rate for the vectors to keep _R~0~_ as before. Do so by increasing _b~1~_ by a factor of 100. compared to the values in the previous 2 tasks. You should see that the vector population remains pretty much constant and that the number susceptible left at the end of the outbreak is almost the same for the 2 scenarios. Use the final size equation to compute _R~0~_ and compare with the value from the equation given earlier."
+tasktext = "You might have expected to see the same size outbreaks in the previous two tasks. The reason why you don't is that here we do not have a closed population, instead vectors are born and die, and their changing populations can affect the result. To test that, we can make vector dynamics so fast that they are essentially fixed. That is not biologically realistic, but we can do it just to explore model behavior and see if our intuition of why we see different outbreak sizes is correct. To do so, set the vector death rate to an (biologically unreasonable) rate of _m = 200_ and adjust birth rate so that vector population size (in absence of disease) remains at 1000. Now run simulations again for the settings from the last 2 tasks. Before you do that, we also need to adjust transmission rate for the vectors to keep _R~0~_ as before. Do so by increasing _b~1~_ by a factor of 100. compared to the values in the previous two tasks. You should see that the vector population remains pretty much constant and that the number susceptible left at the end of the outbreak is almost the same for the two scenarios. Use the final size equation to compute _R~0~_ and compare with the value from the equation given earlier."
 nrec = 1 # number of items to record
 out_records = c("Value of R0 from final size equation")
 out_types = rep("Rounded_Integer",nrec)
@@ -223,7 +221,7 @@ rc = rc + nrec #increment record counter by number of outcomes to record for thi
 # Task 7
 ############
 tid = 7
-tasktext = "While we have played around with the transmission rates, we haven't really given much thought as to how those could map to real biological quantities. Each infection requires an interaction between a host and a vector. This interaction is often a bite, especially if we think about mosquitoes. If the vectors have a fixed rate of biting (call it _r_), no matter how many hosts there are, then the rate at which a vector bites any one of the hosts in a population of size _N_ is _rb_/_N_. If there is some chance of transmission per bite from infected vector to human (call it _q~1~_) and similarly a chance of transmission per bite from infected human to vector (_q~2~_), then the transmission parameters in our model are _b~1~_= _rq~1~/N_ and _b~2~_ = _rq~2~/N_. At the beginning of an outbreak, if we assume everyone is susceptible, we can replace _N_ with _S_. If we stick these quantities into the _R~0~_ equation, we find _R~0~_=r^2 q~1~ q~2~Sv~0~/(gmSh~0~). This produces two potentially interesting insights. First, the reproductive number, and thus outbreak size, is proportional to the square of the biting rate. Reducing that rate is thus an important target. Further, we find that while a larger vector number leads to a higher _R~0~_, it turns out an increase in the host population _reduces_ _R~0~_. The reason for that is that if there are many hosts, two bites of the same host (which is required for ongoing transmission) becomes less likely. For more on that, see e.g. [@keeling08]."
+tasktext = "While we have played around with the transmission rates, we haven't really given much thought as to how those could map to real biological quantities. Each infection requires an interaction between a host and a vector. This interaction is often a bite, especially if we think about mosquitoes. If the vectors have a fixed rate of biting (call it _r_), no matter how many hosts there are, then the rate at which a vector bites any one of the hosts in a population of size _N_ is _rb_/_N_. If there is some chance of transmission per bite from infected vector to human (call it _q~1~_) and similarly a chance of transmission per bite from infected human to vector (_q~2~_), then the transmission parameters in our model are _b~1~_= _rq~1~/N_ and _b~2~_ = _rq~2~/N_. At the beginning of an outbreak, if we assume everyone is susceptible, we can replace _N_ with _S_. If we stick these quantities into the _R~0~_ equation, we find _R~0~_=_r^2*q~1~*q~2~*Sv~0~/(g*m*Sh~0~)_. This produces two potentially interesting insights. First, the reproductive number, and thus outbreak size, is proportional to the square of the biting rate. Reducing that rate is thus an important target. Further, we find that while a larger vector number leads to a higher _R~0~_, it turns out an increase in the host population _reduces_ _R~0~_. The reason for that is that if there are many hosts, two bites of the same host (which is required for ongoing transmission) becomes less likely. For more on that, see e.g. [@keeling08]."
 nrec = 1 # number of items to record
 out_records = c("Nothing")
 out_types = rep("None",nrec)
@@ -242,7 +240,7 @@ rc = rc + nrec #increment record counter by number of outcomes to record for thi
 # Task 8
 ############
 tid = 8
-tasktext = "In the _ID Patterns_ app, we discussed the concept of resource replenishment and that is was a requirement for multiple outbreaks. Here, we have a model that includes births of new vectors, yet we still only get a single outbreak. Think about it for a moment to figure out why. Then play with the model inputs and see if you can get settings for which you have more than one outbreak."
+tasktext = "In the _ID Patterns_ app, we discussed the concept of resource replenishment and that it is a requirement for multiple outbreaks. Here, we have a model that includes births of new vectors, yet we still only get a single outbreak. Think about it for a moment to figure out why. Then play with the model inputs and see if you can get settings for which you have more than one outbreak."
 nrec = 1 # number of items to record
 out_records = c("Nothing")
 out_types = rep("None",nrec)
@@ -261,7 +259,7 @@ rc = rc + nrec #increment record counter by number of outcomes to record for thi
 # Task 9
 ############
 tid = 9
-tasktext = "In the previous task, you hopefully realized that replenishment is needed for _both_ hosts and vectors to get multiple outbreaks, and that you can accomplish that by turning on waning immunity for hosts. Set parameters to values as in task 2 and assume that immunity wanes on average in 10 months. Run the simulation. You should see a few consecutively smaller outbreaks and the system settling down at a steady state of about 462 susceptible hosts."
+tasktext = "In the previous task, you hopefully realized that replenishment is needed for _both_ hosts and vectors to get multiple outbreaks, and that you can accomplish that by turning on waning immunity for hosts. Set parameters to values as in task 2 and assume that immunity wanes on average in 10 months. Run the simulation. You should see a few consecutively smaller outbreaks and the system settling down at a steady state of about 523 susceptible hosts."
 nrec = 1 # number of items to record
 out_records = c("Final number of susceptible vectors at steady state")
 out_types = rep("Rounded_Integer",nrec)

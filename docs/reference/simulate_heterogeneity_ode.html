@@ -74,7 +74,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DSAIDE</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.6.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.8.7</span>
       </span>
     </div>
 
@@ -126,19 +126,19 @@
     </div>
 
     <pre class="usage"><span class='fu'>simulate_heterogeneity_ode</span>(
-  <span class='kw'>S1</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
-  <span class='kw'>I1</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>S2</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
-  <span class='kw'>I2</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>b11</span> <span class='kw'>=</span> <span class='fl'>0.01</span>,
-  <span class='kw'>b12</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>b21</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>b22</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>g1</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>g2</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>w1</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>w2</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>tmax</span> <span class='kw'>=</span> <span class='fl'>120</span>
+  S1 = <span class='fl'>1000</span>,
+  I1 = <span class='fl'>1</span>,
+  S2 = <span class='fl'>1000</span>,
+  I2 = <span class='fl'>0</span>,
+  b11 = <span class='fl'>0.01</span>,
+  b12 = <span class='fl'>0</span>,
+  b21 = <span class='fl'>0</span>,
+  b22 = <span class='fl'>0</span>,
+  g1 = <span class='fl'>1</span>,
+  g2 = <span class='fl'>1</span>,
+  w1 = <span class='fl'>0</span>,
+  w2 = <span class='fl'>0</span>,
+  tmax = <span class='fl'>120</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -222,14 +222,18 @@
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>The UI of the Shiny app 'Host Heterogeneity', which is part of this package, contains more details on the model.</p></div>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Andreas Handel</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>  <span class='co'># To run the simulation with default parameters just call the function:</span>
-  <span class='no'>result</span> <span class='kw'>&lt;-</span> <span class='fu'>simulate_heterogeneity_ode</span>()
+  <span class='kw'>result</span> <span class='op'>&lt;-</span> <span class='fu'>simulate_heterogeneity_ode</span>()
   <span class='co'># To choose parameter values other than the standard one, specify them like such:</span>
-  <span class='no'>result</span> <span class='kw'>&lt;-</span> <span class='fu'>simulate_heterogeneity_ode</span>(<span class='kw'>S1</span> <span class='kw'>=</span> <span class='fl'>100</span>, <span class='kw'>S2</span> <span class='kw'>=</span> <span class='fl'>1e3</span>, <span class='kw'>b11</span> <span class='kw'>=</span> <span class='fl'>0.7</span>, <span class='kw'>tmax</span> <span class='kw'>=</span> <span class='fl'>100</span>)
+  <span class='kw'>result</span> <span class='op'>&lt;-</span> <span class='fu'>simulate_heterogeneity_ode</span>(S1 = <span class='fl'>100</span>, S2 = <span class='fl'>1e3</span>, b11 = <span class='fl'>0.7</span>, tmax = <span class='fl'>100</span>)
   <span class='co'># You should then use the simulation result returned from the function, like this:</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>result</span>$<span class='no'>ts</span>[,<span class='st'>"time"</span>],<span class='no'>result</span>$<span class='no'>ts</span>[,<span class='st'>"S1"</span>],<span class='kw'>xlab</span><span class='kw'>=</span><span class='st'>'Time'</span>,<span class='kw'>ylab</span><span class='kw'>=</span><span class='st'>'Number Susceptible 1'</span>,<span class='kw'>type</span><span class='kw'>=</span><span class='st'>'l'</span>)</div><div class='img'><img src='simulate_heterogeneity_ode-1.png' alt='' width='700' height='433' /></div></pre>
+  <span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>result</span><span class='op'>$</span><span class='kw'>ts</span>[,<span class='st'>"time"</span>],<span class='kw'>result</span><span class='op'>$</span><span class='kw'>ts</span>[,<span class='st'>"S1"</span>],xlab=<span class='st'>'Time'</span>,ylab=<span class='st'>'Number Susceptible 1'</span>,type=<span class='st'>'l'</span>)
+</div><div class='img'><img src='simulate_heterogeneity_ode-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -245,7 +249,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>
