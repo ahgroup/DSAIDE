@@ -119,19 +119,20 @@ alloutcomes = NULL
 # Task 1
 ########################
 tid = 1
-tasktext = " We start by assuming a population of 1000 individuals, with 20% children, 25% elderly and the remainder middle-aged adults. Set the values for _S~c~_, _S~a~_ and _S~e~_ to reflect these assumptions. Start with one infected adult, no infected in the other groups. We make the assumption that infection lasts around 10 days in each age group. This means setting the rates g~i~=0.1. 
+tasktext = "We start by assuming a population of 1000 individuals, with 20% children, 25% elderly and the remainder middle-aged adults. Set the values for _S~c~_, _S~a~_ and _S~e~_ to reflect these assumptions. Start with one infected adult, no infected in the other groups. We make the assumption that infection lasts around 10 days in each age group. This means setting the rates g~i~=0.1. 
 
 If one wanted to run a model for research or policy purposes, one would want to choose transmission rates within and between groups to approximate reality. These transmission rates depend on the pathogen. For respiratory infections, the POLYMOD data is often used (see _Further Resources_ for references). We keep it simple here and assume that rates of transmission within groups is larger than between groups, but that otherwise all groups have the same rates. We'll set b~cc~ = b~aa~ = b~ee~ = 0.0003 (within-group transmission) and all other transmission rates to 0.0001.  
 
-To obtain age-related mortality that mimic COVID-19, we assume mortality among infected to be 0.1%, 1% and 10% for children, adults and elderly respectively. Set the parameters $m_i$ accordingly. Turn off waning immunity for now. Run the simulation without any control applied, i.e. f~1~ = f~2~ = f~3~ = 0 (thus the start and end times for the control do not matter). Run the simulation for 300 days. 
+To obtain age-related mortality that mimic COVID-19, we assume mortality among infected to be 0.1%, 1% and 10% for children, adults and elderly respectively. Set the parameters $m_i$ accordingly. Turn off waning immunity for now. Run the simulation without any control applied, i.e. f~1~ = f~2~ = f~3~ = 0 (thus the start and end times for the control do not matter). Run the simulation for 600 days. 
 
-You should see an outbreak with remaining susceptibles in the children/adult/elderly categories of around 75/109/86."
+You should see an outbreak with remaining susceptibles in the children/adult/elderly categories of around 75/110/87. Note that for the number of dead children, you get a value below 1. This doesn't make much sense, however, we are running it for a popualtion of 1000 (so we can see the plots well), so interpret this as number per thousand, which can be less than 1. Also compare the final number of recovered to dead and make sure it's approximately the ratio you would expect based on the mortalities for the different age groups."
+
 nrec = 3 # number of items to record
 out_records = c("Total dead children at end of simulation",
                 "Total dead adults at end of simulation",
                 "Total dead elderly at end of simulation")
-out_types = rep("Rounded_Integer",nrec)
-out_notes = rep("Report the rounded integer",nrec)
+out_types = rep("Numeric",nrec)
+out_notes = rep("Round to 2 decimal places",nrec)
 outcomes = data.frame( TaskID = rep(tid,nrec),
                        TaskText = rep(tasktext,nrec),
                       RecordID = paste0('T',tid,'R',(1:nrec)),
@@ -141,19 +142,113 @@ outcomes = data.frame( TaskID = rep(tid,nrec),
 alloutcomes = rbind(alloutcomes,outcomes)
 rc = rc + nrec #increment record counter by number of outcomes to record for this task 
 
+#0.12/4.41/16.29
+
 ########################
 # Task 2
 ########################
 tid = tid + 1
-tasktext = # Now lets implement strong control for each age group by setting f~1~ = f~2~ = f~3~ = 0.9. Assume that each control starts 90 days after outbreak start and lasts for 90 days. Keep all other values as previously. Run the simulation. You should see that the strong control initially pushes infected down, but once control is stopped, the outbreak rebounds and the overall size of the outbreak is similar to that without control."
+tasktext = "Now lets implement strong control for each age group by setting f~1~ = f~2~ = f~3~ = 0.9. Assume that each control starts 50 days after outbreak start and lasts for 100 days. Keep all other values as previously. Run the simulation. You should see that the strong control initially pushes infected down, but once control is stopped, the outbreak rebounds and the overall size of the outbreak is similar to that without control and the number dead at the end of the simulation are only slightly lower."
+nrec = 3 # number of items to record
+out_records = c("Total dead children at end of simulation",
+                "Total dead adults at end of simulation",
+                "Total dead elderly at end of simulation")
+out_types = rep("Numeric",nrec)
+out_notes = rep("Round to 2 decimal places",nrec)
+outcomes = data.frame( TaskID = rep(tid,nrec),
+                       TaskText = rep(tasktext,nrec),
+                      RecordID = paste0('T',tid,'R',(1:nrec)),
+                      Record = out_records, 
+                      Type = out_types, 
+                      Note = out_notes)
+alloutcomes = rbind(alloutcomes,outcomes)
+rc = rc + nrec #increment record counter by number of outcomes to record for this task 
+  
+#0.11/3.96/14.03
 
-tasktext = "A) Now lets implement control that targets mainly children. We also need to apply some control to adults, the largest group, to make the effective reproductive number values comparable. This can be achieved by setting $f_1=1; f_2=0.339; f_3=0$. Assume that each control starts 90 days after outbreak start and lasts for 90 days. Keep all other values as previously. Run the simulation. "
 
-tasktext = "A) Now lets implement control applied to adults only, in such a way that the effective reproductive number is the same as for the previous task. This can be achieved by setting $f_1=0; f_2=0.475; f_3=0$. Keep all other values as previously. Run the simulation."
+########################
+# Task 3
+########################
+tid = tid + 1
+tasktext =  "Recall from the multi-outbreak app, the best one can do in a multiple outbreak scenario is to get as close to population immunity as possible without much overshoot, thus preventing further outbreaks. To achieve this, less strong control can be better. We can revisit that idea here. Reduce control strength to 0.4 for each group, leave everything else the same. Record the total dead in the 3 age groups and compare to the ones you got for stronger control. The absolute numbers are small, but convince yourself that the relative change is quite large."
+nrec = 3 # number of items to record
+out_records = c("Total dead children at end of simulation",
+                "Total dead adults at end of simulation",
+                "Total dead elderly at end of simulation")
+out_types = rep("Numeric",nrec)
+out_notes = rep("Round to 2 decimal places",nrec)
+outcomes = data.frame( TaskID = rep(tid,nrec),
+                       TaskText = rep(tasktext,nrec),
+                      RecordID = paste0('T',tid,'R',(1:nrec)),
+                      Record = out_records, 
+                      Type = out_types, 
+                      Note = out_notes)
+alloutcomes = rbind(alloutcomes,outcomes)
+rc = rc + nrec #increment record counter by number of outcomes to record for this task 
 
-tasktext = "A) Now lets implement control that targets mainly the elderly group, again keeping the overall effective reproductive number the same. This can be achieved by setting $f_1=0; f_2=0.318; f_3=1$. Keep all other values as previously. Run the simulation. "
+#0.081/3.26/10.73
 
+########################
+# Task 4
+########################
+tid = tid + 1
+tasktext = "Now lets explore the idea that control that has a similar impact on number infected can have very different results on number deaths for a situation like the one we have here with different mortality in different groups. We'll first target our control to the elderly. Set f~1~=0, f~2~=0.0 and f~3~=1. Assume that control starts 50 days after outbreak start and lasts for 100 days. Keep all other values as previously. Run the simulation."
+nrec = 2 # number of items to record
+out_records = c("Total number susceptible (add all 3 groups) at end of simulation",
+                "Total number dead (add all 3 groups) at end of simulation")
+out_types = rep("Rounded_Integer",nrec)
+out_notes = rep("Round each value to an integer, then add",nrec)
+outcomes = data.frame( TaskID = rep(tid,nrec),
+                       TaskText = rep(tasktext,nrec),
+                      RecordID = paste0('T',tid,'R',(1:nrec)),
+                      Record = out_records, 
+                      Type = out_types, 
+                      Note = out_notes)
+alloutcomes = rbind(alloutcomes,outcomes)
+rc = rc + nrec #increment record counter by number of outcomes to record for this task 
+
+
+########################
+# Task 5
+########################
+tid = tid + 1
+tasktext = " Now we'll implement control that targets adults. This can be achieved by setting f~1~=0, f~2~=0.52 and f~3~=0. The control strength is chosen to ensure the overall control impact is comparable. Keep all other values as previously. Run the simulation. A you compare these 3 control scenarios, you should find that the total number of susceptible left at the end of the outbreak is the same, however the number dead changes in a likely expected way: Control applied to groups with lower mortality leads to more deaths."
+nrec = 2 # number of items to record
+out_records = c("Total number susceptible (add all 3 groups) at end of simulation",
+                "Total number dead (add all 3 groups) at end of simulation")
+out_types = rep("Rounded_Integer",nrec)
+out_notes = rep("Round each value to an integer, then add",nrec)
+outcomes = data.frame( TaskID = rep(tid,nrec),
+                       TaskText = rep(tasktext,nrec),
+                      RecordID = paste0('T',tid,'R',(1:nrec)),
+                      Record = out_records, 
+                      Type = out_types, 
+                      Note = out_notes)
+alloutcomes = rbind(alloutcomes,outcomes)
+rc = rc + nrec #increment record counter by number of outcomes to record for this task 
+
+
+########################
+# Task 6
+########################
+tid = tid + 1
+tasktext = "Now we apply control that focuses on children. Because the population sizes are different, we also need to apply some control to the adults, which is tweaked to get an overall similar strength of control compared to the previous task. This can be achieved by setting f~1~=1, f~2~=0.113 and f~3~=0. Assume that control starts 50 days after outbreak start and lasts for 100 days. Keep all other values as previously. Run the simulation."
+nrec = 2 # number of items to record
+out_records = c("Total number susceptible (add all 3 groups) at end of simulation",
+                "Total number dead (add all 3 groups) at end of simulation")
+out_types = rep("Rounded_Integer",nrec)
+out_notes = rep("Round each value to an integer, then add",nrec)
+outcomes = data.frame( TaskID = rep(tid,nrec),
+                       TaskText = rep(tasktext,nrec),
+                      RecordID = paste0('T',tid,'R',(1:nrec)),
+                      Record = out_records, 
+                      Type = out_types, 
+                      Note = out_notes)
+alloutcomes = rbind(alloutcomes,outcomes)
+rc = rc + nrec #increment record counter by number of outcomes to record for this task 
 ```
+
 
 
 ```{r echo=FALSE}

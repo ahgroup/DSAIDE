@@ -155,15 +155,15 @@ Intervention can be applied to any of the groups for a certain duration.</p>
   ma = <span class='fl'>0.01</span>,
   me = <span class='fl'>0.1</span>,
   f1 = <span class='fl'>0</span>,
-  T1_start = <span class='fl'>60</span>,
-  T1_end = <span class='fl'>120</span>,
+  T1_start = <span class='fl'>50</span>,
+  T1_end = <span class='fl'>100</span>,
   f2 = <span class='fl'>0</span>,
-  T2_start = <span class='fl'>60</span>,
-  T2_end = <span class='fl'>120</span>,
+  T2_start = <span class='fl'>50</span>,
+  T2_end = <span class='fl'>100</span>,
   f3 = <span class='fl'>0</span>,
-  T3_start = <span class='fl'>60</span>,
-  T3_end = <span class='fl'>120</span>,
-  tmax = <span class='fl'>400</span>
+  T3_start = <span class='fl'>50</span>,
+  T3_end = <span class='fl'>100</span>,
+  tmax = <span class='fl'>600</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -303,7 +303,7 @@ Intervention can be applied to any of the groups for a certain duration.</p>
     </tr>
     <tr>
       <th>tmax</th>
-      <td><p>:  maximum simulation time, units of months : numeric</p></td>
+      <td><p>:  maximum simulation time : numeric</p></td>
     </tr>
     </table>
 
@@ -319,10 +319,8 @@ Intervention can be applied to any of the groups for a certain duration.</p>
   with one column per compartment/variable. The first column is time.
   The model implement basic processes of infection, recovery and death.
   Waning immunity is also implemented.
-  Treatment is applied, which reduces b by the indicated proportion, during times tstart and tend.
-  Treatment can be applied at different levels to the different groups.
-  At time intervals given by tnew, a new infected individual enters each group of the population.
-  The simulation also monitors the number of infected and when they drop below 1, they are set to 0.</p>
+  Control is applied, which reduces transmission by the indicated proportion, during times tstart and tend.
+  Control can be applied at different levels to the different groups.</p>
     <h2 class="hasAnchor" id="warning"><a class="anchor" href="#warning"></a>Warning</h2>
 
     

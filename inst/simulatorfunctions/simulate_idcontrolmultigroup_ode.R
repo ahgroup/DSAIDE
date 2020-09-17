@@ -38,7 +38,7 @@
 #' @param f3 : strength of intervention applied to elderly, between 0 and 1 : numeric
 #' @param T3_start : start of intervention applied to elderly : numeric
 #' @param T3_end : end of intervention applied to elderly : numeric
-#' @param tmax :  maximum simulation time, units of months : numeric
+#' @param tmax :  maximum simulation time : numeric
 #' @return This function returns the simulation result as obtained from a call
 #'   to the deSolve ode solver.
 #' @details A compartmental ID model with several states/compartments
@@ -47,10 +47,8 @@
 #'   with one column per compartment/variable. The first column is time.
 #'   The model implement basic processes of infection, recovery and death.
 #'   Waning immunity is also implemented.
-#'   Treatment is applied, which reduces b by the indicated proportion, during times tstart and tend.
-#'   Treatment can be applied at different levels to the different groups.
-#'   At time intervals given by tnew, a new infected individual enters each group of the population.
-#'   The simulation also monitors the number of infected and when they drop below 1, they are set to 0.
+#'   Control is applied, which reduces transmission by the indicated proportion, during times tstart and tend.
+#'   Control can be applied at different levels to the different groups.
 #' @section Warning:
 #'   This function does not perform any error checking. So if you try to do
 #'   something nonsensical (e.g. any negative values or fractions > 1),
@@ -64,7 +62,7 @@
 simulate_idcontrolmultigroup_ode <- function(Sc = 1000, Ic = 0, Sa = 1000, Ia = 1, Se = 1000, Ie = 0,
                                              bcc = 0.0003, bca = 0.0001, bce = 0.0001, bac = 0.0001, baa = 0.0003, bae = 0.0001, bec = 0.0001, bea = 0.0001, bee = 0.0003,
                                              gc = 0.1, ga = 0.1, ge = 0.1, wc = 0, wa = 0, we = 0, mc = 0.001, ma = 0.01, me = 0.1,
-                                             f1 = 0, T1_start = 60, T1_end = 120, f2 = 0, T2_start = 60, T2_end = 120, f3 = 0, T3_start = 60, T3_end = 120,  tmax = 400)
+                                             f1 = 0, T1_start = 50, T1_end = 100, f2 = 0, T2_start = 50, T2_end = 100, f3 = 0, T3_start = 50, T3_end = 100,  tmax = 600)
 {
 
   # This function is used in the solver function and has no independent usages
