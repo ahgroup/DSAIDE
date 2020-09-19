@@ -108,55 +108,59 @@ $$\dot I_v = b_h I S_v - m_v  I_v $$
 _Some of the simulations might take a few seconds to run. Be patient._
 
 ```{r, echo=FALSE, eval=TRUE}
-# save all tasks, outcomes, etc. into an R data frame, then print later.
-# this data frame is used to automate shiny solutions and quiz generation
-
-# Explanation for each of the columns in the R data frame 
-
-# quizID: MUST BE THE FIRST COLUMN. Used by the grading app. naming structure "dsaide_shorttitle" where shorttitle is from appsettings$shorttitle
-# AppTitle: Title used for the app in the dsaide app, from appsettings$apptitle
-# AppID: App number in the dsaide menu, from appsettings$appid
-# TaskID: Identifies which task the text belongs to 
-# TaskText: The text that explains what to do for the task
-# RecordID: Identifies if it is the first, second, third,... item to record within the task
-# Record: Text explaining what value from the model that nee too be recorded
-# Note: Used by students taking quiz. Makes it clear what type of value to enter in "Answers"
-# Answers: In master it contains the rigth answer. For students it is where they record the recorded value
-# Fuzzy: The numeric value of a margin (within +/- of "right" answer) for questions where the quiz checker should not be too strict 
-# Review: Admin use if value is 1 the way the questions is asked may need to be reconsidered. 
-
-ntasks = 9 #number of tasks
-nrecord = 13 #number of outcomes to record
-#set up task tables
-#returned as list for generality, take apart
-tablist <- make_tasktable(ntasks,nrecord,appsettings)
-alltasks = tablist[[1]]
-allrecord = tablist[[2]]
 
 #this is the running counter for the records which starts at 1 
 rc=1
 
+#empty object, will hold all outcomes
+alloutcomes = NULL
 
+########################
 # Task 1
+########################
 tid = 1
-alltasks[tid,"TaskText"] = "A) Set the model parameters such that it corresponds to the following setting: 1000 susceptible hosts and vectors, 1 initially symptomatic host, no infected vectors or pathogen in the environment.Simulation duration approximately 5 years. Assume that only symptomatic individuals transmit, at a rate of 0.002. All other transmission rates should be 0. Assume that the duration of the symptomatic period is 1 month long, the duration of the presymptomatic period is half a month long. Assume that there are no asymptomatic infections. You can, therefore, set the rate of recovery of asymptomatics to anything, it doesn't matter because nobody will be asymptomatic. Assume that no environmental shedding and decay occurs. Assume nobody dies due to disease, and immunity does not wane. Assume that there are no births or natural deaths occurring. With parameters set to correspond to the scenario just described, run the simulation and ensure you get a single outbreak with ~20% susceptibles left at the end."
-
-# Record for task 1
+tasktext = "Set the model parameters such that it corresponds to the following setting: 1000 susceptible hosts and vectors, 1 initially symptomatic host, no infected vectors or pathogen in the environment. Simulation duration approximately 5 years. Assume that only symptomatic individuals transmit, at a rate of 0.002. All other transmission rates should be 0. Assume that the duration of the symptomatic period is 1 month long, the duration of the presymptomatic period is half a month long. Assume that there are no asymptomatic infections. You can, therefore, set the rate of recovery of asymptomatics to anything, it doesn't matter because nobody will be asymptomatic. Assume that no environmental shedding and decay occurs. Assume nobody dies due to disease, and immunity does not wane. Assume that there are no births or natural deaths occurring. With parameters set to correspond to the scenario just described, run the simulation and ensure you get a single outbreak with ~20% susceptibles left at the end."
 nrec = 1 # number of items to record
-reclist = list()
-reclist$rectext = c("Nothing")
-reclist$rectype = "None"
-reclist$recnote = c("")
-reclist$recfuzzy = c(0)
-allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
+out_records = c("Peak/Maximum number of infected.")
+out_types = c("Rounded_Integer")
+out_notes = c("Report the rounded integer")
+outcomes = data.frame( TaskID = rep(tid,nrec),
+                       TaskText = rep(tasktext,nrec),
+                      RecordID = paste0('T',tid,'R',(1:nrec)),
+                      Record = out_records, 
+                      Type = out_types, 
+                      Note = out_notes)
+alloutcomes = rbind(alloutcomes,outcomes)
 rc = rc + nrec #increment record counter by number of outcomes to record for this task 
+
+
+########################
+# Task 2
+########################
+tid = tid + 1
+tasktext = "Let's now assume that 50% of infected hosts are asymptomatic (_f_) and that the duration of the asymptomatic stage (_gA_) is the same as the symptomatic stage (_gI_). Also, assume that asymptomatic infected are half as infectious as symptomatic infected, and that pre-symptomatic are as infectious as symptomatic. Run the simulation, you should get an outbreak with around ~11% susceptibles left.
+
+B) Now, we will envision a scenario where we can only detect and quarantine individuals that show symptoms. Assume that quarantining reduces infectiousness by half. Implement such a scenario, run the simulation.
+C) Now, we will envision a scenario where we can quarantine everyone who has become infected, independent of symptom status. Implement such a scenario, again run the simulation and record the number of susceptibles left at the end."
+nrec = 1 # number of items to record
+out_records = c("Peak/Maximum number of infected.")
+out_types = c("Rounded_Integer")
+out_notes = c("Report the rounded integer")
+outcomes = data.frame( TaskID = rep(tid,nrec),
+                       TaskText = rep(tasktext,nrec),
+                      RecordID = paste0('T',tid,'R',(1:nrec)),
+                      Record = out_records, 
+                      Type = out_types, 
+                      Note = out_notes)
+alloutcomes = rbind(alloutcomes,outcomes)
+rc = rc + nrec #increment record counter by number of outcomes to record for this task 
+
+
 
 
 # Task 2
 tid = 2
-alltasks[tid,"TaskText"] = "A) Let's now assume that 50% of infected hosts are asymptomatic (_f_) and that the duration of the asymptomatic stage (_gA_) is the same as the symptomatic stage (_gI_). Also, assume that asymptomatic infected are half as infectious as symptomatic infected, and that pre-symptomatic are as infectious as symptomatic. Run the simulation, you should get an outbreak with around ~11% susceptibles left.
-B) Now, we will envision a scenario where we can only detect and quarantine individuals that show symptoms. Assume that quarantining reduces infectiousness by half. Implement such a scenario, run the simulation.
-C) Now, we will envision a scenario where we can quarantine everyone who has become infected, independent of symptom status. Implement such a scenario, again run the simulation and record the number of susceptibles left at the end."
+alltasks[tid,"TaskText"] = ""
 
 # Record for task 2
 nrec = 2 # number of items to record

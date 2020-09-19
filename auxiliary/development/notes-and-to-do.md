@@ -6,15 +6,17 @@
 * Add checks to parameter settings, don't allow unreasonable (e.g. negative) ones
 * Continue streamlining code base to make it more general/modular/flexible
 
+
 ## Content Improvement
 * Write/update all solutions
 * Add learning objectives to each overview tab
 * Implement further apps, see below
 * Clean up and make all model diagrams as nice as possible
+* Do those 3 apps, or remove: Parasite model, ID surveillance, and Maternal immunity
 
 ## Apps to be implemented
 * More Fitting apps (e.g. those from DSAIRM)
-* global warming app
+* global warming app /auxiliary/development/globalwarming/
 
 ## Documentation / Outreach / Advertisement
 * Add more content to the "other resources" section
