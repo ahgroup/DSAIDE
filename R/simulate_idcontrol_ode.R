@@ -25,14 +25,14 @@
 #' @param pA : rate of pathogen shedding into environment by asymptomatic hosts : numeric
 #' @param pI : rate of pathogen shedding into environment by symptomatic hosts : numeric
 #' @param c : rate of pathogen decay in environment : numeric
-#' @param f : fraction of pre-symptomatic individuals that have an asymptomatic infection : numeric
+#' @param f : fraction of pre-symptomatic individuals that will go on to be asymptomatic : numeric
 #' @param d : fraction of symptomatic infected hosts that die due to disease : numeric
 #' @param w : rate at which recovered persons lose immunity and return to susceptible state : numeric
 #' @param nh : the rate at which new hosts enter the model (are born) : numeric
 #' @param mh : the rate of mortality of hosts (the inverse it the average lifespan) : numeric
 #' @param nv : the rate at which new vectors enter the model (are born) : numeric
 #' @param mv : the rate of mortality of vectors (the inverse it the average lifespan) : numeric
-#' @param tmax : maximum simulation time, in units of months : numeric
+#' @param tmax : maximum simulation time : numeric
 #' @return This function returns the simulation result as obtained from a call
 #'   to the deSolve ode solver.
 #' @details A compartmental ID model with several states/compartments
@@ -56,7 +56,7 @@
 #' @author Andreas Handel
 #' @export
 
-simulate_idcontrol_ode <- function(S = 1000, I = 1, E = 0, Sv = 1000, Iv = 0, bP = 0, bA = 0, bI = 1e-3, bE = 0, bv = 1e-3, bh = 1e-3, gP = 0.5, gA = 0.5, gI = 0.5, pA = 1, pI = 10, c = 1,  f = 0, d = 0, w = 0, nh = 0, mh = 0, nv = 0, mv = 0, tmax = 300)
+simulate_idcontrol_ode <- function(S = 1000, I = 1, E = 0, Sv = 1000, Iv = 0, bP = 0, bA = 0, bI = 2e-3, bE = 0, bv = 0, bh = 0, gP = 2, gA = 1, gI = 1, pA = 0, pI = 0, c = 0,  f = 0, d = 0, w = 0, nh = 0, mh = 0, nv = 0, mv = 0, tmax = 60)
 {
 
   # This function is used in the ode solver function and has no independent usages
