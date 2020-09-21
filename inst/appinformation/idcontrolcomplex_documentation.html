@@ -89,104 +89,22 @@ Flow diagram for this model.
 </div>
 <div id="task-1" class="section level3">
 <h3>Task 1</h3>
-<ol style="list-style-type: upper-alpha">
-<li>Set the model parameters such that it corresponds to the following setting: 1000 susceptible hosts and vectors, 1 initially symptomatic host, no infected vectors or pathogen in the environment.Simulation duration approximately 5 years. Assume that only symptomatic individuals transmit, at a rate of 0.002. All other transmission rates should be 0. Assume that the duration of the symptomatic period is 1 month long, the duration of the presymptomatic period is half a month long. Assume that there are no asymptomatic infections. You can, therefore, set the rate of recovery of asymptomatics to anything, it doesn’t matter because nobody will be asymptomatic. Assume that no environmental shedding and decay occurs. Assume nobody dies due to disease, and immunity does not wane. Assume that there are no births or natural deaths occurring. With parameters set to correspond to the scenario just described, run the simulation and ensure you get a single outbreak with ~20% susceptibles left at the end.</li>
-</ol>
+<p>Set the model parameters such that it corresponds to the following setting: 1000 susceptible hosts and vectors, 1 initially symptomatic host, no infected vectors or pathogen in the environment. Simulation duration approximately 5 years. Assume that only symptomatic individuals transmit, at a rate of 0.002. All other transmission rates should be 0. Assume that the duration of the symptomatic period is 1 month long, the duration of the presymptomatic period is half a month long. Assume that there are no asymptomatic infections. You can, therefore, set the rate of recovery of asymptomatics to anything, it doesn’t matter because nobody will be asymptomatic. Assume that no environmental shedding and decay occurs. Assume nobody dies due to disease, and immunity does not wane. Assume that there are no births or natural deaths occurring. With parameters set to correspond to the scenario just described, run the simulation and ensure you get a single outbreak with ~20% susceptibles left at the end.</p>
 <p><strong>Record</strong></p>
 <ul>
-<li>Nothing</li>
+<li>Peak/Maximum number of infected.</li>
 </ul>
 </div>
 <div id="task-2" class="section level3">
 <h3>Task 2</h3>
-<ol style="list-style-type: upper-alpha">
-<li>Let’s now assume that 50% of infected hosts are asymptomatic (<em>f</em>) and that the duration of the asymptomatic stage (<em>gA</em>) is the same as the symptomatic stage (<em>gI</em>). Also, assume that asymptomatic infected are half as infectious as symptomatic infected, and that pre-symptomatic are as infectious as symptomatic. Run the simulation, you should get an outbreak with around ~11% susceptibles left.</li>
+<p>Let’s now assume that 50% of infected hosts are asymptomatic (<em>f</em>) and that the duration of the asymptomatic stage (<em>gA</em>) is the same as the symptomatic stage (<em>gI</em>). Also, assume that asymptomatic infected are half as infectious as symptomatic infected, and that pre-symptomatic are as infectious as symptomatic. Run the simulation, you should get an outbreak with around ~11% susceptibles left.</p>
+<ol start="2" style="list-style-type: upper-alpha">
 <li>Now, we will envision a scenario where we can only detect and quarantine individuals that show symptoms. Assume that quarantining reduces infectiousness by half. Implement such a scenario, run the simulation.</li>
 <li>Now, we will envision a scenario where we can quarantine everyone who has become infected, independent of symptom status. Implement such a scenario, again run the simulation and record the number of susceptibles left at the end.</li>
 </ol>
 <p><strong>Record</strong></p>
 <ul>
-<li><p>The number of susceptibles left at the end (Part B)</p></li>
-<li><p>The number of susceptibles left at the end (Part C)</p></li>
-</ul>
-</div>
-<div id="task-3" class="section level3">
-<h3>Task 3</h3>
-<ol style="list-style-type: upper-alpha">
-<li>Change settings back as they were in task 2 part A. Now assume that we can administer a drug. It will likely only be given to symptomatic individuals. First assume that the drug reduces the infectiousness of symptomatic individuals by half. Run the simulation.</li>
-<li>Now assume that the drug <em>also</em> reduces the duration of the symptomatic period from a month (30 days) to 20 days. Run the simulation.</li>
-</ol>
-<p><strong>Record</strong></p>
-<ul>
-<li><p>The number of susceptibles left at the end (Part A)</p></li>
-<li><p>The number of susceptibles left at the end (Part B)</p></li>
-</ul>
-</div>
-<div id="task-4" class="section level3">
-<h3>Task 4</h3>
-<ol style="list-style-type: upper-alpha">
-<li>Of course, intervention strategies are best if they reach all that transmit. Let’s assume now that we still have a drug that targets symptomatic individuals, but that asymptomatic and presymptomatic individuals don’t transmit.Set the model such that only symptomatic individuals transmit, at rate 0.004 and duration of the symptomatic period to 1 month. Nobody else transmits. Everything else should be as in task 2. You should get an outbreak of the same size as in task 1.</li>
-<li>Now assume that the drug reduces the duration of the symptomatic period from a month (30 days) to 20 days. Run the simulation.</li>
-<li>Now assume that the drug also cuts infectiousness by half. Run the simulation.</li>
-</ol>
-<p><strong>Record</strong></p>
-<ul>
-<li><p>The number of susceptibles left at the end (Part B)</p></li>
-<li><p>The number of susceptibles left at the end (Part C)</p></li>
-</ul>
-</div>
-<div id="task-5" class="section level3">
-<h3>Task 5</h3>
-<ol style="list-style-type: upper-alpha">
-<li>Set everything as in task 1. Then turn on environmental shedding by symptomatic individuals and decay both at rates of 1 per month. Run the simulation.</li>
-</ol>
-<p><strong>Record</strong></p>
-<ul>
-<li>The number of susceptibles left at the end</li>
-</ul>
-</div>
-<div id="task-6" class="section level3">
-<h3>Task 6</h3>
-<ol style="list-style-type: upper-alpha">
-<li>Set the rate of transmission from the environment to susceptible hosts to 0.002. Run the simulation. Now, turn off the rate of direct transmission between hosts. Make sure you still get an outbreak.</li>
-<li>Let’s assume different interventions that affect the environmental transmission. First, we consider an intervention that leads to a 50% increased pathogen clearance from the environment. Run the simulation.</li>
-<li>Now instead of faster clearance, assume a 50% reduced rate of infection from the environment. Run the simulation.</li>
-</ol>
-<p><strong>Record</strong></p>
-<ul>
-<li><p>The number of susceptibles left at the end (Part B)</p></li>
-<li><p>The number of susceptibles left at the end (Part C)</p></li>
-</ul>
-</div>
-<div id="task-7" class="section level3">
-<h3>Task 7</h3>
-<ol style="list-style-type: upper-alpha">
-<li>Now we’ll switch to vector-borne transmission. Set everything as in task 1, introduce 1 infected vector. Assume that transmission between hosts does not occur. Set transmission from host to vector and vector to host to 0.001. Assume that vectors (say mosquitoes) live for half a month. Set birth rate such that vector population balances at 1000. Run the simulation.</li>
-<li>Double host-vector and vector-host transmission rates. Now consider some vector control measures. Assume we sprayed against mosquitoes and it reduced the population size by 90%. Set the initial vector population to that value. Run the simulation.</li>
-</ol>
-<p><strong>Record</strong></p>
-<ul>
-<li>The total number infected at the end (Part B)</li>
-</ul>
-</div>
-<div id="task-8" class="section level3">
-<h3>Task 8</h3>
-<ol style="list-style-type: upper-alpha">
-<li>Instead of killing vector populations, we now consider a reduction in transmission, e.g. due to the use of bed nets. Set everything as in task 7 part A. Assume that an intervention only reduces transmission <em>to</em> vectors by half. Run the simulation, observe. Now assume that an intervention only reduces transmission <em>from</em> vectors by half. Run the simulation, observe. Finally, assume that the intervention reduces transmission both to and from vectors by half. Run the simulation, observe.</li>
-</ol>
-<p><strong>Record</strong></p>
-<ul>
-<li>Nothing</li>
-</ul>
-</div>
-<div id="task-9" class="section level3">
-<h3>Task 9</h3>
-<ol style="list-style-type: upper-alpha">
-<li>Keep exploring. The model has many more parameters that you can change, e.g. allowing births and deaths and waning immunity for hosts, or ID that transmit through multiple routes at the same time (e.g. Zika virus). Investigate how different control strategies work under different scenarios.</li>
-</ol>
-<p><strong>Record</strong></p>
-<ul>
-<li>Nothing</li>
+<li>Peak/Maximum number of infected.</li>
 </ul>
 </div>
 </div>

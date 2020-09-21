@@ -31,13 +31,13 @@ simulate_idcontrolmultigroup_ode(
   me = 0.1,
   f1 = 0,
   T1_start = 50,
-  T1_end = 100,
+  T1_end = 150,
   f2 = 0,
   T2_start = 50,
-  T2_end = 100,
+  T2_end = 150,
   f3 = 0,
   T3_start = 50,
-  T3_end = 100,
+  T3_end = 150,
   tmax = 600
 )
 }

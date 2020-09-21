@@ -62,7 +62,7 @@
 simulate_idcontrolmultigroup_ode <- function(Sc = 1000, Ic = 0, Sa = 1000, Ia = 1, Se = 1000, Ie = 0,
                                              bcc = 0.0003, bca = 0.0001, bce = 0.0001, bac = 0.0001, baa = 0.0003, bae = 0.0001, bec = 0.0001, bea = 0.0001, bee = 0.0003,
                                              gc = 0.1, ga = 0.1, ge = 0.1, wc = 0, wa = 0, we = 0, mc = 0.001, ma = 0.01, me = 0.1,
-                                             f1 = 0, T1_start = 50, T1_end = 100, f2 = 0, T2_start = 50, T2_end = 100, f3 = 0, T3_start = 50, T3_end = 100,  tmax = 600)
+                                             f1 = 0, T1_start = 50, T1_end = 150, f2 = 0, T2_start = 50, T2_end = 150, f3 = 0, T3_start = 50, T3_end = 150,  tmax = 600)
 {
 
   # This function is used in the solver function and has no independent usages

@@ -12,16 +12,16 @@ simulate_idcontrol_ode(
   Iv = 0,
   bP = 0,
   bA = 0,
-  bI = 0.001,
+  bI = 0.002,
   bE = 0,
-  bv = 0.001,
-  bh = 0.001,
-  gP = 0.5,
-  gA = 0.5,
-  gI = 0.5,
-  pA = 1,
-  pI = 10,
-  c = 1,
+  bv = 0,
+  bh = 0,
+  gP = 2,
+  gA = 1,
+  gI = 1,
+  pA = 0,
+  pI = 0,
+  c = 0,
   f = 0,
   d = 0,
   w = 0,
@@ -29,7 +29,7 @@ simulate_idcontrol_ode(
   mh = 0,
   nv = 0,
   mv = 0,
-  tmax = 300
+  tmax = 60
 )
 }
 \arguments{
@@ -67,7 +67,7 @@ simulate_idcontrol_ode(
 
 \item{c}{: rate of pathogen decay in environment : numeric}
 
-\item{f}{: fraction of pre-symptomatic individuals that have an asymptomatic infection : numeric}
+\item{f}{: fraction of pre-symptomatic individuals that will go on to be asymptomatic : numeric}
 
 \item{d}{: fraction of symptomatic infected hosts that die due to disease : numeric}
 
@@ -81,7 +81,7 @@ simulate_idcontrol_ode(
 
 \item{mv}{: the rate of mortality of vectors (the inverse it the average lifespan) : numeric}
 
-\item{tmax}{: maximum simulation time, in units of months : numeric}
+\item{tmax}{: maximum simulation time : numeric}
 }
 \value{
 This function returns the simulation result as obtained from a call

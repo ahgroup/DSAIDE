@@ -237,7 +237,7 @@ tid = 7
 tasktext = "If we want to completely prevent an outbreak, what value do we need to reduce _R~0~_ to? To achieve this, by what percentage do we need to reduce transmission? Express this reduction as a percent of the original value (e.g. reducing transmission from 0.1 to 0.06 is a (0.1-0.06)/0.1*100 = 40% reduction). Confirm with the model." 
 nrec = 1 # number of items to record
 out_records = c("Percentage by which transmission needs to be reduced")
-out_types = rep("Rounded_integer",nrec)
+out_types = rep("Rounded_Integer",nrec)
 out_notes = rep("Report rounded integer",nrec)
 outcomes = data.frame( TaskID = rep(tid,nrec),
                        TaskText = rep(tasktext,nrec),

@@ -143,16 +143,16 @@ Any initial conditions not specified below start at 0." />
   Iv = <span class='fl'>0</span>,
   bP = <span class='fl'>0</span>,
   bA = <span class='fl'>0</span>,
-  bI = <span class='fl'>0.001</span>,
+  bI = <span class='fl'>0.002</span>,
   bE = <span class='fl'>0</span>,
-  bv = <span class='fl'>0.001</span>,
-  bh = <span class='fl'>0.001</span>,
-  gP = <span class='fl'>0.5</span>,
-  gA = <span class='fl'>0.5</span>,
-  gI = <span class='fl'>0.5</span>,
-  pA = <span class='fl'>1</span>,
-  pI = <span class='fl'>10</span>,
-  c = <span class='fl'>1</span>,
+  bv = <span class='fl'>0</span>,
+  bh = <span class='fl'>0</span>,
+  gP = <span class='fl'>2</span>,
+  gA = <span class='fl'>1</span>,
+  gI = <span class='fl'>1</span>,
+  pA = <span class='fl'>0</span>,
+  pI = <span class='fl'>0</span>,
+  c = <span class='fl'>0</span>,
   f = <span class='fl'>0</span>,
   d = <span class='fl'>0</span>,
   w = <span class='fl'>0</span>,
@@ -160,7 +160,7 @@ Any initial conditions not specified below start at 0." />
   mh = <span class='fl'>0</span>,
   nv = <span class='fl'>0</span>,
   mv = <span class='fl'>0</span>,
-  tmax = <span class='fl'>300</span>
+  tmax = <span class='fl'>60</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -236,7 +236,7 @@ Any initial conditions not specified below start at 0." />
     </tr>
     <tr>
       <th>f</th>
-      <td><p>: fraction of pre-symptomatic individuals that have an asymptomatic infection : numeric</p></td>
+      <td><p>: fraction of pre-symptomatic individuals that will go on to be asymptomatic : numeric</p></td>
     </tr>
     <tr>
       <th>d</th>
@@ -264,7 +264,7 @@ Any initial conditions not specified below start at 0." />
     </tr>
     <tr>
       <th>tmax</th>
-      <td><p>: maximum simulation time, in units of months : numeric</p></td>
+      <td><p>: maximum simulation time : numeric</p></td>
     </tr>
     </table>
 
