@@ -41,6 +41,11 @@ appsettings = get_settings(currentrmdfile,appdocdir,packagename)
 ## Overview {#shinytab1}
 For this module, we will explore a fairly complex model that allows the study of different types of interventions. Read about the model in the "Model" tab. Then do the tasks described in the "What to do" tab.
 
+### Learning Objectives
+
+* Assess how control applied to different modes of transmission impacts outcomes
+
+
 ## The Model {#shinytab2}
 
 ### Model Overview

@@ -10,7 +10,7 @@
 #' @param bP : level/rate of infectiousness for hosts in the P compartment : numeric
 #' @param bA : level/rate of infectiousness for hosts in the A compartment : numeric
 #' @param bI : level/rate of infectiousness for hosts in the I compartment : numeric
-#' @param gP : rate at which a person leaves the P compartment, which : numeric
+#' @param gP : rate at which a person leaves the P compartment : numeric
 #' @param gA : rate at which a person leaves the A compartment : numeric
 #' @param gI : rate at which a person leaves the A compartment : numeric
 #' @param f : fraction of pre-symptomatic individuals that have an asymptomatic infection : numeric
