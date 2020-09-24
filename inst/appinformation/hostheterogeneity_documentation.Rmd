@@ -42,6 +42,19 @@ appsettings = get_settings(currentrmdfile,appdocdir,packagename)
 ## Overview {#shinytab1}
 For this module, we will explore a simple SIR model with 2 types of hosts. Read about the model in the "Model" tab. Then do the tasks described in the "What to do" tab.
 
+This app assumes that you have worked through several of the previous ones, e.g. that you are familiar with the reproductive number and how it is computed.
+
+
+
+### Learning Objectives
+
+* Know the most common host characteristics that lead to heterogeneity
+* Understand how heterogeneity might impact ID dynamics
+* Evaluate the need to account for heterogeneity depending on setting
+* Understand how different types of heterogeneity affect ID control
+
+
+
 ## The Model {#shinytab2}
 
 ### Model Overview
@@ -74,8 +87,8 @@ knitr::include_graphics(here::here('inst/media',appsettings$modelfigname))
 $$\dot S_1 = - S_1 (b_{11} I_1 + b_{12} I_2) + w_1 R_1 $$ 
 $$\dot I_1 =  S_1 (b_{11} I_1 + b_{12} I_2) - g_1 I_1 $$ 
 $$\dot R_1 = g_1 I_1 - w_1 R_1 $$
-$$\dot S_2 = - S_2 (b_{22} I_2 + b_{21} I_1) + w_2 R_2 $$ 
-$$\dot I_2 =  S_2 (b_{22} I_2 + b_{21} I_1) - g_2 I_2  $$ 
+$$\dot S_2 = - S_2 (b_{21} I_1 + b_{22} I_2) + w_2 R_2 $$ 
+$$\dot I_2 =  S_2 (b_{21} I_1 + b_{22} I_2) - g_2 I_2  $$ 
 $$\dot R_2 = g_2 I_2 - w_2 R_2 $$
 
 
@@ -98,7 +111,7 @@ alloutcomes = NULL
 # Task 1
 #########################
 tid = 1
-tasktext = " Start with 1000 susceptible hosts and 1 infected host of type 1. 200 susceptible hosts and 1 infected host of type 2. Simulation duration approximately 5 years. Assume that transmission from host 1 to host 1 is _b~11~ = 0.002_, from host 2 to host 2 is _b~22~ = 0.01_. No transmission from one host type to the other _b~12~ = 0_ and _b~21~ = 0_. Assume that the duration of the infectious period is 1 month long for both types of hosts (i.e. same recovery rate). No waning immunity. Run the simulation and ensure you get outbreaks in both populations with approximately 20% susceptibles left at the end."
+tasktext = " Start with 1000 susceptible hosts and 1 infected host of type one. 200 susceptible hosts and 1 infected host of type two. Simulation duration approximately 5 years. Assume that transmission from host 1 to host 1 is _b~11~ = 0.002_, from host 2 to host 2 is _b~22~ = 0.01_. No transmission from one host type to the other _b~12~ = 0_ and _b~21~ = 0_. Assume that the duration of the infectious period is 1 month long for both types of hosts (i.e. same recovery rate). No waning immunity. Run the simulation and ensure you get outbreaks in both populations with approximately 20% susceptibles left at the end."
 
 nrec = 2 # number of items to record
 out_records = c("Number susceptible of type 1 left at end of simulation",
@@ -120,7 +133,7 @@ rc = rc + nrec #increment record counter by number of outcomes to record for thi
 #########################
 tid = tid + 1
 tasktext = "Set _b~22~ = 0.02_. Rest as before. Run the simulation. You should get the same outbreak as before among type 1 hosts, a larger outbreak among type 2 hosts. 
-For our current choice of parameters, more specifically the transmission rates, it is ok to define and compute separate R~0~ for the two populations. Contemplate why it is ok to do so and compute the two R~0~ values. Use what you know about how R~0~ is defined to compute a theoretical value, then check with the simulation using the final size equation." 
+For our current choice of parameters, more specifically the transmission rates, it is ok to define and compute separate R~0~ for the two populations. Contemplate why it is ok to do so and compute the two R~0~ values. Use what you learned about R~0~ to compute a theoretical value, then check with the simulation using the final size equation." 
 nrec = 2 # number of items to record
 out_records = c("R0 for type 1 hosts",
                 "R0 for type 2 hosts")
@@ -140,7 +153,7 @@ rc = rc + nrec #increment record counter by number of outcomes to record for thi
 # Task 3
 #########################
 tid = tid + 1
-tasktext = "Set _b~11~ = 0.001_. Rest as in previous task. Run the simulation. You should get the same outbreak as before among type 2 hosts, but no outbreak among type 1 hosts. Compute the R~0~ values for these settings and convince yourself that the theoretical values and simulation results agree." 
+tasktext = "Set _b~11~ = 0.001_. Rest as in previous task. Run the simulation. You should get the same outbreak as before among type 2 hosts, but no real outbreak among type 1 hosts (though a few infections will occur). Compute the R~0~ values for these settings and convince yourself that the theoretical values and simulation results agree." 
 nrec = 2 # number of items to record
 out_records = c("R0 for type 1 hosts",
                 "R0 for type 2 hosts")
@@ -201,7 +214,7 @@ rc = rc + nrec #increment record counter by number of outcomes to record for thi
 # Task 6
 #########################
 tid = tid + 1
-tasktext = "Set everything as in task 1. Then change transmission rates such that _b~11~_ = _b~22~_ = 0 and _b~12~_ = 0.01, _b~21~_ = 0.002. Note that these are the same values for the transmission terms as in task 1, but we switched to now have zeros for transmission among individuals of the same type and non-zero for transmission between types. Those are the same values used in task 1 for transmission among the same hosts. Contemplate what you expect to see, run the simulation, see if your expectations are confirmed. Compare the results to those from task 1."
+tasktext = "Now set transmission rates to _b~11~_ = _b~22~_ = 0 and _b~12~_ = 0.01, _b~21~_ = 0.002. Note that these are the same values for the transmission terms as in task 1, but we now there is no transmission among individuals of the same type and non-zero transmission between types. Contemplate what you expect to see, run the simulation, see if your expectations are confirmed. Compare the results to those from task 1."
 nrec = 2 # number of items to record
 out_records = c("Number susceptible of type 1 left at end of simulation",
             "Number susceptible of type 2 left at end of simulation")
@@ -221,7 +234,7 @@ rc = rc + nrec #increment record counter by number of outcomes to record for thi
 # Task 7
 #########################
 tid = tid + 1
-tasktext = "Note that things are not _symmetric_ here when it comes to values of cross-transmission. Explore what is meant by this by switching the values for the cross-transmission terms, such that now _b~12~_ = 0.002, _b~21~_ = 0.01. Leave everything else as in the previous task. Run the simulation and compare the results to those from the previous task."
+tasktext = "Note that things are not symmetric here when it comes to values of cross-transmission. Explore this by switching the values for the cross-transmission terms, such that now _b~12~_ = 0.002, _b~21~_ = 0.01. Leave everything else as in the previous task. Run the simulation and compare the results to those from the previous task."
 nrec = 2 # number of items to record
 out_records = c("Number susceptible of type 1 left at end of simulation",
             "Number susceptible of type 2 left at end of simulation")
@@ -242,9 +255,9 @@ rc = rc + nrec #increment record counter by number of outcomes to record for thi
 # Task 8
 #########################
 tid = tid + 1
-tasktext = "You have encountered the idea of transmission only between hosts of different type previously, namely in the vector-borne transmission app. There we thought of the different types as different species, e.g. humans and mosquitoes. But it could also be the same hosts. For instance this type of transmission could represent a sexually transmitted disease in a heterosexual population, with the 2 types of hosts being females and males. Many sexually transmitted infections do not produce life-long immunity, re-infection is possible and not uncommon. Let's explore this. Set everything as in the previous task. Then set the number of susceptibles for both populations to 1000 and set b~12~ = 0.001. Then turn on waning immunity, assume it has an average duration of 5 months for each population (i.e. rates _w~1~_ and _w~2~_ need to be the inverse of 5 months. Run the simulation for 10 years). Confirm that you reach a steady state, with around 667 susceptible of type 2 at the end."
+tasktext = "You have previously encountered the idea that transmission occurs only between hosts of different types, namely in the vector-borne transmission app. There we thought of the different types as different species, e.g. humans and mosquitoes. But it could also be among different types of the same hosts. For instance this type of transmission could represent a sexually transmitted disease in a heterosexual population, with the 2 types of hosts being females and males. Many sexually transmitted infections do not produce life-long immunity, re-infection is possible and not uncommon. Let's explore this. Set the number of susceptibles for both populations to 1000, 1 infected in each population. Set b~12~ = 0.002, b~21~ = 0.001. Set the other transmission terms to 0. Leave recovery rates as before. Then turn on waning immunity, assume it has an average duration of 5 months for each population (i.e. rates _w~1~_ and _w~2~_ need to be the inverse of 5 months). Run the simulation for 10 years. Confirm that you reach a steady state, with around 667 susceptible of type 1 at the end."
 nrec = 1 # number of items to record
-out_records = c("Number susceptible of type 1 left at end of simulation")
+out_records = c("Number susceptible of type 2 left at end of simulation")
 out_types = rep("Rounded_Integer",nrec)
 out_notes = rep("Report the rounded integer",nrec)
 outcomes = data.frame( TaskID = rep(tid,nrec),
@@ -261,9 +274,9 @@ rc = rc + nrec #increment record counter by number of outcomes to record for thi
 # Task 9
 #########################
 tid = tid + 1
-tasktext = "In the previous task, the steady state values for S/I/R for the 2 populations were different. Think about why that is the case. Try to find the value for b~12~ for which the 2 populations reach the same steady state. Then explore different values for both transmission rates and see how that impact the outcomes. Consider what that means for a real infectious disease. Would you expect transmission rates to be the same or not? What does it depend on?"
+tasktext = "In the previous task, the steady state values for S/I/R for the 2 populations were different. Think about why that is the case. Try to find the value for b~21~ for which the 2 populations reach the same steady state. Then explore different values for both transmission rates and see how that impact the outcomes. Consider what that means for a real infectious disease. Would you expect transmission rates to be the same or not? What does it depend on?"
 nrec = 1 # number of items to record
-out_records = c("Value for b12 at wich steady state values for both populations are the same.")
+out_records = c("Value for b21 at which steady state values for both populations are the same.")
 out_types = rep("Numeric",nrec)
 out_notes = rep("",nrec)
 outcomes = data.frame( TaskID = rep(tid,nrec),
@@ -301,37 +314,12 @@ rc = rc + nrec #increment record counter by number of outcomes to record for thi
 
 ```{r, include = FALSE}
 ###
-#Stuff in here not really working, not sure what's going on just now
+#These tasks are not really doing what I expect them to do, not sure what's going on just now, no time to figure out
 ###
 
 # tasktext = "You learned that the reproductive number is defined as new infections/infectious hosts of the same type produced by one infectious host. For the case where this is cross-transmission, one can derive it without too much effort. This follows the same reasoning you saw in the vector-borne transmission app. Type 1 infected produce new infections of type 2 at rate _b~21~_ for time 1/g~1~, and if initially all type 2 are susceptible, this leads to a total number of new type 2 infected of _b~21~ S~2~_/_g~1~_. A similar equations holds for the number of type 1 infections produced by a type 2 infected host. The total reproductive number is the product, thus _R~0~_ = _S~1~ S~2~_ _b~21~_ _b~12~_ / (_g~1~ g~2~_). Compute _R~0~_ for the current model settings."
-# nrec = 1 # number of items to record
-# out_records = c("R~0~")
-# out_types = c("Rounded_Integer")
-# out_notes = c("Report the rounded integer")
-# outcomes = data.frame( TaskID = rep(tid,nrec),
-#                        TaskText = rep(tasktext,nrec),
-#                       RecordID = paste0('T',tid,'R',(1:nrec)),
-#                       Record = out_records, 
-#                       Type = out_types, 
-#                       Note = out_notes)
-# alloutcomes = rbind(alloutcomes,outcomes)
-# rc = rc + nrec #increment record counter by number of outcomes to record for this task 
-
 
 # tasktext = "Let's explore the idea of something like a sexually transmitted disease that only goes from host 1 to 2 and the other way (assuming a fully heterosexual population) and combine it with the core group idea. Above, we found that the reproductive number was the product of the 2 components. Let's compute them separately. You should find that for the settings above, they are equal and both larger than 1. Let's change that. Set the 2 populations to equal size, both 1000 susceptible. Set _b~12~_ = 0.01, _b~21~_ = 0.002. Now compute both the expected new infections of type 2 produced by type 1, R~{21}, and the equivalent value for R~{12}, as well as the overall _R~0~_. What do you find? Given those values, do you expect to see an outbreak when you run the simulation with those values? Run and confirm."
-# nrec = 3 # number of items to record
-# out_records = c("R~21~","R~12~","R~0~")
-# out_types = rep("Rounded_Integer",nrec)
-# out_notes = rep("Report the rounded integer",nrec)
-# outcomes = data.frame( TaskID = rep(tid,nrec),
-#                        TaskText = rep(tasktext,nrec),
-#                       RecordID = paste0('T',tid,'R',(1:nrec)),
-#                       Record = out_records, 
-#                       Type = out_types, 
-#                       Note = out_notes)
-# alloutcomes = rbind(alloutcomes,outcomes)
-# rc = rc + nrec #increment record counter by number of outcomes to record for this task 
 ```
 
 

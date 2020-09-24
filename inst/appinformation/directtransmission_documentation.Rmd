@@ -41,6 +41,13 @@ appsettings = get_settings(currentrmdfile,appdocdir,packagename)
 ## Overview {#shinytab1}
 This app allows you to explore a model with 2 different modes of direct transmission. Read about the model in the "Model" tab. Then do the tasks described in the "What to do" tab.
 
+### Learning Objectives
+
+* Assess how different modes of direct transmission affect ID dynamics.
+* Contrast the difference between density- and frequency-dependent transmission.
+* Predict how population size impacts ID dynamics for different types of transmission.
+
+
 
 ## The Model {#shinytab2}
 

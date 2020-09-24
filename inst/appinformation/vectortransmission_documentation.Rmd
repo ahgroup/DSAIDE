@@ -40,6 +40,13 @@ appsettings = get_settings(currentrmdfile,appdocdir,packagename)
 This app allows you to explore a simple model for vector-borne transmission. Read about the model in the "Model" tab. Then do the tasks described in the "What to do" tab.
 
 
+### Learning Objectives
+
+* Know about important IDs that are vector-borne
+* Understand the implications of vector-borne transmission on ID dynamics
+* Understand how vector-borne transmission influences potential ID control strategies.
+
+
 ## The Model {#shinytab2}
 
 ### Model Overview
@@ -106,7 +113,7 @@ alloutcomes = NULL
 # Task 1
 ############
 tid = 1
-tasktext = "Set the model parameters so that there are 1000 initially susceptible for both hosts and vectors, 1 initially infected host, no infected vector, and no recovered hosts. Simulation duration 10 years (convert to months). Set the transmission rates, _b~1~_=0, and _b~2~_ = 0.004. Assume that the duration of the infectious period in hosts is half a month (about 2 weeks) long. Assume that vectors live for half a month. Set the birth rate such that in the absence of the ID, you get a steady population of 1000 vectors. You have learned the relation between births, deaths and steady state susceptibles in the _Patterns of ID_ app. If you don't remember, revisit that app or you can figure it out by trying different values for the birth rate (with no infected hosts or vectors present). Turn off waning immunity for now. Run the simulation, observe what you get. You should not see any outbreak happening. Make sure you know why."
+tasktext = "Set the model parameters so that there are 1000 initially susceptible for both hosts and vectors, 1 initially infected host, no infected vectors, and no recovered hosts. Simulation duration 10 years (convert to months). Set the transmission rates, _b~1~_=0, and _b~2~_ = 0.004. Assume that the duration of the infectious period in hosts is half a month (about 2 weeks) long. Assume that vectors live for half a month. Set the birth rate such that in the absence of the ID, you get a steady population of 1000 vectors. You have learned the relation between births, deaths and steady state susceptibles in the _Patterns of ID_ app. If you don't remember, revisit that app or you can figure it out by trying different values for the birth rate (with no infected hosts or vectors present). Turn off waning immunity for now. Run the simulation, observe what you get. You should not see any outbreak happening. Make sure you know why."
 nrec = 1 # number of items to record
 out_records = c("Nothing")
 out_types = rep("None",nrec)
