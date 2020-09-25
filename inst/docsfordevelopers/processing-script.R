@@ -29,12 +29,20 @@ for (n in 1: length(files)) {rmarkdown::render(files[n]); Sys.sleep(2)}
 # Copy simulator functions into the /inst/simulator folder and zip
 ##################################################
 
+#delete files in /simulatorfunctions/ and the zip file
+zipfilename = paste0(basepath,"/inst/simulatorfunctions/simulatorfunctions.zip")
+simulation_originals = list.files(path = paste0(basepath,"/R/"), recursive=TRUE, pattern = "^simulate", full.names = TRUE)
+simulation_copies = list.files(path = paste0(basepath,"/inst/simulatorfunctions/"), recursive=TRUE, pattern = "^simulate", full.names = TRUE)
+
+#remove zip file and copy of simulators
+file.remove(zipfilename)
+file.remove(simulation_copies)
+
 #copy files
-files = list.files(path = paste0(basepath,"/R/"), recursive=TRUE, pattern = "^simulate", full.names = TRUE)
-file.copy(files, paste0(basepath,"/inst/simulatorfunctions/"), overwrite = TRUE)
+file.copy(simulation_originals, paste0(basepath,"/inst/simulatorfunctions/"), overwrite = TRUE)
 
 # create zip file
-zip::zipr(zipfile = paste0(basepath,"/inst/simulatorfunctions/simulatorfunctions.zip"), files = files, recurse = FALSE, include_directories = FALSE)
+zip::zipr(zipfile = zipfilename, files = simulation_originals, recurse = FALSE, include_directories = FALSE)
 
 
 ###################################################

@@ -12,7 +12,7 @@ test_that("generate_ggplot returns a ggplot",
             result[[1]]=simresult
             expect_is(generate_ggplot(result), "ggplot" )
 
-            simresult = simulate_idcontrol_ode()
+            simresult = simulate_Complex_ID_Control_ode()
             result = vector("list", 1)
             result[[1]]=simresult
             expect_is(generate_ggplot(result), "ggplot" )

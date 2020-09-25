@@ -36,7 +36,7 @@ test_that("generate_shinyinput correctly produces a shiny input structure",
             filepath = paste0(simdir,'/',appsettings$simfunction[1],'.R')
             appsettings$filepath = filepath
 
-
+            #try to generate shiny input for an mbmodel input
             modelinputs1 <- generate_shinyinput(use_mbmodel = TRUE, mbmodel = appsettings$mbmodel,
                                                use_doc = FALSE, model_file = appsettings$filepath,
                                                model_function = appsettings$simfunction[1],
@@ -46,16 +46,21 @@ test_that("generate_shinyinput correctly produces a shiny input structure",
             #this element of the tag list needs to contain the word susceptible
             expect_true(grepl('Susceptible',modelinputs1[[2]][[1]][[3]]))
 
-            modelinputs2 <- generate_shinyinput(use_mbmodel = FALSE, mbmodel = appsettings$mbmodel,
-                                               use_doc = TRUE, model_file = appsettings$filepath,
+
+            #try to generate shiny input for a non-mbmodel input using the doc/header of a model file to make UI
+            appName = "idcontrolvaccine"
+            appsettings <- as.list(at[which(at$appid == appName),])
+            filepath = paste0(simdir,'/',appsettings$simfunction[1],'.R')
+            appsettings$filepath = filepath
+
+            modelinputs2 <- generate_shinyinput(use_mbmodel = FALSE, use_doc = TRUE, model_file = appsettings$filepath,
                                                model_function = appsettings$simfunction[1],
                                                otherinputs = appsettings$otherinputs, packagename = packagename)
 
-
             #this element of the tag list needs to contain the word susceptible
-            expect_true(grepl('Susceptible',modelinputs2[[2]][[1]][[3]]))
+            expect_true(grepl('susceptible',modelinputs2[[2]][[1]][[3]]))
 
-
+            #this uses the name of the function and parses the function call to generate a UI
             modelinputs3 <- generate_shinyinput(use_mbmodel = FALSE, mbmodel = appsettings$mbmodel,
                                                 use_doc = FALSE, model_file = appsettings$filepath,
                                                 model_function = appsettings$simfunction[1],

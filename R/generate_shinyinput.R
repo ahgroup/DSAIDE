@@ -60,6 +60,7 @@ generate_shinyinput <- function(use_mbmodel = FALSE, mbmodel = NULL,
         })
     modelargs = c(allv,allp,allt)
     #end input construction for mbmodel
+    #this uses the header/documentation of an R simulation function to generate UI
     } else if (use_doc) {
 
       if (!file.exists(model_file)) {return("Please provide path to a valid model R file.")}

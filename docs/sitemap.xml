@@ -43,6 +43,12 @@
     <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/run_model.html</loc>
   </url>
   <url>
+    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_Characteristics_of_ID_ode.html</loc>
+  </url>
+  <url>
+    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_Complex_ID_Control_ode.html</loc>
+  </url>
+  <url>
     <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_directtransmission_ode.html</loc>
   </url>
   <url>
@@ -58,16 +64,10 @@
     <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_Host_Heterogeneity_Model_ode.html</loc>
   </url>
   <url>
-    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_idcharacteristics_ode.html</loc>
-  </url>
-  <url>
     <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_idcontrolmultigroup_ode.html</loc>
   </url>
   <url>
     <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_idcontrolmultioutbreak_ode.html</loc>
-  </url>
-  <url>
-    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_idcontrol_ode.html</loc>
   </url>
   <url>
     <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_idpatterns_ode.html</loc>

@@ -70,7 +70,7 @@ test_that("run_model correctly runs different models",
 
             modelsettings =  list(tnew = 80, tmax = 100)
             modelsettings$modeltype =  "_ode_"
-            modelsettings$simfunction = 'simulate_idcontrol_ode'
+            modelsettings$simfunction = 'simulate_maternalimmunity_ode'
             result = run_model(modelsettings)
             expect_is(generate_ggplot(result), "ggplot" )
             expect_is(generate_plotly(result), "plotly" )
