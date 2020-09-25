@@ -104,7 +104,7 @@ Flow diagram for this model.
 <div id="task-2" class="section level3">
 <h3>Task 2</h3>
 <p>Let’s now assume that 50% of infected hosts will be asymptomatic (<em>f</em>) and that the duration of the asymptomatic stage (<em>gA</em>) is the same as the symptomatic stage (<em>gI</em>). Also, assume that asymptomatic infected are half as infectious as symptomatic infected, and that pre-symptomatic are as infectious as symptomatic. Run the simulation, you should get an outbreak with around 107 susceptibles left. Now, we will envision a scenario where we can only detect and quarantine individuals that show symptoms. Assume that quarantining reduces infectiousness by half. Implement such a scenario, run the simulation.</p>
-<p>If you are up for a small, optional, challenge, compute R<sub>0</sub> for this scenario. It will be the sum of transmission coming from all 3 infected compartments (P, A, I), other than that it follows the standard procedure you learned about and you can compare what you get from doing the math with the final size equation. You can then use your R<sub>0</sub> equation for the next following tasks.</p>
+<p>If you are up for a small, optional, challenge, compute R<sub>0</sub> for this scenario. It will be the sum of transmission coming from all 3 infected compartments (P, A, I). You will also need to make sure you multiply <em>A</em> and <em>I</em> by their respective fractions (<em>f</em> and <em>1-f</em>) otherwise you would be double-counting. Other than that it follows the standard procedure you learned about and you can compare what you get from doing the math with the final size equation. You can then use your R<sub>0</sub> equation for the next following tasks.</p>
 <p><strong>Record</strong></p>
 <ul>
 <li>Number susceptibles remaining at end of quarantine simulation.</li>
@@ -120,7 +120,7 @@ Flow diagram for this model.
 </div>
 <div id="task-4" class="section level3">
 <h3>Task 4</h3>
-<p>Set parameter values back to what they were at the start of the previous task. Now assume that we can administer a drug. It will likely only be given to symptomatic individuals. First assume that the drug reduces the infectiousness of symptomatic individuals by half. Run the simulation. Convince yourself that this has the same effect as assuming quarantine of symptomatic individuals above. Now assume that the drug also reduces the duration of the symptomatic period from a month to half a month. What do you expect this shortening of the symptomatic period will do? Run the simulation to check.</p>
+<p>Set parameter values back to what they were at the start of the previous task before you started changing them. Now assume that we can administer a drug. It will likely only be given to symptomatic individuals. First assume that the drug reduces the infectiousness of symptomatic individuals by half. Run the simulation. Convince yourself that this has the same effect as assuming quarantine of symptomatic individuals above. Now assume that the drug also reduces the duration of the symptomatic period from a month to half a month. What do you expect this shortening of the symptomatic period will do? Run the simulation to check.</p>
 <p><strong>Record</strong></p>
 <ul>
 <li>Number susceptibles remaining at end of simulation.</li>
@@ -146,7 +146,7 @@ Flow diagram for this model.
 </div>
 <div id="task-7" class="section level3">
 <h3>Task 7</h3>
-<p>Let’s repeat the previous task, with only environmental transmission possible. Set everything as in task 1 (= the start of the previous task). Then turn on environmental shedding by symptomatic individuals by setting pI=2 and set decay of pathogen in environment to c=1. Set transmission bI=0. Run the simulation. Nothing should happen. The single infected person sheds a bit into the environment, but since we haven’t turned on transmission from the environment yet, nothing else happens. If you zoom into the plot (with plotly) to the beginning, you see I drop to 0 and E come up a little bit and then drop as well. Now set bE=0.002. You will see an outbreak, now driven entirely through environmental transmission (compared to a mix of direct and environmental transmission in our previous task).</p>
+<p>Let’s repeat the previous task, with only environmental transmission possible. Start by setting transmission bI=0 and bE=0, leave everything else unchanged. Run the simulation. Nothing should happen. The single infected person sheds a bit into the environment, but since we haven’t turned on transmission from the environment yet, nothing else happens. If you zoom into the plot (with plotly) to the beginning, you see I drop to 0 and E come up a little bit and then drop as well. Now set bE=0.002. You will see an outbreak, now driven entirely through environmental transmission (compared to a mix of direct and environmental transmission in our previous task).</p>
 <p><strong>Record</strong></p>
 <ul>
 <li><p>Number susceptibles remaining at end of simulation.</p></li>
