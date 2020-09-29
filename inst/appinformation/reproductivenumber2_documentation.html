@@ -54,7 +54,7 @@
 <ul>
 <li><strong>S</strong> - uninfected and susceptible individuals</li>
 <li><strong>I</strong> - infected and infectious individuals (note that these terms are often used interchangeably, but technically we are talking about someone who is infected <strong>and</strong> is infectious, i.e. can infect others)</li>
-<li><strong>R</strong> - recovered/removed individuals. Those are individuals that do not further participate, either because they are now immune or because they died.</li>
+<li><strong>R</strong> - recovered/removed individuals.</li>
 </ul>
 <p>In addition to specifying the <em>compartments</em> of a model, we need to specify the dynamics determining the changes for each compartment. Broadly speaking, some processes increase the number of individuals in a given compartment/stage and other processes that lead to a reduction. Those processes are sometimes called inflows and outflows.</p>
 <p>For our system, we specify the following processes/flows:</p>
@@ -156,7 +156,7 @@ Flow diagram for this model.
 <h2>Further Information</h2>
 <ul>
 <li>This app (and all others) are structured such that the Shiny part (the graphical interface you see and the server-side function that goes with it) calls an underlying R script (or several) which runs the simulation for the model of interest and returns the results.</li>
-<li>For this app, the underlying function(s) running the simulation are called <code>simulate_reproductivenumber2_ode</code>. You can call them directly, without going through the shiny app. Use the <code>help()</code> command for more information on how to use the functions directly. If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself.</li>
+<li>For this app, the underlying function(s) running the simulation are called <code>simulate_SIRSd_model_ode</code>. You can call them directly, without going through the shiny app. Use the <code>help()</code> command for more information on how to use the functions directly. If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself.</li>
 <li>You can also download all simulator functions and modify them for your own purposes. Of course to modify these functions, you’ll need to do some coding.</li>
 <li>For examples on using the simulators directly and how to modify them, read the package vignette by typing <code>vignette(&#39;DSAIDE&#39;)</code> into the R console.</li>
 <li>For the equations mentioned in the tasks, see e.g. <span class="citation">(Heffernan, Smith, and Wahl 2005; Keeling and Rohani 2008; Vynnycky and White 2010)</span>.</li>

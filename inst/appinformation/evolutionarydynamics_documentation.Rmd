@@ -41,6 +41,12 @@ appsettings = get_settings(currentrmdfile,appdocdir,packagename)
 ## Overview {#shinytab1}
 For this module, we will explore a stochastic SIR-type model with 2 different pathogen strains, wild-type and a drug resistant mutant in the presence of drug treatment. Read about the model in the "Model" tab. Then do the tasks described in the "What to do" tab.
 
+### Learning Objectives
+
+
+* Understand the central mechanisms and drivers of infectious disease evolution
+* Be able to assess how different control strategies can affect infectious disease evolution
+
 
 ## The Model {#shinytab2}
 
@@ -74,9 +80,15 @@ The flow diagram for the model implemented in this app is:
 knitr::include_graphics(here::here('inst/media',appsettings$modelfigname))
 ```
 
+The deterministic/ODE equations for this model are:
 
+$$\dot S = - S (b_u I_u + b_t I_t + b_r I_r)$$ 
+$$\dot I_u = S (1-f) (b_u (1-c_u) I_u + b_t (1-c_t) I_t)  - g_u I_u$$
+$$\dot I_t = S f (b_u (1-c_u) I_u + b_t (1-c_t) I_t) - g_t I_t$$
+$$\dot I_r = S (b_u c_u I_u + b_t c_t I_t + b_r I_r) - g_r I_r$$
+$$\dot R = g_u I_u + g_t I_t + g_r I_r$$
 
-Note that this model is _not_ an ordinary differential equation model. It is instead its stochastic equivalent.
+However, for this app we do __not__ implement a deterministic/ODE model. Instead, we implement its stochastic equivalent.
 We can specify the model by writing down every possible transition/event/reaction that can occur and their propensities (the propensity multiplied with the
 time step gives the probability that a given event/transition occurs). For our model these are the following:
 

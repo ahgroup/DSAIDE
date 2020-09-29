@@ -50,19 +50,23 @@ This app lets you explore a _stochastic_ SIR model. Read about the model in the 
 
 ### Model Overview
 
-This model tracks susceptibles, infected/infectious and recovered hosts. 
-The following compartments are included:  
+For this app, we'll use a basic compartmental SIR model that also includes births, deaths and waning immunity. 
+This is the same model we used for the _Reproductive Number 2_ app.
+
+We allow for 3 different stages/compartments: 
 
 * **S** - uninfected and susceptible individuals 
-* **I** - individuals who are infected and infectious.
-* **R** - recovered/removed individuals. Those individuals have recovered and are immune. 
+* **I** - infected and infectious individuals (note that these terms are often used interchangeably, but technically we are talking about someone who is infected **and** is infectious, i.e. can infect others)
+* **R** - recovered/removed individuals that are immune. 
 
+In addition to specifying the *compartments* of a model, we need to specify the dynamics determining the changes for each compartment. Broadly speaking, some processes increase the number of individuals in a given compartment/stage and other processes that lead to a reduction. Those processes are sometimes called inflows and outflows. 
 
-The included processes/mechanisms are the following:
+For our system, we specify the following processes/flows: 
 
-* Susceptible individuals (S) can become infected at rate _b_. 
-* Infected hosts recover at rate _g_. 
-* New susceptible hosts enter the system (are born) at rate _n_. Natural death occurs at rate _m_.
+* Susceptible individuals (S) can become infected by infectious individuals (I) at some rate, _b_. This leads to the susceptible individual leaving the S compartment and entering the I compartment.   
+* Infected individuals recover and enter the recovered (R) compartment at some rate, _g_.
+* Recovered individuals can lose immunity at rate _w_ and return to the susceptible compartment. 
+* Natural births (into the S compartment at rate _n_) and deaths (from all compartments at rate _m_) are possible.
 
 
 
@@ -70,32 +74,32 @@ The included processes/mechanisms are the following:
 The flow diagram for the model implemented in this app is:
 
 
-
-```{r modeldiagram,  fig.cap='',  echo=FALSE}
+```{r modeldiagram,  fig.cap='',  echo=FALSE, out.width = "70%"}
 knitr::include_graphics( system.file(figuredir,appsettings$modelfigname,package=packagename))
 ```
 
 
+In this app, you can run the model both as an deterministic, ordinary differential equation implementation (the kinds of simulations you have mostly seen so far), as well as a stochastic version of that model.
+
 The deterministic model implemented as set of differential equations is given by the following equations:
 
-$$\dot S = n - bSI - mS$$
-$$\dot I = bSI - gI - mI$$
-$$\dot R = gI - mR$$
+$$\dot S = n - b S I - mS + wR$$ 
+$$\dot I = b S I - g I - mI$$
+$$\dot R = g I - mR - wR$$
 
-This is almost the same model as the basic SIR model from the introductory app, with the only difference that this model also allows natural births and deaths. In this app, you can run the basic SIR model together with the stochastic one.
+The main focus for this app is a stochastic implementation of the variables and processes described above. This model is _not_ an ordinary differential equation model. It is instead its stochastic equivalent.
 
-The main model we are focused on here is a stochastic implementation of the variables and processes described above. This model is _not_ an ordinary differential equation model. It is instead its stochastic equivalent.
-We can specify the model by writing down every possible transition/event/reaction that can occur and their propensities (the propensity multiplied with the
-time step gives the probability that a given event/transition occurs). For our model these are the following:
+We can specify the model by writing down every possible transition/event/reaction that can occur and their propensities (the propensity multiplied with the time step gives the probability that a given event/transition occurs). For our model these are the following:
 
 Event type              |  Transitions        |   Propensity      |
 ----------              |  -----------        |   ----------      |
-Infection               |  S => S-1, I => I+1 |   bSI   |
-Recovery                |  I => I-1, R => R+1 |   gI           |
+Infection               |  S => S-1, I => I+1 |   b*S*I   |
+Recovery                |  I => I-1, R => R+1 |   g*I           |
 Births                  |  S => S+1           |   n          |
-Death of susceptible    |  S => S-1           |   mS          | 
-Death of infected       |  I => I-1           |   mI          |
-Death of recovered      |  R => R-1           |   mR          |
+Death of susceptible    |  S => S-1           |   m*S          | 
+Death of infected       |  I => I-1           |   m*I          |
+Death of recovered      |  R => R-1           |   m*R          |
+Waning immunity         |  R => R-1, S => S+1 |   w*R          |
 
 
 
@@ -111,125 +115,87 @@ _Some of the simulations might take a few seconds to run. Be patient._
 
 
 ```{r, echo=FALSE, eval=TRUE}
-# save all tasks, outcomes, etc. into an R data frame, then print later.
-# this data frame is used to automate shiny solutions and quiz generation
-
-# Explanation for each of the columns in the R data frame 
-
-# quizID: MUST BE THE FIRST COLUMN. Used by the grading app. naming structure "dsaide_shorttitle" where shorttitle is from appsettings$shorttitle
-# AppTitle: Title used for the app in the dsaide app, from appsettings$apptitle
-# AppID: App number in the dsaide menu, from appsettings$appid
-# TaskID: Identifies which task the text belongs to 
-# TaskText: The text that explains what to do for the task
-# RecordID: Identifies if it is the first, second, third,... item to record within the task
-# Record: Text explaining what value from the model that nee too be recorded
-# Note: Used by students taking quiz. Makes it clear what type of value to enter in "Answers"
-# Answers: In master it contains the rigth answer. For students it is where they record the recorded value
-# Fuzzy: The numeric value of a margin (within +/- of "right" answer) for questions where the quiz checker should not be too strict 
-# Review: Admin use if value is 1 the way the questions is asked may need to be reconsidered. 
-
-ntasks = 5 #number of tasks
-nrecord = 6 #number of outcomes to record
-#set up task tables
-#returned as list for generality, take apart
-tablist <- make_tasktable(ntasks,nrecord,appsettings)
-alltasks = tablist[[1]]
-allrecord = tablist[[2]]
-
 #this is the running counter for the records which starts at 1 
 rc=1
 
+#empty object, will hold all outcomes
+alloutcomes = NULL
+
+
+##########################
 # Task 1
+##########################
 tid = 1
-alltasks[tid,"TaskText"] = "A) Start with 1000 susceptibles, 1 infected, simulation time of 100 days. Transmission rate of 0.0005, duration of infectious period 5 days, no births and deaths, random seed of 100. Run the deterministic simulation multiple times. You should always see the same result.
-B) Now run a single stochastic simulation multiple times. What do you expect? What do you see? Change the random seed to 101, then 102. Test how this changes the simulation."
+tasktext = "Start with 1000 susceptibles, 1 infected, no recovered. Transmission/infection rate of 0.0005, duration of infectious period 5 days, no births and deaths, no waning immunity. Start time 0, time step 0.1, simulation time of 100 days. Set number of simulations and random seed to anything you like. Run the deterministic/ODE model. Hit the _Run_ button multiple times with changed random number seeds. You can also change the number of simulations. Since the ODE model doesn't include any randomness and each time it leads to the same outcome, the random number seed and simulation number inputs are actually ignored (you can check that by looking at the function call for the ODE model for this app, see the _Further Information_ section). 
 
-# Record for task 1
+Now switch to the stochastic model, single simulation, random number seed at 100. Hit the _Run_ button multiple times. What do you expect? What do you see? If you are surprised, re-read _A note on randomness_ in the _Model_ section.
+
+Next, set the number of simulations to 2 and run. You will see the one you already saw, and a second run that does not cause an outbreak (note that susceptible stay at their starting value). What happens is that if you choose to run multiple stochastic simulations, the software increases the random number seed by 1 each time, otherwise you would only get the same result multiple times, which is useless. To confirm this, set the random seed to 101. You'll see that this does lead to no outbreak.
+
+
+"
 nrec = 2 # number of items to record
-reclist = list()
-reclist$rectext = c("Total number of recovered at end of outbreak with random seed = 101",
+out_records = c("Total number of recovered at end of outbreak with random seed = 101",
                     "Total number of recovered at end of outbreak with random seed = 102")
-reclist$rectype = c("Numeric", 
-                    "Numeric")
-reclist$recnote = c("Report the rounded integer",
-                    "Report the rounded integer")
-reclist$recfuzzy = c(0,0)
-
-allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
+out_types = rep("Rounded_Integer",nrec)
+out_notes = rep("Report the rounded integer",nrec)
+outcomes = data.frame( TaskID = rep(tid,nrec),
+                       TaskText = rep(tasktext,nrec),
+                      RecordID = paste0('T',tid,'R',(1:nrec)),
+                      Record = out_records, 
+                      Type = out_types, 
+                      Note = out_notes)
+alloutcomes = rbind(alloutcomes,outcomes)
 rc = rc + nrec #increment record counter by number of outcomes to record for this task 
 
 
+##########################
 # Task 2
-tid = 2
-alltasks[tid,"TaskText"] = "A) Keep everything as in task 1, with random number seed at 100. Run both simulations and set the number of stochastic simulations to 5. You'll get a plot showing the deterministic model dynamics and 5 runs for the stochastic model (each of the stochastic runs gets consecutive random number seeds, i.e. the first one is 100, the 2nd is 101,...). Try to understand and explain why you see some stochastic simulations lead to an outbreak, while some do not."
+##########################
+tid = tid + 1
+tasktext = "A) Keep everything as in task 1, with random number seed at 100. Run both simulations and set the number of stochastic simulations to 5. You'll get a plot showing the deterministic model dynamics and 5 runs for the stochastic model (each of the stochastic runs gets consecutive random number seeds, i.e. the first one is 100, the 2nd is 101,...). Try to understand and explain why you see some stochastic simulations lead to an outbreak, while some do not."
 
-# Record for task 2
-nrec = 1 # number of items to record
-reclist = list()
-reclist$rectext = c("How many simulations produced an outbreak?")
-reclist$rectype = c("Numeric")
-reclist$recnote = c("Report integer")
-reclist$recfuzzy = c(0)
-allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
-rc = rc + nrec
+#reclist$rectext = c("How many simulations produced an outbreak?")
 
+#alltasks[tid,"TaskText"] = "A) Try to understand and explain what the fact that you outbreaks in some of the stochastic simulations but not in others (for exactly the same model parameter values) says about the role of _R~0~_ in stochastic models and how that differs in deterministic models."
 
-### Task 3 
-tid = 3
-alltasks[tid,"TaskText"] = "A) Try to understand and explain what the fact that you outbreaks in some of the stochastic simulations but not in others (for exactly the same model parameter values) says about the role of _R~0~_ in stochastic models and how that differs in deterministic models."
+#reclist$rectext = c("Nothing")
 
-# Record for task 3
-nrec = 1 # number of items to record
-reclist = list()
-reclist$rectext = c("Nothing")
-reclist$rectype = "None"
-reclist$recnote = c("")
-reclist$recfuzzy = c(0)
-allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
-rc = rc + nrec
+#alltasks[tid,"TaskText"] = "A) You can mathematically derive an equation linking the probability that an outbreak occurs, _p_, to the reproductive number (see e.g. [@keeling08]). We won't try to do the math here but instead see if we can use the simulation to figure it out. Start with the settings in task 1. Run the stochastic model for b = 0.0002, 0.0003, 0.0004, 0.0005, 0.0006, 0.001, 0.002. For each value, compute R~0~, run the model 100 times, with max time 300 and record the number of times you get an outbreak. Plot the relationship (either by hand or using the computer) between the probability of getting an outbreak and _R~0~_."
+
+#reclist$rectext = c("Is there a postive or negative relationship between R~0~ and the probability of getting an outbreak?")
+#reclist$recnote = c("Report 'positive' or 'negative'")
+#reclist$rectype = c("Character")
 
 
-### Task 4
-tid = 4
-alltasks[tid,"TaskText"] = "A) You can mathematically derive an equation linking the probability that an outbreak occurs, _p_, to the reproductive number (see e.g. [@keeling08]). We won't try to do the math here but instead see if we can use the simulation to figure it out. Start with the settings in task 1. Run the stochastic model for b = 0.0002, 0.0003, 0.0004, 0.0005, 0.0006, 0.001, 0.002. For each value, compute R~0~, run the model 100 times, with max time 300 and record the number of times you get an outbreak. Plot the relationship (either by hand or using the computer) between the probability of getting an outbreak and _R~0~_."
+#alltasks[tid,"TaskText"] = "A) There is a similar relation between outbreak probability an the initial number of infected individuals. Let's see if we can use the model to determine it. Follow the steps of the previous task. Keep _b_ fixed at 0.0003, vary the initial number of infected individuals, _I~0~_, from 1 to 10. Record the fraction of outbreaks you got for each _I~0~_. Plot the relationship (either by hand or using the computer) between the probability of getting an outbreak and _I~0~_."
 
-# Record for task 4
-nrec = 1 # number of items to record
-reclist = list()
-reclist$rectext = c("Is there a postive or negative relationship between R~0~ and the probability of getting an outbreak?")
-reclist$recnote = c("Report 'positive' or 'negative'")
-reclist$rectype = c("Character")
-reclist$recfuzzy = c(0)
-allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
-rc = rc + nrec
-
-
-### Task 5
-tid = 5
-alltasks[tid,"TaskText"] = "A) There is a similar relation between outbreak probability an the initial number of infected individuals. Let's see if we can use the model to determine it. Follow the steps of the previous task. Keep _b_ fixed at 0.0003, vary the initial number of infected individuals, _I~0~_, from 1 to 10. Record the fraction of outbreaks you got for each _I~0~_. Plot the relationship (either by hand or using the computer) between the probability of getting an outbreak and _I~0~_."
-
-# Record for task 5
-nrec = 1 # number of items to record
-reclist = list()
-reclist$rectext = c("Is there a positive or negative relationship between the initial number of infected and the probability of getting an outbreak?")
-reclist$recnote = c("Report 'positive' or 'negative'")
-reclist$rectype = c("Character")
-reclist$recfuzzy = c(0)
-allrecord <- fill_tasktable(allrecord,tid,rc,nrec,reclist) #the allrecord table is updated with the new entries
-rc = rc + nrec
-
+#reclist$rectext = c("Is there a positive or negative relationship between the initial number of infected and the probability of getting an outbreak?")
+#reclist$recnote = c("Report 'positive' or 'negative'")
 ```
 
 
+
+
+
 ```{r echo=FALSE}
+##################
+# All Tasks done, add app specific columns to data frame and save all to file 
+##################
 #save the fully filled task table to a tsv file
-save_tasktable(alltasks,allrecord,appsettings)
+alloutcomes$QuizID = paste0('dsaide_',appsettings$appid)
+alloutcomes$AppTitle = appsettings$apptitle
+alloutcomes$AppID = appsettings$appid
+alloutcomes$Answer = "" #add empty answer column, just for consistency. Should probably be removed here.
+write.table(alloutcomes, paste0(appsettings$appid,"_tasktable.tsv"), append = FALSE, sep = "\t", row.names = F, col.names = TRUE)
 ```
 
 
 ```{r, echo=FALSE, results='asis'}
-# Take all the text stored in the table and print the tasks and items to record
-write_tasktext(alltasks,allrecord)
+##################
+# write all the task text and outcome into the html during conversion
+##################
+write_tasktext_new(alloutcomes)
 ```
 
 

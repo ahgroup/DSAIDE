@@ -56,8 +56,7 @@ For this app, we'll use a basic compartmental SIR model that also includes birth
 
 * **S** - uninfected and susceptible individuals 
 * **I** - infected and infectious individuals (note that these terms are often used interchangeably, but technically we are talking about someone who is infected **and** is infectious, i.e. can infect others)
-* **R** - recovered/removed individuals. Those are individuals that do not further participate, either because they are now immune or because they died.
-
+* **R** - recovered/removed individuals. 
 
 In addition to specifying the *compartments* of a model, we need to specify the dynamics determining the changes for each compartment. Broadly speaking, some processes increase the number of individuals in a given compartment/stage and other processes that lead to a reduction. Those processes are sometimes called inflows and outflows. 
 

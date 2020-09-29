@@ -20,7 +20,7 @@ test_that("generate_plotly returns a plotly plot",
             expect_is(generate_plotly(result), "plotly" )
 
             modelsettings =  list(modeltype = "_ode_", plotscale = 'y', nplots = 1)
-            modelsettings$simfunction = 'simulate_reproductivenumber2_ode'
+            modelsettings$simfunction = 'simulate_Characteristics_of_ID_ode'
             result = run_model(modelsettings)
             expect_is(generate_plotly(result), "plotly" )
 
