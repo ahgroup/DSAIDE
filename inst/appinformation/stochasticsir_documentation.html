@@ -164,7 +164,7 @@
 </div>
 <div id="task-4" class="section level3">
 <h3>Task 4</h3>
-<p>One can mathematically derive an equation linking the probability that an outbreak occurs, <em>p</em>, to the reproductive number (see e.g. <span class="citation">(Keeling and Rohani 2008)</span>). We won’t try to do the math here but instead see if we can use the simulation to figure it out. Set parameters as in task 1. Then run the stochastic model for b = 0.0002, 0.0003, 0.0004, 0.0005, 0.0006, 0.001, 0.002. For each value, compute R<sub>0</sub> and write it down. Then run 100 stochastic simulations for each <em>b</em> value, with max time 300 and record the number of times you get an outbreak. Plot the relationship (either by hand or using the computer) between <em>R<sub>0</sub></em> and the probability of getting an outbreak.</p>
+<p>One can mathematically derive an equation linking the probability that an outbreak occurs, <em>p</em>, to the reproductive number (see e.g. <span class="citation">(Keeling and Rohani 2008)</span>). We won’t try to do the math here but instead see if we can use the simulation to figure it out. Set parameters as in task 1. Then run the stochastic model for b = 0.0002, 0.0003, 0.0004, 0.0005, 0.0006, 0.001, 0.002. For each value, compute R<sub>0</sub> and write it down. Then run 100 stochastic simulations for each <em>b</em> value, with max time 300 and record the number of times you get an outbreak. Plot the relationship (either by hand or using the computer) between <em>R<sub>0</sub></em> and the probability of getting an outbreak. Note that running 100 stochastic simulations can take a bit of time, so be patient. If your computer is too slow, you might try to only run 50 or less, though with fewer simulations the estimate of the proportion of outbreaks is not as accurate as with more simulations.</p>
 <p><strong>Record</strong></p>
 <ul>
 <li>The relation between R0 and the probability of an outbreak is close to a straight line.</li>
@@ -172,7 +172,7 @@
 </div>
 <div id="task-5" class="section level3">
 <h3>Task 5</h3>
-<p>There is a similar relation between outbreak probability an the initial number of infected individuals. Instead of doing math, let’s again use the model to determine it. Keep <em>b</em> fixed at 0.0003, but now vary the initial number of infected individuals, <em>I<sub>0</sub></em>, from 1 to 10. For each value of <em>I<sub>0</sub></em>, run 100 simulations, record the fraction of outbreaks you get for each <em>I<sub>0</sub></em>. Plot the relationship (either by hand or using the computer) between <em>I<sub>0</sub></em> and the probability of getting an outbreak.</p>
+<p>There is a similar relation between outbreak probability an the initial number of infected individuals. Instead of doing math, let’s again use the model to determine it. Keep <em>b</em> fixed at 0.0003, but now vary the initial number of infected individuals, <em>I<sub>0</sub></em>, from 1 to 10. Everything else as in the previous task. For each value of <em>I<sub>0</sub></em>, run 100 simulations, record the fraction of outbreaks you get for each <em>I<sub>0</sub></em>. Plot the relationship (either by hand or using the computer) between <em>I<sub>0</sub></em> and the probability of getting an outbreak.</p>
 <p><strong>Record</strong></p>
 <ul>
 <li>The relation between R0 and the probability of an outbreak is close to a straight line.</li>
@@ -180,7 +180,7 @@
 </div>
 <div id="task-6" class="section level3">
 <h3>Task 6</h3>
-<p>Keep exploring. So far we haven’t turned on births and deaths or waning immunity. If you do so, you can get steady states. Note that for the stochastic model, there is technically not a real steady state since the numbers bounce around. Also, eventually just by chance, the numbers for the stochastic model will hit 0 and then won’t recover from there. However, that could take a very long time, so in practice the stochastic model often does exhibit something like a steady state, sometimes called a quasi-steady state.</p>
+<p>Keep exploring. So far we haven’t turned on births and deaths or waning immunity. If you do so, you can get steady states. Note that for the stochastic model, there is technically not a real steady state since the numbers bounce around. Eventually, just by chance, the numbers for the stochastic model will hit 0 and then won’t recover from there. However, that could take a very long time (approaching infinity). So in practice the stochastic model often does exhibit something like a steady state, with fluctuations around that state.</p>
 <p><strong>Record</strong></p>
 <ul>
 <li>Nothing</li>
