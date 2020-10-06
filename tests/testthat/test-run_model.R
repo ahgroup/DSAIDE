@@ -59,6 +59,18 @@ test_that("run_model correctly runs different models",
             expect_is(generate_plotly(result), "plotly" )
             testthat::  expect_is(generate_text(result), "html" )
 
+            tfinal = 120
+            modelsettings =  list(S = 1000, Iu = 1, R = 0 , gIu = 2, rngseed = 123, tstart = 0, tfinal = tfinal, dt = 0.1, modeltype = "_stochastic_", plotscale = 'y', nplots = 1)
+            modelsettings$simfunction = 'simulate_Drug_Resistance_Evolution_stochastic'
+            result = run_model(modelsettings)
+            #check that simulation ran until max time
+            Imax = round(max(dplyr::filter(result[[1]]$dat, varnames == "Iu")$yvals))
+            expect_equal(Imax, 86)
+            expect_equal(max(result[[1]]$dat$xvals), tfinal)
+            expect_is(generate_ggplot(result), "ggplot" )
+            expect_is(generate_plotly(result), "plotly" )
+            testthat::  expect_is(generate_text(result), "html" )
+
 
             modelsettings =  list(tnew = 150, tmax = 100)
             modelsettings$modeltype =  "_ode_"

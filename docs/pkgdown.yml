@@ -1,9 +1,9 @@
 pandoc: 2.7.3
-pkgdown: 1.5.1
+pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
   DSAIDE: DSAIDE.html
-last_built: 2020-09-28T19:00Z
+last_built: 2020-10-05T23:10Z
 urls:
   reference: https://ahgroup.github.io/DSAIDE/index.html/reference
   article: https://ahgroup.github.io/DSAIDE/index.html/articles

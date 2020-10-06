@@ -73,7 +73,9 @@
 Flow diagram for this model.
 </p>
 </div>
-<p>Note that this model is <em>not</em> an ordinary differential equation model. It is instead its stochastic equivalent. We can specify the model by writing down every possible transition/event/reaction that can occur and their propensities (the propensity multiplied with the time step gives the probability that a given event/transition occurs). For our model these are the following:</p>
+<p>The deterministic/ODE equations for this model are:</p>
+<p><span class="math display">\[\dot S = n - S (b_E E + b_I I) - mS + wR\]</span> <span class="math display">\[\dot E = S (b_E E + b_I I)  - g_E E - m E\]</span> <span class="math display">\[\dot I = g_E E - g_I I - m I \]</span> <span class="math display">\[\dot R = g I - mR - wR\]</span></p>
+<p>However, for this app we do <strong>not</strong> implement a deterministic/ODE model. Instead, we implement its stochastic equivalent. We can specify the model by writing down every possible transition/event/reaction that can occur and their propensities (the propensity multiplied with the time step gives the probability that a given event/transition occurs). For our model these are the following:</p>
 <table>
 <thead>
 <tr class="header">

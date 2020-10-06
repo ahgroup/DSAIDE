@@ -64,10 +64,11 @@ The following compartments are included:
 
 The included processes/mechanisms are the following:
 
-* Susceptible individuals (S) can become infected by untreated or treated hosts infected with the wild-type strain at rates _b~u~_ and _b~t~_. 
-* A fraction _f_ of those hosts are assumed to receive treatment, while the remainder does not. 
+* Susceptible individuals, _S_ can become infected by untreated or treated hosts infected with the wild-type strain at rates _b~u~_ and _b~t~_. 
+* A fraction _f_ of those hosts infected with the wild-type strain are assumed to receive treatment (_I~t~_), while the remainder does not (_I~u~_). 
 * Small fractions, that is low values for _c~u~_ and _c~t~_  of wild-type infected untreated or treated hosts can generate resistant mutants and transmit those, leading to resistant infections.
-* Susceptible individuals (S) can become infected by hosts infected with the resistant strain at rate _b~r~_. 
+* Individuals infected with the resistant strain ,_I~r~_, might receive treatment, but we assume treatment has no effect in those individuals so don't track them explicitly.
+* Resistant infected individuals can infect susceptible individuals (S) with the resistant strain at rate _b~r~_. 
 * All infected hosts recover at some rate _g~i~_, with _i=u,t,r_. 
 * Recovered individuals are immune to reinfection. 
 
@@ -76,15 +77,15 @@ The included processes/mechanisms are the following:
 ### Model Implementation
 The flow diagram for the model implemented in this app is:
 
-```{r modeldiagram,  fig.cap='Flow diagram for this model. ',  echo=FALSE}
+```{r modeldiagram,  fig.cap='',  echo=FALSE, out.width = "70%"}
 knitr::include_graphics(here::here('inst/media',appsettings$modelfigname))
 ```
 
 The deterministic/ODE equations for this model are:
 
 $$\dot S = - S (b_u I_u + b_t I_t + b_r I_r)$$ 
-$$\dot I_u = S (1-f) (b_u (1-c_u) I_u + b_t (1-c_t) I_t)  - g_u I_u$$
-$$\dot I_t = S f (b_u (1-c_u) I_u + b_t (1-c_t) I_t) - g_t I_t$$
+$$\dot I_u = S (1-f) b_u (1-c_u) I_u + S (1-f)b_t (1-c_t) I_t  - g_u I_u$$
+$$\dot I_t = S f b_u (1-c_u) I_u + S f b_t (1-c_t) I_t - g_t I_t$$
 $$\dot I_r = S (b_u c_u I_u + b_t c_t I_t + b_r I_r) - g_r I_r$$
 $$\dot R = g_u I_u + g_t I_t + g_r I_r$$
 
