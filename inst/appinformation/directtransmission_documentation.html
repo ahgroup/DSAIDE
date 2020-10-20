@@ -83,13 +83,11 @@
 <p><strong>The tasks below are described in a way that assumes everything is in units of MONTHS (rate parameters, therefore, have units of inverse months). If any quantity is not given in those units, you need to convert it first (e.g. if it says a year, you need to convert it to 12 months).</strong></p>
 <div id="task-1" class="section level3">
 <h3>Task 1</h3>
-<ol style="list-style-type: upper-alpha">
-<li>Run the simulation with 999 susceptible individuals and 1 initially infected host. Set the simulation duration, to 10 years. Consider density-dependent transmission, with a transmission rate of <em>b<sub>d</sub></em> = 0.005, and an area of size 2. Assume that the duration of the infectious period is 15 days long (and that there are 30 days in a month). Turn off births, deaths and waning immunity for now. If you did it correctly, your outbreak should end with around 626 susceptible individuals still remaining. Take a look at the force of infection (FOI) equation for density-dependent transmission. The FOI value changes throughout the outbreak because it has <em>I</em> in the equation. But the other parts of the equation remain constant. Compute the FOI value for the settings here at the start of the outbreak (I=1).</li>
-</ol>
+<p>Run the simulation with 999 susceptible individuals and 1 initially infected host. Set the simulation duration to 10 years. Consider density-dependent transmission, with a transmission rate of <em>b<sub>d</sub></em> = 0.005, and an area of size 2. Assume that the duration of the infectious period is 15 days long (and that there are 30 days in a month). Turn off births, deaths and waning immunity for now. If you did it correctly, your outbreak should end with around 626 susceptible individuals still remaining. Take a look at the force of infection (FOI) equation for density-dependent transmission. The FOI value changes throughout the outbreak because it has <em>I</em> in the equation. But the other parts of the equation remain constant. Compute the FOI value for the settings here at the start of the outbreak (where I=1).</p>
 <p><strong>Record</strong></p>
 <ul>
 <li><p>Force of infection at start</p></li>
-<li><p>FRACTION of susceptible at end of simulation</p></li>
+<li><p>FRACTION of susceptible (Sfinal/Sinitial) at end of simulation</p></li>
 </ul>
 </div>
 <div id="task-2" class="section level3">
@@ -103,7 +101,7 @@
 </div>
 <div id="task-3" class="section level3">
 <h3>Task 3</h3>
-<p>Let’s assume we are now in a location with twice the number of people as before (<em>S<sub>0</sub></em> = 1999), living in the same area. All other quantities (rate of transmission, recovery time, etc.) are assumed to be the same. Take a look at the FOI equations for density-dependent transmission. Based on its value for this new scenario, how do you expect the outbreak to change if transmission is density-dependent? Note that you will need to consider how <em>I</em> is impacted by a changing population size and how it factors into the FOI during the outbreak to fully understand what’s going on. Run the simulation to check.</p>
+<p>Let’s assume we are now in a location with twice the number of people as before (<em>S<sub>0</sub></em> = 1999), living in the same area. All other quantities (rate of transmission, recovery time, etc.) are assumed to be the same. Take a look at the FOI equation for density-dependent transmission. Based on its value for this new scenario, how do you expect the outbreak to change if transmission is density-dependent? Note that you will need to consider not only the FOI at the start (with <em>I</em>=1), but also how <em>I</em>, and thus the FOI, change over the course of the outbreak, and how this is impacted by a change in population size. Run the simulation to check your expectations.</p>
 <p><strong>Record</strong></p>
 <ul>
 <li><p>Force of infection at start</p></li>

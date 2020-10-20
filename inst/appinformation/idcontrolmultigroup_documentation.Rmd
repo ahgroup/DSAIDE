@@ -38,7 +38,7 @@ appsettings = get_settings(currentrmdfile,appdocdir,packagename)
 
 
 ## Overview {#shinytab1}  
-This app lets you explore interventions applied to different population subgroups with potentially different infectiousness and mortality patterns. The app assumes you have worked through _The Basics_ and _Reproductive Number_ sections, as well as the first to apps in the _Control_ section. This app specifically builds on the _ID Control for multiple outbreaks_ app and follows a model and analysis described in [@Handel2020], see the _Further Information_ tab for this and other related references.
+This app lets you explore interventions applied to different population subgroups with potentially different infectiousness and mortality patterns. The app assumes you have worked through _The Basics_ and _Reproductive Number_ sections, as well as the first two apps in the _Control_ section. This app specifically builds on the _ID Control for multiple outbreaks_ app and follows a model and analysis described in [@Handel2020], see the _Further Information_ tab for this and other related references.
 
 
 ### Learning Objectives  
@@ -70,7 +70,7 @@ For this app, we specify the following processes/flows:
 ### Model Implementation
 The flow diagram and the set of equations which are used to implement this model are as follows:
 
-```{r modeldiagram,  fig.cap='Flow diagram for this model. ',  echo=FALSE}
+```{r modeldiagram,  fig.cap='Flow diagram for this model.',  echo=FALSE}
 knitr::include_graphics(here::here('inst/media',appsettings$modelfigname))
 ```
 
@@ -98,6 +98,15 @@ with control _f~i~_ being only non-zero between times $T^i_{start}$ and $T^i_{en
 
 
 Note that we'll be exploring multi-outbreak scenarios with this app, similar to the _ID control for multiple outbreaks_ app. Instead of setting infected to zero once they drop below 1, and introducing new infected at certain times, we simply do not set infected to zero, which means they might approach very low, but never fully zero values. Having fractions of infected individuals is of course not quite realistic, but it works for our purpose here and the overall patterns would be the same if we implemented it more realistically (e.g. a stochastic model with regular new introductions of infected).
+
+
+### Notation Comment
+
+It might be worth saying something about the transmission terms. I generally use a single subscript to describe transmission from a group, e.g. _b~A~_ for transmission/infectiousness of asymptomatic. If there are multiple groups that can be susceptible and infectious, a common notation is to start with the **receiving** group first, then the **sending/transmitting group**, e.g. if susceptible adults (A) are infected by children (C), most authors write _b~AC~_. I follow this convention. Note however that it is equally ok to use _b~AC~_ to mean that infected adults transmit to susceptible children. I actually like this _sender first_ perspective better, and used it originally, but switched to stick with the convention used in the main introductory textbooks on this topic. 
+
+**In general you need to read papers/model descriptions carefully, and hopefully the authors do a good job explaining exactly what is meant. Such that there is no confusion. Just read carefully every time and don't jump to conclusions based on what you have seen before or what you think it means.**
+
+
 
 
 ## What to do {#shinytab3}
@@ -193,7 +202,7 @@ rc = rc + nrec #increment record counter by number of outcomes to record for thi
 # Task 4
 ########################
 tid = tid + 1
-tasktext = "Now lets explore the idea that control that has a similar impact on number infected can have very different results on number deaths for a situation like the one we have here with different mortality in different groups. We'll first target our control to the elderly. Set f~1~=0, f~2~=0.0 and f~3~=1. Assume that control starts 50 days after outbreak start and lasts for 100 days. Keep all other values as previously. Run the simulation."
+tasktext = "Now lets explore the idea that control that has a similar impact on number infected can differ in its impact on the number who are dying. This can happen if mortality differs between groups. We'll first target the elderly with some control measures. Set f~1~=0, f~2~=0.0 and f~3~=1. Assume that control starts 50 days after outbreak start and lasts for 100 days. Keep all other values as previously. Run the simulation."
 nrec = 2 # number of items to record
 out_records = c("Total number susceptible (add all 3 groups) at end of simulation",
                 "Total number dead (add all 3 groups) at end of simulation")
@@ -213,7 +222,7 @@ rc = rc + nrec #increment record counter by number of outcomes to record for thi
 # Task 5
 ########################
 tid = tid + 1
-tasktext = " Now we'll implement control that targets adults. This can be achieved by setting f~1~=0, f~2~=0.52 and f~3~=0. The control strength is chosen to ensure the overall control impact is comparable. Keep all other values as previously. Run the simulation. A you compare these 3 control scenarios, you should find that the total number of susceptible left at the end of the outbreak is the same, however the number dead changes in a likely expected way: Control applied to groups with lower mortality leads to more deaths."
+tasktext = " Now we'll implement control that targets adults. This can be achieved by setting f~1~=0, f~2~=0.52 and f~3~=0. The control strength is chosen to ensure the overall control impact is comparable. Keep all other values as previously. Run the simulation. As you compare these 3 control scenarios, you should find that the total number of susceptible left at the end of the outbreak is the same, however the number dead changes in a likely expected way: Control applied to groups with higher mortality leads to an increased reduction in deaths."
 nrec = 2 # number of items to record
 out_records = c("Total number susceptible (add all 3 groups) at end of simulation",
                 "Total number dead (add all 3 groups) at end of simulation")

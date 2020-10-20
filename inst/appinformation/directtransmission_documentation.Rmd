@@ -109,12 +109,12 @@ alloutcomes = NULL
 
 # Task 1
 tid = 1
-tasktext = "A) Run the simulation with 999 susceptible individuals and 1 initially infected host. Set the simulation duration, to 10 years. Consider density-dependent transmission, with a transmission rate of _b~d~_ = 0.005, and an area of size 2. Assume that the duration of the infectious period is 15 days long (and that there are 30 days in a month). Turn off births, deaths and waning immunity for now. If you did it correctly, your outbreak should end with around 626 susceptible individuals still remaining. Take a look at the force of infection (FOI) equation for density-dependent transmission. The FOI value changes throughout the outbreak because it has _I_ in the equation. But the other parts of the equation remain constant. Compute the FOI value for the settings here at the start of the outbreak (I=1)."
+tasktext = "Run the simulation with 999 susceptible individuals and 1 initially infected host. Set the simulation duration to 10 years. Consider density-dependent transmission, with a transmission rate of _b~d~_ = 0.005, and an area of size 2. Assume that the duration of the infectious period is 15 days long (and that there are 30 days in a month). Turn off births, deaths and waning immunity for now. If you did it correctly, your outbreak should end with around 626 susceptible individuals still remaining. Take a look at the force of infection (FOI) equation for density-dependent transmission. The FOI value changes throughout the outbreak because it has _I_ in the equation. But the other parts of the equation remain constant. Compute the FOI value for the settings here at the start of the outbreak (where I=1)."
 
 # Record for task 1
 nrec = 2 # number of items to record
 out_records = c("Force of infection at start",
-                "FRACTION of susceptible at end of simulation")
+                "FRACTION of susceptible (Sfinal/Sinitial) at end of simulation")
 out_types = c("Numeric","Rounded_Numeric")
 out_notes = c("Report all digits","Round to 2 significant digits (0.XX)")
 outcomes = data.frame( TaskID = rep(tid,nrec),
@@ -149,7 +149,7 @@ rc = rc + nrec #increment record counter by number of outcomes to record for thi
 
 ### Task 3 
 tid = 3
-tasktext = "Let's assume we are now in a location with twice the number of people as before (_S~0~_ = 1999), living in the same area. All other quantities (rate of transmission, recovery time, etc.) are assumed to be the same. Take a look at the FOI equations for density-dependent transmission. Based on its value for this new scenario, how do you expect the outbreak to change if transmission is density-dependent? Note that you will need to consider how _I_ is impacted by a changing population size and how it factors into the FOI during the outbreak to fully understand what's going on. Run the simulation to check."
+tasktext = "Let's assume we are now in a location with twice the number of people as before (_S~0~_ = 1999), living in the same area. All other quantities (rate of transmission, recovery time, etc.) are assumed to be the same. Take a look at the FOI equation for density-dependent transmission. Based on its value for this new scenario, how do you expect the outbreak to change if transmission is density-dependent? Note that you will need to consider not only the FOI at the start (with _I_=1), but also how _I_, and thus the FOI, change over the course of the outbreak, and how this is impacted by a change in population size. Run the simulation to check your expectations."
 
 
 # Record for task 3

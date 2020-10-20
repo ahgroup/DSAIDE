@@ -3,7 +3,7 @@ pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
   DSAIDE: DSAIDE.html
-last_built: 2020-10-06T23:24Z
+last_built: 2020-10-20T18:26Z
 urls:
   reference: https://ahgroup.github.io/DSAIDE/index.html/reference
   article: https://ahgroup.github.io/DSAIDE/index.html/articles

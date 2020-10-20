@@ -68,7 +68,7 @@ For our system, we specify the following processes/flows:
 ### Model Implementation
 The flow diagram and the set of equations which are used are the basic SIR model and are shown again:
 
-```{r modeldiagram,  fig.cap='',  echo=FALSE, out.width = "70%"}
+```{r modeldiagram,  fig.cap='Model Diagram',  echo=FALSE, out.width = "70%"}
 knitr::include_graphics(here::here('inst/media',appsettings$modelfigname))
 ```
 

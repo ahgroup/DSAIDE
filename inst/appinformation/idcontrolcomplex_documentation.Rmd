@@ -57,7 +57,7 @@ The following compartments are included:
 * **P** - individuals who are infected and do not yet show symptoms. Those individuals can potentially be infectious
 * **A** - individuals who are infected and do not show symptoms. Those individuals can potentially be infectious
 * **I** - individuals who are infected and show symptoms. Those individuals are likely infectious, but the model allows to adjust this, including no infectiousness.
-* **R** - recovered/removed individuals. Those individuals have recovered and are immune. They can loose their immunity in this model.
+* **R** - recovered/removed individuals. Those individuals have recovered and are immune. They can lose their immunity in this model.
 * **D** - individuals who have died due to the disease.
 * **E** - pathogen in the environment
 * **S~V~** - susceptible vectors
@@ -81,11 +81,24 @@ Note that we only track people that die due to the disease in our _D_ compartmen
 Also, note that we made several simplifications to keep the model from getting too complex. For instance, presymptomatic individuals do not shed into the environment, and only symptomatic hosts are assumed to be able to infect vectors. Further details relaxing these assumptions could, of course, be included, at the expense of a larger and more complex model.
 
 
+### Model Comments
+
+In the _Environmental Transmission_ app, I used _P_ for pathogen in the environment, but here I'm using _E_ since _P_ is used for pre-symptomatic. One could as well switch things around and use _E_ for exposed (instead of my _P_) and then _P_ for pathogen in environment. I decided to leave it as is. It's good to get used to different notation. 
+
+I also decided for simplicity to not give the human compartments (or the environmental pathogen) any subscripts, so no subscript means human, if a compartment has a subscript it refers to vectors (i.e. _S~v~_ and _I~v~_).
+
+Another point worth mentioning are the transmission terms. I generally use a single subscript to describe transmission from a group, e.g. _b~A~_ for transmission/infectiousness of asymptomatic. If there are multiple groups that can be susceptible and infectious, a common notation is to start with the **receiving** group first, then the **sending/transmitting group**, e.g. if susceptible adults (A) are infected by children (C), most authors write _b~AC~_. I follow this convention. Note however that it is equally ok to use _b~AC~_ to mean that infected adults transmit to susceptible children. I actually like this _sender first_ perspective better, and used it originally, but switched to stick with the convention used in the main introductory textbooks on this topic. 
+
+**In general you need to read papers/model descriptions carefully, and hopefully the authors do a good job explaining exactly what is meant. Such that there is no confusion. Just read carefully every time and don't jump to conclusions based on what you have seen before or what you think it means.**
+
+
+
+
 ### Model Implementation
-The flow diagram and equations describe the model implemented in this app (Note: births and natural deaths are not drawn to keep the diagram from getting too cluttered):
+The flow diagram and equations describe the model implemented in this app. Note that births and natural deaths are not drawn to keep the diagram from getting too cluttered.
 
 
-```{r modeldiagram,  fig.cap='Flow diagram for this model. ',  echo=FALSE, out.width = "70%"}
+```{r modeldiagram,  fig.cap='Flow diagram for this model.',  echo=FALSE, out.width = "70%"}
 knitr::include_graphics(here::here('inst/media',appsettings$modelfigname))
 ```
 
@@ -143,7 +156,7 @@ rc = rc + nrec #increment record counter by number of outcomes to record for thi
 # Task 2
 ########################
 tid = tid + 1
-tasktext = "Let's now assume that 50% of infected hosts will be asymptomatic (_f_) and that the duration of the asymptomatic stage (_gA_) is the same as the symptomatic stage (_gI_). Also, assume that asymptomatic infected are half as infectious as symptomatic infected, and that pre-symptomatic are as infectious as symptomatic. Run the simulation, you should get an outbreak with around 107 susceptibles left. Now, we will envision a scenario where we can only detect and quarantine individuals that show symptoms. Assume that quarantining reduces infectiousness by half. Implement such a scenario, run the simulation. 
+tasktext = "Let's now assume that 50% of infected hosts will be asymptomatic (_f_) and that the duration of the asymptomatic stage (_gA_) is the same as the symptomatic stage (_gI_). Also, assume that asymptomatic infected are half as infectious as symptomatic infected, and that pre-symptomatic are as infectious as symptomatic. Run the simulation, you should get an outbreak with around 107 susceptibles left. Now, we will envision a scenario where we can only detect and quarantine individuals that show symptoms. Assume that isolating reduces infectiousness by half. Implement such a scenario, run the simulation. 
 
 If you are up for a small, optional, challenge, compute R~0~ for this scenario. It will be the sum of transmission coming from all 3 infected compartments (P, A, I). You will also need to make sure you multiply _A_ and _I_ by their respective fractions (_f_ and _1-f_) otherwise you would be double-counting. Other than that it follows the standard procedure you learned about and you can compare what you get from doing the math with the final size equation. You can then use your R~0~ equation for the next following tasks."
 nrec = 1 # number of items to record
@@ -163,7 +176,7 @@ rc = rc + nrec #increment record counter by number of outcomes to record for thi
 # Task 3
 ########################
 tid = tid + 1
-tasktext = "Set parameter values back to what they were at the start of the previous task. Now, we envision a scenario where we can quarantine everyone who has become infected, independent of symptom status. We assume quarantining reduces transmission by half for anyone quarantined. Implement such a scenario, again run the simulation and record the number of susceptibles left at the end."
+tasktext = "Set parameter values back to what they were at the start of the previous task. Now, we envision a scenario where we can isolate everyone who has become infected, independent of symptom status. We assume this reduces transmission by half for anyone isolated. Implement such a scenario, again run the simulation and record the number of susceptibles left at the end."
 nrec = 1 # number of items to record
 out_records = c("Number susceptibles remaining at end of simulation.")
 out_types = c("Rounded_Integer")
@@ -182,7 +195,7 @@ rc = rc + nrec #increment record counter by number of outcomes to record for thi
 # Task 4
 ########################
 tid = tid + 1
-tasktext = "Set parameter values back to what they were at the start of the previous task before you started changing them. Now assume that we can administer a drug. It will likely only be given to symptomatic individuals. First assume that the drug reduces the infectiousness of symptomatic individuals by half. Run the simulation. Convince yourself that this has the same effect as assuming quarantine of symptomatic individuals above. Now assume that the drug also reduces the duration of the symptomatic period from a month to half a month. What do you expect this shortening of the symptomatic period will do? Run the simulation to check."
+tasktext = "Set parameter values back to what they were at the start of the previous task before you started changing them. Now assume that we can administer a drug. It will likely only be given to symptomatic individuals. First assume that the drug reduces the infectiousness of symptomatic individuals by half. Run the simulation. Convince yourself that this has the same effect as assuming isolation of of symptomatic individuals above. Now assume that the drug also reduces the duration of the symptomatic period from a month to half a month. What do you expect this shortening of the symptomatic period will do? Run the simulation to check."
 nrec = 1 # number of items to record
 out_records = c("Number susceptibles remaining at end of simulation.")
 out_types = c("Rounded_Integer")

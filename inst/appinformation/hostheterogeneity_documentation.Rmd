@@ -79,7 +79,7 @@ The included processes/mechanisms are the following:
 ### Model Implementation
 The flow diagram and equations describe the model implemented in this app:
 
-```{r modeldiagram,  fig.cap='',  echo=FALSE, out.width = "70%"}
+```{r modeldiagram,  fig.cap='Model diagram.',  echo=FALSE, out.width = "70%"}
 knitr::include_graphics(here::here('inst/media',appsettings$modelfigname))
 ```
 
@@ -90,6 +90,14 @@ $$\dot R_1 = g_1 I_1 - w_1 R_1 $$
 $$\dot S_2 = - S_2 (b_{21} I_1 + b_{22} I_2) + w_2 R_2 $$ 
 $$\dot I_2 =  S_2 (b_{21} I_1 + b_{22} I_2) - g_2 I_2  $$ 
 $$\dot R_2 = g_2 I_2 - w_2 R_2 $$
+
+
+
+### Notation Comment
+
+It might be worth saying something about the transmission terms. I generally use a single subscript to describe transmission from a group, e.g. _b~A~_ for transmission/infectiousness of asymptomatic. If there are multiple groups that can be susceptible and infectious, a common notation is to start with the **receiving** group first, then the **sending/transmitting group**, e.g. if susceptible individuals of type 1 are infected by individuals of type 2, most authors write _b~12~_. I follow this convention. Note however that it is equally ok to use _b~12~_ to mean that infected type 1 individuals transmit to susceptible type 2 individuals. I actually like this _sender first_ perspective/notation better, and used it originally, but switched to stick with the convention used in the main introductory textbooks on this topic. 
+
+**In general you need to read papers/model descriptions carefully, and hopefully the authors do a good job explaining exactly what is meant. Such that there is no confusion. Just read carefully every time and don't jump to conclusions based on what you have seen before or what you think it means.**
 
 
 
