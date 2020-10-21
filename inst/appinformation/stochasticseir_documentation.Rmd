@@ -73,7 +73,7 @@ The included processes/mechanisms are the following:
 ### Model Implementation
 The flow diagram for the model implemented in this app is:
 
-```{r modeldiagram,  fig.cap='',  echo=FALSE, out.width = "70%"}
+```{r modeldiagram,  fig.cap='Model diagram',  echo=FALSE, out.width = "70%"}
 knitr::include_graphics(here::here('inst/media',appsettings$modelfigname))
 ```
 
@@ -238,7 +238,7 @@ rc = rc + nrec #increment record counter by number of outcomes to record for thi
 # Task 7
 #########################
 tid = tid + 1
-tasktext = "Finally, let's explore extinctions. We'll start with 100 individuals in each compartment, b~E~=0 and b~I~=0.01, g~E~=4, g~I~=2, w=1. No births and deaths, start simulation at 0, run for 60 months, time step arbitrary. Run 10 simulations with seed of 123. You should see some initial ups and downs, and then for each simulation, you'll see fluctuations around some type of steady state, with an average number of infected at the end of 57. For those settings, in the absence of transmission from the _E_ class, the basic reproductive number (if everyone were susceptible) is R~0~ = S~0~b~I~/g~I~ = 0.01*400/2 = 2. Now, reduce transmission to bI=0.006. Compute R~0~ for this value. You will find that for some of these simulations, the pathogen goes extinct (and susceptible go up to the maximum value of 400). Double simulation time to 10 years. You will find that for most simulations, extinction occured."
+tasktext = "Finally, let's explore extinctions. We'll start with 100 individuals in each compartment, b~E~=0 and b~I~=0.01, g~E~=4, g~I~=2, w=1. No births and deaths, start simulation at 0, run for 60 months, time step arbitrary. Run 10 simulations with seed of 123. You should see some initial ups and downs, and then for each simulation, you'll see fluctuations around some type of steady state, with an average number of infected at the end of 57. For those settings, in the absence of transmission from the _E_ class, the basic reproductive number (if everyone were susceptible) is R~0~ = S~0~b~I~/g~I~ = 0.01*400/2 = 2. Now, reduce transmission to bI=0.006. Compute R~0~ for this value. Run simulations for 60 months. You will find that for some of these simulations, the pathogen goes extinct (and susceptible go up to the maximum value of 400). Now double simulation time to 10 years. You will find that for most simulations, extinction occured."
 nrec = 2 # number of items to record
 out_records = c("Number of simulations that DO NOT lead to extinction after 10 years of simulation (with bI=0.006)",
                 "Reproductive number for bI=0.006")

@@ -58,7 +58,7 @@ The following compartments are included:
 * __S__ - uninfected and susceptible individuals 
 * __I~u~__ - individuals who are infected with the wild-type/drug sensitive strain and not on treatment.
 * __I~t~__ - individuals who are infected with the wild-type/drug sensitive strain and on treatment.
-* __I~r~__ - individuals who are infected with the drug-resistant strain. Treatment has no impact on those hosts.
+* __I~r~__ - individuals who are infected with the drug-resistant strain. Treatment has no impact on those hosts, so is not modeled.
 * __R__ - recovered/removed individuals. Those individuals have recovered and are immune. 
 
 
@@ -210,7 +210,7 @@ tasktext = "In the previous task, you should have found that as you increase tre
 nrec = 1 # number of items to record
 out_records = c("The treatment level f for which you get the lowest number of total infections")
 out_types = rep("Numeric",nrec)
-out_notes = rep("Report to two decimal places",nrec)
+out_notes = rep("",nrec)
 outcomes = data.frame( TaskID = rep(tid,nrec),
                        TaskText = rep(tasktext,nrec),
                       RecordID = paste0('T',tid,'R',(1:nrec)),
