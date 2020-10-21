@@ -57,7 +57,7 @@ The following compartments are included:
 * **S** - uninfected and susceptible individuals 
 * **E** - individuals who are infected and do not yet show symptoms. Those individuals can be infectious.
 * **I** - individuals who are infected and show symptoms. Those individuals are likely infectious, but the model allows to adjust this, including no infectiousness.
-* **R** - recovered/removed individuals. Those individuals have recovered and are immune. They can lose their immunity.
+* **R** - recovered/removed individuals. Those individuals have recovered and are immune.
 
 
 The included processes/mechanisms are the following:
@@ -82,7 +82,7 @@ The deterministic/ODE equations for this model are:
 $$\dot S = n - S (b_E E + b_I I) - mS + wR$$ 
 $$\dot E = S (b_E E + b_I I)  - g_E E - m E$$
 $$\dot I = g_E E - g_I I - m I $$
-$$\dot R = g I - mR - wR$$
+$$\dot R = g_I I - mR - wR$$
 
 However, for this app we do __not__ implement a deterministic/ODE model. Instead, we implement its stochastic equivalent.
 We can specify the model by writing down every possible transition/event/reaction that can occur and their propensities (the propensity multiplied with the
@@ -159,7 +159,7 @@ rc = rc + nrec #increment record counter by number of outcomes to record for thi
 # Task 3
 #########################
 tid = tid + 1
-tasktext = "Let's go back to the settings at the beginning of the previous task, namely w=0.2, 10 simulations, random seed 123. You can see that the reported final value for the susceptibles does not agree with what you see for those simulations which have a steady-state like scenario with non-zero infected. That's because the average includes also those scenarios where no outbreak happened. Essentially, the average is computed here by doing 6/10*1000 (simulations without an outbreak) + 4/10*Sfinal_outbreak (simulations with outbreak), where Sfinal_outbreak is the average value of susceptibles at the end of the simulation for those scenarios where you get an outbreak. Approximately read off a value for Sfinal_outbreak and convince yourself that adding the non-outbreak and outbreak scenarios together gives you the reported mean."
+tasktext = "Let's go back to the settings at the beginning of the previous task, namely w=0.2, 10 simulations, random seed 123. You can see that the reported final value for the susceptibles does not agree with what you see for those simulations which have a steady-state like scenario with non-zero infected. That's because the average includes also those scenarios where no outbreak happened. Essentially, the average is computed here by doing 6/10\\*1000 (simulations without an outbreak) + 4/10\\*Sfinal_outbreak (simulations with outbreak), where Sfinal_outbreak is the average value of susceptibles at the end of the simulation for those scenarios where you get an outbreak. Approximately read off a value for Sfinal_outbreak and convince yourself that adding the non-outbreak and outbreak scenarios together gives you the reported mean."
 nrec = 1 # number of items to record
 out_records = c("Average number (across all simulations) of susceptible at end of simulation, as reported by DSAIDE")
 out_types = rep("Rounded_Integer",nrec)

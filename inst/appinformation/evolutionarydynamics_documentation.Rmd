@@ -66,8 +66,8 @@ The included processes/mechanisms are the following:
 
 * Susceptible individuals, _S_ can become infected by untreated or treated hosts infected with the wild-type strain at rates _b~u~_ and _b~t~_. 
 * A fraction _f_ of those hosts infected with the wild-type strain are assumed to receive treatment (_I~t~_), while the remainder does not (_I~u~_). 
-* Small fractions, that is low values for _c~u~_ and _c~t~_  of wild-type infected untreated or treated hosts can generate resistant mutants and transmit those, leading to resistant infections.
-* Individuals infected with the resistant strain ,_I~r~_, might receive treatment, but we assume treatment has no effect in those individuals so don't track them explicitly.
+* Each time a wild-type infected host transmits to a susceptible host, there is a probability of a resistant mutant being transmitted; consequently, this generates a resistant infection. These probabilities are represented by _c~u~_ and _c~t~_ for wild-type untreated and treated hosts, respectively.
+* Individuals infected with the resistant strain, _I~r~_, might receive treatment, but we assume treatment has no effect in those individuals so don't track them explicitly.
 * Resistant infected individuals can infect susceptible individuals (S) with the resistant strain at rate _b~r~_. 
 * All infected hosts recover at some rate _g~i~_, with _i=u,t,r_. 
 * Recovered individuals are immune to reinfection. 
@@ -122,7 +122,7 @@ alloutcomes = NULL
 # Task 1
 #########################
 tid = 1
-tasktext = "Set the model parameters to the following: susceptible _S_ = 500, and initially untreated infected host I~u~ = 1. No other infected hosts, no recovered. Set simulation duration to 300 days, start at day 0, time step doesn't matter. Assume that untreated individuals transmit at _b~u~_ = 0.001, treated at _b~t~_ = 0.0005, and resistant at _b~r~_ = 0.0008. Assume that the duration of the infectious period is 5 days for untreated, 4 days for treated and 5 days for resistant (for those individuals, treatment has no effect). Set the rates _g~i~_ accordingly. Assume nobody receives treatment and no resistance is generated (_f = c~u~ = c~t~ = 0_). Set the number of simulations to 20, random seed 123. With parameters set to correspond to the scenario just described, run the simulation. You should see half of the simulations with outbreaks and the other without. Only untreated infected will differ from zero. Make sure you understand why. For those simulations with outbreaks, you should have around 10-100 susceptible left at the end."
+tasktext = "Set the model parameters to the following: susceptible _S_ = 500, and initially untreated infected host I~u~ = 1. No other infected hosts, no recovered. Set simulation duration to 300 days, start at day 0, time step doesn't matter. Assume that untreated individuals transmit at _b~u~_ = 0.001, treated at _b~t~_ = 0.0005, and resistant at _b~r~_ = 0.0008. Assume that the duration of the infectious period is 5 days for untreated, 4 days for treated and 5 days for resistant (for those individuals, treatment has no effect). Set the rates _g~i~_ accordingly. Assume nobody receives treatment and no resistance is generated (_f = c~u~ = c~t~ = 0_). Set the number of simulations to 20, random seed 123. With parameters set to correspond to the scenario just described, run the simulation. You should see 12 of the simulations with outbreaks and the others without. Only untreated infected will differ from zero. Make sure you understand why. For those simulations with outbreaks, you should have around 50-85 susceptible left at the end."
 nrec = 1 # number of items to record
 out_records = c("Average number of susceptible at end of simulation")
 out_types = rep("Rounded_Integer",nrec)
@@ -185,7 +185,7 @@ rc = rc + nrec #increment record counter by number of outcomes to record for thi
 # Task 4
 #########################
 tid = tid + 1
-tasktext = "Set the rate of transmission for resistant hosts to _b~r~ = 0.001_, als increase resistance generation during treatment to _c~t~ = 0.3_.  Keep everything else as previously. Contemplate what these changes mean biologically, and what you should expect from the simulations. Run the model for each of the 5 treatment levels specified above and record the total number infected at each treatment level. Draw them in the same figure you started above. What do you conclude from that?"
+tasktext = "Set the rate of transmission for resistant hosts to _b~r~ = 0.001_, also increase resistance generation during treatment to _c~t~ = 0.3_.  Keep everything else as previously. Contemplate what these changes mean biologically, and what you should expect from the simulations. Run the model for each of the 5 treatment levels specified above and record the total number infected at each treatment level. Draw them in the same figure you started above. What do you conclude from that?"
 nrec = 3 # number of items to record
 out_records = c("Number of averted infections going from f=0.25 to f=0.75",
                 "Number of averted infections going from f=0 to f=0.5",

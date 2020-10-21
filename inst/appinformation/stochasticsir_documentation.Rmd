@@ -158,7 +158,7 @@ nrec = 2 # number of items to record
 out_records = c("Final number susceptible, deterministic model",
                 "Average final number susceptible, stochastic model")
 out_types = rep("Rounded_Integer",nrec)
-out_notes = rep("Report the integer",nrec)
+out_notes = rep("Report the rounded integer",nrec)
 outcomes = data.frame( TaskID = rep(tid,nrec),
                        TaskText = rep(tasktext,nrec),
                       RecordID = paste0('T',tid,'R',(1:nrec)),
@@ -176,8 +176,8 @@ tid = tid + 1
 tasktext = "We previously discussed that R~0~<1 means you won't get an outbreak, while R~0~>1 means you do get an outbreak. The first statement is true, but the second one is only strictly true in a deterministic model. I've tried to be careful and write that with R~0~>1 you _can_ get an outbreak. But it doesn't always happen, which you just saw in task 1 with the stochastic model. 2 of the 3 runs led to an outbreak, the third did not. Since you were able to get an outbreak, it means we have R~0~>1. Confirm this by computing R~0~ for this model. Still, it can happen that no outbreak occurs. That's because if you start with a single infected, and that person by chance recovers before infecting others, the outbreak is over. Thus, for a stochastic model (which is closer to the real world than a deterministic model), there is a chance you get an outbreak for R~0~>1, but it's not guaranteed. We'll explore that more in the next task."
 nrec = 1 # number of items to record
 out_records = c("R0 for the model")
-out_types = rep("Rounded_Integer",nrec)
-out_notes = rep("Report the integer",nrec)
+out_types = rep("Numeric",nrec)
+out_notes = rep("Report to one decimal place",nrec)
 outcomes = data.frame( TaskID = rep(tid,nrec),
                        TaskText = rep(tasktext,nrec),
                       RecordID = paste0('T',tid,'R',(1:nrec)),
