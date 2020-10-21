@@ -14,6 +14,19 @@
 
 <title>Evolutionary Dynamics - Practice</title>
 
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
 
 
 
@@ -61,8 +74,8 @@
 <ul>
 <li>Susceptible individuals, <em>S</em> can become infected by untreated or treated hosts infected with the wild-type strain at rates <em>b<sub>u</sub></em> and <em>b<sub>t</sub></em>.</li>
 <li>A fraction <em>f</em> of those hosts infected with the wild-type strain are assumed to receive treatment (<em>I<sub>t</sub></em>), while the remainder does not (<em>I<sub>u</sub></em>).</li>
-<li>Small fractions, that is low values for <em>c<sub>u</sub></em> and <em>c<sub>t</sub></em> of wild-type infected untreated or treated hosts can generate resistant mutants and transmit those, leading to resistant infections.</li>
-<li>Individuals infected with the resistant strain ,<em>I<sub>r</sub></em>, might receive treatment, but we assume treatment has no effect in those individuals so don’t track them explicitly.</li>
+<li>Each time a wild-type infected host transmits to a susceptible host, there is a probability of a resistant mutant being transmitted; consequently, this generates a resistant infection. These probabilities are represented by <em>c<sub>u</sub></em> and <em>c<sub>t</sub></em> for wild-type untreated and treated hosts, respectively.</li>
+<li>Individuals infected with the resistant strain, <em>I<sub>r</sub></em>, might receive treatment, but we assume treatment has no effect in those individuals so don’t track them explicitly.</li>
 <li>Resistant infected individuals can infect susceptible individuals (S) with the resistant strain at rate <em>b<sub>r</sub></em>.</li>
 <li>All infected hosts recover at some rate <em>g<sub>i</sub></em>, with <em>i=u,t,r</em>.</li>
 <li>Recovered individuals are immune to reinfection.</li>
@@ -77,9 +90,9 @@
 <p>However, for this app we do <strong>not</strong> implement a deterministic/ODE model. Instead, we implement its stochastic equivalent. We can specify the model by writing down every possible transition/event/reaction that can occur and their propensities (the propensity multiplied with the time step gives the probability that a given event/transition occurs). For our model these are the following:</p>
 <table>
 <colgroup>
-<col width="32%"></col>
-<col width="35%"></col>
-<col width="32%"></col>
+<col width="32%" />
+<col width="35%" />
+<col width="32%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -128,7 +141,7 @@
 <p><strong>The tasks below are described in a way that assumes everything is in units of DAYS (rate parameters, therefore, have units of inverse days). If any quantity is not given in those units, you need to convert it first (e.g. if it says a week, you need to convert it to 7 days).</strong></p>
 <div id="task-1" class="section level3">
 <h3>Task 1</h3>
-<p>Set the model parameters to the following: susceptible <em>S</em> = 500, and initially untreated infected host I<sub>u</sub> = 1. No other infected hosts, no recovered. Set simulation duration to 300 days, start at day 0, time step doesn’t matter. Assume that untreated individuals transmit at <em>b<sub>u</sub></em> = 0.001, treated at <em>b<sub>t</sub></em> = 0.0005, and resistant at <em>b<sub>r</sub></em> = 0.0008. Assume that the duration of the infectious period is 5 days for untreated, 4 days for treated and 5 days for resistant (for those individuals, treatment has no effect). Set the rates <em>g<sub>i</sub></em> accordingly. Assume nobody receives treatment and no resistance is generated (<em>f = c<sub>u</sub> = c<sub>t</sub> = 0</em>). Set the number of simulations to 20, random seed 123. With parameters set to correspond to the scenario just described, run the simulation. You should see half of the simulations with outbreaks and the other without. Only untreated infected will differ from zero. Make sure you understand why. For those simulations with outbreaks, you should have around 10-100 susceptible left at the end.</p>
+<p>Set the model parameters to the following: susceptible <em>S</em> = 500, and initially untreated infected host I<sub>u</sub> = 1. No other infected hosts, no recovered. Set simulation duration to 300 days, start at day 0, time step doesn’t matter. Assume that untreated individuals transmit at <em>b<sub>u</sub></em> = 0.001, treated at <em>b<sub>t</sub></em> = 0.0005, and resistant at <em>b<sub>r</sub></em> = 0.0008. Assume that the duration of the infectious period is 5 days for untreated, 4 days for treated and 5 days for resistant (for those individuals, treatment has no effect). Set the rates <em>g<sub>i</sub></em> accordingly. Assume nobody receives treatment and no resistance is generated (<em>f = c<sub>u</sub> = c<sub>t</sub> = 0</em>). Set the number of simulations to 20, random seed 123. With parameters set to correspond to the scenario just described, run the simulation. You should see 12 of the simulations with outbreaks and the others without. Only untreated infected will differ from zero. Make sure you understand why. For those simulations with outbreaks, you should have around 50-85 susceptible left at the end.</p>
 <p><strong>Record</strong></p>
 <ul>
 <li>Average number of susceptible at end of simulation</li>
@@ -156,7 +169,7 @@
 </div>
 <div id="task-4" class="section level3">
 <h3>Task 4</h3>
-<p>Set the rate of transmission for resistant hosts to <em>b<sub>r</sub> = 0.001</em>, als increase resistance generation during treatment to <em>c<sub>t</sub> = 0.3</em>. Keep everything else as previously. Contemplate what these changes mean biologically, and what you should expect from the simulations. Run the model for each of the 5 treatment levels specified above and record the total number infected at each treatment level. Draw them in the same figure you started above. What do you conclude from that?</p>
+<p>Set the rate of transmission for resistant hosts to <em>b<sub>r</sub> = 0.001</em>, also increase resistance generation during treatment to <em>c<sub>t</sub> = 0.3</em>. Keep everything else as previously. Contemplate what these changes mean biologically, and what you should expect from the simulations. Run the model for each of the 5 treatment levels specified above and record the total number infected at each treatment level. Draw them in the same figure you started above. What do you conclude from that?</p>
 <p><strong>Record</strong></p>
 <ul>
 <li><p>Number of averted infections going from f=0.25 to f=0.75</p></li>
@@ -191,8 +204,8 @@
 <li>The model is a simpler version of a previously published model in <span class="citation">(Handel, Longini, and Antia 2009)</span>.</li>
 </ul>
 <div id="references" class="section level3 unnumbered">
-<h3>References</h3>
-<div id="refs" class="references">
+<h3 class="unnumbered">References</h3>
+<div id="refs" class="references hanging-indent">
 <div id="ref-handel09a">
 <p>Handel, Andreas, Ira M Longini, and Rustom Antia. 2009. “Antiviral Resistance and the Control of Pandemic Influenza: The Roles of Stochasticity, Evolution and Model Details.” <em>Journal of Theoretical Biology</em> 256 (1): 117–25. <a href="https://doi.org/10.1016/j.jtbi.2008.09.021">https://doi.org/10.1016/j.jtbi.2008.09.021</a>.</p>
 </div>
