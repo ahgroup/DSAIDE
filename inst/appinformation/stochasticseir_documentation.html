@@ -14,19 +14,6 @@
 
 <title>Stochastic SEIR Model</title>
 
-<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
-// be compatible with the behavior of Pandoc < 2.8).
-document.addEventListener('DOMContentLoaded', function(e) {
-  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
-  var i, h, a;
-  for (i = 0; i < hs.length; i++) {
-    h = hs[i];
-    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
-    a = h.attributes;
-    while (a.length > 0) h.removeAttribute(a[0].name);
-  }
-});
-</script>
 
 
 
@@ -66,10 +53,10 @@ document.addEventListener('DOMContentLoaded', function(e) {
 <h3>Model Overview</h3>
 <p>This model tracks susceptibles, exposed/pre-symptomatic, infected/symptomatic and recovered hosts. The following compartments are included:</p>
 <ul>
-<li><strong>S</strong> - uninfected and susceptible individuals</li>
+<li><strong>S</strong> - uninfected and susceptible individuals.</li>
 <li><strong>E</strong> - individuals who are infected and do not yet show symptoms. Those individuals can be infectious.</li>
 <li><strong>I</strong> - individuals who are infected and show symptoms. Those individuals are likely infectious, but the model allows to adjust this, including no infectiousness.</li>
-<li><strong>R</strong> - recovered/removed individuals. Those individuals have recovered and are immune.</li>
+<li><strong>R</strong> - recovered/removed individuals. Those individuals have recovered and are immune. They can lose their immunity and return to the susceptible class.</li>
 </ul>
 <p>The included processes/mechanisms are the following:</p>
 <ul>
@@ -236,8 +223,8 @@ document.addEventListener('DOMContentLoaded', function(e) {
 <li>For some further reading concerning stochastic dynamics of ID, see e.g. <span class="citation">(Lloyd-Smith et al. 2005; Black 1966; Keeling 1997)</span>.</li>
 </ul>
 <div id="references" class="section level3 unnumbered">
-<h3 class="unnumbered">References</h3>
-<div id="refs" class="references hanging-indent">
+<h3>References</h3>
+<div id="refs" class="references">
 <div id="ref-black66">
 <p>Black, F L. 1966. “Measles Endemicity in Insular Populations: Critical Community Size and Its Evolutionary Implication.” <em>Journal of Theoretical Biology</em> 11 (2): 207–11.</p>
 </div>

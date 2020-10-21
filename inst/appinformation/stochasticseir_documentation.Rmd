@@ -54,10 +54,10 @@ For this app, it is assumed that you've worked through all the ones in the _Basi
 This model tracks susceptibles, exposed/pre-symptomatic, infected/symptomatic and recovered hosts. 
 The following compartments are included:  
 
-* **S** - uninfected and susceptible individuals 
+* **S** - uninfected and susceptible individuals. 
 * **E** - individuals who are infected and do not yet show symptoms. Those individuals can be infectious.
 * **I** - individuals who are infected and show symptoms. Those individuals are likely infectious, but the model allows to adjust this, including no infectiousness.
-* **R** - recovered/removed individuals. Those individuals have recovered and are immune.
+* **R** - recovered/removed individuals. Those individuals have recovered and are immune. They can lose their immunity and return to the susceptible class.
 
 
 The included processes/mechanisms are the following:
