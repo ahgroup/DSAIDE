@@ -17,6 +17,7 @@
 ## Apps to be implemented
 * More Fitting apps (e.g. those from DSAIRM)
 * global warming app /auxiliary/development/globalwarming/
+* Add a multi-scale app
 
 ## Documentation / Outreach / Advertisement
 * Add more content to the "other resources" section
