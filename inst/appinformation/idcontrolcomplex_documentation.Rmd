@@ -156,11 +156,11 @@ rc = rc + nrec #increment record counter by number of outcomes to record for thi
 # Task 2
 ########################
 tid = tid + 1
-tasktext = "Let's now assume that 50% of infected hosts will be asymptomatic (_f_) and that the duration of the asymptomatic stage (_gA_) is the same as the symptomatic stage (_gI_). Also, assume that asymptomatic infected are half as infectious as symptomatic infected, and that pre-symptomatic are as infectious as symptomatic. Run the simulation, you should get an outbreak with around 107 susceptibles left. Now, we will envision a scenario where we can only detect and quarantine individuals that show symptoms. Assume that isolating reduces infectiousness by half. Implement such a scenario, run the simulation. 
+tasktext = "Let's now assume that 50% of infected hosts will be asymptomatic (_f_) and that the duration of the asymptomatic stage (_gA_) is the same as the symptomatic stage (_gI_). Also, assume that asymptomatic infected are half as infectious as symptomatic infected, and that pre-symptomatic are as infectious as symptomatic. Run the simulation, you should get an outbreak with around 107 susceptibles left. Now, we will envision a scenario where we can only detect and isolate individuals that show symptoms. Assume that isolation reduces transmission rates by half. Implement such a scenario, run the simulation. 
 
 If you are up for a small, optional, challenge, compute R~0~ for this scenario. It will be the sum of transmission coming from all 3 infected compartments (P, A, I). You will also need to make sure you multiply _A_ and _I_ by their respective fractions (_f_ and _1-f_) otherwise you would be double-counting. Other than that it follows the standard procedure you learned about and you can compare what you get from doing the math with the final size equation. You can then use your R~0~ equation for the next following tasks."
 nrec = 1 # number of items to record
-out_records = c("Number susceptibles remaining at end of quarantine simulation.")
+out_records = c("Number susceptibles remaining at end of isolation simulation.")
 out_types = c("Rounded_Integer")
 out_notes = c("Report the rounded integer")
 outcomes = data.frame( TaskID = rep(tid,nrec),
@@ -213,7 +213,7 @@ rc = rc + nrec #increment record counter by number of outcomes to record for thi
 # Task 5
 ########################
 tid = tid + 1
-tasktext = "Set parameter values back to what they were at the start of the previous task. Then change transmission terms such that bP=0.001, bA=0.002, bI=0.001. Can you think of a pathogen where asymptomatic individuals might be more infectious than symptomatic individuals? Some STI might fall into this category. Pathogens that require close contact could also be of that type if symptomatic are at home sick and can't spread the disease. Run the simulation with those settings, you should see an outbreak with around 203 susceptible left. Now assume that we can administer a drug which reduces symptoms in people, but doesn't change their infectiousness. We mimic this by assuming the fraction that are asymptomatic increases to 75%. What do you expect this will do to the overall outbreak size? Run the simulation to check."
+tasktext = "Set parameter values back to what they were at the start of the previous task. Then change transmission terms such that bP=0.001, bA=0.002, bI=0.001. Can you think of a pathogen where asymptomatic individuals might transmit more than symptomatic individuals? Some STI might fall into this category. Pathogens that require close contact could also be of that type if symptomatic are at home sick and can't spread the disease. Run the simulation with those settings, you should see an outbreak with around 203 susceptible left. Now assume that we can administer a drug which reduces symptoms in people, but doesn't change their transmission rates. We mimic this by assuming the fraction that are asymptomatic increases to 75%. What do you expect this will do to the overall outbreak size? Run the simulation to check."
 nrec = 1 # number of items to record
 out_records = c("Number susceptibles remaining at end of simulation.")
 out_types = c("Rounded_Integer")
@@ -294,7 +294,7 @@ rc = rc + nrec #increment record counter by number of outcomes to record for thi
 # Task 9
 ########################
 tid = tid + 1
-tasktext = "Set pathogen decay rate back to what it was at the beginning of the previous task. Now we assume that we have an intervention that reduces shedding of pathogen by infected (e.g. through better access to sanitation). To mimic this, half the rate of environmental shedding by symptomatic individuals. Run the simulation."
+tasktext = "Set pathogen decay rate back to what it was at the beginning of the previous task. Now we assume that we have an intervention that reduces shedding of pathogen by infected (e.g. through better access to sanitation). To mimic this, halve the rate of environmental shedding by symptomatic individuals. Run the simulation."
 nrec = 2 # number of items to record
 out_records = c("Number susceptibles remaining at end of simulation.",
                 "Max/peak of E during simulation.")

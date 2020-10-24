@@ -14,6 +14,19 @@
 
 <title>Complex ID control Scenarios - Practice</title>
 
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
 
 
 
@@ -110,11 +123,11 @@ Flow diagram for this model.
 </div>
 <div id="task-2" class="section level3">
 <h3>Task 2</h3>
-<p>Let’s now assume that 50% of infected hosts will be asymptomatic (<em>f</em>) and that the duration of the asymptomatic stage (<em>gA</em>) is the same as the symptomatic stage (<em>gI</em>). Also, assume that asymptomatic infected are half as infectious as symptomatic infected, and that pre-symptomatic are as infectious as symptomatic. Run the simulation, you should get an outbreak with around 107 susceptibles left. Now, we will envision a scenario where we can only detect and quarantine individuals that show symptoms. Assume that isolating reduces infectiousness by half. Implement such a scenario, run the simulation.</p>
+<p>Let’s now assume that 50% of infected hosts will be asymptomatic (<em>f</em>) and that the duration of the asymptomatic stage (<em>gA</em>) is the same as the symptomatic stage (<em>gI</em>). Also, assume that asymptomatic infected are half as infectious as symptomatic infected, and that pre-symptomatic are as infectious as symptomatic. Run the simulation, you should get an outbreak with around 107 susceptibles left. Now, we will envision a scenario where we can only detect and isolate individuals that show symptoms. Assume that isolation reduces transmission rates by half. Implement such a scenario, run the simulation.</p>
 <p>If you are up for a small, optional, challenge, compute R<sub>0</sub> for this scenario. It will be the sum of transmission coming from all 3 infected compartments (P, A, I). You will also need to make sure you multiply <em>A</em> and <em>I</em> by their respective fractions (<em>f</em> and <em>1-f</em>) otherwise you would be double-counting. Other than that it follows the standard procedure you learned about and you can compare what you get from doing the math with the final size equation. You can then use your R<sub>0</sub> equation for the next following tasks.</p>
 <p><strong>Record</strong></p>
 <ul>
-<li>Number susceptibles remaining at end of quarantine simulation.</li>
+<li>Number susceptibles remaining at end of isolation simulation.</li>
 </ul>
 </div>
 <div id="task-3" class="section level3">
@@ -135,7 +148,7 @@ Flow diagram for this model.
 </div>
 <div id="task-5" class="section level3">
 <h3>Task 5</h3>
-<p>Set parameter values back to what they were at the start of the previous task. Then change transmission terms such that bP=0.001, bA=0.002, bI=0.001. Can you think of a pathogen where asymptomatic individuals might be more infectious than symptomatic individuals? Some STI might fall into this category. Pathogens that require close contact could also be of that type if symptomatic are at home sick and can’t spread the disease. Run the simulation with those settings, you should see an outbreak with around 203 susceptible left. Now assume that we can administer a drug which reduces symptoms in people, but doesn’t change their infectiousness. We mimic this by assuming the fraction that are asymptomatic increases to 75%. What do you expect this will do to the overall outbreak size? Run the simulation to check.</p>
+<p>Set parameter values back to what they were at the start of the previous task. Then change transmission terms such that bP=0.001, bA=0.002, bI=0.001. Can you think of a pathogen where asymptomatic individuals might transmit more than symptomatic individuals? Some STI might fall into this category. Pathogens that require close contact could also be of that type if symptomatic are at home sick and can’t spread the disease. Run the simulation with those settings, you should see an outbreak with around 203 susceptible left. Now assume that we can administer a drug which reduces symptoms in people, but doesn’t change their transmission rates. We mimic this by assuming the fraction that are asymptomatic increases to 75%. What do you expect this will do to the overall outbreak size? Run the simulation to check.</p>
 <p><strong>Record</strong></p>
 <ul>
 <li>Number susceptibles remaining at end of simulation.</li>
@@ -171,7 +184,7 @@ Flow diagram for this model.
 </div>
 <div id="task-9" class="section level3">
 <h3>Task 9</h3>
-<p>Set pathogen decay rate back to what it was at the beginning of the previous task. Now we assume that we have an intervention that reduces shedding of pathogen by infected (e.g. through better access to sanitation). To mimic this, half the rate of environmental shedding by symptomatic individuals. Run the simulation.</p>
+<p>Set pathogen decay rate back to what it was at the beginning of the previous task. Now we assume that we have an intervention that reduces shedding of pathogen by infected (e.g. through better access to sanitation). To mimic this, halve the rate of environmental shedding by symptomatic individuals. Run the simulation.</p>
 <p><strong>Record</strong></p>
 <ul>
 <li><p>Number susceptibles remaining at end of simulation.</p></li>
@@ -223,8 +236,8 @@ Flow diagram for this model.
 <li>For some additional reading, see e.g. <span class="citation">(Klepac et al. 2013, @klepac15, @kirsch17, @tognotti13)</span>.</li>
 </ul>
 <div id="references" class="section level3 unnumbered">
-<h3>References</h3>
-<div id="refs" class="references">
+<h3 class="unnumbered">References</h3>
+<div id="refs" class="references hanging-indent">
 <div id="ref-kirsch17">
 <p>Kirsch, Thomas D, Heidi Moseson, Moses Massaquoi, Tolbert G Nyenswah, Rachel Goodermote, Isabel Rodriguez-Barraquer, Justin Lessler, Derek A T Cumings, and David H Peters. 2017. “Impact of Interventions and the Incidence of Ebola Virus Disease in Liberia-Implications for Future Epidemics.” <em>Health Policy and Planning</em> 32 (2): 205–14. <a href="https://doi.org/10.1093/heapol/czw113">https://doi.org/10.1093/heapol/czw113</a>.</p>
 </div>
