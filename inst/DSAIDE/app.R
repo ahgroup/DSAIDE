@@ -419,7 +419,7 @@ ui <- fluidPage(
                       fluidRow(
                         make_button(at,"stochasticsir"),
                         make_button(at,"stochasticseir"),
-                        make_button(at,"evolutionarydynamics"),
+                        make_button(at,"evolution"),
                         class = "mainmenurow"
                       ),
                       tags$div(class='mainsectionheader', 'Fitting Models to Data'),
