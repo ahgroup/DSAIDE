@@ -286,7 +286,7 @@ tasktext = "In the previous task, the steady state values for S/I/R for the 2 po
 nrec = 1 # number of items to record
 out_records = c("Value for b21 at which steady state values for both populations are the same.")
 out_types = rep("Numeric",nrec)
-out_notes = rep("",nrec)
+out_notes = rep("Report the exact value",nrec)
 outcomes = data.frame( TaskID = rep(tid,nrec),
                        TaskText = rep(tasktext,nrec),
                       RecordID = paste0('T',tid,'R',(1:nrec)),
