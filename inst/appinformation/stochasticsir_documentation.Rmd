@@ -130,12 +130,12 @@ tasktext = "Start with 1000 susceptibles, 1 infected, no recovered. Transmission
 
 Now switch to the stochastic model, single simulation, random number seed at 100. Hit the _Run_ button multiple times. What do you expect? What do you see? If you are surprised, re-read _A note on randomness_ in the _Model_ section.
 
-Next, set the number of simulations to 3 and run. You will see the one you already saw, another similar trajectory, and one scenario without an outbreak (note that susceptible stay at their starting value). What happens is that if you choose to run multiple stochastic simulations, the software increases the random number seed by 1 each time (i.e. it runs 3 simulations with random seeds 100, 101, and 102), otherwise you would get exactly the same result multiple times, which is useless. To confirm this, set the number of simulations to 1 and run the model with random seed 101 and then 102, and compare to what you got when you ran 3 simulations starting at seed 100. 
+Next, set the number of simulations to 3 and run. You will see the one you already saw, another similar trajectory, and one scenario without an outbreak (note that susceptible stay at their starting value). What happens is that if you choose to run multiple stochastic simulations, the software increases the random number seed by 1 each time (i.e. it runs 3 simulations with random seeds 100, 101, and 102), otherwise you would get exactly the same result multiple times, which is useless. To confirm this, set the number of simulations to 1 and run the model with random seed 100, 101 and 102. Compare to what you got when you run 3 simulations starting at seed 100. 
 
 Try to understand why for some of the stochastic simulations (seed 100 and 102) you get an outbreak, while for others (seed 101) not. Keep playing around with different seeds and different number of simulations until you have a full understanding of what's going on."
 nrec = 2 # number of items to record
-out_records = c("Final number susceptible, random seed 100, stochastic model",
-                "Final number susceptible, random seed 102, stochastic model")
+out_records = c("Final number susceptible, random seed 100, single run of stochastic model",
+                "Final number susceptible, random seed 102, single run of stochastic model")
 out_types = rep("Rounded_Integer",nrec)
 out_notes = rep("Report the integer",nrec)
 outcomes = data.frame( TaskID = rep(tid,nrec),
