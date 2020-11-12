@@ -137,12 +137,12 @@
 <h3>Task 1</h3>
 <p>Start with 1000 susceptibles, 1 infected, no recovered. Transmission/infection rate of 0.0005, duration of infectious period 5 days, no births and deaths, no waning immunity. Start time 0, time step 0.1, simulation time of 100 days. Set number of simulations and random seed to anything you like. Run the deterministic/ODE model. Hit the <em>Run</em> button multiple times with changed random number seeds. You can also change the number of simulations. Since the ODE model doesn’t include any randomness and each time it leads to the same outcome, the random number seed and simulation number inputs are actually ignored (you can check that by looking at the function call for the ODE model for this app, see the <em>Further Information</em> section).</p>
 <p>Now switch to the stochastic model, single simulation, random number seed at 100. Hit the <em>Run</em> button multiple times. What do you expect? What do you see? If you are surprised, re-read <em>A note on randomness</em> in the <em>Model</em> section.</p>
-<p>Next, set the number of simulations to 3 and run. You will see the one you already saw, another similar trajectory, and one scenario without an outbreak (note that susceptible stay at their starting value). What happens is that if you choose to run multiple stochastic simulations, the software increases the random number seed by 1 each time (i.e. it runs 3 simulations with random seeds 100, 101, and 102), otherwise you would get exactly the same result multiple times, which is useless. To confirm this, set the number of simulations to 1 and run the model with random seed 101 and then 102, and compare to what you got when you ran 3 simulations starting at seed 100.</p>
+<p>Next, set the number of simulations to 3 and run. You will see the one you already saw, another similar trajectory, and one scenario without an outbreak (note that susceptible stay at their starting value). What happens is that if you choose to run multiple stochastic simulations, the software increases the random number seed by 1 each time (i.e. it runs 3 simulations with random seeds 100, 101, and 102), otherwise you would get exactly the same result multiple times, which is useless. To confirm this, set the number of simulations to 1 and run the model with random seed 100, 101 and 102. Compare to what you got when you run 3 simulations starting at seed 100.</p>
 <p>Try to understand why for some of the stochastic simulations (seed 100 and 102) you get an outbreak, while for others (seed 101) not. Keep playing around with different seeds and different number of simulations until you have a full understanding of what’s going on.</p>
 <p><strong>Record</strong></p>
 <ul>
-<li><p>Final number susceptible, random seed 100, stochastic model</p></li>
-<li><p>Final number susceptible, random seed 102, stochastic model</p></li>
+<li><p>Final number susceptible, random seed 100, single run of stochastic model</p></li>
+<li><p>Final number susceptible, random seed 102, single run of stochastic model</p></li>
 </ul>
 </div>
 <div id="task-2" class="section level3">
@@ -175,7 +175,7 @@
 <p>There is a similar relation between outbreak probability an the initial number of infected individuals. Instead of doing math, let’s again use the model to determine it. Keep <em>b</em> fixed at 0.0003, but now vary the initial number of infected individuals, <em>I<sub>0</sub></em>, from 1 to 10. Everything else as in the previous task. For each value of <em>I<sub>0</sub></em>, run 100 simulations, record the fraction of outbreaks you get for each <em>I<sub>0</sub></em>. Plot the relationship (either by hand or using the computer) between <em>I<sub>0</sub></em> and the probability of getting an outbreak.</p>
 <p><strong>Record</strong></p>
 <ul>
-<li>The relation between R0 and the probability of an outbreak is close to a straight line.</li>
+<li>The relation between I0 and the probability of an outbreak is close to a straight line.</li>
 </ul>
 </div>
 <div id="task-6" class="section level3">
