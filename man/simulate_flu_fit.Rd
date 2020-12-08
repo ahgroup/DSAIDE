@@ -11,20 +11,21 @@ simulate_flu_fit(
   b = 1e-06,
   blow = 1e-10,
   bhigh = 0.1,
-  bsim = 1e-04,
   g = 1,
   glow = 0.001,
   ghigh = 100,
-  gsim = 1,
   f = 0.01,
   flow = 1e-05,
   fhigh = 0.5,
+  usesimdata = 0,
+  bsim = 1e-04,
+  gsim = 1,
   fsim = 0.01,
   noise = 0,
   iter = 100,
   solvertype = 1,
-  usesimdata = 0,
-  logfit = 0
+  logfit = 0,
+  rngseed = 100
 )
 }
 \arguments{
@@ -40,21 +41,23 @@ simulate_flu_fit(
 
 \item{bhigh}{: upper bound for infection rate : numeric}
 
-\item{bsim}{: infection rate for simulated data : numeric}
-
 \item{g}{: recovery rate : numeric}
 
 \item{glow}{: lower bound for g : numeric}
 
 \item{ghigh}{: upper bound for g : numeric}
 
-\item{gsim}{: recovery rate for simulated data : numeric}
-
 \item{f}{: fraction dying : numeric}
 
 \item{flow}{: lower bound for f : numeric}
 
 \item{fhigh}{: upper bound for f : numeric}
+
+\item{usesimdata}{: set to 1 if simulated data should be fitted, 0 otherwise : numeric}
+
+\item{bsim}{: infection rate for simulated data : numeric}
+
+\item{gsim}{: recovery rate for simulated data : numeric}
 
 \item{fsim}{: fraction dying for simulated data : numeric}
 
@@ -64,9 +67,9 @@ simulate_flu_fit(
 
 \item{solvertype}{: the type of solver/optimizer to use (1-3) : numeric}
 
-\item{usesimdata}{: set to 1 if simulated data should be fitted, 0 otherwise : numeric}
-
 \item{logfit}{: set to 1 if the log of the data should be fitted, 0 otherwise : numeric}
+
+\item{rngseed}{: random number seed for reproducibility : numeric}
 }
 \value{
 The function returns a list containing as elements the best fit time series data frame, the best fit parameters,

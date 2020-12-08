@@ -9,20 +9,21 @@
 #' @param b : infection rate : numeric
 #' @param blow : lower bound for infection rate : numeric
 #' @param bhigh : upper bound for infection rate : numeric
-#' @param bsim : infection rate for simulated data : numeric
 #' @param g : recovery rate : numeric
 #' @param glow : lower bound for g : numeric
 #' @param ghigh : upper bound for g : numeric
-#' @param gsim : recovery rate for simulated data : numeric
 #' @param f : fraction dying : numeric
 #' @param flow : lower bound for f : numeric
 #' @param fhigh : upper bound for f : numeric
+#' @param usesimdata : set to 1 if simulated data should be fitted, 0 otherwise : numeric
+#' @param bsim : infection rate for simulated data : numeric
+#' @param gsim : recovery rate for simulated data : numeric
 #' @param fsim : fraction dying for simulated data : numeric
 #' @param noise : noise to be added to simulated data : numeric
 #' @param iter : max number of steps to be taken by optimizer : numeric
 #' @param solvertype : the type of solver/optimizer to use (1-3) : numeric
-#' @param usesimdata : set to 1 if simulated data should be fitted, 0 otherwise : numeric
 #' @param logfit : set to 1 if the log of the data should be fitted, 0 otherwise : numeric
+#' @param rngseed : random number seed for reproducibility : numeric
 #' @return The function returns a list containing as elements the best fit time series data frame, the best fit parameters,
 #' the data and the final SSR
 #' @details A simple compartmental ODE model is fitted to data.
@@ -49,7 +50,7 @@
 #' @export
 
 
-simulate_flu_fit <- function(S = 5e6, I = 1, D = 0, b = 1e-6, blow = 1e-10, bhigh = 1e-1,  bsim = 1e-4,  g = 1, glow = 1e-3, ghigh = 1e2,  gsim = 1, f = 1e-2, flow = 1e-5, fhigh = 0.5,  fsim = 0.01, noise = 0, iter = 100, solvertype = 1, usesimdata = 0, logfit = 0)
+simulate_flu_fit <- function(S = 5e6, I = 1, D = 0, b = 1e-6, blow = 1e-10, bhigh = 1e-1, g = 1, glow = 1e-3, ghigh = 1e2, f = 1e-2, flow = 1e-5, fhigh = 0.5, usesimdata = 0, bsim = 1e-4, gsim = 1, fsim = 0.01, noise = 0, iter = 100, solvertype = 1, logfit = 0, rngseed = 100)
 {
 
   ###################################################################
@@ -99,6 +100,8 @@ simulate_flu_fit <- function(S = 5e6, I = 1, D = 0, b = 1e-6, blow = 1e-10, bhig
   #will contain final result
   output <- list()
 
+  set.seed(rngseed) #set seed for reproducible random numbers
+
   #load data
   #experimental data values from Mills et al. 2004 Nature
   #data is weekly new cases of death
@@ -128,8 +131,7 @@ simulate_flu_fit <- function(S = 5e6, I = 1, D = 0, b = 1e-6, blow = 1e-10, bhig
     fitdata$outcome = simdata$outcome + noise*stats::runif(length(simdata$outcome),-1,1)*simdata$outcome
   }
 
-
-
+  #set starting values and lower and upper bounds for parameters
   par_ini = as.numeric(c(b, g, f))
   lb = as.numeric(c(blow, glow, flow))
   ub = as.numeric(c(bhigh, ghigh, fhigh))
@@ -139,11 +141,8 @@ simulate_flu_fit <- function(S = 5e6, I = 1, D = 0, b = 1e-6, blow = 1e-10, bhig
   if (solvertype == 2) {algname = "NLOPT_LN_NELDERMEAD"}
   if (solvertype == 3) {algname = "NLOPT_LN_SBPLX"}
 
-  #this line runs the simulation, i.e. integrates the differential equations describing the infection process
-  #the result is saved in the odeoutput matrix, with the 1st column the time, all other column the model variables
-  #in the order they are passed into Y0 (which needs to agree with the order in virusode)
+  #this line does the actual fitting
   bestfit = nloptr::nloptr(x0=par_ini, eval_f=fitfunction,lb=lb,ub=ub,opts=list("algorithm"=algname,xtol_rel=1e-10,maxeval=iter,print_level=0), fitdata=fitdata, Y0 = Y0, fitparnames=fitparnames, logfit = logfit)
-
 
   #extract best fit parameter values and from the result returned by the optimizer
   params = bestfit$solution
