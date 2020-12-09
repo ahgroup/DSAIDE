@@ -50,7 +50,7 @@
 #' @export
 
 
-simulate_flu_fit <- function(S = 5e6, I = 1, D = 0, b = 1e-6, blow = 1e-10, bhigh = 1e-1, g = 1, glow = 1e-3, ghigh = 1e2, f = 1e-2, flow = 1e-5, fhigh = 0.5, usesimdata = 0, bsim = 1e-4, gsim = 1, fsim = 0.01, noise = 0, iter = 100, solvertype = 1, logfit = 0, rngseed = 100)
+simulate_flu_fit <- function(S = 5e6, I = 1, D = 0, b = 1e-6, blow = 1e-8, bhigh = 1e-4, g = 1, glow = 1e-2, ghigh = 1e2, f = 1e-2, flow = 1e-4, fhigh = 1, usesimdata = 0, bsim = 1e-6, gsim = 1, fsim = 0.01, noise = 0, iter = 1, solvertype = 1, logfit = 0, rngseed = 100)
 {
 
   ###################################################################
@@ -121,7 +121,7 @@ simulate_flu_fit <- function(S = 5e6, I = 1, D = 0, b = 1e-6, blow = 1e-10, bhig
   {
     #combining fixed parameters and to be estimated parameters into a vector
     modelpars = c(b = bsim, g=gsim, f=fsim)
-    #simulate model with known parameters to get artifitial data
+    #simulate model with known parameters to get artificial data
     simres = try(deSolve::lsoda(Y0,timevec,flufit_model_ode,modelpars,atol=1e-10))
 
     #extract values for virus load at time points where data is available

@@ -125,19 +125,19 @@
     <p>This model allows for the simulation of different direct transmission modes</p>
     </div>
 
-    <pre class="usage"><span class='fu'>simulate_directtransmission_ode</span>(
-  S = <span class='fl'>999</span>,
-  I = <span class='fl'>1</span>,
-  bd = <span class='fl'>0.005</span>,
-  bf = <span class='fl'>0</span>,
-  A = <span class='fl'>2</span>,
-  n = <span class='fl'>0</span>,
-  m = <span class='fl'>0</span>,
-  g = <span class='fl'>0.1</span>,
-  w = <span class='fl'>0</span>,
-  scenario = <span class='fl'>1</span>,
-  tmax = <span class='fl'>120</span>
-)</pre>
+    <pre class="usage"><span class='fu'>simulate_directtransmission_ode</span><span class='op'>(</span>
+  S <span class='op'>=</span> <span class='fl'>999</span>,
+  I <span class='op'>=</span> <span class='fl'>1</span>,
+  bd <span class='op'>=</span> <span class='fl'>0.005</span>,
+  bf <span class='op'>=</span> <span class='fl'>0</span>,
+  A <span class='op'>=</span> <span class='fl'>2</span>,
+  n <span class='op'>=</span> <span class='fl'>0</span>,
+  m <span class='op'>=</span> <span class='fl'>0</span>,
+  g <span class='op'>=</span> <span class='fl'>0.1</span>,
+  w <span class='op'>=</span> <span class='fl'>0</span>,
+  scenario <span class='op'>=</span> <span class='fl'>1</span>,
+  tmax <span class='op'>=</span> <span class='fl'>120</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -220,11 +220,11 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>  <span class='co'># To run the simulation with default parameters just call this function:</span>
-  <span class='kw'>result</span> <span class='op'>&lt;-</span> <span class='fu'>simulate_directtransmission_ode</span>()
+  <span class='va'>result</span> <span class='op'>&lt;-</span> <span class='fu'>simulate_directtransmission_ode</span><span class='op'>(</span><span class='op'>)</span>
   <span class='co'># To choose parameter values other than the standard one, specify them like such:</span>
-  <span class='kw'>result</span> <span class='op'>&lt;-</span> <span class='fu'>simulate_directtransmission_ode</span>(S = <span class='fl'>100</span>, tmax = <span class='fl'>100</span>, A=<span class='fl'>10</span>)
+  <span class='va'>result</span> <span class='op'>&lt;-</span> <span class='fu'>simulate_directtransmission_ode</span><span class='op'>(</span>S <span class='op'>=</span> <span class='fl'>100</span>, tmax <span class='op'>=</span> <span class='fl'>100</span>, A<span class='op'>=</span><span class='fl'>10</span><span class='op'>)</span>
   <span class='co'># You should then use the simulation result returned from the function, like this:</span>
-  <span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>result</span><span class='op'>$</span><span class='kw'>ts</span>[,<span class='st'>"time"</span>],<span class='kw'>result</span><span class='op'>$</span><span class='kw'>ts</span>[,<span class='st'>"S"</span>],xlab=<span class='st'>'Time'</span>,ylab=<span class='st'>'Number Susceptible'</span>,type=<span class='st'>'l'</span>)
+  <span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>result</span><span class='op'>$</span><span class='va'>ts</span><span class='op'>[</span>,<span class='st'>"time"</span><span class='op'>]</span>,<span class='va'>result</span><span class='op'>$</span><span class='va'>ts</span><span class='op'>[</span>,<span class='st'>"S"</span><span class='op'>]</span>,xlab<span class='op'>=</span><span class='st'>'Time'</span>,ylab<span class='op'>=</span><span class='st'>'Number Susceptible'</span>,type<span class='op'>=</span><span class='st'>'l'</span><span class='op'>)</span>
 </div><div class='img'><img src='simulate_directtransmission_ode-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

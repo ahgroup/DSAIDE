@@ -125,39 +125,39 @@
     <p>A compartmental model with several different compartments:  Susceptibles (S), Infected and Pre-symptomatic (P), Infected and Asymptomatic (A), Infected and Symptomatic (I), Recovered and Immune (R) and Dead (D). Also modeled is an environmental pathogen stage (E), and susceptible (Sv) and infected (Iv) vectors.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>simulate_Complex_ID_Control_ode</span>(
-  S = <span class='fl'>1000</span>,
-  P = <span class='fl'>1</span>,
-  A = <span class='fl'>1</span>,
-  I = <span class='fl'>1</span>,
-  R = <span class='fl'>0</span>,
-  D = <span class='fl'>0</span>,
-  E = <span class='fl'>1</span>,
-  Sv = <span class='fl'>1000</span>,
-  Iv = <span class='fl'>1</span>,
-  nH = <span class='fl'>0.01</span>,
-  mH = <span class='fl'>0.001</span>,
-  nV = <span class='fl'>0.01</span>,
-  mV = <span class='fl'>0.001</span>,
-  bP = <span class='fl'>0.02</span>,
-  bA = <span class='fl'>0.02</span>,
-  bI = <span class='fl'>0.02</span>,
-  bE = <span class='fl'>0.02</span>,
-  bV = <span class='fl'>0.02</span>,
-  bH = <span class='fl'>0.02</span>,
-  gP = <span class='fl'>0.7</span>,
-  gA = <span class='fl'>0.1</span>,
-  gI = <span class='fl'>0.1</span>,
-  pI = <span class='fl'>0.04</span>,
-  pA = <span class='fl'>0.03</span>,
-  c = <span class='fl'>0.7</span>,
-  f = <span class='fl'>0.08</span>,
-  d = <span class='fl'>0.01</span>,
-  w = <span class='fl'>0.003</span>,
-  tstart = <span class='fl'>0</span>,
-  tfinal = <span class='fl'>100</span>,
-  dt = <span class='fl'>0.1</span>
-)</pre>
+    <pre class="usage"><span class='fu'>simulate_Complex_ID_Control_ode</span><span class='op'>(</span>
+  S <span class='op'>=</span> <span class='fl'>1000</span>,
+  P <span class='op'>=</span> <span class='fl'>1</span>,
+  A <span class='op'>=</span> <span class='fl'>1</span>,
+  I <span class='op'>=</span> <span class='fl'>1</span>,
+  R <span class='op'>=</span> <span class='fl'>0</span>,
+  D <span class='op'>=</span> <span class='fl'>0</span>,
+  E <span class='op'>=</span> <span class='fl'>1</span>,
+  Sv <span class='op'>=</span> <span class='fl'>1000</span>,
+  Iv <span class='op'>=</span> <span class='fl'>1</span>,
+  nH <span class='op'>=</span> <span class='fl'>0.01</span>,
+  mH <span class='op'>=</span> <span class='fl'>0.001</span>,
+  nV <span class='op'>=</span> <span class='fl'>0.01</span>,
+  mV <span class='op'>=</span> <span class='fl'>0.001</span>,
+  bP <span class='op'>=</span> <span class='fl'>0.02</span>,
+  bA <span class='op'>=</span> <span class='fl'>0.02</span>,
+  bI <span class='op'>=</span> <span class='fl'>0.02</span>,
+  bE <span class='op'>=</span> <span class='fl'>0.02</span>,
+  bV <span class='op'>=</span> <span class='fl'>0.02</span>,
+  bH <span class='op'>=</span> <span class='fl'>0.02</span>,
+  gP <span class='op'>=</span> <span class='fl'>0.7</span>,
+  gA <span class='op'>=</span> <span class='fl'>0.1</span>,
+  gI <span class='op'>=</span> <span class='fl'>0.1</span>,
+  pI <span class='op'>=</span> <span class='fl'>0.04</span>,
+  pA <span class='op'>=</span> <span class='fl'>0.03</span>,
+  c <span class='op'>=</span> <span class='fl'>0.7</span>,
+  f <span class='op'>=</span> <span class='fl'>0.08</span>,
+  d <span class='op'>=</span> <span class='fl'>0.01</span>,
+  w <span class='op'>=</span> <span class='fl'>0.003</span>,
+  tstart <span class='op'>=</span> <span class='fl'>0</span>,
+  tfinal <span class='op'>=</span> <span class='fl'>100</span>,
+  dt <span class='op'>=</span> <span class='fl'>0.1</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -320,12 +320,12 @@ The following R packages need to be loaded for the function to work: deSolve.</p
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># To run the simulation with default parameters:</span>
-<span class='kw'>result</span> <span class='op'>&lt;-</span> <span class='fu'>simulate_Complex_ID_Control_ode</span>()
+<span class='va'>result</span> <span class='op'>&lt;-</span> <span class='fu'>simulate_Complex_ID_Control_ode</span><span class='op'>(</span><span class='op'>)</span>
 <span class='co'># To choose values other than the standard one, specify them like this:</span>
-<span class='kw'>result</span> <span class='op'>&lt;-</span> <span class='fu'>simulate_Complex_ID_Control_ode</span>(S = <span class='fl'>2000</span>,P = <span class='fl'>2</span>,A = <span class='fl'>2</span>,I = <span class='fl'>2</span>,R = <span class='fl'>0</span>,D = <span class='fl'>0</span>,E = <span class='fl'>2</span>)
+<span class='va'>result</span> <span class='op'>&lt;-</span> <span class='fu'>simulate_Complex_ID_Control_ode</span><span class='op'>(</span>S <span class='op'>=</span> <span class='fl'>2000</span>,P <span class='op'>=</span> <span class='fl'>2</span>,A <span class='op'>=</span> <span class='fl'>2</span>,I <span class='op'>=</span> <span class='fl'>2</span>,R <span class='op'>=</span> <span class='fl'>0</span>,D <span class='op'>=</span> <span class='fl'>0</span>,E <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
 <span class='co'># You can display or further process the result, like this:</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>result</span><span class='op'>$</span><span class='kw'>ts</span>[,<span class='st'>'time'</span>],<span class='kw'>result</span><span class='op'>$</span><span class='kw'>ts</span>[,<span class='st'>'S'</span>],xlab=<span class='st'>'Time'</span>,ylab=<span class='st'>'Numbers'</span>,type=<span class='st'>'l'</span>)
-</div><div class='img'><img src='simulate_Complex_ID_Control_ode-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='st'>'Max number of S: '</span>,<span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span>(<span class='kw'>result</span><span class='op'>$</span><span class='kw'>ts</span>[,<span class='st'>'S'</span>])))
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>result</span><span class='op'>$</span><span class='va'>ts</span><span class='op'>[</span>,<span class='st'>'time'</span><span class='op'>]</span>,<span class='va'>result</span><span class='op'>$</span><span class='va'>ts</span><span class='op'>[</span>,<span class='st'>'S'</span><span class='op'>]</span>,xlab<span class='op'>=</span><span class='st'>'Time'</span>,ylab<span class='op'>=</span><span class='st'>'Numbers'</span>,type<span class='op'>=</span><span class='st'>'l'</span><span class='op'>)</span>
+</div><div class='img'><img src='simulate_Complex_ID_Control_ode-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span><span class='op'>(</span><span class='st'>'Max number of S: '</span>,<span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span><span class='op'>(</span><span class='va'>result</span><span class='op'>$</span><span class='va'>ts</span><span class='op'>[</span>,<span class='st'>'S'</span><span class='op'>]</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; [1] "Max number of S:  2000"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
