@@ -84,6 +84,7 @@ The data being used in this app is daily new cases of norovirus for an outbreak 
 
 ### Model comparison 
 There are different ways to evaluate how well a model fits to data, and to compare between different models. This app shows the approach of using Akaike's "An Information Criterion" (AIC), or more precisely, we'll use the one corrected for small sample size, AICc . If we fit by minimizing the sum of squares (SSR), as we do here, the formula for the AICc is:
+
 $$
 AICc = N \log(\frac{SSR}{N})+2(K+1)+\frac{2(K+1)(K+2)}{N-K}
 $$
@@ -93,53 +94,123 @@ For evaluation of models with different AIC, there is fortunately no arbitrary, 
 
 Note that the absolute value of the AIC is unimportant and varies from dataset to dataset. Only relative differences matter. And it goes without saying that we can only compare models that are fit to exactly the same data.
 
+Also note that you can only compare between the models you build and evaluate. It is impossible to implement every possible reasonable model, some simplifications always need to be made. Thus, always keep in mind that if you use mechanistic models, like the ones we explore here, to discriminate between potential mechanisms, your conclusion always comes with the caveat __based on the way we implemented the mechanisms/processes in our model__ we conclude that model/mechanism N aligns better with the data than the others.
+
 
 ## What to do {#shinytab3}
+
+This fairly short set of tasks illustrates the process of model comparison using AICc.
 
 *The tasks below are described in a way that assumes everything is in units of days (rate parameters, therefore, have units of inverse days). If any quantity is not given in those units, you need to convert it first (e.g. if it says a week, you need to convert it to 7 days).*
 
 
-### Task 1 
-* Take a look at the inputs and outputs for the app. It's similar to the "Fitting influenza data" app (which you should do before this one).
-* Each model variant fits parameters _b_ and _g_. Model variant 2 also fits a common source infection rate _n_. Model variant 3 additionally fits times _t~1~_ and _t~2~_ at which infection from the common source starts and stops (i.e., is larger than 0). The best fit estimates are shown under the figure, together with the SSR and AICc. 
-* For simplicity, lower and upper bounds are set inside the simulator function to the beginning and end of the data. As a result, they can't be adjusted through the user interface.
-* To find out more about the data, see _Further Resources_ or `help(norodata)`. 
 
-**Record**
 
-* Nothing
+```{r, echo=FALSE, eval=TRUE}
 
-### Task 2 
-* There were a total of 288 susceptible individuals. Use that as starting value for the susceptibles. Assume 1 infected, no recovered.
-* Try fit model variant 1, which fits parameters  _b_ and _g_. There are two general approaches. You can set _b_ and _g_ to pretty much any starting value and try to run a large number of iterations with the 3 different solvers until you get a good fit.
-* Alternatively, you can try to manually find good starting values for _b_ and _g_ by trying different ones and running a single iteration. Once you have values for which the model is somewhat close to the data, increase iteration, and do the formal fit.
-* In theory, you should always end up with the same best fit. However, as discussed in the flu fitting app, optimizers can sometimes get stuck, so it might be for certain settings you don't end up with a good fit.
-* The best fit I was able to find for model variant 1 was an SSR=1218.81, AIC = 57.03 and best fit parameter values _b = 0.01_ and _g = 1.21_.  
+#this is the running counter for the records which starts at 1 
+rc=1
 
-**Record**
+#empty object, will hold all outcomes
+alloutcomes = NULL
 
-* Nothing
+#########################
+# Task 1
+#########################
+tid = 1
+tasktext = "Take a look at the inputs and outputs for the app. It is similar to the _Fitting influenza data_ app (which you should do before this one). Each model variant fits parameters _b_ and _g_. Model variant 2 also fits a common source infection rate _n_. Model variant 3 additionally fits times _t~1~_ and _t~2~_ at which infection from the common source starts and stops (i.e., is larger than 0). The best fit estimates are shown under the figure, together with the SSR and AICc. For simplicity, the lower and upper bounds for the on/off times _t1_ and _t2_ are set inside the simulator function to the beginning and end of the data time-series. As a result, they can't be adjusted through the user interface. To find out more about the data, see _Further Resources_ or `help(norodata)`. You can play around a bit with the app before starting with the next task." 
 
-### Task 3
-* Now switch to model variant 2, which also fits parameter _n_.
-* Play around with different starting values for the parameters, different optimizers and different numbers of iterations and see what the best fit is you can find.
-* The best fit I was able to find is identical to model 1, i.e., the optimizer sets the rate of infection from an external source to _n=0_. This, of course, gives the same SSR. The AIC is now larger at 61.74 since the model has more parameters and gets penalized for this. Based on these 2 models so far, we would conclude that an external source did not improve model fit and only direct transmission (model variant 1) was more likely.
+nrec = 1 # number of items to record
+out_records = c("Nothing")
+out_types = rep("None",nrec)
+out_notes = c("")
+outcomes = data.frame( TaskID = rep(tid,nrec),
+                       TaskText = rep(tasktext,nrec),
+                      RecordID = paste0('T',tid,'R',(1:nrec)),
+                      Record = out_records, 
+                      Type = out_types, 
+                      Note = out_notes)
+alloutcomes = rbind(alloutcomes,outcomes)
+rc = rc + nrec #increment record counter by number of outcomes to record for this task 
 
-**Record**
+#########################
+# Task 2
+#########################
+tid = tid + 1
+tasktext = "The setting from which the data comes had a total of 288 susceptible individuals. Use that as starting value for the susceptibles. Assume 1 initial infected, no recovered. We'll start by fitting model variant 1, which fits parameters  _b_ and _g_. You could set _b_ and _g_ to pretty much any starting value and try to run a large number of iterations with the 3 different solvers until you get a good fit. As you learned in the flu fitting app, that doesn't always work, starting values are often important. To find good starting values, you can manually change starting values for _b_ and _g_, run a single iteration and visually compare model and data. If model and data are reasonable close, you could run the optimizer for more iterations. In theory there is a single best fit. However, as discussed in the flu fitting app, optimizers can sometimes get stuck on good, but not best, fits. So it might be for certain settings you don't end up with a good fit. Some trial and error is usually required. The best fit for this model is (as far as I know) one with an SSR = 1218. Try various combinations of solver type, iterations and starting values until you reach this SSR. Note that for this and the following tasks, you might need to push iterations into the thousands. Record the best fit value for the rate of recovery. Also make a note of the AICc, you'll need it later."
 
-* Nothing
+nrec = 1 # number of items to record
+out_records = c("Estimate for best-fit value of parameter g (recovery rate)")
+out_types = rep("Numeric",nrec)
+out_notes = rep("Round to two significant digits, report as non-scientic notation (as X.YZ)",nrec)
+outcomes = data.frame( TaskID = rep(tid,nrec),
+                       TaskText = rep(tasktext,nrec),
+                      RecordID = paste0('T',tid,'R',(1:nrec)),
+                      Record = out_records, 
+                      Type = out_types, 
+                      Note = out_notes)
+alloutcomes = rbind(alloutcomes,outcomes)
+rc = rc + nrec #increment record counter by number of outcomes to record for this task 
 
-### Task 4
-* Now switch to model variant 3, which also fits parameters _t~1~_ and _t~2~_. See what best fit you can find. The value for _t~1~_ must be 8 or greater.    
-* I was able, with 5000 iterations of solver 3 and good starting conditions, to get an SSR=17.50 and AIC=34.40  with best fit parameter values _b_/_g_/_n_/_t~1~_/_t~2~_ of 0.0079/1.6357/0.9960/10.7444/12.0000. You might be able to find an even better fit (lower SSR).
 
-The SSR is clearly lower than that for model 1 and 2, and the AIC value suggests that the extra model parameters are 'worth it', and overall, this model should be favored.
+#########################
+# Task 3
+#########################
+tid = tid + 1
+tasktext = "Now switch to model variant 2, which also fits parameter _n_. Play around with different starting values for the parameters, different optimizers and different numbers of iterations and see what the best fit is you can find. You'll likely notice that getting a good fit is trickier now that you added one more parameter to be estimated. That's a general occurence, more parameters make it harder to obtain estimates. The best fit I was able to find is identical to model 1, i.e., the optimizer sets the rate of infection from an external source to _n=0_. This, of course, gives the same SSR. However, since we have more parameters now, the AICc is larger. Based on comparison of the AICc values for the 2 models we explored so far, we would conclude that model 1 (no additional external source of infection) is a more consistent or parsimonious description of the data."
+nrec = 1 # number of items to record
+out_records = c("AIC for best fit")
+out_types = rep("Numeric",nrec)
+out_notes = rep("Round to two significant digits, report as non-scientic notation (as X.YZ)",nrec)
+outcomes = data.frame( TaskID = rep(tid,nrec),
+                       TaskText = rep(tasktext,nrec),
+                      RecordID = paste0('T',tid,'R',(1:nrec)),
+                      Record = out_records, 
+                      Type = out_types, 
+                      Note = out_notes)
+alloutcomes = rbind(alloutcomes,outcomes)
+rc = rc + nrec #increment record counter by number of outcomes to record for this task 
 
-You might have noticed that getting a good fit is tricky and often you don't reach a good one. This comes back to the 'optimizer getting stuck' concept discussed in the 'flu fitting' app.
 
-**Record**
+#########################
+# Task 4
+#########################
+tid = tid + 1
+tasktext = "Now switch to model variant 3, which also fits parameters _t~1~_ and _t~2~_. See what best fit you can find. Note that the starting value for _t~1~_ must be 8 days (the start of the data) or greater, otherwise you'll get an error. I was able, with 10,000 iterations and good starting conditions, to get SSR values <20. My lowest was around 17, you might be able to find an even better fit (lower SSR). Try until you find one with an SSR of 20 or less. Sometimes using the best-fit results from a run as new starting values for a different run while switching between optimizers can help with the _getting stuck_ problem. An SSR of <20 is clearly lower than that for model 1 and 2. AICc will give us an indication of this gain in better fit justifies adding the additional 3 parameters (_n_,  _t~1~_ and _t~2~_). Look at the AICc for your best fit (one for which SSR<20). Is the AICc value lower than that for model 1 and 2? If yes, it means model 3 is favored, otherwise model 1 is favored (we already ruled out model 2)."
 
-* Nothing
+nrec = 1 # number of items to record
+out_records = c("Based on AICc, model 3 is favored")
+out_types = rep("Logical",nrec)
+out_notes = rep("Report TRUE or FALSE",nrec)
+outcomes = data.frame( TaskID = rep(tid,nrec),
+                       TaskText = rep(tasktext,nrec),
+                      RecordID = paste0('T',tid,'R',(1:nrec)),
+                      Record = out_records, 
+                      Type = out_types, 
+                      Note = out_notes)
+alloutcomes = rbind(alloutcomes,outcomes)
+rc = rc + nrec #increment record counter by number of outcomes to record for this task 
+```
+
+
+
+```{r echo=FALSE}
+#save the fully filled task table to a tsv file
+alloutcomes$QuizID = paste0('dsaide_',appsettings$appid)
+alloutcomes$AppTitle = appsettings$apptitle
+alloutcomes$AppID = appsettings$appid
+alloutcomes$Answer = "" #add empty answer column, just for consistency. Should probably be removed here.
+write.table(alloutcomes, paste0(appsettings$appid,"_tasktable.tsv"), append = FALSE, sep = "\t", row.names = F, col.names = TRUE)
+```
+
+
+```{r, echo=FALSE, results='asis'}
+# Take all the text stored in the table and print the tasks and items to record
+write_tasktext_new(alloutcomes)
+```
+
+
+
 
 ## Further Information {#shinytab4}
 * This app (and all others) are structured such that the Shiny part (the graphical interface you see and the server-side function that goes with it) calls an underlying R script (or several) which runs the simulation for the model of interest and returns the results.
