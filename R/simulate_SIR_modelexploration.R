@@ -8,9 +8,9 @@
 #' @param R : starting value for Recovered : numeric
 #' @param b : infection rate : numeric
 #' @param g : recovery rate : numeric
+#' @param w : rate of waning immunity : numeric
 #' @param n : the rate at which new individuals enter the model (are born) : numeric
 #' @param m : the rate of natural death (the inverse is the average lifespan) : numeric
-#' @param w : rate of waning immunity : numeric
 #' @param tstart : Start time of simulation : numeric
 #' @param tfinal : Final time of simulation : numeric
 #' @param dt : Times for which result is returned : numeric
@@ -50,9 +50,8 @@
 #' @export
 
 
-simulate_SIR_modelexploration <- function(S = 1000, I = 1, R = 0, b = 0.002, g = 1,  m = 0, n = 0, w = 0, tstart = 0, tfinal = 100, dt = 0.1, samples = 10, parmin=0.0005, parmax=0.005, samplepar='b',  pardist = 'lin')
+simulate_SIR_modelexploration <- function(S = 1000, I = 1, R = 0, b = 0.002, g = 1, w = 0, n = 0, m = 0, tstart = 0, tfinal = 1000, dt = 0.1, samples = 10, parmin=0.0005, parmax=0.005, samplepar='b',  pardist = 'lin')
   {
-
 
     #initialize vectors that will contain the outcomes of interest
     Smax=rep(0,samples)
@@ -81,7 +80,7 @@ simulate_SIR_modelexploration <- function(S = 1000, I = 1, R = 0, b = 0.002, g =
 
         #this runs the bacteria ODE model for each parameter sample
         #all other parameters remain fixed
-        odeout <- simulate_SIRSd_model_ode(S = S, I = I, R = R, b = b, g = g, m = m, n = n, w = w, tstart = tstart, tfinal = tfinal, dt = dt)
+        odeout <- simulate_SIRSd_model_ode(S = S, I = I, R = R, b = b, g = g, w = w, n = n, m = m, tstart = tstart, tfinal = tfinal, dt = dt)
 
         timeseries = odeout$ts
 

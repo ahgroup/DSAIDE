@@ -11,11 +11,11 @@ simulate_SIR_modelexploration(
   R = 0,
   b = 0.002,
   g = 1,
-  m = 0,
-  n = 0,
   w = 0,
+  n = 0,
+  m = 0,
   tstart = 0,
-  tfinal = 100,
+  tfinal = 1000,
   dt = 0.1,
   samples = 10,
   parmin = 5e-04,
@@ -35,11 +35,11 @@ simulate_SIR_modelexploration(
 
 \item{g}{: recovery rate : numeric}
 
-\item{m}{: the rate of natural death (the inverse is the average lifespan) : numeric}
+\item{w}{: rate of waning immunity : numeric}
 
 \item{n}{: the rate at which new individuals enter the model (are born) : numeric}
 
-\item{w}{: rate of waning immunity : numeric}
+\item{m}{: the rate of natural death (the inverse is the average lifespan) : numeric}
 
 \item{tstart}{: Start time of simulation : numeric}
 
