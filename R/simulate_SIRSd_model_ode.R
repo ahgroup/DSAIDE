@@ -15,9 +15,9 @@
 #' Values for model parameters : numeric
 #' @param b : infection rate : numeric
 #' @param g : recovery rate : numeric
-#' @param w : waning immunity rate : numeric
 #' @param n : birth rate : numeric
 #' @param m : death rate : numeric
+#' @param w : waning immunity rate : numeric
 #' Values for model times : numeric
 #' @param tstart : Start time of simulation : numeric
 #' @param tfinal : Final time of simulation : numeric
@@ -40,7 +40,7 @@
 #' @section Code creation date: 2020-09-28
 #' @export
 
-simulate_SIRSd_model_ode <- function(S = 1000, I = 1, R = 0, b = 0.002, g = 1, w = 1, n = 0, m = 0, tstart = 0, tfinal = 100, dt = 0.1)
+simulate_SIRSd_model_ode <- function(S = 1000, I = 1, R = 0, b = 0.002, g = 1, n = 0, m = 0, w = 1, tstart = 0, tfinal = 100, dt = 0.1)
 {
   ##############################
   #Block of ODE equations for deSolve
@@ -64,7 +64,7 @@ simulate_SIRSd_model_ode <- function(S = 1000, I = 1, R = 0, b = 0.002, g = 1, w
   ##############################
   #Creating named vectors
   varvec_mb = c(S = S, I = I, R = R)
-  parvec_mb = c(b = b, g = g, w = w, n = n, m = m)
+  parvec_mb = c(b = b, g = g, n = n, m = m, w = w)
   timevec_mb = seq(tstart, tfinal,by = dt)
   #Running the model
   simout = deSolve::ode(y = varvec_mb, parms = parvec_mb, times = timevec_mb,  func = SIRSd_model_ode_fct, rtol = 1e-12, atol = 1e-12)

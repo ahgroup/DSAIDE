@@ -6,23 +6,23 @@
 \usage{
 simulate_SIR_usanalysis(
   Smin = 1000,
-  Smax = 1200,
-  Imin = 1,
+  Smax = 1000,
+  Imin = 10,
   Imax = 10,
-  bmin = 0.001,
+  bmin = 0.005,
   bmax = 0.01,
   gmean = 1,
   gvar = 0.05,
   nmin = 0,
-  nmax = 10,
+  nmax = 0,
   mmin = 0,
-  mmax = 0.1,
+  mmax = 0,
   wmin = 0,
-  wmax = 0.1,
-  samples = 10,
+  wmax = 0,
+  samples = 5,
   rngseed = 100,
   tstart = 0,
-  tfinal = 100,
+  tfinal = 500,
   dt = 0.1
 )
 }

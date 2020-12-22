@@ -20,6 +20,11 @@ sapply(files_to_source, source)
 basepath = here::here()
 files = list.files(path = paste0(basepath, "/inst/appinformation/"), recursive=FALSE, pattern = "\\.Rmd$", full.names = TRUE)
 
+#remove all html documentation files before recreating
+html_files = list.files(path = paste0(basepath, "/inst/appinformation/"), recursive=FALSE, pattern = "\\.html$", full.names = TRUE)
+file.remove(html_files)
+
+
 #re-build all html documentation files from the rmd files at once
 for (n in 1: length(files)) {rmarkdown::render(files[n]); Sys.sleep(2)}
 

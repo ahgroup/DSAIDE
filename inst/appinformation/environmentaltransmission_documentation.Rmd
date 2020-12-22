@@ -72,7 +72,7 @@ The processes being modeled are:
 ### Model Implementation
 The flow diagram for this model is shown in this figure:
 
-```{r modeldiagram,  fig.cap='',  echo=FALSE, out.width = "70%"}
+```{r modeldiagram,  fig.cap='Model Diagram',  echo=FALSE, out.width = "70%"}
 knitr::include_graphics(here::here('inst/media',appsettings$modelfigname))
 ```
 

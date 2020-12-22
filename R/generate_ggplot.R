@@ -156,7 +156,7 @@ generate_ggplot <- function(res)
   	 #set x-axis. no numbering/labels on x-axis for boxplots
   	 if (plottype == 'Boxplot')
      {
-          p3 = p2 + ggplot2::scale_x_continuous(trans = xscaletrans, limits=c(xmin,xmax), breaks = NULL, labels = NULL)
+          p3 = p2 + ggplot2::scale_x_continuous(trans = xscaletrans, breaks = NULL, labels = NULL)
           p3 = p3 + ggplot2::labs(x = NULL)
       }
       else

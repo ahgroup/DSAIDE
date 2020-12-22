@@ -77,7 +77,7 @@ The included processes/mechanisms are the following:
 ### Model Implementation
 The flow diagram for the model implemented in this app is:
 
-```{r modeldiagram,  fig.cap='',  echo=FALSE, out.width = "70%"}
+```{r modeldiagram,  fig.cap='Model Diagram',  echo=FALSE, out.width = "70%"}
 knitr::include_graphics(here::here('inst/media',appsettings$modelfigname))
 ```
 

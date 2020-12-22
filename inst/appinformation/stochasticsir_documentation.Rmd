@@ -74,7 +74,7 @@ For our system, we specify the following processes/flows:
 The flow diagram for the model implemented in this app is:
 
 
-```{r modeldiagram,  fig.cap='',  echo=FALSE, out.width = "70%"}
+```{r modeldiagram,  fig.cap='Model Diagram',  echo=FALSE, out.width = "70%"}
 knitr::include_graphics( system.file(figuredir,appsettings$modelfigname,package=packagename))
 ```
 

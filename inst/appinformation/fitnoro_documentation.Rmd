@@ -55,7 +55,7 @@ The overall model is a variant of the basic SIR model, with the inclusion of a p
 ### Model Diagram
 The diagram illustrates the model.
 
-```{r modeldiagram,  fig.cap='',  echo=FALSE, out.width = "70%"}
+```{r modeldiagram,  fig.cap='Model Diagram',  echo=FALSE, out.width = "70%"}
 knitr::include_graphics(here::here('inst/media',appsettings$modelfigname))
 ```
 

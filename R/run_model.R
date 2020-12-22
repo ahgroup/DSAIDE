@@ -244,7 +244,7 @@ run_model <- function(modelsettings) {
     simdat = simresult$dat
 
     #number of columns - each outcome gets a column
-    result[[1]]$ncols = modelsettings$ncols
+    result[[1]]$ncols = modelsettings$nplots
 
     #loop over each outer list element corresponding to a plot and fill it with another list
     #of meta-data and data needed to create each plot

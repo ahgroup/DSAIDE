@@ -10,9 +10,9 @@ simulate_SIRSd_model_ode(
   R = 0,
   b = 0.002,
   g = 1,
-  w = 1,
   n = 0,
   m = 0,
+  w = 1,
   tstart = 0,
   tfinal = 100,
   dt = 0.1
@@ -30,11 +30,11 @@ Values for model parameters : numeric}
 
 \item{g}{: recovery rate : numeric}
 
-\item{w}{: waning immunity rate : numeric}
-
 \item{n}{: birth rate : numeric}
 
-\item{m}{: death rate : numeric
+\item{m}{: death rate : numeric}
+
+\item{w}{: waning immunity rate : numeric
 Values for model times : numeric}
 
 \item{tstart}{: Start time of simulation : numeric}

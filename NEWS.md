@@ -1,3 +1,10 @@
+# DSAIDE 0.9.0
+
+* Major overhaul of documentation and what-to-do tasks. 
+* Some bug fixes and feature improvements.
+* Changes in some of the underlying simulator functions.
+* Rewriting/relabeling of some models to conform with more standard notation.
+
 # DSAIDE 0.8.6
 
 * New apps

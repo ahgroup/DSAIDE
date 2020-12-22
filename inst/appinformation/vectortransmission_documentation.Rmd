@@ -78,7 +78,7 @@ We envision hosts to be humans and vectors to be e.g. mosquitoes. We further ass
 ### Model Implementation
 The flow diagram and the set of ordinary differential equations (ODE) which are used to implement this model are as follows:
 
-```{r modeldiagram,  fig.cap='',  echo=FALSE, out.width = "70%"}
+```{r modeldiagram,  fig.cap='Model Diagram',  echo=FALSE, out.width = "70%"}
 knitr::include_graphics(here::here('inst/media',appsettings$modelfigname))
 ```
 

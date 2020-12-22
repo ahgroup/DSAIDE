@@ -55,7 +55,7 @@
 #' @export
 
 
-simulate_SIR_usanalysis <- function(Smin = 1000, Smax = 1200, Imin = 1, Imax = 10, bmin=1e-3, bmax=1e-2, gmean=1, gvar=0.05, nmin = 0, nmax = 10, mmin = 0, mmax = 0.1, wmin = 0, wmax = 0.1, samples = 10, rngseed = 100, tstart = 0, tfinal = 100, dt = 0.1)
+simulate_SIR_usanalysis <- function(Smin = 1000, Smax = 1000, Imin = 10, Imax = 10, bmin=0.005, bmax=0.01, gmean=1, gvar=0.05, nmin = 0, nmax = 0, mmin = 0, mmax = 0, wmin = 0, wmax = 0, samples = 5, rngseed = 100, tstart = 0, tfinal = 500, dt = 0.1)
   {
 
     #this creates a LHS with the specified number of samples for all parameters
@@ -68,8 +68,8 @@ simulate_SIR_usanalysis <- function(Smin = 1000, Smax = 1200, Imin = 1, Imax = 1
     Svec = stats::qunif(lhssample[,1],min = Smin, max = Smax)
     Ivec = stats::qunif(lhssample[,2],min = Imin, max = Imax)
     bvec = stats::qunif(lhssample[,3],min = bmin, max = bmax)
-    mvec = stats::qunif(lhssample[,4],min = mmin, max = mmax)
-    nvec = stats::qunif(lhssample[,5],min = nmin, max = nmax)
+    nvec = stats::qunif(lhssample[,4],min = nmin, max = nmax)
+    mvec = stats::qunif(lhssample[,5],min = mmin, max = mmax)
     wvec = stats::qunif(lhssample[,6],min = wmin, max = wmax)
 
     #transforming parameter g to a gamma distribution with mean gmean and variance gvar
@@ -94,7 +94,7 @@ simulate_SIR_usanalysis <- function(Smin = 1000, Smax = 1200, Imin = 1, Imax = 1
 
         #this runs the bacteria ODE model for each parameter sample
         #all other parameters remain fixed
-        odeout <- simulate_SIRSd_model_ode(S = S, I = I, R = 0, b = b, g = g, m = m, n = n, w = w, tstart = tstart, tfinal = tfinal, dt = dt)
+        odeout <- simulate_SIRSd_model_ode(S = S, I = I, R = 0, b = b, g = g, n = n, m = m, w = w, tstart = tstart, tfinal = tfinal, dt = dt)
 
         timeseries = odeout$ts
 
@@ -120,7 +120,7 @@ simulate_SIR_usanalysis <- function(Smin = 1000, Smax = 1200, Imin = 1, Imax = 1
         }
     }
 
-    simresults = data.frame(Ipeak = Ipeak, Ifinal = Ifinal, Sfinal = Sfinal, S = Svec, I = Ivec, b = bvec, g = gvec, m = mvec, n = nvec, w = wvec, steady = steady)
+    simresults = data.frame(Ipeak = Ipeak, Ifinal = Ifinal, Sfinal = Sfinal, S = Svec, I = Ivec, b = bvec, g = gvec, n = nvec, m = mvec, w = wvec, steady = steady)
 
     result = list()
     result$dat = simresults
