@@ -31,7 +31,6 @@ dsaidemenu()
 
 You can also give the package [a quick try online, without having to install it](https://shiny.ovpr.uga.edu/DSAIDE/). I still recommend you install it like any regular `R` package should you decide that you want to use it. The online version is likely not quite as robust as the local. So just go ahead and install the package, it's only 3 commands to get it up and running! 
 
-
 ## Further information
 * [I published a paper describing the package](https://doi.org/10.1371/journal.pcbi.1005642). The paper is by now somewhat outdated with regards to the details of the package, but it describes the overall idea and context well.  
 * The [package tutorial (vignette)](https://ahgroup.github.io/DSAIDE/articles/DSAIDE.html) contains up-to-date and detailed instructions on the different ways the package can be used.
