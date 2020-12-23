@@ -9,6 +9,8 @@
 # DSAIDE
 Dynamical Systems Approach to Infectious Disease Epidemiology (Ecology/Evolution)
 
+Find the website for the package [here.](https://ahgroup.github.io/DSAIDE/)
+
 ## Description
 DSAIDE is an R package containing a set of simulation models (apps) that teach infectious disease epidemiology (ecology/evolution) from a dynamical system perspective. 
 
