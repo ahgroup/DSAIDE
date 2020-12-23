@@ -55,7 +55,7 @@
 #' @export
 
 
-simulate_SIR_usanalysis <- function(Smin = 1000, Smax = 1000, Imin = 10, Imax = 10, bmin=0.005, bmax=0.01, gmean=1, gvar=0.05, nmin = 0, nmax = 0, mmin = 0, mmax = 0, wmin = 0, wmax = 0, samples = 5, rngseed = 100, tstart = 0, tfinal = 500, dt = 0.1)
+simulate_SIR_usanalysis <- function(Smin = 1000, Smax = 1000, Imin = 10, Imax = 10, bmin=0.005, bmax=0.01, gmean=0.5, gvar=0.01, nmin = 0, nmax = 0, mmin = 0, mmax = 0, wmin = 0, wmax = 0, samples = 5, rngseed = 100, tstart = 0, tfinal = 500, dt = 0.1)
   {
 
     #this creates a LHS with the specified number of samples for all parameters
