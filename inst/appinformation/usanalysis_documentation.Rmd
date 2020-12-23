@@ -120,7 +120,7 @@ For the purpose of uncertainty and sensitivity analysis, starting values for var
 
 The default outcome plots are boxplots, which show the distribution of the 3 outcomes of interest for the different parameter samples. You can set the number of samples you want to run. Samples are constructed using the latin hypercube sampling (LHS) method to efficiently span the space of possible parameter values. In general, more samples are better, but of course take longer to run.
 
-For the tasks, we assume the model is run in units of weeks.
+For the tasks, we assume the model is run in units of years.
 
 
 ```{r, echo=FALSE, eval=TRUE}
@@ -186,7 +186,7 @@ rc = rc + nrec #increment record counter by number of outcomes to record for thi
 # Task 3
 #########################
 tid = tid + 1
-tasktext = "This model includes births, deaths and waning immunity. So far, they are turned off since both lower and upper bounds are set to 0. Now let's turn on births and deaths. The presence of births and deaths means the underlying time-series (which we can't see, but could look at in one of the earlier apps), produces an initial large outbreak, followed by a few smaller outbreaks and then settles down to a steady state. Reset everything to the initial values. Then set the range for the birth rate _n_ to 50 - 100, the range for death rate _m_ to 0.05 - 0.1. (If you are paying attention, you might have noticed that the range for the death rate means a natural life-span of 10 - 20 weeks. That's of course way too short for humans. It's chosen here to make the model settle down in a reasonable time-frame. You can think of maybe modeling an animal disease in a host that doesn't live very long.)
+tasktext = "This model includes births, deaths and waning immunity. So far, they are turned off since both lower and upper bounds are set to 0. Now let's turn on births and deaths. The presence of births and deaths means the underlying time-series (which we can't see, but could look at in one of the earlier apps), produces an initial large outbreak, followed by a few smaller outbreaks and then settles down to a steady state. Reset everything to the initial values. Then set the range for the birth rate _n_ to 50 - 100, the range for death rate _m_ to 0.05 - 0.1. (If you are paying attention, you might have noticed that the range for the death rate means a natural life-span of 10 - 20 years. That's of course too short for humans. It's chosen here to make the model settle down in a reasonable time-frame. You can think of maybe modeling an animal disease in a host that doesn't live as long.)
 
 Let's explore how the steady state is impacted if we change birth and death rates. Run the model with the specified settings for 50 simulations with random seed at 100. Look at the values at final steady state (and record the one requested).
 
@@ -316,12 +316,12 @@ rc = rc + nrec #increment record counter by number of outcomes to record for thi
 # Task 8
 #########################
 tid = tid + 1
-tasktext = "We can get a clearer picture of the impact of a specific parameter on the outcomes by restricting variability in other parameters. To do so, keep everything as you just had, but now set bmin and bmax both to 0.01, thus removing variability in the _b_ parameter. Run the simulation with 100 samples, rngseed=100. You will see less scatter/variation along the y-axis in the scatterplots. Next, reduce gvar to 0.01, re-run. You should see that the scatter keeps reducing and the correlation between _m_ and _S~final~_ is getting stronger. 
+tasktext = "We can get a clearer picture of the impact of a specific parameter on the outcomes by restricting variability in other parameters. To do so, keep everything as you just had, but now set bmin and bmax both to 0.01, thus removing variability in the _b_ parameter. Run the simulation with 100 samples, rngseed=100. You will see less scatter/variation along the y-axis in the scatterplots. Next, reduce gvar to 0.001, re-run. You should see that the scatter keeps reducing and the correlation between _m_ and _S~final~_ is getting stronger. 
 
 Also confirm that there is still no correlation between _n_ and _S~final~_."
 
 nrec = 1 # number of items to record
-out_records = c("Correlation between _m_ and final number of susceptibles, bmin=bmax=0.01 and gvar=0.01")
+out_records = c("Correlation between _m_ and final number of susceptibles, bmin=bmax=0.01 and gvar=0.001")
 out_types = rep("Numeric",nrec)
 out_notes = rep("Report rounded to 2 digits (hundredths)",nrec)
 outcomes = data.frame( TaskID = rep(tid,nrec),
