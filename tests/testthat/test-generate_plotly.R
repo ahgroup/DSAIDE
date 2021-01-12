@@ -19,8 +19,19 @@ test_that("generate_plotly returns a plotly plot",
             result[[1]]$legendlocation = "left"
             expect_is(generate_plotly(result), "plotly" )
 
-            modelsettings =  list(modeltype = "_ode_", plotscale = 'y', nplots = 1)
+            modelsettings =  list()
             modelsettings$simfunction = 'simulate_Characteristics_of_ID_ode'
+
+            #use default values for simulation function,
+            #they need to be part of modelsettings otherwise run_model won't work
+            defpar = formals(modelsettings$simfunction)
+            modelsettings = c(modelsettings,defpar)
+
+            modelsettings$modeltype = "_ode_"
+            modelsettings$plotscale = 'y'
+            modelsettings$nplots = 1
+
+
             result = run_model(modelsettings)
             expect_is(generate_plotly(result), "plotly" )
 

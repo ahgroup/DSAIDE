@@ -4,6 +4,11 @@ test_that("test that modelexploration app returns the proper plots",
           {
 
             modelsettings = list()
+            modelsettings$simfunction = 'simulate_SIR_modelexploration'
+            #use default values for simulation function,
+            #they need to be part of modelsettings otherwise run_model won't work
+            defpar = formals(modelsettings$simfunction)
+            modelsettings = c(modelsettings,defpar)
 
             modelsettings$samples = 10
             modelsettings$parmin = 1e-04
@@ -17,8 +22,8 @@ test_that("test that modelexploration app returns the proper plots",
 
             modelsettings$modeltype = '_modelexploration_'
             modelsettings$nplots = 1
-            modelsettings$simfunction = 'simulate_SIR_modelexploration'
             modelsettings$plotscale = 'x'
+
 
             result = run_model(modelsettings)
 

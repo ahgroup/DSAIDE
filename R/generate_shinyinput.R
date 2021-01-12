@@ -133,13 +133,14 @@ generate_shinyinput <- function(use_mbmodel = FALSE, mbmodel = NULL,
     )
     otherargs = lapply(otherargs,myclassfct)
 
+
     if (!is.null(otherinputs) && nchar(otherinputs)>1)
     {
         moreargs = lapply(eval(str2expression(otherinputs)),myclassfct)
         otherargs = c(moreargs,otherargs)
     }
 
-
+    #browser()
 
 
     #############################################################
