@@ -67,22 +67,13 @@
     <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_idpatterns_ode.html</loc>
   </url>
   <url>
-    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_idsurveillance_ode.html</loc>
-  </url>
-  <url>
     <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_idvaccine_ode.html</loc>
-  </url>
-  <url>
-    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_maternalimmunity_ode.html</loc>
   </url>
   <url>
     <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_multipathogen_ode.html</loc>
   </url>
   <url>
     <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_noro_fit.html</loc>
-  </url>
-  <url>
-    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_parasites_ode.html</loc>
   </url>
   <url>
     <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_SEIRSd_model_stochastic.html</loc>

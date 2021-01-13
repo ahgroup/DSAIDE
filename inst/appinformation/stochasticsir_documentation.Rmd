@@ -211,7 +211,7 @@ rc = rc + nrec #increment record counter by number of outcomes to record for thi
 # Task 5
 ##########################
 tid = tid + 1
-tasktext = "There is a similar relation between outbreak probability an the initial number of infected individuals. Instead of doing math, let's again use the model to determine it. Keep _b_ fixed at 0.0003, but now vary the initial number of infected individuals, _I~0~_, from 1 to 10. Everything else as in the previous task. For each value of _I~0~_, run 100 simulations, record the fraction of outbreaks you get for each _I~0~_. Plot the relationship (either by hand or using the computer) between _I~0~_ and the probability of getting an outbreak."
+tasktext = "There is a similar relation between outbreak probability and the initial number of infected individuals. Instead of doing math, let's again use the model to determine it. Keep _b_ fixed at 0.0003, but now vary the initial number of infected individuals, _I~0~_, from 1 to 10. Everything else as in the previous task. For each value of _I~0~_, run 100 simulations, record the fraction of outbreaks you get for each _I~0~_. Plot the relationship (either by hand or using the computer) between _I~0~_ and the probability of getting an outbreak."
 nrec = 1 # number of items to record
 out_records = c("The relation between I0 and the probability of an outbreak is close to a straight line.")
 out_types = rep("Logical",nrec)
