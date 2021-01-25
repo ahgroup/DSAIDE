@@ -433,7 +433,7 @@ ui <- fluidPage(
                         make_button(at,"usanalysis"),
                         class = "mainmenurow"
                       ), #close fluidRow structure for input
-                      tags$div(class='mainsectionheader', 'Further ID Topics'),
+                      tags$div(class='mainsectionheader', 'Further Topics'),
                       fluidRow(
                         make_button(at,"hostheterogeneity"),
                         make_button(at,"multipathogen"),

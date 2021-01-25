@@ -45,7 +45,7 @@ __Note:__ You should complete the "Fitting influenza data" app before starting t
 ## The Model {#shinytab2}
 
 ### Model Overview
-This app fits 2 different SIR models to norovirus infection data.
+This app fits different versions of an SIR model to Norovirus infection data.
 
 
 #### Models
@@ -179,7 +179,7 @@ tid = tid + 1
 tasktext = "Now switch to model variant 3, which also fits parameters _t~1~_ and _t~2~_. See what best fit you can find. Note that the starting value for _t~1~_ must be 8 days (the start of the data) or greater, otherwise you'll get an error. I was able, with 10,000 iterations and good starting conditions, to get SSR values <20. My lowest was around 17, you might be able to find an even better fit (lower SSR). Try until you find one with an SSR of 20 or less. Sometimes using the best-fit results from a run as new starting values for a different run while switching between optimizers can help with the _getting stuck_ problem. An SSR of <20 is clearly lower than that for model 1 and 2. AICc will give us an indication of this gain in better fit justifies adding the additional 3 parameters (_n_,  _t~1~_ and _t~2~_). Look at the AICc for your best fit (one for which SSR<20). Is the AICc value lower than that for model 1 and 2? If yes, it means model 3 is favored, otherwise model 1 is favored (we already ruled out model 2)."
 
 nrec = 1 # number of items to record
-out_records = c("Based on AICc, model 3 is favored")
+out_records = c("Based on AICc, model 3 is favored (TRUE/FALSE)")
 out_types = rep("Logical",nrec)
 out_notes = rep("Report TRUE or FALSE",nrec)
 outcomes = data.frame( TaskID = rep(tid,nrec),

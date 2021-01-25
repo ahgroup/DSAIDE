@@ -162,7 +162,7 @@ simulate_flu_fit <- function(S = 5e6, I = 1, D = 0, b = 1e-6, blow = 1e-8, bhigh
   }
 
   #adjust data a bit for consistent formatting on return
-  fitdata$varnames = "I_data"
+  fitdata$varnames = "D_data"
   colnames(fitdata) = c("xvals",'yvals','varnames')
 
 

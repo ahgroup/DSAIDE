@@ -40,7 +40,7 @@ appsettings = get_settings(currentrmdfile,appdocdir,packagename)
 
 
 ## Overview {#shinytab1}
-For this module, we will explore a simple SIR model with 2 types of hosts. Read about the model in the "Model" tab. Then do the tasks described in the "What to do" tab.
+This app allows you to explore a simple SIR model with 2 types of hosts. Read about the model in the "Model" tab. Then do the tasks described in the "What to do" tab.
 
 This app assumes that you have worked through several of the previous ones, e.g. that you are familiar with the reproductive number and how it is computed.
 

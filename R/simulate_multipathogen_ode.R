@@ -38,7 +38,7 @@
 #' @export
 
 
-simulate_multipathogen_ode <- function(S = 1e3, I1 = 1, I2 = 0, I12 = 0, b1 = 1e-3, b2 = 0, b12 = 0, g1 = 1, g2 = 1, g12 = 1, a = 0, tmax = 120)
+simulate_multipathogen_ode <- function(S = 1000, I1 = 1, I2 = 0, I12 = 0, b1 = 1e-3, b2 = 0, b12 = 0, g1 = 0.5, g2 = 0.5, g12 = 0.5, a = 0, tmax = 100)
 {
 
     ############################################################
@@ -49,41 +49,41 @@ simulate_multipathogen_ode <- function(S = 1e3, I1 = 1, I2 = 0, I12 = 0, b1 = 1e
         with(
             as.list(c(y, parms)), #lets us access variables and parameters stored in y and pars by name
             {
-                
+
                 dS <- -S*(b1*(I1+I1X) + b2*(I2+I2X) + b12*I12)
                 dI1 <- (b1*(I1+I1X) + a*b12*I12)*S       - g1*I1 - (b2*(I2+I2X) + b12*I12)*I1
                 dI2 <- (b2*(I2+I2X) + (1 - a)*b12*I12)*S - g2*I2 - (b1*(I1+I1X) + b12*I12)*I2
-                dI12 <- (b1*(I1+I1X) + b12*I12)*I2 + (b2*(I2+I2X) + b12*I12)*I1 - g12*I12 
+                dI12 <- (b1*(I1+I1X) + b12*I12)*I2 + (b2*(I2+I2X) + b12*I12)*I1 - g12*I12
                 dI1X <- (b1 * (I1 + I1X) + b12*I12)*R2 - g1*I1X
                 dI2X <- (b2 * (I2 + I2X) + b12*I12)*R1 - g2*I2X
                 dR1 <- g1*I1 - (b2 * (I2 + I2X) + b12*I12)*R1
                 dR2 <- g2*I2 - (b1 * (I1 + I1X) + b12*I12)*R2
                 dR12 <- g12*I12 + g1*I1X + g2*I2X
-                list( c(dS, dI1, dI2, dI12, dI1X, dI2X, dR1, dR2, dR12))        
+                list( c(dS, dI1, dI2, dI12, dI1X, dI2X, dR1, dR2, dR12))
             }
         ) #close with statement
     } #end function specifying the ODEs
     ############################################################
-    
-    
+
+
     ############################################################
     #main function code
     Y0 = c(S = S, I1 = I1, I2 = I2, I12 = I12, I1X = 0 , I2X = 0, R1 = 0, R2 = 0, R12 = 0);  #combine initial conditions into a vector
     dt = min(0.1, tmax / 1000); #time step for which to get results back
     timevec = seq(0, tmax, dt); #vector of times for which solution is returned (not that internal timestep of the integrator is different)
-    
-    
+
+
     ############################################################
-    #vector of parameters which is sent to the ODE function  
+    #vector of parameters which is sent to the ODE function
     pars <- c(b1 = b1, b2 = b2, b12 = b12, g1 = g1, g2 = g2, g12 = g12, a = a);
-    
+
     #this line runs the simulation, i.e. integrates the differential equations describing the infection process
     #the result is saved in the odeoutput matrix, with the 1st column the time, the 2nd, 3rd, 4th column the variables S, I, R
     #This odeoutput matrix will be re-created every time you run the code, so any previous results will be overwritten
     odeoutput = deSolve::lsoda(Y0, timevec, func = multipatheq, parms=pars, atol=1e-12, rtol=1e-12);
-    
+
     result <- list()
     result$ts <- as.data.frame(odeoutput)
-    
+
     return(result)
 }

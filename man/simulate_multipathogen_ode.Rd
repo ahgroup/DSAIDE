@@ -12,11 +12,11 @@ simulate_multipathogen_ode(
   b1 = 0.001,
   b2 = 0,
   b12 = 0,
-  g1 = 1,
-  g2 = 1,
-  g12 = 1,
+  g1 = 0.5,
+  g2 = 0.5,
+  g12 = 0.5,
   a = 0,
-  tmax = 120
+  tmax = 100
 )
 }
 \arguments{

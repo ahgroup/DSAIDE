@@ -5,7 +5,7 @@
 * Continue implementing unit tests using the testthat package
 * Add checks to parameter settings, don't allow unreasonable (e.g. negative) ones
 * Continue streamlining code base to make it more general/modular/flexible
-
+* Fix that some shiny inputs (e.g. "models to run", "log-scale for plot", and "plot engine") are on top of floating task list (tried briefly, wasn't able to)
 
 ## Content Improvement
 * Write/update all solutions
