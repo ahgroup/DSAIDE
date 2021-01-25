@@ -22,7 +22,7 @@
 ## Documentation / Outreach / Advertisement
 * Add more content to the "other resources" section
 * Make list of ID Epi and related courses, email instructors
-* Send annoucements at suitable times
+* Send announcements at suitable times
 * Make/update hex sticker/logo
 * Create more docs
 * Find all classes/instructors who could use package.

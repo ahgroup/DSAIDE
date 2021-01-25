@@ -1,10 +1,9 @@
 ## Test environments
 
 * local Windows 10.1 x86_64, R 3.6.1
-* Travis-ci (Ubuntu, MacOS) 
-* Appveyor (Windows)
-* Rhub (Windows, Ubuntu, Fedora)
+* R-CMD-Check (Github actions) 
 * Win-builder 
+* devtools: check_rhub(), check_win_release(), check_win_devel()
 
 ## R CMD check results
 
@@ -14,9 +13,9 @@
 
 checking installed package size ... NOTE
   installed size is  5.8Mb
-     sub-directories of 1Mb or more:
-       appinformation   3.9Mb
-       
+  sub-directories of 1Mb or more:
+    appinformation   4.0Mb
+
 The documentation for the apps in this package contains diagrams/figures, which is responsible for the directory size.
 
 
