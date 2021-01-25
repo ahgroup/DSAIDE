@@ -4,7 +4,7 @@
 [![CRAN checks](https://cranchecks.info/badges/summary/DSAIDE)](https://cran.r-project.org/web/checks/check_results_DSAIDE.html)
 [![metacran monthly downloads](http://cranlogs.r-pkg.org/badges/DSAIDE)](https://cran.r-project.org/package=DSAIDE)
 [![metacran downloads](http://cranlogs.r-pkg.org/badges/grand-total/DSAIDE?color=ff69b4)](https://cran.r-project.org/package=DSAIDE)
-![test-coverage](https://github.com/ahgroup/DSAIDE/workflows/test-coverage/badge.svg)
+[![test-coverage](https://github.com/ahgroup/DSAIDE/workflows/test-coverage/badge.svg)](https://github.com/ahgroup/DSAIDE/actions)
 
 
 
