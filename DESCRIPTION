@@ -38,8 +38,8 @@ Imports:
     utils (>= 3.4),
     XML (>= 3.98)
 Depends:
-    R (>= 4.0),
-    shiny (>= 1.0)
+    R (>= 3.2),
+    shiny (>= 1.2)
 Suggests: 
     covr,
     devtools,
