@@ -74,6 +74,10 @@ All libraries/packages needed to allow the package to run should be loaded via t
 
 Additional packages are needed for development (but not use) of the package. Those are listed in the suggests section of the DESCRIPTION file. 
 
+### Package logo
+According to pkgdown, logo should be includes as described here:
+https://pkgdown.r-lib.org/reference/build_home.html#package-logo
+
 ### To update R documentation and vignette
 * Edit documentation inside R functions. 
 * Build documentation with More/Document or devtools::document()
