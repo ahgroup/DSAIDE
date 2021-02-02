@@ -19,9 +19,8 @@ downloads](http://cranlogs.r-pkg.org/badges/DSAIDE)](https://cran.r-project.org/
 downloads](http://cranlogs.r-pkg.org/badges/grand-total/DSAIDE?color=ff69b4)](https://cran.r-project.org/package=DSAIDE)
 <!-- badges: end -->
 
-Dynamical Systems Approach to Infectious Disease Epidemiology
-(Ecology/Evolution) Find the website for the package
-[here.](https://ahgroup.github.io/DSAIDE/)
+**Dynamical Systems Approach to Infectious Disease Epidemiology
+(Ecology/Evolution).**
 
 ## Description
 

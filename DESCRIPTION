@@ -6,7 +6,7 @@ Description: Exploration of simulation models (apps) of various infectious disea
     about infectious disease epidemiology (ecology/evolution) from a dynamical systems perspective.
     All apps include explanations of the underlying models and instructions on what to do with the models. 
 Version: 0.9.0
-Date: 2021-01-25
+Date: 2021-02-01
 Authors@R: c(
     person("Andreas", "Handel", email = "ahandel@uga.edu", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-4622-1146") ),
     person("Cody", "Dailey",  role = "ctb"), 
@@ -38,7 +38,7 @@ Imports:
     utils (>= 3.4),
     XML (>= 3.98)
 Depends:
-    R (>= 3.2),
+    R (>= 3.5),
     shiny (>= 1.2)
 Suggests: 
     covr,
