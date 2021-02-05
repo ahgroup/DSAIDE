@@ -1,33 +1,29 @@
 # To-do list for DSAIDE package
 
 ## Code Improvements
-* Fix/finish download button for each app (currently disabled). This downloads code that reproduces a given scenario.
 * Continue implementing unit tests using the testthat package
 * Add checks to parameter settings, don't allow unreasonable (e.g. negative) ones
 * Continue streamlining code base to make it more general/modular/flexible
 * Fix that some shiny inputs (e.g. "models to run", "log-scale for plot", and "plot engine") are on top of floating task list (tried briefly, wasn't able to)
+* Fix/finish download button for each app (currently disabled). This downloads code that reproduces a given scenario.
 
 ## Content Improvement
-* Write/update all solutions
-* Add learning objectives to each overview tab
-* Implement further apps, see below
-* Clean up and make all model diagrams as nice as possible
-* Do those 3 apps, or remove: Parasite model, ID surveillance, and Maternal immunity
+* Clean up and make all model diagrams as nice as possible (wait for diagram package)
 
 ## Apps to be implemented
 * More Fitting apps (e.g. those from DSAIRM)
 * global warming app /auxiliary/development/globalwarming/
 * Add a multi-scale app
+* Do those 3 apps, or remove: Parasite model, ID surveillance, and Maternal immunity
 
 ## Documentation / Outreach / Advertisement
+* Write a vignette explaining how to use DSAIDE (and solutions/quizgrader) for teachers
 * Add more content to the "other resources" section
 * Make list of ID Epi and related courses, email instructors
 * Send announcements at suitable times
-* Make/update hex sticker/logo
 * Create more docs
 * Find all classes/instructors who could use package.
 * Make videos for levels 1/2/3 for packages 
-* Write/update all solutions
 
 ## General thoughts and comments
 * look into R consortium package certification
