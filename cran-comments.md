@@ -21,6 +21,8 @@ The documentation for the apps in this package contains diagrams/figures, which 
 
 ## Submission History
 
+version 0.9.1: small fixes to resolve CRAN errors/notes for testthat and package dependencies. other minor updates.
+
 version 0.9.0: major overhaul of documentation and what-to-do tasks. also some bug fixes and feature improvements.
 
 version 0.8.3: minor bug fixes and improvements.

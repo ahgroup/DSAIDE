@@ -1,3 +1,8 @@
+# DSAIDE 0.9.1
+
+* Small fixes that caused CRAN Notes/error messages.
+* Other minor updates and improvements.
+
 # DSAIDE 0.9.0
 
 * Major overhaul of documentation and what-to-do tasks. 
