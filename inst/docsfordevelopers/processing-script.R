@@ -67,4 +67,3 @@ devtools::build_vignettes()
 
 #update the pkgdown website
 pkgdown::build_site()
-
