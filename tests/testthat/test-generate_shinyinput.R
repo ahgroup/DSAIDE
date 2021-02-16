@@ -10,8 +10,7 @@ test_that("generate_shinyinput correctly produces a shiny input structure",
             packagename = 'DSAIDE'
 
             appdir = system.file("appinformation", package = packagename) #find path to apps
-            modeldir = system.file("mbmodels", package = packagename) #find path to apps
-            simdir = system.file("simulatorfunctions", package = packagename) #find path to apps
+            simdir = system.file("simulatorfunctions", package = packagename) #find path to simulator functions
 
             #load app table that has all the app information
             at = read.table(file = file.path(appdir,"apptable.tsv"), sep = '\t', header = TRUE)
@@ -33,7 +32,7 @@ test_that("generate_shinyinput correctly produces a shiny input structure",
 
             #if an mbmodel should be used, check that it exists and load
             appsettings$mbmodel <- NULL
-            appsettings$mbmodel = readRDS(paste0(modeldir,"/",appsettings$mbmodelname) )
+            appsettings$mbmodel = readRDS(appsettings$mbmodelname) #mbmodel needs to be in current folder
 
             #if the doc of a file should be parsed for UI generation, get it here
             filepath = file.path(simdir,paste0(appsettings$simfunction[1],'.R'))

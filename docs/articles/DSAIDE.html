@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DSAIDE</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.1</span>
       </span>
     </div>
 
@@ -84,7 +84,7 @@
       <h1 data-toc-skip>DSAIDE Package Tutorial</h1>
                         <h4 class="author"><a href="http://handelgroup.uga.edu">Andreas Handel</a></h4>
             
-            <h4 class="date">2021-02-01</h4>
+            <h4 class="date">2021-02-16</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ahgroup/DSAIDE/blob/master/vignettes/DSAIDE.Rmd"><code>vignettes/DSAIDE.Rmd</code></a></small>
       <div class="hidden name"><code>DSAIDE.Rmd</code></div>
@@ -96,26 +96,27 @@
 <div id="summary" class="section level2">
 <h2 class="hasAnchor">
 <a href="#summary" class="anchor"></a>Summary</h2>
-<p><em>Dynamical Systems Approaches to Infectious Disease Epidemiology/Ecology/Evolution (DSAIDE)</em> is an R package that allows you to explore and study concepts of infectious disease epidemiology (ecology/evolution) using dynamical systems models. The main way of interaction with the models is through a graphical user interface. It is not necessary - though possible - to read or write computer code.</p>
+<p><em>Dynamical Systems Approaches to Infectious Disease Epidemiology/Ecology/Evolution (DSAIDE)</em> is an R package that allows you to explore and study concepts of infectious disease epidemiology (ecology/evolution) using dynamical systems models.</p>
+<p>The main way of interaction with the models is through a graphical user interface. It is not necessary - though possible - to read or write computer code.</p>
 <p>The package also provides a path toward using and building your own models by relatively seamlessly moving from the graphical user interface to direct interaction with pre-written simulations all the way to modifying the underlying simulations to fit your needs.</p>
 <p>The different use cases for the package are described below.</p>
 </div>
 <div id="package-description" class="section level2">
 <h2 class="hasAnchor">
 <a href="#package-description" class="anchor"></a>Package description</h2>
-<p>The package consists of several simulations/apps that allow for the simulation and exploration of different topics related to infectious disease dynamics. The underlying models are written as compartmental dynamical models, either deterministic using differential equations (deSolve package) or stochastic using a Gillespie-type approach (adaptivetau package). A graphical user interface is wrapped around each simulation/app. The graphical user interface is written using the functionality of the R Shiny package. This allows exploration of models and concepts without the need to write any code. At the same time, the package is structured in a way that should allow those interested in the actual models and learning R coding to easily move from one stage to another.</p>
+<p>The package consists of several simulations (referred to as apps) that allow for the simulation and exploration of different topics related to infectious disease dynamics. The underlying models are written as compartmental simulation models, either deterministic using differential equations (<code>deSolve</code> package) or stochastic using a Gillespie-type approach (<code>adaptivetau</code> package). A graphical user interface is wrapped around each simulation/app. The graphical user interface is written using the functionality of the R <code>shiny</code> package. This allows exploration of models and concepts without the need to write any code. At the same time, the package is structured in a way that should allow those interested in the actual models and learning R coding to easily move from one stage to another.</p>
 <p>Each app is meant to be fully self-explanatory and contains a description of the model, a list of tasks the user could try, and further information on background reading and other resources.</p>
 </div>
 <div id="intended-audience-and-goal-of-the-package" class="section level2">
 <h2 class="hasAnchor">
 <a href="#intended-audience-and-goal-of-the-package" class="anchor"></a>Intended audience and goal of the package</h2>
-<p>The audience for this package consists individuals interested in infectious disease epidemiology from a <em>systems/modeling perspective</em>. The package allows exploration of concepts such as <em>patterns of infectious disease incidence</em>, <em>reproductive number concept</em>, <em>extinctions and critical community size</em>, etc. All these concepts are not well described by applying classical epidemiology approaches (i.e. assuming independence between individuals) to infectious diseases, but can readily by understood using a systems/modeling approach.</p>
-<p>While the package was written as a component of a course on infectious disease epidemiology/modeling, the documentation for each app tries to be fairly complete and self-contained. This should allow you to get some understanding of the topics and models without requiring additional information. However, the information provided inside each app is not sufficient to get a very thorough understanding. If you use this package on your own without taking a class on the topc, it might be possible to learn the material covered by the apps in depth by working through some of the references provided for each app or general infectious disease modeling textbooks (e.g. <span class="citation">(Keeling and Rohani 2008; Vynnycky and White 2010; Bjørnstad 2018)</span>).</p>
+<p>The package is geared towards individuals who want to learn how simulation models are used to study and understand infectious disease epidemiology/ecology/evolution. The package teaches concepts such as <em>patterns of infectious disease incidence</em>, <em>the reproductive number</em>, <em>extinctions and critical community size</em>, and more. All these concepts are not well described by applying classical epidemiology approaches (i.e. assuming independence between individuals), but can readily by understood using a systems/modeling approach.</p>
+<p>While I originally wrote the package <a href="https://andreashandel.github.io/IDEMAcourse/">as a component of a course on infectious disease epidemiology/modeling</a>, the documentation for each app tries to be fairly complete and self-contained. This should allow you to get some understanding of the topics and models without requiring additional information. If you use this package on your own without taking a class on the topic, it might be possible to fully learn the material covered by the apps by working through the <em>Tasks</em> for each app and filling any gaps with some of the references provided for each app (see the <em>Further Information</em> section for each app) or by consulting some general infectious disease modeling textbooks, e.g. <span class="citation">(Keeling and Rohani 2008; Vynnycky and White 2010; Bjørnstad 2018)</span> or my <a href="https://andreashandel.github.io/IDEMAbook/">online textbook</a> or <a href="https://andreashandel.github.io/IDEMAcourse/">course materials</a>.</p>
 </div>
 <div id="pre-requisites" class="section level2">
 <h2 class="hasAnchor">
 <a href="#pre-requisites" class="anchor"></a>Pre-requisites</h2>
-<p>Since <code>DSAIDE</code> is an <code>R</code> package, you need to have <a href="https://www.r-project.org/">R</a> installed. I also highly recommend <a href="https://rstudio.com/products/rstudio/download/">RStudio</a>, though it’s not required. If you are not familiar with <code>R</code> you can find <a href="https://andreashandel.github.io/IDEMAcourse/R_and_RStudio.html">a brief introduction here</a>, which also provides a reference to detailed install instructions.</p>
+<p>Since <code>DSAIDE</code> is an <code>R</code> package, you need to have <a href="https://www.r-project.org/">R</a> installed. I also highly recommend <a href="https://rstudio.com/products/rstudio/download/">RStudio</a>, though it’s not required. If you are not familiar with <code>R</code> you can find <a href="https://andreashandel.github.io/IDEMAcourse/R_and_RStudio.html">a brief introduction here</a>, which also provides pointers to detailed install instructions.</p>
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
@@ -147,59 +148,68 @@
 <p>If the package loads correctly, you should receive a short greeting. Now you can open the main menu by typing the following into the <code>R</code> console:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/dsaidemenu.html">dsaidemenu</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p>If successful, you should see a graphical menu open in your browser that looks similar to this (looks might differ a bit depending on the version of <code>DSAIDE</code> you are running):</p>
+<p>If successful, you should see a graphical menu open in your browser that looks similar to this (looks might differ a bit depending on the version of DSAIDE you are running):</p>
 <div class="figure">
 <img src="mainmenu.png" alt="Main menu of the DSAIDE package." width="421"><p class="caption">
 Main menu of the DSAIDE package.
 </p>
 </div>
-<p>From the main menu, you can choose the different apps corresponding to different modeling topics and scenarios. Each app has the inputs you can set on the left and the outputs (figures and text) on the right. This is an example of one of the apps:</p>
+<p>From the main menu, you can choose the different apps corresponding to different topics. Each app has the model inputs you can set on the left and the outputs (figures and text) on the right. This is an example of one of the apps:</p>
 <div class="figure">
 <img src="appexample.png" alt="Screenshot of the input-output elements of one of the apps." width="671"><p class="caption">
 Screenshot of the input-output elements of one of the apps.
 </p>
 </div>
-<p>As seen in the figure above, below each app are four tabs with different sections providing information and instruction. The <em>Overview</em> and <em>Further Information</em> tabs provide a brief introduction and pointers to further exploration options, respectively.</p>
-<p>The two most important tabs are the <em>Model</em> and <em>What to do</em> tabs. The <em>Model</em> tab gives a detailed description of the model underlying the app, shows the model diagram and equations, and provides any other further information needed to understand what is going on. The following figure shows an example of this for one of the apps.</p>
+<p>As seen in the figure above, below each app are four tabs with different sections providing information and instruction.</p>
+<p>The <strong>Overview</strong> tab provides a brief overview, introduction and list of learning objectives.</p>
+<p>The <strong>Further Information</strong> tab tells you the name(s) of the underlying models and often provides references to resources (books and papers) on that topic.</p>
+<p>The two most important tabs are the <em>Model</em> and <em>What to do</em> tabs.</p>
+<p>The <strong>Model</strong> tab gives a detailed description of the model underlying the app, shows the model diagram and equations, and provides any other further information needed to understand what is going on. The following figure shows an example of this for one of the apps.</p>
 <div class="figure">
 <img src="modelexample.png" alt="Screenshot of the _Model_ section of one of the apps." width="783"><p class="caption">
 Screenshot of the <em>Model</em> section of one of the apps.
 </p>
 </div>
-<p>The <em>What to do</em> tab contains a list of suggested tasks you might want to go through. By doing those tasks, you will learn the topic a specific app is meant to teach. The following figure shows an example for part of one of those <em>What to do</em> sections for one of the apps.</p>
+<p>To use the package, you do not need to do any math with differential equations, i.e. no calculus (you will have to do a bit of algebra for some tasks.) By seeing the model equations, diagram and description, you should be able to learn how these models are set up and what the different model terms mean and do. The idea is that you learn how to read those models (and if inclined, build and implement your own, see below), but you will not need to do any complicated math involving differential equations.</p>
+<p>The <strong>What to do</strong> tab contains a list of suggested tasks you might want to go through. By doing those tasks, you will learn the topic a specific app is meant to teach. The following figure shows an example for part of one of those <em>What to do</em> sections for one of the apps.</p>
 <div class="figure">
 <img src="whattodoexample.png" alt="Screenshot of the _What to do_ section of one of the apps." width="773"><p class="caption">
 Screenshot of the <em>What to do</em> section of one of the apps.
 </p>
 </div>
-<p>Once you finished exploring a specific app, you can return to the main menu. Eventually, you can exit back to the <code>R</code> console by clicking the <em>Exit</em> button. You will not need to read or write any code at this level of exploration and learning. If an when you want to learn more, you can proceed to level 2.</p>
+<p>For learning the material and topic, going through all the tasks in the <em>What to do</em> section is the most important part. The idea is that by working through the tasks you will be able to learn the topic the app is meant to teach. If you are using the package as part of a course, you might be asked to write down and submit the answers you are asked to record for each task. Once you finished exploring a specific app, you can return to the main menu by clicking the <code>Menu</code> button in the upper left corner.</p>
+<p>The apps are arranged in roughly the order you should go through them. You should definitely start with all apps in <code>The Basics</code> section, even if you are already familiar with some of these models, since those apps introduce some general ideas and conventions that are specific to DSAIDE. In general, at the beginning of an app there will be information telling you which other apps are assumed as pre-requisite knowledge.</p>
+<p>Once you are done exploring DSAIDE, you can exit back to the <code>R</code> console by clicking the <em>Exit</em> button.</p>
 </div>
 </div>
 <div id="level-2-directly-interacting-with-the-simulation-functions" class="section level3">
 <h3 class="hasAnchor">
 <a href="#level-2-directly-interacting-with-the-simulation-functions" class="anchor"></a>Level 2: Directly interacting with the simulation functions</h3>
+<p>Using DSAIDE through the <em>Level 1</em> approach just described means you will not need to read or write any code. If an when you want to learn more, you can proceed to <em>Level 2</em>.</p>
 <p>Once you are comfortable interacting with the models and have a good understanding of the concepts covered by the different apps, it is possible, without too much effort, to interact with the simulation models directly. This provides more flexibility at the cost of writing a limited amount of code.</p>
-<p>To facilitate direct interaction and modification of the underlying simulations, each app is structured in such a way that the underlying model/simulation is a stand-alone function. For some apps, there are multiple underlying functions involved. You can call any of these functions directly, without going through the graphical interface. The <em>Further Information</em> tab inside each app provides the name of the corresponding underlying function(s) and how to call their help files to get information on their use.</p>
-<p>Consider as example the first app, called “ID Dynamics Intro.” The simulator function for this model is called <code>simulate_SIR_model_ode.R</code>. After loading the package (if not already loaded) with</p>
+<p>To facilitate direct interaction and modification of the underlying simulations, each app is structured in such a way that the underlying model/simulation is a stand-alone function. For some apps, there are multiple underlying functions involved. Assuming you have loaded the package, you can call any of these functions directly, without going through the graphical interface. The <em>Further Information</em> tab inside each app provides the name of the corresponding underlying function(s) and how to call their help files to get information on their use.</p>
+<p>Consider as example the first app, <em>Basic SIR Model</em>. As you can read in the <em>Further Information</em> tab, this app uses two simulator functions, <code>simulate_SIR_model_ode</code> and <code>simulate_SIR_model_discrete</code>. After loading the package (if not already loaded) with</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://ahgroup.github.io/DSAIDE/">'DSAIDE'</a></span><span class="op">)</span> </code></pre></div>
 <pre><code>## Loading required package: shiny</code></pre>
 <pre><code>## Welcome to the DSAIDE package. Type dsaidemenu() to get started.</code></pre>
-<p>you can learn about the inputs and outputs of the model/function by looking at its documentation</p>
+<p>you can learn about the inputs and outputs of the model/function by looking at its documentation. For instance for the first simulator function, <code>simulate_SIR_model_ode</code>, you can type the following into the <code>R</code> console:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/help.html">help</a></span><span class="op">(</span><span class="st">'simulate_SIR_model_ode'</span><span class="op">)</span></code></pre></div>
-<p>The help file explains that you can run the simulation by specifying initial number of susceptibles and infected, the duration for which the simulation should be run, and the infection and recovery parameters. Each parameter has some default, listed in the help file. Running a simulation model without any specifications runs it with the defaults:</p>
+<p>The help file explains that you can run the simulation by specifying initial number of individuals in each compartment (susceptible, infected, recovered), the parameters governing the model processes (here the rates of infection and recovery), as well as time parameters (start time, end time, and time step). Note that the time step determines the times for which results are returned, not the internal time step during simulation.</p>
+<p>Each parameter has some default, listed in the help file. Running a simulation model without any specifications runs it with the defaults:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/simulate_SIR_model_ode.html">simulate_SIR_model_ode</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p>Calling the simulation function execuctes the underlying dynamical model (here a simple 3 compartment ODE model, as described in the “Model” section of the app). Most simulation functions produce and return time-series for the dynamics of each of the variables that are tracked as a list. You can then take the results returned from the simulation function and further process them. For instance you could plot the time-series for susceptible as function of time:</p>
+<p>Calling the simulation function runs the underlying model (here a simple 3 compartment ODE model, as described in the <em>Model</em> section of the app). Most simulation functions produce and return time-series for the dynamics of each of the variables that are tracked as a list. What exactly is returned is described in the help file for each function.</p>
+<p>You can take the results returned from the simulation function and further process them. For instance you could plot the time-series for susceptible as function of time:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">$</span><span class="va">ts</span><span class="op">[</span> , <span class="st">"time"</span><span class="op">]</span>,<span class="va">result</span><span class="op">$</span><span class="va">ts</span><span class="op">[</span> , <span class="st">"S"</span><span class="op">]</span>,xlab<span class="op">=</span><span class="st">'Time'</span>,ylab<span class="op">=</span><span class="st">'Number Susceptible'</span>,type<span class="op">=</span><span class="st">'l'</span><span class="op">)</span></code></pre></div>
-<p><img src="DSAIDE_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
+<p><img src="DSAIDE_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
 <p>You can overwrite the default settings by providing your own values for specific parameters, as shown in this example:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/simulate_SIR_model_ode.html">simulate_SIR_model_ode</a></span><span class="op">(</span>S <span class="op">=</span> <span class="fl">2000</span>, b <span class="op">=</span> <span class="fl">0.001</span>, g <span class="op">=</span> <span class="fl">0.5</span>, tfinal <span class="op">=</span> <span class="fl">200</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">$</span><span class="va">ts</span><span class="op">[</span> , <span class="st">"time"</span><span class="op">]</span>,<span class="va">result</span><span class="op">$</span><span class="va">ts</span><span class="op">[</span> , <span class="st">"S"</span><span class="op">]</span>,xlab<span class="op">=</span><span class="st">'Time'</span>,ylab<span class="op">=</span><span class="st">'Number Susceptible'</span>,type<span class="op">=</span><span class="st">'l'</span><span class="op">)</span></code></pre></div>
-<p><img src="DSAIDE_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
+<p><img src="DSAIDE_files/figure-html/unnamed-chunk-8-1.png" width="700"></p>
 <p>Any values that you do not specify will be kept at their defaults.</p>
 <p>Note that unless explicitly specified, the models do not have inherent time units. Instead, those depend on the time units you choose for the parameters. It is important to ensure that all quantities (parameters and time settings) have the same time units, e.g. days or months (or the inverse of those units for the rate parameters).</p>
 <p>Not all simulator functions return time-series. For instance the function underlying the uncertainty and sensitivity app returns specific outcomes (maximum and final state of variables) for different parameter values. In every instance, the documentation for the function explains what is returned, so you know how to take the returned results and further process them.</p>
@@ -215,7 +225,7 @@ Screenshot of the <em>What to do</em> section of one of the apps.
 <span class="op">}</span>
 <span class="co">#plot final result</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">gvec</span>,<span class="va">peak</span>,type<span class="op">=</span><span class="st">'p'</span>,xlab<span class="op">=</span><span class="st">'Rate of recovery'</span>,ylab<span class="op">=</span><span class="st">'Max number of infected'</span><span class="op">)</span></code></pre></div>
-<p><img src="DSAIDE_files/figure-html/unnamed-chunk-8-1.png" width="700"></p>
+<p><img src="DSAIDE_files/figure-html/unnamed-chunk-9-1.png" width="700"></p>
 <p>Thus, you can add your own custom code to the existing simulator functions and with a few lines of extra code analyze and explore many more questions and scenarios than those accessible through the graphical interface. This provides a lot more flexibility, but requires writing some R code to interface with the supplied simulator functions.</p>
 </div>
 <div id="level-3-modifying-the-simulation-functions" class="section level3">
@@ -259,8 +269,8 @@ Screenshot of the <em>What to do</em> section of one of the apps.
   <span class="va">peak</span><span class="op">[</span><span class="va">n</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">result</span><span class="op">$</span><span class="va">ts</span><span class="op">[</span>,<span class="st">"I"</span><span class="op">]</span><span class="op">)</span>
 <span class="op">}</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">wvec</span>,<span class="va">peak</span>,type<span class="op">=</span><span class="st">'p'</span>,xlab<span class="op">=</span><span class="st">'Rate of waning immunity'</span>,ylab<span class="op">=</span><span class="st">'Max number of infected'</span><span class="op">)</span></code></pre></div>
-<p><img src="DSAIDE_files/figure-html/unnamed-chunk-15-1.png" width="700"></p>
-<p>For most users and especially novice coders, it is likely best to start with one of the provided models and modify as needed. However, at this level, you have essentially full control and are only limited by what can be accomplished using the <code>R</code> programming language and their ability and interest in writing customized code.</p>
+<p><img src="DSAIDE_files/figure-html/unnamed-chunk-16-1.png" width="700"></p>
+<p>For most users and especially novice coders, it is likely best to start with one of the provided models and modify as needed. However, at this level, you have essentially full control and are only limited by what can be accomplished using the <code>R</code> programming language and your ability and interest in writing customized code.</p>
 </div>
 </div>
 <div id="contributing-to-the-package" class="section level2">
@@ -273,22 +283,27 @@ Screenshot of the <em>What to do</em> section of one of the apps.
 <h2 class="hasAnchor">
 <a href="#further-information" class="anchor"></a>Further information</h2>
 <ul>
+<li>The <a href="https://ahgroup.github.io/DSAIDE/articles/DSAIDE.html">package tutorial (vignette)</a> contains detailed instructions on the different ways the package can be used.</li>
 <li>
-<a href="https://doi.org/10.1371/journal.pcbi.1005642">I published a paper describing the package and how to use it</a>. The package structure has changed since the paper was published, but it still describes the overall idea and context well, if you are interested in that.</li>
-<li>A ‘companion’ package to this one, called Dynamical Systems Approaches for Immune Respone Modeling (DSAIRM), focuses on models for analyzing with-host infection dynamics. It has the same structure as DSAIDE. <a href="https://ahgroup.github.io/DSAIRM/">See the DSAIRM site for more information.</a>
+<a href="https://doi.org/10.1371/journal.pcbi.1005642">I published a paper describing the package</a>. The package has since been updated and changed, but the paper still describes the overall idea and context well.<br>
 </li>
-<li>I have solutions (as R Markdown files) to most of the ‘What to do’ tasks for the different apps. If you are an instructor using this package as part of a class, email me if you are interested in having access to these solutions.</li>
+<li>I regularly teach two courses related to infectious diseases and modeling. All materials for those courses <a href="https://andreashandel.github.io/IDEMAcourse/">are freely available online</a>.</li>
+<li>As part of these courses, <a href="https://andreashandel.github.io/IDEMAbook/">I wrote a freely available online textbook</a>. It is not (and probably never will be) finished, some chapters are fairly empty, but some topics are covered in enough detail that I use it for teaching.</li>
+<li>I have solutions to all of the <em>What to do</em> tasks for each app. If you are an instructor using this package as part of a class, email me if you are interested in having access to these solutions.</li>
+<li>If you want to take a deeper look at the package, see <a href="https://github.com/ahgroup/DSAIDE/blob/master/inst/docsfordevelopers/documentation.md">this Markdown file</a> which provides further information on the details of the package structure. I’d be excited to receive any contributions from individuals who want to help improve the package. If you plan to develop new apps, or make other substantial contributions, it might be best to get in touch with me first.</li>
+<li>A ‘companion’ package to this one, called Dynamical Systems Approaches for Immune Response Modeling (DSAIRM), focuses on models for analyzing with-host infection dynamics. It has the same structure as DSAIDE. <a href="https://ahgroup.github.io/DSAIRM/">See the DSAIRM site for more information.</a>
+</li>
 </ul>
 </div>
 <div id="contributors" class="section level2">
 <h2 class="hasAnchor">
 <a href="#contributors" class="anchor"></a>Contributors</h2>
-<p>This R package is developed and maintained by <a href="http://handelgroup.uga.edu/">Andreas Handel</a>. A full list of contributors <a href="https://ahgroup.github.io/DSAIDE/authors.html">can be found here</a>.</p>
+<p>This R package is developed and maintained by <a href="https://www.andreashandel.com/">Andreas Handel</a>. A full list of contributors and a Bibtex entry for the citation <a href="https://ahgroup.github.io/DSAIDE/authors.html">can be found here</a>.</p>
 </div>
 <div id="citation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#citation" class="anchor"></a>Citation</h2>
-<p>If the package does in any way help you with your work such that it warrants citing in one of your papers, please cite <a href="https://doi.org/10.1371/journal.pcbi.1005642">the DSAIDE publication in PLoS Comp Bio</a>.</p>
+<p>If the package does in any way help you with your work such that it warrants citing in one of your papers, please cite <a href="https://doi.org/10.1371/journal.pcbi.1005642">this publication in PLoS Computational Biology</a>.</p>
 </div>
 <div id="references" class="section level2 unnumbered">
 <h2 class="hasAnchor">
