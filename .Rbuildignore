@@ -8,10 +8,9 @@
 ^\.Rproj\.user$
 ^CRAN-RELEASE$
 ^README\.md$
+^README\.Rmd$
 ^cran-comments\.md$
 ^to-do\.md$
 ^codecov\.yml$
 ^_pkgdown\.yml$
-^vignettes\related-resources.Rmd$
 ^\.github$
-^README.Rmd
