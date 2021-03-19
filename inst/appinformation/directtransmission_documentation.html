@@ -29,28 +29,6 @@
 
 
 
-<style type="text/css">
-/* for pandoc --citeproc since 2.11 */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
-</style>
 
 
 
@@ -83,7 +61,7 @@ div.csl-indent {
 <h2>The Model</h2>
 <div id="model-overview" class="section level3">
 <h3>Model Overview</h3>
-<p>This is a simple SIR model with births and deaths and 2 types of direct transmission, density-dependent and frequency-dependent (based on the terminology in <span class="citation">(Begon et al. 2002)</span> - see <em>Further Information</em> tab for references).</p>
+<p>This is a simple SIR model with births and deaths and 2 types of direct transmission, density-dependent and frequency-dependent (based on the terminology in <span class="citation">(<strong>begon02?</strong>)</span> - see <em>Further Information</em> tab for references).</p>
 <p>This model has the following compartments:</p>
 <ul>
 <li><strong>S</strong> - uninfected and susceptible individuals</li>
@@ -179,15 +157,10 @@ Model Diagram
 <li>For this app, the underlying function(s) running the simulation are called <code>simulate_directtransmission_ode</code>. You can call them directly, without going through the shiny app. Use the <code>help()</code> command for more information on how to use the functions directly. If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself.</li>
 <li>You can also download all simulator functions and modify them for your own purposes. Of course to modify these functions, you’ll need to do some coding.</li>
 <li>For examples on using the simulators directly and how to modify them, read the package vignette by typing <code>vignette(&#39;DSAIDE&#39;)</code> into the R console.</li>
-<li>For more on this topic, see e.g. <span class="citation">(Begon et al. 2002)</span>.</li>
+<li>For more on this topic, see e.g. <span class="citation">(<strong>begon02?</strong>)</span>.</li>
 </ul>
-<div id="references" class="section level3 unnumbered">
-<h3 class="unnumbered">References</h3>
-<div id="refs" class="references csl-bib-body hanging-indent">
-<div id="ref-begon02" class="csl-entry">
-Begon, M., M. Bennett, R. G. Bowers, N. P. French, S. M. Hazel, and J. Turner. 2002. <span>“A Clarification of Transmission Terms in Host-Microparasite Models: Numbers, Densities and Areas.”</span> <em>Epidemiology and Infection</em> 129 (1): 147–53.
-</div>
-</div>
+<div id="references" class="section level3">
+<h3>References</h3>
 </div>
 </div>
 

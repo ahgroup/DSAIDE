@@ -1,6 +1,6 @@
 ## Test environments
 
-* local Windows 10.1 x86_64, R 3.6.1
+* local Windows 10.1 x86_64, R 4.0.4
 * R-CMD-Check (Github actions) 
 * Win-builder 
 * devtools: check_rhub(), check_win_release(), check_win_devel()
@@ -12,7 +12,7 @@
 1 note:
 
 checking installed package size ... NOTE
-  installed size is  5.8Mb
+  installed size is  6.0Mb
   sub-directories of 1Mb or more:
     appinformation   4.0Mb
 
