@@ -6,7 +6,7 @@ Description: Exploration of simulation models (apps) of various infectious disea
     about infectious disease epidemiology (ecology/evolution) from a dynamical systems perspective.
     All apps include explanations of the underlying models and instructions on what to do with the models. 
 Version: 0.9.1
-Date: 2021-02-05
+Date: 2021-03-17
 Authors@R: c(
     person("Andreas", "Handel", email = "ahandel@uga.edu", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-4622-1146") ),
     person("Cody", "Dailey",  role = "ctb"), 
@@ -24,20 +24,20 @@ License: GPL-3
 Encoding: UTF-8
 LazyData: TRUE
 Imports:
-    adaptivetau (>= 2.2),
-    deSolve (>= 1.13),
-    dplyr (>= 0.7.4),
-    ggplot2 (>= 2.2),
-    gridExtra (>= 2.3),
-    lhs (>= 0.15),
+    adaptivetau,
+    deSolve,
+    dplyr,
+    ggplot2,
+    gridExtra,
+    lhs,
     nloptr,
     plotly,
     rlang,
     stats,
-    utils (>= 3.4),
-    XML (>= 3.98)
+    utils,
+    XML 
 Depends:
-    R (>= 3.5),
+    R (>= 4.0.0),
     shiny (>= 1.2)
 Suggests: 
     covr,
