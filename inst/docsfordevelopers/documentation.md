@@ -143,5 +143,9 @@ library('DSAIDE')
 * Run devtools::check_rhub(), devtools::check_win_release() and devtools::check_win_devel()
 * Do a test run of devtools::release() - fix any remaining issues, then re-run and release
 
+### To manage github actions for CI
+
+
+
 ### Trouble-shooting
 * If you get the 'can't find qpdf error' during build, try this (on windows): https://stackoverflow.com/questions/41570633/how-to-build-qpdf-on-windows
