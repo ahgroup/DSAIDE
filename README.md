@@ -14,9 +14,9 @@ status](https://www.r-pkg.org/badges/version/DSAIDE)](https://cran.r-project.org
 [![CRAN
 checks](https://cranchecks.info/badges/summary/DSAIDE)](https://cran.r-project.org/web/checks/check_results_DSAIDE.html)
 [![metacran monthly
-downloads](http://cranlogs.r-pkg.org/badges/DSAIDE)](https://cran.r-project.org/package=DSAIDE)
+downloads](https://cranlogs.r-pkg.org/badges/DSAIDE)](https://cran.r-project.org/package=DSAIDE)
 [![metacran
-downloads](http://cranlogs.r-pkg.org/badges/grand-total/DSAIDE?color=ff69b4)](https://cran.r-project.org/package=DSAIDE)
+downloads](https://cranlogs.r-pkg.org/badges/grand-total/DSAIDE?color=ff69b4)](https://cran.r-project.org/package=DSAIDE)
 <!-- badges: end -->
 
 **Dynamical Systems Approach to Infectious Disease Epidemiology
