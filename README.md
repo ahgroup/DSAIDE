@@ -76,7 +76,7 @@ package [see the *Get Started* tutorial
     you are an instructor using this package as part of a class, email
     me if you are interested in having access to these solutions.
 -   If you want to take a deeper look at the package, see [this Markdown
-    file](https://github.com/ahgroup/DSAIDE/blob/master/inst/docsfordevelopers/documentation.md)
+    file](https://github.com/ahgroup/DSAIDE/blob/master/auxiliary/docsfordevelopers/documentation.md)
     which provides further information on the details of the package
     structure. I’d be excited to receive any contributions from
     individuals who want to help improve the package. If you plan to
