@@ -120,7 +120,7 @@ knitr::include_graphics("modelexample.png")
 To use the package, you do not need to do any math with differential equations, i.e. no calculus (you will have to do a bit of algebra for some tasks.) By seeing the model equations, diagram and description, you should be able to learn how these models are set up and what the different model terms mean and do. The idea is that you learn how to read those models (and if inclined, build and implement your own, see below), but you will not need to do any complicated math involving differential equations.
 
 
-The __What to do__ tab contains a list of suggested tasks you might want to go through. By doing those tasks, you will learn the topic a specific app is meant to teach. The following figure shows an example for part of one of those _What to do_ sections for one of the apps. 
+The __What to do__ tab contains a list of suggested tasks you might want to go through. By doing those tasks, you will learn the topic a specific app is meant to teach. The following figure shows an example for part of one of those _What to do_ sections. 
 
 ```{r whattodoexample,  fig.cap='Screenshot of the _What to do_ section of one of the apps.', echo=FALSE}
 knitr::include_graphics("whattodoexample.png")
