@@ -54,6 +54,9 @@ For an introduction to the package, step-by-step instructions on getting started
 * A 'companion' package to this one, called Dynamical Systems Approaches for Immune Response Modeling (DSAIRM), focuses on models for analyzing with-host infection dynamics. It has the same structure as DSAIDE. [See the DSAIRM site for more information.](https://ahgroup.github.io/DSAIRM/)
 
 ## Citation and Contributors
-If the DSAIDE package does in any way help you with your work such that it warrants citing it, please cite [the DSAIDE publication in PLoS Computational Biology](https://doi.org/10.1371/journal.pcbi.1005642). 
+If the package does in any way help you with your work such that it warrants citing it, please cite [this publication in PLoS Computational Biology](https://doi.org/10.1371/journal.pcbi.1005642). 
 
 This R package is developed and maintained by [Andreas Handel](https://www.andreashandel.com/). A full list of contributors and a Bibtex entry for the citation [can be found here](https://ahgroup.github.io/DSAIDE/authors.html).
+
+This project was/is partially supported by NIH grants R01GM124280 and R01GM12480-03S1.
+
