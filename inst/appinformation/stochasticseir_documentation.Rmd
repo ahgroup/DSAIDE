@@ -12,25 +12,8 @@ bibliography: dsaide_references.bib
 ---
 
 ```{r, include = FALSE}
-#*************************************
-#general setup to define package and get path locations
-#all paths are inside the package and retrieved with system.file
-packagename = "DSAIDE"
-helperdir = "helperfunctions"
-mbmodeldir = "mbmodels"
-figuredir = "media"
-appdocdir = "appinformation" 
-#*************************************
-#Note: for this to process/knit, several helper functions need to be available (sourced) first
-#those are in the inst/helperfunctions folder
-#Note: in general, the "processing-script.R" in the docsfordevelopers should be used to produce the html docs
-#manual knitting of each doc only during development/testing
-#*************************************
-files_to_source = list.files(system.file(helperdir,package = packagename),full.names=TRUE)
-sapply(files_to_source, source) #sourcing needs to happen inside each Rmd file since knitr starts a new environment
-#load the settings file for the current app 
-#so we can automatically include figure, list the functions in the further information section
-#and use other information specific to the current app for the task table generation
+#load various variable definitions that are the same for each app
+source('startup_script.R')
 currentrmdfile = knitr::current_input() 
 appsettings = get_settings(currentrmdfile,appdocdir,packagename)
 ```
@@ -298,20 +281,19 @@ rc = rc + nrec #increment record counter by number of outcomes to record for thi
 
 ```{r echo=FALSE}
 #save the fully filled task table to a tsv file
-alloutcomes$QuizID = paste0('dsaide_',appsettings$appid)
+alloutcomes$QuizID = paste0(packagename,"_",appsettings$appid)
 alloutcomes$AppTitle = appsettings$apptitle
 alloutcomes$AppID = appsettings$appid
-alloutcomes <- alloutcomes %>% dplyr::select(QuizID,AppID,AppTitle,TaskID,TaskText,RecordID,Record,Type,Note)		
-write.table(alloutcomes, paste0(appsettings$appid,"_tasktable.tsv"), append = FALSE, sep = "\t", row.names = F, col.names = TRUE)
+#remove a few variables from the data frame
+savedoutcomes <- dplyr::select(alloutcomes,QuizID,AppID,AppTitle,TaskID,TaskText,RecordID,Record,Type,Note)		
+write.table(savedoutcomes, paste0(appsettings$appid,"_tasktable.tsv"), append = FALSE, sep = "\t", row.names = F, col.names = TRUE)
 ```
 
 
 ```{r, echo=FALSE, results='asis'}
 # Take all the text stored in the table and print the tasks and items to record
-write_tasktext_new(alloutcomes)
+write_tasktext(alloutcomes)
 ```
-
-
 
 
 
