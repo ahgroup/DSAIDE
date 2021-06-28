@@ -142,6 +142,9 @@ library('DSAIDE')
 * Run devtools::check_rhub(), devtools::check_win_release() and devtools::check_win_devel()
 * Do a test run of devtools::release() - fix any remaining issues, then re-run and release
 
+### Notes on 'notes'
+* CRAN check complains about "Undefined global functions or variables" in ggplot2 code.
+
 ### To manage github actions for CI
 
 
