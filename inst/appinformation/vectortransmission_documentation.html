@@ -29,28 +29,6 @@
 
 
 
-<style type="text/css">
-/* for pandoc --citeproc since 2.11 */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
-</style>
 
 
 
@@ -171,7 +149,7 @@ Model Diagram
 </div>
 <div id="task-7" class="section level3">
 <h3>Task 7</h3>
-<p>While we have played around with the transmission rates, we haven’t really given much thought as to how those could map to real biological quantities. Each infection requires an interaction between a host and a vector. This interaction is often a bite, especially if we think about mosquitoes. If the vectors have a fixed rate of biting (call it <em>r</em>), no matter how many hosts there are, then the rate at which a vector bites any one of the hosts in a population of size <em>N</em> is <em>rb</em>/<em>N</em>. If there is some chance of transmission per bite from infected vector to human (call it <em>q<sub>1</sub></em>) and similarly a chance of transmission per bite from infected human to vector (<em>q<sub>2</sub></em>), then the transmission parameters in our model are <em>b<sub>1</sub></em>= <em>rq<sub>1</sub>/N</em> and <em>b<sub>2</sub></em> = <em>rq<sub>2</sub>/N</em>. At the beginning of an outbreak, if we assume everyone is susceptible, we can replace <em>N</em> with <em>S</em>. If we stick these quantities into the <em>R<sub>0</sub></em> equation, we find <em>R<sub>0</sub></em>=_r^2<em>q<sub>1</sub></em>q<sub>2</sub><em>Sv<sub>0</sub>/(g</em>m*Sh<sub>0</sub>)_. This produces two potentially interesting insights. First, the reproductive number, and thus outbreak size, is proportional to the square of the biting rate. Reducing that rate is thus an important target. Further, we find that while a larger vector number leads to a higher <em>R<sub>0</sub></em>, it turns out an increase in the host population <em>reduces</em> <em>R<sub>0</sub></em>. The reason for that is that if there are many hosts, two bites of the same host (which is required for ongoing transmission) becomes less likely. For more on that, see e.g. <span class="citation">(Keeling and Rohani 2008)</span>.</p>
+<p>While we have played around with the transmission rates, we haven’t really given much thought as to how those could map to real biological quantities. Each infection requires an interaction between a host and a vector. This interaction is often a bite, especially if we think about mosquitoes. If the vectors have a fixed rate of biting (call it <em>r</em>), no matter how many hosts there are, then the rate at which a vector bites any one of the hosts in a population of size <em>N</em> is <em>rb</em>/<em>N</em>. If there is some chance of transmission per bite from infected vector to human (call it <em>q<sub>1</sub></em>) and similarly a chance of transmission per bite from infected human to vector (<em>q<sub>2</sub></em>), then the transmission parameters in our model are <em>b<sub>1</sub></em>= <em>rq<sub>1</sub>/N</em> and <em>b<sub>2</sub></em> = <em>rq<sub>2</sub>/N</em>. At the beginning of an outbreak, if we assume everyone is susceptible, we can replace <em>N</em> with <em>S</em>. If we stick these quantities into the <em>R<sub>0</sub></em> equation, we find <em>R<sub>0</sub></em>=_r^2<em>q<sub>1</sub></em>q<sub>2</sub><em>Sv<sub>0</sub>/(g</em>m*Sh<sub>0</sub>)_. This produces two potentially interesting insights. First, the reproductive number, and thus outbreak size, is proportional to the square of the biting rate. Reducing that rate is thus an important target. Further, we find that while a larger vector number leads to a higher <em>R<sub>0</sub></em>, it turns out an increase in the host population <em>reduces</em> <em>R<sub>0</sub></em>. The reason for that is that if there are many hosts, two bites of the same host (which is required for ongoing transmission) becomes less likely. For more on that, see e.g. <span class="citation">(<strong>keeling08?</strong>)</span>.</p>
 <p><strong>Record</strong></p>
 <ul>
 <li>Nothing</li>
@@ -209,18 +187,10 @@ Model Diagram
 <li>For this app, the underlying function(s) running the simulation are called <code>simulate_Vector_transmission_model_ode</code>. You can call them directly, without going through the shiny app. Use the <code>help()</code> command for more information on how to use the functions directly. If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself.</li>
 <li>You can also download all simulator functions and modify them for your own purposes. Of course to modify these functions, you’ll need to do some coding.</li>
 <li>For examples on using the simulators directly and how to modify them, read the package vignette by typing <code>vignette(&#39;DSAIDE&#39;)</code> into the R console.</li>
-<li>Some more information on vector-borne diseases and modeling can be found in <span class="citation">(Kilpatrick and Randolph 2012)</span>.</li>
+<li>Some more information on vector-borne diseases and modeling can be found in <span class="citation">(<strong>kilpatrick12?</strong>)</span>.</li>
 </ul>
-<div id="references" class="section level3 unnumbered">
-<h3 class="unnumbered">References</h3>
-<div id="refs" class="references csl-bib-body hanging-indent">
-<div id="ref-keeling08" class="csl-entry">
-Keeling, Matt J, and Pejman Rohani. 2008. <em>Modeling Infectious Diseases in Humans and Animals</em>. <span>Princeton University Press</span>.
-</div>
-<div id="ref-kilpatrick12" class="csl-entry">
-Kilpatrick, A Marm, and Sarah E Randolph. 2012. <span>“Drivers, Dynamics, and Control of Emerging Vector-Borne Zoonotic Diseases.”</span> <em>Lancet (London, England)</em> 380 (9857): 1946–55. <a href="https://doi.org/10.1016/S0140-6736(12)61151-9">https://doi.org/10.1016/S0140-6736(12)61151-9</a>.
-</div>
-</div>
+<div id="references" class="section level3">
+<h3>References</h3>
 </div>
 </div>
 

@@ -83,7 +83,7 @@ div.csl-indent {
 <h2>The Model</h2>
 <div id="data" class="section level3">
 <h3>Data</h3>
-<p>For this app, weekly mortality data from the 1918 influenza pandemic in New York City is used. The data comes from <span class="citation">(Mills, Robins, and Lipsitch 2004)</span>. You can read a bit more about the data by looking at its help file with <code>help(&#39;flu1918data&#39;)</code>.</p>
+<p>For this app, weekly mortality data from the 1918 influenza pandemic in New York City is used. The data comes from <span class="citation">(<strong>mills04?</strong>)</span>. You can read a bit more about the data by looking at its help file with <code>help(&#39;flu1918data&#39;)</code>.</p>
 <p>The data is reported in new deaths per week per 100,000 individuals. Our model (see next section) tracks <em>cumulative</em>, not <em>new</em> deaths. The easiest way to match the two is to add up the weekly reported deaths in the data and compute cumulative deaths for each week. We can then fit that quantity directly to the model variable <em>D</em>. Adjustment for population size is also needed, which is done by dividing the reported death rate by 100,000 and multiplying with the population size. This is further discussed in the tasks.</p>
 <p>Alternatively, the model itself can be used to generate artificial data. We can then fit the model to this model-generated data. This is useful for diagnostic purposes, as you will learn by going through the tasks for this app.</p>
 </div>
@@ -243,31 +243,19 @@ SSR= \sum_t (\log(D_t) - \log(D^{data}_t))^2
 <li>You can also download all simulator functions and modify them for your own purposes. Of course, to modify these functions, you will need to do some coding.</li>
 <li>For examples on using the simulators directly and how to modify them, read the package vignette by typing <code>vignette(&#39;DSAIDE&#39;)</code> into the R console.</li>
 <li>The optimizers/fitting routines used here are from the <code>nloptr</code> package, specifically the ones used here are (1 = COBYLA, 2 = NELDERMEAD, 3 = SBPLX). See the nloptr package and the <a href="https://nlopt.readthedocs.io/en/latest/">nlopt website</a> for details.</li>
-<li>A good source for fitting models in <code>R</code> is <span class="citation">(Bolker 2008)</span>. Note though that the focus is on ecological data and ODE-type models are not/barely discussed.</li>
-<li>This book <span class="citation">(Hilborn and Mangel 1997)</span> has nice explanations of data fitting, model comparison, etc. but is more theoretical.</li>
+<li>A good source for fitting models in <code>R</code> is <span class="citation">(<strong>bolker08?</strong>)</span>. Note though that the focus is on ecological data and ODE-type models are not/barely discussed.</li>
+<li>This book <span class="citation">(<strong>hilborn97?</strong>)</span> has nice explanations of data fitting, model comparison, etc. but is more theoretical.</li>
 <li>Many good online material exists on fitting/inference. Most of the material is explained in the context of static, non-mechanistic, statistical or machine learning models, but a lot of the principles apply equally to ODEs.</li>
-<li>A discussion of overfitting (also called ‘identifiability problem’) for ODEs is <span class="citation">(Miao et al. 2011)</span>.</li>
+<li>A discussion of overfitting (also called ‘identifiability problem’) for ODEs is <span class="citation">(<strong>miao11a?</strong>)</span>.</li>
 <li>Advanced functionality to fit stochastic models can be found in the <code>pomp</code> package in R. (If you do not know what stochastic models are, check out the stochastic apps in DSAIDE.)</li>
-<li>The data for this study is saved in the data variable <code>flu1918data</code>, you can read more about it by looking at its help file entry <code>help(flu1918data)</code>. The publication from which the data comes is <span class="citation">(Mills, Robins, and Lipsitch 2004)</span>.</li>
+<li>The data for this study is saved in the data variable <code>flu1918data</code>, you can read more about it by looking at its help file entry <code>help(flu1918data)</code>. The publication from which the data comes is <span class="citation">(<strong>mills04?</strong>)</span>.</li>
 <li>The fitting approach used and described here is based on a frequently used but simple approach of minimizing the sum of squares. Many other alternatives are possible. I think taking a fully Bayesian approach is best, and the available software tools are slowly reaching a level of sophistication that allows for fitting of the kind of models we discuss here. A great introduction to Bayesian statistics/fitting (with an example of an ODE model being fit in the last chapter) is <span class="citation">(McElreath 2020)</span>.</li>
 </ul>
 <div id="references" class="section level3 unnumbered">
 <h3 class="unnumbered">References</h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
-<div id="ref-bolker08" class="csl-entry">
-Bolker, Benjamin M. 2008. <em>Ecological Models and Data in r</em>. <span>Princeton University Press</span>.
-</div>
-<div id="ref-hilborn97" class="csl-entry">
-Hilborn, Ray, and Marc Mangel. 1997. <em>The Ecological Detective : Confronting Models with Data</em>. Monographs in Population Biology 28. <span>Princeton, N.J.</span>: <span>Princeton University Press</span>.
-</div>
 <div id="ref-mcelreath20" class="csl-entry">
 McElreath, Richard. 2020. <em>Statistical <span>Rethinking</span>: <span>A Bayesian Course</span> with <span>Examples</span> in <span>R</span> and <span>STAN</span></em>. 2nd edition. <span>Boca Raton</span>: <span>Chapman and Hall/CRC</span>.
-</div>
-<div id="ref-miao11a" class="csl-entry">
-Miao, Hongyu, Xiaohua Xia, Alan S. Perelson, and Hulin Wu. 2011. <span>“On Identifiability of Nonlinear <span>ODE</span> Models and Applications in Viral Dynamics.”</span> <em>SIAM Review</em> 53 (1): 3. <a href="https://doi.org/10.1137/090757009">https://doi.org/10.1137/090757009</a>.
-</div>
-<div id="ref-mills04" class="csl-entry">
-Mills, Christina E., James M. Robins, and Marc Lipsitch. 2004. <span>“Transmissibility of 1918 Pandemic Influenza.”</span> <em>Nature</em> 432 (7019): 904–6. <a href="https://doi.org/10.1038/nature03063">https://doi.org/10.1038/nature03063</a>.
 </div>
 </div>
 </div>

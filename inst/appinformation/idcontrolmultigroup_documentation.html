@@ -29,28 +29,6 @@
 
 
 
-<style type="text/css">
-/* for pandoc --citeproc since 2.11 */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
-</style>
 
 
 
@@ -69,7 +47,7 @@ div.csl-indent {
 
 <div id="shinytab1" class="section level2">
 <h2>Overview</h2>
-<p>This app lets you explore interventions applied to different population subgroups with potentially different infectiousness and mortality patterns. The app assumes you have worked through <em>The Basics</em> and <em>Reproductive Number</em> sections, as well as the first two apps in the <em>Control</em> section. This app specifically builds on the <em>ID Control for multiple outbreaks</em> app and follows a model and analysis described in <span class="citation">(Handel et al. 2020)</span>, see the <em>Further Information</em> tab for this and other related references.</p>
+<p>This app lets you explore interventions applied to different population subgroups with potentially different infectiousness and mortality patterns. The app assumes you have worked through <em>The Basics</em> and <em>Reproductive Number</em> sections, as well as the first two apps in the <em>Control</em> section. This app specifically builds on the <em>ID Control for multiple outbreaks</em> app and follows a model and analysis described in <span class="citation">(<strong>Handel2020?</strong>)</span>, see the <em>Further Information</em> tab for this and other related references.</p>
 <div id="learning-objectives" class="section level3">
 <h3>Learning Objectives</h3>
 <ul>
@@ -206,22 +184,11 @@ div.csl-indent {
 <li>For this app, the underlying function(s) running the simulation are called <code>simulate_idcontrolmultigroup_ode</code>. You can call them directly, without going through the shiny app. Use the <code>help()</code> command for more information on how to use the functions directly. If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself.</li>
 <li>You can also download all simulator functions and modify them for your own purposes. Of course, to modify these functions, you’ll need to do some coding.</li>
 <li>For examples on using the simulators directly and how to modify them, read the package vignette by typing <code>vignette(&#39;DSAIDE&#39;)</code> into the R console.</li>
-<li>This app closely follows a model and analysis described in <span class="citation">(Handel et al. 2020)</span>.</li>
-<li>The POLYMOD mixing data is described in <span class="citation">(Mossong et al. 2008)</span>. Similar studies have since provided additional data, e.g. <span class="citation">(<strong>zhang20a?</strong>; Klepac et al. 2020)</span>.</li>
+<li>This app closely follows a model and analysis described in <span class="citation">(<strong>Handel2020?</strong>)</span>.</li>
+<li>The POLYMOD mixing data is described in <span class="citation">(<strong>mossong08?</strong>)</span>. Similar studies have since provided additional data, e.g. <span class="citation">(<strong>zhang20a?</strong>; <strong>klepac20?</strong>)</span>.</li>
 </ul>
-<div id="references" class="section level3 unnumbered">
-<h3 class="unnumbered">References</h3>
-<div id="refs" class="references csl-bib-body hanging-indent">
-<div id="ref-Handel2020" class="csl-entry">
-Handel, Andreas, Joel Miller, Yang Ge, and Isaac Chun-Hai Fung. 2020. <span>“If Containment Is Not Possible, How Do We Minimize Mortality for <span>COVID</span>-19 and Other Emerging Infectious Disease Outbreaks?”</span> <a href="https://doi.org/10.1101/2020.03.13.20034892">https://doi.org/10.1101/2020.03.13.20034892</a>.
-</div>
-<div id="ref-klepac20" class="csl-entry">
-Klepac, Petra, Adam J Kucharski, Andrew JK Conlan, Stephen Kissler, Maria Tang, Hannah Fry, and Julia R Gog. 2020. <span>“Contacts in Context: Large-Scale Setting-Specific Social Mixing Matrices from the <span>BBC Pandemic</span> Project.”</span> <em>medRxiv</em>. <a href="https://doi.org/10.1101/2020.02.16.20023754">https://doi.org/10.1101/2020.02.16.20023754</a>.
-</div>
-<div id="ref-mossong08" class="csl-entry">
-Mossong, Joël, Niel Hens, Mark Jit, Philippe Beutels, Kari Auranen, Rafael Mikolajczyk, Marco Massari, et al. 2008. <span>“Social Contacts and Mixing Patterns Relevant to the Spread of Infectious Diseases.”</span> <em>PLoS Medicine</em> 5 (3): e74. <a href="https://doi.org/10.1371/journal.pmed.0050074">https://doi.org/10.1371/journal.pmed.0050074</a>.
-</div>
-</div>
+<div id="references" class="section level3">
+<h3>References</h3>
 </div>
 </div>
 

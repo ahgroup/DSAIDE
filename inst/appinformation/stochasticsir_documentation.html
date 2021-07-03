@@ -29,28 +29,6 @@
 
 
 
-<style type="text/css">
-/* for pandoc --citeproc since 2.11 */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
-</style>
 
 
 
@@ -202,7 +180,7 @@ Model Diagram
 </div>
 <div id="task-4" class="section level3">
 <h3>Task 4</h3>
-<p>One can mathematically derive an equation linking the probability that an outbreak occurs, <em>p</em>, to the reproductive number (see e.g. <span class="citation">(Matt J. Keeling and Rohani 2008)</span>). We won’t try to do the math here but instead see if we can use the simulation to figure it out. Set parameters as in task 1. Then run the stochastic model for b = 0.0002, 0.0003, 0.0004, 0.0005, 0.0006, 0.001, 0.002. For each value, compute R<sub>0</sub> and write it down. Then run 100 stochastic simulations for each <em>b</em> value, with max time 300 and record the number of times you get an outbreak. Plot the relationship (either by hand or using the computer) between <em>R<sub>0</sub></em> and the probability of getting an outbreak. Note that running 100 stochastic simulations can take a bit of time, so be patient. If your computer is too slow, you might try to only run 50 or less, though with fewer simulations the estimate of the proportion of outbreaks is not as accurate as with more simulations.</p>
+<p>One can mathematically derive an equation linking the probability that an outbreak occurs, <em>p</em>, to the reproductive number (see e.g. <span class="citation">(<strong>keeling08?</strong>)</span>). We won’t try to do the math here but instead see if we can use the simulation to figure it out. Set parameters as in task 1. Then run the stochastic model for b = 0.0002, 0.0003, 0.0004, 0.0005, 0.0006, 0.001, 0.002. For each value, compute R<sub>0</sub> and write it down. Then run 100 stochastic simulations for each <em>b</em> value, with max time 300 and record the number of times you get an outbreak. Plot the relationship (either by hand or using the computer) between <em>R<sub>0</sub></em> and the probability of getting an outbreak. Note that running 100 stochastic simulations can take a bit of time, so be patient. If your computer is too slow, you might try to only run 50 or less, though with fewer simulations the estimate of the proportion of outbreaks is not as accurate as with more simulations.</p>
 <p><strong>Record</strong></p>
 <ul>
 <li>The relation between R0 and the probability of an outbreak is close to a straight line.</li>
@@ -232,25 +210,11 @@ Model Diagram
 <li>For this app, the underlying function(s) running the simulation are called <code>simulate_SIRSd_model_stochastic, simulate_SIRSd_model_ode</code>. You can call them directly, without going through the shiny app. Use the <code>help()</code> command for more information on how to use the functions directly. If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself.</li>
 <li>You can also download all simulator functions and modify them for your own purposes. Of course to modify these functions, you’ll need to do some coding.</li>
 <li>For examples on using the simulators directly and how to modify them, read the package vignette by typing <code>vignette(&#39;DSAIDE&#39;)</code> into the R console.</li>
-<li>For some more details on the equations connecting outbreak probability and R<sub>0</sub> see e.g. the stochastic dynamics chapters in the <a href="https://andreashandel.github.io/IDEMAbook">IDEMA book</a> or <span class="citation">(Matt J. Keeling and Rohani 2008)</span>.</li>
-<li>For some further reading concerning stochastic dynamics of ID, see e.g. <span class="citation">(Lloyd-Smith et al. 2005; Black 1966; M. J. Keeling 1997)</span>.</li>
+<li>For some more details on the equations connecting outbreak probability and R<sub>0</sub> see e.g. the stochastic dynamics chapters in the <a href="https://andreashandel.github.io/IDEMAbook">IDEMA book</a> or <span class="citation">(<strong>keeling08?</strong>)</span>.</li>
+<li>For some further reading concerning stochastic dynamics of ID, see e.g. <span class="citation">(<strong>lloyd-smith05a?</strong>; <strong>black66?</strong>; <strong>keeling97?</strong>)</span>.</li>
 </ul>
-<div id="references" class="section level3 unnumbered">
-<h3 class="unnumbered">References</h3>
-<div id="refs" class="references csl-bib-body hanging-indent">
-<div id="ref-black66" class="csl-entry">
-Black, F L. 1966. <span>“Measles Endemicity in Insular Populations: Critical Community Size and Its Evolutionary Implication.”</span> <em>Journal of Theoretical Biology</em> 11 (2): 207–11.
-</div>
-<div id="ref-keeling97" class="csl-entry">
-Keeling, M J. 1997. <span>“Modelling the Persistence of Measles.”</span> <em>Trends in Microbiology</em> 5 (12): 513–18. <a href="https://doi.org/10.1016/S0966-842X(97)01147-5">https://doi.org/10.1016/S0966-842X(97)01147-5</a>.
-</div>
-<div id="ref-keeling08" class="csl-entry">
-Keeling, Matt J, and Pejman Rohani. 2008. <em>Modeling Infectious Diseases in Humans and Animals</em>. <span>Princeton University Press</span>.
-</div>
-<div id="ref-lloyd-smith05a" class="csl-entry">
-Lloyd-Smith, James O, Paul C Cross, Cheryl J Briggs, Matt Daugherty, Wayne M Getz, John Latto, Maria S Sanchez, Adam B Smith, and Andrea Swei. 2005. <span>“Should We Expect Population Thresholds for Wildlife Disease?”</span> <em>Trends in Ecology &amp; Evolution</em> 20 (9): 511–19. <a href="https://doi.org/10.1016/j.tree.2005.07.004">https://doi.org/10.1016/j.tree.2005.07.004</a>.
-</div>
-</div>
+<div id="references" class="section level3">
+<h3>References</h3>
 </div>
 </div>
 

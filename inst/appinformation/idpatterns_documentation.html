@@ -158,7 +158,7 @@ Flow diagram for this model.
 <h3>Task 5</h3>
 <p>It is possible to compute the steady state values for the model variables at the endemic scenario, i.e. when the number of infected is non-zero. This computation is a bit messy for the model above because it has the extra <em>P</em> and <em>A</em> states that make the math more complicated (you can try for yourself as a challenge after you’ve done the simple model.) To keep the math simpler, we consider a simplified approximation of the above model. The way we have set our parameters so far, individuals spend a very short time in <em>P</em> compared to <em>I</em>. We can thus approximately ignore the <em>P</em> compartment and assume that individuals go directly from <em>S</em> to <em>I</em>. Further, for our parameter choices, nobody enters <em>A</em> and <em>D</em>, so we can ignore those compartments too. This produces the following simpler SIR model:</p>
 <p><span class="math display">\[ dS/dt = n -   b_I IS - m S \]</span> <span class="math display">\[ dI/dt = b_I SI - g_I I - m I \]</span> <span class="math display">\[ dR/dt =  g_I I  - m R \]</span></p>
-<p>We can follow the procedure above for computing the steady state for <em>S</em> to compute the endemic steady state by setting the left side of the equations to 0 and solving for the variables <em>S</em>, <em>I</em> and <em>R</em> as functions of model parameters only. Try it. You should get <em>S=(g<sub>I</sub> + m)/b<sub>I</sub> </em> and similar equations for <em>I</em> and <em>R</em>. For more on steady state calculations, see e.g. <span class="citation">(<strong>vynnycky10?</strong>)</span> or <span class="citation">(Keeling and Rohani 2008)</span> (but note that each of those references uses their own notation which is not quite the same as used here.) Compare the model simulations with the equations you found. Substitute the parameter values from the task above into the equations you found for <em>S</em>, <em>I</em> and <em>R</em> and confirm that you get approximately the same results as you get from running the model to steady state.</p>
+<p>We can follow the procedure above for computing the steady state for <em>S</em> to compute the endemic steady state by setting the left side of the equations to 0 and solving for the variables <em>S</em>, <em>I</em> and <em>R</em> as functions of model parameters only. Try it. You should get <em>S=(g<sub>I</sub> + m)/b<sub>I</sub> </em> and similar equations for <em>I</em> and <em>R</em>. For more on steady state calculations, see e.g. <span class="citation">(Vynnycky and White 2010)</span> or <span class="citation">(<strong>keeling08?</strong>)</span> (but note that each of those references uses their own notation which is not quite the same as used here.) Compare the model simulations with the equations you found. Substitute the parameter values from the task above into the equations you found for <em>S</em>, <em>I</em> and <em>R</em> and confirm that you get approximately the same results as you get from running the model to steady state.</p>
 <p>To get an exact match between simulation and math would require solving the full model (i.e. the one that includes <em>P</em> and <em>A</em> as shown in the <em>Model</em> tab. But those equations are getting big and ugly. If you want to give it a try, I recommend using software that can solve such equations analytically. The free <a href="http://maxima.sourceforge.net/">Maxima software</a> might be a good option. If you have access to it, Mathematica or Maple are other good choices.</p>
 <p><strong>Record</strong></p>
 <ul>
@@ -180,7 +180,7 @@ Flow diagram for this model.
 <h3>Task 7</h3>
 <p>We can again compare the steady state values we get from the simulation with those we get from a model. To do so, we follow the approach above. The model we now solve is one that doesn’t include births and deaths but does including waning immunity. The equations are:</p>
 <p><span class="math display">\[ dS/dt = w R  -   b_I IS \]</span> <span class="math display">\[ dI/dt = b_I SI - g_I I \]</span> <span class="math display">\[ dR/dt =  g_I I  - w R \]</span></p>
-<p>You can set the left sides to zero and solve for the steady states of <em>S</em>, <em>I</em> and <em>R</em>. By solving the second equation for <em>S</em>, you will find that its steady state is independent of <em>w</em>, which you should have also seen in your simulations. <em>I</em> and <em>R</em> are not uniquely determined, you’ll realize you can’t solve them as before. Going deeper into what this means is beyond what we want to discuss here. For more on steady states, see e.g. <span class="citation">(Keeling and Rohani 2008)</span> or some mathematical biology textbook.</p>
+<p>You can set the left sides to zero and solve for the steady states of <em>S</em>, <em>I</em> and <em>R</em>. By solving the second equation for <em>S</em>, you will find that its steady state is independent of <em>w</em>, which you should have also seen in your simulations. <em>I</em> and <em>R</em> are not uniquely determined, you’ll realize you can’t solve them as before. Going deeper into what this means is beyond what we want to discuss here. For more on steady states, see e.g. <span class="citation">(<strong>keeling08?</strong>)</span> or some mathematical biology textbook.</p>
 <p><strong>Record</strong></p>
 <ul>
 <li>Nothing</li>
@@ -226,19 +226,13 @@ Flow diagram for this model.
 <li>For this app, the underlying function(s) running the simulation are called <code>simulate_idpatterns_ode</code>. You can call them directly, without going through the shiny app. Use the <code>help()</code> command for more information on how to use the functions directly. If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself.</li>
 <li>You can also download all simulator functions and modify them for your own purposes. Of course to modify these functions, you’ll need to do some coding.</li>
 <li>For examples on using the simulators directly and how to modify them, read the package vignette by typing <code>vignette(&#39;DSAIDE&#39;)</code> into the R console.</li>
-<li>For some papers discussing ID patterns and seasonality, see e.g. <span class="citation">(Dowell 2001; Altizer et al. 2006)</span>.</li>
+<li>For some papers discussing ID patterns and seasonality, see e.g. <span class="citation">(<strong>dowell01?</strong>; <strong>altizer06?</strong>)</span>.</li>
 </ul>
 <div id="references" class="section level3 unnumbered">
 <h3 class="unnumbered">References</h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
-<div id="ref-altizer06" class="csl-entry">
-Altizer, Sonia, Andrew Dobson, Parviez Hosseini, Peter Hudson, Mercedes Pascual, and Pejman Rohani. 2006. <span>“Seasonality and the Dynamics of Infectious Diseases.”</span> <em>Ecology Letters</em> 9 (4): 467–84. <a href="https://doi.org/10.1111/j.1461-0248.2005.00879.x">https://doi.org/10.1111/j.1461-0248.2005.00879.x</a>.
-</div>
-<div id="ref-dowell01" class="csl-entry">
-Dowell, S F. 2001. <span>“Seasonal Variation in Host Susceptibility and Cycles of Certain Infectious Diseases.”</span> <em>Emerging Infectious Diseases</em> 7 (3): 369–74. <a href="https://doi.org/10.3201/eid0703.010301">https://doi.org/10.3201/eid0703.010301</a>.
-</div>
-<div id="ref-keeling08" class="csl-entry">
-Keeling, Matt J, and Pejman Rohani. 2008. <em>Modeling Infectious Diseases in Humans and Animals</em>. <span>Princeton University Press</span>.
+<div id="ref-vynnycky10" class="csl-entry">
+Vynnycky, Emilia, and Richard White. 2010. <em>An Introduction to Infectious Disease Modelling</em>. <span>Oxford University Press</span>.
 </div>
 </div>
 </div>
