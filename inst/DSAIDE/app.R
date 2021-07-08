@@ -438,7 +438,7 @@ ui <- fluidPage(
                         make_button(at,"hostheterogeneity"),
                         make_button(at,"multipathogen"),
                         #make_button(at,"parasitemodel"),
-                        #make_button(at,"idsurveillance"),
+                        make_button(at,"idsurveillance"),
                         #make_button(at,"maternalimmunity"),
                         class = "mainmenurow"
                       ), #close fluidRow structure for input
