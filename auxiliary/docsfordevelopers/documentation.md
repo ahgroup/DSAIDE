@@ -146,7 +146,7 @@ library('DSAIDE')
 * CRAN check complains about "Undefined global functions or variables" in ggplot2 code.
 
 ### To manage github actions for CI
-
+* Run 
 
 
 ### Trouble-shooting
