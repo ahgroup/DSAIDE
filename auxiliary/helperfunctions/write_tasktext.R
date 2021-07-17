@@ -1,4 +1,5 @@
 #helper function that writes task text for each app into the Rmd/html file
+library(dplyr)
 
 write_tasktext <- function(alltext)
 {
