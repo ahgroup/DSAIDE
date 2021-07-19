@@ -37,7 +37,7 @@ generate_fctcall <- function(modelsettings)
     }
     #this is an alternative, silently dropping non-supplied values and using defaults
     #not a good idea
-    currentargs <- currentargs[!is.na(currentargs)]
+    #currentargs <- currentargs[!is.na(currentargs)]
     #make a list, makes conversion to numeric easier
     arglist = as.list(currentargs)
     #convert arguments for function call to numeric if possible
