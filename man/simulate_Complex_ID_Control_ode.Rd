@@ -133,14 +133,14 @@ The following R packages need to be loaded for the function to work: deSolve.
 }
 
 \section{Code creation date}{
- 2021-02-16
+ 2021-07-19
 }
 
 \examples{
 # To run the simulation with default parameters:
 result <- simulate_Complex_ID_Control_ode()
 # To choose values other than the standard one, specify them like this:
-result <- simulate_Complex_ID_Control_ode(S=2000,P=2,A=2,I=2,R=0,D=0,E=2,Sv=2000,Iv=2)
+result <- simulate_Complex_ID_Control_ode(P = 2,A = 2,I = 2,R = 0,D = 0,E = 2,Iv = 2)
 # You can display or further process the result, like this:
 plot(result$ts[,'time'],result$ts[,'S'],xlab='Time',ylab='Numbers',type='l')
 print(paste('Max number of S: ',max(result$ts[,'S'])))

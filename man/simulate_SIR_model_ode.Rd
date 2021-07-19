@@ -64,7 +64,7 @@ The following R packages need to be loaded for the function to work: deSolve.
 }
 
 \section{Code creation date}{
- 2021-02-16
+ 2021-07-19
 }
 
 \examples{

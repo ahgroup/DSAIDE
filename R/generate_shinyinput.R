@@ -37,7 +37,8 @@ generate_shinyinput <- function(use_mbmodel = FALSE, mbmodel = NULL,
 
     ###########################################
     #for an mbmodel, make input elements from model list structure
-    if (use_mbmodel)  {
+    if (use_mbmodel)
+    {
       if (!is.list(mbmodel))  {return("Please provide a valid mbmodel list structure.")}
 
       #numeric input elements for all variable initial conditions
@@ -59,24 +60,23 @@ generate_shinyinput <- function(use_mbmodel = FALSE, mbmodel = NULL,
                 value = mbmodel$time[[n]]$timeval, min = 0, step = mbmodel$time[[n]]$timeval/100)
             )
         })
-    modelargs = c(allv,allp,allt)
-    ###########################################
-    #for stochastic model, add a few input elements
-    #for packages other than DSAIDE, need to check if/how to do that and not do things double (see code for modelbuilder below)
-    if ( (packagename == "DSAIDE") && grepl("_stochastic",model_function) )
-    {
-      stochasticui <- shiny::tagList(
-        shiny::numericInput("nreps", "Number of simulations", min = 1, max = 100, value = 1, step = 1),
-        shiny::numericInput("rngseed", "Random number seed", min = 1, max = 1000, value = 123, step = 1)
-      ) #end taglist
-      stochasticui = lapply(stochasticui,myclassfct)
-      modelargs = c(modelargs,stochasticui)
-    } #end the stochastic addition
-
-
-
+      modelargs = c(allv,allp,allt)
+      ###########################################
+      #for stochastic model, add a few input elements
+      #for packages other than DSAIDE, need to check if/how to do that and not do things double (see code for modelbuilder below)
+      if ( (packagename == "DSAIDE") && grepl("_stochastic",model_function) )
+      {
+        stochasticui <- shiny::tagList(
+          shiny::numericInput("nreps", "Number of simulations", min = 1, max = 100, value = 1, step = 1),
+          shiny::numericInput("rngseed", "Random number seed", min = 1, max = 1000, value = 123, step = 1)
+        ) #end taglist
+        stochasticui = lapply(stochasticui,myclassfct)
+        modelargs = c(modelargs,stochasticui)
+      } #end the stochastic addition
+    ######################################
     #end input construction for mbmodel
-    #this uses the header/documentation of an R simulation function to generate UI
+    #this uses the header/documentation (the roxygen created part)
+    #of an R simulation function to generate UI
     } else if (use_doc) {
 
       if (!file.exists(model_file)) {return("Please provide path to a valid model R file.")}
@@ -102,7 +102,9 @@ generate_shinyinput <- function(use_mbmodel = FALSE, mbmodel = NULL,
               shiny::numericInput(names(ip[n]), label = iplabel, value = ip[n][[1]], step = 0.01*ip[n][[1]])
           ) #close myclassfct
       }) #close lapply
-    #end UI creation using file doc
+
+    ######################################
+    #end UI creation using file documentation header
     } else {
       #if neither mbmodel is present nor doc, use function name to generate UI
       if (is.null(model_function))  {return("Please provide a valid model function name.")}
