@@ -62,18 +62,6 @@ knitr::include_graphics( system.file(figuredir,appsettings$modelfigname,package=
 To allow us to simulate this model, we need to implement it on the computer. For that purpose, it is often useful to write the model as mathematical equations (this is not strictly needed, some computer simulation models are never formulated as mathematical models). A very common way (but not the only one) to implement compartmental models such as the simple SIR model is a set of ordinary differential equations. Each compartment/variable gets an equation. The right side of each equation specifies the processes going on in the system and how they change the numbers in each compartment via inflows and outflows. For the model described above, the equations look like this: 
 
 
-```{r, echo = FALSE, eval = FALSE, include = FALSE}
-# an automated way to include equations, output not that pretty and only works for mbmodel
-# currently turned off
-#if (appsettings$use_mbmodel)
-#{
-#  modelfile = system.file(mbmodeldir,appsettings$mbmodelname, package = packagename) #find path to apps
-#  mbmodel = readRDS(modelfile)
-#  eqs = DSAIDE::generate_equations(mbmodel)
-#  eqs
-#}
-```
-
 
 $$
 \begin{aligned}

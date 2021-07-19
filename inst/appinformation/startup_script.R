@@ -8,7 +8,6 @@
 #all paths are inside the package and retrieved with system.file
 packagename = "DSAIDE"
 helperdir = "auxiliary/helperfunctions"
-mbmodeldir = "mbmodels"
 figuredir = "media"
 appdocdir = "appinformation"
 #*************************************
