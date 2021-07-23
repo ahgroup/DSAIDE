@@ -9,12 +9,14 @@
 
 ## Content Improvement
 * Clean up and make all model diagrams as nice as possible (wait for flowdiagramr package)
+* Fix all refs
+* Review ID surveillance app
 
 ## Apps to be implemented
 * More Fitting apps (e.g. those from DSAIRM)
 * global warming app /auxiliary/development/globalwarming/
 * Add a multi-scale app
-* Do those 3 apps, or remove: Parasite model, ID surveillance, and Maternal immunity
+* Do those 3 apps, or remove: Parasite model, and Maternal immunity
 
 ## Documentation / Outreach / Advertisement
 * Write a vignette explaining how to use DSAIDE (and solutions/quizgrader) for teachers

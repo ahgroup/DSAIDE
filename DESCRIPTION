@@ -11,6 +11,8 @@ Authors@R: c(
     person("Andreas", "Handel", email = "ahandel@uga.edu", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-4622-1146") ),
     person("Cody", "Dailey",  role = "ctb"), 
 	person("Isaac Chun-Hai", "Fung",  role = "ctb"), 
+    person("Ronald", "Galiwango",  role = "ctb"), 
+    person("Salil", "Goyal",  role = "ctb"),
 	person("Spencer", "Hall",  role = "ctb"), 
 	person("Ben", "Listyg",  role = "ctb"), 
     person("Brian", "McKay",  role = "ctb"),
