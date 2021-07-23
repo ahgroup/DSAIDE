@@ -1,3 +1,8 @@
+# DSAIDE 0.9.3 (2021-07-23)
+
+* Small bug fixes and feature enhancements.
+* Other minor updates and improvements.
+
 # DSAIDE 0.9.1 (2021-03-19)
 
 * Small fixes that caused CRAN Notes/error messages.

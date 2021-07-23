@@ -8,7 +8,7 @@
 * Fix/finish download button for each app (currently disabled). This downloads code that reproduces a given scenario.
 
 ## Content Improvement
-* Clean up and make all model diagrams as nice as possible (wait for diagram package)
+* Clean up and make all model diagrams as nice as possible (wait for flowdiagramr package)
 
 ## Apps to be implemented
 * More Fitting apps (e.g. those from DSAIRM)
@@ -32,3 +32,22 @@
 * Add/cite/connect to Ottar's book and package: https://github.com/objornstad/epimdr
 * Hashtags on twitter when promoting DSAIDE app: #rstats, #dynamicalsystems #infectiousdisease #epidemiology #EpiTwitter
 * Contribute code to Epirecipes? http://epirecip.es/
+
+
+## Thoughts on consistent DSAIDE model notation:
+
+* Main textbooks are V&W, K&R, Bjornstadt. Follow them.
+* We don't want to use greek labels.
+* VW and KR use b_ij to mean transmission to i from j
+* KR and BS use gamma for recovery rate
+* Natural mortality is mu in KR and BS and m in VW
+* VW use b for birth rate, KR use nu
+* KR use sigma for latent rate, VW use f
+
+Our notation:
+n for birth rate
+m for mortality 
+b for transmission
+b_ij for transmission TO i FROM j 
+g_i for transition rate out of a compartment
+w for waning immmunity

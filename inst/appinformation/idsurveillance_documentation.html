@@ -79,7 +79,7 @@
 <li>Asymptomatic infected hosts are removed by surveillance after some time (specified by the rate <em>rA</em>).</li>
 <li>Similarly, infected symptomatic hosts and presymptomatic hosts leave that stage at rate <em>rI</em> and <em>rP</em> respectively.</li>
 <li>Removed individuals recover from the infection and are initially immune to reinfection. They can loose their immunity at rate <em>w</em> and return to the susceptible compartment.</li>
-<li>New susceptibles enter the system/model at a fixed rate m. From each compartment (apart from the observed/removed compartment), hosts “leave??? after some time (i.e. they die) at rate <em>n</em>. The inverse of this rate is the average lifespan of a host. In addition, infected symptomatic individuals can die due to the disease at rate <em>d</em>.</li>
+<li>New susceptibles enter the system/model at a fixed rate m. From each compartment (apart from the observed/removed compartment), hosts “leave” after some time (i.e. they die) at rate <em>n</em>. The inverse of this rate is the average lifespan of a host. In addition, infected symptomatic individuals can die due to the disease at rate <em>d</em>.</li>
 </ul>
 </div>
 <div id="model-implementation" class="section level3">
@@ -102,8 +102,8 @@ Flow diagram for this model.
 <p>This will be our ‘base case’–we’ll have no surveillance going on, so that you have a comparison point for when we later include some surveillance. Set the model parameters such that they correspond to the following setting: A population size, <em>S</em>, of 1000, 1 initially infected presymptomatic host, <em>P</em>, simulation duration <em>tmax</em> = 50 years. Be sure to convert the units to months. Assume that only symptomatic individuals transmit, at rate <em>bI</em> = 0.002. Assume that <em>gP</em> = 5 (the inverse of this parameter is the average duration of the presymptomatic period). Assume that 20% of the infections are asymptomatic–accordingly set <em>f</em> = 0.2. Assume that immunity wanes at a rate <em>w</em> = 1/100. Set the natural death rate, n, to a value that corresponds to an average lifespan of 41 years. Recall that the unit of n needs to be in 1/months. You need to convert lifespan to months, then take the inverse to get the death rate. Round to the first significant digit (i.e. 0.00X). Set the birth rate to <em>m</em> = 5 per month and the death rate <em>d</em> = 0.5. Also assume that no surveillance is done. Accordingly set the surveillance parameters <em>rP</em>, <em>rA</em> and <em>rI</em> to zero. With parameters set to correspond to the scenario just described, run the simulation and ensure that you observe oscillations/cycles (i.e. repeated outbreaks). In the diagram for the model, make note of which arrows are present and which are not when you plug in these parameters (for example, the arrows pointing to the ‘R’ compartment would disappear). Because there is no mechanism for recovery or removal, you should see the number of deaths steadily increase. Additionally, you should see the number of susceptibles oscillate due to the nonzero birth rate parameter.</p>
 <p><strong>Record</strong></p>
 <ul>
-<li><p>The final number of susceptibles (i.e., <em>S<sub>f</sub></em>)</p></li>
-<li><p>The final value of the disease induced deaths (i.e., <em>D<sub>f</sub></em>)</p></li>
+<li><p>The number of susceptibles left, <em>S<sub>f</sub></em></p></li>
+<li><p>The final value of the disease induced deaths, <em>D<sub>f</sub></em></p></li>
 </ul>
 </div>
 <div id="task-2" class="section level3">
@@ -111,42 +111,62 @@ Flow diagram for this model.
 <p>Surveillance ensures that diseased individuals are removed from the transmission cycle before they contribute to the next generation of cases. Previously, we assumed that there was no surveillance. Now, assume that there exists a surveillance system that detects only symptomatic infections. Set the rate of surveillance of symptomatic hosts, <em>rI</em> to 0.5. Leave the rest of the settings as in task 1, and run the simulation. Compare this result with the result observed in task 1 so as to understand the effect of surveillance on the course of the epidemic. Pay attention to the y-axis! You should see changes in the number of deaths over time, in the number of susceptibles over time, and of course in the number of removed over time. Why might the number of deaths change as it did?</p>
 <p><strong>Record</strong></p>
 <ul>
-<li><p>The final number of susceptibles (i.e., <em>S<sub>f</sub></em>)</p></li>
-<li><p>The final value of the disease induced deaths (i.e., <em>D<sub>f</sub></em>)</p></li>
+<li><p>The number of susceptibles left, <em>S<sub>f</sub></em></p></li>
+<li><p>The final value of the disease induced deaths, <em>D<sub>f</sub></em></p></li>
 </ul>
 </div>
 <div id="task-3" class="section level3">
 <h3>Task 3</h3>
-<p>Now, let’s see what happens when we change values of <em>rI</em>. First, plot a graph of <em>S<sub>f</sub></em> as a function of <em>rI</em> to determine the effect of the extent of surveillance on the number of susceptibles left at the end of the simulation. Then, plot a graph of <em>D<sub>f</sub></em> as a function of <em>rI</em> to determine the effect of the extent of surveillance on the total number of deaths that occurred. You can make this plot either by hand or in R. If you plot by hand, you’ll want to plot a rough trend line (unless you solve the ODEs, you’ll just have to guesstimate the answers for this question). If you want to plot in R, see the DSAIDE Package Tutorial, under the ‘Level 2’ heading, for an example of how to write the code (you’ll get exact answers here).</p>
+<p>Now, let’s see what happens when we change values of <em>rI</em>. First, plot a graph of <em>S<sub>f</sub></em> as a function of <em>rI</em> to determine the effect of the extent of surveillance on the number of susceptibles left at the end of the simulation. Then, plot a graph of <em>D<sub>f</sub></em> as a function of <em>rI</em> to determine the effect of the extent of surveillance on the total number of deaths that occurred. You can make this plot either by hand or in R. If you plot by hand, you’ll want to plot a rough trend line. If you want to plot in R, see the DSAIDE Package Tutorial, under the ‘Level 2’ heading, for an example of how to write the code.</p>
 <p><strong>Record</strong></p>
 <ul>
-<li><p>The final number of susceptibles (<em>S<sub>f</sub></em>) for <em>rI</em> = 0.5</p></li>
-<li><p><em>S<sub>f</sub></em> for <em>rI</em> = 1.5</p></li>
-<li><p>The final value of the disease induced deaths (<em>D<sub>f</sub></em>) for <em>rI</em> = 0.5</p></li>
-<li><p><em>D<sub>f</sub></em> for <em>rI</em> = 1.5</p></li>
+<li><p>Do you see an increasing trend between <em>rI</em> and the number of susceptibles left at the end <em>S<sub>f</sub></em>? (Yes/No)</p></li>
+<li><p>The number of deaths at the end drops to 0 once <em>rI</em> passes 1 (Yes/No)</p></li>
 </ul>
 </div>
 <div id="task-4" class="section level3">
 <h3>Task 4</h3>
-<p>Previously, although we had 20% of our infections as asymptomatic, they weren’t actually transmitting (recall, <em>bA</em> was set to be 0). Now, let’s consider the scenario where they do transmit the infection–and let’s see what happens with and without surveillance. Start with the settings in task 2.</p>
-<p>Part 1: First consider the case where asymptomatic individuals transmit, and they do so at a rate similar to that of symptomatic hosts (<em>bA</em> = 0.002) but no surveillance for them is done (<em>rA</em> = 0). Run the simulation. Compare <em>S<sub>f</sub></em> with that in task 2. Note–the only thing we’ve changed is the number of susceptibles becoming infected (because now they can get infected by both infected symptomatic and infected asymptomatic individuals). What happens to the susceptible population?</p>
-<p>Part 2: Then consider the case where a new surveillance system detects asymptomatic cases at the same rate as that of symptomatic cases, i.e., <em>rA</em> = 0.5 in addition to surveillance of symptomatic cases. Also in this case, assume that asymptomatic cases still transmit at a rate similar to that of symptomatic hosts, i.e., <em>bA</em> = 0.002. Run the simulation and compare this result with that in task 4 part 1. Notice now what happens to the susceptible population. A couple other compartments should also change!</p>
-<p>Part 3: Finally, consider the case where asymptomatic individuals don’t transmit but they’re still detected by the surveillance system, i.e., set <em>bA</em> = 0 but keep <em>rA</em> = 0.5. Run the simulation and compare your result with that in task 4 part 1 and part 2.</p>
+<p>Previously, although we had 20% of our infections as asymptomatic, they weren’t actually transmitting (recall, <em>bA</em> was set to be 0). Now, let’s consider the scenario where they do transmit the infection–and let’s see what happens with and without surveillance. Start with the settings in task 2. Consider the case where asymptomatic individuals transmit, and they do so at a rate similar to that of symptomatic hosts (<em>bA</em> = 0.002) but no surveillance for them is done (<em>rA</em> = 0). Run the simulation. Compare <em>S<sub>f</sub></em> with that in task 2. Note–the only thing we’ve changed is the number of susceptibles becoming infected (because now they can get infected by both infected symptomatic and infected asymptomatic individuals). What happens to the susceptible population?</p>
 <p><strong>Record</strong></p>
 <ul>
-<li><p><em>S<sub>f</sub></em> for Part 1</p></li>
-<li><p><em>S<sub>f</sub></em> for Part 2</p></li>
-<li><p><em>S<sub>f</sub></em> for Part 3</p></li>
+<li><p>The number of susceptibles left, <em>S<sub>f</sub></em></p></li>
+<li><p>The final value of the disease induced deaths, <em>D<sub>f</sub></em></p></li>
 </ul>
 </div>
 <div id="task-5" class="section level3">
 <h3>Task 5</h3>
-<p>For some infectious diseases, such as tuberculosis (TB), it is possible to control the epidemic by identifying latently infected individuals i.e., while at the presymptomatic stage. These can be given Preventive Therapy so as to reduce the number of individuals transitioning to infectiousness.</p>
-<p>Part 1: Consider the case where surveillance is done for asymptomatic, symptomatic and presymptomatic individuals at the same rate (i.e., 0.5). Also assume that asymptomatic individuals don’t transmit, as the case is with TB. Leave the other settings as in task 1. Run the simulation and compare the value of Sf in this simulation with those in the other tasks.</p>
-<p>Part 2: Play with the rates of disease detection ( <em>rP</em> , <em>rI</em>, and <em>rA</em>) and explore their effect on the disease dynamics. For example, you can consider the case where the rate of detection of asymptomatic hosts is lower than the rate of detection of symptomatic hosts. This is usually the case. Continue exploring. In your exploration, which individual detection rate values ( <em>rP</em> , <em>rI</em>, and <em>rA</em>) or a combination of detection rates prevent the occurrence of an outbreak?</p>
+<p>Then consider the case where a new surveillance system detects asymptomatic cases at the same rate as that of symptomatic cases, i.e., <em>rA</em> = 0.5 in addition to surveillance of symptomatic cases. Also in this case, assume that asymptomatic cases still transmit at a rate similar to that of symptomatic hosts, i.e., <em>bA</em> = 0.002. Run the simulation and compare this result with that in task 4 part 1. Notice now what happens to the susceptible population. A couple other compartments should also change!</p>
 <p><strong>Record</strong></p>
 <ul>
-<li><em>S<sub>f</sub></em> for Part 1</li>
+<li><p>The number of susceptibles left, <em>S<sub>f</sub></em></p></li>
+<li><p>The final value of the disease induced deaths, <em>D<sub>f</sub></em></p></li>
+</ul>
+</div>
+<div id="task-6" class="section level3">
+<h3>Task 6</h3>
+<p>Finally, consider the case where asymptomatic individuals don’t transmit but they’re still detected by the surveillance system, i.e., set <em>bA</em> = 0 but keep <em>rA</em> = 0.5. Run the simulation and compare your result with that in task 4 part 1 and part 2.</p>
+<p><strong>Record</strong></p>
+<ul>
+<li><p>The number of susceptibles left, <em>S<sub>f</sub></em></p></li>
+<li><p>The final value of the disease induced deaths, <em>D<sub>f</sub></em></p></li>
+</ul>
+</div>
+<div id="task-7" class="section level3">
+<h3>Task 7</h3>
+<p>For some infectious diseases, such as tuberculosis (TB), it is possible to control the epidemic by identifying latently infected individuals i.e., while individuals are at the presymptomatic stage. These can be given Preventive Therapy so as to reduce the number of individuals transitioning to infectiousness. Consider the case where surveillance is done for asymptomatic, symptomatic and presymptomatic individuals at the same rate (i.e., 0.5). Also assume that asymptomatic individuals don’t transmit, as the case is with TB. Leave the other settings as in task 1. Run the simulation and compare the value of Sf in this simulation with those in the other tasks.</p>
+<p><strong>Record</strong></p>
+<ul>
+<li><p>The number of susceptibles left, <em>S<sub>f</sub></em></p></li>
+<li><p>The final value of the disease induced deaths, <em>D<sub>f</sub></em></p></li>
+</ul>
+</div>
+<div id="task-8" class="section level3">
+<h3>Task 8</h3>
+<p>Play with the rates of disease detection ( <em>rP</em> , <em>rI</em>, and <em>rA</em>) and explore their effect on the disease dynamics. Specifically, consider the case where the rate of detection of asymptomatic and presymptomatic hosts is lower than the rate of detection of symptomatic hosts, which is usually the case. Set <em>rI</em> = 1, <em>rA</em> = 0.5 and <em>rP</em> = 0.5 and leave other settings as in task 7.</p>
+<p><strong>Record</strong></p>
+<ul>
+<li><p>The number of susceptibles left, <em>S<sub>f</sub></em></p></li>
+<li><p>The final value of the disease induced deaths, <em>D<sub>f</sub></em></p></li>
 </ul>
 </div>
 </div>
