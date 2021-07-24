@@ -19,7 +19,7 @@ downloads](https://cranlogs.r-pkg.org/badges/DSAIDE)](https://cran.r-project.org
 downloads](https://cranlogs.r-pkg.org/badges/grand-total/DSAIDE?color=ff69b4)](https://cran.r-project.org/package=DSAIDE)
 <!-- badges: end -->
 
-**Dynamical Systems Approach to Infectious Disease Epidemiology
+**DSAIDE - Dynamical Systems Approach to Infectious Disease Epidemiology
 (Ecology/Evolution).**
 
 ## Description
@@ -72,29 +72,37 @@ package [see the *Get Started* tutorial
     (and probably never will be) finished, some chapters are fairly
     empty, but some topics are covered in enough detail that I use it
     for teaching.
--   I have solutions to all of the *What to do* tasks for each app. If
-    you are an instructor using this package as part of a class, email
-    me if you are interested in having access to these solutions.
--   If you want to take a deeper look at the package, see [this Markdown
+-   I have full solutions and quiz sheets for all of the **What to do**
+    tasks for each app. If you are an instructor using this package as
+    part of a class, email me if you are interested in having access to
+    the materials.
+-   Contributions to the package are very welcome! If you want to take a
+    deeper look at the package, see [this Markdown
     file](https://github.com/ahgroup/DSAIDE/blob/master/auxiliary/docsfordevelopers/documentation.md)
     which provides further information on the details of the package
     structure. I’d be excited to receive any contributions from
     individuals who want to help improve the package. If you plan to
     develop new apps, or make other substantial contributions, it might
     be best to get in touch with me first.
--   A ‘companion’ package to this one, called Dynamical Systems
-    Approaches for Immune Response Modeling (DSAIRM), focuses on models
+-   A companion package to this one, called *Dynamical Systems
+    Approaches for Immune Response Modeling (DSAIRM)*, focuses on models
     for analyzing with-host infection dynamics. It has the same
     structure as DSAIDE. [See the DSAIRM site for more
     information.](https://ahgroup.github.io/DSAIRM/)
+-   I send out a monthly newsletter in which I announce any noteworthy
+    updates to my R packages. If you want to stay updated, [you can sign
+    up here](https://www.andreashandel.com/susbscribe/).
 
 ## Citation and Contributors
 
-If the DSAIDE package does in any way help you with your work such that
-it warrants citing it, please cite [the DSAIDE publication in PLoS
-Computational Biology](https://doi.org/10.1371/journal.pcbi.1005642).
+If the package does in any way help you with your work such that it
+warrants citing it, please cite [this publication in PLoS Computational
+Biology](https://doi.org/10.1371/journal.pcbi.1005642).
 
 This R package is developed and maintained by [Andreas
 Handel](https://www.andreashandel.com/). A full list of contributors and
 a Bibtex entry for the citation [can be found
 here](https://ahgroup.github.io/DSAIDE/authors.html).
+
+This project was/is partially supported by NIH grants U19AI117891,
+U01AI150747, R25AI147391 and R25GM089694.
