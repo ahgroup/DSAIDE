@@ -105,6 +105,10 @@ https://pkgdown.r-lib.org/reference/build_home.html#package-logo
 ### To update simulation functions
 Some simulation functions are coded 'by hand', some are generated through modelbuilder. To see which is which, look at the `use_mbmodel` column in `/inst/appinformation/apptable.tsv`
 
+### To work with data
+See here for how data is handled/documented:
+https://r-pkgs.org/data.html
+documentation for data is in /R/data.R
 
 ### To update R documentation and vignette
 * Edit documentation inside R functions. 
