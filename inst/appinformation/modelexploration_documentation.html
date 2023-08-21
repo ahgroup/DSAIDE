@@ -14,16 +14,29 @@
 
 <title>Exploring the impact of parameter changes</title>
 
-<script src="data:application/javascript;base64,Ly8gUGFuZG9jIDIuOSBhZGRzIGF0dHJpYnV0ZXMgb24gYm90aCBoZWFkZXIgYW5kIGRpdi4gV2UgcmVtb3ZlIHRoZSBmb3JtZXIgKHRvCi8vIGJlIGNvbXBhdGlibGUgd2l0aCB0aGUgYmVoYXZpb3Igb2YgUGFuZG9jIDwgMi44KS4KZG9jdW1lbnQuYWRkRXZlbnRMaXN0ZW5lcignRE9NQ29udGVudExvYWRlZCcsIGZ1bmN0aW9uKGUpIHsKICB2YXIgaHMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCJkaXYuc2VjdGlvbltjbGFzcyo9J2xldmVsJ10gPiA6Zmlyc3QtY2hpbGQiKTsKICB2YXIgaSwgaCwgYTsKICBmb3IgKGkgPSAwOyBpIDwgaHMubGVuZ3RoOyBpKyspIHsKICAgIGggPSBoc1tpXTsKICAgIGlmICghL15oWzEtNl0kL2kudGVzdChoLnRhZ05hbWUpKSBjb250aW51ZTsgIC8vIGl0IHNob3VsZCBiZSBhIGhlYWRlciBoMS1oNgogICAgYSA9IGguYXR0cmlidXRlczsKICAgIHdoaWxlIChhLmxlbmd0aCA+IDApIGgucmVtb3ZlQXR0cmlidXRlKGFbMF0ubmFtZSk7CiAgfQp9KTsK"></script>
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
 
 <style type="text/css">
-  code{white-space: pre-wrap;}
-  span.smallcaps{font-variant: small-caps;}
-  span.underline{text-decoration: underline;}
-  div.column{display: inline-block; vertical-align: top; width: 50%;}
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-  ul.task-list{list-style: none;}
-    </style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
 
 
 
@@ -41,19 +54,29 @@
 
 
 
-<h1 class="title toc-ignore">Exploring the impact of parameter changes</h1>
+<h1 class="title toc-ignore">Exploring the impact of parameter
+changes</h1>
 
 
 
 <div id="shinytab1" class="section level2">
 <h2>Overview</h2>
-<p>This app allows you to explore the effect of specific model parameters on some outcomes of interest for the simple SIR model with births and deaths that we explored previously. Read about the model in the “Model” tab. Then do the tasks described in the “What to do” tab.</p>
-<p>For this app, it is assumed that you’ve worked through all the ones in the <em>Basics</em> and <em>Reproductive Number</em> sections.</p>
-<p>Note that the model we use here is the same as the one in the <em>Stochastic SIRS model</em> app, but you don’t have to have worked through that app yet to follow along, you will have seen all the model components in other apps previously.</p>
+<p>This app allows you to explore the effect of specific model
+parameters on some outcomes of interest for the simple SIR model with
+births and deaths that we explored previously. Read about the model in
+the “Model” tab. Then do the tasks described in the “What to do”
+tab.</p>
+<p>For this app, it is assumed that you’ve worked through all the ones
+in the <em>Basics</em> and <em>Reproductive Number</em> sections.</p>
+<p>Note that the model we use here is the same as the one in the
+<em>Stochastic SIRS model</em> app, but you don’t have to have worked
+through that app yet to follow along, you will have seen all the model
+components in other apps previously.</p>
 <div id="learning-objectives" class="section level3">
 <h3>Learning Objectives</h3>
 <ul>
-<li>Learn how to use models to explore the impact of parameters on outcomes</li>
+<li>Learn how to use models to explore the impact of parameters on
+outcomes</li>
 </ul>
 </div>
 </div>
@@ -61,18 +84,23 @@
 <h2>The Model</h2>
 <div id="model-overview" class="section level3">
 <h3>Model Overview</h3>
-<p>The model used here is the SIR model with births and deaths and waning immunity. This model tracks susceptibles, infected/infectious and recovered hosts. The following compartments are included:</p>
+<p>The model used here is the SIR model with births and deaths and
+waning immunity. This model tracks susceptibles, infected/infectious and
+recovered hosts. The following compartments are included:</p>
 <ul>
 <li><strong>S</strong> - uninfected and susceptible individuals</li>
-<li><strong>I</strong> - individuals who are infected and infectious.</li>
-<li><strong>R</strong> - recovered/removed individuals. Those individuals have recovered and are immune.</li>
+<li><strong>I</strong> - individuals who are infected and
+infectious.</li>
+<li><strong>R</strong> - recovered/removed individuals. Those
+individuals have recovered and are immune.</li>
 </ul>
 <p>The included processes/mechanisms are the following:</p>
 <ul>
 <li>Susceptible individuals can become infected at rate <em>b</em>.</li>
 <li>Infected hosts recover at rate <em>g</em>.</li>
 <li>Immunity can wane at rate <em>w</em>.</li>
-<li>New susceptible hosts enter the system (are born) at rate <em>n</em>. Natural mortality occurs at rate <em>m</em>.</li>
+<li>New susceptible hosts enter the system (are born) at rate
+<em>n</em>. Natural mortality occurs at rate <em>m</em>.</li>
 </ul>
 </div>
 <div id="model-implementation" class="section level3">
@@ -84,24 +112,84 @@
 Flow diagram for this model.
 </p>
 </div>
-<p>The deterministic model implemented as set of differential equations is given by the following equations:</p>
-<p><span class="math display">\[\dot S = n - bSI - mS + wR\]</span> <span class="math display">\[\dot I = bSI - gI - mI\]</span> <span class="math display">\[\dot R = gI - mR - wR\]</span></p>
+<p>The deterministic model implemented as set of differential equations
+is given by the following equations:</p>
+<p><span class="math display">\[\dot S = n - bSI - mS + wR\]</span>
+<span class="math display">\[\dot I = bSI - gI - mI\]</span> <span class="math display">\[\dot R = gI - mR - wR\]</span></p>
 </div>
 <div id="model-exploration" class="section level3">
 <h3>Model exploration</h3>
-<p>The new component implemented for this app is the ability to run the simulation multiple times as you scan through values for a specific parameter. Instead of running the simulation once for a given choice of parameter values and looking at the resulting time-series, this app lets you explore the impact of each model parameter on some pre-specified outcomes. Specifically, we consider the maximum and final value of each variable.</p>
-<p>In the app, those outcomes of interest are labeled <em>Smax</em>, <em>Imax</em>, <em>Rmax</em> and <em>Sfinal</em>, <em>Ifinal</em>, <em>Rfinal</em>. You can choose one of the model parameters to be varied between some minimum and maximum value. The other parameter values remain fixed. For each parameter value, the model is run and the outcomes of interest computed. The resulting plot is one showing how those outcomes of interest vary with the parameter you investigated.</p>
-<p>While you can do that with some of the other apps too, by manually changing parameters, re-running the simulation, and recording results, this is done here in an automated way. Exploring models in this way, and presenting plots showing how some outcome(s) of interest vary with a specific parameter, is a very common way models are used in research.</p>
+<p>The new component implemented for this app is the ability to run the
+simulation multiple times as you scan through values for a specific
+parameter. Instead of running the simulation once for a given choice of
+parameter values and looking at the resulting time-series, this app lets
+you explore the impact of each model parameter on some pre-specified
+outcomes. Specifically, we consider the maximum and final value of each
+variable.</p>
+<p>In the app, those outcomes of interest are labeled <em>Smax</em>,
+<em>Imax</em>, <em>Rmax</em> and <em>Sfinal</em>, <em>Ifinal</em>,
+<em>Rfinal</em>. You can choose one of the model parameters to be varied
+between some minimum and maximum value. The other parameter values
+remain fixed. For each parameter value, the model is run and the
+outcomes of interest computed. The resulting plot is one showing how
+those outcomes of interest vary with the parameter you investigated.</p>
+<p>While you can do that with some of the other apps too, by manually
+changing parameters, re-running the simulation, and recording results,
+this is done here in an automated way. Exploring models in this way, and
+presenting plots showing how some outcome(s) of interest vary with a
+specific parameter, is a very common way models are used in
+research.</p>
 </div>
 </div>
 <div id="shinytab3" class="section level2">
 <h2>What to do</h2>
-<p><em>The tasks below are described in a way that assumes everything is in units of days (rate parameters, therefore, have units of inverse days).</em></p>
+<p><em>The tasks below are described in a way that assumes everything is
+in units of days (rate parameters, therefore, have units of inverse
+days).</em></p>
 <div id="task-1" class="section level3">
 <h3>Task 1</h3>
-<p>Set the initial number of susceptible/infected/recovered to 1000/1/0. Set infection rate to 0.002, and recovery rate to 1. The former value does not matter since we’ll be exploring the simulation for different values of <em>b</em>. Set natural births and deaths to 0 and no waning immunity. Choose <em>b</em> as the parameter to vary, go from 0.0005 to 0.005, do it for 10 different parameter values, linear spacing, and no log scales for plotting. Set start and final simulation time to 0 and 100, time steps 0.1. Run the simulation. You will notice that you get a message saying the system did not reach steady state 1 times (see output message below plot). Increase simulation time to 1000 days, now you should reach steady state for all 10 simulations. Recall that for a simple SIR model with no births/deaths or waning immunity, the final steady state is one in which the outbreak is over and possibly some individuals remain uninfected.</p>
-<p>In this app, you don’t see the model dynamics, i.e. the time-series for the variables. It is being run in the background, but only parts of it, i.e. maximum and final states of variables are recorded. Try to visualize what the S/I/R curves look like, based on your exploration of the simple SIR model app. Then check these ‘virtual’ curves with the results reported in the plot and make sure you understand how each of them comes about. For instance do you understand why <em>Smax</em> is always 1000? Or why <em>Rfinal</em> increases from 0 to 1000 as you increase <em>b</em>? If you have a hard time with this, I suggest you (re)visit the basic SIR model and explore it some more. The final number of susceptibles declines as transmission (and thus the reproductive number) increases. This hopefully all makes sense to you based on what you have learned in the other apps. The maximum and final values for I and R should equally make sense. Essentially, you are running a simulation 10 times that can produce (at most) a single outbreak. If transmission is low enough, no outbreak occurs. The larger the transmission rate, the larger the outbreak. Instead of showing the time-series for each outbreak, the simulation only records some summary quantities and reports those. This is a very common way of analyzing models and reporting findings. Switch the plot engine to plotly and use it to read off the value for the maximum number infected for b=0.002, you should find it to be 154. The read off the maxium number infected for b=0.005.</p>
-<p>Play around with the sample number, i.e. number of different parameter values (the higher the number, the more often the simulation runs and the longer it takes), the minimum and maximum, and linear or logarithmic spacing and plotting, to understand how these different settings impact the resulting plot.</p>
+<p>Set the initial number of susceptible/infected/recovered to 1000/1/0.
+Set infection rate to 0.002, and recovery rate to 1. The former value
+does not matter since we’ll be exploring the simulation for different
+values of <em>b</em>. Set natural births and deaths to 0 and no waning
+immunity. Choose <em>b</em> as the parameter to vary, go from 0.0005 to
+0.005, do it for 10 different parameter values, linear spacing, and no
+log scales for plotting. Set start and final simulation time to 0 and
+100, time steps 0.1. Run the simulation. You will notice that you get a
+message saying the system did not reach steady state 1 times (see output
+message below plot). Increase simulation time to 1000 days, now you
+should reach steady state for all 10 simulations. Recall that for a
+simple SIR model with no births/deaths or waning immunity, the final
+steady state is one in which the outbreak is over and possibly some
+individuals remain uninfected.</p>
+<p>In this app, you don’t see the model dynamics, i.e. the time-series
+for the variables. It is being run in the background, but only parts of
+it, i.e. maximum and final states of variables are recorded. Try to
+visualize what the S/I/R curves look like, based on your exploration of
+the simple SIR model app. Then check these ‘virtual’ curves with the
+results reported in the plot and make sure you understand how each of
+them comes about. For instance do you understand why <em>Smax</em> is
+always 1000? Or why <em>Rfinal</em> increases from 0 to 1000 as you
+increase <em>b</em>? If you have a hard time with this, I suggest you
+(re)visit the basic SIR model and explore it some more. The final number
+of susceptibles declines as transmission (and thus the reproductive
+number) increases. This hopefully all makes sense to you based on what
+you have learned in the other apps. The maximum and final values for I
+and R should equally make sense. Essentially, you are running a
+simulation 10 times that can produce (at most) a single outbreak. If
+transmission is low enough, no outbreak occurs. The larger the
+transmission rate, the larger the outbreak. Instead of showing the
+time-series for each outbreak, the simulation only records some summary
+quantities and reports those. This is a very common way of analyzing
+models and reporting findings. Switch the plot engine to plotly and use
+it to read off the value for the maximum number infected for b=0.002,
+you should find it to be 154. The read off the maxium number infected
+for b=0.005.</p>
+<p>Play around with the sample number, i.e. number of different
+parameter values (the higher the number, the more often the simulation
+runs and the longer it takes), the minimum and maximum, and linear or
+logarithmic spacing and plotting, to understand how these different
+settings impact the resulting plot.</p>
 <p><strong>Record</strong></p>
 <ul>
 <li>Maximum number infected for b = 0.005</li>
@@ -109,7 +197,22 @@ Flow diagram for this model.
 </div>
 <div id="task-2" class="section level3">
 <h3>Task 2</h3>
-<p>A good way to build intuition about a specific model is to run simulations, look at the results, and then look at the model equations and diagram and see if by staring at them, you can understand why you got the results you saw. With enough practice, it is often possible to intuit specific results based on the underlying equations - but that requires a good bit of modeling practice. Let’s try to comparison of model equations and simulation. Look at the basic model with no births/deaths/waning immunity and try to predict how changing the parameter <em>g</em> will impact the reported outcomes. You can also think of it scientifically, namely as <em>g</em> increases, the duration of the infectious period becomes shorter, what does that mean for the outbreak? Now explore this with the model. Set the parameter to change to be <em>g</em>, values from 0.2 to 2. Fix b=0.001. Run 10 simulations for 1000 days. Try both linear and logarithmic spacing. Take a look at the results and see if they agree with what you expected. Use the plotly plot again to report the requested value.</p>
+<p>A good way to build intuition about a specific model is to run
+simulations, look at the results, and then look at the model equations
+and diagram and see if by staring at them, you can understand why you
+got the results you saw. With enough practice, it is often possible to
+intuit specific results based on the underlying equations - but that
+requires a good bit of modeling practice. Let’s try to comparison of
+model equations and simulation. Look at the basic model with no
+births/deaths/waning immunity and try to predict how changing the
+parameter <em>g</em> will impact the reported outcomes. You can also
+think of it scientifically, namely as <em>g</em> increases, the duration
+of the infectious period becomes shorter, what does that mean for the
+outbreak? Now explore this with the model. Set the parameter to change
+to be <em>g</em>, values from 0.2 to 2. Fix b=0.001. Run 10 simulations
+for 1000 days. Try both linear and logarithmic spacing. Take a look at
+the results and see if they agree with what you expected. Use the plotly
+plot again to report the requested value.</p>
 <p><strong>Record</strong></p>
 <ul>
 <li>Final number susceptible for g=1</li>
@@ -117,7 +220,15 @@ Flow diagram for this model.
 </div>
 <div id="task-3" class="section level3">
 <h3>Task 3</h3>
-<p>In the previous task, you should have noticed that above <em>g=1</em> the final number of recovered (which is also the max) goes to 0. What does that mean for the outbreak? From the previous apps, you know that the criterion for getting an outbreak or not is R0=1. Let’s compute R0 here for this model (with no births/deaths/waning immunity). If you don’t remember how to do this, re-visit the apps in the <em>Reproductive Number</em> section. Then also compute the R0 for the smallest and largest values for <em>g</em> in the ranges you explored in the previous task.</p>
+<p>In the previous task, you should have noticed that above <em>g=1</em>
+the final number of recovered (which is also the max) goes to 0. What
+does that mean for the outbreak? From the previous apps, you know that
+the criterion for getting an outbreak or not is R0=1. Let’s compute R0
+here for this model (with no births/deaths/waning immunity). If you
+don’t remember how to do this, re-visit the apps in the <em>Reproductive
+Number</em> section. Then also compute the R0 for the smallest and
+largest values for <em>g</em> in the ranges you explored in the previous
+task.</p>
 <p><strong>Record</strong></p>
 <ul>
 <li>Reproductive number for g=0.2</li>
@@ -125,22 +236,79 @@ Flow diagram for this model.
 </div>
 <div id="task-4" class="section level3">
 <h3>Task 4</h3>
-<p>Sometimes, the model is simple enough that one can figure things out just doing math, without needing to run simulations. For the simple model we have here, we can compute the steady states for the different variables. This was one of the tasks in the <em>Patterns of ID</em> app. Revisit that app if you don’t remember. We found there that at steady state, in the presence of births and deaths (and ignoring waning immunity), the variable S is defined by model parameters through <em>S = (g+m)/b</em>, and similar equations for the other variables. Based on this, we expect that the final, steady state value for S increases linearly with <em>g</em>. Let’s compare this equation with running the simulation. Set n=10, m = 0.01 (these values will keep the population at a steady value of 1000 in the absence if infection. If you are unclear why that is so, revisit the <em>ID Patterns</em> app). Keep everything as in the previous task, i.e. we are still scanning over g from 0.2 to 2 with b=0.001. Compare the values for <em>S<sub>final</sub></em> for the different values of <em>g</em> you get from the mathematical equation with what you get from running the simulation. Things should be consistent between the math and the simulations. If they are not, it means something went wrong somewhere. You should see that S<sub>final</sub> increases linearly with <em>g</em>, up to the point where R0 drops below one, thus no outbreak occurs and the steady state in the presence of infection (which the equation we use here specifies) is not valid anymore. You can test the other parts of the equation by varying <em>m</em> (the equations tells you that you should again see a linear change) and <em>b</em> (you should see an inverse relationship between increasing <em>b</em> and <em>S</em>).</p>
-<p>Even for this simple model, we cannot easily compute mathematical expressions for the maximum values of the variables. In general, as soon as our model reaches a certain level of complexity (maybe around 5 equations and more), getting exact analytic/mathematical equations for most outcomes of interest is not possible. Also, as models get more complicated, even experienced modelers can often not intuit what model behavior one should expect as specific parameters vary. Often the only way to find out is by actually running the simulations.</p>
+<p>Sometimes, the model is simple enough that one can figure things out
+just doing math, without needing to run simulations. For the simple
+model we have here, we can compute the steady states for the different
+variables. This was one of the tasks in the <em>Patterns of ID</em> app.
+Revisit that app if you don’t remember. We found there that at steady
+state, in the presence of births and deaths (and ignoring waning
+immunity), the variable S is defined by model parameters through <em>S =
+(g+m)/b</em>, and similar equations for the other variables. Based on
+this, we expect that the final, steady state value for S increases
+linearly with <em>g</em>. Let’s compare this equation with running the
+simulation. Set n=10, m = 0.01 (these values will keep the population at
+a steady value of 1000 in the absence if infection. If you are unclear
+why that is so, revisit the <em>ID Patterns</em> app). Keep everything
+as in the previous task, i.e. we are still scanning over g from 0.2 to 2
+with b=0.001. Compare the values for <em>S<sub>final</sub></em> for the
+different values of <em>g</em> you get from the mathematical equation
+with what you get from running the simulation. Things should be
+consistent between the math and the simulations. If they are not, it
+means something went wrong somewhere. You should see that
+S<sub>final</sub> increases linearly with <em>g</em>, up to the point
+where R0 drops below one, thus no outbreak occurs and the steady state
+in the presence of infection (which the equation we use here specifies)
+is not valid anymore. You can test the other parts of the equation by
+varying <em>m</em> (the equations tells you that you should again see a
+linear change) and <em>b</em> (you should see an inverse relationship
+between increasing <em>b</em> and <em>S</em>).</p>
+<p>Even for this simple model, we cannot easily compute mathematical
+expressions for the maximum values of the variables. In general, as soon
+as our model reaches a certain level of complexity (maybe around 5
+equations and more), getting exact analytic/mathematical equations for
+most outcomes of interest is not possible. Also, as models get more
+complicated, even experienced modelers can often not intuit what model
+behavior one should expect as specific parameters vary. Often the only
+way to find out is by actually running the simulations.</p>
 <p><strong>Record</strong></p>
 <ul>
 <li>Final number INFECTED for g=0.4</li>
 </ul>
-<p>As an end note, it is worth pointing out that for this app, we focus on varying a single parameter at a time and looking at the results. With some coding effort, we could change the underlying simulation to loop over say 2 parameters and produce outcomes for sets of parameter values. The results could be plotted as a 2-dimensional heatmap for each outcome. While this could be extended to more than 2 parameters, it will become hard to visualize and will also take longer to run. What is often done is that some parameters are chosen at discrete values (e.g. g=0.1 and 1) and then for those sets, one loops over some other parameter (e.g. b). This can be done in any combinations that are deemed interesting to explore. If there are many parameters that one might want to change, a different approach is useful, which you’ll learn about in the <em>Uncertainty and Sensitivity</em> app.</p>
+<p>As an end note, it is worth pointing out that for this app, we focus
+on varying a single parameter at a time and looking at the results. With
+some coding effort, we could change the underlying simulation to loop
+over say 2 parameters and produce outcomes for sets of parameter values.
+The results could be plotted as a 2-dimensional heatmap for each
+outcome. While this could be extended to more than 2 parameters, it will
+become hard to visualize and will also take longer to run. What is often
+done is that some parameters are chosen at discrete values (e.g. g=0.1
+and 1) and then for those sets, one loops over some other parameter
+(e.g. b). This can be done in any combinations that are deemed
+interesting to explore. If there are many parameters that one might want
+to change, a different approach is useful, which you’ll learn about in
+the <em>Uncertainty and Sensitivity</em> app.</p>
 </div>
 </div>
 <div id="shinytab4" class="section level2">
 <h2>Further Information</h2>
 <ul>
-<li>This app (and all others) are structured such that the Shiny part (the graphical interface you see and the server-side function that goes with it) calls an underlying R script (or several) which runs the simulation for the model of interest and returns the results.</li>
-<li>For this app, the underlying function running the simulation is called <code>simulate_SIR_modelexploration</code>. You can call them directly, without going through the shiny app. Use the <code>help()</code> command for more information on how to use the functions directly. If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself.</li>
-<li>You can also download all simulator functions and modify them for your own purposes. Of course to modify these functions, you’ll need to do some coding.</li>
-<li>For examples on using the simulators directly and how to modify them, read the package vignette by typing <code>vignette(&#39;DSAIDE&#39;)</code> into the R console.</li>
+<li>This app (and all others) are structured such that the Shiny part
+(the graphical interface you see and the server-side function that goes
+with it) calls an underlying R script (or several) which runs the
+simulation for the model of interest and returns the results.</li>
+<li>For this app, the underlying function running the simulation is
+called <code>simulate_SIR_modelexploration</code>. You can call them
+directly, without going through the shiny app. Use the
+<code>help()</code> command for more information on how to use the
+functions directly. If you go that route, you need to use the results
+returned from this function and produce useful output (such as a plot)
+yourself.</li>
+<li>You can also download all simulator functions and modify them for
+your own purposes. Of course to modify these functions, you’ll need to
+do some coding.</li>
+<li>For examples on using the simulators directly and how to modify
+them, read the package vignette by typing
+<code>vignette(&#39;DSAIDE&#39;)</code> into the R console.</li>
 </ul>
 <div id="references" class="section level3">
 <h3>References</h3>

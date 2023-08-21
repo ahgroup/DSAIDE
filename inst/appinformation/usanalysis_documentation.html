@@ -14,41 +14,54 @@
 
 <title>Uncertainty and Sensitivity Analysis</title>
 
-<script src="data:application/javascript;base64,Ly8gUGFuZG9jIDIuOSBhZGRzIGF0dHJpYnV0ZXMgb24gYm90aCBoZWFkZXIgYW5kIGRpdi4gV2UgcmVtb3ZlIHRoZSBmb3JtZXIgKHRvCi8vIGJlIGNvbXBhdGlibGUgd2l0aCB0aGUgYmVoYXZpb3Igb2YgUGFuZG9jIDwgMi44KS4KZG9jdW1lbnQuYWRkRXZlbnRMaXN0ZW5lcignRE9NQ29udGVudExvYWRlZCcsIGZ1bmN0aW9uKGUpIHsKICB2YXIgaHMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCJkaXYuc2VjdGlvbltjbGFzcyo9J2xldmVsJ10gPiA6Zmlyc3QtY2hpbGQiKTsKICB2YXIgaSwgaCwgYTsKICBmb3IgKGkgPSAwOyBpIDwgaHMubGVuZ3RoOyBpKyspIHsKICAgIGggPSBoc1tpXTsKICAgIGlmICghL15oWzEtNl0kL2kudGVzdChoLnRhZ05hbWUpKSBjb250aW51ZTsgIC8vIGl0IHNob3VsZCBiZSBhIGhlYWRlciBoMS1oNgogICAgYSA9IGguYXR0cmlidXRlczsKICAgIHdoaWxlIChhLmxlbmd0aCA+IDApIGgucmVtb3ZlQXR0cmlidXRlKGFbMF0ubmFtZSk7CiAgfQp9KTsK"></script>
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
 
 <style type="text/css">
-  code{white-space: pre-wrap;}
-  span.smallcaps{font-variant: small-caps;}
-  span.underline{text-decoration: underline;}
-  div.column{display: inline-block; vertical-align: top; width: 50%;}
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-  ul.task-list{list-style: none;}
-    </style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
 
 
 
 
 
 <style type="text/css">
-/* for pandoc --citeproc since 2.11 */
+
 div.csl-bib-body { }
 div.csl-entry {
-  clear: both;
+clear: both;
 }
 .hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
+margin-left:2em;
+text-indent:-2em;
 }
 div.csl-left-margin {
-  min-width:2em;
-  float:left;
+min-width:2em;
+float:left;
 }
 div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
+margin-left:2em;
+padding-left:1em;
 }
 div.csl-indent {
-  margin-left: 2em;
+margin-left: 2em;
 }
 </style>
 
@@ -69,12 +82,18 @@ div.csl-indent {
 
 <div id="shinytab1" class="section level2">
 <h2>Overview</h2>
-<p>This app allows exploration of the concept of uncertainty and sensitivity analysis. For this purpose, we use the SIR model with demographics (also used in the stochastic SIR app and model exploration app).</p>
-<p>For this app, it is assumed that you’ve worked through all the ones in the <em>Basics</em> and <em>Reproductive Number</em> sections, as well as the <em>Model Exploration</em> app.</p>
+<p>This app allows exploration of the concept of uncertainty and
+sensitivity analysis. For this purpose, we use the SIR model with
+demographics (also used in the stochastic SIR app and model exploration
+app).</p>
+<p>For this app, it is assumed that you’ve worked through all the ones
+in the <em>Basics</em> and <em>Reproductive Number</em> sections, as
+well as the <em>Model Exploration</em> app.</p>
 <div id="learning-objectives" class="section level3">
 <h3>Learning Objectives</h3>
 <ul>
-<li>Understand what an uncertainty and sensitivity analysis does and how to run them.</li>
+<li>Understand what an uncertainty and sensitivity analysis does and how
+to run them.</li>
 </ul>
 </div>
 </div>
@@ -82,17 +101,24 @@ div.csl-indent {
 <h2>The Model</h2>
 <div id="model-overview" class="section level3">
 <h3>Model Overview</h3>
-<p>The model used here is the SIR model with births and deaths. It is also used and described in the stochastic SIR app. This model tracks susceptibles, infected/infectious and recovered hosts. The following compartments are included:</p>
+<p>The model used here is the SIR model with births and deaths. It is
+also used and described in the stochastic SIR app. This model tracks
+susceptibles, infected/infectious and recovered hosts. The following
+compartments are included:</p>
 <ul>
 <li><strong>S</strong> - uninfected and susceptible individuals</li>
-<li><strong>I</strong> - individuals who are infected and infectious.</li>
-<li><strong>R</strong> - recovered/removed individuals. Those individuals have recovered and are immune.</li>
+<li><strong>I</strong> - individuals who are infected and
+infectious.</li>
+<li><strong>R</strong> - recovered/removed individuals. Those
+individuals have recovered and are immune.</li>
 </ul>
 <p>The included processes/mechanisms are the following:</p>
 <ul>
-<li>Susceptible individuals (S) can become infected at rate <em>b</em>.</li>
+<li>Susceptible individuals (S) can become infected at rate
+<em>b</em>.</li>
 <li>Infected hosts recover at rate <em>g</em>.</li>
-<li>New susceptible hosts enter the system (are born) at rate <em>n</em>. Natural death occurs at rate <em>m</em>.</li>
+<li>New susceptible hosts enter the system (are born) at rate
+<em>n</em>. Natural death occurs at rate <em>m</em>.</li>
 </ul>
 </div>
 <div id="model-implementation" class="section level3">
@@ -104,7 +130,8 @@ div.csl-indent {
 Flow diagram for this model.
 </p>
 </div>
-<p>The deterministic model implemented as set of differential equations is given by the following equations:</p>
+<p>The deterministic model implemented as set of differential equations
+is given by the following equations:</p>
 <p><span class="math display">\[
 \begin{aligned}
 \dot S &amp; = n - bSI - mS + wR\\
@@ -112,48 +139,172 @@ Flow diagram for this model.
 \dot R &amp; = gI - mR - wR
 \end{aligned}
 \]</span></p>
-<p>This is almost the same model as the basic SIR model from the introductory app, with the only difference that this model also allows natural births and deaths.</p>
+<p>This is almost the same model as the basic SIR model from the
+introductory app, with the only difference that this model also allows
+natural births and deaths.</p>
 </div>
 <div id="uncertainty-and-sensitivity-analysis" class="section level3">
 <h3>Uncertainty and Sensitivity analysis</h3>
-<p>Often, for a given system we want to model, we only have rough estimates for the model parameters and starting values. Instead of specifying fixed values (which results in a single time-series), we can instead specify parameter ranges, choose sets of parameter values from these ranges, and run the model for multiple sets of parameters.</p>
-<p>The simplest way of specifying parameter ranges is to set an upper and lower bound (based on what we know about the biology of the system) and randomly choose any value within those bounds. We can almost always set bounds even if we know very little about a system. Assume we want to model the duration of the infectious period for some disease in humans. We might not little, but we can still be fairly confident that it’s longer than say 1 hour and less than 100 years. That’s of course a wide range and we should and usually can narrow ranges further, based on biological knowledge of a given system.</p>
-<p>If we are fairly certain that values are close to some quantity, instead of specifying a uniform distribution, we can choose one that is more peaked around the most likely value. Normal distributions are not ideal since they allow negative values, which doesn’t make sense for our parameters. The gamma distribution is a better idea, since it leads to only positive values.</p>
-<p>To run the model for this app, we need to specify values for the initial conditions and model parameters. Initial conditions and all parameters are sampled uniformly between the specified upper and lower bound, apart from the recovery rate, which is given by a gamma distribution, with user-specified mean and variance. For this teaching app, there is no biological reason for making this parameter different, I just picked one parameter and decided to make it non-uniformly distributed to show you different ways one can implement distributions from which to draw parameter samples.</p>
-<p>The way the samples are drawn could be done completely randomly, but that would lead to inefficient sampling. A smarter method exists, known as Latin Hypercube sampling (LHS). It essentially ensures that we sample the full range of possible parameter combinations in an efficient manner. For more technical details, see e.g. <span class="citation">(<strong>saltelli04?</strong>)</span>. For this app, we use LHS.</p>
-<p>Once we specify the ranges for each parameter, the sampling method, and the number of samples, the simulation draws that many samples, runs the model for each sample, and records outcomes of interest. While the underlying simulation returns a time-series for each sample, we are usually not interested in the full time-series. Instead, we are interested in some summary quantity. For instance in this model, we might be interested in the maximum and final number of infected and final number of susceptible. This app records and reports those 3 quantities as <em>I<sub>peak</sub></em>, <em>I<sub>final</sub></em> and <em>S<sub>final</sub></em>.</p>
-<p>Results from such simulations for multiple samples can be analyzed in different ways. The most basic one, called <em>uncertainty analysis</em> only asks what level of uncertainty we have in our outcomes of interest, given the amount of uncertainty in our model parameter values. This can be graphically represented with a boxplot, and is one of the plot options for this app.</p>
-<p>In a next step, we can ask ‘how sensitive is the outcome(s) of interest to variation in specific parameters’ - that part is the <em>sensitivity analysis</em>. When you run the simulations, you essentially do both uncertainty and sensitivity analysis at the same time, it’s just a question of how you further process the results. We can graphically inspect the relation between outcome and some parameter with scatterplots. If we find that there is a monotone up or down (or neither) trend between parameter and outcome, we can also summarize the finding using a correlation coefficient. For this type of analysis, using the Spearman rank correlation coefficient is useful, which is what the app produces below the figures.</p>
+<p>Often, for a given system we want to model, we only have rough
+estimates for the model parameters and starting values. Instead of
+specifying fixed values (which results in a single time-series), we can
+instead specify parameter ranges, choose sets of parameter values from
+these ranges, and run the model for multiple sets of parameters.</p>
+<p>The simplest way of specifying parameter ranges is to set an upper
+and lower bound (based on what we know about the biology of the system)
+and randomly choose any value within those bounds. We can almost always
+set bounds even if we know very little about a system. Assume we want to
+model the duration of the infectious period for some disease in humans.
+We might not little, but we can still be fairly confident that it’s
+longer than say 1 hour and less than 100 years. That’s of course a wide
+range and we should and usually can narrow ranges further, based on
+biological knowledge of a given system.</p>
+<p>If we are fairly certain that values are close to some quantity,
+instead of specifying a uniform distribution, we can choose one that is
+more peaked around the most likely value. Normal distributions are not
+ideal since they allow negative values, which doesn’t make sense for our
+parameters. The gamma distribution is a better idea, since it leads to
+only positive values.</p>
+<p>To run the model for this app, we need to specify values for the
+initial conditions and model parameters. Initial conditions and all
+parameters are sampled uniformly between the specified upper and lower
+bound, apart from the recovery rate, which is given by a gamma
+distribution, with user-specified mean and variance. For this teaching
+app, there is no biological reason for making this parameter different,
+I just picked one parameter and decided to make it non-uniformly
+distributed to show you different ways one can implement distributions
+from which to draw parameter samples.</p>
+<p>The way the samples are drawn could be done completely randomly, but
+that would lead to inefficient sampling. A smarter method exists, known
+as Latin Hypercube sampling (LHS). It essentially ensures that we sample
+the full range of possible parameter combinations in an efficient
+manner. For more technical details, see e.g. <span class="citation">(Saltelli et al. 2004)</span>. For this app, we use
+LHS.</p>
+<p>Once we specify the ranges for each parameter, the sampling method,
+and the number of samples, the simulation draws that many samples, runs
+the model for each sample, and records outcomes of interest. While the
+underlying simulation returns a time-series for each sample, we are
+usually not interested in the full time-series. Instead, we are
+interested in some summary quantity. For instance in this model, we
+might be interested in the maximum and final number of infected and
+final number of susceptible. This app records and reports those 3
+quantities as <em>I<sub>peak</sub></em>, <em>I<sub>final</sub></em> and
+<em>S<sub>final</sub></em>.</p>
+<p>Results from such simulations for multiple samples can be analyzed in
+different ways. The most basic one, called <em>uncertainty analysis</em>
+only asks what level of uncertainty we have in our outcomes of interest,
+given the amount of uncertainty in our model parameter values. This can
+be graphically represented with a boxplot, and is one of the plot
+options for this app.</p>
+<p>In a next step, we can ask ‘how sensitive is the outcome(s) of
+interest to variation in specific parameters’ - that part is the
+<em>sensitivity analysis</em>. When you run the simulations, you
+essentially do both uncertainty and sensitivity analysis at the same
+time, it’s just a question of how you further process the results. We
+can graphically inspect the relation between outcome and some parameter
+with scatterplots. If we find that there is a monotone up or down (or
+neither) trend between parameter and outcome, we can also summarize the
+finding using a correlation coefficient. For this type of analysis,
+using the Spearman rank correlation coefficient is useful, which is what
+the app produces below the figures.</p>
 </div>
 <div id="a-note-on-randomness-in-computer-simulations" class="section level3">
 <h3>A note on randomness in computer simulations</h3>
-<p>This simulation (as well as some of the others) involves sampling. This leads to some level of randomness. In science, we want to be as reproducible as possible. Fortunately, random numbers on a computer are not completely random, but can be reproduced. In practice, this is done by specifying a random number seed, in essence a starting position for the algorithm to produce pseudo-random numbers. As long as the seed is the same, the code should produce the same pseudo-random numbers each time, thus ensuring reproducibility.</p>
+<p>This simulation (as well as some of the others) involves sampling.
+This leads to some level of randomness. In science, we want to be as
+reproducible as possible. Fortunately, random numbers on a computer are
+not completely random, but can be reproduced. In practice, this is done
+by specifying a random number seed, in essence a starting position for
+the algorithm to produce pseudo-random numbers. As long as the seed is
+the same, the code should produce the same pseudo-random numbers each
+time, thus ensuring reproducibility.</p>
 </div>
 </div>
 <div id="shinytab3" class="section level2">
 <h2>What to do</h2>
-<p>First, familiarize yourself with the setup of the app, it looks different from most others. Parameters are not set to specific values. Instead, most parameters have a lower and upper bound. For each simulation that is run, random values for the parameter are chosen uniformly between those bounds. The parameter <em>g</em> does not have a uniform but instead a gamma distribution, you can specify its mean and variance to determine the distribution from which values are sampled. In general, you can choose distributions for parameters based on what makes biological sense. Practically, there is often very little difference between a uniform and some other distribution, I’m showing a different one for <em>g</em> here so you can see that in principle you can pick whatever you want (as long as it makes sense, e.g. you likely don’t want a distribution that can produce negative parameter values.)</p>
-<p>For the purpose of uncertainty and sensitivity analysis, starting values for variables can be treated like parameters. For this app you can vary the starting values for susceptibles and infected, the initial number of recovered are fixed at 0. For the tasks below, we set lower and upper bounds for the starting values to be the same, meaning we don’t let those values vary.</p>
-<p>The default outcome plots are boxplots, which show the distribution of the 3 outcomes of interest for the different parameter samples. You can set the number of samples you want to run. Samples are constructed using the latin hypercube sampling (LHS) method to efficiently span the space of possible parameter values. In general, more samples are better, but of course take longer to run.</p>
+<p>First, familiarize yourself with the setup of the app, it looks
+different from most others. Parameters are not set to specific values.
+Instead, most parameters have a lower and upper bound. For each
+simulation that is run, random values for the parameter are chosen
+uniformly between those bounds. The parameter <em>g</em> does not have a
+uniform but instead a gamma distribution, you can specify its mean and
+variance to determine the distribution from which values are sampled. In
+general, you can choose distributions for parameters based on what makes
+biological sense. Practically, there is often very little difference
+between a uniform and some other distribution, I’m showing a different
+one for <em>g</em> here so you can see that in principle you can pick
+whatever you want (as long as it makes sense, e.g. you likely don’t want
+a distribution that can produce negative parameter values.)</p>
+<p>For the purpose of uncertainty and sensitivity analysis, starting
+values for variables can be treated like parameters. For this app you
+can vary the starting values for susceptibles and infected, the initial
+number of recovered are fixed at 0. For the tasks below, we set lower
+and upper bounds for the starting values to be the same, meaning we
+don’t let those values vary.</p>
+<p>The default outcome plots are boxplots, which show the distribution
+of the 3 outcomes of interest for the different parameter samples. You
+can set the number of samples you want to run. Samples are constructed
+using the latin hypercube sampling (LHS) method to efficiently span the
+space of possible parameter values. In general, more samples are better,
+but of course take longer to run.</p>
 <p>For the tasks, we assume the model is run in units of years.</p>
 <div id="task-1" class="section level3">
 <h3>Task 1</h3>
-<p>Start with the pre-set input values. Since sampling of parameters involves uncertainty/randomness, we need to use random numbers. We still want results to be reproducible. That’s where the random number seed comes in. As long as the seed is the same, the code should produce the same (pseudo)-random numbers each time, thus ensuring reproducibility. Let’s explore this. Leave all settings as they are, run the simulation twice with the same random number seed (value of 100), check to make sure you get exactly the same result twice. Now change the random number seed to 102, run again. You should see the results changed.</p>
-<p>If you have more samples, the results generally become more robust to changes in the underlying sample generation (determined by the random number seed). Try checking this by repeating simulations for the two random seeds, but now run 50 samples for each seed (this may take a while, depending on the speed of your computer).</p>
-<p>Pay attention to variability in the different quantities reported below the plot. You should see less variability in the central quantities (mean, median) for the larger sample size, extremes (min/max) will continue to fluctuate more.</p>
-<p>In general, the amount by which you change the random seed doesn’t matter, the impact it has on outcomes is random. It just so happens that 101 gives a maybe confusing result for 50 samples - try if you want.</p>
-<p>Note that each sample means one simulation of the underlying dynamical model, so as sample numbers increase, things slow down. Also note the <em>system might not have reached steady state</em> message. We are ignoring it for now, but if for too many of the samples steady state has not been reached, the results for <em>S<sub>final</sub></em> and <em>I<sub>final</sub></em> do not reflect steady-state values. Increasing the simulation time can help the system reach a steady state (if there is one). For some parameter combinations, that can take very long.</p>
+<p>Start with the pre-set input values. Since sampling of parameters
+involves uncertainty/randomness, we need to use random numbers. We still
+want results to be reproducible. That’s where the random number seed
+comes in. As long as the seed is the same, the code should produce the
+same (pseudo)-random numbers each time, thus ensuring reproducibility.
+Let’s explore this. Leave all settings as they are, run the simulation
+twice with the same random number seed (value of 100), check to make
+sure you get exactly the same result twice. Now change the random number
+seed to 102, run again. You should see the results changed.</p>
+<p>If you have more samples, the results generally become more robust to
+changes in the underlying sample generation (determined by the random
+number seed). Try checking this by repeating simulations for the two
+random seeds, but now run 50 samples for each seed (this may take a
+while, depending on the speed of your computer).</p>
+<p>Pay attention to variability in the different quantities reported
+below the plot. You should see less variability in the central
+quantities (mean, median) for the larger sample size, extremes (min/max)
+will continue to fluctuate more.</p>
+<p>In general, the amount by which you change the random seed doesn’t
+matter, the impact it has on outcomes is random. It just so happens that
+101 gives a maybe confusing result for 50 samples - try if you want.</p>
+<p>Note that each sample means one simulation of the underlying
+dynamical model, so as sample numbers increase, things slow down. Also
+note the <em>system might not have reached steady state</em> message. We
+are ignoring it for now, but if for too many of the samples steady state
+has not been reached, the results for <em>S<sub>final</sub></em> and
+<em>I<sub>final</sub></em> do not reflect steady-state values.
+Increasing the simulation time can help the system reach a steady state
+(if there is one). For some parameter combinations, that can take very
+long.</p>
 <p><strong>Record</strong></p>
 <ul>
 <li><p>Mean number of peak infected, samples = 5, rngseed = 100</p></li>
 <li><p>Mean number of peak infected, samples = 5, rngseed = 102</p></li>
-<li><p>Mean number of peak infected, samples = 50, rngseed = 100</p></li>
-<li><p>Mean number of peak infected, samples = 50, rngseed = 102</p></li>
+<li><p>Mean number of peak infected, samples = 50, rngseed =
+100</p></li>
+<li><p>Mean number of peak infected, samples = 50, rngseed =
+102</p></li>
 </ul>
 </div>
 <div id="task-2" class="section level3">
 <h3>Task 2</h3>
-<p>Recall the underlying SIR model and its behavior. If you don’t remember, revisit the apps mentioned in the overview tab that discuss this model. Use your understanding of the model to predict what happens to the plots and the outcomes reported under the plots if you increase both lower and upper bound for the infection rate. Increase lower/upper bounds by a factor of 2. This means you are now sampling b in the range of 0.01 - 0.02. From previous apps, you know that this also implies that you increased R0. Thus, we expect larger outbreaks. Use 50 samples and rngseed=100. Run the simulation with the new ranges of b, see how results change. Now go the opposite way and lower the initial lower/upper bounds by a factor of 2, such that the range is 0.0025 - 0.005. Run the simulation, see how results change. As expected, a lower transmission rate and thus a lower R0 leads to smaller outbreaks.</p>
+<p>Recall the underlying SIR model and its behavior. If you don’t
+remember, revisit the apps mentioned in the overview tab that discuss
+this model. Use your understanding of the model to predict what happens
+to the plots and the outcomes reported under the plots if you increase
+both lower and upper bound for the infection rate. Increase lower/upper
+bounds by a factor of 2. This means you are now sampling b in the range
+of 0.01 - 0.02. From previous apps, you know that this also implies that
+you increased R0. Thus, we expect larger outbreaks. Use 50 samples and
+rngseed=100. Run the simulation with the new ranges of b, see how
+results change. Now go the opposite way and lower the initial
+lower/upper bounds by a factor of 2, such that the range is 0.0025 -
+0.005. Run the simulation, see how results change. As expected, a lower
+transmission rate and thus a lower R0 leads to smaller outbreaks.</p>
 <p><strong>Record</strong></p>
 <ul>
 <li><p>Mean number of peak infected, increased transmission</p></li>
@@ -162,33 +313,112 @@ Flow diagram for this model.
 </div>
 <div id="task-3" class="section level3">
 <h3>Task 3</h3>
-<p>This model includes births, deaths and waning immunity. So far, they are turned off since both lower and upper bounds are set to 0. Now let’s turn on births and deaths. The presence of births and deaths means the underlying time-series (which we can’t see, but could look at in one of the earlier apps), produces an initial large outbreak, followed by a few smaller outbreaks and then settles down to a steady state. Reset everything to the initial values. Then set the range for the birth rate <em>n</em> to 50 - 100, the range for death rate <em>m</em> to 0.05 - 0.1. (If you are paying attention, you might have noticed that the range for the death rate means a natural life-span of 10 - 20 years. That’s of course too short for humans. It’s chosen here to make the model settle down in a reasonable time-frame. You can think of maybe modeling an animal disease in a host that doesn’t live as long.)</p>
-<p>Let’s explore how the steady state is impacted if we change birth and death rates. Run the model with the specified settings for 50 simulations with random seed at 100. Look at the values at final steady state (and record the one requested).</p>
-<p>Now, if we increase births or deaths, which of the outcomes do you expect to change, and in which direction? Test your assumption by increasing the bounds for the birth rate such that the range is now 100 - 200. Re-run the simulation. Then set the birth rate back to the range 50-100 and now increase the bounds for the death rate such that the range is now 0.1 - 0.2. Repeat the simulations. Finally, have both birth and death rates at the increased ranges of 50-100 and 0.1-0.2 respectively, run simulations again.</p>
-<p>You should see that a change in birth rate has essentially no impact on the final steady state of S, while an increase in the death rate leads to an increase in <em>S<sub>final</sub></em>. If you are not sure why you are getting these results, remember what you did in the <em>ID Patterns</em> app (or revisit that app). There you found an equation for the steady state for <em>S</em> for this type of model, given by S=(g + m)/b. This shows that changes in birth rate do not affect the steady state, while changes in death rate do.</p>
+<p>This model includes births, deaths and waning immunity. So far, they
+are turned off since both lower and upper bounds are set to 0. Now let’s
+turn on births and deaths. The presence of births and deaths means the
+underlying time-series (which we can’t see, but could look at in one of
+the earlier apps), produces an initial large outbreak, followed by a few
+smaller outbreaks and then settles down to a steady state. Reset
+everything to the initial values. Then set the range for the birth rate
+<em>n</em> to 50 - 100, the range for death rate <em>m</em> to 0.05 -
+0.1. (If you are paying attention, you might have noticed that the range
+for the death rate means a natural life-span of 10 - 20 years. That’s of
+course too short for humans. It’s chosen here to make the model settle
+down in a reasonable time-frame. You can think of maybe modeling an
+animal disease in a host that doesn’t live as long.)</p>
+<p>Let’s explore how the steady state is impacted if we change birth and
+death rates. Run the model with the specified settings for 50
+simulations with random seed at 100. Look at the values at final steady
+state (and record the one requested).</p>
+<p>Now, if we increase births or deaths, which of the outcomes do you
+expect to change, and in which direction? Test your assumption by
+increasing the bounds for the birth rate such that the range is now 100
+- 200. Re-run the simulation. Then set the birth rate back to the range
+50-100 and now increase the bounds for the death rate such that the
+range is now 0.1 - 0.2. Repeat the simulations. Finally, have both birth
+and death rates at the increased ranges of 50-100 and 0.1-0.2
+respectively, run simulations again.</p>
+<p>You should see that a change in birth rate has essentially no impact
+on the final steady state of S, while an increase in the death rate
+leads to an increase in <em>S<sub>final</sub></em>. If you are not sure
+why you are getting these results, remember what you did in the <em>ID
+Patterns</em> app (or revisit that app). There you found an equation for
+the steady state for <em>S</em> for this type of model, given by S=(g +
+m)/b. This shows that changes in birth rate do not affect the steady
+state, while changes in death rate do.</p>
 <p><strong>Record</strong></p>
 <ul>
-<li><p>Mean number of susceptible at end of simulation, baseline</p></li>
-<li><p>Mean number of susceptible at end of simulation, increased birth</p></li>
-<li><p>Mean number of susceptible at end of simulation, increased death</p></li>
-<li><p>Mean number of susceptible at end of simulation, increased birth and death</p></li>
+<li><p>Mean number of susceptible at end of simulation,
+baseline</p></li>
+<li><p>Mean number of susceptible at end of simulation, increased
+birth</p></li>
+<li><p>Mean number of susceptible at end of simulation, increased
+death</p></li>
+<li><p>Mean number of susceptible at end of simulation, increased birth
+and death</p></li>
 </ul>
 </div>
 <div id="task-4" class="section level3">
 <h3>Task 4</h3>
-<p>Let’s continue with the exploration of the last task, to illustrate an important point. Reset all values, then set ranges for birth rate to 10 - 20 and death rate range 0.1 - 0.2. Run 50 simulations with random seed at 100. Look at the values at final steady state (and record the one requested).</p>
-<p>Now increase the range for the birth rate to 20 - 40. Based on the last task, the final number of susceptible should not change. This is not what you will see, instead the value goes up. Can you figure out why this is the case? As a hint, it has to do with the reproductive number.</p>
-<p>Here is a detailed explanation: Remember (from earlier apps) that the reproductive number for this model is R<sub>0</sub> = b * S<sub>0</sub>/(g+m). You also learned previously that for this kind of model, in the presence of births and deaths, the steady value for S<sub>0</sub> is S<sub>0</sub> = n/m. Combining those 2 equations, you get R<sub>0</sub> = b * n/((g+m) * m). We can explore the range of possible R<sub>0</sub> values by using the minimum and maximum of the ranges (we’ll just use g=0.5 since the variation is fairly small). Plugging in numbers for the baseline gives a range for R<sub>0</sub> from 0.005 * 10/((0.5+0.2) * 0.2) to 0.01 * 20/((0.5+0.1) * 0.1), which is rougly 0.35 to 3.3. Thus a good number of samples will have R<sub>0</sub> &lt; 1 and thus the equation for a steady state in the presence of the disease (i.e. an endemic situation) does not apply. As you increase the birth rate, more values move into the R<sub>0</sub> &gt; 1 range. The computed average mixes both the R<sub>0</sub> &gt; 1 samples, for which the steady state equation applies, and those with R0&lt;1, for which that equation does not apply. Therefore, the overall results don’t quite make sense. (You can check that in the previous task, parameter ranges were such that all R<sub>0</sub> values were larger than 1.)</p>
-<p>This is an important point. When you sample your parameters, you want to make sure that it doesn’t put the model into completely different regimes, otherwise you are combining 2 very different situations and the combined results are hard to interpret. To guard against this, it is often good to sample ranges of parameters in pieces, instead of one very wide range. And it’s also always good to explore the outcomes in a plot.</p>
+<p>Let’s continue with the exploration of the last task, to illustrate
+an important point. Reset all values, then set ranges for birth rate to
+10 - 20 and death rate range 0.1 - 0.2. Run 50 simulations with random
+seed at 100. Look at the values at final steady state (and record the
+one requested).</p>
+<p>Now increase the range for the birth rate to 20 - 40. Based on the
+last task, the final number of susceptible should not change. This is
+not what you will see, instead the value goes up. Can you figure out why
+this is the case? As a hint, it has to do with the reproductive
+number.</p>
+<p>Here is a detailed explanation: Remember (from earlier apps) that the
+reproductive number for this model is R<sub>0</sub> = b *
+S<sub>0</sub>/(g+m). You also learned previously that for this kind of
+model, in the presence of births and deaths, the steady value for
+S<sub>0</sub> is S<sub>0</sub> = n/m. Combining those 2 equations, you
+get R<sub>0</sub> = b * n/((g+m) * m). We can explore the range of
+possible R<sub>0</sub> values by using the minimum and maximum of the
+ranges (we’ll just use g=0.5 since the variation is fairly small).
+Plugging in numbers for the baseline gives a range for R<sub>0</sub>
+from 0.005 * 10/((0.5+0.2) * 0.2) to 0.01 * 20/((0.5+0.1) * 0.1), which
+is rougly 0.35 to 3.3. Thus a good number of samples will have
+R<sub>0</sub> &lt; 1 and thus the equation for a steady state in the
+presence of the disease (i.e. an endemic situation) does not apply. As
+you increase the birth rate, more values move into the R<sub>0</sub>
+&gt; 1 range. The computed average mixes both the R<sub>0</sub> &gt; 1
+samples, for which the steady state equation applies, and those with
+R0&lt;1, for which that equation does not apply. Therefore, the overall
+results don’t quite make sense. (You can check that in the previous
+task, parameter ranges were such that all R<sub>0</sub> values were
+larger than 1.)</p>
+<p>This is an important point. When you sample your parameters, you want
+to make sure that it doesn’t put the model into completely different
+regimes, otherwise you are combining 2 very different situations and the
+combined results are hard to interpret. To guard against this, it is
+often good to sample ranges of parameters in pieces, instead of one very
+wide range. And it’s also always good to explore the outcomes in a
+plot.</p>
 <p><strong>Record</strong></p>
 <ul>
-<li><p>Mean number of susceptible at end of simulation, baseline</p></li>
-<li><p>Mean number of susceptible at end of simulation, increased birth</p></li>
+<li><p>Mean number of susceptible at end of simulation,
+baseline</p></li>
+<li><p>Mean number of susceptible at end of simulation, increased
+birth</p></li>
 </ul>
 </div>
 <div id="task-5" class="section level3">
 <h3>Task 5</h3>
-<p>Continue exploring by changing ranges for different parameters or initial conditions. It is likely that for some settings you will get warning or error messages. That generally means that the parameters for a given simulation are such that the differential equation solver can’t properly run the model. That usually corresponds to biologically unrealistic parameter settings. Obvious silly choices would be ranges that include negative parameter values, but even some non-negative values of individual parameters or combinations of parameters can produce biologically unrealistic outcomes. Thus, when doing any kind of sampling, pay close attention to any warning or error messages from your code, and give your input ranges and results careful attention to make sure nothing unreasonable os happening.</p>
+<p>Continue exploring by changing ranges for different parameters or
+initial conditions. It is likely that for some settings you will get
+warning or error messages. That generally means that the parameters for
+a given simulation are such that the differential equation solver can’t
+properly run the model. That usually corresponds to biologically
+unrealistic parameter settings. Obvious silly choices would be ranges
+that include negative parameter values, but even some non-negative
+values of individual parameters or combinations of parameters can
+produce biologically unrealistic outcomes. Thus, when doing any kind of
+sampling, pay close attention to any warning or error messages from your
+code, and give your input ranges and results careful attention to make
+sure nothing unreasonable os happening.</p>
 <p><strong>Record</strong></p>
 <ul>
 <li>Nothing</li>
@@ -196,48 +426,125 @@ Flow diagram for this model.
 </div>
 <div id="task-6" class="section level3">
 <h3>Task 6</h3>
-<p>So far, we have changed parameter ranges and explored how that impacts the result. It is often useful to look at the impact of specific parameters on the outcomes of interest in more detail. This is where sensitivity analysis comes in. We run the same simulations, but now instead of plotting outcomes as a boxplot, we produce scatterplots for outcomes as function of each varied parameter.</p>
-<p>Let’s explore that. Set values back as in task 1. Switch the plot type from boxplot to scatterplot, choose <em>b</em> as the parameter for the scatterplot, run 50 samples with seed 100. Take a close look at the scatterplots to investigate the relation between the chosen parameter and the various outcomes. To investigate specific parameters, chose them as the output for the scatterplot. Look at the text below the plots. For each parameter-output pair, the code computes a rank correlation coefficient. Numbers close to 0 mean there is essentially no correlation, close to 1 or -1 means a large positive or negative correlation. (One could compute p-values for these correlations, but they are somewhat meaningless since the values will get smaller the more samples you use, so you can basically produce any p-value you want). With more samples, the patterns of correlation are clearer in the plots. Try running the simulation with different sample sizes (50, 100 or even more) to see the impact. Compare the scatterplots and correlation coefficients with the results you found above, when you explored changes in <em>b</em> and how they affected infected peak. You should see the same finding as before, namely larger values of <em>b</em> lead to a higher peak.</p>
+<p>So far, we have changed parameter ranges and explored how that
+impacts the result. It is often useful to look at the impact of specific
+parameters on the outcomes of interest in more detail. This is where
+sensitivity analysis comes in. We run the same simulations, but now
+instead of plotting outcomes as a boxplot, we produce scatterplots for
+outcomes as function of each varied parameter.</p>
+<p>Let’s explore that. Set values back as in task 1. Switch the plot
+type from boxplot to scatterplot, choose <em>b</em> as the parameter for
+the scatterplot, run 50 samples with seed 100. Take a close look at the
+scatterplots to investigate the relation between the chosen parameter
+and the various outcomes. To investigate specific parameters, chose them
+as the output for the scatterplot. Look at the text below the plots. For
+each parameter-output pair, the code computes a rank correlation
+coefficient. Numbers close to 0 mean there is essentially no
+correlation, close to 1 or -1 means a large positive or negative
+correlation. (One could compute p-values for these correlations, but
+they are somewhat meaningless since the values will get smaller the more
+samples you use, so you can basically produce any p-value you want).
+With more samples, the patterns of correlation are clearer in the plots.
+Try running the simulation with different sample sizes (50, 100 or even
+more) to see the impact. Compare the scatterplots and correlation
+coefficients with the results you found above, when you explored changes
+in <em>b</em> and how they affected infected peak. You should see the
+same finding as before, namely larger values of <em>b</em> lead to a
+higher peak.</p>
 <p><strong>Record</strong></p>
 <ul>
-<li>The correlation between <em>b</em> and infection peak, 50 samples, rngseed = 100</li>
+<li>The correlation between <em>b</em> and infection peak, 50 samples,
+rngseed = 100</li>
 </ul>
 </div>
 <div id="task-7" class="section level3">
 <h3>Task 7</h3>
-<p>Now we’ll revisit the scenario with births and deaths turned on. Set the range for the birth rate <em>n</em> to 50 - 100, the range for death rate <em>m</em> to 0.1 - 0.2. Choose the plot to be a scatterplot, set <em>n</em> as the parameter to be shown on the scatterplots, run 100 samples, seed 100. From the tasks above, we expect that the final number of susceptible is not affected by different values of <em>n</em>. Look at the scatter plot and the correlation coefficient to confirm this.</p>
-<p>Now re-run and look at the scatterplots for parameter <em>m</em>. From the equation above, we know that larger <em>m</em> means larger <em>S<sub>final</sub></em>. The correlation we find is positive but small.</p>
-<p>There is a lot of scatter in the data, too much to see clear patterns. One could always increase sample size which should help detect patterns. If your computer is fast enough, run 200 or 500 samples. Another option is to restrict the variability to a subset of parameters, which we’ll do next.</p>
+<p>Now we’ll revisit the scenario with births and deaths turned on. Set
+the range for the birth rate <em>n</em> to 50 - 100, the range for death
+rate <em>m</em> to 0.1 - 0.2. Choose the plot to be a scatterplot, set
+<em>n</em> as the parameter to be shown on the scatterplots, run 100
+samples, seed 100. From the tasks above, we expect that the final number
+of susceptible is not affected by different values of <em>n</em>. Look
+at the scatter plot and the correlation coefficient to confirm this.</p>
+<p>Now re-run and look at the scatterplots for parameter <em>m</em>.
+From the equation above, we know that larger <em>m</em> means larger
+<em>S<sub>final</sub></em>. The correlation we find is positive but
+small.</p>
+<p>There is a lot of scatter in the data, too much to see clear
+patterns. One could always increase sample size which should help detect
+patterns. If your computer is fast enough, run 200 or 500 samples.
+Another option is to restrict the variability to a subset of parameters,
+which we’ll do next.</p>
 <p><strong>Record</strong></p>
 <ul>
-<li><p>The correlation between <em>n</em> and the final number of susceptibles, 100 samples, rngseed = 100</p></li>
-<li><p>The correlation between <em>m</em> and the final number of susceptibles, 100 samples, rngseed = 100</p></li>
+<li><p>The correlation between <em>n</em> and the final number of
+susceptibles, 100 samples, rngseed = 100</p></li>
+<li><p>The correlation between <em>m</em> and the final number of
+susceptibles, 100 samples, rngseed = 100</p></li>
 </ul>
 </div>
 <div id="task-8" class="section level3">
 <h3>Task 8</h3>
-<p>We can get a clearer picture of the impact of a specific parameter on the outcomes by restricting variability in other parameters. To do so, keep everything as you just had, but now set bmin and bmax both to 0.01, thus removing variability in the <em>b</em> parameter. Run the simulation with 100 samples, rngseed=100. You will see less scatter/variation along the y-axis in the scatterplots. Next, reduce gvar to 0.001, re-run. You should see that the scatter keeps reducing and the correlation between <em>m</em> and <em>S<sub>final</sub></em> is getting stronger.</p>
-<p>Also confirm that there is still no correlation between <em>n</em> and <em>S<sub>final</sub></em>.</p>
+<p>We can get a clearer picture of the impact of a specific parameter on
+the outcomes by restricting variability in other parameters. To do so,
+keep everything as you just had, but now set bmin and bmax both to 0.01,
+thus removing variability in the <em>b</em> parameter. Run the
+simulation with 100 samples, rngseed=100. You will see less
+scatter/variation along the y-axis in the scatterplots. Next, reduce
+gvar to 0.001, re-run. You should see that the scatter keeps reducing
+and the correlation between <em>m</em> and <em>S<sub>final</sub></em> is
+getting stronger.</p>
+<p>Also confirm that there is still no correlation between <em>n</em>
+and <em>S<sub>final</sub></em>.</p>
 <p><strong>Record</strong></p>
 <ul>
-<li>Correlation between <em>m</em> and final number of susceptibles, bmin=bmax=0.01 and gvar=0.001</li>
+<li>Correlation between <em>m</em> and final number of susceptibles,
+bmin=bmax=0.01 and gvar=0.001</li>
 </ul>
 </div>
 </div>
 <div id="shinytab4" class="section level2">
 <h2>Further Information</h2>
 <ul>
-<li>This app (and all others) are structured such that the Shiny part (the graphical interface you see and the server-side function that goes with it) calls an underlying R script (or several) which runs the simulation for the model of interest and returns the results.</li>
-<li>For this app, the underlying function running the simulation is called <code>simulate_SIR_usanalysis</code>. You can call them directly, without going through the shiny app. Use the <code>help()</code> command for more information on how to use the functions directly. If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself.</li>
-<li>You can also download all simulator functions and modify them for your own purposes. Of course to modify these functions, you’ll need to do some coding.</li>
-<li>For examples on using the simulators directly and how to modify them, read the package vignette by typing <code>vignette(&#39;DSAIDE&#39;)</code> into the R console.</li>
-<li>Good papers explaining uncertainty and sensitivity analysis in a bit more detail are <span class="citation">(<strong>hoare08?</strong>; Marino et al. 2008)</span>.</li>
+<li>This app (and all others) are structured such that the Shiny part
+(the graphical interface you see and the server-side function that goes
+with it) calls an underlying R script (or several) which runs the
+simulation for the model of interest and returns the results.</li>
+<li>For this app, the underlying function running the simulation is
+called <code>simulate_SIR_usanalysis</code>. You can call them directly,
+without going through the shiny app. Use the <code>help()</code> command
+for more information on how to use the functions directly. If you go
+that route, you need to use the results returned from this function and
+produce useful output (such as a plot) yourself.</li>
+<li>You can also download all simulator functions and modify them for
+your own purposes. Of course to modify these functions, you’ll need to
+do some coding.</li>
+<li>For examples on using the simulators directly and how to modify
+them, read the package vignette by typing
+<code>vignette(&#39;DSAIDE&#39;)</code> into the R console.</li>
+<li>Good papers explaining uncertainty and sensitivity analysis in a bit
+more detail are <span class="citation">(Hoare, Regan, and Wilson 2008;
+Marino et al. 2008)</span>.</li>
 </ul>
 <div id="references" class="section level3 unnumbered">
 <h3 class="unnumbered">References</h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-hoare2008" class="csl-entry">
+Hoare, Alexander, David G Regan, and David P Wilson. 2008.
+<span>“Sampling and Sensitivity Analyses Tools (<span>SaSAT</span>) for
+Computational Modelling.”</span> <em>Theor Biol Med Model</em> 5: 4. <a href="https://doi.org/10.1186/1742-4682-5-4">https://doi.org/10.1186/1742-4682-5-4</a>.
+</div>
 <div id="ref-marino08" class="csl-entry">
-Marino, Simeone, Ian B. Hogue, Christian J. Ray, and Denise E. Kirschner. 2008. <span>“A Methodology for Performing Global Uncertainty and Sensitivity Analysis in Systems Biology.”</span> <em>J. Theor. Biol</em> 254 (1): 178–96. <a href="https://doi.org/10.1016/j.jtbi.2008.04.011">https://doi.org/10.1016/j.jtbi.2008.04.011</a>.
+Marino, Simeone, Ian B. Hogue, Christian J. Ray, and Denise E.
+Kirschner. 2008. <span>“A Methodology for Performing Global Uncertainty
+and Sensitivity Analysis in Systems Biology.”</span> <em>J. Theor.
+Biol</em> 254 (1): 178–96. <a href="https://doi.org/10.1016/j.jtbi.2008.04.011">https://doi.org/10.1016/j.jtbi.2008.04.011</a>.
+</div>
+<div id="ref-saltelli2004" class="csl-entry">
+Saltelli, A., Stefano Tarantola, Francesca Campolongo, and Marco Ratto.
+2004. <em>Sensitivity <span>Analysis</span> in <span>Practice</span>:
+<span>A Guide</span> to <span>Assessing Scientific Models</span></em>.
+1st ed. <span>Wiley</span>.
 </div>
 </div>
 </div>

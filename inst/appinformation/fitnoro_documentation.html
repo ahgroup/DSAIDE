@@ -14,41 +14,54 @@
 
 <title>Model Comparison and Norovirus Fit</title>
 
-<script src="data:application/javascript;base64,Ly8gUGFuZG9jIDIuOSBhZGRzIGF0dHJpYnV0ZXMgb24gYm90aCBoZWFkZXIgYW5kIGRpdi4gV2UgcmVtb3ZlIHRoZSBmb3JtZXIgKHRvCi8vIGJlIGNvbXBhdGlibGUgd2l0aCB0aGUgYmVoYXZpb3Igb2YgUGFuZG9jIDwgMi44KS4KZG9jdW1lbnQuYWRkRXZlbnRMaXN0ZW5lcignRE9NQ29udGVudExvYWRlZCcsIGZ1bmN0aW9uKGUpIHsKICB2YXIgaHMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCJkaXYuc2VjdGlvbltjbGFzcyo9J2xldmVsJ10gPiA6Zmlyc3QtY2hpbGQiKTsKICB2YXIgaSwgaCwgYTsKICBmb3IgKGkgPSAwOyBpIDwgaHMubGVuZ3RoOyBpKyspIHsKICAgIGggPSBoc1tpXTsKICAgIGlmICghL15oWzEtNl0kL2kudGVzdChoLnRhZ05hbWUpKSBjb250aW51ZTsgIC8vIGl0IHNob3VsZCBiZSBhIGhlYWRlciBoMS1oNgogICAgYSA9IGguYXR0cmlidXRlczsKICAgIHdoaWxlIChhLmxlbmd0aCA+IDApIGgucmVtb3ZlQXR0cmlidXRlKGFbMF0ubmFtZSk7CiAgfQp9KTsK"></script>
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
 
 <style type="text/css">
-  code{white-space: pre-wrap;}
-  span.smallcaps{font-variant: small-caps;}
-  span.underline{text-decoration: underline;}
-  div.column{display: inline-block; vertical-align: top; width: 50%;}
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-  ul.task-list{list-style: none;}
-    </style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
 
 
 
 
 
 <style type="text/css">
-/* for pandoc --citeproc since 2.11 */
+
 div.csl-bib-body { }
 div.csl-entry {
-  clear: both;
+clear: both;
 }
 .hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
+margin-left:2em;
+text-indent:-2em;
 }
 div.csl-left-margin {
-  min-width:2em;
-  float:left;
+min-width:2em;
+float:left;
 }
 div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
+margin-left:2em;
+padding-left:1em;
 }
 div.csl-indent {
-  margin-left: 2em;
+margin-left: 2em;
 }
 </style>
 
@@ -69,17 +82,24 @@ div.csl-indent {
 
 <div id="shinytab1" class="section level2">
 <h2>Overview</h2>
-<p>This app demonstrates basic fitting of data to 2 simple infection models. This shows the concept of model/hypothesis testing. Read about the model in the “Model” tab. Then do the tasks described in the “What to do” tab.</p>
-<p><strong>Note:</strong> You should complete the “Fitting influenza data” app before starting this app.</p>
+<p>This app demonstrates basic fitting of data to 2 simple infection
+models. This shows the concept of model/hypothesis testing. Read about
+the model in the “Model” tab. Then do the tasks described in the “What
+to do” tab.</p>
+<p><strong>Note:</strong> You should complete the “Fitting influenza
+data” app before starting this app.</p>
 </div>
 <div id="shinytab2" class="section level2">
 <h2>The Model</h2>
 <div id="model-overview" class="section level3">
 <h3>Model Overview</h3>
-<p>This app fits different versions of an SIR model to Norovirus infection data.</p>
+<p>This app fits different versions of an SIR model to Norovirus
+infection data.</p>
 <div id="models" class="section level4">
 <h4>Models</h4>
-<p>The overall model is a variant of the basic SIR model, with the inclusion of a process that allows infection of individuals from some common (unmodeled) source.</p>
+<p>The overall model is a variant of the basic SIR model, with the
+inclusion of a process that allows infection of individuals from some
+common (unmodeled) source.</p>
 </div>
 </div>
 <div id="model-diagram" class="section level3">
@@ -94,7 +114,8 @@ Model Diagram
 </div>
 <div id="model-equations" class="section level3">
 <h3>Model Equations</h3>
-<p>Implementing the models as continuous-time, deterministic systems leads to the following set of ordinary differential equations:</p>
+<p>Implementing the models as continuous-time, deterministic systems
+leads to the following set of ordinary differential equations:</p>
 <p><span class="math display">\[
 \begin{aligned}
 \dot S &amp; =  - nS  - bSI \\
@@ -108,34 +129,93 @@ Model Diagram
 <ul>
 <li>We explore the following 3 models/hypotheses:
 <ul>
-<li>The outbreak involved only person-to-person transmission, i.e. <em>n=0</em>.</li>
-<li>The outbreak involved person-to-person transmission and an outside source of infection (e.g. contaminated food) that lead to constant infections at a fixed rate <em>n&gt;0</em>.</li>
-<li>The outbreak involved person-to-person transmission and an outside source of infection which was present for some period of time during the outbreak, i.e. <em>n&gt;0</em> between some time <em>t<sub>1</sub></em> and <em>t<sub>2</sub></em> and 0 otherwise.</li>
+<li>The outbreak involved only person-to-person transmission,
+i.e. <em>n=0</em>.</li>
+<li>The outbreak involved person-to-person transmission and an outside
+source of infection (e.g. contaminated food) that lead to constant
+infections at a fixed rate <em>n&gt;0</em>.</li>
+<li>The outbreak involved person-to-person transmission and an outside
+source of infection which was present for some period of time during the
+outbreak, i.e. <em>n&gt;0</em> between some time <em>t<sub>1</sub></em>
+and <em>t<sub>2</sub></em> and 0 otherwise.</li>
 </ul></li>
 </ul>
 </div>
 <div id="data-source" class="section level3">
 <h3>Data source</h3>
-<p>The data being used in this app is daily new cases of norovirus for an outbreak at a school camp. See `help(‘norodata’) for more details.</p>
+<p>The data being used in this app is daily new cases of norovirus for
+an outbreak at a school camp. See `help(‘norodata’) for more
+details.</p>
 </div>
 <div id="model-comparison" class="section level3">
 <h3>Model comparison</h3>
-<p>There are different ways to evaluate how well a model fits to data, and to compare between different models. This app shows the approach of using Akaike’s “An Information Criterion” (AIC), or more precisely, we’ll use the one corrected for small sample size, AICc . If we fit by minimizing the sum of squares (SSR), as we do here, the formula for the AICc is:</p>
+<p>There are different ways to evaluate how well a model fits to data,
+and to compare between different models. This app shows the approach of
+using Akaike’s “An Information Criterion” (AIC), or more precisely,
+we’ll use the one corrected for small sample size, AICc . If we fit by
+minimizing the sum of squares (SSR), as we do here, the formula for the
+AICc is:</p>
 <p><span class="math display">\[
 AICc = N \log(\frac{SSR}{N})+2(K+1)+\frac{2(K+1)(K+2)}{N-K}
-\]</span> where <em>N</em> is the number of data points, <em>SSR</em> is the sum of squares residual at the final fit, and <em>K</em> is the number of parameters being fit. A lower value means a better model. One nice feature of the AIC is that one can compare as many models as one wants without having issues with p-values and correcting for multiple comparison, and the models do not need to be nested (i.e. each smaller model being contained inside the larger models). That said, AIC has its drawbacks. Nowadays, if one has enough data available, the best approach is to evaluate model performance by a method like cross-validation <span class="citation">(<strong>hastie11?</strong>)</span>.</p>
-<p>For evaluation of models with different AIC, there is fortunately no arbitrary, “magic” value (like p=0.05). A rule of thumb is that if models differ by AIC of more than 2, the one with the smaller one is considered statistically better supported (don’t use the word ‘significant’ since that is usually associated with a p-value&lt;0.05, which we don’t have here). I tend to be more conservative and want AIC differences to be at least &gt;10 before I’m willing to favor a given model. Also, I think that visual inspection of the fits is useful. If one model has a lower AIC, but the fit doesn’t look that convincing biologically (e.g. very steep increases or decreases in some quantity), I’d be careful drawing very strong conclusions.</p>
-<p>Note that the absolute value of the AIC is unimportant and varies from dataset to dataset. Only relative differences matter. And it goes without saying that we can only compare models that are fit to exactly the same data.</p>
-<p>Also note that you can only compare between the models you build and evaluate. It is impossible to implement every possible reasonable model, some simplifications always need to be made. Thus, always keep in mind that if you use mechanistic models, like the ones we explore here, to discriminate between potential mechanisms, your conclusion always comes with the caveat <strong>based on the way we implemented the mechanisms/processes in our model</strong> we conclude that model/mechanism N aligns better with the data than the others.</p>
+\]</span> where <em>N</em> is the number of data points, <em>SSR</em> is
+the sum of squares residual at the final fit, and <em>K</em> is the
+number of parameters being fit. A lower value means a better model. One
+nice feature of the AIC is that one can compare as many models as one
+wants without having issues with p-values and correcting for multiple
+comparison, and the models do not need to be nested (i.e. each smaller
+model being contained inside the larger models). That said, AIC has its
+drawbacks. Nowadays, if one has enough data available, the best approach
+is to evaluate model performance by a method like cross-validation <span class="citation">(Hastie, Tibshirani, and Friedman 2011)</span>.</p>
+<p>For evaluation of models with different AIC, there is fortunately no
+arbitrary, “magic” value (like p=0.05). A rule of thumb is that if
+models differ by AIC of more than 2, the one with the smaller one is
+considered statistically better supported (don’t use the word
+‘significant’ since that is usually associated with a p-value&lt;0.05,
+which we don’t have here). I tend to be more conservative and want AIC
+differences to be at least &gt;10 before I’m willing to favor a given
+model. Also, I think that visual inspection of the fits is useful. If
+one model has a lower AIC, but the fit doesn’t look that convincing
+biologically (e.g. very steep increases or decreases in some quantity),
+I’d be careful drawing very strong conclusions.</p>
+<p>Note that the absolute value of the AIC is unimportant and varies
+from dataset to dataset. Only relative differences matter. And it goes
+without saying that we can only compare models that are fit to exactly
+the same data.</p>
+<p>Also note that you can only compare between the models you build and
+evaluate. It is impossible to implement every possible reasonable model,
+some simplifications always need to be made. Thus, always keep in mind
+that if you use mechanistic models, like the ones we explore here, to
+discriminate between potential mechanisms, your conclusion always comes
+with the caveat <strong>based on the way we implemented the
+mechanisms/processes in our model</strong> we conclude that
+model/mechanism N aligns better with the data than the others.</p>
 </div>
 </div>
 <div id="shinytab3" class="section level2">
 <h2>What to do</h2>
-<p>This fairly short set of tasks illustrates the process of model comparison using AICc.</p>
-<p><em>The tasks below are described in a way that assumes everything is in units of days (rate parameters, therefore, have units of inverse days). If any quantity is not given in those units, you need to convert it first (e.g. if it says a week, you need to convert it to 7 days).</em></p>
+<p>This fairly short set of tasks illustrates the process of model
+comparison using AICc.</p>
+<p><em>The tasks below are described in a way that assumes everything is
+in units of days (rate parameters, therefore, have units of inverse
+days). If any quantity is not given in those units, you need to convert
+it first (e.g. if it says a week, you need to convert it to 7
+days).</em></p>
 <div id="task-1" class="section level3">
 <h3>Task 1</h3>
-<p>Take a look at the inputs and outputs for the app. It is similar to the <em>Fitting influenza data</em> app (which you should do before this one). Each model variant fits parameters <em>b</em> and <em>g</em>. Model variant 2 also fits a common source infection rate <em>n</em>. Model variant 3 additionally fits times <em>t<sub>1</sub></em> and <em>t<sub>2</sub></em> at which infection from the common source starts and stops (i.e., is larger than 0). The best fit estimates are shown under the figure, together with the SSR and AICc. For simplicity, the lower and upper bounds for the on/off times <em>t1</em> and <em>t2</em> are set inside the simulator function to the beginning and end of the data time-series. As a result, they can’t be adjusted through the user interface. To find out more about the data, see <em>Further Resources</em> or <code>help(norodata)</code>. You can play around a bit with the app before starting with the next task.</p>
+<p>Take a look at the inputs and outputs for the app. It is similar to
+the <em>Fitting influenza data</em> app (which you should do before this
+one). Each model variant fits parameters <em>b</em> and <em>g</em>.
+Model variant 2 also fits a common source infection rate <em>n</em>.
+Model variant 3 additionally fits times <em>t<sub>1</sub></em> and
+<em>t<sub>2</sub></em> at which infection from the common source starts
+and stops (i.e., is larger than 0). The best fit estimates are shown
+under the figure, together with the SSR and AICc. For simplicity, the
+lower and upper bounds for the on/off times <em>t1</em> and <em>t2</em>
+are set inside the simulator function to the beginning and end of the
+data time-series. As a result, they can’t be adjusted through the user
+interface. To find out more about the data, see <em>Further
+Resources</em> or <code>help(norodata)</code>. You can play around a bit
+with the app before starting with the next task.</p>
 <p><strong>Record</strong></p>
 <ul>
 <li>Nothing</li>
@@ -143,7 +223,27 @@ AICc = N \log(\frac{SSR}{N})+2(K+1)+\frac{2(K+1)(K+2)}{N-K}
 </div>
 <div id="task-2" class="section level3">
 <h3>Task 2</h3>
-<p>The setting from which the data comes had a total of 288 susceptible individuals. Use that as starting value for the susceptibles. Assume 1 initial infected, no recovered. We’ll start by fitting model variant 1, which fits parameters <em>b</em> and <em>g</em>. You could set <em>b</em> and <em>g</em> to pretty much any starting value and try to run a large number of iterations with the 3 different solvers until you get a good fit. As you learned in the flu fitting app, that doesn’t always work, starting values are often important. To find good starting values, you can manually change starting values for <em>b</em> and <em>g</em>, run a single iteration and visually compare model and data. If model and data are reasonable close, you could run the optimizer for more iterations. In theory there is a single best fit. However, as discussed in the flu fitting app, optimizers can sometimes get stuck on good, but not best, fits. So it might be for certain settings you don’t end up with a good fit. Some trial and error is usually required. The best fit for this model is (as far as I know) one with an SSR = 1218. Try various combinations of solver type, iterations and starting values until you reach this SSR. Note that for this and the following tasks, you might need to push iterations into the thousands. Record the best fit value for the rate of recovery. Also make a note of the AICc, you’ll need it later.</p>
+<p>The setting from which the data comes had a total of 288 susceptible
+individuals. Use that as starting value for the susceptibles. Assume 1
+initial infected, no recovered. We’ll start by fitting model variant 1,
+which fits parameters <em>b</em> and <em>g</em>. You could set
+<em>b</em> and <em>g</em> to pretty much any starting value and try to
+run a large number of iterations with the 3 different solvers until you
+get a good fit. As you learned in the flu fitting app, that doesn’t
+always work, starting values are often important. To find good starting
+values, you can manually change starting values for <em>b</em> and
+<em>g</em>, run a single iteration and visually compare model and data.
+If model and data are reasonable close, you could run the optimizer for
+more iterations. In theory there is a single best fit. However, as
+discussed in the flu fitting app, optimizers can sometimes get stuck on
+good, but not best, fits. So it might be for certain settings you don’t
+end up with a good fit. Some trial and error is usually required. The
+best fit for this model is (as far as I know) one with an SSR = 1218.
+Try various combinations of solver type, iterations and starting values
+until you reach this SSR. Note that for this and the following tasks,
+you might need to push iterations into the thousands. Record the best
+fit value for the rate of recovery. Also make a note of the AICc, you’ll
+need it later.</p>
 <p><strong>Record</strong></p>
 <ul>
 <li>Estimate for best-fit value of parameter g (recovery rate)</li>
@@ -151,7 +251,19 @@ AICc = N \log(\frac{SSR}{N})+2(K+1)+\frac{2(K+1)(K+2)}{N-K}
 </div>
 <div id="task-3" class="section level3">
 <h3>Task 3</h3>
-<p>Now switch to model variant 2, which also fits parameter <em>n</em>. Play around with different starting values for the parameters, different optimizers and different numbers of iterations and see what the best fit is you can find. You’ll likely notice that getting a good fit is trickier now that you added one more parameter to be estimated. That’s a general occurence, more parameters make it harder to obtain estimates. The best fit I was able to find is identical to model 1, i.e., the optimizer sets the rate of infection from an external source to <em>n=0</em>. This, of course, gives the same SSR. However, since we have more parameters now, the AICc is larger. Based on comparison of the AICc values for the 2 models we explored so far, we would conclude that model 1 (no additional external source of infection) is a more consistent or parsimonious description of the data.</p>
+<p>Now switch to model variant 2, which also fits parameter <em>n</em>.
+Play around with different starting values for the parameters, different
+optimizers and different numbers of iterations and see what the best fit
+is you can find. You’ll likely notice that getting a good fit is
+trickier now that you added one more parameter to be estimated. That’s a
+general occurence, more parameters make it harder to obtain estimates.
+The best fit I was able to find is identical to model 1, i.e., the
+optimizer sets the rate of infection from an external source to
+<em>n=0</em>. This, of course, gives the same SSR. However, since we
+have more parameters now, the AICc is larger. Based on comparison of the
+AICc values for the 2 models we explored so far, we would conclude that
+model 1 (no additional external source of infection) is a more
+consistent or parsimonious description of the data.</p>
 <p><strong>Record</strong></p>
 <ul>
 <li>AIC for best fit</li>
@@ -159,7 +271,23 @@ AICc = N \log(\frac{SSR}{N})+2(K+1)+\frac{2(K+1)(K+2)}{N-K}
 </div>
 <div id="task-4" class="section level3">
 <h3>Task 4</h3>
-<p>Now switch to model variant 3, which also fits parameters <em>t<sub>1</sub></em> and <em>t<sub>2</sub></em>. See what best fit you can find. Note that the starting value for <em>t<sub>1</sub></em> must be 8 days (the start of the data) or greater, otherwise you’ll get an error. I was able, with 10,000 iterations and good starting conditions, to get SSR values &lt;20. My lowest was around 17, you might be able to find an even better fit (lower SSR). Try until you find one with an SSR of 20 or less. Sometimes using the best-fit results from a run as new starting values for a different run while switching between optimizers can help with the <em>getting stuck</em> problem. An SSR of &lt;20 is clearly lower than that for model 1 and 2. AICc will give us an indication of this gain in better fit justifies adding the additional 3 parameters (<em>n</em>, <em>t<sub>1</sub></em> and <em>t<sub>2</sub></em>). Look at the AICc for your best fit (one for which SSR&lt;20). Is the AICc value lower than that for model 1 and 2? If yes, it means model 3 is favored, otherwise model 1 is favored (we already ruled out model 2).</p>
+<p>Now switch to model variant 3, which also fits parameters
+<em>t<sub>1</sub></em> and <em>t<sub>2</sub></em>. See what best fit you
+can find. Note that the starting value for <em>t<sub>1</sub></em> must
+be 8 days (the start of the data) or greater, otherwise you’ll get an
+error. I was able, with 10,000 iterations and good starting conditions,
+to get SSR values &lt;20. My lowest was around 17, you might be able to
+find an even better fit (lower SSR). Try until you find one with an SSR
+of 20 or less. Sometimes using the best-fit results from a run as new
+starting values for a different run while switching between optimizers
+can help with the <em>getting stuck</em> problem. An SSR of &lt;20 is
+clearly lower than that for model 1 and 2. AICc will give us an
+indication of this gain in better fit justifies adding the additional 3
+parameters (<em>n</em>, <em>t<sub>1</sub></em> and
+<em>t<sub>2</sub></em>). Look at the AICc for your best fit (one for
+which SSR&lt;20). Is the AICc value lower than that for model 1 and 2?
+If yes, it means model 3 is favored, otherwise model 1 is favored (we
+already ruled out model 2).</p>
 <p><strong>Record</strong></p>
 <ul>
 <li>Based on AICc, model 3 is favored (TRUE/FALSE)</li>
@@ -169,17 +297,43 @@ AICc = N \log(\frac{SSR}{N})+2(K+1)+\frac{2(K+1)(K+2)}{N-K}
 <div id="shinytab4" class="section level2">
 <h2>Further Information</h2>
 <ul>
-<li>This app (and all others) are structured such that the Shiny part (the graphical interface you see and the server-side function that goes with it) calls an underlying R script (or several) which runs the simulation for the model of interest and returns the results.</li>
-<li>For this app, the underlying function running the simulation is called <code>simulate_noro_fit</code>. You can call them directly, without going through the shiny app. Use the <code>help()</code> command for more information on how to use the functions directly. If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself.</li>
-<li>You can also download all simulator functions and modify them for your own purposes. Of course to modify these functions, you’ll need to do some coding.</li>
-<li>For examples on using the simulators directly and how to modify them, read the package vignette by typing <code>vignette(&#39;DSAIDE&#39;)</code> into the R console.</li>
-<li>The data for this study is saved in the data variable <code>norodata</code>, you can read more about it by looking at its help file entry <code>help(norodata)</code>. The publication from which the data comes is <span class="citation">(Kuo et al. 2009)</span>.</li>
+<li>This app (and all others) are structured such that the Shiny part
+(the graphical interface you see and the server-side function that goes
+with it) calls an underlying R script (or several) which runs the
+simulation for the model of interest and returns the results.</li>
+<li>For this app, the underlying function running the simulation is
+called <code>simulate_noro_fit</code>. You can call them directly,
+without going through the shiny app. Use the <code>help()</code> command
+for more information on how to use the functions directly. If you go
+that route, you need to use the results returned from this function and
+produce useful output (such as a plot) yourself.</li>
+<li>You can also download all simulator functions and modify them for
+your own purposes. Of course to modify these functions, you’ll need to
+do some coding.</li>
+<li>For examples on using the simulators directly and how to modify
+them, read the package vignette by typing
+<code>vignette(&#39;DSAIDE&#39;)</code> into the R console.</li>
+<li>The data for this study is saved in the data variable
+<code>norodata</code>, you can read more about it by looking at its help
+file entry <code>help(norodata)</code>. The publication from which the
+data comes is <span class="citation">(Kuo et al. 2009)</span>.</li>
 </ul>
 <div id="references" class="section level3 unnumbered">
 <h3 class="unnumbered">References</h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-hastie11" class="csl-entry">
+Hastie, Trevor, Robert Tibshirani, and Jerome Friedman. 2011. <em>The
+Elements of Statistical Learning: <span>Data</span> Mining, Inference,
+and Prediction, Second Edition (Springer Series in Statistics)</em>.
+<span>Springer</span>.
+</div>
 <div id="ref-kuo09" class="csl-entry">
-Kuo, Hung-Wei, Daniela Schmid, Karin Schwarz, Anna-Margaretha Pichler, Heidelinde Klein, Christoph König, Alfred de Martin, and Franz Allerberger. 2009. <span>“A Non-Foodborne Norovirus Outbreak Among School Children During a Skiing Holiday, <span>Austria</span>, 2007.”</span> <em>Wiener Klinische Wochenschrift</em> 121 (3-4): 120–24. <a href="https://doi.org/10.1007/s00508-008-1131-1">https://doi.org/10.1007/s00508-008-1131-1</a>.
+Kuo, Hung-Wei, Daniela Schmid, Karin Schwarz, Anna-Margaretha Pichler,
+Heidelinde Klein, Christoph König, Alfred de Martin, and Franz
+Allerberger. 2009. <span>“A Non-Foodborne Norovirus Outbreak Among
+School Children During a Skiing Holiday, <span>Austria</span>,
+2007.”</span> <em>Wiener Klinische Wochenschrift</em> 121 (3-4): 120–24.
+<a href="https://doi.org/10.1007/s00508-008-1131-1">https://doi.org/10.1007/s00508-008-1131-1</a>.
 </div>
 </div>
 </div>

@@ -14,21 +14,56 @@
 
 <title>Stochastic SIR Model</title>
 
-<script src="data:application/javascript;base64,Ly8gUGFuZG9jIDIuOSBhZGRzIGF0dHJpYnV0ZXMgb24gYm90aCBoZWFkZXIgYW5kIGRpdi4gV2UgcmVtb3ZlIHRoZSBmb3JtZXIgKHRvCi8vIGJlIGNvbXBhdGlibGUgd2l0aCB0aGUgYmVoYXZpb3Igb2YgUGFuZG9jIDwgMi44KS4KZG9jdW1lbnQuYWRkRXZlbnRMaXN0ZW5lcignRE9NQ29udGVudExvYWRlZCcsIGZ1bmN0aW9uKGUpIHsKICB2YXIgaHMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCJkaXYuc2VjdGlvbltjbGFzcyo9J2xldmVsJ10gPiA6Zmlyc3QtY2hpbGQiKTsKICB2YXIgaSwgaCwgYTsKICBmb3IgKGkgPSAwOyBpIDwgaHMubGVuZ3RoOyBpKyspIHsKICAgIGggPSBoc1tpXTsKICAgIGlmICghL15oWzEtNl0kL2kudGVzdChoLnRhZ05hbWUpKSBjb250aW51ZTsgIC8vIGl0IHNob3VsZCBiZSBhIGhlYWRlciBoMS1oNgogICAgYSA9IGguYXR0cmlidXRlczsKICAgIHdoaWxlIChhLmxlbmd0aCA+IDApIGgucmVtb3ZlQXR0cmlidXRlKGFbMF0ubmFtZSk7CiAgfQp9KTsK"></script>
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
 
 <style type="text/css">
-  code{white-space: pre-wrap;}
-  span.smallcaps{font-variant: small-caps;}
-  span.underline{text-decoration: underline;}
-  div.column{display: inline-block; vertical-align: top; width: 50%;}
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-  ul.task-list{list-style: none;}
-    </style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
 
 
 
 
 
+
+<style type="text/css">
+
+div.csl-bib-body { }
+div.csl-entry {
+clear: both;
+}
+.hanging div.csl-entry {
+margin-left:2em;
+text-indent:-2em;
+}
+div.csl-left-margin {
+min-width:2em;
+float:left;
+}
+div.csl-right-inline {
+margin-left:2em;
+padding-left:1em;
+}
+div.csl-indent {
+margin-left: 2em;
+}
+</style>
 
 
 
@@ -47,14 +82,18 @@
 
 <div id="shinytab1" class="section level2">
 <h2>Overview</h2>
-<p>This app lets you explore a <em>stochastic</em> SIR model. Read about the model in the “Model” tab. Then do the tasks described in the “What to do” tab.</p>
+<p>This app lets you explore a <em>stochastic</em> SIR model. Read about
+the model in the “Model” tab. Then do the tasks described in the “What
+to do” tab.</p>
 <div id="learning-objectives" class="section level3">
 <h3>Learning Objectives</h3>
 <ul>
 <li>Get an introduction to stochastic compartmental models</li>
-<li>Understand differences and similarities between stochastic models and their deterministic equivalent</li>
+<li>Understand differences and similarities between stochastic models
+and their deterministic equivalent</li>
 <li>Understand the concept of reproducibility with random numbers</li>
-<li>Know how the reproductive number affects outbreaks in stochastic models</li>
+<li>Know how the reproductive number affects outbreaks in stochastic
+models</li>
 </ul>
 </div>
 </div>
@@ -62,21 +101,38 @@
 <h2>The Model</h2>
 <div id="model-overview" class="section level3">
 <h3>Model Overview</h3>
-<p>For this app, we’ll use a basic compartmental SIR model that also includes births, deaths and waning immunity. This is the same model we used for the <em>Reproductive Number 2</em> app.</p>
+<p>For this app, we’ll use a basic compartmental SIR model that also
+includes births, deaths and waning immunity. This is the same model we
+used for the <em>Reproductive Number 2</em> app.</p>
 <p>We allow for 3 different stages/compartments:</p>
 <ul>
 <li><strong>S</strong> - uninfected and susceptible individuals</li>
-<li><strong>I</strong> - infected and infectious individuals (note that these terms are often used interchangeably, but technically we are talking about someone who is infected <strong>and</strong> is infectious, i.e. can infect others)</li>
-<li><strong>R</strong> - recovered/removed individuals that are immune.</li>
+<li><strong>I</strong> - infected and infectious individuals (note that
+these terms are often used interchangeably, but technically we are
+talking about someone who is infected <strong>and</strong> is
+infectious, i.e. can infect others)</li>
+<li><strong>R</strong> - recovered/removed individuals that are
+immune.</li>
 </ul>
-<p>In addition to specifying the <em>compartments</em> of a model, we need to specify the dynamics determining the changes for each compartment. Broadly speaking, some processes increase the number of individuals in a given compartment/stage and other processes that lead to a reduction. Those processes are sometimes called inflows and outflows.</p>
+<p>In addition to specifying the <em>compartments</em> of a model, we
+need to specify the dynamics determining the changes for each
+compartment. Broadly speaking, some processes increase the number of
+individuals in a given compartment/stage and other processes that lead
+to a reduction. Those processes are sometimes called inflows and
+outflows.</p>
 <p>For our system, we specify the following processes/flows:</p>
 <ul>
-<li>Susceptible individuals (S) can become infected by infectious individuals (I) at some rate, <em>b</em>. This leads to the susceptible individual leaving the S compartment and entering the I compartment.<br />
+<li>Susceptible individuals (S) can become infected by infectious
+individuals (I) at some rate, <em>b</em>. This leads to the susceptible
+individual leaving the S compartment and entering the I
+compartment.<br />
 </li>
-<li>Infected individuals recover and enter the recovered (R) compartment at some rate, <em>g</em>.</li>
-<li>Recovered individuals can lose immunity at rate <em>w</em> and return to the susceptible compartment.</li>
-<li>Natural births (into the S compartment at rate <em>n</em>) and deaths (from all compartments at rate <em>m</em>) are possible.</li>
+<li>Infected individuals recover and enter the recovered (R) compartment
+at some rate, <em>g</em>.</li>
+<li>Recovered individuals can lose immunity at rate <em>w</em> and
+return to the susceptible compartment.</li>
+<li>Natural births (into the S compartment at rate <em>n</em>) and
+deaths (from all compartments at rate <em>m</em>) are possible.</li>
 </ul>
 </div>
 <div id="model-implementation" class="section level3">
@@ -88,11 +144,22 @@
 Model Diagram
 </p>
 </div>
-<p>In this app, you can run the model both as an deterministic, ordinary differential equation implementation (the kinds of simulations you have mostly seen so far), as well as a stochastic version of that model.</p>
-<p>The deterministic model implemented as set of differential equations is given by the following equations:</p>
-<p><span class="math display">\[\dot S = n - b S I - mS + wR\]</span> <span class="math display">\[\dot I = b S I - g I - mI\]</span> <span class="math display">\[\dot R = g I - mR - wR\]</span></p>
-<p>The main focus for this app is a stochastic implementation of the variables and processes described above. This model is <em>not</em> an ordinary differential equation model. It is instead its stochastic equivalent.</p>
-<p>We can specify the model by writing down every possible transition/event/reaction that can occur and their propensities (the propensity multiplied with the time step gives the probability that a given event/transition occurs). For our model these are the following:</p>
+<p>In this app, you can run the model both as an deterministic, ordinary
+differential equation implementation (the kinds of simulations you have
+mostly seen so far), as well as a stochastic version of that model.</p>
+<p>The deterministic model implemented as set of differential equations
+is given by the following equations:</p>
+<p><span class="math display">\[\dot S = n - b S I - mS + wR\]</span>
+<span class="math display">\[\dot I = b S I - g I - mI\]</span> <span class="math display">\[\dot R = g I - mR - wR\]</span></p>
+<p>The main focus for this app is a stochastic implementation of the
+variables and processes described above. This model is <em>not</em> an
+ordinary differential equation model. It is instead its stochastic
+equivalent.</p>
+<p>We can specify the model by writing down every possible
+transition/event/reaction that can occur and their propensities (the
+propensity multiplied with the time step gives the probability that a
+given event/transition occurs). For our model these are the
+following:</p>
 <table>
 <thead>
 <tr class="header">
@@ -142,28 +209,79 @@ Model Diagram
 </div>
 <div id="a-note-on-randomness-in-computer-simulations" class="section level3">
 <h3>A note on randomness in computer simulations</h3>
-<p>This simulation (as well as some of the others) involves using random numbers to introduce stochasticity/uncertainty/noise into the model. This leads to a model that usually more closely reflects the underlying real system. However, in science, we want to be as reproducible as possible. Fortunately, random numbers on a computer are not completely random, but can be reproduced. In practice, this is done by specifying a random number seed, in essence a starting position for the algorithm to produce pseudo-random numbers. As long as the seed is the same, the code should produce the same pseudo-random numbers each time, thus ensuring reproducibility.</p>
+<p>This simulation (as well as some of the others) involves using random
+numbers to introduce stochasticity/uncertainty/noise into the model.
+This leads to a model that usually more closely reflects the underlying
+real system. However, in science, we want to be as reproducible as
+possible. Fortunately, random numbers on a computer are not completely
+random, but can be reproduced. In practice, this is done by specifying a
+random number seed, in essence a starting position for the algorithm to
+produce pseudo-random numbers. As long as the seed is the same, the code
+should produce the same pseudo-random numbers each time, thus ensuring
+reproducibility.</p>
 </div>
 </div>
 <div id="shinytab3" class="section level2">
 <h2>What to do</h2>
-<p><strong>The tasks below are described in a way that assumes everything is in units of DAYS (rate parameters, therefore, have units of inverse days). If any quantity is not given in those units, you need to convert it first (e.g. if it says a week, you need to convert it to 7 days).</strong></p>
-<p><em>Some of the simulations might take a few seconds to run. Be patient.</em></p>
+<p><strong>The tasks below are described in a way that assumes
+everything is in units of DAYS (rate parameters, therefore, have units
+of inverse days). If any quantity is not given in those units, you need
+to convert it first (e.g. if it says a week, you need to convert it to 7
+days).</strong></p>
+<p><em>Some of the simulations might take a few seconds to run. Be
+patient.</em></p>
 <div id="task-1" class="section level3">
 <h3>Task 1</h3>
-<p>Start with 1000 susceptibles, 1 infected, no recovered. Transmission/infection rate of 0.0005, duration of infectious period 5 days, no births and deaths, no waning immunity. Start time 0, time step 0.1, simulation time of 100 days. Set number of simulations and random seed to anything you like. Run the deterministic/ODE model. Hit the <em>Run</em> button multiple times with changed random number seeds. You can also change the number of simulations. Since the ODE model doesn’t include any randomness and each time it leads to the same outcome, the random number seed and simulation number inputs are actually ignored (you can check that by looking at the function call for the ODE model for this app, see the <em>Further Information</em> section).</p>
-<p>Now switch to the stochastic model, single simulation, random number seed at 100. Hit the <em>Run</em> button multiple times. What do you expect? What do you see? If you are surprised, re-read <em>A note on randomness</em> in the <em>Model</em> section.</p>
-<p>Next, set the number of simulations to 3 and run. You will see the one you already saw, another similar trajectory, and one scenario without an outbreak (note that susceptible stay at their starting value). What happens is that if you choose to run multiple stochastic simulations, the software increases the random number seed by 1 each time (i.e. it runs 3 simulations with random seeds 100, 101, and 102), otherwise you would get exactly the same result multiple times, which is useless. To confirm this, set the number of simulations to 1 and run the model with random seed 100, 101 and 102. Compare to what you got when you run 3 simulations starting at seed 100.</p>
-<p>Try to understand why for some of the stochastic simulations (seed 100 and 102) you get an outbreak, while for others (seed 101) not. Keep playing around with different seeds and different number of simulations until you have a full understanding of what’s going on.</p>
+<p>Start with 1000 susceptibles, 1 infected, no recovered.
+Transmission/infection rate of 0.0005, duration of infectious period 5
+days, no births and deaths, no waning immunity. Start time 0, time step
+0.1, simulation time of 100 days. Set number of simulations and random
+seed to anything you like. Run the deterministic/ODE model. Hit the
+<em>Run</em> button multiple times with changed random number seeds. You
+can also change the number of simulations. Since the ODE model doesn’t
+include any randomness and each time it leads to the same outcome, the
+random number seed and simulation number inputs are actually ignored
+(you can check that by looking at the function call for the ODE model
+for this app, see the <em>Further Information</em> section).</p>
+<p>Now switch to the stochastic model, single simulation, random number
+seed at 100. Hit the <em>Run</em> button multiple times. What do you
+expect? What do you see? If you are surprised, re-read <em>A note on
+randomness</em> in the <em>Model</em> section.</p>
+<p>Next, set the number of simulations to 3 and run. You will see the
+one you already saw, another similar trajectory, and one scenario
+without an outbreak (note that susceptible stay at their starting
+value). What happens is that if you choose to run multiple stochastic
+simulations, the software increases the random number seed by 1 each
+time (i.e. it runs 3 simulations with random seeds 100, 101, and 102),
+otherwise you would get exactly the same result multiple times, which is
+useless. To confirm this, set the number of simulations to 1 and run the
+model with random seed 100, 101 and 102. Compare to what you got when
+you run 3 simulations starting at seed 100.</p>
+<p>Try to understand why for some of the stochastic simulations (seed
+100 and 102) you get an outbreak, while for others (seed 101) not. Keep
+playing around with different seeds and different number of simulations
+until you have a full understanding of what’s going on.</p>
 <p><strong>Record</strong></p>
 <ul>
-<li><p>Final number susceptible, random seed 100, single run of stochastic model</p></li>
-<li><p>Final number susceptible, random seed 102, single run of stochastic model</p></li>
+<li><p>Final number susceptible, random seed 100, single run of
+stochastic model</p></li>
+<li><p>Final number susceptible, random seed 102, single run of
+stochastic model</p></li>
 </ul>
 </div>
 <div id="task-2" class="section level3">
 <h3>Task 2</h3>
-<p>Set the random seed to 100, 5 simulations, and choose to run both models. All other parameter values as before. You’ll get a plot showing the deterministic model dynamics and 5 runs for the stochastic model (each of the stochastic runs gets consecutive random number seeds, 100, 101,…). You might want to switch to plotly for the figure so you can easier turn on/off specific curves (by clicking on them). Take a look at the final value for the susceptibles for both the deterministic and stochastic models. Does what you see in the figure and the numbers/text underneath the figure make sense? If they don’t at first glance, carefully think about the last sentence under the figure and what it means.</p>
+<p>Set the random seed to 100, 5 simulations, and choose to run both
+models. All other parameter values as before. You’ll get a plot showing
+the deterministic model dynamics and 5 runs for the stochastic model
+(each of the stochastic runs gets consecutive random number seeds, 100,
+101,…). You might want to switch to plotly for the figure so you can
+easier turn on/off specific curves (by clicking on them). Take a look at
+the final value for the susceptibles for both the deterministic and
+stochastic models. Does what you see in the figure and the numbers/text
+underneath the figure make sense? If they don’t at first glance,
+carefully think about the last sentence under the figure and what it
+means.</p>
 <p><strong>Record</strong></p>
 <ul>
 <li><p>Final number susceptible, deterministic model</p></li>
@@ -172,7 +290,21 @@ Model Diagram
 </div>
 <div id="task-3" class="section level3">
 <h3>Task 3</h3>
-<p>We previously discussed that R<sub>0</sub>&lt;1 means you won’t get an outbreak, while R<sub>0</sub>&gt;1 means you do get an outbreak. The first statement is true, but the second one is only strictly true in a deterministic model. I’ve tried to be careful and write that with R<sub>0</sub>&gt;1 you <em>can</em> get an outbreak. But it doesn’t always happen, which you just saw in task 1 with the stochastic model. 2 of the 3 runs led to an outbreak, the third did not. Since you were able to get an outbreak, it means we have R<sub>0</sub>&gt;1. Confirm this by computing R<sub>0</sub> for this model. Still, it can happen that no outbreak occurs. That’s because if you start with a single infected, and that person by chance recovers before infecting others, the outbreak is over. Thus, for a stochastic model (which is closer to the real world than a deterministic model), there is a chance you get an outbreak for R<sub>0</sub>&gt;1, but it’s not guaranteed. We’ll explore that more in the next task.</p>
+<p>We previously discussed that R<sub>0</sub>&lt;1 means you won’t get
+an outbreak, while R<sub>0</sub>&gt;1 means you do get an outbreak. The
+first statement is true, but the second one is only strictly true in a
+deterministic model. I’ve tried to be careful and write that with
+R<sub>0</sub>&gt;1 you <em>can</em> get an outbreak. But it doesn’t
+always happen, which you just saw in task 1 with the stochastic model. 2
+of the 3 runs led to an outbreak, the third did not. Since you were able
+to get an outbreak, it means we have R<sub>0</sub>&gt;1. Confirm this by
+computing R<sub>0</sub> for this model. Still, it can happen that no
+outbreak occurs. That’s because if you start with a single infected, and
+that person by chance recovers before infecting others, the outbreak is
+over. Thus, for a stochastic model (which is closer to the real world
+than a deterministic model), there is a chance you get an outbreak for
+R<sub>0</sub>&gt;1, but it’s not guaranteed. We’ll explore that more in
+the next task.</p>
 <p><strong>Record</strong></p>
 <ul>
 <li>R0 for the model</li>
@@ -180,23 +312,55 @@ Model Diagram
 </div>
 <div id="task-4" class="section level3">
 <h3>Task 4</h3>
-<p>One can mathematically derive an equation linking the probability that an outbreak occurs, <em>p</em>, to the reproductive number (see e.g. <span class="citation">(<strong>keeling08?</strong>)</span>). We won’t try to do the math here but instead see if we can use the simulation to figure it out. Set parameters as in task 1. Then run the stochastic model for b = 0.0002, 0.0003, 0.0004, 0.0005, 0.0006, 0.001, 0.002. For each value, compute R<sub>0</sub> and write it down. Then run 100 stochastic simulations for each <em>b</em> value, with max time 300 and record the number of times you get an outbreak. Plot the relationship (either by hand or using the computer) between <em>R<sub>0</sub></em> and the probability of getting an outbreak. Note that running 100 stochastic simulations can take a bit of time, so be patient. If your computer is too slow, you might try to only run 50 or less, though with fewer simulations the estimate of the proportion of outbreaks is not as accurate as with more simulations.</p>
+<p>One can mathematically derive an equation linking the probability
+that an outbreak occurs, <em>p</em>, to the reproductive number (see
+e.g. <span class="citation">(M. Keeling and Rohani 2007)</span>). We
+won’t try to do the math here but instead see if we can use the
+simulation to figure it out. Set parameters as in task 1. Then run the
+stochastic model for b = 0.0002, 0.0003, 0.0004, 0.0005, 0.0006, 0.001,
+0.002. For each value, compute R<sub>0</sub> and write it down. Then run
+100 stochastic simulations for each <em>b</em> value, with max time 300
+and record the number of times you get an outbreak. Plot the
+relationship (either by hand or using the computer) between
+<em>R<sub>0</sub></em> and the probability of getting an outbreak. Note
+that running 100 stochastic simulations can take a bit of time, so be
+patient. If your computer is too slow, you might try to only run 50 or
+less, though with fewer simulations the estimate of the proportion of
+outbreaks is not as accurate as with more simulations.</p>
 <p><strong>Record</strong></p>
 <ul>
-<li>The relation between R0 and the probability of an outbreak is close to a straight line.</li>
+<li>The relation between R0 and the probability of an outbreak is close
+to a straight line.</li>
 </ul>
 </div>
 <div id="task-5" class="section level3">
 <h3>Task 5</h3>
-<p>There is a similar relation between outbreak probability and the initial number of infected individuals. Instead of doing math, let’s again use the model to determine it. Keep <em>b</em> fixed at 0.0003, but now vary the initial number of infected individuals, <em>I<sub>0</sub></em>, from 1 to 10. Everything else as in the previous task. For each value of <em>I<sub>0</sub></em>, run 100 simulations, record the fraction of outbreaks you get for each <em>I<sub>0</sub></em>. Plot the relationship (either by hand or using the computer) between <em>I<sub>0</sub></em> and the probability of getting an outbreak.</p>
+<p>There is a similar relation between outbreak probability and the
+initial number of infected individuals. Instead of doing math, let’s
+again use the model to determine it. Keep <em>b</em> fixed at 0.0003,
+but now vary the initial number of infected individuals,
+<em>I<sub>0</sub></em>, from 1 to 10. Everything else as in the previous
+task. For each value of <em>I<sub>0</sub></em>, run 100 simulations,
+record the fraction of outbreaks you get for each
+<em>I<sub>0</sub></em>. Plot the relationship (either by hand or using
+the computer) between <em>I<sub>0</sub></em> and the probability of
+getting an outbreak.</p>
 <p><strong>Record</strong></p>
 <ul>
-<li>The relation between I0 and the probability of an outbreak is close to a straight line.</li>
+<li>The relation between I0 and the probability of an outbreak is close
+to a straight line.</li>
 </ul>
 </div>
 <div id="task-6" class="section level3">
 <h3>Task 6</h3>
-<p>Keep exploring. So far we haven’t turned on births and deaths or waning immunity. If you do so, you can get steady states. Note that for the stochastic model, there is technically not a real steady state since the numbers bounce around. Eventually, just by chance, the numbers for the stochastic model will hit 0 and then won’t recover from there. However, that could take a very long time (approaching infinity). So in practice the stochastic model often does exhibit something like a steady state, with fluctuations around that state.</p>
+<p>Keep exploring. So far we haven’t turned on births and deaths or
+waning immunity. If you do so, you can get steady states. Note that for
+the stochastic model, there is technically not a real steady state since
+the numbers bounce around. Eventually, just by chance, the numbers for
+the stochastic model will hit 0 and then won’t recover from there.
+However, that could take a very long time (approaching infinity). So in
+practice the stochastic model often does exhibit something like a steady
+state, with fluctuations around that state.</p>
 <p><strong>Record</strong></p>
 <ul>
 <li>Nothing</li>
@@ -206,15 +370,57 @@ Model Diagram
 <div id="shinytab4" class="section level2">
 <h2>Further Information</h2>
 <ul>
-<li>This app (and all others) are structured such that the Shiny part (the graphical interface you see and the server-side function that goes with it) calls an underlying R script (or several) which runs the simulation for the model of interest and returns the results.</li>
-<li>For this app, the underlying function(s) running the simulation are called <code>simulate_SIRSd_model_stochastic, simulate_SIRSd_model_ode</code>. You can call them directly, without going through the shiny app. Use the <code>help()</code> command for more information on how to use the functions directly. If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself.</li>
-<li>You can also download all simulator functions and modify them for your own purposes. Of course to modify these functions, you’ll need to do some coding.</li>
-<li>For examples on using the simulators directly and how to modify them, read the package vignette by typing <code>vignette(&#39;DSAIDE&#39;)</code> into the R console.</li>
-<li>For some more details on the equations connecting outbreak probability and R<sub>0</sub> see e.g. the stochastic dynamics chapters in the <a href="https://andreashandel.github.io/IDEMAbook">IDEMA book</a> or <span class="citation">(<strong>keeling08?</strong>)</span>.</li>
-<li>For some further reading concerning stochastic dynamics of ID, see e.g. <span class="citation">(<strong>lloyd-smith05a?</strong>; <strong>black66?</strong>; <strong>keeling97?</strong>)</span>.</li>
+<li>This app (and all others) are structured such that the Shiny part
+(the graphical interface you see and the server-side function that goes
+with it) calls an underlying R script (or several) which runs the
+simulation for the model of interest and returns the results.</li>
+<li>For this app, the underlying function(s) running the simulation are
+called
+<code>simulate_SIRSd_model_stochastic, simulate_SIRSd_model_ode</code>.
+You can call them directly, without going through the shiny app. Use the
+<code>help()</code> command for more information on how to use the
+functions directly. If you go that route, you need to use the results
+returned from this function and produce useful output (such as a plot)
+yourself.</li>
+<li>You can also download all simulator functions and modify them for
+your own purposes. Of course to modify these functions, you’ll need to
+do some coding.</li>
+<li>For examples on using the simulators directly and how to modify
+them, read the package vignette by typing
+<code>vignette(&#39;DSAIDE&#39;)</code> into the R console.</li>
+<li>For some more details on the equations connecting outbreak
+probability and R<sub>0</sub> see e.g. the stochastic dynamics chapters
+in the <a href="https://andreashandel.github.io/IDEMAbook">IDEMA
+book</a> or <span class="citation">(M. Keeling and Rohani
+2007)</span>.</li>
+<li>For some further reading concerning stochastic dynamics of ID, see
+e.g. <span class="citation">(Lloyd-Smith et al. 2005; Black 1966; M. J.
+Keeling 1997)</span>.</li>
 </ul>
-<div id="references" class="section level3">
-<h3>References</h3>
+<div id="references" class="section level3 unnumbered">
+<h3 class="unnumbered">References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-black1966" class="csl-entry">
+Black, F L. 1966. <span>“<a href="https://www.ncbi.nlm.nih.gov/pubmed/5965486">Measles Endemicity in
+Insular Populations: Critical Community Size and Its Evolutionary
+Implication.</a>”</span> <em>Journal of Theoretical Biology</em> 11 (2):
+207–11.
+</div>
+<div id="ref-keeling1997" class="csl-entry">
+Keeling, M J. 1997. <span>“Modelling the Persistence of Measles.”</span>
+<em>Trends in Microbiology</em> 5 (12): 513–18. <a href="https://doi.org/10.1016/S0966-842X(97)01147-5">https://doi.org/10.1016/S0966-842X(97)01147-5</a>.
+</div>
+<div id="ref-keeling08" class="csl-entry">
+Keeling, Matt, and Pejman Rohani. 2007. <em>Modeling <span>Infectious
+Diseases</span> in <span>Humans</span> and <span>Animals</span></em>.
+<span>Princeton University Press</span>.
+</div>
+<div id="ref-lloyd-smith05" class="csl-entry">
+Lloyd-Smith, J. O., S. J. Schreiber, P. E. Kopp, and W. M. Getz. 2005.
+<span>“Superspreading and the Effect of Individual Variation on Disease
+Emergence.”</span> <em>Nature</em> 438 (7066): 355–59. <a href="https://doi.org/10.1038/nature04153">https://doi.org/10.1038/nature04153</a>.
+</div>
+</div>
 </div>
 </div>
 

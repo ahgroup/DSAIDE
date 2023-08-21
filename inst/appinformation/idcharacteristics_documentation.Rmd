@@ -270,7 +270,7 @@ write_tasktext(alloutcomes)
 * For this app, the underlying function(s) running the simulation are called ``r appsettings$simfunction``. You can call them directly, without going through the shiny app. Use the `help()` command for more information on how to use the functions directly. If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself. 
 * You can also download all simulator functions and modify them for your own purposes.  Of course to modify these functions, you'll need to do some coding.
 * For examples on using the simulators directly and how to modify them, read the package vignette by typing `vignette('DSAIDE')` into the R console.
-* Some further information covering the concepts this app addresses can be found in [@keeling08, @vynnycky10, @kajita07, @milwid16].
+* Some further information covering the concepts this app addresses can be found in [@keeling07, @vynnycky10, @kajita07, @milwid2016].
 
 ### References
 

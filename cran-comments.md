@@ -1,7 +1,7 @@
 ## Test environments
 
-* local Windows 10.1 x86_64, R 4.1
-* R-CMD-Check (local, Github actions) 
+* local Windows 11 x86_64, R 4.3.1
+* R-CMD-Check (local) 
 * devtools: check_rhub(), check_win_release(), check_win_devel()
 
 ## R CMD check results
@@ -19,6 +19,8 @@ The documentation for the apps in this package contains diagrams/figures, which 
 
 
 ## Submission History
+
+version 0.9.4: small bug fixes and feature improvements.
 
 version 0.9.3: small bug fixes and feature improvements.
 

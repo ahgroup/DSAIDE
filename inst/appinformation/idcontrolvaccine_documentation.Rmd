@@ -275,8 +275,8 @@ write_tasktext(alloutcomes)
 * For this app, the underlying function(s) running the simulation are called ``r appsettings$simfunction``. You can call them directly, without going through the shiny app. Use the `help()` command for more information on how to use the functions directly. If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself. 
 * You can also download all simulator functions and modify them for your own purposes.  Of course to modify these functions, you'll need to do some coding.
 * For examples on using the simulators directly and how to modify them, read the package vignette by typing `vignette('DSAIDE')` into the R console.
-* For the equations mentioned in the tasks, see e.g. [@heffernan05a; @keeling08; @vynnycky10].
-* For some information on the reproductive number, see e.g. [@fine11; @heffernan05a; @roberts07; @wallinga07].
+* For the equations mentioned in the tasks, see e.g. [@heffernan2005; @keeling08; @vynnycky10].
+* For some information on the reproductive number, see e.g. [@fine2011; @heffernan2005; @roberts2007; @wallinga2007].
 
 ### References
 

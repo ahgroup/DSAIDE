@@ -32,7 +32,8 @@ run_model <- function(modelsettings) {
   check_results <- function(simresult)
   {
     checkres = NULL
-    if (class(simresult)!="list") #if the return from the simulator function is not a list, something went wrong
+    #if (class(simresult)!="list") #if the return from the simulator function is not a list, something went wrong
+    if (!inherits(simresult,"list")) #new way of doing it, class() is apparently not good to use
     {
       checkres <- 'Model run failed. Maybe unreasonable parameter values?'
       return(checkres)
