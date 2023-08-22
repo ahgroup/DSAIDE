@@ -1,6 +1,6 @@
 citHeader("To cite package 'DSAIDE' in publications use:")
 
-citEntry(entry="Article",
+bibentry("Article",
   title         = "Learning infectious disease epidemiology in a modern framework",
   author        = as.person("Andreas Handel"),
   journal       = "PLoS Computational Biology",
