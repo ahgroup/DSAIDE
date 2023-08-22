@@ -258,7 +258,7 @@ write_tasktext(alloutcomes)
 * You can also download all simulator functions and modify them for your own purposes.  Of course to modify these functions, you'll need to do some coding.
 * For examples on using the simulators directly and how to modify them, read the package vignette by typing `vignette('DSAIDE')` into the R console.
 * For some more details on the equations connecting outbreak probability and R~0~ see e.g. the stochastic dynamics chapters in the [IDEMA book](https://andreashandel.github.io/IDEMAbook) or [@keeling08].
-* For some further reading concerning stochastic dynamics of ID, see e.g. [@lloyd-smith05a; @black66; @keeling97].
+* For some further reading concerning stochastic dynamics of ID, see e.g. [@lloyd-smith05; @black1966; @keeling1997].
 
 ### References
 

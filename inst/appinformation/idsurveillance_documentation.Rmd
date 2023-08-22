@@ -31,7 +31,7 @@ This app teaches the topic of _Infectious disease surveillance_ and demonstrates
 
 * Understand the influence of infectious disease surveillance on the dynamics of an infectious disease in a population by comparing disease dynamics with and without surveillance.
 
-* Understand the effect of the extent of surveillance and under-reporting/incomplete surveillance [@brabazon15; @kazerooni18; @jelastopulu10] on the course and outcome of the epidemic. The effect of the extent of surveillance on the number of susceptibles left at the end of the simulation and the total number of deaths that occurred will be explored. In addition, users will explore which surveillance parameters prevent the occurrence of an outbreak.
+* Understand the effect of the extent of surveillance and under-reporting/incomplete surveillance on the course and outcome of the epidemic. The effect of the extent of surveillance on the number of susceptibles left at the end of the simulation and the total number of deaths that occurred will be explored. In addition, users will explore which surveillance parameters prevent the occurrence of an outbreak.
 
 * Understand influence of the type of surveillance (e.g., one that detects presymptomatic, asymptomatic or symptomatic infections or pairwise combinations of the three or all) on disease dynamics. The effect of the type of surveillance will be explored in the case where individuals in the different stages of infection (presymptomatic, asymptomatic or symptomatic) transmit or don't.
 
@@ -272,6 +272,8 @@ write_tasktext(alloutcomes)
 * For this app, the underlying function(s) running the simulation are called ``r appsettings$simfunction``. You can call them directly, without going through the shiny app. Use the `help()` command for more information on how to use the functions directly. If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself. 
 * You can also download all simulator functions and modify them for your own purposes.  Of course to modify these functions, you'll need to do some coding.
 * For examples on using the simulators directly and how to modify them, read the package vignette by typing `vignette('DSAIDE')` into the R console.
+* For some more information on the topics discussed here, see e.g. 
+[@brabazon2015; @kazerooni2018; @jelastopulu2010]
 
 ### References
 

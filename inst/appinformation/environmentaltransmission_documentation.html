@@ -14,21 +14,56 @@
 
 <title>Environmental Transmission - Practice</title>
 
-<script src="data:application/javascript;base64,Ly8gUGFuZG9jIDIuOSBhZGRzIGF0dHJpYnV0ZXMgb24gYm90aCBoZWFkZXIgYW5kIGRpdi4gV2UgcmVtb3ZlIHRoZSBmb3JtZXIgKHRvCi8vIGJlIGNvbXBhdGlibGUgd2l0aCB0aGUgYmVoYXZpb3Igb2YgUGFuZG9jIDwgMi44KS4KZG9jdW1lbnQuYWRkRXZlbnRMaXN0ZW5lcignRE9NQ29udGVudExvYWRlZCcsIGZ1bmN0aW9uKGUpIHsKICB2YXIgaHMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCJkaXYuc2VjdGlvbltjbGFzcyo9J2xldmVsJ10gPiA6Zmlyc3QtY2hpbGQiKTsKICB2YXIgaSwgaCwgYTsKICBmb3IgKGkgPSAwOyBpIDwgaHMubGVuZ3RoOyBpKyspIHsKICAgIGggPSBoc1tpXTsKICAgIGlmICghL15oWzEtNl0kL2kudGVzdChoLnRhZ05hbWUpKSBjb250aW51ZTsgIC8vIGl0IHNob3VsZCBiZSBhIGhlYWRlciBoMS1oNgogICAgYSA9IGguYXR0cmlidXRlczsKICAgIHdoaWxlIChhLmxlbmd0aCA+IDApIGgucmVtb3ZlQXR0cmlidXRlKGFbMF0ubmFtZSk7CiAgfQp9KTsK"></script>
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
 
 <style type="text/css">
-  code{white-space: pre-wrap;}
-  span.smallcaps{font-variant: small-caps;}
-  span.underline{text-decoration: underline;}
-  div.column{display: inline-block; vertical-align: top; width: 50%;}
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-  ul.task-list{list-style: none;}
-    </style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
 
 
 
 
 
+
+<style type="text/css">
+
+div.csl-bib-body { }
+div.csl-entry {
+clear: both;
+}
+.hanging div.csl-entry {
+margin-left:2em;
+text-indent:-2em;
+}
+div.csl-left-margin {
+min-width:2em;
+float:left;
+}
+div.csl-right-inline {
+margin-left:2em;
+padding-left:1em;
+}
+div.csl-indent {
+margin-left: 2em;
+}
+</style>
 
 
 
@@ -47,14 +82,19 @@
 
 <div id="shinytab1" class="section level2">
 <h2>Overview</h2>
-<p>This app allows you to explore a model which allows for both direct transmission and transmission through an environmental stage. Read about the model in the “Model” tab. Then do the tasks described in the “What to do” tab.</p>
+<p>This app allows you to explore a model which allows for both direct
+transmission and transmission through an environmental stage. Read about
+the model in the “Model” tab. Then do the tasks described in the “What
+to do” tab.</p>
 <div id="learning-objectives" class="section level3">
 <h3>Learning Objectives</h3>
 <ul>
 <li>Know the hallmarks of indirect, environmental transmission</li>
-<li>Contrast the difference between direct and environmental transmission.</li>
+<li>Contrast the difference between direct and environmental
+transmission.</li>
 <li>Assess how indirect transmission processes affect ID dynamics.</li>
-<li>Understand what environmental transmission implies for control strategies</li>
+<li>Understand what environmental transmission implies for control
+strategies</li>
 </ul>
 </div>
 </div>
@@ -62,20 +102,29 @@
 <h2>The Model</h2>
 <div id="model-overview" class="section level3">
 <h3>Model Overview</h3>
-<p>This is a simple SIR model with an additional environmental compartment.</p>
+<p>This is a simple SIR model with an additional environmental
+compartment.</p>
 <p>This model has the following compartments:</p>
 <ul>
 <li><strong>S</strong> - uninfected and susceptible individuals</li>
-<li><strong>I</strong> - individuals who are infected and infectious.</li>
+<li><strong>I</strong> - individuals who are infected and
+infectious.</li>
 <li><strong>R</strong> - recovered/removed individuals.</li>
 <li><strong>P</strong> - pathogen in the environment.</li>
 </ul>
 <p>The processes being modeled are:</p>
 <ul>
-<li>Susceptible individuals can become infected by either direct contact with infected hosts at rate <em>b<sub>I</sub></em> or through contact with a pathogen in the environment at rate <em>b<sub>P</sub></em>.</li>
-<li>Infected hosts recover after some time (specified by the rate <em>g</em>).</li>
-<li>New susceptibles enter (are born) at a rate <em>n</em>. From each compartment, hosts “leave” after some time (i.e. they die) at rate <em>m</em>. The inverse of this rate is the average lifespan of a host.</li>
-<li>Infected hosts shed pathogen into the environment at rate <em>q</em>.</li>
+<li>Susceptible individuals can become infected by either direct contact
+with infected hosts at rate <em>b<sub>I</sub></em> or through contact
+with a pathogen in the environment at rate <em>b<sub>P</sub></em>.</li>
+<li>Infected hosts recover after some time (specified by the rate
+<em>g</em>).</li>
+<li>New susceptibles enter (are born) at a rate <em>n</em>. From each
+compartment, hosts “leave” after some time (i.e. they die) at rate
+<em>m</em>. The inverse of this rate is the average lifespan of a
+host.</li>
+<li>Infected hosts shed pathogen into the environment at rate
+<em>q</em>.</li>
 <li>Pathogen in the environment decays at rate <em>c</em>.</li>
 </ul>
 </div>
@@ -88,27 +137,55 @@
 Model Diagram
 </p>
 </div>
-<p>The set of ordinary differential equations (ODE) for this model are:</p>
+<p>The set of ordinary differential equations (ODE) for this model
+are:</p>
 <p><span class="math display">\[
 \begin{aligned}
 \dot S &amp; = n - b_{I}IS -b_PPS - mS\\
 \dot I &amp; = b_{I}IS + b_PPS -gI - mI\\
 \dot R &amp; = gI - mR \\
-\dot P &amp; = qI - c P 
+\dot P &amp; = qI - c P
 \end{aligned}
 \]</span></p>
 </div>
 <div id="a-comment-on-terminology" class="section level3">
 <h3>A comment on terminology</h3>
-<p>It’s tempting to use the letter <em>E</em> for the environmental stage. However, the letter <em>E</em> is generally used for the <em>exposed</em> stage (what I generally call pre-symptomatic), which is then called a SEIR model. Thus, I’m using the letter <em>P</em> here. You might see models that use <em>E</em> for exposed or environmental stages. In general, there are no naming rules for either model compartments or parameters, so you will see all kinds of letters used. They should all be explicitly specified by the authors such that there is no ambiguity.</p>
+<p>It’s tempting to use the letter <em>E</em> for the environmental
+stage. However, the letter <em>E</em> is generally used for the
+<em>exposed</em> stage (what I generally call pre-symptomatic), which is
+then called a SEIR model. Thus, I’m using the letter <em>P</em> here.
+You might see models that use <em>E</em> for exposed or environmental
+stages. In general, there are no naming rules for either model
+compartments or parameters, so you will see all kinds of letters used.
+They should all be explicitly specified by the authors such that there
+is no ambiguity.</p>
 </div>
 </div>
 <div id="shinytab3" class="section level2">
 <h2>What to do</h2>
-<p><strong>The tasks below are described in a way that assumes that everything is in units of MONTHS (rate parameters, therefore, have units of inverse months). If any quantity is not given in those units, you need to convert it first.</strong></p>
+<p><strong>The tasks below are described in a way that assumes that
+everything is in units of MONTHS (rate parameters, therefore, have units
+of inverse months). If any quantity is not given in those units, you
+need to convert it first.</strong></p>
 <div id="task-1" class="section level3">
 <h3>Task 1</h3>
-<p>Set the model parameters to the following values. 1000 initially susceptible individuals, 1 initially infected host, no pathogen in the environment, simulation duration 1 year. We’ll first look at direct transmission. Set transmission rate of <em>b<sub>I</sub> = 0.004</em>, environmental transmission <em>b<sub>P</sub> = 0</em>. Set environmental pathogen shedding and clearance rates to 0. Assume that the duration of the infectious period is 15 days long (and a month has 30 days). Turn off births and deaths for now. Run the simulation. You should get the usual direct transmission dynamics and a single outbreak. You should be left with around 203 susceptibles at the end of the simulation. Remember that in a model like this, where the only flow from the susceptible class is outflow through becoming infected, everyone who is not in the susceptible compartment at the end has been infected. Thus the total number of infected during the outbreak is the different between susceptibles at the beginning and at the end. Use one of the equations you have learned about in the reproductive number apps to compute <em>R<sub>0</sub></em>.</p>
+<p>Set the model parameters to the following values. 1000 initially
+susceptible individuals, 1 initially infected host, no pathogen in the
+environment, simulation duration 1 year. We’ll first look at direct
+transmission. Set transmission rate of <em>b<sub>I</sub> = 0.004</em>,
+environmental transmission <em>b<sub>P</sub> = 0</em>. Set environmental
+pathogen shedding and clearance rates to 0. Assume that the duration of
+the infectious period is 15 days long (and a month has 30 days). Turn
+off births and deaths for now. Run the simulation. You should get the
+usual direct transmission dynamics and a single outbreak. You should be
+left with around 203 susceptibles at the end of the simulation. Remember
+that in a model like this, where the only flow from the susceptible
+class is outflow through becoming infected, everyone who is not in the
+susceptible compartment at the end has been infected. Thus the total
+number of infected during the outbreak is the different between
+susceptibles at the beginning and at the end. Use one of the equations
+you have learned about in the reproductive number apps to compute
+<em>R<sub>0</sub></em>.</p>
 <p><strong>Record</strong></p>
 <ul>
 <li>Basic reproductive number</li>
@@ -116,7 +193,12 @@ Model Diagram
 </div>
 <div id="task-2" class="section level3">
 <h3>Task 2</h3>
-<p>Now try various values for the rate of shedding into the environment, <em>q</em>, and environmental clearance <em>c</em>. Leave everything else unchanged. As those parameters move away from 0, what do you expect to see? Run the simulation and compare your expectations with the results. Anything surprising happening? Do you understand why you see what you see?</p>
+<p>Now try various values for the rate of shedding into the environment,
+<em>q</em>, and environmental clearance <em>c</em>. Leave everything
+else unchanged. As those parameters move away from 0, what do you expect
+to see? Run the simulation and compare your expectations with the
+results. Anything surprising happening? Do you understand why you see
+what you see?</p>
 <p><strong>Record</strong></p>
 <ul>
 <li>Susceptible left at end of simulation</li>
@@ -124,7 +206,13 @@ Model Diagram
 </div>
 <div id="task-3" class="section level3">
 <h3>Task 3</h3>
-<p>Now set <em>q = 100</em> and <em>c = 100</em> . Turn off (set to 0) direct transmission. Run to make sure you don’t get an outbreak. Now turn on environmental transmission, set it to <em>b<sub>P</sub> = 0.004</em>, the same value you had for direct transmission above. Leave everything else unchanged. Run the simulation. Compare results with those from task 1. You might or might not find the result surprising. Take a close look at the curves for <em>I</em> and <em>P</em>.</p>
+<p>Now set <em>q = 100</em> and <em>c = 100</em> . Turn off (set to 0)
+direct transmission. Run to make sure you don’t get an outbreak. Now
+turn on environmental transmission, set it to <em>b<sub>P</sub> =
+0.004</em>, the same value you had for direct transmission above. Leave
+everything else unchanged. Run the simulation. Compare results with
+those from task 1. You might or might not find the result surprising.
+Take a close look at the curves for <em>I</em> and <em>P</em>.</p>
 <p><strong>Record</strong></p>
 <ul>
 <li>Susceptible left at end of simulation</li>
@@ -132,15 +220,53 @@ Model Diagram
 </div>
 <div id="task-4" class="section level3">
 <h3>Task 4</h3>
-<p>In the previous task, removal of pathogens in the environment happened at a rate that was so fast that it essentially tracked whatever was going on in the infected population. In such a case, one can make with is called a quasi-steady state approximation for the fast variable and assume that it’s change only depends on the change of the variable it tracks. There is some formal way of doing it, a quick and often (but not always) correct way is to set the right side of the equation of the fast variable to 0. Here, that is the environmental variable, so the equation becomes <em>0=qI-cP</em> and from that <em>P=qI/c</em>. Since we had <em>q</em>=<em>c</em> in the previous task, I and P tracked each other (approximately). That is generally not the case. Explore a more general scenario by setting <em>q = 100</em> and <em>c = 50</em>. Have direct transmission off and environmental transmission as in the previous task. Since decay is now slower, pathogen in the environment builds up to higher levels and produces an overall larger outbreak. Look at the maximum values for <em>P</em> and <em>I</em>. Compute the ratio and compare that with the equation. Keep exploring how things change for different values of <em>q</em> and <em>c</em>.</p>
+<p>In the previous task, removal of pathogens in the environment
+happened at a rate that was so fast that it essentially tracked whatever
+was going on in the infected population. In such a case, one can make
+with is called a quasi-steady state approximation for the fast variable
+and assume that it’s change only depends on the change of the variable
+it tracks. There is some formal way of doing it, a quick and often (but
+not always) correct way is to set the right side of the equation of the
+fast variable to 0. Here, that is the environmental variable, so the
+equation becomes <em>0=qI-cP</em> and from that <em>P=qI/c</em>. Since
+we had <em>q</em>=<em>c</em> in the previous task, I and P tracked each
+other (approximately). That is generally not the case. Explore a more
+general scenario by setting <em>q = 100</em> and <em>c = 50</em>. Have
+direct transmission off and environmental transmission as in the
+previous task. Since decay is now slower, pathogen in the environment
+builds up to higher levels and produces an overall larger outbreak. Look
+at the maximum values for <em>P</em> and <em>I</em>. Compute the ratio
+and compare that with the equation. Keep exploring how things change for
+different values of <em>q</em> and <em>c</em>.</p>
 <p><strong>Record</strong></p>
 <ul>
-<li>The ratio of the maximum values for P and I, i.e. maximum P/maximum I</li>
+<li>The ratio of the maximum values for P and I, i.e. maximum P/maximum
+I</li>
 </ul>
 </div>
 <div id="task-5" class="section level3">
 <h3>Task 5</h3>
-<p>It is possible to compute the reproductive number for enviromental transmission. Recall that it is defined as the average number of infectious hosts (of 1 type) that are infected by one infectious host of the same type. Here, we need to go through the environment. First, we need to compute <em>how many units of environmental pathogen</em> an individual host produces before they recover, and then how many hosts are infected per unit of environmental pathogen. This can be done as follows: One infected host sheds pathogen for a duration of <em>1/g</em> at a rate <em>q</em>, so the total environmental pathogen produced by that host is <em>q/g</em>. This amount of pathogen is around for an average time of <em>1/c</em>, during which time it infects new hosts at rate <em>b<sub>P</sub></em> for a total production of new infected hosts <em>b<sub>P</sub></em>/<em>c</em>. To get the number of new infectious hosts produced by one infectious host, one needs to multiply these two quantities. Then, to get the basic reproductive number, one also needs to multiply by the inital number of susceptible to get <em>R<sub>0</sub>=qb<sub>P</sub>S/(gc))</em>. Use the values from the last task (<em>q=100</em>, <em>c=50</em>) to compute <em>R<sub>0</sub></em> for this simulation. Then use the final-size equation to compute the fraction of susceptible you expect to get for this <em>R<sub>0</sub></em> value and confirm with the simulation.</p>
+<p>It is possible to compute the reproductive number for enviromental
+transmission. Recall that it is defined as the average number of
+infectious hosts (of 1 type) that are infected by one infectious host of
+the same type. Here, we need to go through the environment. First, we
+need to compute <em>how many units of environmental pathogen</em> an
+individual host produces before they recover, and then how many hosts
+are infected per unit of environmental pathogen. This can be done as
+follows: One infected host sheds pathogen for a duration of <em>1/g</em>
+at a rate <em>q</em>, so the total environmental pathogen produced by
+that host is <em>q/g</em>. This amount of pathogen is around for an
+average time of <em>1/c</em>, during which time it infects new hosts at
+rate <em>b<sub>P</sub></em> for a total production of new infected hosts
+<em>b<sub>P</sub></em>/<em>c</em>. To get the number of new infectious
+hosts produced by one infectious host, one needs to multiply these two
+quantities. Then, to get the basic reproductive number, one also needs
+to multiply by the inital number of susceptible to get
+<em>R<sub>0</sub>=qb<sub>P</sub>S/(gc))</em>. Use the values from the
+last task (<em>q=100</em>, <em>c=50</em>) to compute
+<em>R<sub>0</sub></em> for this simulation. Then use the final-size
+equation to compute the fraction of susceptible you expect to get for
+this <em>R<sub>0</sub></em> value and confirm with the simulation.</p>
 <p><strong>Record</strong></p>
 <ul>
 <li><p>Value of R0</p></li>
@@ -149,7 +275,17 @@ Model Diagram
 </div>
 <div id="task-6" class="section level3">
 <h3>Task 6</h3>
-<p>Use the settings from the previous task and alternate between starting with some non-zero number of infected individuals and no pathogen in the environment, or no infected individuals and some pathogen in the environment. Convince yourself that you always get an outbreak, and if it’s not clear why, look at the flow diagram for the model to understand which processes lead to more or less the same outbreak if you start with either non-zero infected individuals or non-zero levels of environmental contamination. Then also turn on direct transmission, such that you now have transmission through both pathways (environmental and direct) and explore how different values affect the outbreak.</p>
+<p>Use the settings from the previous task and alternate between
+starting with some non-zero number of infected individuals and no
+pathogen in the environment, or no infected individuals and some
+pathogen in the environment. Convince yourself that you always get an
+outbreak, and if it’s not clear why, look at the flow diagram for the
+model to understand which processes lead to more or less the same
+outbreak if you start with either non-zero infected individuals or
+non-zero levels of environmental contamination. Then also turn on direct
+transmission, such that you now have transmission through both pathways
+(environmental and direct) and explore how different values affect the
+outbreak.</p>
 <p><strong>Record</strong></p>
 <ul>
 <li>Nothing</li>
@@ -157,7 +293,14 @@ Model Diagram
 </div>
 <div id="task-7" class="section level3">
 <h3>Task 7</h3>
-<p>Keep exploring by trying different parameters and transmission settings and see how they influence results. You can also turn on births/deaths and see what you get. As you continue your exploration, think about potential real infectious diseases that might be approximated by either one of the transmission types. You could try to find parameter values in the literature that could approximate that disease and run simulations mimicking a specific disease and setting.</p>
+<p>Keep exploring by trying different parameters and transmission
+settings and see how they influence results. You can also turn on
+births/deaths and see what you get. As you continue your exploration,
+think about potential real infectious diseases that might be
+approximated by either one of the transmission types. You could try to
+find parameter values in the literature that could approximate that
+disease and run simulations mimicking a specific disease and
+setting.</p>
 <p><strong>Record</strong></p>
 <ul>
 <li>Nothing</li>
@@ -167,14 +310,35 @@ Model Diagram
 <div id="shinytab4" class="section level2">
 <h2>Further Information</h2>
 <ul>
-<li>This app (and all others) are structured such that the Shiny part (the graphical interface you see and the server-side function that goes with it) calls an underlying R script (or several) which runs the simulation for the model of interest and returns the results.</li>
-<li>For this app, the underlying function(s) running the simulation are called <code>simulate_Environmental_Transmission_model_ode</code>. You can call them directly, without going through the shiny app. Use the <code>help()</code> command for more information on how to use the functions directly. If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself.</li>
-<li>You can also download all simulator functions and modify them for your own purposes. Of course to modify these functions, you’ll need to do some coding.</li>
-<li>For examples on using the simulators directly and how to modify them, read the package vignette by typing <code>vignette(&#39;DSAIDE&#39;)</code> into the R console.</li>
-<li>Some more information on environmentally transmitted ID and modeling can be found in <span class="citation">(<strong>codeco01?</strong>)</span>.</li>
+<li>This app (and all others) are structured such that the Shiny part
+(the graphical interface you see and the server-side function that goes
+with it) calls an underlying R script (or several) which runs the
+simulation for the model of interest and returns the results.</li>
+<li>For this app, the underlying function(s) running the simulation are
+called <code>simulate_Environmental_Transmission_model_ode</code>. You
+can call them directly, without going through the shiny app. Use the
+<code>help()</code> command for more information on how to use the
+functions directly. If you go that route, you need to use the results
+returned from this function and produce useful output (such as a plot)
+yourself.</li>
+<li>You can also download all simulator functions and modify them for
+your own purposes. Of course to modify these functions, you’ll need to
+do some coding.</li>
+<li>For examples on using the simulators directly and how to modify
+them, read the package vignette by typing
+<code>vignette(&#39;DSAIDE&#39;)</code> into the R console.</li>
+<li>Some more information on environmentally transmitted ID and modeling
+can be found in <span class="citation">(Codeço 2001)</span>.</li>
 </ul>
-<div id="references" class="section level3">
-<h3>References</h3>
+<div id="references" class="section level3 unnumbered">
+<h3 class="unnumbered">References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-codeco01" class="csl-entry">
+Codeço, C T. 2001. <span>“<a href="https://www.ncbi.nlm.nih.gov/pubmed/11208258">Endemic and Epidemic
+Dynamics of Cholera: The Role of the Aquatic Reservoir.</a>”</span>
+<em>BMC Infectious Diseases</em> 1: 1.
+</div>
+</div>
 </div>
 </div>
 

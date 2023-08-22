@@ -112,11 +112,9 @@ documentation for data is in /R/data.R
 
 ### To update R documentation and vignette
 * Edit documentation inside R functions. 
-* Build documentation with More/Document or devtools::document()
 * Edit vignette inside the /vignettes folder.
-* To build new vignette, run devtools::build_vignettes()
-* To update the pkgdown website, run pkgdown::build_site()
-* To re-build html documentation files, copy and zip simulator functions and build vignettes and site, run the processing-script provided in this folder.
+* To re-build html documentation files, copy and zip simulator functions, re-build documentation, build vignettes and rebuild site, run the processing-script in the 'helperfunctions' folder.
+
 
 ### To build the package
 * in RStudio, use the functions in the 'build' tab to test and build the package.

@@ -21,7 +21,7 @@ appsettings = get_settings(currentrmdfile,appdocdir,packagename)
 
 
 ## Overview {#shinytab1}  
-This app lets you explore interventions applied to different population subgroups with potentially different infectiousness and mortality patterns. The app assumes you have worked through _The Basics_ and _Reproductive Number_ sections, as well as the first two apps in the _Control_ section. This app specifically builds on the _ID Control for multiple outbreaks_ app and follows a model and analysis described in [@Handel2020], see the _Further Information_ tab for this and other related references.
+This app lets you explore interventions applied to different population subgroups with potentially different infectiousness and mortality patterns. The app assumes you have worked through _The Basics_ and _Reproductive Number_ sections, as well as the first two apps in the _Control_ section. This app specifically builds on the _ID Control for multiple outbreaks_ app and follows a model and analysis described in [@handel2020], see the _Further Information_ tab for this and other related references.
 
 
 ### Learning Objectives  
@@ -266,8 +266,8 @@ write_tasktext(alloutcomes)
 * For this app, the underlying function(s) running the simulation are called ``r appsettings$simfunction``. You can call them directly, without going through the shiny app. Use the `help()` command for more information on how to use the functions directly. If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself. 
 * You can also download all simulator functions and modify them for your own purposes.  Of course, to modify these functions, you'll need to do some coding.
 * For examples on using the simulators directly and how to modify them, read the package vignette by typing `vignette('DSAIDE')` into the R console.
-* This app closely follows a model and analysis described in [@Handel2020]. 
-* The POLYMOD mixing data is described in [@mossong08]. Similar studies have since provided additional data, e.g. [@zhang20a; @klepac20].
+* This app closely follows a model and analysis described in [@handel2020]. 
+* The POLYMOD mixing data is described in [@mossong2008]. Similar studies have since provided additional data, e.g. [@zhang2020b; @klepac2020].
 
 ### References
 

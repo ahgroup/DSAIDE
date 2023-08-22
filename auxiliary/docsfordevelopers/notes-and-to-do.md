@@ -9,7 +9,6 @@
 
 ## Content Improvement
 * Clean up and make all model diagrams as nice as possible (wait for flowdiagramr package)
-* Fix all refs
 * Review ID surveillance app
 
 ## Apps to be implemented

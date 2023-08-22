@@ -14,21 +14,56 @@
 
 <title>Stochastic SEIR Model</title>
 
-<script src="data:application/javascript;base64,Ly8gUGFuZG9jIDIuOSBhZGRzIGF0dHJpYnV0ZXMgb24gYm90aCBoZWFkZXIgYW5kIGRpdi4gV2UgcmVtb3ZlIHRoZSBmb3JtZXIgKHRvCi8vIGJlIGNvbXBhdGlibGUgd2l0aCB0aGUgYmVoYXZpb3Igb2YgUGFuZG9jIDwgMi44KS4KZG9jdW1lbnQuYWRkRXZlbnRMaXN0ZW5lcignRE9NQ29udGVudExvYWRlZCcsIGZ1bmN0aW9uKGUpIHsKICB2YXIgaHMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCJkaXYuc2VjdGlvbltjbGFzcyo9J2xldmVsJ10gPiA6Zmlyc3QtY2hpbGQiKTsKICB2YXIgaSwgaCwgYTsKICBmb3IgKGkgPSAwOyBpIDwgaHMubGVuZ3RoOyBpKyspIHsKICAgIGggPSBoc1tpXTsKICAgIGlmICghL15oWzEtNl0kL2kudGVzdChoLnRhZ05hbWUpKSBjb250aW51ZTsgIC8vIGl0IHNob3VsZCBiZSBhIGhlYWRlciBoMS1oNgogICAgYSA9IGguYXR0cmlidXRlczsKICAgIHdoaWxlIChhLmxlbmd0aCA+IDApIGgucmVtb3ZlQXR0cmlidXRlKGFbMF0ubmFtZSk7CiAgfQp9KTsK"></script>
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
 
 <style type="text/css">
-  code{white-space: pre-wrap;}
-  span.smallcaps{font-variant: small-caps;}
-  span.underline{text-decoration: underline;}
-  div.column{display: inline-block; vertical-align: top; width: 50%;}
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-  ul.task-list{list-style: none;}
-    </style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
 
 
 
 
 
+
+<style type="text/css">
+
+div.csl-bib-body { }
+div.csl-entry {
+clear: both;
+}
+.hanging div.csl-entry {
+margin-left:2em;
+text-indent:-2em;
+}
+div.csl-left-margin {
+min-width:2em;
+float:left;
+}
+div.csl-right-inline {
+margin-left:2em;
+padding-left:1em;
+}
+div.csl-indent {
+margin-left: 2em;
+}
+</style>
 
 
 
@@ -47,8 +82,12 @@
 
 <div id="shinytab1" class="section level2">
 <h2>Overview</h2>
-<p>This app lets you explore a stochastic SEIR model. Read about the model in the “Model” tab. Then do the tasks described in the “What to do” tab.</p>
-<p>For this app, it is assumed that you’ve worked through all the ones in the <em>Basics</em> and <em>Reproductive Number</em> sections, as well as the <em>Stochastic SIRS</em> one.</p>
+<p>This app lets you explore a stochastic SEIR model. Read about the
+model in the “Model” tab. Then do the tasks described in the “What to
+do” tab.</p>
+<p>For this app, it is assumed that you’ve worked through all the ones
+in the <em>Basics</em> and <em>Reproductive Number</em> sections, as
+well as the <em>Stochastic SIRS</em> one.</p>
 <div id="learning-objectives" class="section level3">
 <h3>Learning Objectives</h3>
 <ul>
@@ -62,20 +101,35 @@
 <h2>The Model</h2>
 <div id="model-overview" class="section level3">
 <h3>Model Overview</h3>
-<p>This model tracks susceptibles, exposed/pre-symptomatic, infected/symptomatic and recovered hosts. The following compartments are included:</p>
+<p>This model tracks susceptibles, exposed/pre-symptomatic,
+infected/symptomatic and recovered hosts. The following compartments are
+included:</p>
 <ul>
 <li><strong>S</strong> - uninfected and susceptible individuals.</li>
-<li><strong>E</strong> - individuals who are infected and do not yet show symptoms. Those individuals can be infectious.</li>
-<li><strong>I</strong> - individuals who are infected and show symptoms. Those individuals are likely infectious, but the model allows to adjust this, including no infectiousness.</li>
-<li><strong>R</strong> - recovered/removed individuals. Those individuals have recovered and are immune. They can lose their immunity and return to the susceptible class.</li>
+<li><strong>E</strong> - individuals who are infected and do not yet
+show symptoms. Those individuals can be infectious.</li>
+<li><strong>I</strong> - individuals who are infected and show symptoms.
+Those individuals are likely infectious, but the model allows to adjust
+this, including no infectiousness.</li>
+<li><strong>R</strong> - recovered/removed individuals. Those
+individuals have recovered and are immune. They can lose their immunity
+and return to the susceptible class.</li>
 </ul>
 <p>The included processes/mechanisms are the following:</p>
 <ul>
-<li>Susceptible individuals (S) can become infected by pre-symptomatic/exposed (E) or symptomatic (I) hosts at rates <em>b<sub>E</sub></em> and <em>b<sub>I</sub></em>.</li>
-<li>All infected hosts first enter the exposed/presymptomatic stage and leave the stage at rate <em>g<sub>E</sub></em>, the inverse of which is the average time spent in this stage.</li>
-<li>All infected hosts go from the presymptomatic to the symptomatic stage and leave the stage at rate <em>g<sub>I</sub></em>.</li>
-<li>Recovered individuals are initially immune to reinfection. They can lose their immunity at rate <em>w</em> and return to the susceptible compartment.</li>
-<li>New susceptible hosts enter the system (are born) at fixed rate <em>n</em>. Natural death occurs at rate <em>m</em>.</li>
+<li>Susceptible individuals (S) can become infected by
+pre-symptomatic/exposed (E) or symptomatic (I) hosts at rates
+<em>b<sub>E</sub></em> and <em>b<sub>I</sub></em>.</li>
+<li>All infected hosts first enter the exposed/presymptomatic stage and
+leave the stage at rate <em>g<sub>E</sub></em>, the inverse of which is
+the average time spent in this stage.</li>
+<li>All infected hosts go from the presymptomatic to the symptomatic
+stage and leave the stage at rate <em>g<sub>I</sub></em>.</li>
+<li>Recovered individuals are initially immune to reinfection. They can
+lose their immunity at rate <em>w</em> and return to the susceptible
+compartment.</li>
+<li>New susceptible hosts enter the system (are born) at fixed rate
+<em>n</em>. Natural death occurs at rate <em>m</em>.</li>
 </ul>
 </div>
 <div id="model-implementation" class="section level3">
@@ -88,8 +142,18 @@ Model diagram
 </p>
 </div>
 <p>The deterministic/ODE equations for this model are:</p>
-<p><span class="math display">\[\dot S = n - S (b_E E + b_I I) - mS + wR\]</span> <span class="math display">\[\dot E = S (b_E E + b_I I)  - g_E E - m E\]</span> <span class="math display">\[\dot I = g_E E - g_I I - m I \]</span> <span class="math display">\[\dot R = g_I I - mR - wR\]</span></p>
-<p>However, for this app we do <strong>not</strong> implement a deterministic/ODE model. Instead, we implement its stochastic equivalent. We can specify the model by writing down every possible transition/event/reaction that can occur and their propensities (the propensity multiplied with the time step gives the probability that a given event/transition occurs). For our model these are the following:</p>
+<p><span class="math display">\[\dot S = n - S (b_E E + b_I I) - mS +
+wR\]</span> <span class="math display">\[\dot E = S (b_E E + b_I I)  -
+g_E E - m E\]</span> <span class="math display">\[\dot I = g_E E - g_I I
+- m I \]</span> <span class="math display">\[\dot R = g_I I - mR -
+wR\]</span></p>
+<p>However, for this app we do <strong>not</strong> implement a
+deterministic/ODE model. Instead, we implement its stochastic
+equivalent. We can specify the model by writing down every possible
+transition/event/reaction that can occur and their propensities (the
+propensity multiplied with the time step gives the probability that a
+given event/transition occurs). For our model these are the
+following:</p>
 <table>
 <thead>
 <tr class="header">
@@ -150,11 +214,26 @@ Model diagram
 </div>
 <div id="shinytab3" class="section level2">
 <h2>What to do</h2>
-<p><strong>The tasks below are described in a way that assumes everything is in units of MONTHS (rate parameters, therefore, have units of inverse months). If any quantity is not given in those units, you need to convert it first (e.g. if it says a year, you need to convert it to 12 months).</strong></p>
-<p><em>Some of the simulations might take a few seconds to run. Be patient.</em></p>
+<p><strong>The tasks below are described in a way that assumes
+everything is in units of MONTHS (rate parameters, therefore, have units
+of inverse months). If any quantity is not given in those units, you
+need to convert it first (e.g. if it says a year, you need to convert it
+to 12 months).</strong></p>
+<p><em>Some of the simulations might take a few seconds to run. Be
+patient.</em></p>
 <div id="task-1" class="section level3">
 <h3>Task 1</h3>
-<p>Set the following model parameters to start 1000 susceptible and 1 initially symptomatic host, none in the other categories. Assume that only symptomatic individuals transmit, at rate 0.005. Assume that the duration of the presymptomatic period is one week (1/4 of a month) long, and the duration of the symptomatic period is 2 weeks (half a month) long. Assume immunity does not wane and that there are no births and deaths. Set the number of simulations to 10. Simulation start time 0, duration 1 year, time step does not matter. Set random seed to 123. With parameters set to correspond to the scenario just described, run the simulation. You should find 5 simulations that produced an outbreak and the average final value for the recovered is around 448.</p>
+<p>Set the following model parameters to start 1000 susceptible and 1
+initially symptomatic host, none in the other categories. Assume that
+only symptomatic individuals transmit, at rate 0.005. Assume that the
+duration of the presymptomatic period is one week (1/4 of a month) long,
+and the duration of the symptomatic period is 2 weeks (half a month)
+long. Assume immunity does not wane and that there are no births and
+deaths. Set the number of simulations to 10. Simulation start time 0,
+duration 1 year, time step does not matter. Set random seed to 123. With
+parameters set to correspond to the scenario just described, run the
+simulation. You should find 5 simulations that produced an outbreak and
+the average final value for the recovered is around 448.</p>
 <p><strong>Record</strong></p>
 <ul>
 <li>Average number of susceptible at end of simulation</li>
@@ -162,67 +241,164 @@ Model diagram
 </div>
 <div id="task-2" class="section level3">
 <h3>Task 2</h3>
-<p>Now set waning immunity rate to 0.2, simulation time 5 years. Keep everything as before. Run the simulation, you should find that the system settles to some kind of stochastic version of a steady state, namely S-E-I-R values that fluctuate around some level. Note that there is still a mix of simulations that did and didn’t produce an outbreak. In fact, that number of simulations that produce an outbreak dropped from 5 to 4. Just by chance the inclusion of waning immunity meant that processes in the model got executed differently at the start of the simulation and a simulation that took off earlier now didn’t. Let’s - just for fun - look into that more closely and see if we can identify the simulation. To that end, set the number of simulations to run to 1, start with random seed 123, no waning immunity. Run the simulation. You’ll see that this produces no outbreak. We want to find the one that produces an outbreak in the absence of waning immunity and does not with waning immunity turned on. So let’s move to the next one, run the simulation for random seed 124 (remember from the previous app that if you run 10 simulations, internally the seed is increased each time). Again no outbreak, so let’s do 125. You’ll see an outbreak. Now turn on waning immunity see if you still get an outbreak (you will). Keep trying the random seeds (up to 132) until you find the seed for which you get an outbreak without waning immunity but none with waning immunity. Note that this has nothing directly to do with the waning immunity process, it just happens to mix up the random numbers in the simulation that now we don’t get an outbreak.</p>
+<p>Now set waning immunity rate to 0.2, simulation time 5 years. Keep
+everything as before. Run the simulation, you should find that the
+system settles to some kind of stochastic version of a steady state,
+namely S-E-I-R values that fluctuate around some level. Note that there
+is still a mix of simulations that did and didn’t produce an outbreak.
+In fact, that number of simulations that produce an outbreak dropped
+from 5 to 4. Just by chance the inclusion of waning immunity meant that
+processes in the model got executed differently at the start of the
+simulation and a simulation that took off earlier now didn’t. Let’s -
+just for fun - look into that more closely and see if we can identify
+the simulation. To that end, set the number of simulations to run to 1,
+start with random seed 123, no waning immunity. Run the simulation.
+You’ll see that this produces no outbreak. We want to find the one that
+produces an outbreak in the absence of waning immunity and does not with
+waning immunity turned on. So let’s move to the next one, run the
+simulation for random seed 124 (remember from the previous app that if
+you run 10 simulations, internally the seed is increased each time).
+Again no outbreak, so let’s do 125. You’ll see an outbreak. Now turn on
+waning immunity see if you still get an outbreak (you will). Keep trying
+the random seeds (up to 132) until you find the seed for which you get
+an outbreak without waning immunity but none with waning immunity. Note
+that this has nothing directly to do with the waning immunity process,
+it just happens to mix up the random numbers in the simulation that now
+we don’t get an outbreak.</p>
 <p><strong>Record</strong></p>
 <ul>
-<li>Random number seed for which you get an outbreak in the absence of waning immunity and no outbreak in the presence of waning immunity</li>
+<li>Random number seed for which you get an outbreak in the absence of
+waning immunity and no outbreak in the presence of waning immunity</li>
 </ul>
 </div>
 <div id="task-3" class="section level3">
 <h3>Task 3</h3>
-<p>Let’s go back to the settings at the beginning of the previous task, namely w=0.2, 10 simulations, random seed 123. You can see that the reported final value for the susceptibles does not agree with what you see for those simulations which have a steady-state like scenario with non-zero infected. That’s because the average includes also those scenarios where no outbreak happened. Essentially, the average is computed here by doing 6/10*1000 (simulations without an outbreak) + 4/10*Sfinal_outbreak (simulations with outbreak), where Sfinal_outbreak is the average value of susceptibles at the end of the simulation for those scenarios where you get an outbreak. Approximately read off a value for Sfinal_outbreak and convince yourself that adding the non-outbreak and outbreak scenarios together gives you the reported mean.</p>
+<p>Let’s go back to the settings at the beginning of the previous task,
+namely w=0.2, 10 simulations, random seed 123. You can see that the
+reported final value for the susceptibles does not agree with what you
+see for those simulations which have a steady-state like scenario with
+non-zero infected. That’s because the average includes also those
+scenarios where no outbreak happened. Essentially, the average is
+computed here by doing 6/10*1000 (simulations without an outbreak) +
+4/10*Sfinal_outbreak (simulations with outbreak), where Sfinal_outbreak
+is the average value of susceptibles at the end of the simulation for
+those scenarios where you get an outbreak. Approximately read off a
+value for Sfinal_outbreak and convince yourself that adding the
+non-outbreak and outbreak scenarios together gives you the reported
+mean.</p>
 <p><strong>Record</strong></p>
 <ul>
-<li>Average number (across all simulations) of susceptible at end of simulation, as reported by DSAIDE</li>
+<li>Average number (across all simulations) of susceptible at end of
+simulation, as reported by DSAIDE</li>
 </ul>
 </div>
 <div id="task-4" class="section level3">
 <h3>Task 4</h3>
-<p>Sometimes you do want to know the overall average, including both settings where an outbreak happened and where it didn’t. However, often combining those two very different scenarios can be confusing. So let’s change our setup to make sure we get outbreaks every time. You learned previously that if there are more initial infected, chances of an outbreak are larger. Let’s do that. Keep all settings as before, but change initial number of symptomatic infected to 2. You’ll see that there are a few more outbreaks than with 1 infected, but still not all. Keep increasing the starting value for <em>I</em> until all 10 simulations lead to outbreaks.</p>
+<p>Sometimes you do want to know the overall average, including both
+settings where an outbreak happened and where it didn’t. However, often
+combining those two very different scenarios can be confusing. So let’s
+change our setup to make sure we get outbreaks every time. You learned
+previously that if there are more initial infected, chances of an
+outbreak are larger. Let’s do that. Keep all settings as before, but
+change initial number of symptomatic infected to 2. You’ll see that
+there are a few more outbreaks than with 1 infected, but still not all.
+Keep increasing the starting value for <em>I</em> until all 10
+simulations lead to outbreaks.</p>
 <p><strong>Record</strong></p>
 <ul>
-<li>Minimum number infected such that all 10 simulations produce outbreaks</li>
+<li>Minimum number infected such that all 10 simulations produce
+outbreaks</li>
 </ul>
 </div>
 <div id="task-5" class="section level3">
 <h3>Task 5</h3>
-<p>Set initial number infected to 10, set gI=1, leave all other settings as in the previous task (bE=0, bI=0.005, gE=4, w=0.2). Run the simulation for 5 years. You should find an average of around 133 infected at the end. While there is no guarantee that the average of the stochastic model agrees with an equivalent deterministic model for the types of (nonlinear) models we are exploring, they are often close. We can check that by computing the steady states for the deterministic version of the model. If you want to practice doing steady states, you can go ahead and solve the SEIR ODE model for the steady states of the variables. See e.g. the <em>Patterns of ID</em> app for an explanation on how to do it. If you don’t want to practice, I’ll tell you that the steady state value for S is S=(g<sub>E</sub> * g<sub>I</sub>)/(b<sub>E</sub> * g<sub>I</sub> + b<sub>I</sub> * g<sub>E</sub>). Use the current values to compute S and compare with results from the simulation.</p>
+<p>Set initial number infected to 10, set gI=1, leave all other settings
+as in the previous task (bE=0, bI=0.005, gE=4, w=0.2). Run the
+simulation for 5 years. You should find an average of around 133
+infected at the end. While there is no guarantee that the average of the
+stochastic model agrees with an equivalent deterministic model for the
+types of (nonlinear) models we are exploring, they are often close. We
+can check that by computing the steady states for the deterministic
+version of the model. If you want to practice doing steady states, you
+can go ahead and solve the SEIR ODE model for the steady states of the
+variables. See e.g. the <em>Patterns of ID</em> app for an explanation
+on how to do it. If you don’t want to practice, I’ll tell you that the
+steady state value for S is S=(g<sub>E</sub> *
+g<sub>I</sub>)/(b<sub>E</sub> * g<sub>I</sub> + b<sub>I</sub> *
+g<sub>E</sub>). Use the current values to compute S and compare with
+results from the simulation.</p>
 <p><strong>Record</strong></p>
 <ul>
-<li><p>Theoretical value for susceptible at steady state, based on equation</p></li>
-<li><p>Average number (across all simulations) of susceptible at end of simulation</p></li>
+<li><p>Theoretical value for susceptible at steady state, based on
+equation</p></li>
+<li><p>Average number (across all simulations) of susceptible at end of
+simulation</p></li>
 </ul>
 </div>
 <div id="task-6" class="section level3">
 <h3>Task 6</h3>
-<p>Let’s repeat the previous simulation, but turn off waning immunity. Also set back to gI=2. Still 10 initial infected, random seed at 123, do 20 simulations (be patient), run for 5 years. Record the average number of susceptible left at the end of the simulation. Use that value to compute R<sub>0</sub> using the final size equation. Then compare it with the R<sub>0</sub> value computed based on the model (this is the same as for the SIR model, the E compartment does not make a difference here).</p>
+<p>Let’s repeat the previous simulation, but turn off waning immunity.
+Also set back to gI=2. Still 10 initial infected, random seed at 123, do
+20 simulations (be patient), run for 5 years. Record the average number
+of susceptible left at the end of the simulation. Use that value to
+compute R<sub>0</sub> using the final size equation. Then compare it
+with the R<sub>0</sub> value computed based on the model (this is the
+same as for the SIR model, the E compartment does not make a difference
+here).</p>
 <p><strong>Record</strong></p>
 <ul>
-<li><p>Average number (across all 20 simulations) of susceptible at end of simulation</p></li>
+<li><p>Average number (across all 20 simulations) of susceptible at end
+of simulation</p></li>
 <li><p>R0 based on model equation</p></li>
 </ul>
 </div>
 <div id="task-7" class="section level3">
 <h3>Task 7</h3>
-<p>Finally, let’s explore extinctions. We’ll start with 100 individuals in each compartment, b<sub>E</sub>=0 and b<sub>I</sub>=0.01, g<sub>E</sub>=4, g<sub>I</sub>=2, w=1. No births and deaths, start simulation at 0, run for 60 months, time step arbitrary. Run 10 simulations with seed of 123. You should see some initial ups and downs, and then for each simulation, you’ll see fluctuations around some type of steady state, with an average number of infected at the end of 57. For those settings, in the absence of transmission from the <em>E</em> class, the basic reproductive number (if everyone were susceptible) is R<sub>0</sub> = S<sub>0</sub>b<sub>I</sub>/g<sub>I</sub> = 0.01*400/2 = 2. Now, reduce transmission to bI=0.006. Compute R<sub>0</sub> for this value. Run simulations for 60 months. You will find that for some of these simulations, the pathogen goes extinct (and susceptible go up to the maximum value of 400). Now double simulation time to 10 years. You will find that for most simulations, extinction occured.</p>
+<p>Finally, let’s explore extinctions. We’ll start with 100 individuals
+in each compartment, b<sub>E</sub>=0 and b<sub>I</sub>=0.01,
+g<sub>E</sub>=4, g<sub>I</sub>=2, w=1. No births and deaths, start
+simulation at 0, run for 60 months, time step arbitrary. Run 10
+simulations with seed of 123. You should see some initial ups and downs,
+and then for each simulation, you’ll see fluctuations around some type
+of steady state, with an average number of infected at the end of 57.
+For those settings, in the absence of transmission from the <em>E</em>
+class, the basic reproductive number (if everyone were susceptible) is
+R<sub>0</sub> = S<sub>0</sub>b<sub>I</sub>/g<sub>I</sub> = 0.01*400/2 =
+2. Now, reduce transmission to bI=0.006. Compute R<sub>0</sub> for this
+value. Run simulations for 60 months. You will find that for some of
+these simulations, the pathogen goes extinct (and susceptible go up to
+the maximum value of 400). Now double simulation time to 10 years. You
+will find that for most simulations, extinction occured.</p>
 <p><strong>Record</strong></p>
 <ul>
-<li><p>Number of simulations that DO NOT lead to extinction after 10 years of simulation (with bI=0.006)</p></li>
+<li><p>Number of simulations that DO NOT lead to extinction after 10
+years of simulation (with bI=0.006)</p></li>
 <li><p>Reproductive number for bI=0.006</p></li>
 </ul>
 </div>
 <div id="task-8" class="section level3">
 <h3>Task 8</h3>
-<p>Keep everything as in the previous task, but change infected tranmission rate to b<sub>I</sub>=0.007. Compute R<sub>0</sub> for this value. Run 10 simulations for 10 years. You will find that for most simulations, extinction did not occur.</p>
+<p>Keep everything as in the previous task, but change infected
+tranmission rate to b<sub>I</sub>=0.007. Compute R<sub>0</sub> for this
+value. Run 10 simulations for 10 years. You will find that for most
+simulations, extinction did not occur.</p>
 <p><strong>Record</strong></p>
 <ul>
-<li><p>Number of simulations that DO lead to extinction after 10 years of simulation (with bI=0.007)</p></li>
+<li><p>Number of simulations that DO lead to extinction after 10 years
+of simulation (with bI=0.007)</p></li>
 <li><p>Reproductive number for bI=0.007</p></li>
 </ul>
 </div>
 <div id="task-9" class="section level3">
 <h3>Task 9</h3>
-<p>Keep exploring. You can test how R<sub>0</sub> and other model quantities affect extinction, and how the longer you run the simulations, the more extinctions you get. You can also turn on births and deaths and see how they affect the overall patterns you find. There is a lot more to explore. For some settings, i.e. if you want to run many replicates for a long time, things are starting to slow down. That’s a disadvantage of stochastic models, they often take longer to run.</p>
+<p>Keep exploring. You can test how R<sub>0</sub> and other model
+quantities affect extinction, and how the longer you run the
+simulations, the more extinctions you get. You can also turn on births
+and deaths and see how they affect the overall patterns you find. There
+is a lot more to explore. For some settings, i.e. if you want to run
+many replicates for a long time, things are starting to slow down.
+That’s a disadvantage of stochastic models, they often take longer to
+run.</p>
 <p><strong>Record</strong></p>
 <ul>
 <li>Nothing</li>
@@ -232,14 +408,46 @@ Model diagram
 <div id="shinytab4" class="section level2">
 <h2>Further Information</h2>
 <ul>
-<li>This app (and all others) are structured such that the Shiny part (the graphical interface you see and the server-side function that goes with it) calls an underlying R script (or several) which runs the simulation for the model of interest and returns the results.</li>
-<li>For this app, the underlying function(s) running the simulation are called <code>simulate_SEIRSd_model_stochastic</code>. You can call them directly, without going through the shiny app. Use the <code>help()</code> command for more information on how to use the functions directly. If you go that route, you need to use the results returned from this function and produce useful output (such as a plot) yourself.</li>
-<li>You can also download all simulator functions and modify them for your own purposes. Of course to modify these functions, you’ll need to do some coding.</li>
-<li>For examples on using the simulators directly and how to modify them, read the package vignette by typing <code>vignette(&#39;DSAIDE&#39;)</code> into the R console.</li>
-<li>For some further reading concerning stochastic dynamics of ID, see e.g. <span class="citation">(<strong>lloyd-smith05a?</strong>; <strong>black66?</strong>; <strong>keeling97?</strong>)</span>.</li>
+<li>This app (and all others) are structured such that the Shiny part
+(the graphical interface you see and the server-side function that goes
+with it) calls an underlying R script (or several) which runs the
+simulation for the model of interest and returns the results.</li>
+<li>For this app, the underlying function(s) running the simulation are
+called <code>simulate_SEIRSd_model_stochastic</code>. You can call them
+directly, without going through the shiny app. Use the
+<code>help()</code> command for more information on how to use the
+functions directly. If you go that route, you need to use the results
+returned from this function and produce useful output (such as a plot)
+yourself.</li>
+<li>You can also download all simulator functions and modify them for
+your own purposes. Of course to modify these functions, you’ll need to
+do some coding.</li>
+<li>For examples on using the simulators directly and how to modify
+them, read the package vignette by typing
+<code>vignette(&#39;DSAIDE&#39;)</code> into the R console.</li>
+<li>For some further reading concerning stochastic dynamics of ID, see
+e.g. <span class="citation">(Lloyd-Smith et al. 2005; Black 1966;
+Keeling 1997)</span>.</li>
 </ul>
-<div id="references" class="section level3">
-<h3>References</h3>
+<div id="references" class="section level3 unnumbered">
+<h3 class="unnumbered">References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-black1966" class="csl-entry">
+Black, F L. 1966. <span>“<a href="https://www.ncbi.nlm.nih.gov/pubmed/5965486">Measles Endemicity in
+Insular Populations: Critical Community Size and Its Evolutionary
+Implication.</a>”</span> <em>Journal of Theoretical Biology</em> 11 (2):
+207–11.
+</div>
+<div id="ref-keeling1997" class="csl-entry">
+Keeling, M J. 1997. <span>“Modelling the Persistence of Measles.”</span>
+<em>Trends in Microbiology</em> 5 (12): 513–18. <a href="https://doi.org/10.1016/S0966-842X(97)01147-5">https://doi.org/10.1016/S0966-842X(97)01147-5</a>.
+</div>
+<div id="ref-lloyd-smith05" class="csl-entry">
+Lloyd-Smith, J. O., S. J. Schreiber, P. E. Kopp, and W. M. Getz. 2005.
+<span>“Superspreading and the Effect of Individual Variation on Disease
+Emergence.”</span> <em>Nature</em> 438 (7066): 355–59. <a href="https://doi.org/10.1038/nature04153">https://doi.org/10.1038/nature04153</a>.
+</div>
+</div>
 </div>
 </div>
 

@@ -13,6 +13,10 @@
 #' on the package website:
 #' https://ahgroup.github.io/DSAIDE/
 #'
-#' @docType package
-#' @name DSAIDE
+
+#' @keywords internal
+"_PACKAGE"
+
+## usethis namespace: start
+## usethis namespace: end
 NULL

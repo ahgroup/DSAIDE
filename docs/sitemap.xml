@@ -1,108 +1,126 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://ahgroup.github.io/DSAIDE/index.html/index.html</loc>
+    <loc>https://ahgroup.github.io/DSAIDE/404.html</loc>
   </url>
   <url>
-    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/DSAIDE.html</loc>
+    <loc>https://ahgroup.github.io/DSAIDE/articles/DSAIDE.html</loc>
   </url>
   <url>
-    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/dsaidemenu.html</loc>
+    <loc>https://ahgroup.github.io/DSAIDE/articles/index.html</loc>
   </url>
   <url>
-    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/flu1918data.html</loc>
+    <loc>https://ahgroup.github.io/DSAIDE/authors.html</loc>
   </url>
   <url>
-    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/generate_documentation.html</loc>
+    <loc>https://ahgroup.github.io/DSAIDE/index.html</loc>
   </url>
   <url>
-    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/generate_fctcall.html</loc>
+    <loc>https://ahgroup.github.io/DSAIDE/news/index.html</loc>
   </url>
   <url>
-    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/generate_ggplot.html</loc>
+    <loc>https://ahgroup.github.io/DSAIDE/reference/DSAIDE-package.html</loc>
   </url>
   <url>
-    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/generate_plotly.html</loc>
+    <loc>https://ahgroup.github.io/DSAIDE/reference/DSAIDE.html</loc>
   </url>
   <url>
-    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/generate_shinyinput.html</loc>
+    <loc>https://ahgroup.github.io/DSAIDE/reference/dsaidemenu.html</loc>
   </url>
   <url>
-    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/generate_text.html</loc>
+    <loc>https://ahgroup.github.io/DSAIDE/reference/flu1918data.html</loc>
   </url>
   <url>
-    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/norodata.html</loc>
+    <loc>https://ahgroup.github.io/DSAIDE/reference/generate_documentation.html</loc>
   </url>
   <url>
-    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/run_model.html</loc>
+    <loc>https://ahgroup.github.io/DSAIDE/reference/generate_fctcall.html</loc>
   </url>
   <url>
-    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_Characteristics_of_ID_ode.html</loc>
+    <loc>https://ahgroup.github.io/DSAIDE/reference/generate_ggplot.html</loc>
   </url>
   <url>
-    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_Complex_ID_Control_ode.html</loc>
+    <loc>https://ahgroup.github.io/DSAIDE/reference/generate_plotly.html</loc>
   </url>
   <url>
-    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_directtransmission_ode.html</loc>
+    <loc>https://ahgroup.github.io/DSAIDE/reference/generate_shinyinput.html</loc>
   </url>
   <url>
-    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_Drug_Resistance_Evolution_stochastic.html</loc>
+    <loc>https://ahgroup.github.io/DSAIDE/reference/generate_text.html</loc>
   </url>
   <url>
-    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_Environmental_Transmission_model_ode.html</loc>
+    <loc>https://ahgroup.github.io/DSAIDE/reference/index.html</loc>
   </url>
   <url>
-    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_flu_fit.html</loc>
+    <loc>https://ahgroup.github.io/DSAIDE/reference/norodata.html</loc>
   </url>
   <url>
-    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_Host_Heterogeneity_Model_ode.html</loc>
+    <loc>https://ahgroup.github.io/DSAIDE/reference/run_model.html</loc>
   </url>
   <url>
-    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_idcontrolmultigroup_ode.html</loc>
+    <loc>https://ahgroup.github.io/DSAIDE/reference/simulate_Characteristics_of_ID_ode.html</loc>
   </url>
   <url>
-    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_idcontrolmultioutbreak_ode.html</loc>
+    <loc>https://ahgroup.github.io/DSAIDE/reference/simulate_Complex_ID_Control_ode.html</loc>
   </url>
   <url>
-    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_idpatterns_ode.html</loc>
+    <loc>https://ahgroup.github.io/DSAIDE/reference/simulate_directtransmission_ode.html</loc>
   </url>
   <url>
-    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_idsurveillance_ode.html</loc>
+    <loc>https://ahgroup.github.io/DSAIDE/reference/simulate_Drug_Resistance_Evolution_stochastic.html</loc>
   </url>
   <url>
-    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_idvaccine_ode.html</loc>
+    <loc>https://ahgroup.github.io/DSAIDE/reference/simulate_Environmental_Transmission_model_ode.html</loc>
   </url>
   <url>
-    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_multipathogen_ode.html</loc>
+    <loc>https://ahgroup.github.io/DSAIDE/reference/simulate_flu_fit.html</loc>
   </url>
   <url>
-    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_noro_fit.html</loc>
+    <loc>https://ahgroup.github.io/DSAIDE/reference/simulate_Host_Heterogeneity_Model_ode.html</loc>
   </url>
   <url>
-    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_SEIRSd_model_stochastic.html</loc>
+    <loc>https://ahgroup.github.io/DSAIDE/reference/simulate_idcontrolmultigroup_ode.html</loc>
   </url>
   <url>
-    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_SIRSd_model_ode.html</loc>
+    <loc>https://ahgroup.github.io/DSAIDE/reference/simulate_idcontrolmultioutbreak_ode.html</loc>
   </url>
   <url>
-    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_SIRSd_model_stochastic.html</loc>
+    <loc>https://ahgroup.github.io/DSAIDE/reference/simulate_idpatterns_ode.html</loc>
   </url>
   <url>
-    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_SIR_modelexploration.html</loc>
+    <loc>https://ahgroup.github.io/DSAIDE/reference/simulate_idsurveillance_ode.html</loc>
   </url>
   <url>
-    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_SIR_model_discrete.html</loc>
+    <loc>https://ahgroup.github.io/DSAIDE/reference/simulate_idvaccine_ode.html</loc>
   </url>
   <url>
-    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_SIR_model_ode.html</loc>
+    <loc>https://ahgroup.github.io/DSAIDE/reference/simulate_multipathogen_ode.html</loc>
   </url>
   <url>
-    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_SIR_usanalysis.html</loc>
+    <loc>https://ahgroup.github.io/DSAIDE/reference/simulate_noro_fit.html</loc>
   </url>
   <url>
-    <loc>https://ahgroup.github.io/DSAIDE/index.html/reference/simulate_Vector_transmission_model_ode.html</loc>
+    <loc>https://ahgroup.github.io/DSAIDE/reference/simulate_SEIRSd_model_stochastic.html</loc>
   </url>
   <url>
-    <loc>https://ahgroup.github.io/DSAIDE/index.html/articles/DSAIDE.html</loc>
+    <loc>https://ahgroup.github.io/DSAIDE/reference/simulate_SIRSd_model_ode.html</loc>
+  </url>
+  <url>
+    <loc>https://ahgroup.github.io/DSAIDE/reference/simulate_SIRSd_model_stochastic.html</loc>
+  </url>
+  <url>
+    <loc>https://ahgroup.github.io/DSAIDE/reference/simulate_SIR_modelexploration.html</loc>
+  </url>
+  <url>
+    <loc>https://ahgroup.github.io/DSAIDE/reference/simulate_SIR_model_discrete.html</loc>
+  </url>
+  <url>
+    <loc>https://ahgroup.github.io/DSAIDE/reference/simulate_SIR_model_ode.html</loc>
+  </url>
+  <url>
+    <loc>https://ahgroup.github.io/DSAIDE/reference/simulate_SIR_usanalysis.html</loc>
+  </url>
+  <url>
+    <loc>https://ahgroup.github.io/DSAIDE/reference/simulate_Vector_transmission_model_ode.html</loc>
   </url>
 </urlset>
