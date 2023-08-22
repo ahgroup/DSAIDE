@@ -40,7 +40,7 @@ While I originally wrote the package [as a component of a course on infectious d
 
 
 ## Pre-requisites
-Since `DSAIDE` is an `R` package, you need to have [R](https://www.r-project.org/) installed. I also highly recommend [RStudio](https://www.rstudio.com/products/rstudio/download/), though it's not required. If you are not familiar with `R` you can find [a brief introduction here](https://andreashandel.github.io/IDEMAcourse/R_and_RStudio.html), which also provides pointers to detailed install instructions.
+Since `DSAIDE` is an `R` package, you need to have [R](https://www.r-project.org/) installed. I also recommend [RStudio](https://posit.co/download/rstudio-desktop/), though it's not required. If you are not familiar with `R` you can find [a brief introduction here](https://andreashandel.github.io/IDEMAcourse/R_and_RStudio.html), which also provides pointers to detailed install instructions.
 
 
 ## Installation
