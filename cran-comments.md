@@ -6,9 +6,25 @@
 
 ## R CMD check results
 
+Duration: 1m 25.6s
 
+❯ checking installed package size ... NOTE
+    installed size is  5.2Mb
+    sub-directories of 1Mb or more:
+      appinformation   4.1Mb
+
+0 errors ✔ | 0 warnings ✔ | 1 note ✖
+
+R CMD check succeeded
+
+
+## Notes
 
 The documentation for the apps in this package contains diagrams/figures, which is responsible for the directory size.
+
+I changed the email address from my work to my personal one.
+
+
 
 
 ## Submission History
