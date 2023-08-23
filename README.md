@@ -5,14 +5,14 @@
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/ahgroup/DSAIDE/workflows/R-CMD-check/badge.svg)](https://github.com/ahgroup/DSAIDE/actions)
-[![Coverage
-status](https://codecov.io/gh/ahgroup/DSAIDE/branch/master/graph/badge.svg?token=OGO3sVEcPD)](https://codecov.io/gh/ahgroup/DSAIDE)
-[![test-coverage](https://github.com/ahgroup/DSAIDE/workflows/test-coverage/badge.svg)](https://github.com/ahgroup/DSAIDE/actions)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/DSAIDE)](https://cran.r-project.org/package=DSAIDE)
 [![CRAN
 checks](https://cranchecks.info/badges/summary/DSAIDE)](https://cran.r-project.org/web/checks/check_results_DSAIDE.html)
+[![R-CMD-check](https://github.com/ahgroup/DSAIDE/workflows/R-CMD-check/badge.svg)](https://github.com/ahgroup/DSAIDE/actions)
+[![Coverage
+status](https://codecov.io/gh/ahgroup/DSAIDE/branch/master/graph/badge.svg?token=OGO3sVEcPD)](https://codecov.io/gh/ahgroup/DSAIDE)
+[![test-coverage](https://github.com/ahgroup/DSAIDE/workflows/test-coverage/badge.svg)](https://github.com/ahgroup/DSAIDE/actions)
 [![metacran monthly
 downloads](https://cranlogs.r-pkg.org/badges/DSAIDE)](https://cran.r-project.org/package=DSAIDE)
 [![metacran
@@ -56,42 +56,41 @@ package [see the *Get Started* tutorial
 
 ## Further information
 
--   The [package tutorial
-    (vignette)](https://ahgroup.github.io/DSAIDE/articles/DSAIDE.html)
-    contains detailed instructions on the different ways the package can
-    be used.
--   [I published a paper describing the
-    package](https://doi.org/10.1371/journal.pcbi.1005642). The package
-    has since been updated and changed, but the paper still describes
-    the overall idea and context well.  
--   I regularly teach two courses related to infectious diseases and
-    modeling. All materials for those courses [are freely available
-    online](https://andreashandel.github.io/IDEMAcourse/).
--   As part of these courses, [I wrote a freely available online
-    textbook](https://andreashandel.github.io/IDEMAbook/). It is not
-    (and probably never will be) finished, some chapters are fairly
-    empty, but some topics are covered in enough detail that I use it
-    for teaching.
--   I have full solutions and quiz sheets for all of the **What to do**
-    tasks for each app. If you are an instructor using this package as
-    part of a class, email me if you are interested in having access to
-    the materials.
--   Contributions to the package are very welcome! If you want to take a
-    deeper look at the package, see [this Markdown
-    file](https://github.com/ahgroup/DSAIDE/blob/master/auxiliary/docsfordevelopers/documentation.md)
-    which provides further information on the details of the package
-    structure. I’d be excited to receive any contributions from
-    individuals who want to help improve the package. If you plan to
-    develop new apps, or make other substantial contributions, it might
-    be best to get in touch with me first.
--   A companion package to this one, called *Dynamical Systems
-    Approaches for Immune Response Modeling (DSAIRM)*, focuses on models
-    for analyzing with-host infection dynamics. It has the same
-    structure as DSAIDE. [See the DSAIRM site for more
-    information.](https://ahgroup.github.io/DSAIRM/)
--   I send out a monthly newsletter in which I announce any noteworthy
-    updates to my R packages. If you want to stay updated, [you can sign
-    up here](https://www.andreashandel.com/susbscribe/).
+- The [package tutorial
+  (vignette)](https://ahgroup.github.io/DSAIDE/articles/DSAIDE.html)
+  contains detailed instructions on the different ways the package can
+  be used.
+- [I published a paper describing the
+  package](https://doi.org/10.1371/journal.pcbi.1005642). The package
+  has since been updated and changed, but the paper still describes the
+  overall idea and context well.  
+- I regularly teach two courses related to infectious diseases and
+  modeling. All materials for those courses [are freely available
+  online](https://andreashandel.github.io/IDEMAcourse/).
+- As part of these courses, [I wrote a freely available online
+  textbook](https://andreashandel.github.io/IDEMAbook/). It is not (and
+  probably never will be) finished, some chapters are fairly empty, but
+  some topics are covered in enough detail that I use it for teaching.
+- I have full solutions and quiz sheets for all of the **What to do**
+  tasks for each app. If you are an instructor using this package as
+  part of a class, email me if you are interested in having access to
+  the materials.
+- Contributions to the package are very welcome! If you want to take a
+  deeper look at the package, see [this Markdown
+  file](https://github.com/ahgroup/DSAIDE/blob/master/auxiliary/docsfordevelopers/documentation.md)
+  which provides further information on the details of the package
+  structure. I’d be excited to receive any contributions from
+  individuals who want to help improve the package. If you plan to
+  develop new apps, or make other substantial contributions, it might be
+  best to get in touch with me first.
+- A companion package to this one, called *Dynamical Systems Approaches
+  for Immune Response Modeling (DSAIRM)*, focuses on models for
+  analyzing with-host infection dynamics. It has the same structure as
+  DSAIDE. [See the DSAIRM site for more
+  information.](https://ahgroup.github.io/DSAIRM/)
+- I send out a monthly newsletter in which I announce any noteworthy
+  updates to my R packages. If you want to stay updated, [you can sign
+  up here](https://www.andreashandel.com/subscribe/).
 
 ## Citation and Contributors
 

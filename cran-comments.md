@@ -1,26 +1,19 @@
 ## Test environments
 
 * local Windows 11 x86_64, R 4.3.1
-* R-CMD-Check (local) 
+* R-CMD-Check (local, Github actions) 
 * devtools: check_rhub(), check_win_release(), check_win_devel()
 
 ## R CMD check results
 
-0 errors | 0 warnings 
 
-1 note:
-
-checking installed package size ... NOTE
- installed size is  5.1Mb
-    sub-directories of 1Mb or more:
-      appinformation   4.1Mb
 
 The documentation for the apps in this package contains diagrams/figures, which is responsible for the directory size.
 
 
 ## Submission History
 
-version 0.9.4: small bug fixes and feature improvements.
+version 0.9.6: small bug fixes and feature improvements.
 
 version 0.9.3: small bug fixes and feature improvements.
 

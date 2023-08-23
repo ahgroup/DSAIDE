@@ -1,7 +1,8 @@
-# DSAIDE 0.9.4 (2023-08-23)
+# DSAIDE 0.9.6 (2023-08-23)
 
 * Small bug fixes and feature enhancements.
 * Other minor updates and improvements.
+* Version bump to match DSAIRM package.
 
 # DSAIDE 0.9.3 (2021-07-23)
 
