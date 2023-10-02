@@ -5,3 +5,5 @@
 DSAIDE.Rcheck/
 DSAIDE*.tar.gz
 DSAIDE*.tgz
+/doc/
+/Meta/
