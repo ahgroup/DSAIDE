@@ -1,6 +1,7 @@
 # To-do list for DSAIDE package
 
 ## Code Improvements
+* Fix knitr warning message in Basic SIR Model diagram figure (maybe also other apps)
 * Continue implementing unit tests using the testthat package
 * Add checks to parameter settings, don't allow unreasonable (e.g. negative) ones
 * Continue streamlining code base to make it more general/modular/flexible

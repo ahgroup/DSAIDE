@@ -53,7 +53,7 @@ As with the compartments, we could extend the model and allow other processes to
 For compartmental models (and also often other types of models), it is useful to show a graphical schematic representation of the compartments and processes included in the model. For compartmental models, such a diagram/figure is usually called a flow diagram. Such a diagram consists of a box for each compartment, and arrows pointing in and out of boxes to describe flows and interactions. For the simple SIR model, the flow diagram looks as follows:
 
 
-```{r modeldiagram,  fig.cap='Model Diagram',  echo=FALSE, out.width = "70%"}
+```{r modeldiagram,  fig.cap='Model Diagram', warning=FALSE, echo=FALSE, out.width = "70%"}
 knitr::include_graphics( system.file(figuredir,appsettings$modelfigname,package=packagename))
 ```
 
