@@ -6,11 +6,11 @@ library(forecast)
 library(ggplot2)
 
 packagename = 'DSAIDE'
-#packagename = 'DSAIRM'
+packagename = 'DSAIRM'
 
 
 ##using cranlogs package
-data1 = cranlogs::cran_downloads(package = packagename, from = "2017-02-01", to = Sys.Date( ))
+data1 = cranlogs::cran_downloads(package = packagename, from = "2016-01-01", to = Sys.Date( ))
 print(sprintf('Number of downloads %d for package %s',sum(data1[,'count']),packagename))
 plot(data1$date,data1$count,type='l')
 
