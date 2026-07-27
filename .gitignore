@@ -1,9 +1,2 @@
-.Rproj.user
-.Rhistory
-.RData
-.Ruserdata
-DSAIDE.Rcheck/
-DSAIDE*.tar.gz
-DSAIDE*.tgz
-/doc/
-/Meta/
+/.quarto/
+**/*.quarto_ipynb

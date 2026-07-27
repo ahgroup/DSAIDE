@@ -1,0 +1,10 @@
+---
+title: "Former DSAIDE repository and website"
+---
+
+This is the former home of the **DSAIDE - Dynamical Systems Approach to Infectious Disease Epidemiology (Ecology/Evolution).** R package.
+
+The package has moved to the repository [https://github.com/andreashandel/DSAIDE/](https://github.com/andreashandel/DSAIDE/).
+
+The `DSAIDE` website can now be found at [https://andreashandel.github.io/DSAIDE/](https://andreashandel.github.io/DSAIDE/).
+
